@@ -157,6 +157,8 @@ export default {
       },
       black: '#000000',
       white: '#FFFFFF',
+      transparent: 'transparent',
+      background: '#F5F6FA',
       disabled: '#1211270A',
       text: '#070E25'
     }
