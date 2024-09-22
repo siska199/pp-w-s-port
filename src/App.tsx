@@ -1,11 +1,6 @@
 
-function App() {
+const App = () => {
+  return <div>App</div>;
+};
 
-  return (
-    <div>
-      <h1>SISKA APRIANA RIFIANTI</h1>
-    </div>
-  )
-}
-
-export default App
+export default App;

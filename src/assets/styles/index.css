@@ -5,7 +5,81 @@
 @tailwind utilities;
 
 @layer base{
+  *,
+  *::before,
+  *::after {
+    @apply box-border p-0 m-0;
+  }
+
+  html{
+    @apply scroll-smooth;
+  }
+
   body{
-    @apply font-poppins ;
+    @apply overflow-x-hidden relative text-body-base bg-white text-gray-900;
+
+  }
+}
+
+
+@layer components {
+  
+  /* Remove background autofill input*/
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  /* Customize input number */
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  /* Customize scrollbar */
+  ::-webkit-scrollbar{
+    @apply w-2 h-2
+  }
+  ::-webkit-scrollbar-track {
+      box-shadow: none;
+      border-radius: 10px;
+      background:white;
+  }
+  ::-webkit-scrollbar-thumb {
+      @apply rounded-lg bg-gray-300
+  }
+  ::-webkit-scrollbar-thumb:hover {
+      @apply bg-gray-300
+  }
+
+}
+
+@layer utilities{
+  /* Bounce effect */
+  .bounce-effect {
+    @apply transition-all duration-[50] hover:scale-[1.03] active:scale-[0.98] disabled:!scale-[1] disabled:cursor-not-allowed;
+  }
+
+  .bounce-effect-disabled {
+    @apply transition-none hover:scale-100 active:scale-100;
+  }
+
+  .cursor-pointer-custome {
+    @apply bounce-effect cursor-pointer;
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none; /* Firefox */
   }
 }

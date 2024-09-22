@@ -1,0 +1,3 @@
+interface TUser {
+    id: string;
+}
