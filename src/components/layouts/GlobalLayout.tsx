@@ -1,5 +1,4 @@
 import useCurrentPath from '@/hooks/useCurrentPath'
-import Loading from '@components/loading'
 import { route } from '@lib/data/global'
 import { useAppSelector } from '@store/store'
 import { useEffect } from 'react'
@@ -15,9 +14,8 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
 
   useEffect(() => {
-    if (currentPath === '/') {
+    if (currentPath === '/') 
       navigate(isAuthenticated ? route.personalInformation.fullPath : route.auth.child.signIn.fullPath, { replace: true })
-    }
   }, [])
 
   return <>{children}</>

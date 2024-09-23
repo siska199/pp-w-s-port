@@ -8,7 +8,7 @@ const PublicLayout = () => {
 
   if (isAuthenticated) navigate(route.personalInformation.fullPath, { replace: true })
 
-  return <div className='p-4  h-screen'>
+  return <div className=' h-screen'>
     <Outlet />
   </div>
 }

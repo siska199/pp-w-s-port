@@ -2,22 +2,22 @@ import { cn, getAssetURL } from '@lib/helper'
 import React, { HTMLProps, useState } from 'react'
 
 interface TProps extends Omit<Partial<HTMLProps<HTMLImageElement>>, ''> {
-  src: string
-  alt?: string
+  src   : string
+  alt?  : string
   customeClassName?: {
-    container?: string
-    image?: string
-    containerOverlay?: string
+    container?        : string
+    image?            : string
+    containerOverlay? : string
   }
-  withSkeleton?: boolean
-  timeoutLoadImage?: number
+  withSkeleton?     : boolean
+  timeoutLoadImage? : number
 
-  overlay?: {
-    isShowOnHover?: boolean
-    withBackdrop?: boolean
-    content?: React.ReactNode
+  overlay?  : {
+    isShowOnHover?  : boolean
+    withBackdrop?   : boolean
+    content?        : React.ReactNode
   }
-  withLoadEffect?: boolean
+  withLoadEffect?   : boolean
 }
 
 const Image = (props: TProps) => {
@@ -35,23 +35,23 @@ const Image = (props: TProps) => {
     <div
       className={cn({
         'relative group w-full h-full bg-gray-100 overflow-hidden': true,
-        [className || '']: className,
-        [customeClassName?.container || '']: customeClassName?.container
+        [`${className}`]                   : className,
+        [`${customeClassName?.container}`] : customeClassName?.container
       })}
     >
       <img
         src={src?.includes('http') ? src : getAssetURL({ name: src })}
-        alt={alt || src.replace('-', ' ')}
+        alt={alt || 'image'}
         onLoad={handleLoad}
         className={cn({
-          'w-full h-full object-cover object-center': true,
-          'clear-effect': !isLoading,
-          'blur-effect': isLoading && withLoadEffect,
-
-          [customeClassName?.image || '']: customeClassName?.image
+          'w-full h-full object-cover object-center'  : true,
+          'clear-effect'                              : !isLoading,
+          'blur-effect'                               : isLoading && withLoadEffect,
+          [`${customeClassName?.image }`]             : customeClassName?.image
         })}
         {...attrs}
       />
+      
       {isLoading && withSkeleton && (
         <div role='status' className=' absolute top-0 left-0 border h-full w-full border-gray-400 rounded shadow animate-pulse  '>
           <div className='flex items-center justify-center h-full w-full mb-4 bg-gray-400 rounded '>
@@ -62,13 +62,14 @@ const Image = (props: TProps) => {
           </div>
         </div>
       )}
+
       {overlay?.content && (
         <div
           className={cn({
-            'absolute top-0 left-0 opacity-100 translate-y-0  transition-all duration-300 transform  w-full h-full': true,
-            'translate-y-[50%] group-hover:translate-y-0 opacity-0 group-hover:opacity-100 ': overlay?.isShowOnHover,
-            [customeClassName?.containerOverlay || '']: customeClassName?.containerOverlay,
-            'bg-black/30 ': overlay?.withBackdrop
+            'absolute top-0 left-0 opacity-100 translate-y-0 transition-all duration-300 transform  w-full h-full'  : true,
+            'translate-y-[50%] group-hover:translate-y-0 opacity-0 group-hover:opacity-100 '                        : overlay?.isShowOnHover,
+            [`${customeClassName?.containerOverlay}`]                                                               : customeClassName?.containerOverlay,
+            'bg-black/30'                                                                                         : overlay?.withBackdrop
           })}
         >
           {overlay?.content}

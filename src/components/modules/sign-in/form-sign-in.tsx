@@ -1,15 +1,23 @@
-import { loginSchema, TFormLogin } from "@lib/schema-validation/auth-schema";
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import InputBase from "@components/ui/input/input-base";
-import { excludeRef } from "@lib/helper";
-import Container from "@components/ui/container";
-import Image from "@components/ui/image";
 import Button from "@components/ui/button";
+import Container from "@components/ui/container";
+import InputBase from "@components/ui/input/input-base";
 import InputCheckbox from "@components/ui/input/input-checkbox";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { route } from "@lib/data/global";
+import { excludeRef } from "@lib/helper";
+import { loginSchema, TFormLogin } from "@lib/schema-validation/auth-schema";
+import { handleSetAuth } from "@store/features/auth/authSlice";
+import { useAppDispatch } from "@store/store";
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from "react-router-dom";
 
-
-const FormLogin = () => {
+interface TPropsFormLogin {
+  className? : string;
+}
+const FormLogin = (props:TPropsFormLogin) => {
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const {className} = props
   const {
     register,
     handleSubmit,
@@ -33,19 +41,16 @@ const FormLogin = () => {
 
   const handleOnSubmit: SubmitHandler<TFormLogin> = async (data) => {
     try {
-      console.log('data: ', data);
+      dispatch(handleSetAuth(true))
+      navigate(route.personalInformation.fullPath)
     } catch (error: any) {
       console.log('error: ', error?.message);
     }
   };
 
   return (
-    <Container variant={'vcc'} gap="base" className="max-w-md px-8">
-      <Image
-        src={'logo.png'}
-        alt="Dev port Logo"
-        className="rounded-md shadow-sm w-10 h-10"
-      />
+    <Container variant={'vcc'} gap="base" className={` flex-nowrap px-8 ${className}`}>
+
       <div className="text-center space-y-3 w-full">
         <h5 className="text-body-2xl font-bold"> Sign in to your account</h5>
         <p className="text-center">Welcome back! Please enter your details.</p>
@@ -73,7 +78,7 @@ const FormLogin = () => {
             {...excludeRef(register('isRememberMe'))}
             value={String(watch('isRememberMe'))}
           />
-          <Button variant={'link-black'} className=" underline !p-0" href={'/auth/forget-password'}>
+          <Button variant={'link-black'} className=" text-white md:text-black underline !p-0" href={'/auth/forget-password'}>
             Forget Password
           </Button>
         </div>

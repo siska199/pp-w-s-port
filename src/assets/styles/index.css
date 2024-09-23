@@ -112,7 +112,15 @@
   .icon-sucess-fill path {
     @apply fill-sucess;
   }
+  
 }
+
+
+.bg-glassmorphism{
+  @apply h-full w-full bg-gray-900  rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30;
+}
+
+
 
 @layer utilities {
   /* Bounce effect */

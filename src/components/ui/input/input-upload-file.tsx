@@ -9,15 +9,15 @@ import React, { useEffect, useRef, useState } from 'react'
 import Image from '@components/ui/image'
 import Button from '@components/ui/button'
 
-type TFileWithPreview = File & { preview?: string }
-export type TFileValue = TFileWithPreview | null
+type TFileWithPreview     = File & { preview?: string }
+export type TFileValue    = TFileWithPreview | null
 export interface TPropsInputUploadFile extends Omit<TBasePropsInput, 'variant'>, Omit<Partial<React.HTMLProps<HTMLInputElement>>, 'value' | 'onChange'> {
-  name: string
-  totalMaxSize?: number
-  listAcceptedFile?: TTypeFile[] | []
-  onChange: (e: TCustomeEventOnChange<TFileValue>) => void
-  value: TFileValue
-  variant?: 'change-profile' | 'general'
+  name              : string
+  totalMaxSize?     : number
+  listAcceptedFile? : TTypeFile[] | []
+  onChange          : (e: TCustomeEventOnChange<TFileValue>) => void
+  value             : TFileValue
+  variant?          : 'change-profile' | 'general'
 }
 
 const InputUploadFile = (props: TPropsInputUploadFile) => {
@@ -82,13 +82,12 @@ const InputUploadFile = (props: TPropsInputUploadFile) => {
       })
   }
 
-  console.log('attrs value: ', attrsInput?.value)
   return (
     <ContainerInput<React.HTMLProps<HTMLInputElement>>
       {...attrsInput}
       customeClass={{
         ...attrsInput.customeClass,
-        ciV2: '!border-none !p-0'
+        ciV2  : '!border-none !p-0'
       }}
       errorMessage={errorMessageDynamic}
       isClerable={false}

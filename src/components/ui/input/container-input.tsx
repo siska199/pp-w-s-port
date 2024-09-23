@@ -7,20 +7,20 @@ import { useState } from 'react'
 import { TBasePropsInput } from 'types/ui-types'
 
 export interface TPropsInput<TInput> extends TBasePropsInput {
-  children: React.ReactNode | ((attrsInput: TInput) => React.ReactNode)
-  disabled?: boolean
-  name?: string
-  type?: string
-  onlyContainer?: boolean
-  isClerable?: boolean
-  value?: any
-  onChange?: (e: any) => void
-  childrenOverlay?: React.ReactNode
-  isNotUsingDefaultStyle?: {
-    input?: boolean
+  children                : React.ReactNode | ((attrsInput: TInput) => React.ReactNode)
+  disabled?               : boolean
+  name?                   : string
+  type?                   : string
+  onlyContainer?          : boolean
+  isClerable?             : boolean
+  value?                  : any
+  onChange?               : (e: any) => void
+  childrenOverlay?        : React.ReactNode
+  isNotUsingDefaultStyle? : {
+    input?  : boolean
   }
-  onCustomeClearHandler?: () => void
-  customeClearValue?: string
+  onCustomeClearHandler?  : () => void
+  customeClearValue?      : string
 }
 
 const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
@@ -44,6 +44,7 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
     onChange,
     ...attrsInput
   } = props
+
   const [dynamicType, setDynamicType] = useState(type)
 
   const handleToggleTypePassword = () => {
@@ -65,12 +66,7 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
     <Container className={`${customeClass?.ciV4} relative flex flex-col gap-1`}>
       <section className={`${customeClass?.ciV3} flex flex-col gap-2 w-full`}>
         {label && (
-          <label
-            htmlFor={name}
-            className={cn({
-              'font-medium w-fit': true
-            })}
-          >
+          <label htmlFor={name} className={'font-medium w-fit'}>
             {label}
           </label>
         )}
@@ -80,33 +76,17 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
         ) : (
           <div
             className={cn({
-              'bg-white flex flex-nowrap items-center gap-2 text-body-base border border-input rounded-lg  w-full ': true,
-              [customeClass?.ciV2 || '']: customeClass?.ciV2,
-              '!bg-disabled !border': disabled,
-              'focus-within:ring-primary-200 focus-within:!border-primary': !errorMessage,
-              'border-error focus-within:!ring-error-200 focus-within:!border-error': errorMessage,
-              'px-3 py-2 ': !customeElement?.preStart && !customeElement?.preEnd,
-              'overflow-hidden': customeElement?.preStart || customeElement?.preEnd
+              'bg-white flex flex-nowrap items-center gap-2 text-body-base border border-input rounded-lg  w-full ' : true,
+              [`${customeClass?.ciV2}`]                                                                               : customeClass?.ciV2,
+              '!bg-disabled !border'                                                                                : disabled,
+              'focus-within:ring-primary-200 focus-within:!border-primary'                                        : !errorMessage,
+              'border-error focus-within:!ring-error-200 focus-within:!border-error'                            : errorMessage,
+              'px-3 py-2'                                                                                             : !customeElement?.preStart && !customeElement?.preEnd,
+              'overflow-hidden'                                                                                       : customeElement?.preStart || customeElement?.preEnd
             })}
           >
-            <div
-              className={cn({
-                hidden: true,
-                'shrink-0 !flex bg-gray-100 p-2 ': customeElement?.preStart
-              })}
-            >
-              {customeElement?.preStart}
-            </div>
-
-            <div
-              className={cn({
-                hidden: true,
-                'shrink-0 !flex ': customeElement?.start
-              })}
-            >
-              {customeElement?.start}
-            </div>
-
+            <CustomeElement elmn1={customeElement?.start} elmn2={customeElement?.preStart} />
+            
             <div className={`${customeClass?.ciV1} flex flex-col w-full relative `}>
               {typeof children === 'function' ? (
                 <>
@@ -130,27 +110,11 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
                 children
               )}
             </div>
-
+            
             {isClerable && !isEmptyValue(customeClearValue) && <IconClose className='cursor-pointer' onClick={handleOnClearValue} />}
-
-            <div
-              className={cn({
-                hidden: true,
-                'shrink-0 !flex': customeElement?.end
-              })}
-            >
-              {customeElement?.end}
-            </div>
-
-            <div
-              className={cn({
-                hidden: true,
-                'shrink-0 !flex bg-gray-100 p-2 ': customeElement?.preEnd
-              })}
-            >
-              {customeElement?.preEnd}
-            </div>
-
+            
+            <CustomeElement elmn1={customeElement?.preEnd} elmn2={ customeElement?.end} />
+            
             {type === 'password' && (
               <div onClick={handleToggleTypePassword} className='cursor-pointer-custome '>
                 {dynamicType === 'password' ? <IconEye /> : <IconEyeClose />}
@@ -163,6 +127,26 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
       <HelperMessage variant={'error'} message={errorMessage} />
     </Container>
   )
+}
+
+
+interface TPropsCustomeElement{
+  elmn1?  : React.ReactNode;
+  elmn2?  : React.ReactNode;
+}
+
+const CustomeElement = (props:TPropsCustomeElement)=>{
+  const {elmn1, elmn2} = props
+
+  return <>
+    <div className={`hidden ${elmn1 && 'shrink-0 !flex bg-gray-100 p-2'}`}>
+      {elmn1}
+    </div>
+
+    <div className={`hidden ${ elmn2 && 'shrink-0 !flex'}`}>
+      {elmn2}
+    </div>
+  </>
 }
 
 export default ContainerInput
