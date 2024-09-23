@@ -78,7 +78,7 @@ const FormLogin = (props:TPropsFormLogin) => {
             {...excludeRef(register('isRememberMe'))}
             value={String(watch('isRememberMe'))}
           />
-          <Button variant={'link-black'} className=" text-white md:text-black underline !p-0" href={'/auth/forget-password'}>
+          <Button variant={'link-black'} className=" text-white  underline !p-0" href={'/auth/forget-password'}>
             Forget Password
           </Button>
         </div>
