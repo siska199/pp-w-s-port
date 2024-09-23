@@ -31,12 +31,15 @@ export const route = {
     fullPath : '/work-history'
   },
   education : {
+    name : 'education',
     fullPath : '/education'
   },
   portofolio : {
+    name : 'portofolio',
     fullPath : '/portofolio'
   },
   certification : {
+    name : 'certification',
     fullPath : '/certification'
   }
 }

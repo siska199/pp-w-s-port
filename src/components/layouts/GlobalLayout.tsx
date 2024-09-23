@@ -14,7 +14,7 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
 
   useEffect(() => {
-    if (currentPath.url === '/') 
+    if (currentPath?.pathname === '/') 
       navigate(isAuthenticated ? route.personalInformation.fullPath : route.auth.child.signIn.fullPath, { replace: true })
   }, [])
 

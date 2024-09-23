@@ -1,6 +1,9 @@
 import GlobalLayout from '@components/layouts/GlobalLayout'
 import Protectedlayout from '@components/layouts/Protectedlayout'
+import certificationRouter from '@routes/protected/certificationRouter'
+import educationRouter from '@routes/protected/educationRouter'
 import personalInformationRouter from '@routes/protected/personalInformationRouter'
+import portofolioRouter from '@routes/protected/portofolioRouter'
 import skillRouter from '@routes/protected/skillRouter'
 import workHistoryRouter from '@routes/protected/workHistoryRouter copy'
 import React from 'react'
@@ -18,7 +21,14 @@ const protectedRoutes: RouteObject[] = [
       </React.Suspense>
     ),
     errorElement: <div>Not Found</div>,
-    children: [...personalInformationRouter, ...skillRouter, ...workHistoryRouter]
+    children: [
+      ...personalInformationRouter, 
+      ...skillRouter, 
+      ...workHistoryRouter,
+      ...educationRouter, 
+      ...portofolioRouter,
+      ...certificationRouter
+    ]
   }
 ]
 
