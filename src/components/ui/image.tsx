@@ -31,7 +31,6 @@ const Image = (props: TProps) => {
   }
 
 
-  console.log('src',src,getAssetURL({ name: src }))
   return (
     <div
       className={cn({

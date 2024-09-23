@@ -66,6 +66,25 @@ export enum TTypeFile {
   IMAGE_ALL = 'image/*'
 }
 
+
+export type TValueFile<TIsMultiple extends boolean = true> = TIsMultiple extends false ? File | null : File[] | null;
+
+type TObjectForm = TBasePropsInput & { value: any; listUploadedFile?: TUploadedFile[] } & Omit<Partial<React.HTMLProps<HTMLInputElement>>, "name" | "value" | "onChange"> &
+  // Omit<Partial<ReactDatePickerProps<true, true>>, "onChange" | "value"> &
+  Omit<Partial<React.HTMLProps<HTMLTextAreaElement>>, "onChange" | "value">;
+export type TForm<TKey extends string, TNameRequired extends boolean = true> = Record<TKey, TNameRequired extends true ? TObjectForm & { name: string } : TObjectForm & { name?: string }>;
+
+export interface TUploadedFile {
+  id: number;
+  status: "onprogress" | "done";
+  name: string;
+  type: TTypeFile
+  size: number;
+}
+
+export type TEventOnChange = React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | TCustomeEventOnChange<any> | TCustomeEventOnChange<TValueFile, { files: FileList; listUploadedFile?: TUploadedFile[] }>;
+
+
 /*--->Redux */
 export interface TRUiState {
   isLoading: boolean

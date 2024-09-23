@@ -108,3 +108,9 @@ export const getGeneralTypeFile = (type: string): TTypeGeneralFile => {
 
   return generalType as TTypeGeneralFile
 }
+
+
+export const excludeRef = <T extends { ref?: any }>(input: T) => {
+  const { ref, ...rest } = input;
+  return rest;
+};

@@ -14,6 +14,7 @@ const Protectedlayout = () => {
 
   return (
     <main>
+      
       <Outlet />
     </main>
   )
