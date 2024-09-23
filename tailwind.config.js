@@ -50,7 +50,8 @@ export default {
         300: '#C4B5FD',
         200: '#DDD6FE',
         100: '#EDE9FE',
-        50: '#F5F3FF'
+        50: '#F5F3FF',
+        DEFAULT: '#8B5CF6'
       },
       warning: {
         900: '#F25722',
@@ -62,9 +63,10 @@ export default {
         300: '#FFBC5D',
         200: '#FFD89F',
         100: '#FFE7C7',
-        50: '#FFF4E6'
+        50: '#FFF4E6',
+        DEFAULT: '#FF9E2A'
       },
-      success: {
+      sucess: {
         900: '#064E3B',
         800: '#065F46',
         700: '#047857',

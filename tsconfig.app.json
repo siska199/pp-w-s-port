@@ -23,8 +23,9 @@
     /* Abosulte import*/
     "baseUrl": "./src",
     "paths": {
-      "@*" : ["./*"]
-    }
+      "@*": ["./*"]
+    },
+
   },
   "include": ["src"]
 }

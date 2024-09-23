@@ -1,14 +1,12 @@
 import GlobalLayout from '@components/layouts/GlobalLayout'
 import PublicLayout from '@components/layouts/PublicLayout'
 import Loading from '@components/loading'
-import { route } from '@lib/data/global'
-import { SignInPage } from '@pages'
+import { PlaygroundPage } from '@pages'
 import React from 'react'
-import { RouteObject } from 'react-router-dom'
 
-const authRouter: RouteObject[] = [
+const playgroundRouter = [
   {
-    path: route.auth.name,
+    path: 'playground',
     element: (
       <React.Suspense fallback={<Loading />}>
         <GlobalLayout>
@@ -18,11 +16,11 @@ const authRouter: RouteObject[] = [
     ),
     children: [
       {
-        path: route.auth.child.signIn.name,
-        element: <SignInPage />
+        index: true,
+        element: <PlaygroundPage />
       }
     ]
   }
 ]
 
-export default authRouter
+export default playgroundRouter

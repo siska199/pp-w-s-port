@@ -6,11 +6,10 @@ const PublicLayout = () => {
   const navigate = useNavigate()
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
 
-  if (isAuthenticated)
-    navigate(route.personalInformation.fullPath, { replace: true })
+  if (isAuthenticated) navigate(route.personalInformation.fullPath, { replace: true })
 
   return (
-    <main>
+    <main className='border h-screen p-4'>
       <Outlet />
     </main>
   )

@@ -24,7 +24,9 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
     }
   }, [])
 
-  return <>{children}</>
+  return <>
+  {children}
+  </>
 }
 
 export default GlobalLayout

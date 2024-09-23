@@ -4,26 +4,23 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
+@layer base {
   *,
   *::before,
   *::after {
     @apply box-border p-0 m-0;
   }
 
-  html{
+  html {
     @apply scroll-smooth;
   }
 
-  body{
+  body {
     @apply overflow-x-hidden relative text-body-base bg-white text-gray-900;
-
   }
 }
 
-
 @layer components {
-  
   /* Remove background autofill input*/
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
@@ -43,24 +40,81 @@
   }
 
   /* Customize scrollbar */
-  ::-webkit-scrollbar{
-    @apply w-2 h-2
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
   }
   ::-webkit-scrollbar-track {
-      box-shadow: none;
-      border-radius: 10px;
-      background:white;
+    box-shadow: none;
+    border-radius: 10px;
+    background: white;
   }
   ::-webkit-scrollbar-thumb {
-      @apply rounded-lg bg-gray-300
+    @apply rounded-lg bg-gray-300;
   }
   ::-webkit-scrollbar-thumb:hover {
-      @apply bg-gray-300
+    @apply bg-gray-300;
   }
 
+  /* FOR SVG ICON set color dinamically */
+  .icon-white path,
+  .icon-white rect,
+  .icon-white circle {
+    @apply !stroke-white;
+  }
+  .icon-white-fill path {
+    @apply fill-white;
+  }
+
+  .icon-black path,
+  .icon-black rect {
+    @apply stroke-black;
+  }
+  .icon-black-fill path {
+    @apply fill-black;
+  }
+
+  .icon-gray path,
+  .icon-gray rect {
+    @apply stroke-gray;
+  }
+  .icon-gray-fill path {
+    @apply fill-gray;
+  }
+
+  .icon-primary path,
+  .icon-primary rect {
+    @apply stroke-primary;
+  }
+  .icon-primary-fill path {
+    @apply fill-primary;
+  }
+
+  .icon-error path,
+  .icon-error rect {
+    @apply stroke-error;
+  }
+  .icon-error-fill path {
+    @apply fill-error;
+  }
+
+  .icon-warning path,
+  .icon-warning rect {
+    @apply !stroke-warning;
+  }
+  .icon-warning-fill path {
+    @apply fill-warning;
+  }
+
+  .icon-sucess path,
+  .icon-sucess rect {
+    @apply stroke-sucess;
+  }
+  .icon-sucess-fill path {
+    @apply fill-sucess;
+  }
 }
 
-@layer utilities{
+@layer utilities {
   /* Bounce effect */
   .bounce-effect {
     @apply transition-all duration-[50] hover:scale-[1.03] active:scale-[0.98] disabled:!scale-[1] disabled:cursor-not-allowed;

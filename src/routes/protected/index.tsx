@@ -4,6 +4,7 @@ import personalInformationRouter from '@routes/protected/personalInformationRout
 import React from 'react'
 import { RouteObject } from 'react-router-dom'
 
+
 const protectedRoutes: RouteObject[] = [
   {
     path: '',
