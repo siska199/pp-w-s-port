@@ -17,7 +17,13 @@ export default {
         4: '0.04'
       },
       borderColor: {
-        default: '#1211271F'
+        DEFAULT: '#e5e7eb',
+      },
+      borderWidth: {
+        DEFAULT: '1px',
+      },
+      backgroundImage: {
+        'login': "url('/src/assets/images/background-login.svg')",
       }
     },
     fontFamily: {

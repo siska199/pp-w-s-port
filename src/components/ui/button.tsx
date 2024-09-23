@@ -28,7 +28,7 @@ const Button = (props: TProps) => {
   }
 
   return (
-    <CompButton {...attrs} disabled={isLoading || attrs?.disabled} className={cn(buttonVariants({ className, variant: updateVariant, size, shape }))}>
+    <CompButton {...attrs} disabled={isLoading || attrs?.disabled} className={cn(buttonVariants({variant: updateVariant, size, shape }),className)}>
       {isLoading ? (
         <span>
           <IconLoadingSpinner />

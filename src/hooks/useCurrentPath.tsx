@@ -1,8 +1,13 @@
-import { useLocation } from 'react-router-dom'
+import menuSidebar from '@lib/data/menu-sidebar'
+import { UIMatch, useMatches } from 'react-router-dom'
 
 const useCurrentPath = () => {
-  const location = useLocation()
-  const currentPath = location.pathname
+
+  const matches:UIMatch[] = useMatches()
+  const currentPath = matches?.find(
+    (match: any) =>match?.pathname == location?.pathname,
+  )
+
   return { currentPath }
 }
 

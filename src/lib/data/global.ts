@@ -19,7 +19,25 @@ export const route = {
     }
   },
   personalInformation: {
+    name : 'personal-information',
     fullPath: '/personal-information'
+  },
+  skill : {
+    name : 'skill',
+    fullPath : '/skill'
+  },
+  workHistory : {
+    name : 'work-history',
+    fullPath : '/work-history'
+  },
+  education : {
+    fullPath : '/education'
+  },
+  portofolio : {
+    fullPath : '/portofolio'
+  },
+  certification : {
+    fullPath : '/certification'
   }
 }
 

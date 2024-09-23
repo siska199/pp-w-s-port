@@ -3,6 +3,7 @@ import { TRUiState } from 'types/ui-types'
 
 const initialState: TRUiState = {
   isLoading: false,
+  isToggleSidebar:false,
   alertConfig: {
     show: false,
     message: '',
@@ -15,6 +16,9 @@ const authSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
+    handleToggleSidebar : (state,action:PayloadAction<boolean>)=>{
+      state.isToggleSidebar= action.payload
+    },
     handleSetIsloading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload
     },
@@ -29,4 +33,4 @@ const authSlice = createSlice({
 
 export default authSlice.reducer
 
-export const { handleSetIsloading, handleSetAlertConfig } = authSlice.actions
+export const { handleSetIsloading, handleSetAlertConfig, handleToggleSidebar } = authSlice.actions

@@ -14,6 +14,7 @@ import {
 import { encryptTransform } from 'redux-persist-transform-encrypt'
 import storage from 'redux-persist/lib/storage'
 import authSlice from './features/auth/authSlice'
+import uiSlice from '@store/features/ui/uiSlice'
 
 const encryptor = encryptTransform({
   secretKey: secretkey,
@@ -32,6 +33,15 @@ const rootReducers = () => {
         transforms: [encryptor]
       },
       authSlice
+    ),
+    ui: persistReducer(
+      {
+        key: 'ui',
+        storage: storagePersist,
+        whitelist: [],
+        transforms: [encryptor]
+      },
+      uiSlice
     )
   })
 }

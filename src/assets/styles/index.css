@@ -116,13 +116,16 @@
 }
 
 
-.bg-glassmorphism{
-  @apply h-full w-full bg-gray-900  rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30;
-}
+
 
 
 
 @layer utilities {
+  /* Background glassmorphism*/
+  .bg-glassmorphism{
+    @apply h-full w-full  bg-gray-900  rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30;
+  }
+
   /* Bounce effect */
   .bounce-effect {
     @apply transition-all duration-[50] hover:scale-[1.03] active:scale-[0.98] disabled:!scale-[1] disabled:cursor-not-allowed;
