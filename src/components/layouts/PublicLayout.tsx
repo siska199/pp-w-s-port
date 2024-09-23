@@ -8,11 +8,7 @@ const PublicLayout = () => {
 
   if (isAuthenticated) navigate(route.personalInformation.fullPath, { replace: true })
 
-  return (
-    <main className='border h-screen p-4'>
-      <Outlet />
-    </main>
-  )
+  return <Outlet />
 }
 
 export default PublicLayout

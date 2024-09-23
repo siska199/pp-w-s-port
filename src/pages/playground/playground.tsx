@@ -1,8 +1,9 @@
 import Button from '@components/ui/button'
 import InputBase from '@components/ui/input/input-base'
-import { TCustomeEventOnChange } from 'types/ui-types'
-import { useState } from 'react'
 import InputSelect from '@components/ui/input/input-select'
+import InputUploadFile from '@components/ui/input/input-upload-file'
+import { useState } from 'react'
+import { TCustomeEventOnChange, TTypeFile } from 'types/ui-types'
 
 const PlaygroundPage = () => {
   const [form, setForm] = useState({
@@ -34,12 +35,16 @@ const PlaygroundPage = () => {
         { label: 'Jakarta2', value: 'Jakarta2' },
         { label: 'Jakarta3', value: 'Jakarta3' }
       ]
+    },
+    profile: {
+      name: 'profile',
+      value: null
     }
   })
 
   const handleOnChange = (e: TCustomeEventOnChange<any>) => {
     const name = e.target.name as keyof typeof form
-
+    console.log(e.target.value)
     setForm({
       ...form,
       [name]: {
@@ -56,6 +61,7 @@ const PlaygroundPage = () => {
         <InputBase onChange={handleOnChange} {...form['username']} />
         <InputBase onChange={handleOnChange} {...form['password']} />
         <InputSelect isMultiple={true} onChange={handleOnChange} {...form['city']} />
+        <InputUploadFile listAcceptedFile={[TTypeFile.PDF, TTypeFile.PNG]} onChange={handleOnChange} {...form['profile']} />
       </div>
     </div>
   )

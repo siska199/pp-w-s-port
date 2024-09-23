@@ -46,6 +46,26 @@ export interface TAlertConfig {
   customeIcon?: React.ReactNode
 }
 
+export enum TTypeFile {
+  JPG = '.jpg',
+  JPEG = '.jpeg',
+  PNG = '.png',
+  GIF = '.gif',
+  BMP = '.bmp',
+  WEBP = '.webp',
+
+  DOC = '.doc',
+  DOCX = '.docx',
+  PDF = '.pdf',
+  TXT = '.txt',
+  XLS = '.xls',
+  XLSX = '.xlsx',
+  CSV = '.csv',
+
+  ALL = '*',
+  IMAGE_ALL = 'image/*'
+}
+
 /*--->Redux */
 export interface TRUiState {
   isLoading: boolean

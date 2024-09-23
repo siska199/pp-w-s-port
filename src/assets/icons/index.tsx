@@ -8,3 +8,4 @@ export { default as IconNotification } from '@assets/icons/notification.svg?reac
 export { default as IconSucess } from '@assets/icons/sucess.svg?react'
 export { default as IconChevronDown } from '@assets/icons/chevron-down.svg?react'
 export { default as IconLoadingThreeDots } from '@assets/icons/loading-three-dots.svg?react'
+export { default as IconCamera } from '@assets/icons/camera.svg?react'
