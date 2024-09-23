@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState: TRAuthState = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   user: null
 }
 
