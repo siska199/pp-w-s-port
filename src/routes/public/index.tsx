@@ -1,14 +1,6 @@
-import React from 'react'
+import authRouter from '@routes/public/authRouter'
+import { RouteObject } from 'react-router-dom'
 
-const publicRoutes = [
-  {
-    path: '/',
-    element: (
-      <React.Suspense>
-        <div>Siska</div>
-      </React.Suspense>
-    )
-  }
-]
+const publicRoutes: RouteObject[] = [...authRouter]
 
 export default publicRoutes

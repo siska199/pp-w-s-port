@@ -1,6 +1,19 @@
+import { route } from '@lib/data/global'
+import { useAppSelector } from '@store/store'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 const PublicLayout = () => {
-  return <div>PublicLayout</div>;
-};
+  const navigate = useNavigate()
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
 
-export default PublicLayout;
+  if (isAuthenticated)
+    navigate(route.personalInformation.fullPath, { replace: true })
+
+  return (
+    <main>
+      <Outlet />
+    </main>
+  )
+}
+
+export default PublicLayout

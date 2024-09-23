@@ -1,8 +1,9 @@
 import GlobalLayout from '@components/layouts/GlobalLayout'
 import Protectedlayout from '@components/layouts/Protectedlayout'
 import React from 'react'
+import { RouteObject } from 'react-router-dom'
 
-const protectedRoutes = [
+const protectedRoutes: RouteObject[] = [
   {
     path: '',
     element: (
@@ -13,7 +14,11 @@ const protectedRoutes = [
       </React.Suspense>
     ),
     errorElement: <div>Not Found</div>,
-    children: []
+    children: [
+      {
+        path: '/'
+      }
+    ]
   }
 ]
 

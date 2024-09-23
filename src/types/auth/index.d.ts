@@ -1,9 +1,8 @@
-
 /* Module */
 
 /* Redux */
 
 interface TRAuthState {
-    isLogin : boolean;
-    user    : TUser | null;
+  isAuthenticated: boolean
+  user: TUser | null
 }
