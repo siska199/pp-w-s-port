@@ -1,3 +1,9 @@
+
+export const personalInformation = {
+  
+}
+
+
 export const skills = [
     {
       "id": 1,
@@ -119,5 +125,5 @@ export const skills = [
         "Data Handling for Real-time App"
       ]
     }
-  ];
+];
   

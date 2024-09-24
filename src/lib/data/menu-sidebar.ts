@@ -27,10 +27,10 @@ import { route } from "@lib/data/global";
       name  : 'education',
     },
     {
-      title : 'Portofolio',
-      src   : 'sidebar/portofolio.png',
-      url   : route.portofolio.fullPath,
-      name  : 'portofolio',
+      title : 'Project',
+      src   : 'sidebar/project.png',
+      url   : route.project.fullPath,
+      name  : 'project',
     },
     {
       title : 'Certification',

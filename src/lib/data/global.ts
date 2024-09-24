@@ -34,9 +34,9 @@ export const route = {
     name : 'education',
     fullPath : '/education'
   },
-  portofolio : {
-    name : 'portofolio',
-    fullPath : '/portofolio'
+  project : {
+    name : 'project',
+    fullPath : '/project'
   },
   certification : {
     name : 'certification',

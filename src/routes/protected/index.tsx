@@ -3,7 +3,7 @@ import Protectedlayout from '@components/layouts/Protectedlayout'
 import certificationRouter from '@routes/protected/certificationRouter'
 import educationRouter from '@routes/protected/educationRouter'
 import personalInformationRouter from '@routes/protected/personalInformationRouter'
-import portofolioRouter from '@routes/protected/portofolioRouter'
+import projectRouter from '@routes/protected/projectRouter'
 import skillRouter from '@routes/protected/skillRouter'
 import workHistoryRouter from '@routes/protected/workHistoryRouter copy'
 import React from 'react'
@@ -26,7 +26,7 @@ const protectedRoutes: RouteObject[] = [
       ...skillRouter, 
       ...workHistoryRouter,
       ...educationRouter, 
-      ...portofolioRouter,
+      ...projectRouter,
       ...certificationRouter
     ]
   }
