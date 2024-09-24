@@ -53,7 +53,7 @@ const FormLogin = (props:TPropsFormLogin) => {
 
       <div className="text-center space-y-3 w-full">
         <h5 className="text-body-2xl font-bold"> Sign in to your account</h5>
-        <p className="text-center">Welcome back! Please enter your details.</p>
+        <p className="text-center text-white">Welcome back! Please enter your details.</p>
       </div>
       <form onSubmit={handleSubmit(handleOnSubmit)} className="flex flex-col gap-4 w-full">
         <InputBase

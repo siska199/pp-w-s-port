@@ -91,6 +91,24 @@ export type TEventOnChange = React.ChangeEvent<HTMLInputElement>
                             | TCustomeEventOnChange<TValueFile, { files: FileList; listUploadedFile?: TUploadedFile[] }>;
 
 
+export interface TColumn<TData, TKey extends keyof TData> {
+  name              : string;
+  key               : TKey;
+  className?        : string;
+  customeComponent? : (data: TData) => React.ReactNode;
+  isSorted?         : boolean;
+}
+
+export interface TSettingTable<TData> {
+  sortBy?       : keyof TData;
+  sortDir?      : "asc" | "desc";
+  checked?      : boolean;
+  pagination?   : boolean;
+  currentPage   : number;
+  totalPage     : number;
+  itemsPerPage  : number;
+}
+
 /*--->Redux */
 export interface TRUiState {
   isLoading       : boolean;

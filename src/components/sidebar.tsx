@@ -20,7 +20,7 @@ const Sidebar = () => {
 
 
   return (
-    <div className={` md:z-0  min-h-screen  md:relative w-fit ${isMaxMd && !isToggleSidebar && 'bg-black/50 fixed translate-y-0  z-[9] w-full'} `}>
+    <div className={` md:z-0  min-h-screen h-screen md:relative w-fit ${isMaxMd && !isToggleSidebar && 'bg-black/50 fixed translate-y-0  z-[9] w-full'} `}>
       <div className={`sticky top-0  space-y-4 transition-all  bg-login  h-full ${isToggleSidebar?'w-0 p-0':'w-full md:w-[15rem] '}`}>
         {
           !isToggleSidebar && <>          

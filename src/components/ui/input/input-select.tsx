@@ -8,6 +8,7 @@ import { debounce, getFieldLabelFromOptions, spreadArrayAttemp } from '@lib/help
 import clsx from 'clsx'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { TBasePropsInput, TCustomeEventOnChange, TOption } from 'types/ui-types'
+import { isEmptyValue } from '../../../lib/helper';
 
 export type TPropsInputSelect = {
   name: string
@@ -62,9 +63,10 @@ const InputSelect = (props: TPropsInputSelect) => {
 
   useEffect(() => {
     if (refInput?.current && isMultiple) {
-      refInput.current.style.width = `${searchQuery?.length * 10 || 10}px`
+      console.log(isEmptyValue(attrs.value))
+      refInput.current.style.width = searchQuery || !isEmptyValue(attrs.value)?`${searchQuery?.length * 10 || 10}px`: "auto"
     }
-  }, [searchQuery, isMultiple])
+  }, [searchQuery, isMultiple, attrs.value])
 
   useEffect(() => {
     if (searchQuery && onLoadMore) {
@@ -272,7 +274,7 @@ const InputSelect = (props: TPropsInputSelect) => {
                   />
                 )
               })}
-            <input {...attrsInput} onKeyDown={handleOnKeyDown} id={attrsInput?.name} onChange={handleSearchChange} value={String(searchQuery) || ''} ref={refInput} autoComplete={'new-password'} />
+            <input {...attrsInput} onKeyDown={handleOnKeyDown} id={attrsInput?.name} onChange={handleSearchChange} value={String(searchQuery) || ''} ref={refInput} autoComplete={'new-password'} placeholder={isEmptyValue(attrs.value) ? attrs.placeholder:''}/>
           </div>
         </div>
       )}

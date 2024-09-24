@@ -66,7 +66,8 @@ const Navbar = () => {
             onClick={handleOnClickItemDropdown}
             customeClass={{
               containerDropdown:"h-fit my-auto",
-              btnDropdown:'rounded-full p-2 my-auto'
+              btnDropdown:'rounded-full p-2 my-auto',
+              overlay : 'mt-[1.4rem]'
             }}
             position="right"
           />

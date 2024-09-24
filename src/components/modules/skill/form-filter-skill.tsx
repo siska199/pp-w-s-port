@@ -16,13 +16,14 @@ const FormFilterSKill = () => {
     },
     category : {
       name  : 'category',
-      value : '',
+      value : [],
       options :[
         {label : 'Backend',   value : 'backend'},
         {label : 'Frotnend',  value : 'forntend'},
         {label : 'Fullstack', value : 'fullstack'},
       ],
-      placeholder : 'Category Skill'
+      placeholder : 'Category Skill',
+
     },
     yearsOfexperiance : {
       name : 'yearsOfexperiance',
@@ -32,7 +33,17 @@ const FormFilterSKill = () => {
       })),
       value:'',
       placeholder : 'Year of experiance'
-    }
+    },
+    level : {
+      name  : 'level',
+      value : [],
+      options :[
+        {label : 'Beginner',   value : 'Beginner'},
+        {label : 'Intermediet',  value : 'Intermediet'},
+        {label : 'Advance', value : 'Advance'},
+      ],
+      placeholder : 'Level'
+    },
   })
 
   const handleOnChange = (e: TCustomeEventOnChange<any>)=>{
@@ -48,17 +59,14 @@ const FormFilterSKill = () => {
   }
 
   return (
-    <div className="spacey-3 flex gap-4">
-
-      <div className="w-fit flex gap-4">
-        <InputBase customeElement={{start: <IconSearch className="icon-gray icon-gray-fill"/>}} {...form['keyword']} onChange={handleOnChange} />
-        <InputSelect  onChange={handleOnChange} {...form['category']}/>
-        <InputSelect  onChange={handleOnChange} {...form['yearsOfexperiance']}/>
-
-      </div>
+    <div className="grid grid-cols-4 gap-4">
+      <InputBase customeElement={{start: <IconSearch className="icon-gray icon-gray-fill"/>}} {...form['keyword']} onChange={handleOnChange} />
+      <InputSelect  onChange={handleOnChange} {...form['category']} isMultiple/>
+      <InputSelect  onChange={handleOnChange} {...form['level']} isMultiple/>
+      <InputSelect  onChange={handleOnChange} {...form['yearsOfexperiance']} />
 
     </div>
-  )
+    )
 };
 
 export default FormFilterSKill;

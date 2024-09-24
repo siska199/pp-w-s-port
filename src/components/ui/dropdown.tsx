@@ -17,6 +17,7 @@ interface TProps {
   customeClass? : {
     containerDropdown?  : string;
     btnDropdown?        : string;
+    overlay?            : string;
   };
   isDefaultStyle?       : boolean;
   header?               : React.ReactNode;
@@ -93,6 +94,7 @@ const DropdownBase = (props: TProps) => {
           " h-0 shadow-none opacity-0": !isOpen,
           "!py-0": header,
           "right-0": position === "right",
+          [customeClass?.overlay || ''] : customeClass?.overlay
         })}
       >
         <div
