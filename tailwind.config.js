@@ -27,7 +27,9 @@ export default {
       }
     },
     fontFamily: {
-      poppins: ['Poppins', 'sans-serif']
+      poppins: ['Poppins', 'sans-serif'],
+      'test': ['test'],
+
     },
     fontSize: {
       'heading-05': '1.875rem', // 30px

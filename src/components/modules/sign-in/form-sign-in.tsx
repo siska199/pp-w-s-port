@@ -29,7 +29,7 @@ const FormLogin = (props:TPropsFormLogin) => {
     defaultValues: {
       username: '',
       password: '',
-      isRememberMe: undefined,
+      isRememberMe:'false',
     },
   });
 
@@ -77,6 +77,7 @@ const FormLogin = (props:TPropsFormLogin) => {
             label={'Remember me for 30 days'}
             {...excludeRef(register('isRememberMe'))}
             value={String(watch('isRememberMe'))}
+            onChange={handleOnChange}
           />
           <Button variant={'link-black'} className=" text-white  underline !p-0" href={'/auth/forget-password'}>
             Forget Password

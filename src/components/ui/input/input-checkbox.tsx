@@ -17,8 +17,9 @@ interface TProps extends Omit<TBasePropsInput, 'errorMessage'>, Omit<React.HTMLP
 
 const InputCheckbox = (props: TProps) => {
   const { name, onChange, value, customeClassnameCheckbox, label = '', checked, ...attrsInput } = props
+  
   const updatedChecked = useMemo(() => {
-    return ['true', 'false']?.includes(String(value)) ? String(value) === 'true' : checked
+    return ['true', 'false']?.includes(String(value)) ? String(value) === 'true' : checked||false
   }, [checked, value])
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {

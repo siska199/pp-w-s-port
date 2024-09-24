@@ -25,7 +25,7 @@ const Sidebar = () => {
         {
           !isToggleSidebar && <>          
             <div onClick={()=> dispatch(handleToggleSidebar(!isToggleSidebar))} className="cursor-pointer gap-2 px-6 flex">
-              <h3 className="text-body-3xl font-bold py-6 text-white">
+              <h3 className="text-body-3xl font-test font-bold py-6 text-white">
                 <span className="text-primary-50 ">S-</span>Port
               </h3>
             </div>
@@ -38,7 +38,7 @@ const Sidebar = () => {
                   onClick={()=>isMaxMd?dispatch(handleToggleSidebar(true)):null}
                   className={cn({
                     'gap-4 w-full justify-start py-2  bg-glassmorphism  border-none hover:!text-black !text-white'  : true,
-                    "bg-white !text-black ":currentPath.handle.name === data.name
+                    "bg-white !text-black ":currentPath?.handle?.name === data?.name
                   })}
                 >
 
@@ -46,7 +46,7 @@ const Sidebar = () => {
                     src={data.src || ''} 
                     className={cn({
                       'w-6 h-6 bg-white border p-1 rounded-full  z-[9]'   : true,
-                      'bg-primary-100 border-primary-700'               : currentPath.handle.name === data.name,
+                      'bg-primary-100 border-primary-700'               : currentPath?.handle?.name === data?.name,
                     })} 
                     customeClassName={{image:'object-contain'}} alt="icon menu sidebar" 
                   />
