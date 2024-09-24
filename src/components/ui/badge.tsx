@@ -4,10 +4,11 @@ import variantBadge from "@lib/variant/variant-badge";
 import { VariantProps, cva } from "class-variance-authority";
 import React, { HTMLProps } from "react";
 
-interface TProps extends Omit<Partial<HTMLProps<HTMLDivElement>>, "size" | "shape" | "label">, VariantProps<typeof badgeVariants> {
-  customeElement?: React.ReactNode;
-  label: string | React.ReactNode;
-
+interface TProps extends Omit<Partial<HTMLProps<HTMLDivElement>>, "size" | "shape" | "label">, 
+                        VariantProps<typeof badgeVariants> 
+{
+  customeElement? : React.ReactNode;
+  label           : string | React.ReactNode;
 }
 
 const Badge = (props: TProps) => {

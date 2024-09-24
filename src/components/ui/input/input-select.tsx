@@ -274,7 +274,7 @@ const InputSelect = (props: TPropsInputSelect) => {
                   />
                 )
               })}
-            <input {...attrsInput} onKeyDown={handleOnKeyDown} id={attrsInput?.name} onChange={handleSearchChange} value={String(searchQuery) || ''} ref={refInput} autoComplete={'new-password'} placeholder={isEmptyValue(attrs.value) ? attrs.placeholder:''}/>
+            <input {...attrsInput} onKeyDown={handleOnKeyDown} id={attrsInput?.name} onChange={handleSearchChange} value={String(searchQuery) || ''} ref={refInput} autoComplete={'off'} placeholder={isEmptyValue(attrs.value) ? attrs.placeholder:''} />
           </div>
         </div>
       )}

@@ -114,3 +114,8 @@ export const excludeRef = <T extends { ref?: any }>(input: T) => {
   const { ref, ...rest } = input;
   return rest;
 };
+
+
+export const delay=(ms: number):Promise<void> =>{
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

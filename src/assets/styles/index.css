@@ -21,7 +21,7 @@
   }
 
   body {
-    @apply overflow-x-hidden relative text-body-base bg-white text-gray-800;
+    @apply overflow-hidden relative text-body-base bg-white text-gray-800;
   }
 
   h1 {
@@ -115,6 +115,16 @@
   .icon-primary-fill path {
     @apply fill-primary;
   }
+
+  .icon-blue path,
+  .icon-blue rect,
+  .icon-blue circle  {
+    @apply stroke-blue;
+  }
+  .icon-blue-fill path {
+    @apply fill-blue;
+  }
+
 
   .icon-error path,
   .icon-error rect {

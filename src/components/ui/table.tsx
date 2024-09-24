@@ -6,6 +6,9 @@ import React, { useMemo } from "react";
 import InputCheckbox from "@components/ui/input/input-checkbox";
 import { cn } from "@lib/helper";
 import Button from "@components/ui/button";
+import { IconArrowUp, IconChevronLeft, IconChevronRight, IconDelete, IconEdit, IconEye, IconSort, } from '@assets/icons';
+import EmptyData from "@components/ui/empty-data";
+import Badge from "@components/ui/badge";
 
 
 type WithId<T> = T & { id: string | number };
@@ -21,11 +24,16 @@ export interface TTableProps<TData, TIncludeChecked extends boolean = false> {
     onChange    : (params: any) => void;
     isLoading?  : boolean;
     withNo?     : boolean;
+    actionBtn?   : {
+        view?   : (data:TData)=>void;
+        edit?   : (data:TData)=>void;
+        delete? : (data:TData)=>void;
+    }
 }
 
 
 const Table = <TData, TIncludeChecked extends boolean = false>(props: TTableProps<TData, TIncludeChecked>) => {
-    const { columns, isLoading, data, setData, setting, onChange, withNo } = props
+    const { columns, isLoading, data, setData, setting, onChange, withNo ,actionBtn} = props
 
     const isCheckedAll = useMemo(()=>data?.length > 0 ? 
                                     !data?.some((dataRow: WithOptionalChecked<TData, TIncludeChecked>) => !dataRow.isChecked) 
@@ -36,6 +44,7 @@ const Table = <TData, TIncludeChecked extends boolean = false>(props: TTableProp
         const name = e.target.name
         const value = e?.target?.value
         const isChecked = e?.target?.checked
+        
         if (name === "cheked-all") {
             const newData = data?.map((dataRow) => ({
                 ...dataRow, isChecked
@@ -70,17 +79,20 @@ const Table = <TData, TIncludeChecked extends boolean = false>(props: TTableProp
     }
 
     const style = {
-        columnChecked   : "flex items-center justify-center py-3 px-4  align-top",
-        columnData      : "py-3 px-6  align-top",
-        columnNo        : "py-3 px-4   align-top"
+        columnChecked   : "flex items-center justify-center py-2 px-4 ",
+        columnData      : "py-2 px-6 ",
+        columnNo        : "py-2 px-4 ",
+        iconAction      : '!p-1 !min-h-auto !min-w-auto cursor-pointer-custome'
     }
 
+    const isShowColumnAction = useMemo(()=>actionBtn?.delete || actionBtn?.edit || actionBtn?.view,[actionBtn])
+
     return (
-        <div className="border rounded-lg w-full">
-            <div className="relative  overflow-y-auto  max-h-[30rem] ">
+        <div className="border border-warning-100 rounded-lg w-full overflow-hidden">
+            <div className="relative  overflow-y-auto   max-h-[30rem] ">
                 <table className={`table-auto  w-full ${data?.length === 0 && 'flex flex-col'}`}>
-                    <thead className="sticky z-[2] top-0 text-gray-500 bg-gray-50 ">
-                        <tr className="border-b">
+                    <thead className="sticky z-[2] top-0  text-warning-700 bg-warning-50 ">
+                        <tr className="border-b border-warning-100">
                             {
                                 (setting?.checked) && (
                                     <th className={`${style.columnChecked}`}>
@@ -110,12 +122,12 @@ const Table = <TData, TIncludeChecked extends boolean = false>(props: TTableProp
                                                     setting?.sortBy === column?.key ? (
                                                         <IconArrowUp
                                                             className={cn({
-                                                                'icon-gray h-[1.25rem] transition-transform duration-300': true,
+                                                                'icon-warning h-[1.25rem] transition-transform duration-300': true,
                                                                 "rotate-180": setting?.sortDir === "desc" && setting?.sortBy === column?.key
                                                             })} />
                                                     ) : (
                                                         <IconSort
-                                                            className="ml-1 w-[1.1rem] h-[1.1rem]"
+                                                            className="ml-1 w-[1.1rem] h-[1.1rem] icon-warning"
                                                         />
                                                     )
                                                 }
@@ -123,6 +135,9 @@ const Table = <TData, TIncludeChecked extends boolean = false>(props: TTableProp
                                         )}
                                     </div>
                                 </th>)
+                            }
+                            {
+                                isShowColumnAction && <th> <div className="min-w-[5rem] flex justify-center items-center">Action</div></th>
                             }
                         </tr>
                     </thead>
@@ -132,7 +147,7 @@ const Table = <TData, TIncludeChecked extends boolean = false>(props: TTableProp
                                 {
                                     data?.map((dataRow, i) => {
                                         return (
-                                            <tr key={i} className="border-b ">
+                                            <tr key={i} className="border-b border-warning-100">
                                                 {
                                                     setting?.checked && handleOnChangeChecked && <td className={`${style.columnChecked}`}><InputCheckbox onChange={handleOnChangeChecked} checked={dataRow?.isChecked} value={JSON.stringify(dataRow)} name={`checked-${i}`} /></td>
                                                 }
@@ -145,11 +160,22 @@ const Table = <TData, TIncludeChecked extends boolean = false>(props: TTableProp
                                                 }
                                                 {
                                                     columns?.map((column, j) =>
-                                                        <td key={j} className={`${style.columnData} ${column?.className}`}>
-                                                            <div className="flex ">
+                                                        <td key={j} >
+                                                            <div className={`flex ${style.columnData} ${column?.className}`}>
                                                                 {
                                                                     column?.customeComponent ? column?.customeComponent(dataRow) : dataRow[column.key] as string
                                                                 }
+                                                            </div>
+                                                        </td>
+                                                    )
+                                                }
+                                                {
+                                                    isShowColumnAction && (
+                                                        <td>
+                                                            <div className="min-w-[5rem] flex justify-center items-center gap-2">
+                                                                {actionBtn?.view && <Badge variant={'softborder-blue'} label={ <IconEye className="icon-blue"/>} shape={'pilled'} className={style.iconAction}/>}
+                                                                {actionBtn?.edit && <Badge variant={'softborder-warning'} label={ <IconEdit className="icon-warning"/>} shape={'pilled'} className={style.iconAction}/>}
+                                                                {actionBtn?.delete && <Badge variant={'softborder-warning'} label={ <IconDelete className="icon-error"/>} shape={'pilled'} className={style.iconAction}/>}
                                                             </div>
                                                         </td>
                                                     )

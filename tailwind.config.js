@@ -40,7 +40,7 @@ export default {
 
       'body-tiny': ['0.625rem', { lineHeight: '0.625rem' }], // 10px
       'body-small': ['0.75rem', { lineHeight: '0.85rem' }], // 12px
-      'body-base': ['0.875rem', { lineHeight: '0.875rem' }], // 14px
+      'body-base': ['0.875rem', ], // 14px
       'body-medium': ['1rem', { lineHeight: '1rem' }], // 16px
       'body-large': ['1.125rem', { lineHeight: '1.125rem' }], // 18px
       'body-xl': ['1.25rem', { lineHeight: '1.25rem' }], // 20px
