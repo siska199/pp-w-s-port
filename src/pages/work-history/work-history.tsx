@@ -1,6 +1,16 @@
+import HeaderPage from "@components/ui/header-page";
 
 const WorkHistory = () => {
-  return <div>WorkHistory</div>;
+  
+  const handleAddDataHistory = ()=>{
+
+  }
+  
+  return(
+    <div className="container-page">
+      <HeaderPage title="Work History" onClickAddData={handleAddDataHistory}/>
+    </div>
+  )
 };
 
 export default WorkHistory;

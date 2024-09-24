@@ -153,11 +153,12 @@
 }
 
 
-
-
-
-
 @layer utilities {
+  /* Custome container class*/
+  .container-page {
+    @apply space-y-8 max-w-full overflow-x-auto;
+  }
+
   /* Background glassmorphism*/
   .bg-glassmorphism{
     @apply h-full w-full  bg-gray-900  rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30;
