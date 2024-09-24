@@ -99,6 +99,7 @@ const InputSelect = (props: TPropsInputSelect) => {
         value: valueUpdates
       }
     })
+    refInput?.current?.blur()
     setIsSearch(false)
   }
 

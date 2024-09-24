@@ -46,7 +46,7 @@ const Navbar = () => {
   ],[])
 
   return (
-    <nav className="px-6 py-3 sticky bg-white top-0 flex gap-4 items-center">
+    <nav className="px-6 py-3 sticky border-b bg-white top-0 flex gap-4 items-center">
       <IconHumburger className="cursor-pointer" onClick={handleOnToggle} />
       <div className="ml-auto">
         <div className="flex gap-4 ">

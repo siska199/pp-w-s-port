@@ -21,7 +21,26 @@
   }
 
   body {
-    @apply overflow-x-hidden relative text-body-base bg-white text-gray-900;
+    @apply overflow-x-hidden relative text-body-base bg-white text-gray-800;
+  }
+
+  h1 {
+    @apply text-heading-01;
+  }
+  h2 {
+    @apply text-heading-02;
+  }
+  h3 {
+    @apply text-heading-03;
+  }
+  h4 {
+    @apply text-heading-04;
+  }
+  h5 {
+    @apply text-heading-05;
+  }
+  p {
+    @apply text-body-base text-gray text-justify;
   }
 }
 
@@ -81,6 +100,9 @@
   .icon-gray path,
   .icon-gray rect {
     @apply stroke-gray;
+  }
+  .icon-gray circle {
+    @apply !stroke-gray;
   }
   .icon-gray-fill path {
     @apply fill-gray;

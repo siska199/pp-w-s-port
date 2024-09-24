@@ -19,7 +19,7 @@ const Protectedlayout = () => {
     <Sidebar />
     <div className="flex-grow relative min-h-full ">
       <Navbar />
-      <div className="flex-grow min-h-[calc(100%-5rem)] max-h-[calc(100%-5rem)] bg-background p-4 md:p-8  overflow-y-scroll">
+      <div className="flex-grow min-h-[calc(100%-5rem)]  h-[calc(100%-5rem)] max-h-[calc(100%-5rem)]  px-4 pt-4 md:px-8 md:pt-8  overflow-y-scroll">
         <Outlet />
       </div>
     </div>

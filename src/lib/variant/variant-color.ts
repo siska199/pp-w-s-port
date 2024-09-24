@@ -7,12 +7,12 @@ const variant = {
   'solid-gray': 'bg-gray border-gray text-white',
   'solid-white': 'bg-white border text-black ',
 
-  'soft-primary': 'bg-primary-50 text-primary-700',
-  'soft-sucess': 'bg-sucess-50 text-sucess-700',
-  'soft-warning': 'bg-warning-50 text-warning-700',
-  'soft-error': 'bg-error-50 text-error-700',
+  'soft-primary': 'bg-primary-100 text-primary-700',
+  'soft-sucess': 'bg-sucess-100 text-sucess-700',
+  'soft-warning': 'bg-warning-100 text-warning-700',
+  'soft-error': 'bg-error-100 text-error-700',
   'soft-black': 'bg-gray-100 text-gray-900',
-  'soft-gray': 'bg-gray-50 text-gray-900',
+  'soft-gray': 'bg-gray-100 text-gray-900',
 
   'outline-primary': 'text-primary border-primary border',
   'outline-sucess': 'text-sucess border-sucess border',

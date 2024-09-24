@@ -85,7 +85,7 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
               'overflow-hidden'                                                                                       : customeElement?.preStart || customeElement?.preEnd
             })}
           >
-            <CustomeElement elmn1={customeElement?.start} elmn2={customeElement?.preStart} />
+            <CustomeElement elmn1={customeElement?.preStart} elmn2={customeElement?.start} />
             
             <div className={`${customeClass?.ciV1} flex flex-col w-full relative `}>
               {typeof children === 'function' ? (

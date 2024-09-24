@@ -14,3 +14,4 @@ export { default as IconSucess } from '@assets/icons/sucess.svg?react'
 export { default as IconLogout} from '@assets/icons/logout.svg?react'
 export { default as IconSetting} from '@assets/icons/setting.svg?react';
 export { default as IconUser} from '@assets/icons/user.svg?react';
+export { default as IconSearch} from '@assets/icons/search.svg?react';

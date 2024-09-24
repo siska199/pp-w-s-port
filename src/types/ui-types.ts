@@ -20,8 +20,8 @@ export interface TBasePropsInput {
   customeElement?: {
     start?    : React.ReactNode
     end?      : React.ReactNode
-    preStart? : string
-    preEnd?   : string
+    preStart? : React.ReactNode
+    preEnd?   : React.ReactNode
   }
 }
 
