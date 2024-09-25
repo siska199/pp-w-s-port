@@ -17,7 +17,7 @@ const Navbar = () => {
   const {currentPath : {handle}}   = useCurrentPath()
 
   return (
-    <nav className={`p-3  ${handle?.name==="portofolio" ? 'fixed':'border-b sticky'}  top-0 z-[10] flex gap-4 items-center`}>
+    <nav className={`p-3  ${handle?.name==="portofolio" ? 'fixed':'border-b sticky'}  top-0 z-[2] flex gap-4 items-center`}>
       {
         handle?.name==="portofolio" ? <ContentPortofolio/> : <ContentProtectedRoute/>
       }

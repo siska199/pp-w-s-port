@@ -127,3 +127,41 @@ export const skills = [
     }
 ];
   
+
+export const projects=   [
+  {
+    "id": 1,
+    "title": "DevPort - Developer Portfolio Generator",
+    "description": "A web app that allows developers to showcase their projects, resumes, and work experiences in an organized manner. It provides recruiters with an intuitive way to search for candidates.",
+    "thumbnail": "dummy-images/s-port.png",
+    "techStack": ["Next.js", "TypeScript", "Preline UI", "NextAuth.js", "Tailwind CSS"]
+  },
+  {
+    "id": 2,
+    "title": "GOA - Garda Oto Akses",
+    "description": "Reengineered the GOA application, transforming it from .NET 4 to a modern React-based application with a focus on enhanced user experience and global state management.",
+    "thumbnail":  "dummy-images/goa.png",
+    "techStack": ["React", "Zustand", "Chart.js", "React-Select", "Axios", "React-Router-DOM"]
+  },
+  {
+    "id": 3,
+    "title": "Endcustomer Reseller Eiger",
+    "description": "An e-commerce platform for Eiger's resellers, enabling seamless catalog browsing, shopping cart management, and product customization using drag-and-drop features.",
+    "thumbnail": "dummy-images/riang.png",
+    "techStack": ["Nuxt.js", "TypeScript", "Vuex", "Tailwind CSS", "vue-drag-resize"]
+  },
+  {
+    "id": 4,
+    "title": "Quadra - Employee Management System",
+    "description": "An employee management system providing secure login, timesheet management, and authorization control. Developed with a full stack approach for efficient and automated workflows.",
+    "thumbnail": "https://dummyimage.com/600x400/333/fff&text=Quadra",
+    "techStack": ["Vite", "React", "TypeScript", "Redux Toolkit", "Material UI", "Python Django", "PostgreSQL"]
+  },
+  {
+    "id": 5,
+    "title": "iPast - Real-Time Asset Tracking",
+    "description": "A web app for real-time asset tracking, improving efficiency in managing the location and status of valuable company assets.",
+    "thumbnail": "https://dummyimage.com/600x400/444/fff&text=iPast",
+    "techStack": ["React", "TypeScript", "Formik", "React-Hook-Form", "Tailwind CSS", "Node.js"]
+  }
+]

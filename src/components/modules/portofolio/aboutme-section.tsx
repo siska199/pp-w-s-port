@@ -36,7 +36,7 @@ interface TPropsCardInfo {
 
 const CardInfo= (props:TPropsCardInfo)=>{
   const {title, description} = props
-  return <div className="flex gap-1   items-center w-[17rem]  p-4   rounded-lg ">
+  return <div className="flex gap-1 items-center w-[17rem] p-4 rounded-lg">
     <h1 className="text-heading-05 md:text-heading-01 font-bold w-[5rem] md:w-auto ">{title}</h1>
     <p className="text-start text-white flex-grow">{description}</p>
   </div>
