@@ -193,10 +193,10 @@
     @apply h-full w-full  bg-gray-900   bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30;
   }
 
-    /* Custome container class*/
-    .container-page {
-      @apply space-y-8 max-w-full overflow-x-auto;
-    }
+  /* Custome container class*/
+  .container-page {
+    @apply space-y-8 max-w-full overflow-x-auto;
+  }
 
   /* Bounce effect */
   .bounce-effect {
@@ -210,6 +210,8 @@
   .cursor-pointer-custome {
     @apply bounce-effect cursor-pointer;
   }
+
+ 
 
   /* Hide scrollbar */
   .scrollbar-hidden::-webkit-scrollbar {
@@ -227,5 +229,24 @@
     background: radial-gradient(circle farthest-side at top left, #8B5CF6 0%, #4C1D95 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+}
+
+
+ /* Float image */
+
+ .image-animation-float {
+  animation: float-image 3s ease-in-out infinite; /* Corrected timing function and added duration */
+}
+
+@keyframes float-image {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2.4rem);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

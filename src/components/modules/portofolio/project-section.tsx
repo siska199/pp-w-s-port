@@ -25,7 +25,11 @@ interface TPropsCardProject {
 const CardProject = (props : TPropsCardProject)=>{
     const {thumbnail,} = props
     return <div className="overflow-hidden border-b px-4 py-8 ">
-        <Image src={thumbnail} className=" h-[10rem]  md:h-[15rem] border-1 shadow-image-arise border-gray-500"/>
+        <Image src={thumbnail} overlay={{
+            withBackdrop:true,
+            isShowOnHover:true,
+            content : <div className="p-4 flex"><Badge variant={"outline-white"} className="bg-transparent ml-auto font-bold" label={"Company Project"}/></div>
+        }} className="  h-[10rem] md:h-[15rem] aspect-square border-1 shadow-image-arise border-gray-500 " customeClassName={{image:''}}/>
         <div className="space-y-4 py-4">
             <h5 className=" text-white text-body-large font-bold">{props.title}</h5>
             <p className="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum consequatur suscipit illo, enim accusantium repellat?</p>

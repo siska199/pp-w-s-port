@@ -26,7 +26,9 @@ const variant = {
   'outline-warning': 'text-warning border-warning border',
   'outline-error': 'text-error border-error border',
   'outline-black': 'text-black border-black border',
-  'outline-gray': 'text-gray border-gray border'
+  'outline-gray': 'text-gray border-gray border',
+  'outline-white': 'text-white border-white border'
+
 }
 
 export default variant
