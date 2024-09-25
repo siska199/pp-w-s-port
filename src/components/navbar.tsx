@@ -96,42 +96,49 @@ const ContentPortofolio = ()=>{
     {
       name  : 'aboutme',
       title : 'About Me',
-      url   : "#about-me"
+      url   : "#about-me",
+      classsName: '' // Soft blue for a calm introduction
     },
     {
       name  : 'skill',
       title : 'Skill',
-      url   : "#skill"
+      url   : "#skill",
+      classsName: '' // Green for growth and learning
+
     },
     {
       name  : 'work-history',
       title : 'Work History',
-      url   : "#work-history"
+      url   : "#work-history",
+      classsName: '' // Yellow for energy and focus on skills
+
     },
     {
       name  : 'project',
       title : 'Project',
-      url   : "#project"
+      url   : "#project",
+      classsName: '' // Pink for dynamism and creativity in work history
+
     },
     {
       name  : 'education',
       title : 'Education',
-      url   : "#education"
+      url   : "#education",
+      classsName: '' // Purple for innovation and project display
+
     },
   ]
 
 
   return <div className="flex  gap-8 md:py-2 justify-between items-center w-full px-3 ">
-    <h5 className="font-bold uppercase text-primary-800">S-PORT</h5>
+    <Logo className="min-w-[5rem]"/>
 
-    <div className=" hidden md:grid md:grid-cols-5 gap-4 ">
+    <div className=" flex gap-4 ">
         {
           sectionsMenu?.map((data,i)=>(
-            <Button key={i} to={data?.url} className="font-bold  !py-2 !rounded-full text-center w-full md:min-w-[6rem]" variant={"soft-warning"}>
-              <div className="text-body-small md:text-body-medium">
-                {data?.title}
-              </div>
-            </Button>
+            <div key={i} className={`${data.classsName} border-b  min-w-[7rem] text-center cursor-pointer-custome  pb-2 text-body-small font-medium w-fit  md:text-body-medium`}>
+              {data?.title}
+            </div>
           ))
         }
     </div>

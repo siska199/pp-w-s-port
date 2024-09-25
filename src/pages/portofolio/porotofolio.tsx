@@ -9,9 +9,8 @@ const Portofolio = () => {
 
   console.log("params: ", id)
 
-  return <div className="h-full y ">
+  return <div className="h-full md:max-w-[900px] mx-auto ">
     <ThumbnailHeader/>
-    
     <div className="px-12 py-8 mt-[8rem]">
       <div className=" border-t space-y-8 divide-y">
         <CardAboutMe/>

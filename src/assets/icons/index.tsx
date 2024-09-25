@@ -22,4 +22,4 @@ export { default as IconArrowDown} from '@assets/icons/arrow-down.svg?react';
 export { default as IconSort} from '@assets/icons/sort.svg?react';
 export { default as IconEdit} from '@assets/icons/edit.svg?react';
 export { default as IconDelete} from '@assets/icons/delete.svg?react';
-
+export { default as IconDownload} from '@assets/icons/download.svg?react';
