@@ -267,3 +267,15 @@
   background-size: 100% 100%;
 }
 
+
+.bg-split{
+  background-image: linear-gradient(
+    90deg,
+    rgba(165, 215, 232, 0.42) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+
+
+}

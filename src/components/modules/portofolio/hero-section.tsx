@@ -9,7 +9,11 @@ const HeroSection = () => {
   return <div className=" min-h-[calc(100%)] flex flex-col-reverse md:flex-row items-center justify-center gap-8 pt-[5rem] md:mt-0 px-2">
     <div className="gap-2 flex flex-col justify-center h-full ">
         <h5 className=" text-center !text-white">I'm Siska Apriana Rifianti</h5>
-        <h1 className="font-bold text-center text-heading-03 md:text-heading-01 font-bubblegum-sans !text-white">Frontend Developer</h1>
+        <h1 className="font-bold text-center  text-heading-03 md:text-heading-01 font-bubblegum-sans 
+        bg-clip-text text-transparent bg-gradient-to-r from-primary-300 to-white
+        
+        
+        ">Frontend Developer</h1>
         {
             isMaxMd && <Image className="image-animation-float mt-8 md:clip-path-hero-img mx-auto rounded-full md:rounded-none w-[10rem] md:w-[25rem] aspect-square bg-transparent" src="dummy-images/profesional-image.jpg"/>
         }

@@ -5,7 +5,7 @@ import ProjectSection from "@components/modules/portofolio/project-section";
 
 const Portofolio = () => {
 
-  return <div className=" h-full overflow-y-auto ">
+  return <div className=" h-full overflow-y-auto space-y-16 ">
     <HeroSection/>
     <AboutMeSection/>
     <ProjectSection/>
