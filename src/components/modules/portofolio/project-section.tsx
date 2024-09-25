@@ -30,7 +30,7 @@ const CardProject = (props : TPropsCardProject)=>{
             isShowOnHover:true,
             content : <div className="p-4 flex flex-col space-y-2 items-end">
                 <p className="text-white font-bold">
-                <Badge variant={"outline-white"} className="bg-transparent  font-bold" label={"PT Astra Internasional - React JS Developer"}/>
+                <Badge variant={"outline-white"} className="bg-transparent  font-bold" label={"Personal Project - Fullstack Developer"}/>
                 </p>
                 <p className="font-bold text-white">11 April 2022 - 15 April 2025</p>
             </div>
