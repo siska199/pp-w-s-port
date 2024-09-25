@@ -9,7 +9,7 @@ const Logo = (props: TProps ) => {
     
     return(
         <div {...attrs} className={`text-body-3xl font-shaky-hand font-bold font-bubblegum-sans ${attrs.className}` }>
-           S-Port
+           S-Port {`</>`}
         </div>
     )
 };

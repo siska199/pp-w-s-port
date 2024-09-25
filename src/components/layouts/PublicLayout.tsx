@@ -17,7 +17,7 @@ const PublicLayout = () => {
   console.log(handle)
 
   return (
-    <div className={`${handle?.name==="portofolio"&&' bg-login  '}   h-screen relative  w-full`}>
+    <div className={`${handle?.name==="portofolio"&&' bg-sport-plain '}   h-screen relative  w-full`}>
       <div className='absolute top-0 bg-glassmorphism h-full w-full '>
         {handle?.name==="portofolio" && <Navbar/>}
         <Outlet />

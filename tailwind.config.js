@@ -24,6 +24,9 @@ export default {
       },
       backgroundImage: {
         'login': "url('/src/assets/images/background-login.svg')",
+        's-port': "url('/src/assets/images/bg-sport.svg')",
+        's-port-plain': "url('/src/assets/images/bg-sport-plain.svg')",
+
       }
     },
     fontFamily: {
