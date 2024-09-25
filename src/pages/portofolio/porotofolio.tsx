@@ -7,9 +7,7 @@ const Portofolio = () => {
   return <div className=" h-full overflow-y-auto ">
     <HeroSection/>
     <AboutMeSection/>
-    <AboutMeSection/>
-    <AboutMeSection/>
-    <AboutMeSection/>
+
 
   </div>;
 };
