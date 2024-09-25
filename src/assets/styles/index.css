@@ -230,23 +230,24 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-}
 
-
- /* Float image */
+   /* Float image */
 
  .image-animation-float {
-  animation: float-image 3s ease-in-out infinite; /* Corrected timing function and added duration */
+    animation: float-image 3s ease-in-out infinite; /* Corrected timing function and added duration */
+  }
+
+  @keyframes float-image {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2.4rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 }
 
-@keyframes float-image {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2.4rem);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
+

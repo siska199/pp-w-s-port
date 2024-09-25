@@ -28,8 +28,15 @@ const CardProject = (props : TPropsCardProject)=>{
         <Image src={thumbnail} overlay={{
             withBackdrop:true,
             isShowOnHover:true,
-            content : <div className="p-4 flex"><Badge variant={"outline-white"} className="bg-transparent ml-auto font-bold" label={"Company Project"}/></div>
-        }} className="  h-[10rem] md:h-[15rem] aspect-square border-1 shadow-image-arise border-gray-500 " customeClassName={{image:''}}/>
+            content : <div className="p-4 flex flex-col space-y-2 items-end">
+                <p className="text-white font-bold">
+                <Badge variant={"outline-white"} className="bg-transparent  font-bold" label={"PT Astra Internasional - React JS Developer"}/>
+                </p>
+                <p className="font-bold text-white">11 April 2022 - 15 April 2025</p>
+            </div>
+        }}
+
+             className="  h-[10rem] md:h-[15rem] aspect-square border-1 shadow-image-arise border-gray-500 " customeClassName={{image:'', }}/>
         <div className="space-y-4 py-4">
             <h5 className=" text-white text-body-large font-bold">{props.title}</h5>
             <p className="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum consequatur suscipit illo, enim accusantium repellat?</p>
