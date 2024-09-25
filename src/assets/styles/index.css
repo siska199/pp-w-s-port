@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @font-face {
-  font-family: "test";
+  font-family: "Circle Of Love";
   src: url("../fonts/circle-of-love.ttf");
 }
 
@@ -21,7 +21,7 @@
   }
 
   body {
-    @apply overflow-hidden relative text-body-base bg-white text-gray-800;
+    @apply  relative text-body-base  bg-white text-gray-800;
   }
 
   h1 {
@@ -40,7 +40,7 @@
     @apply text-heading-05;
   }
   p {
-    @apply text-body-base text-gray text-justify;
+    @apply text-body-base text-gray font-[400] text-justify;
   }
 }
 
@@ -184,5 +184,14 @@
   .scrollbar-hidden {
     -ms-overflow-style: none;
     scrollbar-width: none; /* Firefox */
+  }
+
+  /* Gradient  color text*/
+
+  .text-gd{
+    background: #8B5CF6;
+    background: radial-gradient(circle farthest-side at top left, #8B5CF6 0%, #4C1D95 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }

@@ -41,6 +41,10 @@ export const route = {
   certification : {
     name : 'certification',
     fullPath : '/certification'
+  },
+  portofolio : {
+    name : 'portofolio',
+    fullpath : '/portofolio'
   }
 }
 

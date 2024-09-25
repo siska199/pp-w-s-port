@@ -1,20 +1,35 @@
-'use client';
-
 import { IconHumburger, IconLogout, IconUser } from "@assets/icons";
+import Logo from "@components/logo";
 import Avatar from "@components/ui/avatar";
+import Button from "@components/ui/button";
 import DropdownBase, { TOptionDropdown } from "@components/ui/dropdown";
+import useCurrentPath from "@hooks/useCurrentPath";
 import { route } from "@lib/data/global";
 import { handleSetAuth } from "@store/features/auth/authSlice";
 import { handleToggleSidebar } from "@store/features/ui/uiSlice";
 import { useAppDispatch, useAppSelector } from "@store/store";
 import { useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const Navbar = () => {
+
+  const {currentPath : {handle}}   = useCurrentPath()
+
+  return (
+    <nav className=" p-3 sticky border-b backdrop-blur-lg top-0 z-[10] flex gap-4 items-center">
+      {
+        handle?.name==="portofolio" ? <ContentPortofolio/> : <ContentProtectedRoute/>
+      }
+    </nav>
+  );
+};
+
+
+const ContentProtectedRoute = ()=>{
   const isToggleSidebar = useAppSelector((state) => state?.ui?.isToggleSidebar);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate()
+  const dispatch        = useAppDispatch();
+  const navigate        = useNavigate()
 
   const handleOnToggle = () => {
     dispatch(handleToggleSidebar(!isToggleSidebar));
@@ -44,9 +59,7 @@ const Navbar = () => {
       value     : "logout",
     },
   ],[])
-
-  return (
-    <nav className="px-6 py-3 sticky border-b bg-white top-0 flex gap-4 items-center">
+  return <div className="px-3 flex justify-between w-full items-center">
       <IconHumburger className="cursor-pointer" onClick={handleOnToggle} />
       <div className="ml-auto">
         <div className="flex gap-4 ">
@@ -73,8 +86,56 @@ const Navbar = () => {
           />
         </div>
       </div>
-    </nav>
-  );
-};
+  </div>
+}
+
+
+const ContentPortofolio = ()=>{
+
+  const sectionsMenu = [
+    {
+      name  : 'aboutme',
+      title : 'About Me',
+      url   : "#about-me"
+    },
+    {
+      name  : 'skill',
+      title : 'Skill',
+      url   : "#skill"
+    },
+    {
+      name  : 'work-history',
+      title : 'Work History',
+      url   : "#work-history"
+    },
+    {
+      name  : 'project',
+      title : 'Project',
+      url   : "#project"
+    },
+    {
+      name  : 'education',
+      title : 'Education',
+      url   : "#education"
+    },
+  ]
+
+
+  return <div className="flex  gap-8 md:py-2 justify-between items-center w-full px-3 ">
+    <h5 className="font-bold uppercase text-primary-800">S-PORT</h5>
+
+    <div className=" hidden md:grid md:grid-cols-5 gap-4 ">
+        {
+          sectionsMenu?.map((data,i)=>(
+            <Button key={i} to={data?.url} className="font-bold  !py-2 !rounded-full text-center w-full md:min-w-[6rem]" variant={"soft-warning"}>
+              <div className="text-body-small md:text-body-medium">
+                {data?.title}
+              </div>
+            </Button>
+          ))
+        }
+    </div>
+  </div>
+}
 
 export default Navbar;

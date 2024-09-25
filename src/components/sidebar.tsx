@@ -1,3 +1,4 @@
+import Logo from "@components/logo";
 import Button from "@components/ui/button";
 import Image from "@components/ui/image";
 import useCurrentPath from "@hooks/useCurrentPath";
@@ -11,7 +12,7 @@ import { useEffect } from "react";
 const Sidebar = () => {
   const isToggleSidebar = useAppSelector((state) => state?.ui?.isToggleSidebar);
   const dispatch        = useAppDispatch()
-  const { currentPath } = useCurrentPath()
+  const {currentPath}   = useCurrentPath()
   const {isMaxMd}       = useMediaQuery()
 
   useEffect(()=>{
@@ -23,12 +24,9 @@ const Sidebar = () => {
     <div className={` md:z-0  min-h-screen h-screen md:relative w-fit ${isMaxMd && !isToggleSidebar && 'bg-black/50 fixed translate-y-0  z-[9] w-full'} `}>
       <div className={`sticky top-0  space-y-4 transition-all  bg-login  h-full ${isToggleSidebar?'w-0 p-0':'w-full md:w-[15rem] '}`}>
         {
-          !isToggleSidebar && <>          
-            <div onClick={()=> dispatch(handleToggleSidebar(!isToggleSidebar))} className="cursor-pointer gap-2 px-6 flex">
-              <h3 className="text-body-3xl font-test font-bold py-6 text-white">
-                <span className="text-primary-50 ">S-</span>Port
-              </h3>
-            </div>
+          !isToggleSidebar && <>   
+            <Logo className="cursor-pointer gap-2 p-6 flex text-white " onClick={()=> dispatch(handleToggleSidebar(!isToggleSidebar))} />       
+
             <div className=" flex flex-col gap-4 p-4">
               {menuSidebar?.map((data, i) => (
                 <Button
@@ -50,7 +48,7 @@ const Sidebar = () => {
                     })} 
                     customeClassName={{image:'object-contain'}} alt="icon menu sidebar" 
                   />
-                  <span className={cn({})}>{data.title}</span>
+                  <span className={cn({})}>{data?.title}</span>
                 </Button>
               ))}
             </div>

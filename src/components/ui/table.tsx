@@ -183,9 +183,7 @@ const Table = <TData, TIncludeChecked extends boolean = false>(props: TTableProp
                                             </tr>
                                         )
                                     }
-
-                                    )
-                                }
+                                )}
                             </tbody>
                         )
                     }

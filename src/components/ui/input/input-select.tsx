@@ -63,7 +63,6 @@ const InputSelect = (props: TPropsInputSelect) => {
 
   useEffect(() => {
     if (refInput?.current && isMultiple) {
-      console.log(isEmptyValue(attrs.value))
       refInput.current.style.width = searchQuery || !isEmptyValue(attrs.value)?`${searchQuery?.length * 10 || 10}px`: "auto"
     }
   }, [searchQuery, isMultiple, attrs.value])

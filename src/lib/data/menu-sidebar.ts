@@ -38,6 +38,12 @@ import { route } from "@lib/data/global";
       url   : route.certification.fullPath,
       name  : 'certification',
     },
+    {
+      title : 'Generate Resume',
+      src   : 'sidebar/generate-resume.png',
+      url   : route.certification.fullPath,
+      name  : 'certification',
+    },
   ];
   
   export default menuSidebar;

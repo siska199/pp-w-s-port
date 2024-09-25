@@ -60,7 +60,7 @@ const TableSkill = () => {
         customeComponent : (data)=>{
           return <div className="flex flex-col gap-2">
             {
-               data?.projects.map((project)=><Badge variant={"soft-gray"} label={project} className="text-start px-4"/>)
+               data?.projects.map((project,i)=><Badge key={i} variant={"soft-gray"} label={project} className="text-start px-4"/>)
             }
           </div>
         }
