@@ -8,7 +8,7 @@ const Logo = (props: TProps ) => {
     const {...attrs} = props
     
     return(
-        <div {...attrs} className={`text-body-3xl font-test font-bold font-circle-of-love ${attrs.className}` }>
+        <div {...attrs} className={`text-body-3xl font-shaky-hand font-bold font-bubblegum-sans ${attrs.className}` }>
            S-Port
         </div>
     )

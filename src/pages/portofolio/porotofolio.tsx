@@ -1,22 +1,16 @@
-import CardAboutMe from "@components/modules/portofolio/card-about-me";
-import CardSkill from "@components/modules/portofolio/card-skill";
-import ThumbnailHeader from "@components/modules/portofolio/thumbnail-header";
-import { useParams } from "react-router-dom";
+import AboutMeSection from "@components/modules/portofolio/aboutme-section";
+import HeroSection from "@components/modules/portofolio/hero-section";
+
 
 const Portofolio = () => {
 
-  const {id} = useParams();
+  return <div className=" h-full overflow-y-auto ">
+    <HeroSection/>
+    <AboutMeSection/>
+    <AboutMeSection/>
+    <AboutMeSection/>
+    <AboutMeSection/>
 
-  console.log("params: ", id)
-
-  return <div className="h-full md:max-w-[900px] mx-auto ">
-    <ThumbnailHeader/>
-    <div className="px-12 py-8 mt-[8rem]">
-      <div className=" border-t space-y-8 divide-y">
-        <CardAboutMe/>
-        <CardSkill/>
-      </div>
-    </div>
   </div>;
 };
 

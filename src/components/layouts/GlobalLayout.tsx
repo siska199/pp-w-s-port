@@ -16,7 +16,7 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
   useEffect(() => {
     if (currentPath?.pathname === '/') 
       navigate(isAuthenticated ? route.personalInformation.fullPath : route.auth.child.signIn.fullPath, { replace: true })
-  }, [])
+  }, [currentPath])
 
   return <>{children}</>
 }

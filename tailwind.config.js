@@ -29,24 +29,27 @@ export default {
     fontFamily: {
       poppins: ['Poppins', 'sans-serif'],
       'circle-of-love': ['Circle Of Love','sans-serif'],
+      'bubblegum-sans': ['Bubblegum Sans','sans-serif'],
+      'shaky-hand': ['Shaky Hand','sans-serif'],
 
     },
     fontSize: {
-      'heading-05': '1.875rem', // 30px
-      'heading-04': '2.25rem', // 36px
-      'heading-03': '3rem', // 48px
-      'heading-02': '3.75rem', // 60px
-      'heading-01': '4.5rem', // 72px
-
-      'body-tiny': ['0.625rem', { lineHeight: '0.625rem' }], // 10px
-      'body-small': ['0.75rem', { lineHeight: '0.85rem' }], // 12px
-      'body-base': ['0.875rem', ], // 14px
-      'body-medium': ['1rem', ], // 16px
-      'body-large': ['1.125rem', { lineHeight: '1.125rem' }], // 18px
-      'body-xl': ['1.25rem', { lineHeight: '1.25rem' }], // 20px
-      'body-2xl': ['1.5rem', { lineHeight: '1.5rem' }], // 24px
-      'body-3xl': ['1.75rem', { lineHeight: '1.75rem' }] // 28px
+      'heading-05': ['1.875rem', { lineHeight: '2.375rem' }], // 30px font, 38px line-height
+      'heading-04': ['2.25rem', { lineHeight: '2.75rem' }],   // 36px font, 44px line-height
+      'heading-03': ['3rem', { lineHeight: '3.625rem' }],     // 48px font, 58px line-height
+      'heading-02': ['3.75rem', { lineHeight: '4.5rem' }],    // 60px font, 72px line-height
+      'heading-01': ['4.5rem', { lineHeight: '5.375rem' }],   // 72px font, 86px line-height
+    
+      'body-tiny': ['0.625rem', { lineHeight: '0.875rem' }],  // 10px font, 14px line-height
+      'body-small': ['0.75rem', { lineHeight: '1rem' }],      // 12px font, 16px line-height
+      'body-base': ['0.875rem', { lineHeight: '1.25rem' }],   // 14px font, 20px line-height
+      'body-medium': ['1rem', { lineHeight: '1.5rem' }],      // 16px font, 24px line-height
+      'body-large': ['1.125rem', { lineHeight: '1.75rem' }],  // 18px font, 28px line-height
+      'body-xl': ['1.25rem', { lineHeight: '1.875rem' }],     // 20px font, 30px line-height
+      'body-2xl': ['1.5rem', { lineHeight: '2.25rem' }],      // 24px font, 36px line-height
+      'body-3xl': ['1.75rem', { lineHeight: '2.625rem' }]     // 28px font, 42px line-height
     },
+    
     colors: {
       primary: {
         900: '#4C1D95',

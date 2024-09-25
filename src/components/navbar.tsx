@@ -17,7 +17,7 @@ const Navbar = () => {
   const {currentPath : {handle}}   = useCurrentPath()
 
   return (
-    <nav className=" p-3 sticky border-b backdrop-blur-lg top-0 z-[10] flex gap-4 items-center">
+    <nav className={`p-3  ${handle?.name==="portofolio" ? 'fixed':'border-b sticky'}  top-0 z-[10] flex gap-4 items-center`}>
       {
         handle?.name==="portofolio" ? <ContentPortofolio/> : <ContentProtectedRoute/>
       }
@@ -91,57 +91,14 @@ const ContentProtectedRoute = ()=>{
 
 
 const ContentPortofolio = ()=>{
+  const navigate = useNavigate()
 
-  const sectionsMenu = [
-    {
-      name  : 'aboutme',
-      title : 'About Me',
-      url   : "#about-me",
-      classsName: '' // Soft blue for a calm introduction
-    },
-    {
-      name  : 'skill',
-      title : 'Skill',
-      url   : "#skill",
-      classsName: '' // Green for growth and learning
+  const handleRedirect = ()=>{
+    navigate('/')
+  } 
 
-    },
-    {
-      name  : 'work-history',
-      title : 'Work History',
-      url   : "#work-history",
-      classsName: '' // Yellow for energy and focus on skills
-
-    },
-    {
-      name  : 'project',
-      title : 'Project',
-      url   : "#project",
-      classsName: '' // Pink for dynamism and creativity in work history
-
-    },
-    {
-      name  : 'education',
-      title : 'Education',
-      url   : "#education",
-      classsName: '' // Purple for innovation and project display
-
-    },
-  ]
-
-
-  return <div className="flex  gap-8 md:py-2 justify-between items-center w-full px-3 ">
-    <Logo className="min-w-[5rem]"/>
-
-    <div className=" flex gap-4 ">
-        {
-          sectionsMenu?.map((data,i)=>(
-            <div key={i} className={`${data.classsName} border-b  min-w-[7rem] text-center cursor-pointer-custome  pb-2 text-body-small font-medium w-fit  md:text-body-medium`}>
-              {data?.title}
-            </div>
-          ))
-        }
-    </div>
+  return <div className="flex max-w-[1200px] w-full bg-main mx-auto  gap-8 md:py-2 justify-between items-center ">
+    <Logo onClick={handleRedirect} className="min-w-[5rem] !text-white cursor-pointer-custome"/>
   </div>
 }
 

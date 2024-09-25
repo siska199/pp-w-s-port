@@ -16,10 +16,14 @@ const PublicLayout = () => {
 
   console.log(handle)
 
-  return <div className=' overflow-y-auto h-screen relative '>
-    {handle?.name==="portofolio" && <Navbar/>}
-    <Outlet />
+  return (
+    <div className={`${handle?.name==="portofolio"&&' bg-login  '}   h-screen relative  w-full`}>
+      <div className='absolute top-0 bg-glassmorphism h-full w-full '>
+        {handle?.name==="portofolio" && <Navbar/>}
+        <Outlet />
+      </div>
   </div>
+  )
 }
 
 export default PublicLayout
