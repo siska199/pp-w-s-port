@@ -15,7 +15,9 @@ const HeroSection = () => {
         }
 
         <div className="space-y-4 flex flex-col items-center">
-            <p className="ml-1  italic text-body-large text-center !text-white">Turning Vision into Reality with Scalable, Beautiful Code </p>
+            <p className="ml-1  italic text-body-large text-center !text-white">
+                Sharp Thinking and Seamless Coding, Powered by Coffee
+            </p>
             <Button shape={"circle"}>
                 <IconDownload className="icon-white" /> Download Resume
             </Button>
