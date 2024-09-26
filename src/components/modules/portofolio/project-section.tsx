@@ -49,7 +49,7 @@ const CardProject = (props : TPropsCardProject)=>{
             <p className="text-white line-clamp-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum consequatur suscipit illo, enim accusantium repellat?</p>
             <div className="flex gap-2 flex-wrap">
                 {
-                    props?.techStack?.map((tect)=><Badge variant={"soft-gray"} label={tect}/>)
+                    props?.techStack?.map((tect, i)=><Badge key={i} variant={"soft-gray"} label={tect}/>)
                 }
             </div>
             <Button variant={"solid-black"} >View Project <IconArrowUp className="icon-white rotate-90 mt-1"/></Button>
