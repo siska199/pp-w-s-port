@@ -10,7 +10,7 @@ const ProjectSection = () => {
     const [keyword, setKeyword] = useState('')
   return <div className="min-h-[calc(100%-5rem)] text-white my-8 md:space-y-4 py-8 px-4 md:px-8">
         <h3 className="text-heading-05 md:text-heading-03 text-center font-bold font-bubblegum-sans mb-6">Projects</h3>
-        <InputBase customeClass={{ciV4:"max-w-[40rem] mx-auto", ciV2:"bg-transparent !border-primary", input:"bg-transparent placeholder:text-white" }} customeElement={{start:<IconSearch className="icon-white"/>}} name={'keyword'} value={keyword} onChange={(e)=>setKeyword(e.target.value)} placeholder="Search by Project name, Category Skill, Skill, Company Name... "/>
+        <InputBase customeClass={{ciV4:"max-w-[40rem] mx-auto", ciV2:"bg-transparent !border-primary", input:"bg-transparent placeholder:text-white" }} customeElement={{start:<IconSearch className="icon-white"/>}} name={'keyword'} value={keyword} onChange={(e)=>setKeyword(e.target.value)} placeholder="Search Project by Name, Category Skill, Skill or Company... "/>
         <div className="grid md:grid-cols-3 md:gap-4  mx-auto ">
         {
             projects?.map((project, i)=><CardProject key={i} {...project}/>)
