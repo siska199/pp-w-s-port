@@ -18,7 +18,7 @@ const AboutMeSection = () => {
       description : 'Happy Customers',
     }
   ]
-  return <div className=" min-h-[calc(100%-5rem)] text-white px-8 my-8 md:my-0 space-y-4 md:space-y-0 flex flex-col items-center justify-center">
+  return <div className=" min-h-[calc(100%-5rem)] text-white px-8 my-8 md:my-0 space-y-4 lg:space-y-2  flex flex-col items-center justify-center">
     <h3 className="text-heading-05 md:text-heading-03 text-center font-bold font-bubblegum-sans">About Me</h3>
     <div className="flex flex-col-reverse md:flex-row gap-8 ">
       <div className="flex-grow min-w-[20rem] gap-2">
