@@ -6,6 +6,8 @@ const variant = {
   'solid-black': 'bg-black border-black text-white',
   'solid-gray': 'bg-gray border-gray text-white',
   'solid-white': 'bg-white border text-black ',
+  'solid-blue': 'bg-blue border-blue text-white ',
+
 
   'soft-primary': 'bg-primary-100 text-primary-700',
   'soft-blue': 'bg-blue-100 text-blue-700',
@@ -21,13 +23,13 @@ const variant = {
 
 
 
-  'outline-primary': 'text-primary border-primary border',
-  'outline-sucess': 'text-sucess border-sucess border',
-  'outline-warning': 'text-warning border-warning border',
-  'outline-error': 'text-error border-error border',
-  'outline-black': 'text-black border-black border',
-  'outline-gray': 'text-gray border-gray border',
-  'outline-white': 'text-white border-white border'
+  'outline-primary': 'text-primary border-primary border bg-transparent',
+  'outline-sucess': 'text-sucess border-sucess border bg-transparent',
+  'outline-warning': 'text-warning border-warning border bg-transparent',
+  'outline-error': 'text-error border-error border bg-transparent',
+  'outline-black': 'text-black border-black border bg-transparent',
+  'outline-gray': 'text-gray border-gray border bg-transparent',
+  'outline-white': 'text-white border-white border bg-transparent'
 
 }
 

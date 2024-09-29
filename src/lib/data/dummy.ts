@@ -165,3 +165,113 @@ export const projects=   [
     "techStack": ["React", "TypeScript", "Formik", "React-Hook-Form", "Tailwind CSS", "Node.js"]
   }
 ]
+
+
+export const skillsByCategory = [
+  {
+    name: "Frontend",
+    skills: [
+      { name: "React", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" },
+      { name: "JavaScript", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" },
+      { name: "HTML", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" },
+      { name: "CSS", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" },
+      { name: "TypeScript", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" },
+      { name: "Redux", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" },
+      { name: "Next.js", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original-wordmark.svg" },
+      { name: "Vue.js", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original-wordmark.svg" },
+      { name: "Angular", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/angularjs/angularjs-original.svg" },
+      { name: "Tailwind CSS", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-plain.svg" }
+    ]
+  },
+  {
+    name: "Backend",
+    skills: [
+      { name: "Node.js", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" },
+      { name: "Django", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/django/django-original.svg" },
+      { name: "Express.js", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" },
+      { name: "Ruby on Rails", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/rails/rails-original-wordmark.svg" },
+      { name: "Spring Boot", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original-wordmark.svg" },
+      { name: "Flask", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/flask/flask-original-wordmark.svg" },
+      { name: "PHP", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" },
+      { name: "Laravel", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-original-wordmark.svg" },
+      { name: "Koa.js", url: "https://avatars.githubusercontent.com/u/1273335?s=200&v=4" },
+      { name: "ASP.NET", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg" }
+    ]
+  },
+  {
+    name: "UI/UX",
+    skills: [
+      { name: "Figma", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/figma/figma-original.svg" },
+      { name: "Sketch", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/sketch/sketch-original-wordmark.svg" },
+      { name: "Adobe XD", url: "https://upload.wikimedia.org/wikipedia/commons/c/c2/Adobe_XD_CC_icon.svg" },
+      { name: "InVision", url: "https://static.invisionapp.com/img/press/rebrand/press-logo-invision-one.png" },
+      { name: "Axure RP", url: "https://axureassets.s3.amazonaws.com/icon-axure.png" },
+      { name: "Marvel", url: "https://avatars.githubusercontent.com/u/5540243?s=200&v=4" },
+      { name: "Balsamiq", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Balsamiq_Icon.svg/1024px-Balsamiq_Icon.svg.png" },
+      { name: "Framer", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/framer/framer-original.svg" },
+      { name: "Principle", url: "https://cdn-principle.app/presskit/icon.png" },
+      { name: "Zeplin", url: "https://avatars.githubusercontent.com/u/1154899?s=200&v=4" }
+    ]
+  },
+  {
+    name: "Database",
+    skills: [
+      { name: "PostgreSQL", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" },
+      { name: "MongoDB", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" },
+      { name: "MySQL", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" },
+      { name: "SQLite", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/sqlite/sqlite-original-wordmark.svg" },
+      { name: "MariaDB", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/mariadb/mariadb-original-wordmark.svg" },
+      { name: "Redis", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original-wordmark.svg" },
+      { name: "Cassandra", url: "https://avatars.githubusercontent.com/u/2208412?s=200&v=4" },
+      { name: "Oracle DB", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/oracle/oracle-original.svg" },
+      { name: "DynamoDB", url: "https://upload.wikimedia.org/wikipedia/commons/f/fd/DynamoDB.png" },
+      { name: "Firebase Firestore", url: "https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" }
+    ]
+  },
+  {
+    name: "DevOps",
+    skills: [
+      { name: "Docker", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" },
+      { name: "Kubernetes", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/kubernetes/kubernetes-plain.svg" },
+      { name: "Jenkins", url: "https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg" },
+      { name: "Terraform", url: "https://www.vectorlogo.zone/logos/terraformio/terraformio-icon.svg" },
+      { name: "Ansible", url: "https://www.vectorlogo.zone/logos/ansible/ansible-icon.svg" },
+      { name: "Vagrant", url: "https://www.vectorlogo.zone/logos/vagrantup/vagrantup-icon.svg" },
+      { name: "Prometheus", url: "https://www.vectorlogo.zone/logos/prometheusio/prometheusio-icon.svg" },
+      { name: "Grafana", url: "https://www.vectorlogo.zone/logos/grafana/grafana-icon.svg" },
+      { name: "Nagios", url: "https://www.vectorlogo.zone/logos/nagios/nagios-icon.svg" },
+      { name: "Puppet", url: "https://www.vectorlogo.zone/logos/puppet/puppet-icon.svg" }
+    ]
+  },
+  {
+    name: "Cloud Technologies",
+    skills: [
+      { name: "AWS", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+      { name: "Microsoft Azure", url: "https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg" },
+      { name: "Google Cloud Platform", url: "https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg" },
+      { name: "Heroku", url: "https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" },
+      { name: "IBM Cloud", url: "https://www.vectorlogo.zone/logos/ibm_cloud/ibm_cloud-icon.svg" },
+      { name: "Alibaba Cloud", url: "https://www.vectorlogo.zone/logos/alibabacloud/alibabacloud-icon.svg" },
+      { name: "Oracle Cloud", url: "https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg" },
+      { name: "Cloudflare", url: "https://www.vectorlogo.zone/logos/cloudflare/cloudflare-icon.svg" },
+      { name: "DigitalOcean", url: "https://www.vectorlogo.zone/logos/digitalocean/digitalocean-official.svg" },
+      { name: "Netlify", url: "https://www.vectorlogo.zone/logos/netlify/netlify-icon.svg" }
+    ]
+  },
+  {
+    name: "Testing",
+    skills: [
+      { name: "Jest", url: "https://raw.githubusercontent.com/devicons/devicon/master/icons/jest/jest-plain.svg" },
+      { name: "Mocha", url: "https://www.vectorlogo.zone/logos/mochajs/mochajs-icon.svg" },
+      { name: "Chai", url: "https://www.vectorlogo.zone/logos/chaijs/chaijs-icon.svg" },
+      { name: "Cypress", url: "https://www.vectorlogo.zone/logos/cypressio/cypressio-icon.svg" },
+      { name: "Selenium", url: "https://www.vectorlogo.zone/logos/selenium/selenium-icon.svg" },
+      { name: "Playwright", url: "https://playwright.dev/img/playwright-logo.svg" },
+      { name: "Puppeteer", url: "https://pptr.dev/images/pptr-logo.svg" },
+      { name: "Testing Library", url: "https://testing-library.com/img/octopus-128x128.png" },
+      { name: "Karma", url: "https://avatars.githubusercontent.com/u/5133152?s=200&v=4" },
+      { name: "QUnit", url: "https://qunitjs.com/assets/qunit-logo.png" }
+    ]
+  }
+];
+
