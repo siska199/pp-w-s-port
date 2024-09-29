@@ -1,5 +1,5 @@
 import Badge from "@components/ui/badge";
-import Table from "@components/ui/Table";
+import Table from "@components/ui/table";
 import useTable from "@hooks/useTable";
 import { skills } from "@lib/data/dummy";
 import { delay } from "@lib/helper";
