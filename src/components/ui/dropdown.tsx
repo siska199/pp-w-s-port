@@ -24,7 +24,7 @@ interface TProps {
   position?             : "left" | "right";
 }
 
-const DropdownBase = (props: TProps) => {
+const Dropdown = (props: TProps) => {
   const { options, position, label, customeButtonTriger, onClick: handleOnClick, customeClass, isDefaultStyle = true, header } = props;
 
   const ref = useRef<HTMLDivElement | null>(null);
@@ -140,4 +140,4 @@ const DropdownBase = (props: TProps) => {
   );
 };
 
-export default DropdownBase;
+export default Dropdown;

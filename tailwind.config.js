@@ -26,7 +26,22 @@ export default {
         'login': "url('/src/assets/images/background-login.svg')",
         's-port': "url('/src/assets/images/bg-sport.svg')",
         's-port-plain': "url('/src/assets/images/bg-sport-plain.svg')",
-
+      },
+      animation : {
+        'bounce-custome'  : 'bounce 3s ease-in-out infinite',
+        'waved'           : 'waved_border 8s ease-in-out infinite'
+      },
+      keyframes : {
+        bounce : {
+          '0%'    : { transform: 'translateY(0)' },
+          '50%'   : { transform: 'translateY(-2.4rem)' },
+          '100%'  : { transform: 'translateY(0)' }
+        },
+        'waved_border' : {
+          '0%'  : { 'border-radius' : '60% 40% 30% 70%/60% 30% 70% 40%' },
+          '50%' : { 'border-radius' : '30% 60% 70% 40%/50% 60% 30% 60%' },
+          '100%': { 'border-radius' : '60% 40% 30% 70%/60% 30% 70% 40%' }
+        }
       }
     },
     fontFamily: {

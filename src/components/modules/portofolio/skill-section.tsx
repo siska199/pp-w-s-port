@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 const SkillSection = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
-    // Animation variants for skill cards
     const cardVariants = {
         hidden: {
             opacity: 0,
@@ -17,7 +16,7 @@ const SkillSection = () => {
             opacity: 1,
             y: 0,
             transition: {
-                delay: index * 0.1, // stagger effect
+                delay: index * 0.1,
                 duration: 0.3,
             },
         }),
