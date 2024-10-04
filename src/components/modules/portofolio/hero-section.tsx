@@ -35,7 +35,7 @@ const HeroSection = () => {
             </div>
         </div>
         <div className=" hidden md:flex w-full md:w-auto">
-            <Image className="animate-waved mx-auto rounded-full md:rounded-none w-[10rem] md:w-[25rem] aspect-square bg-transparent" customeClassName={{image:'object-center'}} src="dummy-images/profesional-image.jpg"/>
+            <Image className="animate-waved-border mx-auto rounded-full md:rounded-none w-[10rem] md:w-[25rem] aspect-square bg-transparent" customeClassName={{image:'object-center'}} src="dummy-images/profesional-image.jpg"/>
         </div> 
     </div>
   )

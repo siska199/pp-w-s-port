@@ -28,14 +28,14 @@ export default {
         's-port-plain': "url('/src/assets/images/bg-sport-plain.svg')",
       },
       animation : {
-        'bounce-custome'  : 'bounce 3s ease-in-out infinite',
-        'waved'           : 'waved_border 8s ease-in-out infinite'
+        'bounce-custome'  : 'bounce_custome 3s ease-in-out infinite',
+        'waved-border'           : 'waved_border 8s ease-in-out infinite'
       },
       keyframes : {
-        bounce : {
+        bounce_custome :  {
           '0%'    : { transform: 'translateY(0)' },
           '50%'   : { transform: 'translateY(-2.4rem)' },
-          '100%'  : { transform: 'translateY(0)' }
+          '100%'  : { transform: 'translateY(0)' },
         },
         'waved_border' : {
           '0%'  : { 'border-radius' : '60% 40% 30% 70%/60% 30% 70% 40%' },
