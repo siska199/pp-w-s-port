@@ -64,7 +64,8 @@ const CardProject = (props: TPropsCardProject) => {
           withBackdrop: true,
           isShowOnHover: true,
           content: (
-            <Container variant={'vee'} gap="base" className="p-4">
+            <Container variant={'vee'} className="p-4 gap-3">
+              <Badge variant={'solid-primary'} label={'Website'} />
               <Badge
                 variant={'outline-white'}
                 className="bg-transparent  font-bold"

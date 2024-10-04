@@ -566,3 +566,56 @@ export const aboutMeData = {
             further enhance my capabilities in creating full-stack applications.
   `,
 };
+
+export const experiances = [
+  {
+    companyName: 'PT Asuransi Astra Buana',
+    position: 'Frontend Developer',
+    startDate: '2024-01-14',
+    endDate: 'Present',
+    description:
+      'Responsible for reengineering the GOA application from .NET to a modern React-based interface.',
+    projects: ['GOA', 'Vehicle Management System'],
+    techStack: ['React', 'Vite', 'Zustand', 'Chart.js'],
+  },
+  {
+    companyName: 'PT Steradian Data Optima',
+    position: 'Junior Until Middle Frontend Developer',
+    startDate: '2022-12-15',
+    endDate: '2023-08-14',
+    description:
+      'Led the development of frontend and backend systems for various applications, focusing on scalability and maintainability.',
+    projects: ['Quadra', 'QLOLA', 'iPast'],
+    techStack: ['React', 'Next.js', 'TypeScript', 'Material UI'],
+  },
+  {
+    companyName: 'Tech Innovations Inc.',
+    position: 'Web Developer Intern',
+    startDate: '2023-06-01',
+    endDate: '2023-11-30',
+    description:
+      'Assisted in the development of web applications using React and contributed to the design of user interfaces.',
+    projects: ['Internal Dashboard', 'Client Portal'],
+    techStack: ['React', 'CSS', 'JavaScript'],
+  },
+  {
+    companyName: 'Creative Solutions Co.',
+    position: 'Frontend Developer',
+    startDate: '2021-05-10',
+    endDate: '2022-11-15',
+    description:
+      'Developed and maintained responsive web applications, focusing on performance and user experience.',
+    projects: ['E-commerce Platform', 'Blog Site'],
+    techStack: ['Next.js', 'Tailwind CSS', 'Redux'],
+  },
+  {
+    companyName: 'Global Tech Corp.',
+    position: 'Software Engineer',
+    startDate: '2020-03-15',
+    endDate: '2021-04-30',
+    description:
+      'Engaged in full-stack development, primarily working on client-side features and optimizing backend processes.',
+    projects: ['Mobile App', 'Website Redesign'],
+    techStack: ['React', 'Node.js', 'Express'],
+  },
+];

@@ -1,6 +1,6 @@
 import { cn } from '@lib/helper';
 import { VariantProps, cva } from 'class-variance-authority';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 export interface TPropsContainer
   extends React.HTMLProps<HTMLDivElement>,
@@ -9,7 +9,7 @@ export interface TPropsContainer
   customElement?: 'ul' | 'nav' | 'body' | 'main' | 'form';
 }
 
-const Container: React.FC<TPropsContainer> = (props) => {
+const Container = forwardRef<HTMLElement, TPropsContainer>((props, ref) => {
   const {
     children,
     className,
@@ -21,9 +21,12 @@ const Container: React.FC<TPropsContainer> = (props) => {
     customElement,
     ...attrs
   } = props;
+
   const Component = customElement ?? ('div' as React.ElementType);
+
   return (
     <Component
+      ref={ref}
       className={cn(
         containerFlexVariants({
           className,
@@ -39,7 +42,7 @@ const Container: React.FC<TPropsContainer> = (props) => {
       {children}
     </Component>
   );
-};
+});
 
 const containerFlexVariants = cva('flex w-full flex-wrap md:flex-nowrap ', {
   variants: {

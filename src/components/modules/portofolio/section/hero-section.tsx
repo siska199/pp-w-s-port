@@ -39,8 +39,8 @@ const HeroSection = () => {
             variant="hcc"
             className="justify-center md:justify-start gap-2"
           >
-            {socialLinks?.map((socialAcc) => (
-              <Button className="!p-2" variant={'soft-primary'}>
+            {socialLinks?.map((socialAcc, i) => (
+              <Button key={i} className="!p-2" variant={'soft-primary'}>
                 <Image
                   className="w-6 aspect-square rounded-full"
                   src={socialAcc.src}

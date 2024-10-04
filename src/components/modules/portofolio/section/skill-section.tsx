@@ -25,6 +25,7 @@ const SkillSection = () => {
         >
           {skillCategories?.map((category, i) => (
             <Button
+              key={i}
               variant={'no-style'}
               className={cn({
                 'bg-glass-animation text-body-medium font-medium md:min-w-[10rem] !justify-start !text-start':
@@ -41,7 +42,7 @@ const SkillSection = () => {
         <AnimatePresence mode="wait">
           <div className="md:p-8 grid grid-cols-2 md:flex flex-wrap m-auto justify-center items-center gap-4">
             {skillCategories[activeIndex]?.skills.map((skill, j) => (
-              <CardItemSkill {...skill} index={j} />
+              <CardItemSkill key={j} {...skill} index={j} />
             ))}
           </div>
         </AnimatePresence>
@@ -74,8 +75,14 @@ const CardItemSkill = (props: TCardItemSkill) => {
         className="w-10 md:w-[3.5rem] aspect-square rounded-full shadow-2xl"
       />
       <div className="flex flex-col gap-2">
-        <p className="md:text-body-medium font-bold ">{name}</p>
-        <Badge className="" variant={'solid-blue'} label={'3+ Project'} />
+        <p className="md:text-body-medium font-bold line-clamp-1 text-start ">
+          {name}
+        </p>
+        <Badge
+          className="truncate"
+          variant={'solid-blue'}
+          label={'3+ Project'}
+        />
       </div>
     </motion.div>
   );
