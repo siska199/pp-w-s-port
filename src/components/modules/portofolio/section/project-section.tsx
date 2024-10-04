@@ -64,32 +64,28 @@ const CardProject = (props: TPropsCardProject) => {
           withBackdrop: true,
           isShowOnHover: true,
           content: (
-            <div className="p-4 flex flex-col space-y-2 items-end">
-              <p className="text-white font-bold">
-                <Badge
-                  variant={'outline-white'}
-                  className="bg-transparent  font-bold"
-                  label={'Personal Project - Fullstack Developer'}
-                />
-              </p>
-              <p className="font-bold text-white">
-                11 April 2022 - 15 April 2025
-              </p>
-            </div>
+            <Container variant={'vee'} gap="base" className="p-4">
+              <Badge
+                variant={'outline-white'}
+                className="bg-transparent  font-bold"
+                label={'Personal Project - Fullstack Developer'}
+              />
+              <p className="font-bold ">11 April 2022 - 15 April 2025</p>
+            </Container>
           ),
         }}
       />
       <div className="space-y-4 py-4">
-        <h5 className=" text-white text-body-large font-bold">{props.title}</h5>
-        <p className="text-white line-clamp-3">
+        <h5 className="  text-body-large font-bold">{props.title}</h5>
+        <p className=" line-clamp-3">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
           consequatur suscipit illo, enim accusantium repellat?
         </p>
-        <div className="flex gap-2 flex-wrap">
+        <Container variant={'hsc'} className="!flex-wrap gap-3">
           {props?.techStack?.map((tect, i) => (
             <Badge key={i} variant={'soft-gray'} label={tect} />
           ))}
-        </div>
+        </Container>
         <Button variant={'solid-black'}>
           View Project <IconArrowUp className="icon-white rotate-90 mt-1" />
         </Button>
