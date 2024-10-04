@@ -1,6 +1,7 @@
 import ContainerSection from '@components/modules/portofolio/container-section';
 import Badge from '@components/ui/badge';
 import Container from '@components/ui/container';
+import Tooltip from '@components/ui/tooltip';
 import { experiances } from '@lib/data/dummy';
 import { useScroll, motion } from 'framer-motion';
 import { useRef } from 'react';
@@ -57,11 +58,14 @@ const CardExperiance = (props: TPropsExperiance) => {
           {startDate} | {endDate}
         </p>
 
-        <Container variant={'hsc'} className="!flex-wrap gap-3">
-          {techStack?.map((tect, i) => (
-            <Badge key={i} variant={'soft-gray'} label={tect} />
-          ))}
-        </Container>
+        <div className="flex gap-6 justify-between">
+          <p className="font-medium w-auto min-w-[5rem]">Tech Stacks</p>
+          <Container variant={'hsc'} className="!flex-wrap gap-3">
+            {techStack?.map((tect, i) => (
+              <Badge key={i} variant={'soft-gray'} label={tect} />
+            ))}
+          </Container>
+        </div>
 
         <div className="space-y-2">
           <p className="font-medium">Projects</p>

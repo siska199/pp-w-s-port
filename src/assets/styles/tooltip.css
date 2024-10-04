@@ -1,0 +1,72 @@
+@import url('./index.css');
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+.tooltip:hover .rectangle {
+  border-width: 5px;
+  border-style: solid;
+}
+
+.tooltip:hover.tooltip::before {
+  content: attr(data-text);
+  position: absolute;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  padding: 7px;
+  text-align: center;
+  z-index: 10;
+}
+
+/* TOP */
+.tooltip.top:hover.tooltip::before {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tooltip:hover .rectangle.top {
+  border-color: black transparent transparent transparent;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+}
+
+/* BOTTOM */
+.tooltip.bottom:hover.tooltip::before {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tooltip:hover .rectangle.bottom {
+  border-color: transparent transparent black transparent;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+}
+
+/* LEFT */
+.tooltip.left:hover.tooltip::before {
+  right: 100%;
+}
+.tooltip:hover .rectangle.left {
+  border-color: transparent transparent transparent black;
+  position: absolute;
+  left: -1px;
+  top: 10px;
+}
+
+/* RIGHT */
+.tooltip.right:hover.tooltip::before {
+  left: 100%;
+}
+
+.tooltip:hover .rectangle.right {
+  border-color: transparent black transparent transparent;
+  position: absolute;
+  right: -1px;
+  top: 10px;
+}
