@@ -12,8 +12,10 @@ const HeroSection = () => {
   return (
     <ContainerSection gap="xl" className="mt-10 md:mt-0">
       <Container gap="base" className="w-auto">
-        <h5 className="mx-auto md:mx-0">I'm Siska Apriana Rifianti</h5>
-        <h1 className="mx-auto md:mx-0 text-heading-03 md:text-heading-01 bg-color-text-1">
+        <h5 className="mx-auto text-center md:text-start md:mx-0">
+          I'm Siska Apriana Rifianti
+        </h5>
+        <h1 className="mx-auto text-center md:text-start md:mx-0 text-heading-03 md:text-heading-01 bg-color-text-1">
           Frontend Developer
         </h1>
         {isMaxMd && (

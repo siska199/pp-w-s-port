@@ -4,7 +4,7 @@ import { aboutMeData } from '@lib/data/dummy';
 
 const AboutMeSection = () => {
   return (
-    <ContainerSection title="About Me" className="!py-0">
+    <ContainerSection title="About Me">
       <Container
         variant={'hsc'}
         gap="medium"

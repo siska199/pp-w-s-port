@@ -200,7 +200,7 @@ export const projects = [
   },
 ];
 
-export const skillsByCategory = [
+export const skillCategories = [
   {
     name: 'Frontend',
     skills: [

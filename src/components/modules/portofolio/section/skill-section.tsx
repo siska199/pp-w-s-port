@@ -1,70 +1,83 @@
-import Badge from '@components/ui/badge';
-import Image from '@components/ui/image';
-import { skillsByCategory } from '@lib/data/dummy';
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { cardSkillAnimation } from '@assets/styles/animation';
+import ContainerSection from '@components/modules/portofolio/container-section';
+import Badge from '@components/ui/badge';
+import Button from '@components/ui/button';
+import Container from '@components/ui/container';
+import Image from '@components/ui/image';
+import { skillCategories } from '@lib/data/dummy';
+import { cn } from '@lib/helper';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useState } from 'react';
 
 const SkillSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="min-h-[calc(100%-5rem)] text-white px-8 my-8 md:my-0 space-y-4 lg:space-y-2 flex flex-col items-center justify-center">
-      <h3 className="text-heading-05 md:text-heading-03 text-center font-bold font-bubblegum-sans">
-        Skill
-      </h3>
-      <div className="gap-4 w-full flex flex-col md:flex-row md:px-8 justify-center items-center h-full flex-grow">
-        <div className="flex flex-wrap md:flex-col gap-4 border-b pb-4 md:pb-0 md:border-none">
-          {skillsByCategory?.map((catSkill, i) => (
-            <div
-              key={i}
+    <ContainerSection title="Skill">
+      <Container
+        variant={'hsc'}
+        gap="large"
+        className="flex-col md:flex-row flex-grow"
+      >
+        <Container
+          gap="base"
+          className="flex-row md:flex-col md:pb-0 md:border-none w-auto"
+        >
+          {skillCategories?.map((category, i) => (
+            <Button
+              variant={'no-style'}
+              className={cn({
+                'bg-glass-animation text-body-medium font-medium md:min-w-[10rem] !justify-start !text-start':
+                  true,
+                'bg-glass': i === activeIndex,
+              })}
               onClick={() => setActiveIndex(i)}
-              className={`flex gap-4 cursor-pointer`}
             >
-              <h5
-                className={`p-3 effect-split-bg cursor-pointer-custome h-fit rounded-md w-fit text-body-medium font-medium md:min-w-[10rem] ${
-                  i === activeIndex ? 'bg-split' : ''
-                }`}
-              >
-                {catSkill?.name}
-              </h5>
-            </div>
+              {category?.name}
+            </Button>
           ))}
-        </div>
+        </Container>
 
         <AnimatePresence mode="wait">
-          <div className="p-4 md:p-8 flex flex-wrap m-auto justify-center items-center gap-4">
-            {skillsByCategory[activeIndex]?.skills.map((skill, j) => (
-              <motion.div
-                key={skill.name}
-                initial="hidden"
-                whileInView="visible"
-                exit="exit"
-                custom={j}
-                variants={cardSkillAnimation}
-                viewport={{ once: true }}
-                className="bg-white/30 flex gap-4 items-center md:min-w-[8rem] text-white p-4 rounded-md"
-              >
-                <Image
-                  src={skill.url}
-                  className="aspect-square w-10 md:w-[3.5rem] rounded-full shadow-2xl"
-                />
-                <div className="flex flex-col gap-2">
-                  <p className="md:text-body-medium font-bold text-white">
-                    {skill.name}
-                  </p>
-                  <Badge
-                    className=""
-                    variant={'solid-blue'}
-                    label={'3+ Project'}
-                  />
-                </div>
-              </motion.div>
+          <div className="md:p-8 grid grid-cols-2 md:flex flex-wrap m-auto justify-center items-center gap-4">
+            {skillCategories[activeIndex]?.skills.map((skill, j) => (
+              <CardItemSkill {...skill} index={j} />
             ))}
           </div>
         </AnimatePresence>
+      </Container>
+    </ContainerSection>
+  );
+};
+
+interface TCardItemSkill {
+  name: string;
+  url: string;
+  index: number;
+}
+
+const CardItemSkill = (props: TCardItemSkill) => {
+  const { name, url, index } = props;
+  return (
+    <motion.div
+      key={name}
+      initial="hidden"
+      whileInView="visible"
+      exit="exit"
+      custom={index}
+      variants={cardSkillAnimation}
+      viewport={{ once: true }}
+      className=" bg-card-transparent  flex gap-4 items-center md:min-w-[8rem] p-4 rounded-md"
+    >
+      <Image
+        src={url}
+        className="w-10 md:w-[3.5rem] aspect-square rounded-full shadow-2xl"
+      />
+      <div className="flex flex-col gap-2">
+        <p className="md:text-body-medium font-bold ">{name}</p>
+        <Badge className="" variant={'solid-blue'} label={'3+ Project'} />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
