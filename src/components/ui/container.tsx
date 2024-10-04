@@ -1,15 +1,15 @@
-import { cn } from '@lib/helper'
-import { VariantProps, cva } from 'class-variance-authority'
-import React from 'react'
+import { cn } from '@lib/helper';
+import { VariantProps, cva } from 'class-variance-authority';
+import React from 'react';
 
-interface TProps
+export interface TPropsContainer
   extends React.HTMLProps<HTMLDivElement>,
     VariantProps<typeof containerFlexVariants> {
-  children: React.ReactNode
-  customElement?: 'ul' | 'nav' | 'body' | 'main' | 'form'
+  children: React.ReactNode;
+  customElement?: 'ul' | 'nav' | 'body' | 'main' | 'form';
 }
 
-const Container: React.FC<TProps> = (props) => {
+const Container: React.FC<TPropsContainer> = (props) => {
   const {
     children,
     className,
@@ -20,8 +20,8 @@ const Container: React.FC<TProps> = (props) => {
     typeComp,
     customElement,
     ...attrs
-  } = props
-  const Component = customElement ?? ('div' as React.ElementType)
+  } = props;
+  const Component = customElement ?? ('div' as React.ElementType);
   return (
     <Component
       className={cn(
@@ -31,15 +31,15 @@ const Container: React.FC<TProps> = (props) => {
           gap,
           fit,
           padding,
-          typeComp
+          typeComp,
         })
       )}
       {...attrs}
     >
       {children}
     </Component>
-  )
-}
+  );
+};
 
 const containerFlexVariants = cva('flex w-full flex-wrap md:flex-nowrap ', {
   variants: {
@@ -64,11 +64,11 @@ const containerFlexVariants = cva('flex w-full flex-wrap md:flex-nowrap ', {
       vse: 'flex-col items-start justify-end',
       ves: 'flex-col items-end justify-start',
       vec: 'flex-col items-end justify-center',
-      vee: 'flex-col items-end justify-end'
+      vee: 'flex-col items-end justify-end',
     },
     fit: {
       true: 'w-fit',
-      false: 'w-full'
+      false: 'w-full',
     },
     gap: {
       tiny: 'gap-1',
@@ -76,7 +76,7 @@ const containerFlexVariants = cva('flex w-full flex-wrap md:flex-nowrap ', {
       base: 'gap-4',
       medium: 'gap-6',
       large: 'gap-8',
-      xl: 'gap-16'
+      xl: 'gap-16',
     },
 
     padding: {
@@ -84,18 +84,18 @@ const containerFlexVariants = cva('flex w-full flex-wrap md:flex-nowrap ', {
       base: 'p-4 w-[calc(100%-1rem)]',
       medium: 'p-6 w-[calc(100%-1.5rem)]',
       large: 'p-8 w-[calc(100%-2rem)]',
-      xl: 'p-16 w-[calc(100%-4rem)]'
+      xl: 'p-16 w-[calc(100%-4rem)]',
     },
     typeComp: {
       page: 'min-h-screen h-screen',
-      card: 'p-4'
-    }
+      card: 'p-4',
+    },
   },
   compoundVariants: [],
   defaultVariants: {
     variant: 'vss',
-    fit: false
-  }
-})
+    fit: false,
+  },
+});
 
-export default Container
+export default Container;

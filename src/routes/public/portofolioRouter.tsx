@@ -1,5 +1,5 @@
 import { route } from "@lib/data/global"
-import Portofolio from "@pages/portofolio/porotofolio"
+import Portofolio from "@pages/portofolio/portofolio"
 import { RouteObject } from "react-router-dom"
 
 const portofolioRouter: RouteObject[] = [
