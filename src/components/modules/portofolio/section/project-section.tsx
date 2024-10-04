@@ -1,6 +1,8 @@
 import { IconArrowUp, IconSearch } from '@assets/icons';
+import ContainerSection from '@components/modules/portofolio/container-section';
 import Badge from '@components/ui/badge';
 import Button from '@components/ui/button';
+import Container from '@components/ui/container';
 import Image from '@components/ui/image';
 import InputBase from '@components/ui/input/input-base';
 import { projects } from '@lib/data/dummy';
@@ -8,38 +10,37 @@ import { useState } from 'react';
 
 const ProjectSection = () => {
   const [keyword, setKeyword] = useState('');
+
   return (
-    <div className="min-h-[calc(100%-5rem)] text-white my-8 md:space-y-4 py-8 px-4 md:px-8">
-      <h3 className="text-heading-05 md:text-heading-03 text-center font-bold font-bubblegum-sans mb-6">
-        Projects
-      </h3>
-      <InputBase
-        customeClass={{
-          ciV4: 'max-w-[40rem] mx-auto',
-          ciV2: 'bg-transparent !border-primary',
-          input: 'bg-transparent placeholder:text-white',
-        }}
-        customeElement={{ start: <IconSearch className="icon-white" /> }}
-        name={'keyword'}
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
-        placeholder="Search Project by Name, Category Skill, Skill or Company... "
-      />
-      <div className="grid md:grid-cols-3 md:gap-4  mx-auto ">
-        {projects?.map((project, i) => (
-          <CardProject key={i} {...project} />
-        ))}
-      </div>
-      <div className="w-full justify-center flex">
+    <ContainerSection title="Projects">
+      <Container className="mt-8">
+        <InputBase
+          customeClass={{
+            ciV4: 'max-w-[40rem] mx-auto',
+            ciV2: 'bg-transparent !border-primary',
+            input: 'bg-transparent placeholder:text-white',
+          }}
+          customeElement={{ start: <IconSearch className="icon-white" /> }}
+          name={'keyword'}
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          placeholder="Search Project by Name, Category Skill, Skill or Company... "
+        />
+        <div className="grid md:grid-cols-3 md:gap-4  mx-auto ">
+          {projects?.map((project, i) => (
+            <CardProject key={i} {...project} />
+          ))}
+        </div>
+
         <Button
           shape={'circle'}
-          variant={'link-black'}
-          className="min-w-[20rem]  !text-white md:text-body-large bg-split !py-3 !rounded-md md:font-bold cursor-pointer-custome"
+          variant={'no-style'}
+          className="min-w-[20rem] mx-auto !text-white md:text-body-large bg-glass !py-3 !rounded-md md:font-bold cursor-pointer-custome"
         >
           Load More +
         </Button>
-      </div>
-    </div>
+      </Container>
+    </ContainerSection>
   );
 };
 
