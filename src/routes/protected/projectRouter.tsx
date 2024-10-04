@@ -1,14 +1,14 @@
-import { route } from '@lib/data/global'
-import menuSidebar from '@lib/data/menu-sidebar'
-import Project from '@pages/project/project'
-import { RouteObject } from 'react-router-dom'
+import { routes } from '@routes/constant';
+import menuSidebar from '@lib/data/menu-sidebar';
+import Project from '@pages/project/project';
+import { RouteObject } from 'react-router-dom';
 
 const projectRouter: RouteObject[] = [
   {
-    path: route.project.fullPath,
-    element: <Project/>,
-    handle : menuSidebar?.filter(data=>(data.name===route.project.name))[0]
-  }
-]
+    path: routes.project.fullPath,
+    element: <Project />,
+    handle: menuSidebar?.filter((data) => data.name === routes.project.name)[0],
+  },
+];
 
-export default projectRouter
+export default projectRouter;

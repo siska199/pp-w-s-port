@@ -1,17 +1,17 @@
-import { route } from '@lib/data/global'
-import { SignInPage } from '@pages'
-import { RouteObject } from 'react-router-dom'
+import { routes } from '@routes/constant';
+import { SignInPage } from '@pages';
+import { RouteObject } from 'react-router-dom';
 
 const authRouter: RouteObject[] = [
   {
-    path: route.auth.name,
+    path: routes.auth.name,
     children: [
       {
-        path: route.auth.child.signIn.name,
-        element: <SignInPage />
-      }
-    ]
-  }
-]
+        path: routes.auth?.child?.signIn.name,
+        element: <SignInPage />,
+      },
+    ],
+  },
+];
 
-export default authRouter
+export default authRouter;
