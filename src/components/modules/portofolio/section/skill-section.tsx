@@ -42,7 +42,7 @@ const SkillSection = () => {
                 exit="exit"
                 custom={j}
                 variants={cardSkillAnimation}
-                viewport={{ once: false }}
+                viewport={{ once: true }}
                 className="bg-white/30 flex gap-4 items-center md:min-w-[8rem] text-white p-4 rounded-md"
               >
                 <Image

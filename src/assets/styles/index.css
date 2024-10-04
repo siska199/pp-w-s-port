@@ -198,6 +198,37 @@
     @apply h-full w-full  bg-gray-900   bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30;
   }
 
+  /*->Background Glass */
+  .bg-glass-animation {
+    background-image: linear-gradient(
+      90deg,
+      rgba(165, 215, 232, 0.42) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 0 100%;
+    background-repeat: no-repeat;
+    transition: 0.4s;
+  }
+
+  .bg-glass-animation:hover {
+    background-size: 100% 100%;
+  }
+
+  .bg-glass {
+    background-image: linear-gradient(
+      90deg,
+      rgba(165, 215, 232, 0.42) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+  /*->Background */
+  .bg-card-transparent {
+    @apply bg-gray-50/30;
+  }
+
   /*->Shadow Custome */
   .shadow-image-arise {
     @apply shadow-[rgba(0,0,0,0.25)_0px_14px_28px,rgba(0,0,0,0.22)_0px_10px_10px];
@@ -235,51 +266,4 @@
   .cursor-pointer-custome {
     @apply bounce-effect cursor-pointer;
   }
-}
-
-/* Animation border image */
-
-.animate_boder {
-  animation: bounce_border 8s ease-in-out infinite;
-  @apply shadow-2xl;
-}
-
-@keyframes bounce_border {
-  0% {
-    border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
-  }
-
-  50% {
-    border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
-  }
-
-  100% {
-    border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
-  }
-}
-
-/* soft glass effect backround card */
-.effect-split-bg {
-  background-image: linear-gradient(
-    90deg,
-    rgba(165, 215, 232, 0.42) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  background-size: 0 100%;
-  background-repeat: no-repeat;
-  transition: 0.4s;
-}
-
-.effect-split-bg:hover {
-  background-size: 100% 100%;
-}
-
-.bg-split {
-  background-image: linear-gradient(
-    90deg,
-    rgba(165, 215, 232, 0.42) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
 }

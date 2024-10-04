@@ -4,7 +4,7 @@ import Button from '@components/ui/button';
 import Container from '@components/ui/container';
 import Image from '@components/ui/image';
 import useMediaQuery from '@hooks/useMediaQuery';
-import { listLinkSocialAccount } from '@lib/data/dummy';
+import { socialLinks } from '@lib/data/dummy';
 
 const HeroSection = () => {
   const { isMaxMd } = useMediaQuery();
@@ -37,7 +37,7 @@ const HeroSection = () => {
             variant="hcc"
             className="justify-center md:justify-start gap-2"
           >
-            {listLinkSocialAccount?.map((socialAcc) => (
+            {socialLinks?.map((socialAcc) => (
               <Button className="!p-2" variant={'soft-primary'}>
                 <Image
                   className="w-6 aspect-square rounded-full"
