@@ -9,7 +9,7 @@ import { useEffect, useRef } from 'react';
 const ExperianceSection = () => {
   return (
     <ContainerSection title="Experiance" className="">
-      <Container className="h-full w-auto relative px-8 md:px-0 ">
+      <Container className="h-full w-auto relative gap-8 ">
         {experiances?.map((experiance, i) => (
           <CardExperiance key={i} {...experiance} />
         ))}
@@ -41,14 +41,16 @@ const CardExperiance = (props: TPropsExperiance) => {
   return (
     <motion.div
       style={{ scale: scrollYProgress, opacity: scrollYProgress }}
-      className="relative md:mb-8"
+      className="relative bg-card-transparent flex pb-4 w-full rounded-md"
       ref={targetRef}
     >
-      <div className="rounded-full flex items-center justify-center bg-glass z-2 absolute -left-[2.75rem] md:-left-[0.85rem] top-[1rem] p-2">
-        <div className="w-3 h-3 bg-white rounded-full" />
+      <div className="p-4">
+        <div className="rounded-full flex items-center justify-center bg-glass h-fit p-2 border">
+          <div className="w-3 h-3 bg-white rounded-full" />
+        </div>
       </div>
 
-      <div className="md:ml-6 space-y-2  p-4 rounded-md md:max-w-md">
+      <div className="space-y-2  py-4 pr-4 rounded-md md:max-w-md">
         <h5 className="text-body-large">
           {companyName} - {position}
         </h5>

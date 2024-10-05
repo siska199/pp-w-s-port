@@ -13,7 +13,7 @@ const ProjectSection = () => {
 
   return (
     <ContainerSection title="Projects">
-      <Container className="mt-8">
+      <Container className="mt-8" gap={'large'}>
         <InputBase
           customeClass={{
             ciV4: 'max-w-[40rem] mx-auto',
@@ -26,7 +26,7 @@ const ProjectSection = () => {
           onChange={(e) => setKeyword(e.target.value)}
           placeholder="Search Project by Name, Category Skill, Skill or Company... "
         />
-        <div className="grid md:grid-cols-3 md:gap-4  mx-auto ">
+        <div className="grid md:grid-cols-3 gap-8  mx-auto ">
           {projects?.map((project, i) => (
             <CardProject key={i} {...project} />
           ))}
@@ -55,7 +55,7 @@ interface TPropsCardProject {
 const CardProject = (props: TPropsCardProject) => {
   const { thumbnail } = props;
   return (
-    <div className="overflow-hidden px-4 py-8 ">
+    <div className="overflow-hidden  bg-card-transparent rounded-md ">
       <Image
         src={thumbnail}
         className="h-[13rem] md:h-[15rem] aspect-square border-1 shadow-image-arise border-gray-500 "
@@ -76,7 +76,7 @@ const CardProject = (props: TPropsCardProject) => {
           ),
         }}
       />
-      <div className="space-y-4 py-4">
+      <div className="space-y-4 p-4">
         <h5 className="  text-body-large font-bold">{props.title}</h5>
         <p className=" line-clamp-3">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum

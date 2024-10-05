@@ -190,7 +190,7 @@
   }
 
   .bg-sport-plain {
-    @apply bg-s-port-plain bg-center bg-no-repeat bg-cover ;
+    @apply bg-s-port-plain bg-center bg-no-repeat bg-cover;
   }
 
   /*->Background glassmorphism*/
@@ -226,7 +226,7 @@
 
   /*->Background */
   .bg-card-transparent {
-    @apply bg-gray-50/30;
+    @apply bg-gradient-to-br from-white/20 to-white/0;
   }
 
   /*->Shadow Custome */

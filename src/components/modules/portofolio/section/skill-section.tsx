@@ -62,12 +62,7 @@ const CardItemSkill = (props: TCardItemSkill) => {
   return (
     <motion.div
       key={name}
-      initial="hidden"
-      whileInView="visible"
-      exit="exit"
-      custom={index}
-      variants={cardSkillAnimation}
-      viewport={{ once: false }}
+      {...cardSkillAnimation({ index })}
       className=" bg-card-transparent  flex gap-4 items-center md:min-w-[8rem] p-4 rounded-md"
     >
       <Image
