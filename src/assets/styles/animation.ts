@@ -33,17 +33,26 @@ export const cardSkillAnimation = (params: { index: number }): MotionProps => {
 
 export const textAnimation = (): MotionProps => {
   return {
-    initial: 'initial',
-    animate: 'animate',
+    initial: 'hidden',
+    whileInView: 'visible',
+    exit: 'exit',
+    viewport: { once: false },
     variants: {
-      initial: {
+      hidden: {
         opacity: 0,
       },
-      animate: {
+      visible: {
         opacity: 1,
         transition: {
           delay: 0.5,
           staggerChildren: 0.08,
+        },
+      },
+      exit: {
+        opacity: 0,
+        y: 20,
+        transition: {
+          duration: 0.2,
         },
       },
     },
@@ -53,15 +62,22 @@ export const textAnimation = (): MotionProps => {
 export const singleWordAnimation = (): MotionProps => {
   return {
     variants: {
-      initial: {
+      hidden: {
         opacity: 0,
         y: 50,
       },
-      animate: {
+      visible: {
         opacity: 1,
         y: 0,
         transition: {
           duration: 1,
+        },
+      },
+      exit: {
+        opacity: 0,
+        y: 50,
+        transition: {
+          duration: 0.2,
         },
       },
     },

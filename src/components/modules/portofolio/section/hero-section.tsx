@@ -1,13 +1,11 @@
 import { IconDownload } from '@assets/icons';
-import { textAnimation } from '@assets/styles/animation';
 import ContainerSection from '@components/modules/portofolio/container-section';
+import AnimatedText from '@components/ui/animated/animated-text';
 import Button from '@components/ui/button';
 import Container from '@components/ui/container';
 import Image from '@components/ui/image';
-import AnimatedText from '@components/ui/text/animated-text';
 import useMediaQuery from '@hooks/useMediaQuery';
 import { socialLinks } from '@lib/data/dummy';
-import { motion } from 'framer-motion';
 
 const HeroSection = () => {
   const { isMaxMd } = useMediaQuery();

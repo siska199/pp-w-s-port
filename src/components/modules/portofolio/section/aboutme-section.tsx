@@ -1,4 +1,5 @@
 import ContainerSection from '@components/modules/portofolio/container-section';
+import { AnimatedCountNumber } from '@components/ui/animated/animated-count-number';
 import Container from '@components/ui/container';
 import { aboutMeData } from '@lib/data/dummy';
 
@@ -24,16 +25,20 @@ const AboutMeSection = () => {
 };
 
 interface TPropsCardExperienceMetric {
-  title: string;
+  total: string;
   description: string;
 }
 
 const CardExperienceMetric = (props: TPropsCardExperienceMetric) => {
-  const { title, description } = props;
+  const { total, description } = props;
   return (
     <Container variant={'hsc'} className="bg-glass-animation rounded-lg p-4">
-      <h1 className="text-heading-05 md:text-heading-01 w-[5rem] md:w-auto ">
-        {title}
+      <h1 className="flex">
+        <AnimatedCountNumber
+          number={Number(total)}
+          className="text-heading-05 md:text-heading-01 w-[5rem] md:w-auto font-bold"
+        />{' '}
+        +
       </h1>
       <p className="text-start text-white flex-grow">{description}</p>
     </Container>

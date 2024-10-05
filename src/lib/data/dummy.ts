@@ -535,19 +535,19 @@ export const socialLinks = [
 export const aboutMeData = {
   experienceMetrics: [
     {
-      title: '3+',
+      total: '3',
       description: 'Years of experience',
     },
     {
-      title: '8+',
+      total: '8',
       description: 'Company Projects completed',
     },
     {
-      title: '10+',
+      total: '10',
       description: 'Personal Projects completed',
     },
     {
-      title: '4+',
+      total: '4',
       description: 'Happy Customers',
     },
   ],
