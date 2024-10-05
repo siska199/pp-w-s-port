@@ -6,7 +6,8 @@ import Container from '@components/ui/container';
 import Image from '@components/ui/image';
 import InputBase from '@components/ui/input/input-base';
 import { projects } from '@lib/data/dummy';
-import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
 
 const ProjectSection = () => {
   const [keyword, setKeyword] = useState('');
@@ -54,8 +55,13 @@ interface TPropsCardProject {
 
 const CardProject = (props: TPropsCardProject) => {
   const { thumbnail } = props;
+  const targetRef = useRef<HTMLDivElement | null>(null);
+
   return (
-    <div className="overflow-hidden  bg-card-transparent rounded-md ">
+    <motion.div
+      className="overflow-hidden  bg-card-transparent rounded-md "
+      ref={targetRef}
+    >
       <Image
         src={thumbnail}
         className="h-[13rem] md:h-[15rem] aspect-square border-1 shadow-image-arise border-gray-500 "
@@ -91,7 +97,7 @@ const CardProject = (props: TPropsCardProject) => {
           View Project <IconArrowUp className="icon-white rotate-90 mt-1" />
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

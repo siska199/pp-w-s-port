@@ -3,8 +3,8 @@ import Badge from '@components/ui/badge';
 import Container from '@components/ui/container';
 import { useScrollCustome } from '@hooks/useScrollCustome';
 import { experiances } from '@lib/data/dummy';
-import { motion, useScroll } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { useRef } from 'react';
 
 const ExperianceSection = () => {
   return (
@@ -40,9 +40,9 @@ const CardExperiance = (props: TPropsExperiance) => {
 
   return (
     <motion.div
-      style={{ scale: scrollYProgress, opacity: scrollYProgress }}
       className="relative bg-card-transparent flex pb-4 w-full rounded-md"
       ref={targetRef}
+      style={{ scale: scrollYProgress, opacity: scrollYProgress }}
     >
       <div className="p-4">
         <div className="rounded-full flex items-center justify-center bg-glass h-fit p-2 border">

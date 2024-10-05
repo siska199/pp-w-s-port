@@ -1,23 +1,29 @@
 import { IconDownload } from '@assets/icons';
+import { textAnimation } from '@assets/styles/animation';
 import ContainerSection from '@components/modules/portofolio/container-section';
 import Button from '@components/ui/button';
 import Container from '@components/ui/container';
 import Image from '@components/ui/image';
+import AnimatedText from '@components/ui/text/animated-text';
 import useMediaQuery from '@hooks/useMediaQuery';
 import { socialLinks } from '@lib/data/dummy';
+import { motion } from 'framer-motion';
 
 const HeroSection = () => {
   const { isMaxMd } = useMediaQuery();
 
   return (
     <ContainerSection gap="xl" className="mt-10 md:mt-0">
-      <Container gap="base" className="w-auto">
-        <h5 className="mx-auto text-center md:text-start md:mx-0">
-          I'm Siska Apriana Rifianti
-        </h5>
-        <h1 className="mx-auto text-center md:text-start md:mx-0 text-heading-03 md:text-heading-01 bg-color-text-1">
-          Frontend Developer
-        </h1>
+      <Container gap="base" className="w-auto ">
+        <AnimatedText
+          text={`I'm Siska Apriana Rifianti`}
+          className="!text-heading-05 text-center md:text-start "
+        />
+        <AnimatedText
+          text={`Frontend Developer`}
+          className="font-bubblegum-sans text-center md:text-start"
+        />
+
         {isMaxMd && (
           <Image
             className="mt-8 animate-bounce-custome  mx-auto rounded-full md:rounded-none w-[10rem] md:w-[25rem] aspect-square bg-transparent"
@@ -26,10 +32,10 @@ const HeroSection = () => {
         )}
 
         <Container variant={'vcc'} className="md:items-start" gap="base">
-          <p className="ml-1 text-center md:text-start italic text-body-large ">
-            Sharp Thinking and Seamless Coding, Powered by Coffee{' '}
-            <span className="not-italic animate-pulse">☕</span>
-          </p>
+          <AnimatedText
+            text={`Sharp Thinking and Seamless Coding, Powered by Coffee ☕`}
+            className="ml-1 text-center md:text-start italic text-body-large font-normal "
+          />
 
           <Button shape={'circle'}>
             <IconDownload className="icon-white" /> Download Resume

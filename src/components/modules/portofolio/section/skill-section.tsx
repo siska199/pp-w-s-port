@@ -6,7 +6,7 @@ import Container from '@components/ui/container';
 import Image from '@components/ui/image';
 import { skillCategories } from '@lib/data/dummy';
 import { cn } from '@lib/helper';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 const SkillSection = () => {
@@ -39,13 +39,11 @@ const SkillSection = () => {
           ))}
         </Container>
 
-        <AnimatePresence mode="wait">
-          <div className="md:p-8 grid grid-cols-2 md:flex flex-wrap m-auto justify-center items-center gap-4">
-            {skillCategories[activeIndex]?.skills.map((skill, j) => (
-              <CardItemSkill key={j} {...skill} index={j} />
-            ))}
-          </div>
-        </AnimatePresence>
+        <div className="md:p-8 grid grid-cols-2 md:flex flex-wrap m-auto justify-center items-center gap-4">
+          {skillCategories[activeIndex]?.skills.map((skill, j) => (
+            <CardItemSkill key={j} {...skill} index={j} />
+          ))}
+        </div>
       </Container>
     </ContainerSection>
   );
@@ -63,11 +61,11 @@ const CardItemSkill = (props: TCardItemSkill) => {
     <motion.div
       key={name}
       {...cardSkillAnimation({ index })}
-      className=" bg-card-transparent  flex gap-4 items-center md:min-w-[8rem] p-4 rounded-md"
+      className=" bg-card-transparent  flex gap-4 items-center md:w-[12rem] md:max-w-[12rem] md:min-w-[12rem] p-4 rounded-md"
     >
       <Image
         src={url}
-        className="w-10 md:w-[3.5rem] aspect-square rounded-full shadow-2xl"
+        className="w-10 md:w-[3.5rem] flex-shrink-0 aspect-square rounded-full shadow-2xl"
       />
       <div className="flex flex-col gap-2">
         <p className="md:text-body-medium font-bold line-clamp-1 text-start ">
