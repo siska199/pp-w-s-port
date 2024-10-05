@@ -619,3 +619,9 @@ export const experiances = [
     techStack: ['React', 'Node.js', 'Express'],
   },
 ];
+
+
+
+export const educations = [
+  
+]

@@ -6,6 +6,7 @@ export interface TRoute {
   name: string;
   fullPath: string;
   isPrivate?: boolean;
+  isOpenRoute?: boolean;
   component?: RouteComponent;
   child?: {
     [key: string]: TRoute;
@@ -58,6 +59,7 @@ const route = {
         name: 'project-detail',
         fullPath: '/project/:id',
         isPrivate: true,
+        isOpenRoute: true,
         component: {
           publicNavbar: true,
         },
@@ -73,6 +75,7 @@ const route = {
     name: 'portofolio',
     fullPath: '/portofolio',
     isPrivate: false,
+    isOpenRoute: true,
     component: {
       publicNavbar: true,
     },

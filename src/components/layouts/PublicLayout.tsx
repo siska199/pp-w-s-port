@@ -13,7 +13,7 @@ const PublicLayout = () => {
   } = useCurrentPath();
 
   useEffect(() => {
-    if (isAuthenticated)
+    if (isAuthenticated && !handle?.isOpenRoute)
       navigate(routes.personalInformation.fullPath, { replace: true });
   }, [isAuthenticated]);
 
@@ -26,7 +26,6 @@ const PublicLayout = () => {
         <Outlet />
       </div>
     </div>
-
   );
 };
 
