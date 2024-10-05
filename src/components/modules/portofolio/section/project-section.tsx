@@ -1,4 +1,5 @@
 import { IconArrowUp, IconSearch } from '@assets/icons';
+import { cardAnimation } from '@assets/styles/animation';
 import ContainerSection from '@components/modules/portofolio/container-section';
 import Badge from '@components/ui/badge';
 import Button from '@components/ui/button';
@@ -29,7 +30,7 @@ const ProjectSection = () => {
         />
         <div className="grid md:grid-cols-3 gap-8  mx-auto ">
           {projects?.map((project, i) => (
-            <CardProject key={i} {...project} />
+            <CardProject key={i} index={i} {...project} />
           ))}
         </div>
 
@@ -51,16 +52,18 @@ interface TPropsCardProject {
   title: string;
   description: string;
   techStack: string[];
+  index: number;
 }
 
 const CardProject = (props: TPropsCardProject) => {
-  const { thumbnail } = props;
+  const { thumbnail, index } = props;
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <motion.div
       className="overflow-hidden  bg-card-transparent rounded-md "
       ref={targetRef}
+      {...cardAnimation({ index })}
     >
       <Image
         src={thumbnail}

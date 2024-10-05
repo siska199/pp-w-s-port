@@ -11,7 +11,7 @@ const ContainerSection = (props: TProps) => {
     <Container
       gap="base"
       variant={title ? 'vcc' : 'hcc'}
-      className={`min-h-[calc(100vh)] p-8  ${className} `}
+      className={`min-h-[calc(100vh)] overflow-x-hidden p-8  ${className} `}
       {...attrs}
     >
       {title && (

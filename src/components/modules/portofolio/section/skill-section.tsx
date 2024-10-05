@@ -1,4 +1,4 @@
-import { cardSkillAnimation } from '@assets/styles/animation';
+import { cardAnimation, slideInAnimation } from '@assets/styles/animation';
 import ContainerSection from '@components/modules/portofolio/container-section';
 import Badge from '@components/ui/badge';
 import Button from '@components/ui/button';
@@ -19,25 +19,27 @@ const SkillSection = () => {
         gap="large"
         className="flex-col md:flex-row flex-grow"
       >
-        <Container
-          gap="base"
-          className="flex-row md:flex-col md:pb-0 md:border-none w-auto"
-        >
-          {skillCategories?.map((category, i) => (
-            <Button
-              key={i}
-              variant={'no-style'}
-              className={cn({
-                'bg-glass-animation text-body-medium font-medium md:min-w-[10rem] !justify-start !text-start':
-                  true,
-                'bg-glass': i === activeIndex,
-              })}
-              onClick={() => setActiveIndex(i)}
-            >
-              {category?.name}
-            </Button>
-          ))}
-        </Container>
+        <motion.div {...slideInAnimation({ direction: 'left' })}>
+          <Container
+            gap="base"
+            className="flex-row md:flex-col md:pb-0 md:border-none w-auto"
+          >
+            {skillCategories?.map((category, i) => (
+              <Button
+                key={i}
+                variant={'no-style'}
+                className={cn({
+                  'bg-glass-animation text-body-medium font-medium md:min-w-[10rem] !justify-start !text-start':
+                    true,
+                  'bg-glass': i === activeIndex,
+                })}
+                onClick={() => setActiveIndex(i)}
+              >
+                {category?.name}
+              </Button>
+            ))}
+          </Container>
+        </motion.div>
 
         <div className="md:p-8 grid grid-cols-2 md:flex flex-wrap m-auto justify-center items-center gap-4">
           {skillCategories[activeIndex]?.skills.map((skill, j) => (
@@ -60,7 +62,7 @@ const CardItemSkill = (props: TCardItemSkill) => {
   return (
     <motion.div
       key={name}
-      {...cardSkillAnimation({ index })}
+      {...cardAnimation({ index })}
       className=" bg-card-transparent  flex gap-4 items-center md:w-[12rem] md:max-w-[12rem] md:min-w-[12rem] p-4 rounded-md"
     >
       <Image
