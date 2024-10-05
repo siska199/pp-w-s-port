@@ -17,7 +17,7 @@ const HeroSection = () => {
       <Container gap="base" className="w-auto ">
         <AnimatedText
           text={`I'm Siska Apriana Rifianti`}
-          className="!text-heading-05  mx-auto md:mx-0 "
+          className="!text-heading-05 text-center md:text-start mx-auto md:mx-0 "
         />
         <AnimatedText
           text={`Frontend Developer`}
@@ -25,10 +25,12 @@ const HeroSection = () => {
         />
 
         {isMaxMd && (
-          <Image
-            className="mt-8 animate-bounce-custome  mx-auto rounded-full md:rounded-none w-[10rem] md:w-[25rem] aspect-square bg-transparent"
-            src="dummy-images/profesional-image.jpg"
-          />
+          <motion.div {...opacityAnimation()} className="m-auto">
+            <Image
+              className="mt-8 animate-bounce-custome  mx-auto rounded-full md:rounded-none w-[10rem] md:w-[25rem] aspect-square bg-transparent"
+              src="dummy-images/profesional-image.jpg"
+            />
+          </motion.div>
         )}
 
         <motion.div {...opacityAnimation()}>
