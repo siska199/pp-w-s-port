@@ -22,7 +22,7 @@ const PublicLayout = () => {
       <div
         className={`absolute top-0 bg-glassmorphism text-white h-full w-full`}
       >
-        {['portofolio', 'project-detail']?.includes(handle?.name) && <Navbar />}
+        {['portofolio']?.includes(handle?.name) && <Navbar />}
         <Outlet />
       </div>
     </div>
