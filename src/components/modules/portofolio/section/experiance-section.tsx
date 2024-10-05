@@ -1,28 +1,15 @@
 import ContainerSection from '@components/modules/portofolio/container-section';
 import Badge from '@components/ui/badge';
 import Container from '@components/ui/container';
-import Tooltip from '@components/ui/tooltip';
+import { useScrollCustome } from '@hooks/useScrollCustome';
 import { experiances } from '@lib/data/dummy';
-import { useScroll, motion } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useScroll } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 const ExperianceSection = () => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
-  console.log(scrollYProgress);
-
   return (
     <ContainerSection title="Experiance" className="">
-      <Container
-        ref={containerRef}
-        className="h-full w-auto relative px-8 md:px-0  "
-      >
-        <div className="absolute left-[0rem]  top-0 w-[1px] min-h-full h-full mt-[3.5%] bg-white origin-top" />
-
+      <Container className="h-full w-auto relative px-8 md:px-0 ">
         {experiances?.map((experiance, i) => (
           <CardExperiance key={i} {...experiance} />
         ))}
@@ -44,9 +31,20 @@ interface TPropsExperiance {
 const CardExperiance = (props: TPropsExperiance) => {
   const { companyName, position, startDate, endDate, projects, techStack } =
     props;
+
+  const targetRef = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScrollCustome({
+    targetRef,
+    offset: ['0 1', '1.33 1'],
+  });
+
   return (
-    <div className="relative">
-      <div className="rounded-full flex items-center justify-center bg-glass z-2 absolute -left-[2.75rem] md:-left-[0.85rem] p-2">
+    <motion.div
+      style={{ scale: scrollYProgress, opacity: scrollYProgress }}
+      className="relative md:mb-8"
+      ref={targetRef}
+    >
+      <div className="rounded-full flex items-center justify-center bg-glass z-2 absolute -left-[2.75rem] md:-left-[0.85rem] top-[1rem] p-2">
         <div className="w-3 h-3 bg-white rounded-full" />
       </div>
 
@@ -81,7 +79,7 @@ const CardExperiance = (props: TPropsExperiance) => {
           </ul>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

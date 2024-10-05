@@ -67,7 +67,7 @@ const CardItemSkill = (props: TCardItemSkill) => {
       exit="exit"
       custom={index}
       variants={cardSkillAnimation}
-      viewport={{ once: true }}
+      viewport={{ once: false }}
       className=" bg-card-transparent  flex gap-4 items-center md:min-w-[8rem] p-4 rounded-md"
     >
       <Image

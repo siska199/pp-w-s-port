@@ -18,14 +18,15 @@ const PublicLayout = () => {
   }, [isAuthenticated]);
 
   return (
-    <div className={`bg-sport-plain h-screen relative  w-full`}>
+    <div className={`bg-sport-plain h-screen  relative  w-full`}>
       <div
         className={`absolute top-0 bg-glassmorphism text-white h-full w-full`}
       >
-        {['portofolio', 'project-detail']?.includes(handle.name) && <Navbar />}
+        {['portofolio', 'project-detail']?.includes(handle?.name) && <Navbar />}
         <Outlet />
       </div>
     </div>
+
   );
 };
 
