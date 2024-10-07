@@ -22,7 +22,7 @@ const Slider3D = (props: TPropsSlider3D) => {
         rotate: 0,
         stretch: 0,
         depth: 100,
-        modifier: 2.5,
+        modifier: 10,
       }}
       modules={[EffectCoverflow, Pagination, Navigation]} // Include necessary modules here
       pagination={{ el: '.swiper-pagination', clickable: true }}
@@ -33,20 +33,24 @@ const Slider3D = (props: TPropsSlider3D) => {
       className="swiper_container "
     >
       {images?.map((image, i) => (
-        <SwiperSlide key={i}>
+        <SwiperSlide
+          key={i}
+          className="min-w-[30rem] rounded-lg overflow-hidden"
+        >
           <Image
             src={image}
             alt={`slide_image_${i}`}
-            className="w-[20rem] aspect-video"
+            customeClassName={{ image: 'object-cover' }}
+            className=" w-full h-full "
           />
         </SwiperSlide>
       ))}
-
+      {/* 
       <div className="slider-controler">
         <div className="swiper-button-prev slider-arrow">BACK</div>
         <div className="swiper-button-next slider-arrow">FORWARD</div>
         <div className="swiper-pagination"></div>
-      </div>
+      </div> */}
     </Swiper>
   );
 };
