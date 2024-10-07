@@ -620,8 +620,186 @@ export const experiances = [
   },
 ];
 
+export const educations = [];
 
-
-export const educations = [
-  
-]
+export const projectDetail = {
+  thumbnail: 'dummy-images/goa.png',
+  companyName: 'PT Astra International TBK',
+  startDate: '11 April 2022',
+  endDate: '11 Oketober 2022',
+  description: `
+  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores, aut inventore? Excepturi accusantium labore neque dolor consectetur, quasi consequatur aliquam veniam ratione, ea doloribus, earum quidem fuga ullam hic exercitationem quaerat expedita culpa amet asperiores? Unde alias maiores explicabo doloremque nobis asperiores, veniam consectetur aut laborum nisi ipsam earum obcaecati?
+  `,
+  linkGithubRepository: 'github.com',
+  linkWebsite: '',
+  menus: [
+    {
+      name: 'Menu Login',
+      mainImage: 'dummy-images/project-goa/1.png',
+      description: `lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque cum necessitatibus illo. Fugit itaque hic cupiditate. Culpa pariatur nemo tempore?`,
+      relatedImages: [
+        {
+          src: 'dummy-images/project-goa/1.png',
+        },
+        {
+          src: 'dummy-images/project-goa/2.png',
+        },
+        {
+          src: 'dummy-images/project-goa/3.png',
+        },
+        {
+          src: 'dummy-images/project-goa/4.png',
+        },
+        {
+          src: 'dummy-images/project-goa/3.png',
+        },
+        {
+          src: 'dummy-images/project-goa/4.png',
+        },
+        {
+          src: 'dummy-images/project-goa/3.png',
+        },
+        {
+          src: 'dummy-images/project-goa/4.png',
+        },
+      ],
+      features: [
+        {
+          description: 'Create Registrasi Data Bengekel',
+        },
+        {
+          description: 'Update nasional',
+        },
+        {
+          description: 'Search bengkel off line and online',
+        },
+      ],
+    },
+    {
+      name: 'Menu Registrasi Data Bengkel',
+      mainImage: 'dummy-images/project-goa/2.png',
+      description: `lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque cum necessitatibus illo. Fugit itaque hic cupiditate. Culpa pariatur nemo tempore?`,
+      relatedImages: [
+        {
+          src: 'dummy-images/project-goa/1.png',
+        },
+        {
+          src: 'dummy-images/project-goa/2.png',
+        },
+        {
+          src: 'dummy-images/project-goa/3.png',
+        },
+        {
+          src: 'dummy-images/project-goa/4.png',
+        },
+        {
+          src: 'dummy-images/project-goa/3.png',
+        },
+        {
+          src: 'dummy-images/project-goa/4.png',
+        },
+        {
+          src: 'dummy-images/project-goa/3.png',
+        },
+        {
+          src: 'dummy-images/project-goa/4.png',
+        },
+      ],
+      features: [
+        {
+          description: 'Create Registrasi Data Bengekel',
+        },
+        {
+          description: 'Update nasional',
+        },
+        {
+          description: 'Search bengkel off line and online',
+        },
+      ],
+    },
+    {
+      name: 'Menu Survey',
+      mainImage: 'dummy-images/project-goa/3.png',
+      description: `lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque cum necessitatibus illo. Fugit itaque hic cupiditate. Culpa pariatur nemo tempore?`,
+      relatedImages: [
+        {
+          src: 'dummy-images/project-goa/1.png',
+        },
+        {
+          src: 'dummy-images/project-goa/2.png',
+        },
+        {
+          src: 'dummy-images/project-goa/3.png',
+        },
+        {
+          src: 'dummy-images/project-goa/4.png',
+        },
+        {
+          src: 'dummy-images/project-goa/3.png',
+        },
+        {
+          src: 'dummy-images/project-goa/4.png',
+        },
+        {
+          src: 'dummy-images/project-goa/3.png',
+        },
+        {
+          src: 'dummy-images/project-goa/4.png',
+        },
+      ],
+      features: [
+        {
+          description: 'Create Registrasi Data Bengekel',
+        },
+        {
+          description: 'Update nasional',
+        },
+        {
+          description: 'Search bengkel off line and online',
+        },
+      ],
+    },
+    {
+      name: 'Menu Kuitansi',
+      mainImage: 'dummy-images/project-goa/3.png',
+      description: `lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque cum necessitatibus illo. Fugit itaque hic cupiditate. Culpa pariatur nemo tempore?`,
+      relatedImages: [
+        {
+          src: 'dummy-images/project-goa/1.png',
+        },
+        {
+          src: 'dummy-images/project-goa/2.png',
+        },
+        {
+          src: 'dummy-images/project-goa/3.png',
+        },
+        {
+          src: 'dummy-images/project-goa/4.png',
+        },
+        {
+          src: 'dummy-images/project-goa/3.png',
+        },
+        {
+          src: 'dummy-images/project-goa/4.png',
+        },
+        {
+          src: 'dummy-images/project-goa/3.png',
+        },
+        {
+          src: 'dummy-images/project-goa/4.png',
+        },
+      ],
+      features: [
+        {
+          description: 'Create Registrasi Data Bengekel',
+        },
+        {
+          description: 'Update nasional',
+        },
+        {
+          description: 'Search bengkel off line and online',
+        },
+      ],
+    },
+  ],
+};

@@ -1,4 +1,4 @@
-import Container, { TPropsContainer } from '@components/ui/container';
+import Container, { TPropsContainer } from '@components/ui/container/container';
 
 interface TProps extends TPropsContainer {
   children: React.ReactNode;
@@ -15,7 +15,7 @@ const ContainerSection = (props: TProps) => {
       {...attrs}
     >
       {title && (
-        <h3 className=" text-heading-05 md:text-heading-03 text-center font-bubblegum-sans">
+        <h3 className=" text-heading-05 md:text-heading-03 text-center font-bubblegum-sans capitalize ">
           {title}
         </h3>
       )}

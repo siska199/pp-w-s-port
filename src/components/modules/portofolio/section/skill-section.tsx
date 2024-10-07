@@ -1,8 +1,8 @@
 import { cardAnimation, slideInAnimation } from '@assets/styles/animation';
-import ContainerSection from '@components/modules/portofolio/container-section';
+import ContainerSection from '@components/ui/container/container-section';
 import Badge from '@components/ui/badge';
 import Button from '@components/ui/button';
-import Container from '@components/ui/container';
+import Container from '@components/ui/container/container';
 import Image from '@components/ui/image';
 import { skillCategories } from '@lib/data/dummy';
 import { cn } from '@lib/helper';
@@ -29,7 +29,7 @@ const SkillSection = () => {
                 key={i}
                 variant={'no-style'}
                 className={cn({
-                  'bg-glass-animation text-body-medium font-medium md:min-w-[10rem] !justify-start !text-start':
+                  'bg-glass-animation flex flex-grow text-body-medium font-medium md:min-w-[10rem] !justify-start !text-start':
                     true,
                   'bg-glass': i === activeIndex,
                 })}

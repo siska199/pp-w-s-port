@@ -14,6 +14,7 @@ export const variantButton = {
     'bg-white hover:!bg-gray-100 text-gray-900 focus:ring-0 !p-2 border-none disabled:opacity-50',
   transparent:
     'bg-transparent hover:!bg-white/20 !rounded-full !p-2 focus:ring-0 active:!bg-white/20 disabled:opacity-50',
+  glass: ' bg-glass text-white',
 };
 
 Object.entries(variantButton)?.forEach(([key, value]) => {

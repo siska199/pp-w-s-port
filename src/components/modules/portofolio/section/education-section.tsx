@@ -1,4 +1,4 @@
-import ContainerSection from '@components/modules/portofolio/container-section';
+import ContainerSection from '@components/ui/container/container-section';
 
 const EducationSection = () => {
   return <ContainerSection title="Education">SISKA</ContainerSection>;

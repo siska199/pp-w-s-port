@@ -1,9 +1,9 @@
 import { IconArrowUp, IconSearch } from '@assets/icons';
 import { cardAnimation } from '@assets/styles/animation';
-import ContainerSection from '@components/modules/portofolio/container-section';
+import ContainerSection from '@components/ui/container/container-section';
 import Badge from '@components/ui/badge';
 import Button from '@components/ui/button';
-import Container from '@components/ui/container';
+import Container from '@components/ui/container/container';
 import Image from '@components/ui/image';
 import InputBase from '@components/ui/input/input-base';
 import { projects } from '@lib/data/dummy';
@@ -35,9 +35,10 @@ const ProjectSection = () => {
         </div>
 
         <Button
-          shape={'circle'}
-          variant={'no-style'}
-          className="min-w-[20rem] mx-auto !text-white md:text-body-large bg-glass !py-3 !rounded-md md:font-bold cursor-pointer-custome"
+          shape={'rounded'}
+          variant={'glass'}
+          size={"large"}
+          className="min-w-[15rem] mx-auto  md:text-body-large  md:font-bold"
         >
           Load More +
         </Button>

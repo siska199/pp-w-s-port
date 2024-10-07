@@ -1,6 +1,6 @@
-import ContainerSection from '@components/modules/portofolio/container-section';
+import ContainerSection from '@components/ui/container/container-section';
 import Badge from '@components/ui/badge';
-import Container from '@components/ui/container';
+import Container from '@components/ui/container/container';
 import { useScrollCustome } from '@hooks/useScrollCustome';
 import { experiances } from '@lib/data/dummy';
 import { motion } from 'framer-motion';

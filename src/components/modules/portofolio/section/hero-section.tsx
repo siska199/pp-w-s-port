@@ -1,9 +1,9 @@
 import { IconDownload } from '@assets/icons';
 import { opacityAnimation, textAnimation } from '@assets/styles/animation';
-import ContainerSection from '@components/modules/portofolio/container-section';
+import ContainerSection from '@components/ui/container/container-section';
 import AnimatedText from '@components/ui/animated/animated-text';
 import Button from '@components/ui/button';
-import Container from '@components/ui/container';
+import Container from '@components/ui/container/container';
 import Image from '@components/ui/image';
 import useMediaQuery from '@hooks/useMediaQuery';
 import { socialLinks } from '@lib/data/dummy';
@@ -40,7 +40,7 @@ const HeroSection = () => {
               className="ml-1 text-center md:text-start italic text-body-large font-normal "
             />
 
-            <Button shape={'circle'}>
+            <Button shape={'circle'} variant={'glass'} className="font-bold animate-bounce">
               <IconDownload className="icon-white" /> Download Resume
             </Button>
 

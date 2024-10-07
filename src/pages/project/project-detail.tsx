@@ -1,3 +1,4 @@
+import MenuSection from '@components/modules/project-detail/menu-section';
 import Badge from '@components/ui/badge';
 import Button from '@components/ui/button';
 import Image from '@components/ui/image';
@@ -5,13 +6,9 @@ import Image from '@components/ui/image';
 const ProjectDetailPage = () => {
   return (
     <>
-      <div
-        className="h-full relative bg-center bg-no-repeat bg-cover overflow-x-hidden"
-        style={{
-          backgroundImage: `url('/src/assets/images/dummy-images/project-goa/thumbnail-goa.png')`,
-        }}
-      >
-        <div className="absolute top-0 bg-glassmorphism !bg-opacity-60 w-full min-h-full h-full overflow-y-auto ">
+      <div className="h-full relative bg-center bg-no-repeat bg-cover overflow-x-hidden">
+        <div className="absolute top-0  !bg-opacity-60 w-full min-h-full h-full overflow-y-auto ">
+          {/* Introduction */}
           <div className=" h-full space-y-4 grid grid-cols-2 px-16">
             <div className="space-y-4 my-auto ">
               <div className="">
@@ -39,7 +36,7 @@ const ProjectDetailPage = () => {
                   Code Repository
                 </Button>
                 <Button
-                  variant={'outline-white'}
+                  variant={'glass'}
                   shape={'circle'}
                   className="min-w-[10rem] font-medium !text-white hover:!bg-transparent "
                 >
@@ -47,151 +44,19 @@ const ProjectDetailPage = () => {
                 </Button>
               </div>
             </div>
-          </div>
 
-          <div className="px-16 py-8 space-y-8 min-h-full h-auto overflow-hidden ">
-            <h3 className="font-bubblegum-sans">Feature That Build</h3>
-            <div className="flex  gap-16 h-auto justify-between">
-              <div className="flex-grow gap-8  flex flex-col justify-center ">
-                <div className="flex gap-8 ">
-                  <div className="flex-[0.65]">
-                    <Image
-                      className="w-full min-h-[20rem] rounded-lg shadow-image-arise"
-                      src="dummy-images/project-goa/1.png"
-                    />
-                  </div>
-                  <div className="flex-[0.35] flex overflow-x-scroll gap-8 mt-auto scrollbar-hidden">
-                    <Image
-                      className="shadow-image-arise min-w-[15rem] h-[10rem] aspect-video rounded-lg cursor-pointer-custome"
-                      src="dummy-images/project-goa/1.png"
-                      overlay={{
-                        content: (
-                          <div className="p-8 h-full flex flex-col justify-center items-center">
-                            <Badge
-                              label={'Menu Login'}
-                              variant={'solid-white'}
-                            />
-                          </div>
-                        ),
-                        withBackdrop: true,
-                      }}
-                    />
-                    <Image
-                      className="shadow-image-arise min-w-[15rem] h-[10rem] aspect-video rounded-lg cursor-pointer-custome"
-                      src="dummy-images/project-goa/2.png"
-                      overlay={{
-                        content: (
-                          <div className="p-8 h-full flex flex-col justify-center items-center">
-                            <Badge
-                              label={'Menu Login'}
-                              variant={'solid-white'}
-                            />
-                          </div>
-                        ),
-                        withBackdrop: true,
-                      }}
-                    />
-                    <Image
-                      className="shadow-image-arise min-w-[15rem] h-[10rem] aspect-video rounded-lg cursor-pointer-custome"
-                      src="dummy-images/project-goa/3.png"
-                      overlay={{
-                        content: (
-                          <div className="p-8 h-full flex flex-col justify-center items-center">
-                            <Badge
-                              label={'Menu Login'}
-                              variant={'solid-white'}
-                            />
-                          </div>
-                        ),
-                        withBackdrop: true,
-                      }}
-                    />
-                    <Image
-                      className="shadow-image-arise min-w-[15rem] h-[10rem] aspect-video rounded-lg cursor-pointer-csutome"
-                      src="dummy-images/project-goa/4.png"
-                      overlay={{
-                        content: (
-                          <div className="p-8 h-full flex flex-col justify-center items-center">
-                            <Badge
-                              label={'Menu Login'}
-                              variant={'solid-white'}
-                            />
-                          </div>
-                        ),
-                        withBackdrop: true,
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className=" h-full flex flex-col">
-                  <h5 className="">Menu Login</h5>
-                  <p className="max-w-md">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Doloribus fugit officiis nulla? Nobis sit dolorum fugiat
-                    porro dolore nemo sapiente.
-                  </p>
-                  <br />
-                  <div>
-                    <p className="font-bold">Task:</p>
-                    <div>
-                      <li>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Dolorem, quis!
-                      </li>
-                      <li>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Dolorem, quis!
-                      </li>
-                      <li>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Dolorem, quis!
-                      </li>
-                      <li>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Dolorem, quis!
-                      </li>
-                      <li>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Dolorem, quis!
-                      </li>
-                      <li>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Dolorem, quis!
-                      </li>
-                      <li>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Dolorem, quis!
-                      </li>
-                      <li>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Dolorem, quis!
-                      </li>
-                      <li>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Dolorem, quis!
-                      </li>
-                      <li>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Dolorem, quis!
-                      </li>
-                      <li>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Dolorem, quis!
-                      </li>
-                      <li>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Dolorem, quis!
-                      </li>
-                      <li>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Dolorem, quis!
-                      </li>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="p-8 flex">
+              <Image
+                customeClassName={{
+                  image: 'object-cover hover:scale-125 ease-in duration-150',
+                }}
+                src="dummy-images/goa.png"
+                className="w-full my-auto h-auto aspect-video rounded-lg shadow-image-arise overflow-hidden "
+              />
             </div>
           </div>
+
+          <MenuSection />
 
           <div className="h-full w-full px-16 py-8">
             <h3 className="font-bubblegum-sans">Responsibility</h3>
