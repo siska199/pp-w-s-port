@@ -9,6 +9,7 @@ import InputBase from '@components/ui/input/input-base';
 import { projects } from '@lib/data/dummy';
 import { motion } from 'framer-motion';
 import { useRef, useState } from 'react';
+import { routes } from '@routes/constant';
 
 const ProjectSection = () => {
   const [keyword, setKeyword] = useState('');
@@ -37,7 +38,7 @@ const ProjectSection = () => {
         <Button
           shape={'rounded'}
           variant={'glass'}
-          size={"large"}
+          size={'large'}
           className="min-w-[15rem] mx-auto  md:text-body-large  md:font-bold"
         >
           Load More +
@@ -97,7 +98,10 @@ const CardProject = (props: TPropsCardProject) => {
             <Badge key={i} variant={'soft-gray'} label={tect} />
           ))}
         </Container>
-        <Button variant={'solid-black'}>
+        <Button
+          to={`${routes.project?.fullPath}/${index}`}
+          variant={'solid-black'}
+        >
           View Project <IconArrowUp className="icon-white rotate-90 mt-1" />
         </Button>
       </div>
