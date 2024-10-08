@@ -26,14 +26,15 @@ const IntroductionSection = () => {
             shape={'circle'}
             className="font-medium min-w-[10rem] flex gap-2"
           >
-            Code Repository
+            <span className="-mt-1">📂</span>
+            {''} Code Repository
           </Button>
           <Button
             variant={'glass'}
             shape={'circle'}
             className="min-w-[10rem] font-medium !text-white hover:!bg-transparent "
           >
-            Demo
+            <span>🌐</span> View Demo
           </Button>
         </div>
       </div>

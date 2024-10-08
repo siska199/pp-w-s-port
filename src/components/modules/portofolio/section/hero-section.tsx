@@ -19,6 +19,7 @@ const HeroSection = () => {
           text={`I'm Siska Apriana Rifianti`}
           className="!text-heading-05 text-center md:text-start mx-auto md:mx-0 "
         />
+
         <AnimatedText
           text={`Frontend Developer`}
           className="font-bubblegum-sans text-center md:text-start"
@@ -39,8 +40,11 @@ const HeroSection = () => {
               text={`Sharp Thinking and Seamless Coding, Powered by Coffee ☕`}
               className="ml-1 text-center md:text-start italic text-body-large font-normal "
             />
-
-            <Button shape={'circle'} variant={'glass'} className="font-bold animate-bounce">
+            <Button
+              shape={'circle'}
+              variant={'glass'}
+              className="font-bold animate-bounce"
+            >
               <IconDownload className="icon-white" /> Download Resume
             </Button>
 
