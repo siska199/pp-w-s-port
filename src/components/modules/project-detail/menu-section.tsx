@@ -35,7 +35,7 @@ const MenuSection = () => {
         </div>
 
         <div className="space-y-2">
-          <p className="text-body-large">Related Image</p>
+          <p className="text-body-large font-medium">Related Image</p>
           <div className="flex gap-4">
             {listImage?.map((image, i) => (
               <Image key={i} src={image} className="w-[10rem] rounded-md" />
@@ -44,7 +44,7 @@ const MenuSection = () => {
         </div>
 
         <div className="space-y-2">
-          <p className="text-body-large">Features:</p>
+          <p className="text-body-large font-medium">Features:</p>
           <ul className="flex flex-col gap-2">
             {listFeatures?.map((feature, i) => (
               <li key={i}>

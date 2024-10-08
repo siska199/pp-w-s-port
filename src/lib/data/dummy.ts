@@ -803,3 +803,9 @@ export const projectDetail = {
     },
   ],
 };
+
+export const techStacks = [
+  {
+    name: 'Next JS',
+  },
+];

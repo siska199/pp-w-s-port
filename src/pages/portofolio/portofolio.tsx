@@ -4,21 +4,18 @@ import ExperianceSection from '@components/modules/portofolio/section/experiance
 import HeroSection from '@components/modules/portofolio/section/hero-section';
 import ProjectSection from '@components/modules/portofolio/section/project-section';
 import SkillSection from '@components/modules/portofolio/section/skill-section';
+import ContainerLandingPage from '@components/ui/container/container-landing-page';
 
 const Portofolio = () => {
-
   return (
-    <div
-      id="container-page-portofolio"
-      className=" h-full overflow-y-auto space-y-16 text-white"
-    >
+    <ContainerLandingPage id="container-page-portofolio">
       <HeroSection />
       <AboutMeSection />
       <SkillSection />
       <ProjectSection />
       <ExperianceSection />
       <EducationSection />
-    </div>
+    </ContainerLandingPage>
   );
 };
 
