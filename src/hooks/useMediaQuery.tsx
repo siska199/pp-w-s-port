@@ -39,6 +39,8 @@ const useMediaQuery = () => {
             for (const key in mediaQueryConfig) {
                 updatedMatches[key as TKeyMediaQuery] = mediaQueryLists[key as TKeyMediaQuery].matches;
             }
+
+            
             setMatches(updatedMatches);
         };
 

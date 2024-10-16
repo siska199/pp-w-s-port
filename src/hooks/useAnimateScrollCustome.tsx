@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { useScroll, MotionValue, UseScrollOptions } from 'framer-motion';
 
-interface TUseScrollCustomeProps extends UseScrollOptions {
+interface TUseAnimateScrollCustomeProps extends UseScrollOptions {
   containerId?: string;
   targetRef: React.RefObject<HTMLDivElement>;
 }
 
-export const useScrollCustome = (
-  props: TUseScrollCustomeProps
+export const useAnimateScrollCustome = (
+  props: TUseAnimateScrollCustomeProps
 ): { scrollYProgress: MotionValue<number> } => {
   const {
     containerId = 'container-page-portofolio',

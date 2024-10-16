@@ -1,9 +1,9 @@
 import { IconDownload } from '@assets/icons';
-import { opacityAnimation, textAnimation } from '@assets/styles/animation';
-import ContainerSection from '@components/ui/container/container-section';
+import { opacityAnimation } from '@assets/styles/animation';
 import AnimatedText from '@components/ui/animated/animated-text';
 import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
+import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
 import useMediaQuery from '@hooks/useMediaQuery';
 import { socialLinks } from '@lib/data/dummy';
@@ -40,11 +40,7 @@ const HeroSection = () => {
               text={`Sharp Thinking and Seamless Coding, Powered by Coffee ☕`}
               className="ml-1 text-center md:text-start italic text-body-large font-normal "
             />
-            <Button
-              shape={'circle'}
-              variant={'glass'}
-              className="font-bold animate-bounce"
-            >
+            <Button shape={'circle'} variant={'glass'} className="font-bold ">
               <IconDownload className="icon-white" /> Download Resume
             </Button>
 

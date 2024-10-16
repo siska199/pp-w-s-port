@@ -1,10 +1,10 @@
 import ContainerSection from '@components/ui/container/container-section';
 import Badge from '@components/ui/badge';
 import Container from '@components/ui/container/container';
-import { useScrollCustome } from '@hooks/useScrollCustome';
 import { experiances } from '@lib/data/dummy';
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
+import { useAnimateScrollCustome } from '@hooks/useAnimateScrollCustome';
 
 const ExperianceSection = () => {
   return (
@@ -33,7 +33,7 @@ const CardExperiance = (props: TPropsExperiance) => {
     props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScrollCustome({
+  const { scrollYProgress } = useAnimateScrollCustome({
     targetRef,
     offset: ['0 1', '1.33 1'],
   });
