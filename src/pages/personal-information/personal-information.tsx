@@ -1,6 +1,11 @@
+import ContainerProtectedPage from '@components/ui/container/container-protected-page';
 
 const PersonalInformationPage = () => {
-  return <div>PersonalInformationPage</div>;
+  return (
+    <ContainerProtectedPage title="Personal Information">
+      <div>TEST</div>
+    </ContainerProtectedPage>
+  );
 };
 
 export default PersonalInformationPage;

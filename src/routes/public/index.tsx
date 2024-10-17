@@ -12,7 +12,7 @@ const publicRoutes: RouteObject[] = [
   {
     path: '',
     element: (
-      <React.Suspense fallback={<Loading />}>
+      <React.Suspense fallback={'Loading...'}>
         <GlobalLayout>
           <PublicLayout />
         </GlobalLayout>

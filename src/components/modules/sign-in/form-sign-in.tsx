@@ -5,11 +5,11 @@ import InputCheckbox from '@components/ui/input/input-checkbox';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { routes } from '@routes/constant';
 import { excludeRef } from '@lib/helper';
-import { loginSchema, TFormLogin } from '@lib/schema-validation/auth-schema';
 import { handleSetAuth } from '@store/features/auth/authSlice';
 import { useAppDispatch } from '@store/store';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { loginSchema, TFormLogin } from '@lib/validation/module/auth-schema';
 
 interface TPropsFormLogin {
   className?: string;

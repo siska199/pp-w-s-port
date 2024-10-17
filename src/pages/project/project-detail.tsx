@@ -2,7 +2,7 @@ import IntroductionSection from '@components/modules/project-detail/introduction
 import MenuSection from '@components/modules/project-detail/menu-section';
 import TechStackSection from '@components/modules/project-detail/tech-stack-section';
 import ContainerLandingPage from '@components/ui/container/container-landing-page';
-import ResponsibilitySection from '@components/ui/container/responsibility-section';
+import ResponsibilitySection from '@components/modules/project-detail/responsibility-section';
 
 const ProjectDetailPage = () => {
   return (
