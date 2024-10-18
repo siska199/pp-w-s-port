@@ -27,15 +27,15 @@ export interface TPropsInputUploadFile
     Omit<Partial<React.HTMLProps<HTMLInputElement>>, 'value' | 'onChange'> {
   name: string;
   totalMaxSize?: number;
-  listAcceptedFile?: TTypeFile[] | [];
+  listAcceptedTypeFile?: TTypeFile[] | [];
   onChange: (e: TCustomeEventOnChange<TFileValue>) => void;
-  value: TFileValue;
+  value: TFileValue | null | undefined;
   variant?: 'change-profile' | 'general';
 }
 
 const InputUploadFile = (props: TPropsInputUploadFile) => {
   const {
-    listAcceptedFile = [TTypeFile.ALL],
+    listAcceptedTypeFile = [TTypeFile.ALL],
     totalMaxSize = 5,
     onChange,
     name,
@@ -54,9 +54,11 @@ const InputUploadFile = (props: TPropsInputUploadFile) => {
 
   useEffect(() => {
     setAcceptedFile(
-      variant === 'change-profile' ? 'image/*' : listAcceptedFile?.join(', ')
+      variant === 'change-profile'
+        ? 'image/*'
+        : listAcceptedTypeFile?.join(', ')
     );
-  }, [listAcceptedFile]);
+  }, [listAcceptedTypeFile]);
 
   const handleOnClickInput = <T extends React.MouseEvent>(e: T) => {
     e?.preventDefault();
@@ -88,7 +90,7 @@ const InputUploadFile = (props: TPropsInputUploadFile) => {
 
     isValid = handleValidateType({
       file,
-      listAcceptedType: listAcceptedFile,
+      listAcceptedType: listAcceptedTypeFile,
     });
     return isValid;
   };
@@ -143,7 +145,10 @@ const InputUploadFile = (props: TPropsInputUploadFile) => {
           <div className="space-y-3 my-auto">
             <p className="font-italic">
               Please upload a file (Max size: {totalMaxSize}MB, Formats:{' '}
-              {listAcceptedFile?.join(', ')})
+              {listAcceptedTypeFile?.includes(TTypeFile.ALL)
+                ? 'All files'
+                : listAcceptedTypeFile?.join(', ')}
+              )
             </p>
             <div className="flex gap-2">
               <Button variant={'outline-primary'} onClick={handleOnClickInput}>

@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`p-3  ${
+      className={`p-3 bg-white ${
         isUsingPublicNavabr ? 'fixed' : 'border-b sticky'
       }  top-0 z-[2] flex gap-4 items-center`}
     >
@@ -73,7 +73,7 @@ const ContentProtectedRoute = () => {
     []
   );
   return (
-    <div className="px-3 flex justify-between w-full items-center">
+    <div className="px-3 flex justify-between  w-full items-center">
       <IconHumburger className="cursor-pointer" onClick={handleOnToggle} />
       <div className="ml-auto">
         <div className="flex gap-4 ">

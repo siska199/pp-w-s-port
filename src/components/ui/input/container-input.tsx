@@ -21,6 +21,7 @@ export interface TPropsInput<TInput> extends TBasePropsInput {
   };
   onCustomeClearHandler?: () => void;
   customeClearValue?: string;
+  maxLength?: number;
 }
 
 const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
@@ -42,6 +43,7 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
     customeClass,
     value,
     onChange,
+    maxLength,
     ...attrsInput
   } = props;
 
@@ -49,6 +51,10 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
 
   const handleToggleTypePassword = () => {
     setDynamicType(dynamicType === 'password' ? 'text' : 'password');
+  };
+
+  const handelOnChange = (e: any) => {
+    if (maxLength != Number(value?.length ?? 0) && onChange) return onChange(e);
   };
 
   const handleOnClearValue = () => {
@@ -66,9 +72,17 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
     <Container className={`${customeClass?.ciV4} relative flex flex-col gap-1`}>
       <section className={`${customeClass?.ciV3} flex flex-col gap-2 w-full`}>
         {label && (
-          <label htmlFor={name} className={'font-medium w-fit'}>
-            {label}
-          </label>
+          <div className="flex justify-between gap-4">
+            <label htmlFor={name} className={'font-medium w-fit'}>
+              {label}
+            </label>
+
+            {maxLength && (
+              <span className="text-gray text-body-small">
+                {maxLength - Number(value?.length ?? 0)}
+              </span>
+            )}
+          </div>
         )}
 
         {onlyContainer && typeof children !== 'function' ? (
@@ -113,7 +127,8 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
                     type: dynamicType,
                     disabled,
                     value,
-                    onChange,
+                    onChange: handelOnChange,
+                    maxLength,
                   })}
                 </>
               ) : (

@@ -98,15 +98,15 @@ export const zEnum = <TEnum extends [string, ...string[]]>(params: {
 };
 
 export const zFileLocale = (params: {
-  size: number;
+  size?: number;
   listAcceptedType: TTypeFile[];
   mandatory?: boolean;
 }): z.ZodType<File | null | undefined> => {
-  const { size, listAcceptedType, mandatory } = params;
+  const { size = 5, listAcceptedType, mandatory } = params;
   const fileSchema = z
     .instanceof(File)
     ?.refine(
-      (file) => file.size > size,
+      (file) => file.size > size * 1024 * 1024,
       messageError.fileType(listAcceptedType)
     )
     .refine((file) => {
@@ -118,4 +118,12 @@ export const zFileLocale = (params: {
     }, messageError.fileType(listAcceptedType));
 
   return mandatory ? fileSchema : fileSchema?.optional()?.nullable();
+};
+
+export const zLink = (params: { mandatory?: boolean }) => {
+  const { mandatory } = params;
+  const linkSchema = zString({ name: 'Link', max: 2083 })?.url({
+    message: messageError.url,
+  });
+  return mandatory ? linkSchema : linkSchema?.optional();
 };

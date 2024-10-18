@@ -809,3 +809,27 @@ export const techStacks = [
     name: 'Next JS',
   },
 ];
+
+export const provinces = [
+  { label: 'Province 1', value: 'province1' },
+  { label: 'Province 2', value: 'province2' },
+  { label: 'Province 3', value: 'province3' },
+];
+
+export const cities = [
+  { label: 'City 1', value: 'city1' },
+  { label: 'City 2', value: 'city2' },
+  { label: 'City 3', value: 'city3' },
+];
+
+export const districts = [
+  { label: 'District 1', value: 'district1' },
+  { label: 'District 2', value: 'district2' },
+  { label: 'District 3', value: 'district3' },
+];
+
+export const postalCodes = [
+  { label: 'Postal Code 1', value: '12345' },
+  { label: 'Postal Code 2', value: '23456' },
+  { label: 'Postal Code 3', value: '34567' },
+];

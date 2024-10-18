@@ -8,9 +8,12 @@ interface TProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 const ContainerProtectedPage = (props: TProps) => {
-  const { children, title, onClickAddData } = props;
+  const { children, title, onClickAddData, ...attrs } = props;
   return (
-    <div className="container-page gap-y-8">
+    <div
+      className={`container-page gap-y-8 h-full scrollbar-hidden ${attrs?.className}`}
+      {...attrs}
+    >
       <HeaderPage title={title} onClickAddData={onClickAddData} />
       {children}
     </div>

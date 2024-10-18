@@ -1,6 +1,7 @@
 import { TTypeFile } from 'types/ui-types';
 import clsx, { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import z, { ZodType } from 'zod';
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
@@ -151,4 +152,20 @@ export const generateUrlQueryParams = (params: {
   const queryParams = new URLSearchParams(queryObject);
   const newUrl = `${url}?${queryParams.toString()}`;
   return newUrl;
+};
+
+export const generateDefaultValue = (schema: ZodType<any>): any => {
+  if (schema instanceof z.ZodString) return '';
+  if (schema instanceof z.ZodObject) {
+    const shape = schema.shape;
+    const defaultObj: { [key: string]: any } = {};
+    for (const key in shape) {
+      defaultObj[key] = generateDefaultValue(shape[key]);
+    }
+    return defaultObj;
+  }
+  if (schema instanceof z.ZodArray) null;
+  if (schema instanceof z.ZodOptional) return null;
+  if (schema instanceof z.ZodNull) return null;
+  return null;
 };
