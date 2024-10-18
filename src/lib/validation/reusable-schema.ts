@@ -1,12 +1,7 @@
+import { handleValidateType } from '@lib/helper';
 import validation, { messageError } from '@lib/validation';
+import { TTypeFile } from 'types/ui-types';
 import z, { ZodEffects, ZodOptional, ZodString } from 'zod';
-
-type TZString<TMandatory extends boolean> = (params: {
-  name: string;
-  min?: number;
-  max?: number;
-  mandatory?: TMandatory;
-}) => ZodString | z.ZodOptional<ZodString>;
 
 export const zString = <TMandatory extends boolean = true>(params: {
   name: string;
@@ -37,14 +32,12 @@ export const zString = <TMandatory extends boolean = true>(params: {
     : ZodOptional<ZodString>;
 };
 
-type TZNumber = (params: {
+export const zNumber = (params: {
   name: string;
   min?: number;
   max?: number;
   mandatory?: boolean;
-}) => z.ZodNumber | z.ZodOptional<z.ZodNumber>;
-
-export const zNumber: TZNumber = (params) => {
+}): z.ZodNumber | z.ZodOptional<z.ZodNumber> => {
   const { name, max = 255, min = 1, mandatory = true } = params;
 
   const numberSchema = z.number().max(max, {
@@ -86,22 +79,43 @@ export const zEmail = (mandatory = true) => {
 export const zPhoneNumber = (mandatory = true) => {
   const phoneSchema = z
     .string()
-    .max(15, { message: 'Phone number must not exceed 15 characters' })
+    .max(15, { message: messageError.phoneNumberExceedLength })
     .refine((val) => /^08\d{8,13}$/.test(val), {
-      message: 'Phone Number should be in 08XXXXXXXXXX format',
+      message: messageError.phoneNumberFormat,
     });
 
   return mandatory ? phoneSchema : phoneSchema.optional();
 };
 
-type TZEnum<T extends [string, ...string[]]> = (params: {
-  enum: [string, ...string[]];
+export const zEnum = <TEnum extends [string, ...string[]]>(params: {
+  enum: TEnum;
   mandatory?: boolean;
-}) => z.ZodEnum<T> | z.ZodOptional<z.ZodEnum<T>>;
-
-export const zEnum: TZEnum<[string, ...string[]]> = (params) => {
+}): z.ZodEnum<TEnum> | z.ZodOptional<z.ZodEnum<TEnum>> => {
   const { enum: enumValues, mandatory } = params;
   const enumSchema = z.enum(enumValues);
 
   return mandatory ? enumSchema : enumSchema.optional();
+};
+
+export const zFileLocale = (params: {
+  size: number;
+  listAcceptedType: TTypeFile[];
+  mandatory?: boolean;
+}): z.ZodType<File | null | undefined> => {
+  const { size, listAcceptedType, mandatory } = params;
+  const fileSchema = z
+    .instanceof(File)
+    ?.refine(
+      (file) => file.size > size,
+      messageError.fileType(listAcceptedType)
+    )
+    .refine((file) => {
+      const isValid = handleValidateType({
+        file,
+        listAcceptedType,
+      });
+      return isValid;
+    }, messageError.fileType(listAcceptedType));
+
+  return mandatory ? fileSchema : fileSchema?.optional()?.nullable();
 };

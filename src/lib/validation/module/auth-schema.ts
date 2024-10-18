@@ -4,7 +4,10 @@ import * as z from 'zod';
 export const loginSchema = z.object({
   username: zString<true>({ name: 'username' }),
   password: zPassword<true>(),
-  isRememberMe: zEnum({ enum: ['false', 'true'], mandatory: false }),
+  isRememberMe: zEnum<['false', 'true']>({
+    enum: ['false', 'true'],
+    mandatory: false,
+  }),
 });
 
 export type TFormLogin = z.input<typeof loginSchema>;

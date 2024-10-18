@@ -1,22 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TRAuthState } from 'types/auth-types'
+import { TRAuthState } from 'types/auth-types';
 
 const initialState: TRAuthState = {
   isAuthenticated: false,
-  user: null
-}
+  user: null,
+};
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    handleSetAuth : (state, action:PayloadAction<boolean>)=>{
-      console.log('payload: ', action.payload)
-      state.isAuthenticated=action.payload
-    }
-  }
-})
+    handleSetAuth: (state, action: PayloadAction<boolean>) => {
+      state.isAuthenticated = action.payload;
+    },
+  },
+});
 
-export default authSlice.reducer
+export default authSlice.reducer;
 
-export const {handleSetAuth } = authSlice.actions
+export const { handleSetAuth } = authSlice.actions;

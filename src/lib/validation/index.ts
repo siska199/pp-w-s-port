@@ -1,3 +1,4 @@
+import { TTypeFile } from '../../types/ui-types';
 export const messageError = {
   required: (name: string) => `${name} is Required`,
   invalid: (name: string) => `${name} is Invalid`,
@@ -10,14 +11,21 @@ export const messageError = {
   maxNumber: (name: string, max: number) =>
     `${name} must not exceed ${max} digits.`,
   password:
-    "Password must be at least 8 characters long and contain at least one uppercase letter",
-  url: "Please enter a valid URL. Ensure it starts with http:// or https://",
+    'Password must be at least 8 characters long and contain at least one uppercase letter',
+  url: 'Please enter a valid URL. Ensure it starts with http:// or https://',
+  maxSizeFile: 'File upload cancelled due to size limit exceeded.',
+  fileType: (fileTypes: TTypeFile[]) => {
+    const updateFileType = fileTypes?.join(',');
+    return `Please upload the correct type file : ${updateFileType}`;
+  },
+  phoneNumberFormat: 'Phone Number should be in 08XXXXXXXXXX format',
+  phoneNumberExceedLength: 'Phone number must not exceed 15 characters',
 };
 
 const validation = {
   email: {
     regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-    message: messageError.invalid("Email"),
+    message: messageError.invalid('Email'),
   },
   password: {
     regex: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,

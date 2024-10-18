@@ -1,5 +1,5 @@
-import clsx from 'clsx';
-import { ClassValue } from 'clsx';
+import { TTypeFile } from 'types/ui-types';
+import clsx, { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -86,6 +86,21 @@ export const handleGetFileTypeFromName = (name: string) => {
   const type = name?.split('.')?.slice(-1)[0];
 
   return `.${type?.toLowerCase()}`;
+};
+
+export const handleValidateType = (params: {
+  file: File;
+  listAcceptedType: TTypeFile[];
+}) => {
+  const { file, listAcceptedType } = params;
+  const type = handleGetFileTypeFromName(file?.name) as TTypeFile;
+
+  const isAllTypeAllow = listAcceptedType?.includes(TTypeFile.ALL);
+  const isAllImageTypeAllow = listAcceptedType?.includes(TTypeFile.IMAGE_ALL);
+  const isTypeAllow =
+    isAllTypeAllow || listAcceptedType?.includes(type) || isAllImageTypeAllow;
+
+  return isTypeAllow;
 };
 
 interface TParamsDownloadFile {
