@@ -11,12 +11,12 @@ const useReusableAPI = () => {
     return result?.data?.data;
   };
 
-  const getListCity = async (queryParam: { provinceCode: string }) => {
+  const getListCity = async (queryObject: { provinceCode: string }) => {
     const { apiClient } = useAPI();
 
     return await apiClient({
       endpoint: ENDPOINT.GET_LIST_CITY,
-      queryObject: queryParam,
+      queryObject,
     });
   };
   return {
