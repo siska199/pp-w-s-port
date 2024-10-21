@@ -118,7 +118,6 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
                     className: cn({
                       'peer w-full shrink !outline-none border-none focus:border-none focus:ring-0 p-0 text-body-base placeholder:text-gray-400':
                         !isNotUsingDefaultStyle?.input,
-                      '!bg-disabled': disabled,
                       'px-4': customeElement?.preEnd,
                       'pr-4 pl-1': customeElement?.preStart,
                       [customeClass?.input || '']: customeClass?.input,

@@ -169,3 +169,16 @@ export const generateDefaultValue = (schema: ZodType<any>): any => {
   if (schema instanceof z.ZodNull) return null;
   return null;
 };
+
+export const generateOptions = (params: {
+  options: TObject;
+  labelName: string;
+  valueName: string;
+}) => {
+  const { options, labelName, valueName } = params;
+
+  return options?.map((option: TObject) => ({
+    label: option[labelName],
+    value: option[valueName],
+  }));
+};

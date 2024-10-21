@@ -43,6 +43,7 @@ const InputUploadFile = (props: TPropsInputUploadFile) => {
     errorMessage,
     ...attrsInput
   } = props;
+
   const inputFileRef = useRef<HTMLInputElement | null>(null);
 
   const [acceptedFile, setAcceptedFile] = useState('');

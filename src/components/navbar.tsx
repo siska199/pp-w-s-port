@@ -19,8 +19,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`p-3 bg-white ${
-        isUsingPublicNavabr ? 'fixed' : 'border-b sticky'
+      className={`p-3 ${
+        isUsingPublicNavabr ? 'fixed' : 'border-b sticky bg-white'
       }  top-0 z-[2] flex gap-4 items-center`}
     >
       {isUsingPublicNavabr ? <ContentPortofolio /> : <ContentProtectedRoute />}

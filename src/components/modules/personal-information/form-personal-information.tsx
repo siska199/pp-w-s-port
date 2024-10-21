@@ -1,125 +1,138 @@
+import useReusableAPI from '@apis/use-reusable-api';
+import Button from '@components/ui/button';
 import InputBase from '@components/ui/input/input-base';
 import InputSelect from '@components/ui/input/input-select';
 import InputTextArea from '@components/ui/input/input-text-area';
+import InputTextEditor from '@components/ui/input/input-text-editor';
 import InputUploadFile from '@components/ui/input/input-upload-file';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { provinces } from '@lib/data/dummy';
-import { excludeRef } from '@lib/helper';
+import useFormCustome, { TOnFieldChange } from '@hooks/useFormCustome';
+import { generateOptions } from '@lib/helper';
 import personalInformationSchema, {
+  initialFormPersonalInformation,
   personalInformationDefaultValues,
   TFormPersonalInformation,
-} from '@lib/validation/module/personal-information-schema';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { TEventOnChange } from 'types/ui-types';
+} from '@lib/validation/module/personal-information/personal-information-schema';
+import { useEffect, useState } from 'react';
 
 const FormPersonlaInformation = () => {
-  const navigate = useNavigate();
+  const { getListProvince } = useReusableAPI();
+  const { handleSubmit, handleGetAttrs, watch, reset, handleOnChange } =
+    useFormCustome<TFormPersonalInformation>({
+      formSchema: personalInformationSchema,
+      defaultValues: personalInformationDefaultValues,
+      onFieldChange: handleFieldChange,
+    });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    watch,
-  } = useForm<TFormPersonalInformation>({
-    resolver: zodResolver(personalInformationSchema, {}, { raw: true }),
-    defaultValues: personalInformationDefaultValues,
+  const [formStaticAttrs, setFormStaticAttrs] = useState(
+    initialFormPersonalInformation
+  );
+
+  useEffect(() => {
+    handleInitialData();
+  }, []);
+
+  const handleInitialData = async () => {
+    const provinces = await getListProvince();
+    formStaticAttrs['province'].options = generateOptions({
+      options: provinces,
+      labelName: 'name',
+      valueName: 'code',
+    });
+    setFormStaticAttrs({ ...formStaticAttrs });
+  };
+
+  function handleFieldChange(params: TOnFieldChange<TFormPersonalInformation>) {
+    const { fieldName } = params;
+    const currentValues = watch();
+
+    if (fieldName === 'province') {
+      currentValues.city = '';
+      currentValues.district = '';
+      currentValues.postalCode = '';
+    }
+
+    if (fieldName === 'city') {
+      currentValues.district = '';
+    }
+
+    if (fieldName === 'district') {
+      currentValues.postalCode = '';
+    }
+
+    formStaticAttrs['city'].disabled = !currentValues.province;
+    formStaticAttrs['district'].disabled = !currentValues.city;
+    formStaticAttrs['postalCode'].disabled = !currentValues.district;
+
+    reset({
+      ...currentValues,
+    });
+    setFormStaticAttrs({ ...formStaticAttrs });
+  }
+
+  const handleOnSubmit = handleSubmit(async (data) => {
+    console.log('data: ', data);
   });
 
-  const handleOnChange = (e: TEventOnChange) => {
-    const name = e.target.name as keyof TFormPersonalInformation;
-    const value = e.target.value;
-    setValue(name, value);
-  };
-
-  const handleOnSubmit: SubmitHandler<TFormPersonalInformation> = async (
-    data
-  ) => {
-    try {
-      console.log('data: ', data);
-    } catch (error: any) {
-      console.log('error: ', error?.message);
-    }
-  };
-
   return (
-    <form onSubmit={handleSubmit(handleOnSubmit)} className="space-y-4">
+    <form onSubmit={handleOnSubmit} className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <InputBase
-          label="First Name"
-          {...excludeRef(register('firstName'))}
-          value={watch('firstName')}
+          {...handleGetAttrs('firstName')}
+          {...formStaticAttrs['firstName']}
           onChange={handleOnChange}
-          errorMessage={errors?.firstName?.message}
-          placeholder="e.g Siska Apriana"
         />
         <InputBase
-          label="Last Name"
-          {...excludeRef(register('lastName'))}
-          value={watch('lastName')}
+          {...handleGetAttrs('lastName')}
+          {...formStaticAttrs['lastName']}
           onChange={handleOnChange}
-          errorMessage={errors?.lastName?.message}
-          placeholder="e.g Rifianti"
         />
       </div>
       <InputBase
-        label="Profession"
-        {...excludeRef(register('profession'))}
-        value={watch('profession')}
+        {...handleGetAttrs('profession')}
+        {...formStaticAttrs['profession']}
         onChange={handleOnChange}
-        errorMessage={errors?.profession?.message}
-        placeholder="e.g Frontend Developer"
       />
-
       <div className="grid grid-cols-2 gap-4">
         <InputSelect
-          label="Province"
-          {...excludeRef(register('province'))}
-          value={watch('province')}
+          {...handleGetAttrs('province')}
+          {...formStaticAttrs['province']}
           onChange={handleOnChange}
-          options={provinces}
-          placeholder="e.g Jawa Timur"
         />
         <InputSelect
-          label="City"
-          {...excludeRef(register('city'))}
-          value={watch('city')}
+          {...handleGetAttrs('city')}
+          {...formStaticAttrs['city']}
           onChange={handleOnChange}
-          options={provinces}
-          placeholder="e.g Situbondo"
         />
         <InputSelect
-          label="District"
-          {...excludeRef(register('district'))}
-          value={watch('district')}
+          {...handleGetAttrs('district')}
+          {...formStaticAttrs['district']}
           onChange={handleOnChange}
-          options={provinces}
-          placeholder="e.g Besuki"
         />
         <InputSelect
-          label="Postal Code"
-          {...excludeRef(register('postalCode'))}
-          value={watch('postalCode')}
+          {...handleGetAttrs('postalCode')}
+          {...formStaticAttrs['postalCode']}
           onChange={handleOnChange}
-          options={provinces}
-          placeholder="e.g 68356"
         />
       </div>
       <InputTextArea
-        label={'Bio'}
-        {...excludeRef(register('bio'))}
-        value={watch('bio')}
-        maxLength={100}
-        placeholder={`e.g I'm Frontend Developer based on Jakarta, Indonesia`}
+        {...handleGetAttrs('bio')}
+        {...formStaticAttrs['bio']}
+        onChange={handleOnChange}
+      />
+      <InputTextEditor
+        {...handleGetAttrs('aboutMe')}
+        {...formStaticAttrs['aboutMe']}
         onChange={handleOnChange}
       />
       <InputUploadFile
-        label="Professional Image"
-        {...excludeRef(register('professionalImage'))}
-        value={watch('professionalImage')}
+        {...handleGetAttrs('professionalImage')}
+        {...formStaticAttrs['professionalImage']}
         onChange={handleOnChange}
       />
+
+      <Button type="submit" className="ml-auto">
+        Save
+      </Button>
     </form>
   );
 };
