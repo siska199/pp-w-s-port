@@ -167,7 +167,7 @@ export const generateDefaultValue = (schema: ZodType<any>): any => {
   if (schema instanceof z.ZodArray) null;
   if (schema instanceof z.ZodOptional) return null;
   if (schema instanceof z.ZodNull) return null;
-  return null;
+  if (schema instanceof z.ZodEffects) return '';
 };
 
 export const generateOptions = (params: {

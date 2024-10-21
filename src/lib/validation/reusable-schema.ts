@@ -60,7 +60,7 @@ export const zPassword = <TMandatory extends boolean = true>(
   mandatory: TMandatory = true as TMandatory
 ): TResultZPassword<TMandatory> => {
   return zString<TMandatory>({ name: 'Password', mandatory }).refine(
-    (val) => validation.password.regex.test(val as string),
+    (val) => (mandatory ? validation.password.regex.test(val as string) : true),
     {
       message: validation.password.message,
     }

@@ -2,51 +2,43 @@ import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
 import InputBase from '@components/ui/input/input-base';
 import InputCheckbox from '@components/ui/input/input-checkbox';
-import { zodResolver } from '@hookform/resolvers/zod';
+import useFormCustome, { TOnFieldChange } from '@hooks/useFormCustome';
+import {
+  initialFormLogin,
+  loginDefaultValues,
+  loginSchema,
+  TFormLogin,
+} from '@lib/validation/module/auth/login-schema';
 import { routes } from '@routes/constant';
-import { excludeRef } from '@lib/helper';
 import { handleSetAuth } from '@store/features/auth/authSlice';
 import { useAppDispatch } from '@store/store';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginSchema, TFormLogin } from '@lib/validation/module/auth-schema';
 
 interface TPropsFormLogin {
   className?: string;
 }
 const FormLogin = (props: TPropsFormLogin) => {
+  const { className } = props;
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { className } = props;
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    watch,
-  } = useForm<TFormLogin>({
-    resolver: zodResolver(loginSchema, {}, { raw: true }),
-    defaultValues: {
-      username: '',
-      password: '',
-      isRememberMe: 'false',
-    },
+
+  const { handleSubmit, handleGetAttrs, handleOnChange } = useFormCustome({
+    formSchema: loginSchema,
+    defaultValues: loginDefaultValues,
+    onFieldChange: handleFieldChange,
   });
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name as keyof TFormLogin;
-    const value = e.target.value;
-    setValue(name, value);
-  };
+  const [formStaticAttrs, setFormStaticAttrs] = useState(initialFormLogin);
 
-  const handleOnSubmit: SubmitHandler<TFormLogin> = async (data) => {
-    try {
-      dispatch(handleSetAuth(true));
-      navigate(routes.personalInformation.fullPath);
-    } catch (error: any) {
-      console.log('error: ', error?.message);
-    }
-  };
+  function handleFieldChange(params: TOnFieldChange<TFormLogin>) {}
+
+  const handleOnSubmit = handleSubmit(async (data) => {
+    console.log('data: ', data);
+    dispatch(handleSetAuth(true));
+    navigate(routes.personalInformation.fullPath);
+  });
 
   return (
     <Container
@@ -60,31 +52,22 @@ const FormLogin = (props: TPropsFormLogin) => {
           Welcome back! Please enter your details.
         </p>
       </div>
-      <form
-        onSubmit={handleSubmit(handleOnSubmit)}
-        className="flex flex-col gap-4 w-full"
-      >
+      <form onSubmit={handleOnSubmit} className="flex flex-col gap-4 w-full">
         <InputBase
-          label="Username"
-          {...excludeRef(register('username'))}
-          value={watch('username')}
+          {...handleGetAttrs('username')}
+          {...formStaticAttrs['username']}
           onChange={handleOnChange}
-          errorMessage={errors?.username?.message}
         />
         <InputBase
-          label="Password"
-          type="password"
-          {...excludeRef(register('password'))}
-          value={watch('password')}
+          {...handleGetAttrs('password')}
+          {...formStaticAttrs['password']}
           onChange={handleOnChange}
-          errorMessage={errors?.password?.message}
         />
         <div className="flex justify-between items-center gap-2">
           <InputCheckbox
-            customeClassnameCheckbox={{ container: 'w-fit' }}
-            label={'Remember me for 30 days'}
-            {...excludeRef(register('isRememberMe'))}
-            value={String(watch('isRememberMe'))}
+            {...formStaticAttrs['isRememberMe']}
+            {...handleGetAttrs('isRememberMe')}
+            value={handleGetAttrs('isRememberMe')?.value || 'false'}
             onChange={handleOnChange}
           />
           <Button

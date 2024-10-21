@@ -109,7 +109,7 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
             />
 
             <div
-              className={`${customeClass?.ciV1} flex flex-col w-full relative `}
+              className={`${customeClass?.ciV1} text-black flex flex-col w-full relative `}
             >
               {typeof children === 'function' ? (
                 <>

@@ -1,4 +1,3 @@
-import { provinces } from '@lib/data/dummy';
 import { generateDefaultValue } from '@lib/helper';
 import {
   zEmail,
