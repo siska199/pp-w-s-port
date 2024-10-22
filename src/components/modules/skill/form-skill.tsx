@@ -23,7 +23,7 @@ const FormSkill = () => {
   const { handleSubmit, handleGetAttrs, handleOnChange, reset } =
     useFormCustome<TFormSkill>({
       formSchema: skillSchema,
-      defaultValues: skillDefaultValues(),
+      defaultValues: skillDefaultValues,
       onFieldChange: handleFieldChange,
     });
 
@@ -62,12 +62,12 @@ const FormSkill = () => {
       }
       customeClass={{
         mdBody: '!overflow-visible',
-        mdContent: '!overflow-visible',
+        mdContent: '!overflow-visible w-[32rem]',
         mdModal: '!overflow-visible',
       }}
     >
-      <form onSubmit={handleOnSubmit} className="space-y-4 w-[32rem]">
-        <div className="grid grid-cols-2 gap-4">
+      <form onSubmit={handleOnSubmit} className="space-y-4 w-full mx-auto">
+        <div className="grid md:grid-cols-2 gap-4">
           <InputSelect
             {...handleGetAttrs('category')}
             {...formStaticAttrs['category']}
@@ -79,7 +79,7 @@ const FormSkill = () => {
             onChange={handleOnChange}
           />
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-4">
           <InputSelect
             {...handleGetAttrs('level')}
             {...formStaticAttrs['level']}

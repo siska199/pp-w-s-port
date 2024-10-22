@@ -1,6 +1,6 @@
 
 
-export enum TLevelSkill {
+export enum TTypeLevelSkill {
   ADVANCE = 'ADVANCE',
   INTERMEDIET = 'INTERMEDIET',
   BEGINNER = 'BEGINNER',

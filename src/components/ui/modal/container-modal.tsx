@@ -51,11 +51,9 @@ const ContainerModal = (props: TModalProps) => {
         >
           {title && (
             <div
-              className={`md-header border-b pb-4 ${customeClass?.mdHeader}`}
+              className={`md-header border-b pb-4 font-bold text-gray-900 text-body-large ${customeClass?.mdHeader}`}
             >
-              <p className="md-title font-bold text-gray-900 text-body-large">
-                {title}
-              </p>
+              {title}
             </div>
           )}
           <Button

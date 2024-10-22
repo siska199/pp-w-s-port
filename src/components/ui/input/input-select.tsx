@@ -222,7 +222,7 @@ const InputSelect = (props: TPropsInputSelect) => {
       isClerable
       onCustomeClearHandler={handleOnClearValue}
       customeClearValue={
-        isMultiple ? searchQuery : String(attrs?.value) || searchQuery
+        isMultiple ? searchQuery : String(attrs?.value ?? '') || searchQuery
       }
       customeElement={{
         ...attrs?.customeElement,
