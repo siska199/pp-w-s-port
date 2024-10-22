@@ -1,7 +1,7 @@
-import { TTypeFile } from 'types/ui-types';
+import { TOption, TTypeFile } from 'types/ui-types';
 import clsx, { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import z, { ZodType } from 'zod';
+import z, { object, ZodType } from 'zod';
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
@@ -180,5 +180,14 @@ export const generateOptions = (params: {
   return options?.map((option: TObject) => ({
     label: option[labelName],
     value: option[valueName],
+  }));
+};
+
+export const generateOptionsFromEnum = (
+  enumObject: TObject
+): TOption<string>[] => {
+  return Object?.keys(enumObject)?.map((key) => ({
+    label: enumObject[key],
+    value: enumObject[key],
   }));
 };

@@ -1,4 +1,5 @@
 import { TAlertProps } from '@components/ui/alert';
+import { TPropsModalConfirmation } from '@components/ui/modal/modal-confirmation';
 
 export interface TOption<TLabel = string> {
   label: TLabel;
@@ -130,6 +131,7 @@ export interface TBaseModal {
   isShow: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  title?: React.ReactNode;
 }
 
 /*--->Redux */
@@ -140,4 +142,5 @@ export interface TRUiState {
     show: boolean;
     type?: TAlertProps['type'];
   };
+  modalConfirmation: TPropsModalConfirmation;
 }

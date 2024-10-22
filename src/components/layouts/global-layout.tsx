@@ -1,6 +1,8 @@
 import useCurrentPath from '@/hooks/useCurrentPath';
+import ModalConfirmation from '@components/ui/modal/modal-confirmation';
 import { routes } from '@routes/constant';
-import { useAppSelector } from '@store/store';
+import { handleSetModalConfirmation } from '@store/features/ui/uiSlice';
+import { useAppDispatch, useAppSelector } from '@store/store';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 interface TPropsGlobalLayout {
@@ -9,9 +11,15 @@ interface TPropsGlobalLayout {
 
 const GlobalLayout = (props: TPropsGlobalLayout) => {
   const { children } = props;
+
   const { currentPath } = useCurrentPath();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const modalConfirmation = useAppSelector(
+    (state) => state?.ui?.modalConfirmation
+  );
 
   useEffect(() => {
     if (currentPath?.pathname === '/')
@@ -23,7 +31,15 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
       );
   }, [currentPath]);
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <ModalConfirmation
+        {...modalConfirmation}
+        onClose={() => dispatch(handleSetModalConfirmation({ isShow: false }))}
+      />
+    </>
+  );
 };
 
 export default GlobalLayout;

@@ -4,6 +4,8 @@ export const ACTION_TYPE_SOCIAL_LINK = {
   ONCHANGE_SOCIAL_LINKS: 'ONCHANGE_SOCIAL_LINKS',
 } as const;
 
+/*-------------------------------------------------------------------------- */
+
 export interface TSocialLink {
   name: string;
   image: string;
@@ -19,12 +21,10 @@ interface TSocialLinkState {
   selectedSocialLinks: TSocialLink[];
 }
 
-interface TOnChangeSocialLinkAction {
+type TSocialLinkAction = {
   type: typeof ACTION_TYPE_SOCIAL_LINK.ONCHANGE_SOCIAL_LINKS;
   payload: TSocialLink[];
-}
-
-type TSocialLinkAction = TOnChangeSocialLinkAction;
+};
 
 export interface TSocialLinkContext {
   state: TSocialLinkState;

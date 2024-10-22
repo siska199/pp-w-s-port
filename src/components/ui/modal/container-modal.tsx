@@ -1,16 +1,16 @@
-import { IconEyeClose } from '@assets/icons';
-import '@assets/styles/ui/modal.css';
-import { TBaseModal } from 'types/ui-types';
+import { IconClose } from '@assets/icons';
 import Button from '@components/ui/button';
 import { cn } from '@lib/helper';
 import { VariantProps, cva } from 'class-variance-authority';
-import clsx from 'clsx';
+import { TBaseModal } from 'types/ui-types';
 
 export interface TModalProps
   extends TBaseModal,
     VariantProps<typeof modalVariants> {
   customeClass?: {
     mdContent?: string;
+    mdBody?: string;
+    mdHeader?: string;
   };
   className?: string;
 }
@@ -20,6 +20,7 @@ const ContainerModal = (props: TModalProps) => {
     isShow,
     customeClass,
     className,
+    title,
     onClose: handleOnClose,
     children,
     variant = 'fadein-scaleup',
@@ -37,39 +38,39 @@ const ContainerModal = (props: TModalProps) => {
         className={cn(
           modalVariants({
             variant,
-            className: clsx({
-              'md-modal ': true,
-              'md-show flex ': isShow,
-              [className || '']: className,
-            }),
+            className: `md-modal ${isShow && 'md-show flex'} ${className}`,
           })
         )}
       >
         <div
-          className={cn({
-            'md-content bottom-0 relative  flex flex-col gap-2  w-full ': true,
-            [customeClass?.mdContent || '']: customeClass?.mdContent,
-          })}
+          className={`md-content bottom-0 relative flex flex-col gap-2  w-full ${customeClass?.mdContent}`}
           onClick={handleStopPropagation}
         >
+          {title && (
+            <div className={`md-header ${customeClass?.mdHeader}`}>
+              <p className="md-title font-bold text-gray-900 text-body-large">
+                {title}
+              </p>
+            </div>
+          )}
           <Button
-            className="absolute top-2 right-2 rounded-full w-[2rem] h-[2rem] "
+            className="absolute top-3 right-2 rounded-full w-[2rem] h-[2rem] "
             variant={'plain'}
             onClick={handleOnClose}
           >
-            <IconEyeClose />
+            <IconClose />
           </Button>
-          <div className="max-h-[90vh] flex overflow-y-auto p-2">
+          <div
+            className={`max-h-[90vh] flex flex-col overflow-y-auto space-y-4 ${customeClass?.mdBody}`}
+          >
             {children}
           </div>
         </div>
       </div>
 
       <div
-        className={`${
-          isShow ? 'md-show' : ''
-        } md-overlay h-screen max-h-screeen`}
-      ></div>
+        className={`${isShow && 'md-show'} md-overlay h-screen max-h-screeen`}
+      />
     </>
   );
 };

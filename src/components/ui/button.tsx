@@ -60,7 +60,7 @@ const Button = (props: TProps) => {
 };
 
 const buttonVariants = cva(
-  'w-fit min-w-[5rem]  gap-1 h-fit items-center  text-white justify-center font-normal flex gap-sm disabled:cursor-not-allowed  disabled:opacity-50 ',
+  'w-fit min-w-auto  gap-1 h-fit items-center  text-white justify-center font-normal flex gap-sm disabled:cursor-not-allowed  disabled:opacity-50 ',
   {
     variants: {
       variant: {

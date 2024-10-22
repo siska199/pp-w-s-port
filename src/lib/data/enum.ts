@@ -1,0 +1,7 @@
+
+
+export enum TLevelSkill {
+  ADVANCE = 'ADVANCE',
+  INTERMEDIET = 'INTERMEDIET',
+  BEGINNER = 'BEGINNER',
+}

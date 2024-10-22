@@ -92,6 +92,7 @@ const TableSkill = () => {
   }
 
   return <div>
+    
       <Table<TData, false> 
         {...configTable} 
         withNo 

@@ -251,7 +251,7 @@
 
   /*->Custome container class*/
   .container-page {
-    @apply space-y-8 max-w-full overflow-x-auto;
+    @apply max-w-full overflow-x-auto;
   }
 
   /*->Bounce effect */
