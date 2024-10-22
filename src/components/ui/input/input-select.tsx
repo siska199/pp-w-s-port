@@ -29,15 +29,15 @@ interface SingleSelectProps
   extends TBasePropsInput,
     Omit<React.HTMLProps<HTMLInputElement>, 'onChange'> {
   isMultiple?: false;
-  value: string;
+  value?: string;
   withSelectAll?: false;
 }
 
 interface MultipleSelectProps
   extends TBasePropsInput,
     Omit<React.HTMLProps<HTMLInputElement>, 'onChange'> {
-  isMultiple: true;
-  value: string[];
+  isMultiple?: true;
+  value?: string[];
   withSelectAll?: boolean;
 }
 
@@ -301,7 +301,7 @@ const InputSelect = (props: TPropsInputSelect) => {
                   );
                 })}
                 {filteredOptions?.length == 0 && (
-                  <div className="p-3 w-full !bg-gray-100  text-gray">
+                  <div className="p-3 w-full rounded-md !bg-gray-100  text-gray">
                     No Option
                   </div>
                 )}

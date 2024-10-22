@@ -1,3 +1,4 @@
+import Button from '@components/ui/button';
 import InputSelect from '@components/ui/input/input-select';
 import ContainerModal from '@components/ui/modal/container-modal';
 import {
@@ -13,16 +14,16 @@ import skillSchema, {
 } from '@store/skill/skill-schema';
 import { useContext, useState } from 'react';
 
-const ModalFormSkill = () => {
+const FormSkill = () => {
   const {
     state: { modalFormSkill },
     dispatch,
   } = useContext(skillContext);
 
-  const { handleSubmit, handleGetAttrs, handleOnChange } =
+  const { handleSubmit, handleGetAttrs, handleOnChange, reset } =
     useFormCustome<TFormSkill>({
       formSchema: skillSchema,
-      defaultValues: skillDefaultValues,
+      defaultValues: skillDefaultValues(),
       onFieldChange: handleFieldChange,
     });
 
@@ -41,6 +42,7 @@ const ModalFormSkill = () => {
         isShow: false,
       },
     });
+    reset();
   };
 
   return (
@@ -58,9 +60,14 @@ const ModalFormSkill = () => {
           </div>
         </>
       }
+      customeClass={{
+        mdBody: '!overflow-visible',
+        mdContent: '!overflow-visible',
+        mdModal: '!overflow-visible',
+      }}
     >
-      <form onSubmit={handleOnSubmit}>
-        <div className="grid grid-cols-2">
+      <form onSubmit={handleOnSubmit} className="space-y-4 w-[32rem]">
+        <div className="grid grid-cols-2 gap-4">
           <InputSelect
             {...handleGetAttrs('category')}
             {...formStaticAttrs['category']}
@@ -72,7 +79,7 @@ const ModalFormSkill = () => {
             onChange={handleOnChange}
           />
         </div>
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-2 gap-4">
           <InputSelect
             {...handleGetAttrs('level')}
             {...formStaticAttrs['level']}
@@ -84,9 +91,12 @@ const ModalFormSkill = () => {
             onChange={handleOnChange}
           />
         </div>
+        <Button type="submit" className="ml-auto">
+          Save
+        </Button>
       </form>
     </ContainerModal>
   );
 };
 
-export default ModalFormSkill;
+export default FormSkill;

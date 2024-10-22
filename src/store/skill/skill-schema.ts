@@ -1,44 +1,52 @@
 import { levelSkillOptions } from '@lib/data/options';
 import { generateDefaultValue } from '@lib/helper';
-import { zEnum, zNumber, zString } from '@lib/validation/reusable-schema';
+import { zEnum, zString } from '@lib/validation/reusable-schema';
+import { TOption } from 'types/ui-types';
 import z from 'zod';
 
 const skillSchema = z.object({
   category: zString({ name: 'Category' }),
   skill: zString({ name: 'Skill' }),
   level: zEnum({
-    enum: levelSkillOptions?.map((data) => data?.value) as [
+    name: 'Level',
+    enum: levelSkillOptions?.map((data: TOption) => data?.value) as [
       string,
       ...string[]
     ],
-    mandatory: true,
   }),
-  yearOfExperiance: zNumber({ name: 'Year of Experiance', min: 0 }),
+  yearOfExperiance: zString({
+    name: 'Year of Experiance',
+  }),
 });
 
 export const initialFormSkill = {
   category: {
     label: 'Category',
+    placeholder: 'Select a category',
     options: [],
   },
   skill: {
     label: 'Skill',
+    placeholder: 'Select a skill',
     options: [],
   },
   level: {
     label: 'Level',
+    placeholder: 'Select a level',
     options: [],
   },
   yearOfExperiance: {
-    label: 'Year of Experiance',
+    label: 'Year of Experience',
+    placeholder: 'Select years of experience',
     options: [],
   },
 };
 
-export const skillDefaultValues = {
+export const skillDefaultValues = ()=>({
   ...generateDefaultValue(skillSchema),
-  level:
-};
+  level: '',
+  yearOfExperiance: '',
+})
 
 export type TFormSkill = z.input<typeof skillSchema>;
 

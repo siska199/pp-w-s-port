@@ -8,6 +8,7 @@ export interface TModalProps
   extends TBaseModal,
     VariantProps<typeof modalVariants> {
   customeClass?: {
+    mdModal?: string;
     mdContent?: string;
     mdBody?: string;
     mdHeader?: string;
@@ -38,7 +39,9 @@ const ContainerModal = (props: TModalProps) => {
         className={cn(
           modalVariants({
             variant,
-            className: `md-modal ${isShow && 'md-show flex'} ${className}`,
+            className: `md-modal  ${isShow && 'md-show flex'} ${
+              customeClass?.mdModal
+            }`,
           })
         )}
       >
@@ -47,7 +50,9 @@ const ContainerModal = (props: TModalProps) => {
           onClick={handleStopPropagation}
         >
           {title && (
-            <div className={`md-header ${customeClass?.mdHeader}`}>
+            <div
+              className={`md-header border-b pb-4 ${customeClass?.mdHeader}`}
+            >
               <p className="md-title font-bold text-gray-900 text-body-large">
                 {title}
               </p>
@@ -61,7 +66,7 @@ const ContainerModal = (props: TModalProps) => {
             <IconClose />
           </Button>
           <div
-            className={`max-h-[90vh] flex flex-col overflow-y-auto space-y-4 ${customeClass?.mdBody}`}
+            className={`max-h-[90vh] flex flex-col overflow-y-auto  space-y-4 ${customeClass?.mdBody}`}
           >
             {children}
           </div>

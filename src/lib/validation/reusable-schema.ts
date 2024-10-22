@@ -88,11 +88,14 @@ export const zPhoneNumber = (mandatory = true) => {
 };
 
 export const zEnum = <TEnum extends [string, ...string[]]>(params: {
+  name: string;
   enum: TEnum;
   mandatory?: boolean;
 }): z.ZodEnum<TEnum> | z.ZodOptional<z.ZodEnum<TEnum>> => {
-  const { enum: enumValues, mandatory } = params;
-  const enumSchema = z.enum(enumValues);
+  const { enum: enumValues, mandatory, name } = params;
+  const enumSchema = z.enum(enumValues, {
+    message: messageError.required(name),
+  });
 
   return mandatory ? enumSchema : enumSchema.optional();
 };
