@@ -51,7 +51,7 @@ const ContainerModal = (props: TModalProps) => {
         >
           {title && (
             <div
-              className={`md-header border-b pb-4 font-bold text-gray-900 text-body-large ${customeClass?.mdHeader}`}
+              className={`md-header border-b pb-2 font-bold text-gray-900 text-body-large ${customeClass?.mdHeader}`}
             >
               {title}
             </div>
@@ -64,7 +64,7 @@ const ContainerModal = (props: TModalProps) => {
             <IconClose />
           </Button>
           <div
-            className={`max-h-[90vh] flex flex-col overflow-y-auto  space-y-4 ${customeClass?.mdBody}`}
+            className={`max-h-[90vh] flex flex-col  space-y-2 ${customeClass?.mdBody}`}
           >
             {children}
           </div>

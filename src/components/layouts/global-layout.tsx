@@ -36,7 +36,14 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
       {children}
       <ModalConfirmation
         {...modalConfirmation}
-        onClose={() => dispatch(handleSetModalConfirmation({ isShow: false }))}
+        button={{
+          ...modalConfirmation?.button,
+          cancel: {
+            ...modalConfirmation?.button?.cancel,
+            onClick: () =>
+              dispatch(handleSetModalConfirmation({ isShow: false })),
+          },
+        }}
       />
     </>
   );

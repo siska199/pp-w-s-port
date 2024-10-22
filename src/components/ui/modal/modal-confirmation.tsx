@@ -2,7 +2,7 @@ import ContainerModal from '@components/ui/modal/container-modal';
 import { TBaseModal } from 'types/ui-types';
 import Button from '../button';
 
-export interface TPropsModalConfirmation extends TBaseModal {
+export interface TPropsModalConfirmation extends Omit<TBaseModal, 'onClose'> {
   title?: string;
   button?: {
     cancel?: {
@@ -22,27 +22,29 @@ export interface TPropsModalConfirmation extends TBaseModal {
 }
 
 const ModalConfirmation = (props: TPropsModalConfirmation) => {
-  const {
-    title,
-    isShow,
-    children,
-    onClose: handleOnClose,
-    button,
-    customeClass,
-  } = props;
+  const { title, isShow, children, button, customeClass } = props;
 
   const handleConfirmationBtn = () => {
     button?.confirm?.onClick && button?.confirm?.onClick();
   };
-  
+
+  const handleOnClose = () => {
+    button?.cancel?.onClick && button?.cancel?.onClick();
+  };
+
   return (
-    <ContainerModal title={title} isShow={isShow} onClose={handleOnClose}>
-      <div className={`md-body w-[25.6rem] text-gray ${customeClass?.body}`}>
+    <ContainerModal
+      customeClass={{ mdContent: 'p-4' }}
+      title={title}
+      isShow={isShow}
+      onClose={handleOnClose}
+    >
+      <div className={`md-body w-[25.6rem]  text-gray ${customeClass?.body}`}>
         {children}
       </div>
 
       <div
-        className={`md-footer mb-auto justify-end flex gap-2 ${customeClass?.footer}`}
+        className={`md-footer h-auto  mb-auto justify-end flex gap-2 ${customeClass?.footer}`}
       >
         <Button variant={'solid-white'} onClick={handleOnClose}>
           {button?.cancel?.name || 'Cancel'}

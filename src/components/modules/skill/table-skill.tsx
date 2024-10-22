@@ -9,7 +9,8 @@ import useTable from '@hooks/useTable';
 import { skills } from '@lib/data/dummy';
 import { delay } from '@lib/helper';
 import variantBadge from '@lib/variant/variant-badge';
-import { useAppSelector } from '@store/store';
+import { handleSetModalConfirmation } from '@store/features/ui/uiSlice';
+import { useAppDispatch, useAppSelector } from '@store/store';
 import { useContext } from 'react';
 import { TSettingTable } from 'types/ui-types';
 
@@ -18,6 +19,7 @@ type TData = (typeof skills)[0];
 const TableSkill = () => {
   const isLoading = useAppSelector((state) => state.ui.isLoading);
   const { dispatch } = useContext(skillContext);
+  const dispatchR = useAppDispatch();
 
   const configTable = useTable<TData, false>({
     initialColumn: [
@@ -115,7 +117,15 @@ const TableSkill = () => {
 
   const handleViewData = (data: TData) => {};
 
-  const handleDeleteData = (data: TData) => {};
+  const handleDeleteData = (data: TData) => {
+    dispatchR(
+      handleSetModalConfirmation({
+        isShow: true,
+        // title: 'Modal Confirmation',
+        children: <>Are you sure want to delete this data?</>,
+      })
+    );
+  };
 
   return (
     <div>

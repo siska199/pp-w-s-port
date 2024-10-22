@@ -19,7 +19,6 @@ const initialState: TRUiState = {
         onClick: () => null,
       },
     },
-    onClose: () => null,
     children: null,
   },
 };
