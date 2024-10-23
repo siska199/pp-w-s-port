@@ -4,7 +4,7 @@ import { RouteObject } from 'react-router-dom';
 
 const projectDetailRouter: RouteObject[] = [
   {
-    path: routes.project.name,
+    path: routes.project.child?.detail.name,
     children: [
       {
         path: ':id',

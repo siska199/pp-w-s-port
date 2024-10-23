@@ -179,6 +179,10 @@
 }
 
 @layer utilities {
+  .zoom-out-effect {
+    @apply hover:scale-125 ease-in duration-150;
+  }
+
   /*->Background color text*/
   .bg-color-text-1 {
     @apply font-bubblegum-sans bg-clip-text text-transparent bg-gradient-to-r from-primary-300 to-white;

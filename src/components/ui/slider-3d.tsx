@@ -35,7 +35,7 @@ const Slider3D = (props: TPropsSlider3D) => {
       {images?.map((image, i) => (
         <SwiperSlide
           key={i}
-          className="min-w-auto md:min-w-[30rem] rounded-lg overflow-hidden"
+          className="min-w-auto max-w-[15rem] md:min-w-[30rem] md:max-w-[30rem] rounded-lg overflow-hidden"
         >
           <Image
             src={image}

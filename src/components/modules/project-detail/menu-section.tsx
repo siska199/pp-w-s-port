@@ -18,7 +18,7 @@ const MenuSection = () => {
     'Edit Data bengkerl',
   ];
   return (
-    <ContainerSection title="Menu">
+    <ContainerSection title="Menu" className=' '>
       <Slider3D images={listImage} />
 
       <div className="space-y-4 w-full">
@@ -38,7 +38,11 @@ const MenuSection = () => {
           <p className="text-body-large font-medium">Related Image</p>
           <div className="flex gap-4">
             {listImage?.map((image, i) => (
-              <Image key={i} src={image} className="w-[10rem] rounded-md" />
+              <Image
+                key={i}
+                src={image}
+                className="w-[10rem] zoom-out-effect cursor-pointer rounded-md"
+              />
             ))}
           </div>
         </div>

@@ -6,7 +6,7 @@ import ResponsibilitySection from '@components/modules/project-detail/responsibi
 
 const ProjectDetailPage = () => {
   return (
-    <ContainerLandingPage>
+    <ContainerLandingPage className="p-8 flex flex-col items-center">
       <IntroductionSection />
       <TechStackSection />
       <MenuSection />

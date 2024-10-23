@@ -1,9 +1,10 @@
 import Button from '@components/ui/button';
+import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
 
 const IntroductionSection = () => {
   return (
-    <div className=" h-full space-y-4 grid grid-cols-2 px-16">
+    <ContainerSection>
       <div className="space-y-4 my-auto ">
         <div className="">
           <h3 className="font-bubblegum-sans mb-2">Garda Oto Akses</h3>
@@ -20,7 +21,7 @@ const IntroductionSection = () => {
           consectetur aut laborum nisi ipsam earum obcaecati?
         </p>
 
-        <div className="flex gap-4 ">
+        <div className=" flex-col md:flex-row flex gap-4 ">
           <Button
             variant={'solid-primary'}
             shape={'circle'}
@@ -42,13 +43,13 @@ const IntroductionSection = () => {
       <div className="p-8 flex">
         <Image
           customeClassName={{
-            image: 'object-cover hover:scale-125 ease-in duration-150',
+            image: 'object-cover zoom-out-effect',
           }}
           src="dummy-images/goa.png"
           className="w-full my-auto h-auto aspect-video rounded-lg shadow-image-arise overflow-hidden "
         />
       </div>
-    </div>
+    </ContainerSection>
   );
 };
 

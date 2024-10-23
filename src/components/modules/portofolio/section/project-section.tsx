@@ -21,7 +21,7 @@ const ProjectSection = () => {
           customeClass={{
             ciV4: 'max-w-[40rem] mx-auto',
             ciV2: 'bg-transparent !border-primary',
-            input: 'bg-transparent placeholder:text-white',
+            input: 'bg-transparent placeholder:text-white text-white',
           }}
           customeElement={{ start: <IconSearch className="icon-white" /> }}
           name={'keyword'}
@@ -99,7 +99,7 @@ const CardProject = (props: TPropsCardProject) => {
           ))}
         </Container>
         <Button
-          to={`${routes.project?.fullPath}/${index}`}
+          to={`/${routes.project?.child?.detail?.name}/${index}`}
           variant={'solid-black'}
         >
           View Project <IconArrowUp className="icon-white rotate-90 mt-1" />

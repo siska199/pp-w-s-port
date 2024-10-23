@@ -1,6 +1,12 @@
+import ContainerProtectedPage from '@components/ui/container/container-protected-page';
+import HeaderPage from '@components/ui/header-page';
 
-const Project = () => {
-  return <div>Project</div>;
+const ProjectPage = () => {
+  return (
+    <ContainerProtectedPage className="mb-8 space-y-8">
+      <HeaderPage title="Project" />
+    </ContainerProtectedPage>
+  );
 };
 
-export default Project;
+export default ProjectPage;

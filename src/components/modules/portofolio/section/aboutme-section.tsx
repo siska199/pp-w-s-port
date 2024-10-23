@@ -11,7 +11,7 @@ const AboutMeSection = () => {
       <Container
         variant={'hsc'}
         gap="medium"
-        className="flex-col-reverse md:flex-row"
+        className="flex-col-reverse md:flex-row overflow-x-hidden"
       >
         <motion.div
           {...slideInAnimation({ direction: 'left' })}
