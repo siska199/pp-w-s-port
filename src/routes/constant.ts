@@ -71,6 +71,11 @@ const route = {
     fullPath: '/certification',
     isPrivate: true,
   },
+  generateResume: {
+    name: 'generate-resume',
+    fullPath: '/generate-resume',
+    isPrivate: true,
+  },
   portofolio: {
     name: 'portofolio',
     fullPath: '/portofolio',

@@ -40,8 +40,8 @@ const menuSidebar = [
   {
     title: 'Generate Resume',
     src: 'sidebar/generate-resume.png',
-    url: routes.certification.fullPath,
-    name: 'certification',
+    url: routes.generateResume.fullPath,
+    name: 'generate-resume',
   },
 ];
 

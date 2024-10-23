@@ -21,8 +21,8 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
     (state) => state?.ui?.modalConfirmation
   );
 
-  console.log('current path: ', currentPath);
   useEffect(() => {
+
     if (currentPath?.pathname === '/')
       navigate(
         (isAuthenticated
