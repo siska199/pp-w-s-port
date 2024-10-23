@@ -12,8 +12,8 @@ import {
 } from 'redux-persist';
 import { encryptTransform } from 'redux-persist-transform-encrypt';
 import storage from 'redux-persist/lib/storage';
-import authSlice from './features/auth/authSlice';
-import uiSlice from '@store/features/ui/uiSlice';
+import authSlice from './features/auth/auth-slice';
+import uiSlice from '@store/features/ui/ui-slice';
 import CONFIG from '@lib/config/config';
 
 const encryptor = encryptTransform({
@@ -39,7 +39,7 @@ const rootReducers = () => {
       {
         key: 'ui',
         storage: storagePersist,
-        whitelist: [],
+        whitelist: ['isLoading', 'isToggleSidebar', 'alertConfig'],
         transforms: [encryptor],
       },
       uiSlice

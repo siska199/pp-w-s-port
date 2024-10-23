@@ -1,30 +1,49 @@
-import { IconClose, IconDanger, IconInfo, IconNotification, IconSucess } from '@assets/icons'
+import {
+  IconClose,
+  IconDanger,
+  IconInfo,
+  IconNotification,
+  IconSucess,
+} from '@assets/icons';
 
-import { cn } from '@lib/helper'
-import variantsAlert, { variantAlertError, variantAlertSucess, variantAlertWarning } from '@lib/variant/variant-alert'
-import variant from '@lib/variant/variant-color'
-import { handleSetAlertConfig } from '@store/features/ui/uiSlice'
-import { TAlertConfig } from 'types/ui-types'
+import { cn } from '@lib/helper';
+import variantsAlert, {
+  variantAlertError,
+  variantAlertSucess,
+  variantAlertWarning,
+} from '@lib/variant/variant-alert';
+import variant from '@lib/variant/variant-color';
+import { handleSetAlertConfig } from '@store/features/ui/ui-slice';
+import { TAlertConfig } from 'types/ui-types';
 
-import { VariantProps, cva } from 'class-variance-authority'
-import { HTMLProps, useEffect, useState } from 'react'
+import { VariantProps, cva } from 'class-variance-authority';
+import { HTMLProps, useEffect, useState } from 'react';
 
 interface TPropsVariantError extends VariantProps<typeof alertVariantError> {
-  type: 'error'
+  type: 'error';
 }
-interface TPropsVariantWarning extends VariantProps<typeof alertVariantWarning> {
-  type: 'warning'
+interface TPropsVariantWarning
+  extends VariantProps<typeof alertVariantWarning> {
+  type: 'warning';
 }
 
 interface TPropsVariantSuccess extends VariantProps<typeof alertVariantSucess> {
-  type: 'sucess'
+  type: 'sucess';
 }
 
-interface TPropsVariantGeneral extends VariantProps<typeof alertVariantGeneral> {
-  type?: 'notification' | 'info'
+interface TPropsVariantGeneral
+  extends VariantProps<typeof alertVariantGeneral> {
+  type?: 'notification' | 'info';
 }
 
-export type TAlertProps = HTMLProps<HTMLButtonElement> & TAlertConfig & (TPropsVariantError | TPropsVariantWarning | TPropsVariantSuccess | TPropsVariantGeneral)
+export type TAlertProps = HTMLProps<HTMLButtonElement> &
+  TAlertConfig &
+  (
+    | TPropsVariantError
+    | TPropsVariantWarning
+    | TPropsVariantSuccess
+    | TPropsVariantGeneral
+  );
 
 const Alert = (props: TAlertProps) => {
   const {
@@ -40,42 +59,44 @@ const Alert = (props: TAlertProps) => {
     className = '',
     position = 'top-right',
     timeout = 3000,
-    onDismiss: handleOnDismiss
-  } = props
-  const [isCloseAlert, setIsCloseAlert] = useState(!show)
+    onDismiss: handleOnDismiss,
+  } = props;
+  const [isCloseAlert, setIsCloseAlert] = useState(!show);
 
   useEffect(() => {
-    setIsCloseAlert(!show)
-  }, [show])
+    setIsCloseAlert(!show);
+  }, [show]);
 
   useEffect(() => {
     if (timeout > 0 && autoClose && show) {
       const timer = setTimeout(() => {
-        setIsCloseAlert(true)
-        handleOnDismiss ? handleOnDismiss() : handleSetAlertConfig({ show: false })
-      }, timeout)
-      return () => clearTimeout(timer)
+        setIsCloseAlert(true);
+        handleOnDismiss
+          ? handleOnDismiss()
+          : handleSetAlertConfig({ show: false });
+      }, timeout);
+      return () => clearTimeout(timer);
     }
-  }, [show])
+  }, [show]);
 
   const getAlertVariant = () => {
     switch (type) {
       case 'error':
-        return alertVariantError
+        return alertVariantError;
       case 'sucess':
-        return alertVariantSucess
+        return alertVariantSucess;
       case 'warning':
-        return alertVariantWarning
+        return alertVariantWarning;
       case 'notification':
       case 'info':
-        return alertVariantGeneral
+        return alertVariantGeneral;
       default:
-        return alertVariantError // Default to error variant if type is not specified or unrecognized
+        return alertVariantError; // Default to error variant if type is not specified or unrecognized
     }
-  }
+  };
 
-  const paramsAlertVariant = { className, variant, position, isFixed }
-  const alertVariant = getAlertVariant()
+  const paramsAlertVariant = { className, variant, position, isFixed };
+  const alertVariant = getAlertVariant();
 
   return (show && !isCloseAlert) || !isFixed ? (
     // @ts-expect-error
@@ -83,7 +104,7 @@ const Alert = (props: TAlertProps) => {
       <div
         className={cn({
           'flex gap-3 w-full relative': true,
-          'pr-4': withCloseBtn
+          'pr-4': withCloseBtn,
         })}
       >
         {withCloseBtn && (
@@ -93,19 +114,19 @@ const Alert = (props: TAlertProps) => {
               'top-1 right-0 absolute  cursor-pointer-custome': true,
               'icon-warning': type === 'warning',
               'icon-error': type === 'error',
-              'icon-sucess': type === 'sucess'
+              'icon-sucess': type === 'sucess',
             })}
           />
         )}
 
         {withIcon && (
-          <span className='mt-1'>
+          <span className="mt-1">
             {customeIcon ?? (
               <>
-                {type === 'info' && <IconInfo className='icon-gray' />}
-                {type === 'warning' && <IconInfo className='icon-warning ' />}
-                {type === 'error' && <IconDanger className='icon-error' />}
-                {type === 'sucess' && <IconSucess className='icon-sucess' />}
+                {type === 'info' && <IconInfo className="icon-gray" />}
+                {type === 'warning' && <IconInfo className="icon-warning " />}
+                {type === 'error' && <IconDanger className="icon-error" />}
+                {type === 'sucess' && <IconSucess className="icon-sucess" />}
                 {type === 'notification' && <IconNotification />}
               </>
             )}
@@ -114,57 +135,58 @@ const Alert = (props: TAlertProps) => {
         {message}
       </div>
     </div>
-  ) : null
-}
+  ) : null;
+};
 
-const generalStyle = 'flex flex-shrink gap-3 px-3 py-2 border w-fit min-w-[15rem] rounded-md max-w-[20rem]'
+const generalStyle =
+  'flex flex-shrink gap-3 px-3 py-2 border w-fit min-w-[15rem] rounded-md max-w-[20rem]';
 
 const alertVariantError = cva(generalStyle, {
   variants: {
     ...variantsAlert,
     variant: {
-      ...variantAlertError
-    }
+      ...variantAlertError,
+    },
   },
   defaultVariants: {
-    variant: 'error-soft'
-  }
-})
+    variant: 'error-soft',
+  },
+});
 
 const alertVariantSucess = cva(generalStyle, {
   variants: {
     ...variantsAlert,
     variant: {
-      ...variantAlertSucess
-    }
+      ...variantAlertSucess,
+    },
   },
   defaultVariants: {
-    variant: 'sucess-soft'
-  }
-})
+    variant: 'sucess-soft',
+  },
+});
 
 const alertVariantWarning = cva(generalStyle, {
   variants: {
     ...variantsAlert,
     variant: {
-      ...variantAlertWarning
-    }
+      ...variantAlertWarning,
+    },
   },
   defaultVariants: {
-    variant: 'warning-soft'
-  }
-})
+    variant: 'warning-soft',
+  },
+});
 
 const alertVariantGeneral = cva(generalStyle, {
   variants: {
     ...variantsAlert,
     variant: {
-      ...variant
-    }
+      ...variant,
+    },
   },
   defaultVariants: {
-    variant: 'solid-white'
-  }
-})
+    variant: 'solid-white',
+  },
+});
 
-export default Alert
+export default Alert;

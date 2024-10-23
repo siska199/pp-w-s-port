@@ -1,4 +1,7 @@
-import { skillDefaultValues, TFormSkill } from '@store/skill/skill-schema';
+import {
+  skillDefaultValues,
+  TFormSkill,
+} from '@lib/validation/module/skill/skill-schema';
 import React, { createContext, useReducer } from 'react';
 
 export const ACTION_TYPE_SKILL = {

@@ -14,11 +14,6 @@ const initialState: TRUiState = {
   modalConfirmation: {
     title: 'Confirmation',
     isShow: false,
-    button: {
-      cancel: {
-        onClick: () => null,
-      },
-    },
     children: null,
   },
 };

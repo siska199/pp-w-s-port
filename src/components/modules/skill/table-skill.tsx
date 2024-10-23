@@ -9,7 +9,7 @@ import useTable from '@hooks/useTable';
 import { skills } from '@lib/data/dummy';
 import { delay } from '@lib/helper';
 import variantBadge from '@lib/variant/variant-badge';
-import { handleSetModalConfirmation } from '@store/features/ui/uiSlice';
+import { handleSetModalConfirmation } from '@store/features/ui/ui-slice';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { useContext } from 'react';
 import { TSettingTable } from 'types/ui-types';

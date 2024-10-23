@@ -10,7 +10,7 @@ import {
   TFormLogin,
 } from '@lib/validation/module/auth/login-schema';
 import { routes } from '@routes/constant';
-import { handleSetAuth } from '@store/features/auth/authSlice';
+import { handleSetAuth } from '@store/features/auth/auth-slice';
 import { useAppDispatch } from '@store/store';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
