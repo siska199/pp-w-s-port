@@ -7,7 +7,11 @@ import {
   TTypeActionModalFormSkill,
 } from '@context/modules/skill/skill-context';
 import useFormCustome, { TOnFieldChange } from '@hooks/useFormCustome';
-import skillSchema, { initialFormSkill, skillDefaultValues, TFormSkill } from '@lib/validation/module/skill/skill-schema';
+import skillSchema, {
+  initialFormSkill,
+  skillDefaultValues,
+  TFormSkill,
+} from '@lib/validation/module/skill/skill-schema';
 
 import { useContext, useState } from 'react';
 
@@ -24,9 +28,11 @@ const FormSkill = () => {
       onFieldChange: handleFieldChange,
     });
 
-  const [formStaticAttrs, setFormStaticAttrs] = useState(initialFormSkill);
+  const [formStaticAttrs] = useState(initialFormSkill);
 
-  function handleFieldChange(params: TOnFieldChange<TFormSkill>) {}
+  function handleFieldChange(params: TOnFieldChange<TFormSkill>) {
+    console.log('params: ', params);
+  }
 
   const handleOnSubmit = handleSubmit(async (data) => {
     console.log('data: ', data);

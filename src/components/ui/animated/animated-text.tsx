@@ -1,6 +1,6 @@
-import React from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { singleWordAnimation, textAnimation } from '@/assets/styles/animation';
+import { motion } from 'framer-motion';
+import React from 'react';
 
 interface TAnimatedTextProps extends React.HTMLProps<HTMLHeadElement> {
   text: string;

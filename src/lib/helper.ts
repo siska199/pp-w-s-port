@@ -1,7 +1,7 @@
-import { TOption, TTypeFile } from 'types/ui-types';
 import clsx, { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import z, { object, ZodType } from 'zod';
+import { TOption, TTypeFile } from 'types/ui-types';
+import z, { ZodType } from 'zod';
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));

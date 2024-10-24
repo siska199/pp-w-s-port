@@ -8,7 +8,7 @@ const ContainerProtectedPage = (props: TProps) => {
   const { children, className, ...attrs } = props;
   return (
     <div
-      className={`container-page gap-y-8 h-full scrollbar-hidden p-4 md:p-8 ${className}`}
+      className={`container-page mb-8 gap-y-8 h-full scrollbar-hidden p-4 md:p-8 ${className}`}
       {...attrs}
     >
       {children}

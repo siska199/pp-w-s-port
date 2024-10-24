@@ -92,11 +92,13 @@ const TableSkill = () => {
   async function handleFetchData(
     params: TSettingTable<TData>
   ): Promise<TData[]> {
+    console.log('params: ', params);
     delay(1500);
     return skills as TData[];
   }
 
   const handleEditData = (data: TData) => {
+    console.log('data: ', data);
     dispatch({
       type: ACTION_TYPE_SKILL.SET_MODAL_FORM_SKILL,
       payload: {
@@ -115,9 +117,12 @@ const TableSkill = () => {
     });
   };
 
-  const handleViewData = (data: TData) => {};
+  const handleViewData = (data: TData) => {
+    console.log('data: ', data);
+  };
 
   const handleDeleteData = (data: TData) => {
+    console.log('data: ', data);
     dispatchR(
       handleSetModalConfirmation({
         isShow: true,

@@ -6,19 +6,18 @@ import {
 
 import { IconCamera } from '@assets/icons';
 import Avatar from '@components/ui/avatar';
+import Button from '@components/ui/button';
+import Image from '@components/ui/image';
 import ContainerInput from '@components/ui/input/container-input';
 import PDFThumbnail from '@components/ui/pdf-thumbnail';
 import {
   convertBytesToMegabytes,
   getGeneralTypeFile,
   handleDownloadFile,
-  handleGetFileTypeFromName,
-  handleValidateType,
+  handleValidateType
 } from '@lib/helper';
-import React, { useEffect, useRef, useState } from 'react';
-import Image from '@components/ui/image';
-import Button from '@components/ui/button';
 import { messageError } from '@lib/validation';
+import React, { useEffect, useRef, useState } from 'react';
 
 type TFileWithPreview = File & { preview?: string };
 export type TFileValue = TFileWithPreview | null;

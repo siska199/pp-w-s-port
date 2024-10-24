@@ -47,7 +47,7 @@ const FormSocialLinks = () => {
   const handleOnSubmit = () => {
     try {
       let isValid = true;
-      const updatelistFormSocialLink = listFormSocialLink?.map((form, i) => {
+      const updatelistFormSocialLink = listFormSocialLink?.map((form) => {
         const result = socialLinkSchema.safeParse({ url: form.value });
         if (!result.success) isValid = false;
         return {

@@ -30,9 +30,11 @@ const FormLogin = (props: TPropsFormLogin) => {
     onFieldChange: handleFieldChange,
   });
 
-  const [formStaticAttrs, setFormStaticAttrs] = useState(initialFormLogin);
+  const [formStaticAttrs] = useState(initialFormLogin);
 
-  function handleFieldChange(params: TOnFieldChange<TFormLogin>) {}
+  function handleFieldChange(params: TOnFieldChange<TFormLogin>) {
+    console.log('params: ', params);
+  }
 
   const handleOnSubmit = handleSubmit(async (data) => {
     console.log('data: ', data);
