@@ -7,7 +7,7 @@ import HeaderPage from '@components/ui/header-page'
 const PersonalInformationPage = () => {
   return (
     <ContainerProtectedPage className='mb-8 space-y-8'>
-      <HeaderPage title='Personal Information' />
+      <HeaderPage title='Personal Informationw' />
       <FormPersonlaInformation />
       <Divider />
       <SocialLinks />
