@@ -28,7 +28,7 @@ const FormSocialLinks = () => {
     setListFormSocialLink([...updateListFormSocialLink])
   }, [selectedSocialLinks])
 
-  const handleOnChangeListFormSocialLink = (index: number, e: TEventOnChange,) => {
+  const handleOnChangeListFormSocialLink = (index: number, e: TEventOnChange) => {
     listFormSocialLink[index] = {
       ...listFormSocialLink[index],
       value: e.target.value

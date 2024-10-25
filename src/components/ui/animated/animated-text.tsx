@@ -10,9 +10,6 @@ interface TAnimatedTextProps extends React.HTMLProps<HTMLHeadElement> {
 const AnimatedText = (props: TAnimatedTextProps) => {
   const { text, className } = props
   return (
-    
-    
-    
     <motion.h1 className={`${className} inline-block`} {...textAnimation()}>
       {text.split(' ')?.map((word, i) => (
         <motion.span className='inline-block' key={i} {...singleWordAnimation()}>

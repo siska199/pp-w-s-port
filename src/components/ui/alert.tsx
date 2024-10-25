@@ -9,7 +9,7 @@ import variantsAlert, {
 import variant from '@lib/variant/variant-color'
 import { handleSetAlertConfig } from '@store/modules/ui/ui-slice'
 import { TAlertConfig } from '@typescript/modules/ui/ui-types'
-import { cva,VariantProps } from 'class-variance-authority'
+import { cva, VariantProps } from 'class-variance-authority'
 
 interface TPropsVariantError extends VariantProps<typeof alertVariantError> {
   type: 'error'

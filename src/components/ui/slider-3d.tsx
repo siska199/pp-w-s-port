@@ -1,5 +1,5 @@
 import Image from '@components/ui/image'
-import { EffectCoverflow, Navigation,Pagination } from 'swiper/modules'
+import { EffectCoverflow, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/css'

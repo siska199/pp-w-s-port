@@ -2,7 +2,7 @@ import { HTMLProps } from 'react'
 import Image from '@components/ui/image'
 import { cn } from '@lib/helper'
 import variantsAvatar from '@lib/variant/variant-avatar'
-import { cva,VariantProps } from 'class-variance-authority'
+import { cva, VariantProps } from 'class-variance-authority'
 
 interface TPropsImage {
   type?: 'image'

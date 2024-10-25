@@ -1,7 +1,7 @@
 import React, { HTMLProps } from 'react'
 import { cn } from '@lib/helper'
 import variantBadge from '@lib/variant/variant-badge'
-import { cva,VariantProps } from 'class-variance-authority'
+import { cva, VariantProps } from 'class-variance-authority'
 
 interface TProps
   extends Omit<Partial<HTMLProps<HTMLDivElement>>, 'size' | 'shape' | 'label'>,

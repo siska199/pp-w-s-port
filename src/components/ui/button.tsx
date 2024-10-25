@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import IconLoadingSpinner from '@assets/icons/icon-loading-spinner'
 import { cn } from '@lib/helper'
 import { variantButton } from '@lib/variant/variant-button'
-import { cva,VariantProps } from 'class-variance-authority'
+import { cva, VariantProps } from 'class-variance-authority'
 
 interface TPropsLink {
   to?: string
