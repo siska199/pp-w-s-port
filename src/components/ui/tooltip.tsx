@@ -1,22 +1,19 @@
-import { cn } from '@lib/helper';
-import { forwardRef } from 'react';
+import { cn } from '@lib/helper'
+import { forwardRef } from 'react'
 
 interface TProps {
-  children: React.ReactNode;
-  text: string;
-  variant?: 'top' | 'bottom' | 'left' | 'right';
-  type?: 'glass';
+  children: React.ReactNode
+  text: string
+  variant?: 'top' | 'bottom' | 'left' | 'right'
+  type?: 'glass'
   customeClass?: {
-    tooltip?: string;
-    rectangle?: string;
-  };
+    tooltip?: string
+    rectangle?: string
+  }
 }
 
-const Tooltip = forwardRef<HTMLDivElement, TProps>(function Tooltip(
-  props,
-  ref
-) {
-  const { children, type, text, variant = 'top', customeClass } = props;
+const Tooltip = forwardRef<HTMLDivElement, TProps>(function Tooltip(props, ref) {
+  const { children, type, text, variant = 'top', customeClass } = props
   return (
     <div
       data-text={text}
@@ -25,7 +22,7 @@ const Tooltip = forwardRef<HTMLDivElement, TProps>(function Tooltip(
         [customeClass?.tooltip || '']: !!customeClass?.tooltip,
         'tooltip ': !!text,
         [`${variant}`]: !!variant,
-        'hover:before:!bg-white/15': type === 'glass',
+        'hover:before:!bg-white/15': type === 'glass'
       })}
       ref={ref}
     >
@@ -37,12 +34,12 @@ const Tooltip = forwardRef<HTMLDivElement, TProps>(function Tooltip(
             [customeClass?.rectangle || '']: !!customeClass?.rectangle,
             [`${variant}`]: !!variant,
             '!border-transparent !border-t-transparent !border-b-white/15 !border-l-transparent !border-r-transparent':
-              type === 'glass',
+              type === 'glass'
           })}
         ></span>
       )}
     </div>
-  );
-});
+  )
+})
 
-export default Tooltip;
+export default Tooltip

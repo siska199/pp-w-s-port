@@ -1,6 +1,5 @@
-
 const Certification = () => {
-  return <div>Certification</div>;
-};
+  return <div>Certification</div>
+}
 
-export default Certification;
+export default Certification

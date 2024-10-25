@@ -1,7 +1,7 @@
-import ContainerSection from '@components/ui/container/container-section';
+import ContainerSection from '@components/ui/container/container-section'
 
 const ResponsibilitySection = () => {
-  return <ContainerSection title="Responsibility">- ....</ContainerSection>;
-};
+  return <ContainerSection title='Responsibility'>- ....</ContainerSection>
+}
 
-export default ResponsibilitySection;
+export default ResponsibilitySection

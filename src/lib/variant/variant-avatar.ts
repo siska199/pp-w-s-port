@@ -1,4 +1,4 @@
-import variant from "@lib/variant/variant-color"
+import variant from '@lib/variant/variant-color'
 
 const variantsAvatar = {
   variant: {

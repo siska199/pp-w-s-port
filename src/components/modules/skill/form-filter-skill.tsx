@@ -1,8 +1,8 @@
-import { IconSearch } from "@assets/icons";
-import InputBase from "@components/ui/input/input-base";
-import InputSelect from "@components/ui/input/input-select";
-import { TCustomeEventOnChange } from "@typescript/modules/ui/ui-types";
-import { useState } from "react";
+import { IconSearch } from '@assets/icons'
+import InputBase from '@components/ui/input/input-base'
+import InputSelect from '@components/ui/input/input-select'
+import { TCustomeEventOnChange } from '@typescript/modules/ui/ui-types'
+import { useState } from 'react'
 
 const FormFilterSKill = () => {
   const [form, setForm] = useState({
@@ -10,7 +10,7 @@ const FormFilterSKill = () => {
       name: 'keyword',
       value: '',
       placeholder: 'Search by skill name...',
-      customeClass: {},
+      customeClass: {}
     },
     category: {
       name: 'category',
@@ -18,18 +18,18 @@ const FormFilterSKill = () => {
       options: [
         { label: 'Backend', value: 'backend' },
         { label: 'Frotnend', value: 'forntend' },
-        { label: 'Fullstack', value: 'fullstack' },
+        { label: 'Fullstack', value: 'fullstack' }
       ],
-      placeholder: 'Category Skill',
+      placeholder: 'Category Skill'
     },
-    yearsOfexperiance : {
-      name : 'yearsOfexperiance',
-      options :[...Array(40)]?.map((data,i)=>({
-        label : `${i+1} year`,
-        value : `${i+1}`
+    yearsOfexperiance: {
+      name: 'yearsOfexperiance',
+      options: [...Array(40)]?.map((data, i) => ({
+        label: `${i + 1} year`,
+        value: `${i + 1}`
       })),
       value: '',
-      placeholder: 'Year of experiance',
+      placeholder: 'Year of experiance'
     },
     level: {
       name: 'level',
@@ -37,29 +37,29 @@ const FormFilterSKill = () => {
       options: [
         { label: 'Beginner', value: 'Beginner' },
         { label: 'Intermediet', value: 'Intermediet' },
-        { label: 'Advance', value: 'Advance' },
+        { label: 'Advance', value: 'Advance' }
       ],
-      placeholder: 'Level',
-    },
-  });
+      placeholder: 'Level'
+    }
+  })
 
   const handleOnChange = (e: TCustomeEventOnChange<any>) => {
-    const value = e.target.value;
-    const name = e.target.name as keyof typeof form;
+    const value = e.target.value
+    const name = e.target.name as keyof typeof form
     setForm({
       ...form,
       [name]: {
         ...form[name],
-        value,
-      },
-    });
-  };
+        value
+      }
+    })
+  }
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4'>
       <InputBase
         customeElement={{
-          start: <IconSearch className="icon-gray icon-gray-fill" />,
+          start: <IconSearch className='icon-gray icon-gray-fill' />
         }}
         {...form['keyword']}
         onChange={handleOnChange}
@@ -68,7 +68,7 @@ const FormFilterSKill = () => {
       <InputSelect onChange={handleOnChange} {...form['level']} isMultiple />
       <InputSelect onChange={handleOnChange} {...form['yearsOfexperiance']} />
     </div>
-  );
-};
+  )
+}
 
-export default FormFilterSKill;
+export default FormFilterSKill

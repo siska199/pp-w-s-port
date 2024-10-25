@@ -1,49 +1,46 @@
-import {
-  skillDefaultValues,
-  TFormSkill,
-} from '@lib/validation/module/skill/skill-schema';
-import React, { createContext, useReducer } from 'react';
+import { skillDefaultValues, TFormSkill } from '@lib/validation/module/skill/skill-schema'
+import React, { createContext, useReducer } from 'react'
 
 export const ACTION_TYPE_SKILL = {
   SET_MODAL_FORM_SKILL: 'SET_MODAL_FORM_SKILL',
   SET_MODAL_DETAIL_SKILL: 'SET_MODAL_DETAIL_SKILL:',
-  SET_SKILL: 'SET_SKILL',
-} as const;
+  SET_SKILL: 'SET_SKILL'
+} as const
 
 export enum TTypeActionModalFormSkill {
   EDIT = 'EDIT',
-  ADD = 'ADD',
+  ADD = 'ADD'
 }
 
 /*-----------------------------------------------------------------------------------------*/
 interface TSkillState {
   modalFormSkill: {
-    isShow: boolean;
-    action: TTypeActionModalFormSkill;
-  };
+    isShow: boolean
+    action: TTypeActionModalFormSkill
+  }
   modalDetailSkill: {
-    isShow: boolean;
-  };
-  skill: TFormSkill;
+    isShow: boolean
+  }
+  skill: TFormSkill
 }
 
 type TSkillAction =
   | {
-      type: typeof ACTION_TYPE_SKILL.SET_MODAL_FORM_SKILL;
-      payload: Partial<TSkillState['modalFormSkill']>;
+      type: typeof ACTION_TYPE_SKILL.SET_MODAL_FORM_SKILL
+      payload: Partial<TSkillState['modalFormSkill']>
     }
   | {
-      type: typeof ACTION_TYPE_SKILL.SET_MODAL_DETAIL_SKILL;
-      payload: TSkillState['modalDetailSkill'];
+      type: typeof ACTION_TYPE_SKILL.SET_MODAL_DETAIL_SKILL
+      payload: TSkillState['modalDetailSkill']
     }
   | {
-      type: typeof ACTION_TYPE_SKILL.SET_SKILL;
-      payload: TSkillState['skill'];
-    };
+      type: typeof ACTION_TYPE_SKILL.SET_SKILL
+      payload: TSkillState['skill']
+    }
 
 interface TSkillContext {
-  state: TSkillState;
-  dispatch: React.Dispatch<TSkillAction>;
+  state: TSkillState
+  dispatch: React.Dispatch<TSkillAction>
 }
 
 /*---------------------------------------------------------------------------------------- */
@@ -51,20 +48,20 @@ interface TSkillContext {
 const initialValue: TSkillState = {
   modalFormSkill: {
     isShow: false,
-    action: TTypeActionModalFormSkill.ADD,
+    action: TTypeActionModalFormSkill.ADD
   },
   modalDetailSkill: {
-    isShow: false,
+    isShow: false
   },
-  skill: skillDefaultValues,
-};
+  skill: skillDefaultValues
+}
 
-const defaultDispatch: React.Dispatch<TSkillAction> = () => initialValue;
+const defaultDispatch: React.Dispatch<TSkillAction> = () => initialValue
 
 export const skillContext = createContext<TSkillContext>({
   state: initialValue,
-  dispatch: defaultDispatch,
-});
+  dispatch: defaultDispatch
+})
 
 const reducer = (state: TSkillState, action: TSkillAction) => {
   switch (action.type) {
@@ -73,36 +70,32 @@ const reducer = (state: TSkillState, action: TSkillAction) => {
         ...state,
         modalFormSkill: {
           ...state.modalFormSkill,
-          ...action.payload,
-        },
-      };
+          ...action.payload
+        }
+      }
     case ACTION_TYPE_SKILL.SET_MODAL_DETAIL_SKILL:
       return {
         ...state,
         modalDetailSkill: {
           ...state.modalDetailSkill,
-          ...action.payload,
-        },
-      };
+          ...action.payload
+        }
+      }
     case ACTION_TYPE_SKILL.SET_SKILL:
       return {
         ...state,
         skill: {
-          ...action.payload,
-        },
-      };
+          ...action.payload
+        }
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const SkillContextProvider = (props: { children: React.ReactNode }) => {
-  const { children } = props;
-  const [state, dispatch] = useReducer(reducer, initialValue);
+  const { children } = props
+  const [state, dispatch] = useReducer(reducer, initialValue)
 
-  return (
-    <skillContext.Provider value={{ state, dispatch }}>
-      {children}
-    </skillContext.Provider>
-  );
-};
+  return <skillContext.Provider value={{ state, dispatch }}>{children}</skillContext.Provider>
+}

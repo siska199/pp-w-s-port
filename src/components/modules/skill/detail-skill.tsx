@@ -1,5 +1,5 @@
 const DetailSkill = () => {
-  return <div>DetailSkill</div>;
-};
+  return <div>DetailSkill</div>
+}
 
-export default DetailSkill;
+export default DetailSkill

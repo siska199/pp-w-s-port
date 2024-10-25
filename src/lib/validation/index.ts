@@ -1,4 +1,4 @@
-import { TTypeFile } from '../../@typescript/modules/ui/ui-types';
+import { TTypeFile } from '../../@typescript/modules/ui/ui-types'
 export const messageError = {
   required: (name: string) => `${name} is Required`,
   invalid: (name: string) => `${name} is Invalid`,
@@ -6,35 +6,32 @@ export const messageError = {
     `${name} must not exceed ${maxCharacter} characters.`,
   minCharacter: (name: string, maxCharacter: number) =>
     `${name} must have at least ${maxCharacter} characters.`,
-  minNumber: (name: string, min: number) =>
-    `${name} must be at least ${min} digits long.`,
-  maxNumber: (name: string, max: number) =>
-    `${name} must not exceed ${max} digits.`,
-  password:
-    'Password must be at least 8 characters long and contain at least one uppercase letter',
+  minNumber: (name: string, min: number) => `${name} must be at least ${min} digits long.`,
+  maxNumber: (name: string, max: number) => `${name} must not exceed ${max} digits.`,
+  password: 'Password must be at least 8 characters long and contain at least one uppercase letter',
   url: 'Please enter a valid URL. Ensure it starts with http:// or https://',
   maxSizeFile: 'File upload cancelled due to size limit exceeded.',
   fileType: (fileTypes: TTypeFile[]) => {
-    const updateFileType = fileTypes?.join(',');
-    return `Please upload the correct type file : ${updateFileType}`;
+    const updateFileType = fileTypes?.join(',')
+    return `Please upload the correct type file : ${updateFileType}`
   },
   phoneNumberFormat: 'Phone Number should be in 08XXXXXXXXXX format',
-  phoneNumberExceedLength: 'Phone number must not exceed 15 characters',
-};
+  phoneNumberExceedLength: 'Phone number must not exceed 15 characters'
+}
 
 const validation = {
   email: {
     regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-    message: messageError.invalid('Email'),
+    message: messageError.invalid('Email')
   },
   password: {
     regex: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-    message: messageError.password,
+    message: messageError.password
   },
   url: {
     regex: /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s]*)?$/,
-    message: messageError.url,
-  },
-};
+    message: messageError.url
+  }
+}
 
-export default validation;
+export default validation

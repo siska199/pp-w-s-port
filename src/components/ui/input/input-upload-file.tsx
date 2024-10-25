@@ -1,32 +1,34 @@
-
-
-import { IconCamera } from '@assets/icons';
-import Avatar from '@components/ui/avatar';
-import Button from '@components/ui/button';
-import Image from '@components/ui/image';
-import ContainerInput from '@components/ui/input/container-input';
-import PDFThumbnail from '@components/ui/pdf-thumbnail';
+import { IconCamera } from '@assets/icons'
+import Avatar from '@components/ui/avatar'
+import Button from '@components/ui/button'
+import Image from '@components/ui/image'
+import ContainerInput from '@components/ui/input/container-input'
+import PDFThumbnail from '@components/ui/pdf-thumbnail'
 import {
   convertBytesToMegabytes,
   getGeneralTypeFile,
   handleDownloadFile,
   handleValidateType
-} from '@lib/helper';
-import { messageError } from '@lib/validation';
-import React, { useEffect, useRef, useState } from 'react';
-import { TBasePropsInput, TCustomeEventOnChange, TTypeFile } from '../../../typescript/modules/ui/ui-types';
+} from '@lib/helper'
+import { messageError } from '@lib/validation'
+import React, { useEffect, useRef, useState } from 'react'
+import {
+  TBasePropsInput,
+  TCustomeEventOnChange,
+  TTypeFile
+} from '../../../typescript/modules/ui/ui-types'
 
-type TFileWithPreview = File & { preview?: string };
-export type TFileValue = TFileWithPreview | null;
+type TFileWithPreview = File & { preview?: string }
+export type TFileValue = TFileWithPreview | null
 export interface TPropsInputUploadFile
   extends Omit<TBasePropsInput, 'variant'>,
     Omit<Partial<React.HTMLProps<HTMLInputElement>>, 'value' | 'onChange'> {
-  name: string;
-  totalMaxSize?: number;
-  listAcceptedTypeFile?: TTypeFile[] | [];
-  onChange: (e: TCustomeEventOnChange<TFileValue>) => void;
-  value: TFileValue | null | undefined;
-  variant?: 'change-profile' | 'general';
+  name: string
+  totalMaxSize?: number
+  listAcceptedTypeFile?: TTypeFile[] | []
+  onChange: (e: TCustomeEventOnChange<TFileValue>) => void
+  value: TFileValue | null | undefined
+  variant?: 'change-profile' | 'general'
 }
 
 const InputUploadFile = (props: TPropsInputUploadFile) => {
@@ -38,74 +40,70 @@ const InputUploadFile = (props: TPropsInputUploadFile) => {
     variant = 'general',
     errorMessage,
     ...attrsInput
-  } = props;
+  } = props
 
-  const inputFileRef = useRef<HTMLInputElement | null>(null);
+  const inputFileRef = useRef<HTMLInputElement | null>(null)
 
-  const [acceptedFile, setAcceptedFile] = useState('');
-  const [errorMessageDynamic, setErrorMessageDynamic] = useState('');
-
-  useEffect(() => {
-    setErrorMessageDynamic(errorMessage || '');
-  }, [errorMessage]);
+  const [acceptedFile, setAcceptedFile] = useState('')
+  const [errorMessageDynamic, setErrorMessageDynamic] = useState('')
 
   useEffect(() => {
-    setAcceptedFile(
-      variant === 'change-profile'
-        ? 'image/*'
-        : listAcceptedTypeFile?.join(', ')
-    );
-  }, [listAcceptedTypeFile]);
+    setErrorMessageDynamic(errorMessage || '')
+  }, [errorMessage])
+
+  useEffect(() => {
+    setAcceptedFile(variant === 'change-profile' ? 'image/*' : listAcceptedTypeFile?.join(', '))
+  }, [listAcceptedTypeFile])
 
   const handleOnClickInput = <T extends React.MouseEvent>(e: T) => {
-    e?.preventDefault();
-    inputFileRef?.current?.click();
-  };
+    e?.preventDefault()
+    inputFileRef?.current?.click()
+  }
 
   const handleUpdateOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target?.files?.[0] as TFileWithPreview;
-    const isValidFile = handleValidationInputFile(file);
-    file.preview = URL.createObjectURL(file);
+    const file = e.target?.files?.[0] as TFileWithPreview
+    const isValidFile = handleValidationInputFile(file)
+    file.preview = URL.createObjectURL(file)
 
     onChange({
       target: {
         name,
-        value: isValidFile ? file : null,
-      },
-    });
-    isValidFile && setErrorMessageDynamic('');
-  };
+        value: isValidFile ? file : null
+      }
+    })
+    isValidFile && setErrorMessageDynamic('')
+  }
 
   const handleValidationInputFile = (file: File): boolean => {
-    let isValid = true;
+    let isValid = true
 
-    const totalSize: number = convertBytesToMegabytes(file?.size);
+    const totalSize: number = convertBytesToMegabytes(file?.size)
     if (totalSize > totalMaxSize) {
-      setErrorMessageDynamic(messageError.maxSizeFile);
-      return false;
+      setErrorMessageDynamic(messageError.maxSizeFile)
+      return false
     }
 
     isValid = handleValidateType({
       file,
-      listAcceptedType: listAcceptedTypeFile,
-    });
-    return isValid;
-  };
+      listAcceptedType: listAcceptedTypeFile
+    })
+    return isValid
+  }
 
   const handleOnDownloadFile = () => {
     attrsInput?.value &&
       handleDownloadFile({
         url: (attrsInput?.value as TFileWithPreview)?.preview as string,
-        filename: attrsInput?.value?.name as string,
-      });
-  };
+        filename: attrsInput?.value?.name as string
+      })
+  }
 
   return (
     <ContainerInput<React.HTMLProps<HTMLInputElement>>
       {...attrsInput}
       customeClass={{
         ...attrsInput.customeClass,
-        ciV2: '!border-none !p-0',
+        ciV2: '!border-none !p-0'
       }}
       errorMessage={errorMessageDynamic}
       isClerable={false}
@@ -115,16 +113,13 @@ const InputUploadFile = (props: TPropsInputUploadFile) => {
           size={'large'}
           src={(attrsInput?.value as TFileWithPreview)?.preview || ''}
           customeIcon={
-            <IconCamera
-              className="icon-primary-fill"
-              onClick={(e) => handleOnClickInput(e)}
-            />
+            <IconCamera className='icon-primary-fill' onClick={(e) => handleOnClickInput(e)} />
           }
         />
       )}
 
       {variant === 'general' && (
-        <div className="flex gap-4 ">
+        <div className='flex gap-4 '>
           {attrsInput.value ? (
             <Thumbnail file={attrsInput.value} />
           ) : (
@@ -135,19 +130,19 @@ const InputUploadFile = (props: TPropsInputUploadFile) => {
               width={500}
               height={500}
               src={'placeholder-image.png'}
-              alt="Initial Image"
+              alt='Initial Image'
             />
           )}
 
-          <div className="space-y-3 my-auto">
-            <p className="font-italic">
+          <div className='space-y-3 my-auto'>
+            <p className='font-italic'>
               Please upload a file (Max size: {totalMaxSize}MB, Formats:{' '}
               {listAcceptedTypeFile?.includes(TTypeFile.ALL)
                 ? 'All files'
                 : listAcceptedTypeFile?.join(', ')}
               )
             </p>
-            <div className="flex gap-2">
+            <div className='flex gap-2'>
               <Button variant={'outline-primary'} onClick={handleOnClickInput}>
                 Choose File
               </Button>
@@ -167,45 +162,44 @@ const InputUploadFile = (props: TPropsInputUploadFile) => {
       <input
         {...attrsInput}
         ref={inputFileRef}
-        className="hidden"
-        type="file"
+        className='hidden'
+        type='file'
         accept={acceptedFile}
         value={''}
         multiple={false}
         onChange={(e) => handleUpdateOnChange(e)}
       />
     </ContainerInput>
-  );
-};
+  )
+}
 
 interface TPropsThumbnail {
-  file: File;
+  file: File
 }
 
 const Thumbnail = (props: TPropsThumbnail) => {
-  const { file } = props;
+  const { file } = props
   return (
     <>
       {getGeneralTypeFile(file?.type) === 'image' && (
         <Image
-          className="self-center  !h-[7rem] !w-[7rem] border "
+          className='self-center  !h-[7rem] !w-[7rem] border '
           width={500}
           height={500}
           src={(file as TFileWithPreview)?.preview || ''}
-          alt="Preview Image"
+          alt='Preview Image'
         />
       )}
       {getGeneralTypeFile(file?.type) === 'pdf' && (
         <PDFThumbnail
           customeClass={{
-            container:
-              '!h-[7rem] !w-[7rem] !max-h-[7rem] !max-w-[7rem] !min-w-[7rem]',
+            container: '!h-[7rem] !w-[7rem] !max-h-[7rem] !max-w-[7rem] !min-w-[7rem]'
           }}
           file={file}
         />
       )}
     </>
-  );
-};
+  )
+}
 
-export default InputUploadFile;
+export default InputUploadFile

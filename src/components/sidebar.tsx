@@ -1,30 +1,28 @@
-import Logo from '@components/logo';
-import Button from '@components/ui/button';
-import Image from '@components/ui/image';
-import useCurrentPath from '@hooks/use-current-path';
-import useMediaQuery from '@hooks/use-media-query';
-import menuSidebar from '@lib/data/menu-sidebar';
-import { cn } from '@lib/helper';
-import { handleToggleSidebar } from '@store/modules/ui/ui-slice';
-import { useAppDispatch, useAppSelector } from '@store/store';
-import { useEffect } from 'react';
+import Logo from '@components/logo'
+import Button from '@components/ui/button'
+import Image from '@components/ui/image'
+import useCurrentPath from '@hooks/use-current-path'
+import useMediaQuery from '@hooks/use-media-query'
+import menuSidebar from '@lib/data/menu-sidebar'
+import { cn } from '@lib/helper'
+import { handleToggleSidebar } from '@store/modules/ui/ui-slice'
+import { useAppDispatch, useAppSelector } from '@store/store'
+import { useEffect } from 'react'
 
 const Sidebar = () => {
-  const isToggleSidebar = useAppSelector((state) => state?.ui?.isToggleSidebar);
-  const dispatch = useAppDispatch();
-  const { currentPath } = useCurrentPath();
-  const { isMaxMd } = useMediaQuery();
+  const isToggleSidebar = useAppSelector((state) => state?.ui?.isToggleSidebar)
+  const dispatch = useAppDispatch()
+  const { currentPath } = useCurrentPath()
+  const { isMaxMd } = useMediaQuery()
 
   useEffect(() => {
-    dispatch(handleToggleSidebar(isMaxMd ? true : false));
-  }, [isMaxMd]);
+    dispatch(handleToggleSidebar(isMaxMd ? true : false))
+  }, [isMaxMd])
 
   return (
     <div
       className={` md:z-0  min-h-screen h-screen md:relative w-fit ${
-        isMaxMd &&
-        !isToggleSidebar &&
-        'bg-black/50 fixed translate-y-0  z-[9] w-full'
+        isMaxMd && !isToggleSidebar && 'bg-black/50 fixed translate-y-0  z-[9] w-full'
       } `}
     >
       <div
@@ -35,35 +33,31 @@ const Sidebar = () => {
         {!isToggleSidebar && (
           <>
             <Logo
-              className="cursor-pointer gap-2 p-6 flex text-white "
+              className='cursor-pointer gap-2 p-6 flex text-white '
               onClick={() => dispatch(handleToggleSidebar(!isToggleSidebar))}
             />
 
-            <div className=" flex flex-col gap-4 p-4">
+            <div className=' flex flex-col gap-4 p-4'>
               {menuSidebar?.map((data, i) => (
                 <Button
                   key={i}
                   to={data.url}
                   variant={'solid-white'}
-                  onClick={() =>
-                    isMaxMd ? dispatch(handleToggleSidebar(true)) : null
-                  }
+                  onClick={() => (isMaxMd ? dispatch(handleToggleSidebar(true)) : null)}
                   className={cn({
                     'gap-4 w-full justify-start py-2  bg-glassmorphism  border-none hover:!text-black !text-white':
                       true,
-                    'bg-white !text-black ':
-                      currentPath?.handle?.name === data?.name,
+                    'bg-white !text-black ': currentPath?.handle?.name === data?.name
                   })}
                 >
                   <Image
                     src={data.src || ''}
                     className={cn({
                       'w-6 h-6 bg-white border p-1 rounded-full  z-[9]': true,
-                      'bg-primary-100 border-primary-700':
-                        currentPath?.handle?.name === data?.name,
+                      'bg-primary-100 border-primary-700': currentPath?.handle?.name === data?.name
                     })}
                     customeClassName={{ image: 'object-contain' }}
-                    alt="icon menu sidebar"
+                    alt='icon menu sidebar'
                   />
                   <span className={cn({})}>{data?.title}</span>
                 </Button>
@@ -73,7 +67,7 @@ const Sidebar = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

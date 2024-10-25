@@ -1,36 +1,34 @@
-import InputSelect from '@components/ui/input/input-select';
+import InputSelect from '@components/ui/input/input-select'
 import {
   ACTION_TYPE_SOCIAL_LINK,
-  socialLinkContext,
-} from '@context/modules/personal-info/social-link-context';
-import { categoriesSocialLink } from '@lib/data/dummy';
-import { TEventOnChange } from '@typescript/modules/ui/ui-types';
-import { useContext } from 'react';
+  socialLinkContext
+} from '@context/modules/personal-info/social-link-context'
+import { categoriesSocialLink } from '@lib/data/dummy'
+import { TEventOnChange } from '@typescript/modules/ui/ui-types'
+import { useContext } from 'react'
 
 const FormAddSocialLink = () => {
-  const { dispatch, state } = useContext(socialLinkContext);
+  const { dispatch, state } = useContext(socialLinkContext)
 
   const handleOnChange = (e: TEventOnChange) => {
     dispatch({
       type: ACTION_TYPE_SOCIAL_LINK.ONCHANGE_SOCIAL_LINKS,
-      payload: e.target.value?.map((data: string) => JSON.parse(data)),
-    });
-  };
+      payload: e.target.value?.map((data: string) => JSON.parse(data))
+    })
+  }
 
   return (
     <div>
       <InputSelect
-        value={state.selectedSocialLinks?.map((data: any) =>
-          JSON.stringify(data)
-        )}
-        placeholder="e.g Github, Linkeind, or Whatsapp"
-        name="socialLink"
+        value={state.selectedSocialLinks?.map((data: any) => JSON.stringify(data))}
+        placeholder='e.g Github, Linkeind, or Whatsapp'
+        name='socialLink'
         options={categoriesSocialLink}
         onChange={handleOnChange}
         isMultiple
       />
     </div>
-  );
-};
+  )
+}
 
-export default FormAddSocialLink;
+export default FormAddSocialLink

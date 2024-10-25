@@ -1,6 +1,5 @@
-
 const WorkHistoryDetailPage = () => {
-  return <div>WorkHistoryDetailPage</div>;
-};
+  return <div>WorkHistoryDetailPage</div>
+}
 
-export default WorkHistoryDetailPage;
+export default WorkHistoryDetailPage

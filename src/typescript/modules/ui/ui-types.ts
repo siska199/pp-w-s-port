@@ -1,53 +1,50 @@
-import { TAlertProps } from '@components/ui/alert';
-import { TPropsModalConfirmation } from '@components/ui/modal/modal-confirmation';
+import { TAlertProps } from '@components/ui/alert'
+import { TPropsModalConfirmation } from '@components/ui/modal/modal-confirmation'
 
 export interface TOption<TLabel = string> {
-  label: TLabel;
-  value: string;
+  label: TLabel
+  value: string
 }
 
 export interface TBasePropsInput {
-  errorMessage?: string;
-  label?: string;
-  variant?: 'v1';
+  errorMessage?: string
+  label?: string
+  variant?: 'v1'
   customeClass?: {
-    label?: string;
-    input?: string;
-    ciV1?: string;
-    ciV2?: string;
-    ciV3?: string;
-    ciV4?: string;
-  };
+    label?: string
+    input?: string
+    ciV1?: string
+    ciV2?: string
+    ciV3?: string
+    ciV4?: string
+  }
   customeElement?: {
-    start?: React.ReactNode;
-    end?: React.ReactNode;
-    preStart?: React.ReactNode;
-    preEnd?: React.ReactNode;
-  };
+    start?: React.ReactNode
+    end?: React.ReactNode
+    preStart?: React.ReactNode
+    preEnd?: React.ReactNode
+  }
 }
 
-export interface TCustomeEventOnChange<
-  V,
-  T extends object = NonNullable<unknown>
-> {
+export interface TCustomeEventOnChange<V, T extends object = NonNullable<unknown>> {
   target: {
-    name: string;
-    value: V;
-    type?: string;
-  } & T;
+    name: string
+    value: V
+    type?: string
+  } & T
 }
 
 export interface TAlertConfig {
-  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-  timeout?: number;
-  onDismiss?: () => void;
-  show: boolean;
-  autoClose?: boolean;
-  isFixed?: boolean;
-  withIcon?: boolean;
-  withCloseBtn?: boolean;
-  message: string | React.ReactNode;
-  customeIcon?: React.ReactNode;
+  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+  timeout?: number
+  onDismiss?: () => void
+  show: boolean
+  autoClose?: boolean
+  isFixed?: boolean
+  withIcon?: boolean
+  withCloseBtn?: boolean
+  message: string | React.ReactNode
+  customeIcon?: React.ReactNode
 }
 
 export enum TTypeFile {
@@ -67,80 +64,70 @@ export enum TTypeFile {
   CSV = '.csv',
 
   ALL = '*',
-  IMAGE_ALL = 'image/*',
+  IMAGE_ALL = 'image/*'
 }
 
-export type TValueFile<TIsMultiple extends boolean = true> =
-  TIsMultiple extends false ? File | null : File[] | null;
+export type TValueFile<TIsMultiple extends boolean = true> = TIsMultiple extends false
+  ? File | null
+  : File[] | null
 
 type TObjectForm = TBasePropsInput & {
-  value: any;
-  listUploadedFile?: TUploadedFile[];
-} & Omit<
-    Partial<React.HTMLProps<HTMLInputElement>>,
-    'name' | 'value' | 'onChange'
-  > & // Omit<Partial<ReactDatePickerProps<true, true>>, "onChange" | "value"> &
-  Omit<Partial<React.HTMLProps<HTMLTextAreaElement>>, 'onChange' | 'value'>;
+  value: any
+  listUploadedFile?: TUploadedFile[]
+} & Omit<Partial<React.HTMLProps<HTMLInputElement>>, 'name' | 'value' | 'onChange'> & // Omit<Partial<ReactDatePickerProps<true, true>>, "onChange" | "value"> &
+  Omit<Partial<React.HTMLProps<HTMLTextAreaElement>>, 'onChange' | 'value'>
 
-export type TForm<
-  TKey extends string,
-  TNameRequired extends boolean = true
-> = Record<
+export type TForm<TKey extends string, TNameRequired extends boolean = true> = Record<
   TKey,
-  TNameRequired extends true
-    ? TObjectForm & { name: string }
-    : TObjectForm & { name?: string }
->;
+  TNameRequired extends true ? TObjectForm & { name: string } : TObjectForm & { name?: string }
+>
 
 export interface TUploadedFile {
-  id: number;
-  status: 'onprogress' | 'done';
-  name: string;
-  type: TTypeFile;
-  size: number;
+  id: number
+  status: 'onprogress' | 'done'
+  name: string
+  type: TTypeFile
+  size: number
 }
 
 export type TEventOnChange =
   | React.ChangeEvent<HTMLInputElement>
   | React.ChangeEvent<HTMLTextAreaElement>
   | TCustomeEventOnChange<any>
-  | TCustomeEventOnChange<
-      TValueFile,
-      { files: FileList; listUploadedFile?: TUploadedFile[] }
-    >;
+  | TCustomeEventOnChange<TValueFile, { files: FileList; listUploadedFile?: TUploadedFile[] }>
 
 export interface TColumn<TData, TKey extends keyof TData> {
-  name: string;
-  key: TKey;
-  className?: string;
-  customeComponent?: (data: TData) => React.ReactNode;
-  isSorted?: boolean;
+  name: string
+  key: TKey
+  className?: string
+  customeComponent?: (data: TData) => React.ReactNode
+  isSorted?: boolean
 }
 
 export interface TSettingTable<TData> {
-  sortBy?: keyof TData;
-  sortDir?: 'asc' | 'desc';
-  checked?: boolean;
-  pagination?: boolean;
-  currentPage: number;
-  totalPage: number;
-  itemsPerPage: number;
+  sortBy?: keyof TData
+  sortDir?: 'asc' | 'desc'
+  checked?: boolean
+  pagination?: boolean
+  currentPage: number
+  totalPage: number
+  itemsPerPage: number
 }
 
 export interface TBaseModal {
-  isShow: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-  title?: React.ReactNode;
+  isShow: boolean
+  onClose: () => void
+  children: React.ReactNode
+  title?: React.ReactNode
 }
 
 /*--->Redux */
 export interface TRUiState {
-  isLoading: boolean;
-  isToggleSidebar: boolean;
+  isLoading: boolean
+  isToggleSidebar: boolean
   alertConfig: Omit<Partial<TAlertConfig>, 'show'> & {
-    show: boolean;
-    type?: TAlertProps['type'];
-  };
-  modalConfirmation: TPropsModalConfirmation;
+    show: boolean
+    type?: TAlertProps['type']
+  }
+  modalConfirmation: TPropsModalConfirmation
 }

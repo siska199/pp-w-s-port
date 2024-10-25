@@ -1,0 +1,12 @@
+[
+  { "id": 1, "name": "City A1", "id_province": 1 },
+  { "id": 2, "name": "City A2", "id_province": 1 },
+  { "id": 3, "name": "City B1", "id_province": 2 },
+  { "id": 4, "name": "City B2", "id_province": 2 },
+  { "id": 5, "name": "City C1", "id_province": 3 },
+  { "id": 6, "name": "City C2", "id_province": 3 },
+  { "id": 7, "name": "City D1", "id_province": 4 },
+  { "id": 8, "name": "City D2", "id_province": 4 },
+  { "id": 9, "name": "City E1", "id_province": 5 },
+  { "id": 10, "name": "City E2", "id_province": 5 }
+]

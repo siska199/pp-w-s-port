@@ -17,57 +17,56 @@ export default {
         4: '0.04'
       },
       borderColor: {
-        DEFAULT: '#e5e7eb',
+        DEFAULT: '#e5e7eb'
       },
       borderWidth: {
-        DEFAULT: '1px',
+        DEFAULT: '1px'
       },
       backgroundImage: {
-        'login': "url('/src/assets/images/background-login.svg')",
+        login: "url('/src/assets/images/background-login.svg')",
         's-port': "url('/src/assets/images/bg-sport.svg')",
-        's-port-plain': "url('/src/assets/images/bg-sport-plain.svg')",
+        's-port-plain': "url('/src/assets/images/bg-sport-plain.svg')"
       },
-      animation : {
-        'bounce-custome'  : 'bounce_custome 3s ease-in-out infinite',
-        'waved-border'           : 'waved_border 8s ease-in-out infinite'
+      animation: {
+        'bounce-custome': 'bounce_custome 3s ease-in-out infinite',
+        'waved-border': 'waved_border 8s ease-in-out infinite'
       },
-      keyframes : {
-        bounce_custome :  {
-          '0%'    : { transform: 'translateY(0)' },
-          '50%'   : { transform: 'translateY(-2.4rem)' },
-          '100%'  : { transform: 'translateY(0)' },
+      keyframes: {
+        bounce_custome: {
+          '0%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-2.4rem)' },
+          '100%': { transform: 'translateY(0)' }
         },
-        'waved_border' : {
-          '0%'  : { 'border-radius' : '60% 40% 30% 70%/60% 30% 70% 40%' },
-          '50%' : { 'border-radius' : '30% 60% 70% 40%/50% 60% 30% 60%' },
-          '100%': { 'border-radius' : '60% 40% 30% 70%/60% 30% 70% 40%' }
+        waved_border: {
+          '0%': { 'border-radius': '60% 40% 30% 70%/60% 30% 70% 40%' },
+          '50%': { 'border-radius': '30% 60% 70% 40%/50% 60% 30% 60%' },
+          '100%': { 'border-radius': '60% 40% 30% 70%/60% 30% 70% 40%' }
         }
       }
     },
     fontFamily: {
       poppins: ['Poppins', 'sans-serif'],
-      'circle-of-love': ['Circle Of Love','sans-serif'],
-      'bubblegum-sans': ['Bubblegum Sans','sans-serif'],
-      'shaky-hand': ['Shaky Hand','sans-serif'],
-
+      'circle-of-love': ['Circle Of Love', 'sans-serif'],
+      'bubblegum-sans': ['Bubblegum Sans', 'sans-serif'],
+      'shaky-hand': ['Shaky Hand', 'sans-serif']
     },
     fontSize: {
       'heading-05': ['1.875rem', { lineHeight: '2.375rem' }], // 30px font, 38px line-height
-      'heading-04': ['2.25rem', { lineHeight: '2.75rem' }],   // 36px font, 44px line-height
-      'heading-03': ['3rem', { lineHeight: '3.625rem' }],     // 48px font, 58px line-height
-      'heading-02': ['3.75rem', { lineHeight: '4.5rem' }],    // 60px font, 72px line-height
-      'heading-01': ['4.5rem', { lineHeight: '5.375rem' }],   // 72px font, 86px line-height
-    
-      'body-tiny': ['0.625rem', { lineHeight: '0.875rem' }],  // 10px font, 14px line-height
-      'body-small': ['0.75rem', { lineHeight: '1rem' }],      // 12px font, 16px line-height
-      'body-base': ['0.875rem', { lineHeight: '1.25rem' }],   // 14px font, 20px line-height
-      'body-medium': ['1rem', { lineHeight: '1.5rem' }],      // 16px font, 24px line-height
-      'body-large': ['1.125rem', { lineHeight: '1.75rem' }],  // 18px font, 28px line-height
-      'body-xl': ['1.25rem', { lineHeight: '1.875rem' }],     // 20px font, 30px line-height
-      'body-2xl': ['1.5rem', { lineHeight: '2.25rem' }],      // 24px font, 36px line-height
-      'body-3xl': ['1.75rem', { lineHeight: '2.625rem' }]     // 28px font, 42px line-height
+      'heading-04': ['2.25rem', { lineHeight: '2.75rem' }], // 36px font, 44px line-height
+      'heading-03': ['3rem', { lineHeight: '3.625rem' }], // 48px font, 58px line-height
+      'heading-02': ['3.75rem', { lineHeight: '4.5rem' }], // 60px font, 72px line-height
+      'heading-01': ['4.5rem', { lineHeight: '5.375rem' }], // 72px font, 86px line-height
+
+      'body-tiny': ['0.625rem', { lineHeight: '0.875rem' }], // 10px font, 14px line-height
+      'body-small': ['0.75rem', { lineHeight: '1rem' }], // 12px font, 16px line-height
+      'body-base': ['0.875rem', { lineHeight: '1.25rem' }], // 14px font, 20px line-height
+      'body-medium': ['1rem', { lineHeight: '1.5rem' }], // 16px font, 24px line-height
+      'body-large': ['1.125rem', { lineHeight: '1.75rem' }], // 18px font, 28px line-height
+      'body-xl': ['1.25rem', { lineHeight: '1.875rem' }], // 20px font, 30px line-height
+      'body-2xl': ['1.5rem', { lineHeight: '2.25rem' }], // 24px font, 36px line-height
+      'body-3xl': ['1.75rem', { lineHeight: '2.625rem' }] // 28px font, 42px line-height
     },
-    
+
     colors: {
       primary: {
         900: '#4C1D95',

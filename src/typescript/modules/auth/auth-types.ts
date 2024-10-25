@@ -1,5 +1,4 @@
-
-import { TUser } from "@typescript/modules/user/user-types"
+import { TUser } from '@typescript/modules/user/user-types'
 
 /*--->Redux */
 export interface TRAuthState {

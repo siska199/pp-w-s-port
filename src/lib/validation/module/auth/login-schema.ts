@@ -1,5 +1,5 @@
-import { zEnum, zPassword, zString } from '@lib/validation/reusable-schema';
-import * as z from 'zod';
+import { zEnum, zPassword, zString } from '@lib/validation/reusable-schema'
+import * as z from 'zod'
 
 export const loginSchema = z.object({
   username: zString<true>({ name: 'username' }),
@@ -7,9 +7,9 @@ export const loginSchema = z.object({
   isRememberMe: zEnum<['false', 'true']>({
     name: 'Is Remember Me',
     enum: ['false', 'true'],
-    mandatory: false,
-  }),
-});
+    mandatory: false
+  })
+})
 
 export const initialFormLogin = {
   username: {
@@ -17,7 +17,7 @@ export const initialFormLogin = {
     label: 'Username',
     placeholder: 'Enter your username',
     value: '',
-    errorMessage: '',
+    errorMessage: ''
   },
   password: {
     name: 'password',
@@ -25,13 +25,13 @@ export const initialFormLogin = {
     placeholder: 'Enter your password',
     type: 'password',
     value: '',
-    errorMessage: '',
+    errorMessage: ''
   },
   isRememberMe: {
     name: 'is_remember_me',
     value: 'false',
-    errorMessage: '',
-  },
-};
+    errorMessage: ''
+  }
+}
 
-export type TFormLogin = z.input<typeof loginSchema>;
+export type TFormLogin = z.input<typeof loginSchema>

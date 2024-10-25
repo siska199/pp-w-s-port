@@ -1,22 +1,22 @@
-import ContainerModal from '@components/ui/modal/container-modal';
-import React, { useState } from 'react';
+import ContainerModal from '@components/ui/modal/container-modal'
+import React, { useState } from 'react'
 
 interface TProps {
-  content: React.ReactNode;
-  label: React.ReactNode;
+  content: React.ReactNode
+  label: React.ReactNode
 }
 
 const LabelWithModal = (props: TProps) => {
-  const { content, label } = props;
-  const [showModal, setShowModal] = useState(false);
+  const { content, label } = props
+  const [showModal, setShowModal] = useState(false)
 
   const handleToggleModal = () => {
-    setShowModal(!showModal);
-  };
+    setShowModal(!showModal)
+  }
 
   return (
-    <div className="inline-block ">
-      <span className="cursor-pointer text-primary" onClick={handleToggleModal}>
+    <div className='inline-block '>
+      <span className='cursor-pointer text-primary' onClick={handleToggleModal}>
         {label}
       </span>
       <ContainerModal
@@ -27,7 +27,7 @@ const LabelWithModal = (props: TProps) => {
         {content}
       </ContainerModal>
     </div>
-  );
-};
+  )
+}
 
-export default LabelWithModal;
+export default LabelWithModal

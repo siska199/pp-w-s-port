@@ -1,18 +1,15 @@
-import { HTMLProps } from 'react';
+import { HTMLProps } from 'react'
 
 interface TProps extends HTMLProps<HTMLDivElement> {}
 
 const Logo = (props: TProps) => {
-  const { ...attrs } = props;
+  const { ...attrs } = props
 
   return (
-    <div
-      {...attrs}
-      className={`text-body-3xl font-bold font-bubblegum-sans ${attrs.className}`}
-    >
+    <div {...attrs} className={`text-body-3xl font-bold font-bubblegum-sans ${attrs.className}`}>
       S-Port {`</>`}
     </div>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo

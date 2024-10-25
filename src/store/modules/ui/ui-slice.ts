@@ -1,6 +1,6 @@
-import { TPropsModalConfirmation } from '@components/ui/modal/modal-confirmation';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TRUiState } from '@typescript/modules/ui/ui-types';
+import { TPropsModalConfirmation } from '@components/ui/modal/modal-confirmation'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { TRUiState } from '@typescript/modules/ui/ui-types'
 
 const initialState: TRUiState = {
   isLoading: false,
@@ -9,33 +9,30 @@ const initialState: TRUiState = {
     show: false,
     message: '',
     autoClose: true,
-    type: 'error',
+    type: 'error'
   },
   modalConfirmation: {
     title: 'Confirmation',
     isShow: false,
-    children: null,
-  },
-};
+    children: null
+  }
+}
 
 const authSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
     handleToggleSidebar: (state, action: PayloadAction<boolean>) => {
-      state.isToggleSidebar = action.payload;
+      state.isToggleSidebar = action.payload
     },
     handleSetIsloading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload;
+      state.isLoading = action.payload
     },
-    handleSetAlertConfig: (
-      state,
-      action: PayloadAction<TRUiState['alertConfig']>
-    ) => {
+    handleSetAlertConfig: (state, action: PayloadAction<TRUiState['alertConfig']>) => {
       state.alertConfig = {
         ...state.alertConfig,
-        ...action.payload,
-      };
+        ...action.payload
+      }
     },
     handleSetModalConfirmation: (
       state,
@@ -43,17 +40,17 @@ const authSlice = createSlice({
     ) => {
       state.modalConfirmation = {
         ...state.modalConfirmation,
-        ...action.payload,
-      };
-    },
-  },
-});
+        ...action.payload
+      }
+    }
+  }
+})
 
-export default authSlice.reducer;
+export default authSlice.reducer
 
 export const {
   handleSetIsloading,
   handleSetAlertConfig,
   handleToggleSidebar,
-  handleSetModalConfirmation,
-} = authSlice.actions;
+  handleSetModalConfirmation
+} = authSlice.actions

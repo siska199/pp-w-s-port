@@ -1,8 +1,8 @@
-import { zLink } from '@lib/validation/reusable-schema';
-import z from 'zod';
+import { zLink } from '@lib/validation/reusable-schema'
+import z from 'zod'
 
 const socialLinkSchema = z.object({
-  url: zLink({ mandatory: true }),
-});
+  url: zLink({ mandatory: true })
+})
 
-export default socialLinkSchema;
+export default socialLinkSchema

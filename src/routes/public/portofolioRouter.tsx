@@ -1,6 +1,6 @@
-import { routes } from '@routes/constant';
-import Portofolio from '@pages/portofolio/portofolio';
-import { RouteObject } from 'react-router-dom';
+import { routes } from '@routes/constant'
+import Portofolio from '@pages/portofolio/portofolio'
+import { RouteObject } from 'react-router-dom'
 
 const portofolioRouter: RouteObject[] = [
   {
@@ -10,10 +10,10 @@ const portofolioRouter: RouteObject[] = [
         path: ':id',
         element: <Portofolio />,
         handle: {
-          ...routes.portofolio,
-        },
-      },
-    ],
-  },
-];
-export default portofolioRouter;
+          ...routes.portofolio
+        }
+      }
+    ]
+  }
+]
+export default portofolioRouter

@@ -1,6 +1,6 @@
-import { routes } from '@routes/constant';
-import { SignInPage } from '@pages';
-import { RouteObject } from 'react-router-dom';
+import { routes } from '@routes/constant'
+import { SignInPage } from '@pages'
+import { RouteObject } from 'react-router-dom'
 
 const authRouter: RouteObject[] = [
   {
@@ -8,10 +8,10 @@ const authRouter: RouteObject[] = [
     children: [
       {
         path: routes.auth?.child?.signIn.name,
-        element: <SignInPage />,
-      },
-    ],
-  },
-];
+        element: <SignInPage />
+      }
+    ]
+  }
+]
 
-export default authRouter;
+export default authRouter

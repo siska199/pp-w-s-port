@@ -1,6 +1,6 @@
-import { routes } from '@routes/constant';
-import ProjectDetailPage from '@pages/project/project-detail';
-import { RouteObject } from 'react-router-dom';
+import { routes } from '@routes/constant'
+import ProjectDetailPage from '@pages/project/project-detail'
+import { RouteObject } from 'react-router-dom'
 
 const projectDetailRouter: RouteObject[] = [
   {
@@ -10,11 +10,11 @@ const projectDetailRouter: RouteObject[] = [
         path: ':id',
         element: <ProjectDetailPage />,
         handle: {
-          ...routes.project?.child?.detail,
-        },
-      },
-    ],
-  },
-];
+          ...routes.project?.child?.detail
+        }
+      }
+    ]
+  }
+]
 
-export default projectDetailRouter;
+export default projectDetailRouter

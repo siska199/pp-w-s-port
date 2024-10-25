@@ -1,16 +1,16 @@
 interface RouteComponent {
-  publicNavbar?: boolean;
+  publicNavbar?: boolean
 }
 
 export interface TRoute {
-  name: string;
-  fullPath: string;
-  isPrivate?: boolean;
-  isOpenRoute?: boolean;
-  component?: RouteComponent;
+  name: string
+  fullPath: string
+  isPrivate?: boolean
+  isOpenRoute?: boolean
+  component?: RouteComponent
   child?: {
-    [key: string]: TRoute;
-  };
+    [key: string]: TRoute
+  }
 }
 
 const route = {
@@ -21,34 +21,34 @@ const route = {
       signIn: {
         name: 'sign-in',
         fullPath: '/auth/sign-in',
-        isPrivate: false,
+        isPrivate: false
       },
       signUp: {
         name: 'sign-up',
         fullPath: '/auth/sign-up',
-        isPrivate: false,
-      },
-    },
+        isPrivate: false
+      }
+    }
   },
   personalInformation: {
     name: 'personal-information',
     fullPath: '/personal-information',
-    isPrivate: true,
+    isPrivate: true
   },
   skill: {
     name: 'skill',
     fullPath: '/skill',
-    isPrivate: true,
+    isPrivate: true
   },
   workHistory: {
     name: 'work-history',
     fullPath: '/work-history',
-    isPrivate: true,
+    isPrivate: true
   },
   education: {
     name: 'education',
     fullPath: '/education',
-    isPrivate: true,
+    isPrivate: true
   },
   project: {
     name: 'project',
@@ -61,25 +61,25 @@ const route = {
         isPrivate: true,
         isOpenRoute: true,
         component: {
-          publicNavbar: true,
-        },
+          publicNavbar: true
+        }
       },
       form: {
         name: 'form',
         fullPath: '/project/form',
-        isPrivate: true,
-      },
-    },
+        isPrivate: true
+      }
+    }
   },
   certification: {
     name: 'certification',
     fullPath: '/certification',
-    isPrivate: true,
+    isPrivate: true
   },
   generateResume: {
     name: 'generate-resume',
     fullPath: '/generate-resume',
-    isPrivate: true,
+    isPrivate: true
   },
   portofolio: {
     name: 'portofolio',
@@ -87,13 +87,13 @@ const route = {
     isPrivate: false,
     isOpenRoute: true,
     component: {
-      publicNavbar: true,
-    },
-  },
-} as const;
+      publicNavbar: true
+    }
+  }
+} as const
 
 export type TRoutes = {
-  [K in keyof typeof route]: TRoute;
-};
+  [K in keyof typeof route]: TRoute
+}
 
-export const routes: TRoutes = route;
+export const routes: TRoutes = route

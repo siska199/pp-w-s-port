@@ -1,43 +1,33 @@
-import Image from '@components/ui/image';
-import { cn } from '@lib/helper';
-import variantsAvatar from '@lib/variant/variant-avatar';
-import { VariantProps, cva } from 'class-variance-authority';
-import { HTMLProps } from 'react';
+import Image from '@components/ui/image'
+import { cn } from '@lib/helper'
+import variantsAvatar from '@lib/variant/variant-avatar'
+import { VariantProps, cva } from 'class-variance-authority'
+import { HTMLProps } from 'react'
 
 interface TPropsImage {
-  type?: 'image';
-  src: string;
+  type?: 'image'
+  src: string
 }
 
 interface TInitialName {
-  type?: 'initial-name';
-  name?: string;
+  type?: 'initial-name'
+  name?: string
 }
 
 type TProps = Omit<Partial<HTMLProps<HTMLDivElement>>, 'size' | 'shape'> &
   VariantProps<typeof avatarVariants> & {
-    customeIcon?: React.ReactNode;
-  } & (TPropsImage | TInitialName);
+    customeIcon?: React.ReactNode
+  } & (TPropsImage | TInitialName)
 
 const Avatar = (props: TProps) => {
-  const {
-    className,
-    type = 'image',
-    customeIcon,
-    src,
-    name,
-    variant,
-    size,
-    shape,
-    status,
-  } = props;
-  let updateVariant = variant || 'soft-gray';
+  const { className, type = 'image', customeIcon, src, name, variant, size, shape, status } = props
+  let updateVariant = variant || 'soft-gray'
   if (!variant && type === 'image') {
-    updateVariant = 'solid-black';
+    updateVariant = 'solid-black'
   }
 
   return (
-    <div className="relative">
+    <div className='relative'>
       <div
         className={cn(
           avatarVariants({
@@ -45,7 +35,7 @@ const Avatar = (props: TProps) => {
             variant: updateVariant,
             size,
             shape,
-            status,
+            status
           })
         )}
       >
@@ -53,26 +43,24 @@ const Avatar = (props: TProps) => {
           <Image
             src={src || 'avatar.svg'}
             alt={name}
-            className=" w-full h-full object-scale-down"
+            className=' w-full h-full object-scale-down'
           />
         )}
         {type === 'initial-name' && <div>{name?.substring(0, 1)}</div>}
-        {['online', 'offline', 'dontdistrub', 'away']?.includes(
-          status || ''
-        ) && (
+        {['online', 'offline', 'dontdistrub', 'away']?.includes(status || '') && (
           <span
             className={cn({
-              ' absolute border-white border-2   rounded-full': true,
+              ' absolute border-white border-2   rounded-full': true
             })}
           ></span>
         )}
         {customeIcon && status === 'icon' && (
-          <span className="absolute top-2 right-2">{customeIcon}</span>
+          <span className='absolute top-2 right-2'>{customeIcon}</span>
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
 const avatarVariants = cva(
   'text-white flex  items-center justify-center w-fit font-semibold overflow-hidden [&>span]:top-0 [&>span]:right-0  [&>span]:w-[0.75rem]  [&>span]:h-[0.75rem]',
@@ -82,9 +70,9 @@ const avatarVariants = cva(
     defaultVariants: {
       variant: 'soft-gray',
       size: 'base',
-      shape: 'circular',
-    },
+      shape: 'circular'
+    }
   }
-);
+)
 
-export default Avatar;
+export default Avatar

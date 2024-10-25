@@ -1,12 +1,7 @@
-import { generateDefaultValue } from '@lib/helper';
-import {
-  zEmail,
-  zFileLocale,
-  zPhoneNumber,
-  zString,
-} from '@lib/validation/reusable-schema';
-import { TTypeFile } from '@typescript/modules/ui/ui-types';
-import z from 'zod';
+import { generateDefaultValue } from '@lib/helper'
+import { zEmail, zFileLocale, zPhoneNumber, zString } from '@lib/validation/reusable-schema'
+import { TTypeFile } from '@typescript/modules/ui/ui-types'
+import z from 'zod'
 
 const personalInformationSchema = z
   .object({
@@ -25,37 +20,38 @@ const personalInformationSchema = z
     about_me: zString({ name: 'About Me', max: 1000 }),
     professional_image: zFileLocale({
       name: 'Professional Image',
-      listAcceptedType: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG],
-    }),
+      listAcceptedType: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG]
+    })
   })
-  ?.strict();
+  ?.strict()
 
 export const initialFormPersonalInformation = {
   first_name: {
     name: 'first_name',
     label: 'First Name',
     placeholder: 'e.g Siska Apriana',
-    value: '',
+    value: ''
   },
   last_name: {
     name: 'last_name',
     label: 'Last Name',
     placeholder: 'e.g Rifianti',
-    value: '',
+    value: ''
   },
   id_profession: {
-    name: ' id_profession',
+    name: 'id_profession',
     label: 'Profession',
+    options: [],
     placeholder: 'e.g Frontend Developer',
-    value: '',
+    value: ''
   },
 
   id_province: {
-    name: ' id_province',
+    name: 'id_province',
     options: [],
     label: 'Province',
     placeholder: 'e.g Jawa Timur',
-    value: '',
+    value: ''
   },
   id_city: {
     name: 'id_city',
@@ -63,7 +59,7 @@ export const initialFormPersonalInformation = {
     label: 'City',
     options: [],
     disabled: true,
-    value: '',
+    value: ''
   },
   id_district: {
     name: 'id_district',
@@ -71,7 +67,7 @@ export const initialFormPersonalInformation = {
     placeholder: 'e.g Besuki',
     options: [],
     disabled: true,
-    value: '',
+    value: ''
   },
 
   id_postal_code: {
@@ -80,31 +76,28 @@ export const initialFormPersonalInformation = {
     label: 'Postal Code',
     placeholder: 'e.g 68356',
     disabled: true,
-    value: '',
+    value: ''
   },
   bio: {
     name: 'bio',
     maxLength: 100,
     label: 'Bio',
     placeholder: `e.g I'm Frontend Developer based on Jakarta, Indonesia`,
-    value: '',
+    value: ''
   },
   about_me: {
     name: 'about_me',
     label: 'About Me',
-    placeholder:
-      'Write a brief summary about your professional background and skills',
-    value: '',
+    placeholder: 'Write a brief summary about your professional background and skills',
+    value: ''
   },
   professional_image: {
     name: 'professional_image',
     label: 'Professional Image',
-    value: null,
-  },
-};
+    value: null
+  }
+}
 
-export type TFormPersonalInformation = z.input<
-  typeof personalInformationSchema
->;
+export type TFormPersonalInformation = z.input<typeof personalInformationSchema>
 
-export default personalInformationSchema;
+export default personalInformationSchema

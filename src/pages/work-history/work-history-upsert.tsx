@@ -1,6 +1,5 @@
-
 const WorkHistoryUpsertPage = () => {
-  return <div>WorkHistoryUpsertPage</div>;
-};
+  return <div>WorkHistoryUpsertPage</div>
+}
 
-export default WorkHistoryUpsertPage;
+export default WorkHistoryUpsertPage

@@ -1,40 +1,37 @@
-import CONFIG from '@lib/config/config';
-import appMessage from '@lib/data/app-message';
-import { generateUrlQueryParams, isEmptyValue } from '@lib/helper';
-import {
-  handleSetAlertConfig,
-  handleSetIsloading,
-} from '@store/modules/ui/ui-slice';
+import CONFIG from '@lib/config/config'
+import appMessage from '@lib/data/app-message'
+import { generateUrlQueryParams, isEmptyValue } from '@lib/helper'
+import { handleSetAlertConfig, handleSetIsloading } from '@store/modules/ui/ui-slice'
 
-import axios, { CancelTokenSource } from 'axios';
-import { useRef, useState } from 'react';
+import axios, { CancelTokenSource } from 'axios'
+import { useRef, useState } from 'react'
 
 interface TParamsApiClient {
-  baseUrl?: string;
-  method?: 'get' | 'post' | 'put' | 'post';
-  bareerToken?: string;
-  endpoint: string;
-  payload?: TObject;
-  isForm?: boolean;
+  baseUrl?: string
+  method?: 'get' | 'post' | 'put' | 'post'
+  bareerToken?: string
+  endpoint: string
+  payload?: TObject
+  isForm?: boolean
   message?: {
-    sucess?: string;
-    error?: string;
-  };
-  queryObject?: TObject;
+    sucess?: string
+    error?: string
+  }
+  queryObject?: TObject
 }
 
 type TResultApiClient = Promise<{
-  data: TObject | null;
-  sucess: boolean;
-  message: string;
-}>;
+  data: TObject | null
+  sucess: boolean
+  message: string
+}>
 
 const useAPI = () => {
-  const [progress, setProgress] = useState(0);
-  const cancelTokenRef = useRef<CancelTokenSource | null>(null);
+  const [progress, setProgress] = useState(0)
+  const cancelTokenRef = useRef<CancelTokenSource | null>(null)
 
   const apiClient = async (params: TParamsApiClient): TResultApiClient => {
-    handleSetIsloading(true);
+    handleSetIsloading(true)
     const {
       baseUrl,
       method = 'get',
@@ -43,15 +40,15 @@ const useAPI = () => {
       isForm = false,
       payload,
       message,
-      queryObject,
-    } = params;
+      queryObject
+    } = params
     try {
-      cancelTokenRef.current = axios.CancelToken.source();
+      cancelTokenRef.current = axios.CancelToken.source()
 
-      let url = endpoint;
+      let url = endpoint
 
       if (method === 'get' && queryObject) {
-        url = generateUrlQueryParams({ url, queryObject });
+        url = generateUrlQueryParams({ url, queryObject })
       }
 
       const response = await axios({
@@ -60,57 +57,57 @@ const useAPI = () => {
         method: !isEmptyValue(payload) ? 'post' : method,
         headers: {
           Authorization: bareerToken ? `Bearer ${bareerToken}` : null,
-          'Content-Type': isForm ? 'multipart/form-data' : 'application/json',
+          'Content-Type': isForm ? 'multipart/form-data' : 'application/json'
         },
         withCredentials: !!bareerToken,
         cancelToken: cancelTokenRef.current.token,
         data: payload,
         onUploadProgress: (event) => {
-          setProgress(Math.round((100 * event.loaded) / (event?.total || 100)));
-        },
-      });
+          setProgress(Math.round((100 * event.loaded) / (event?.total || 100)))
+        }
+      })
 
       handleSetAlertConfig({
         show: true,
         message: message?.sucess || 'Successfully',
         type: 'sucess',
-        withIcon: true,
-      });
+        withIcon: true
+      })
 
       return {
         sucess: true,
         data: response.data,
-        message: 'Success',
-      };
+        message: 'Success'
+      }
     } catch (error: any) {
       handleSetAlertConfig({
         show: true,
         message: message?.error || appMessage.systemErrorMessage,
         type: 'error',
-        withIcon: true,
-      });
+        withIcon: true
+      })
       return {
         sucess: false,
         data: null,
-        message: 'error',
-      };
+        message: 'error'
+      }
     } finally {
-      handleSetIsloading(false);
+      handleSetIsloading(false)
     }
-  };
+  }
 
   const cancelRequest = () => {
     if (cancelTokenRef.current) {
-      cancelTokenRef.current.cancel('Operation canceled by the user.');
+      cancelTokenRef.current.cancel('Operation canceled by the user.')
     }
-  };
+  }
 
   return {
     apiClient,
     progress,
     cancelRequest,
-    setProgress,
-  };
-};
+    setProgress
+  }
+}
 
-export default useAPI;
+export default useAPI

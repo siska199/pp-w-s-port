@@ -26,7 +26,10 @@ const PDFThumbnail = (props: TProps) => {
   }, [])
 
   return (
-    <div className={`border overflow-hidden flex items-center justify-center ${props.customeClass?.container || ''}`} ref={containerRef}>
+    <div
+      className={`border overflow-hidden flex items-center justify-center ${props.customeClass?.container || ''}`}
+      ref={containerRef}
+    >
       {containerSize.width > 0 && (
         <Document {...attrsDocument}>
           <Page

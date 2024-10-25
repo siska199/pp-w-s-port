@@ -1,3 +1,3 @@
 export interface TUser {
-    id: string;
+  id: string
 }
