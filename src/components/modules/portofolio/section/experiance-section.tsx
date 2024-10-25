@@ -1,10 +1,10 @@
-import ContainerSection from '@components/ui/container/container-section'
+import { useRef } from 'react'
 import Badge from '@components/ui/badge'
 import Container from '@components/ui/container/container'
+import ContainerSection from '@components/ui/container/container-section'
+import { useAnimateScrollCustome } from '@hooks/use-animate-scroll-custome'
 import { experiances } from '@lib/data/dummy'
 import { motion } from 'framer-motion'
-import { useRef } from 'react'
-import { useAnimateScrollCustome } from '@hooks/use-animate-scroll-custome'
 
 const ExperianceSection = () => {
   return (

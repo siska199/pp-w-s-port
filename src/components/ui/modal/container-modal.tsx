@@ -2,7 +2,7 @@ import { IconClose } from '@assets/icons'
 import Button from '@components/ui/button'
 import { cn } from '@lib/helper'
 import { TBaseModal } from '@typescript/modules/ui/ui-types'
-import { VariantProps, cva } from 'class-variance-authority'
+import { cva,VariantProps } from 'class-variance-authority'
 
 export interface TModalProps extends TBaseModal, VariantProps<typeof modalVariants> {
   customeClass?: {

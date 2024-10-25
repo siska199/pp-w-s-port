@@ -1,9 +1,9 @@
+import { useState } from 'react'
 import { IconClose, IconEye, IconEyeClose } from '@assets/icons'
 import Container from '@components/ui/container/container'
 import HelperMessage from '@components/ui/helper-message'
 import { cn, isEmptyValue } from '@lib/helper'
 import { TBasePropsInput } from '@typescript/modules/ui/ui-types'
-import { useState } from 'react'
 
 export interface TPropsInput<TInput> extends TBasePropsInput {
   children: React.ReactNode | ((attrsInput: TInput) => React.ReactNode)
@@ -32,7 +32,6 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
     isNotUsingDefaultStyle,
     childrenOverlay,
     label,
-    variant = 'v1',
     isClerable = false,
     type,
     onlyContainer = false,

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Logo from '@components/logo'
 import Button from '@components/ui/button'
 import Image from '@components/ui/image'
@@ -7,7 +8,6 @@ import menuSidebar from '@lib/data/menu-sidebar'
 import { cn } from '@lib/helper'
 import { handleToggleSidebar } from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
-import { useEffect } from 'react'
 
 const Sidebar = () => {
   const isToggleSidebar = useAppSelector((state) => state?.ui?.isToggleSidebar)

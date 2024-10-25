@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { TRAuthState } from 'types/auth-types'
+import { TRAuthState } from '@typescript/modules/auth/auth-types'
 
 const initialState: TRAuthState = {
   isAuthenticated: false,

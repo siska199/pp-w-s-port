@@ -1,15 +1,15 @@
+import { useRef, useState } from 'react'
 import { IconArrowUp, IconSearch } from '@assets/icons'
 import { cardAnimation } from '@assets/styles/animation'
-import ContainerSection from '@components/ui/container/container-section'
 import Badge from '@components/ui/badge'
 import Button from '@components/ui/button'
 import Container from '@components/ui/container/container'
+import ContainerSection from '@components/ui/container/container-section'
 import Image from '@components/ui/image'
 import InputBase from '@components/ui/input/input-base'
 import { projects } from '@lib/data/dummy'
-import { motion } from 'framer-motion'
-import { useRef, useState } from 'react'
 import { routes } from '@routes/constant'
+import { motion } from 'framer-motion'
 
 const ProjectSection = () => {
   const [keyword, setKeyword] = useState('')

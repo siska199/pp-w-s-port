@@ -1,7 +1,7 @@
-import { routes } from '@routes/constant'
+import { RouteObject } from 'react-router-dom'
 import menuSidebar from '@lib/data/menu-sidebar'
 import Certification from '@pages/certification/certification'
-import { RouteObject } from 'react-router-dom'
+import { routes } from '@routes/constant'
 
 const certificationRouter: RouteObject[] = [
   {

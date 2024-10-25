@@ -1,5 +1,5 @@
-import { TRoute } from '@routes/constant'
 import { UIMatch, useMatches } from 'react-router-dom'
+import { TRoute } from '@routes/constant'
 
 const useCurrentPath = () => {
   const matches = useMatches()

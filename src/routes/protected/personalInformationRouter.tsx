@@ -1,6 +1,6 @@
+import { RouteObject } from 'react-router-dom'
 import PersonalInformationPage from '@pages/personal-information/personal-information'
 import { routes } from '@routes/constant'
-import { RouteObject } from 'react-router-dom'
 
 const personalInformationRouter: RouteObject[] = [
   {

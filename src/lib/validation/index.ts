@@ -1,4 +1,5 @@
-import { TTypeFile } from '../../@typescript/modules/ui/ui-types'
+import { TTypeFile } from "@typescript/modules/ui/ui-types"
+
 export const messageError = {
   required: (name: string) => `${name} is Required`,
   invalid: (name: string) => `${name} is Invalid`,

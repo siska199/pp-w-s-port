@@ -1,7 +1,7 @@
-import { routes } from '@routes/constant'
+import { RouteObject } from 'react-router-dom'
 import menuSidebar from '@lib/data/menu-sidebar'
 import WorkHistory from '@pages/work-history/work-history'
-import { RouteObject } from 'react-router-dom'
+import { routes } from '@routes/constant'
 
 const workHistoryRouter: RouteObject[] = [
   {

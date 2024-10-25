@@ -1,6 +1,6 @@
+import { useContext } from 'react'
 import HeaderPage from '@components/ui/header-page'
 import { ACTION_TYPE_SKILL, skillContext } from '@context/modules/skill/skill-context'
-import { useContext } from 'react'
 
 const HeaderSkill = () => {
   const { dispatch } = useContext(skillContext)

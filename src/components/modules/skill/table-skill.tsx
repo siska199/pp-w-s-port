@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import Badge from '@components/ui/badge'
 import Table from '@components/ui/table'
 import {
@@ -12,7 +13,6 @@ import variantBadge from '@lib/variant/variant-badge'
 import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
 import { TSettingTable } from '@typescript/modules/ui/ui-types'
-import { useContext } from 'react'
 
 type TData = (typeof skills)[0]
 
@@ -102,7 +102,7 @@ const TableSkill = () => {
     dispatch({
       type: ACTION_TYPE_SKILL.SET_SKILL,
       payload: {
-        category: '',
+        id_category: '',
         skill: '',
         level: '',
         yearOfExperiance: ''

@@ -1,8 +1,8 @@
+import { useState } from 'react'
 import Button from '@components/ui/button'
 import InputBase from '@components/ui/input/input-base'
 import InputSelect from '@components/ui/input/input-select'
 import InputUploadFile from '@components/ui/input/input-upload-file'
-import { useState } from 'react'
 import { TCustomeEventOnChange, TTypeFile } from '@typescript/modules/ui/ui-types'
 
 const PlaygroundPage = () => {

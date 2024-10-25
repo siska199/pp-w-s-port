@@ -1,5 +1,5 @@
+import { HTMLProps, useEffect, useState } from 'react'
 import { IconClose, IconDanger, IconInfo, IconNotification, IconSucess } from '@assets/icons'
-
 import { cn } from '@lib/helper'
 import variantsAlert, {
   variantAlertError,
@@ -9,9 +9,7 @@ import variantsAlert, {
 import variant from '@lib/variant/variant-color'
 import { handleSetAlertConfig } from '@store/modules/ui/ui-slice'
 import { TAlertConfig } from '@typescript/modules/ui/ui-types'
-
-import { VariantProps, cva } from 'class-variance-authority'
-import { HTMLProps, useEffect, useState } from 'react'
+import { cva,VariantProps } from 'class-variance-authority'
 
 interface TPropsVariantError extends VariantProps<typeof alertVariantError> {
   type: 'error'
@@ -84,6 +82,7 @@ const Alert = (props: TAlertProps) => {
   const alertVariant = getAlertVariant()
 
   return (show && !isCloseAlert) || !isFixed ? (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     <div className={cn(alertVariant(paramsAlertVariant))}>
       <div

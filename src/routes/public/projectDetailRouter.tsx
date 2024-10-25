@@ -1,6 +1,6 @@
-import { routes } from '@routes/constant'
-import ProjectDetailPage from '@pages/project/project-detail'
 import { RouteObject } from 'react-router-dom'
+import ProjectDetailPage from '@pages/project/project-detail'
+import { routes } from '@routes/constant'
 
 const projectDetailRouter: RouteObject[] = [
   {

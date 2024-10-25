@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Button from '@components/ui/button'
 import Container from '@components/ui/container/container'
 import InputBase from '@components/ui/input/input-base'
@@ -8,8 +10,6 @@ import { routes } from '@routes/constant'
 import { handleSetAuth } from '@store/modules/auth/auth-slice'
 import { useAppDispatch } from '@store/store'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 interface TPropsFormLogin {
   className?: string

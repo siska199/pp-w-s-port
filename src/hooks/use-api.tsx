@@ -1,10 +1,9 @@
+import { useRef, useState } from 'react'
 import CONFIG from '@lib/config/config'
 import appMessage from '@lib/data/app-message'
 import { generateUrlQueryParams, isEmptyValue } from '@lib/helper'
 import { handleSetAlertConfig, handleSetIsloading } from '@store/modules/ui/ui-slice'
-
 import axios, { CancelTokenSource } from 'axios'
-import { useRef, useState } from 'react'
 
 interface TParamsApiClient {
   baseUrl?: string
@@ -53,7 +52,7 @@ const useAPI = () => {
 
       const response = await axios({
         baseURL: baseUrl || CONFIG.SERVER_BASE_URL,
-        url: endpoint,
+        url,
         method: !isEmptyValue(payload) ? 'post' : method,
         headers: {
           Authorization: bareerToken ? `Bearer ${bareerToken}` : null,

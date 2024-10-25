@@ -1,6 +1,6 @@
 import { HTMLProps } from 'react'
 
-interface TProps extends HTMLProps<HTMLDivElement> {}
+type TProps = HTMLProps<HTMLDivElement>
 
 const Logo = (props: TProps) => {
   const { ...attrs } = props

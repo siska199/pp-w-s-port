@@ -1,8 +1,8 @@
-import provinces from '@lib/data/dummy/provinces.json'
 import cities from '@lib/data/dummy/cities.json'
 import districts from '@lib/data/dummy/districts.json'
 import postal_codes from '@lib/data/dummy/postal_codes.json'
 import professions from '@lib/data/dummy/professions.json'
+import provinces from '@lib/data/dummy/provinces.json'
 
 const useGeneralAPI = () => {
   const getListProvince = async () => {

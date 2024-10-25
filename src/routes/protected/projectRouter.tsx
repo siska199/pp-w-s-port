@@ -1,7 +1,7 @@
+import { RouteObject } from 'react-router-dom'
 import ProjectPage from '@pages/project/project'
 import ProjectForm from '@pages/project/project-form'
 import { routes } from '@routes/constant'
-import { RouteObject } from 'react-router-dom'
 
 const projectRouter: RouteObject[] = [
   {

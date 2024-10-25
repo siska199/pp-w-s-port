@@ -1,21 +1,19 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import CONFIG from '@lib/config/config'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import authSlice from '@store/modules/auth/auth-slice'
+import uiSlice from '@store/modules/ui/ui-slice'
 import {
   FLUSH,
   PAUSE,
   PERSIST,
+  persistReducer,
+  persistStore,
   PURGE,
   REGISTER,
-  REHYDRATE,
-  persistReducer,
-  persistStore
-} from 'redux-persist'
-import { encryptTransform } from 'redux-persist-transform-encrypt'
+  REHYDRATE} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-
-import CONFIG from '@lib/config/config'
-import authSlice from '@store/modules/auth/auth-slice'
-import uiSlice from '@store/modules/ui/ui-slice'
+import { encryptTransform } from 'redux-persist-transform-encrypt'
 
 const encryptor = encryptTransform({
   secretKey: CONFIG.SECRET_KEY,

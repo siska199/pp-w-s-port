@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import useGeneralAPI from '@apis/use-general-api'
 import Button from '@components/ui/button'
 import InputBase from '@components/ui/input/input-base'
@@ -11,7 +12,6 @@ import personalInformationSchema, {
   TFormPersonalInformation
 } from '@lib/validation/module/personal-information/personal-information-schema'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
-import { useEffect, useState } from 'react'
 
 const FormPersonlaInformation = () => {
   const { getListProvince, getListCity, getListDistrict, getListProfession, getListPostalCode } =

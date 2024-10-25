@@ -1,8 +1,8 @@
+import { useState } from 'react'
 import { IconSearch } from '@assets/icons'
 import InputBase from '@components/ui/input/input-base'
 import InputSelect from '@components/ui/input/input-select'
 import { TCustomeEventOnChange } from '@typescript/modules/ui/ui-types'
-import { useState } from 'react'
 
 const FormFilterSKill = () => {
   const [form, setForm] = useState({
@@ -24,7 +24,7 @@ const FormFilterSKill = () => {
     },
     yearsOfexperiance: {
       name: 'yearsOfexperiance',
-      options: [...Array(40)]?.map((data, i) => ({
+      options: [...Array(40)]?.map((_, i) => ({
         label: `${i + 1} year`,
         value: `${i + 1}`
       })),

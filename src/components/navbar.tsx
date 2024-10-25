@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { IconHumburger, IconLogout, IconUser } from '@assets/icons'
 import Logo from '@components/logo'
 import Avatar from '@components/ui/avatar'
@@ -6,10 +8,7 @@ import useCurrentPath from '@hooks/use-current-path'
 import { routes } from '@routes/constant'
 import { handleSetAuth } from '@store/modules/auth/auth-slice'
 import { handleToggleSidebar } from '@store/modules/ui/ui-slice'
-
 import { useAppDispatch, useAppSelector } from '@store/store'
-import { useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
   const {

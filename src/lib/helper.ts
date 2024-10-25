@@ -1,6 +1,6 @@
+import { TOption, TTypeFile } from '@typescript/modules/ui/ui-types'
 import clsx, { ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { TBasePropsInput, TOption, TTypeFile } from '@typescript/modules/ui/ui-types'
 import z, { ZodSchema, ZodType } from 'zod'
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -124,7 +124,7 @@ export const getGeneralTypeFile = (type: string): TTypeGeneralFile => {
 }
 
 export const excludeRef = <T extends { ref?: any }>(input: T) => {
-  const { ref, ...rest } = input
+  const { ref: _, ...rest } = input
   return rest
 }
 
@@ -149,7 +149,7 @@ export const generateDefaultValue = (schema: ZodType<any>): any => {
     }
     return defaultObj
   }
-  if (schema instanceof z.ZodArray) null
+  if (schema instanceof z.ZodArray) return null
   if (schema instanceof z.ZodOptional) return null
   if (schema instanceof z.ZodNull) return null
   if (schema instanceof z.ZodEffects) return ''

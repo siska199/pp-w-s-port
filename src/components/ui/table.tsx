@@ -1,8 +1,4 @@
-import { TColumn, TSettingTable } from '@typescript/modules/ui/ui-types'
 import React, { useMemo } from 'react'
-import InputCheckbox from '@components/ui/input/input-checkbox'
-import { cn } from '@lib/helper'
-import Button from '@components/ui/button'
 import {
   IconArrowUp,
   IconChevronLeft,
@@ -12,8 +8,12 @@ import {
   IconEye,
   IconSort
 } from '@assets/icons'
-import EmptyData from '@components/ui/empty-data'
 import Badge from '@components/ui/badge'
+import Button from '@components/ui/button'
+import EmptyData from '@components/ui/empty-data'
+import InputCheckbox from '@components/ui/input/input-checkbox'
+import { cn } from '@lib/helper'
+import { TColumn, TSettingTable } from '@typescript/modules/ui/ui-types'
 
 type WithId<T> = T & { id: string | number }
 type WithOptionalChecked<T, TInclude extends boolean> = TInclude extends true

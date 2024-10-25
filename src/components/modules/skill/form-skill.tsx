@@ -1,3 +1,4 @@
+import { useContext, useState } from 'react'
 import Button from '@components/ui/button'
 import InputSelect from '@components/ui/input/input-select'
 import ContainerModal from '@components/ui/modal/container-modal'
@@ -8,8 +9,6 @@ import {
 } from '@context/modules/skill/skill-context'
 import { initialFormSkill } from '@lib/validation/module/skill/skill-schema'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
-
-import { useContext, useState } from 'react'
 
 const FormSkill = () => {
   const {

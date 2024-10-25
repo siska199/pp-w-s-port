@@ -1,6 +1,6 @@
+import React from 'react'
 import ContainerInput from '@components/ui/input/container-input'
 import { TBasePropsInput } from '@typescript/modules/ui/ui-types'
-import React from 'react'
 
 interface TProps extends TBasePropsInput, React.HTMLProps<HTMLTextAreaElement> {
   name: string

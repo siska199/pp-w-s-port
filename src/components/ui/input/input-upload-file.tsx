@@ -1,3 +1,4 @@
+import React, { useEffect, useRef, useState } from 'react'
 import { IconCamera } from '@assets/icons'
 import Avatar from '@components/ui/avatar'
 import Button from '@components/ui/button'
@@ -11,7 +12,7 @@ import {
   handleValidateType
 } from '@lib/helper'
 import { messageError } from '@lib/validation'
-import React, { useEffect, useRef, useState } from 'react'
+
 import {
   TBasePropsInput,
   TCustomeEventOnChange,

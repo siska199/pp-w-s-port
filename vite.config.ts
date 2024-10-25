@@ -1,11 +1,20 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tsconfigPaths from 'vite-tsconfig-paths'
-import svgr from 'vite-plugin-svgr'
 import basicSsl from '@vitejs/plugin-basic-ssl'
+import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
+import checker from 'vite-plugin-checker'
+import svgr from 'vite-plugin-svgr'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
-  plugins: [react(), tsconfigPaths(), svgr(), basicSsl()],
+  plugins: [
+    react(),
+    tsconfigPaths(),
+    svgr(),
+    basicSsl(),
+    checker({
+      typescript: true
+    })
+  ],
   define: {
     global: 'window'
   },

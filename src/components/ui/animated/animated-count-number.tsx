@@ -1,5 +1,5 @@
-import { useInView, useMotionValue, useSpring } from 'framer-motion'
 import React, { useEffect, useRef } from 'react'
+import { useInView, useMotionValue, useSpring } from 'framer-motion'
 
 interface TAnimatedCountNumber extends React.HTMLProps<HTMLSpanElement> {
   number: number

@@ -1,9 +1,9 @@
+import { useEffect } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 import Navbar from '@components/navbar'
 import useCurrentPath from '@hooks/use-current-path'
 import { routes } from '@routes/constant'
 import { useAppSelector } from '@store/store'
-import { useEffect } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
 
 const PublicLayout = () => {
   const navigate = useNavigate()

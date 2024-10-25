@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import InputSelect from '@components/ui/input/input-select'
 import {
   ACTION_TYPE_SOCIAL_LINK,
@@ -5,7 +6,6 @@ import {
 } from '@context/modules/personal-info/social-link-context'
 import { categoriesSocialLink } from '@lib/data/dummy'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
-import { useContext } from 'react'
 
 const FormAddSocialLink = () => {
   const { dispatch, state } = useContext(socialLinkContext)
@@ -20,7 +20,7 @@ const FormAddSocialLink = () => {
   return (
     <div>
       <InputSelect
-        value={state.selectedSocialLinks?.map((data: any) => JSON.stringify(data))}
+        value={state.selectedSocialLinks?.map((data: TObject) => JSON.stringify(data))}
         placeholder='e.g Github, Linkeind, or Whatsapp'
         name='socialLink'
         options={categoriesSocialLink}

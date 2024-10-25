@@ -1,7 +1,7 @@
 import { slideInAnimation } from '@assets/styles/animation'
-import ContainerSection from '@components/ui/container/container-section'
 import { AnimatedCountNumber } from '@components/ui/animated/animated-count-number'
 import Container from '@components/ui/container/container'
+import ContainerSection from '@components/ui/container/container-section'
 import { aboutMeData } from '@lib/data/dummy'
 import { motion } from 'framer-motion'
 
