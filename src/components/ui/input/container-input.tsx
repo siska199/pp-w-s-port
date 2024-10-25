@@ -2,9 +2,8 @@ import { IconClose, IconEye, IconEyeClose } from '@assets/icons';
 import Container from '@components/ui/container/container';
 import HelperMessage from '@components/ui/helper-message';
 import { cn, isEmptyValue } from '@lib/helper';
-
+import { TBasePropsInput } from '@typescript/modules/ui/ui-types';
 import { useState } from 'react';
-import { TBasePropsInput } from 'types/ui-types';
 
 export interface TPropsInput<TInput> extends TBasePropsInput {
   children: React.ReactNode | ((attrsInput: TInput) => React.ReactNode);

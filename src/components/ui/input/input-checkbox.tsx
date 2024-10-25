@@ -1,8 +1,8 @@
 import { IconCheck } from '@assets/icons';
 import Container from '@components/ui/container/container';
 
+import { TBasePropsInput } from '@typescript/modules/ui/ui-types';
 import { useMemo } from 'react';
-import { TBasePropsInput } from 'types/ui-types';
 import HelperMessage from '../helper-message';
 
 interface TProps

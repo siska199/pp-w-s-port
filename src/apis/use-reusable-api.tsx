@@ -1,12 +1,12 @@
 import ENDPOINT from '@apis/constant';
-import useAPI from '@hooks/useAPI';
+import useAPI from '@hooks/use-api';
 
 const useReusableAPI = () => {
   const { apiClient } = useAPI();
 
   const getListProvince = async () => {
     const result = await apiClient({
-      endpoint: ENDPOINT.GET_LIST_PROVINCE,
+      endpoint: ENDPOINT.GENERAL.GET_LIST_PROVINCE,
     });
     return result?.data?.data;
   };
@@ -15,7 +15,7 @@ const useReusableAPI = () => {
     const { apiClient } = useAPI();
 
     return await apiClient({
-      endpoint: ENDPOINT.GET_LIST_CITY,
+      endpoint: ENDPOINT.GENERAL.GET_LIST_CITY,
       queryObject,
     });
   };

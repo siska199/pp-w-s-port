@@ -1,6 +1,6 @@
 import Navbar from '@components/navbar';
 import Sidebar from '@components/sidebar';
-import useCurrentPath from '@hooks/useCurrentPath';
+import useCurrentPath from '@hooks/use-current-path';
 import { routes } from '@routes/constant';
 import { useAppSelector } from '@store/store';
 import { useEffect, useRef } from 'react';

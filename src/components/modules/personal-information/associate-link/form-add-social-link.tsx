@@ -4,8 +4,8 @@ import {
   socialLinkContext,
 } from '@context/modules/personal-info/social-link-context';
 import { categoriesSocialLink } from '@lib/data/dummy';
+import { TEventOnChange } from '@typescript/modules/ui/ui-types';
 import { useContext } from 'react';
-import { TEventOnChange } from 'types/ui-types';
 
 const FormAddSocialLink = () => {
   const { dispatch, state } = useContext(socialLinkContext);

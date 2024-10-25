@@ -13,8 +13,8 @@ import variantsAlert, {
   variantAlertWarning,
 } from '@lib/variant/variant-alert';
 import variant from '@lib/variant/variant-color';
-import { handleSetAlertConfig } from '@store/features/ui/ui-slice';
-import { TAlertConfig } from 'types/ui-types';
+import { handleSetAlertConfig } from '@store/modules/ui/ui-slice';
+import { TAlertConfig } from '@typescript/modules/ui/ui-types';
 
 import { VariantProps, cva } from 'class-variance-authority';
 import { HTMLProps, useEffect, useState } from 'react';

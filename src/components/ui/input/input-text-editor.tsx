@@ -1,11 +1,14 @@
 import ContainerInput from '@components/ui/input/container-input';
 import { ContentState, convertToRaw, EditorState } from 'draft-js';
 import { Editor, EditorProps } from 'react-draft-wysiwyg';
-import { TBasePropsInput, TCustomeEventOnChange } from 'types/ui-types';
 
 import { useState } from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
+import {
+  TBasePropsInput,
+  TCustomeEventOnChange,
+} from '@typescript/modules/ui/ui-types';
 
 interface TProps extends TBasePropsInput, Omit<EditorProps, 'onChange'> {
   value: string;

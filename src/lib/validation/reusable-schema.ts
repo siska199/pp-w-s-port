@@ -1,6 +1,6 @@
 import { handleValidateType } from '@lib/helper';
 import validation, { messageError } from '@lib/validation';
-import { TTypeFile } from 'types/ui-types';
+import { TTypeFile } from '@typescript/modules/ui/ui-types';
 import z, { ZodEffects, ZodOptional, ZodString } from 'zod';
 
 export const zString = <TMandatory extends boolean = true>(params: {

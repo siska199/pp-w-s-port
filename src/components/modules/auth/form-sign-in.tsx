@@ -2,7 +2,7 @@ import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
 import InputBase from '@components/ui/input/input-base';
 import InputCheckbox from '@components/ui/input/input-checkbox';
-import useFormCustome, { TOnFieldChange } from '@hooks/useFormCustome';
+import useFormCustome, { TOnFieldChange } from '@hooks/use-form-custome';
 import {
   initialFormLogin,
   loginDefaultValues,
@@ -10,7 +10,7 @@ import {
   TFormLogin,
 } from '@lib/validation/module/auth/login-schema';
 import { routes } from '@routes/constant';
-import { handleSetAuth } from '@store/features/auth/auth-slice';
+import { handleSetAuth } from '@store/modules/auth/auth-slice';
 import { useAppDispatch } from '@store/store';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';

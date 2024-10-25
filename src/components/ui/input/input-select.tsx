@@ -3,7 +3,7 @@ import IconChevronToggle from '@assets/icons/icon-chevron-down';
 import Badge from '@components/ui/badge';
 import ContainerInput from '@components/ui/input/container-input';
 import InputMultipleCheckbox from '@components/ui/input/input-multiple-checkbox';
-import useOnClickOutside from '@hooks/useOnClickOutside';
+import useOnClickOutside from '@hooks/use-on-click-outside';
 import {
   debounce,
   getFieldLabelFromOptions,
@@ -11,12 +11,13 @@ import {
 } from '@lib/helper';
 import clsx from 'clsx';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+
+import { isEmptyValue } from '../../../lib/helper';
 import {
   TBasePropsInput,
   TCustomeEventOnChange,
   TOption,
-} from 'types/ui-types';
-import { isEmptyValue } from '../../../lib/helper';
+} from '@typescript/modules/ui/ui-types';
 
 export type TPropsInputSelect = {
   name: string;

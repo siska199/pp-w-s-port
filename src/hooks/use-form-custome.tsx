@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { excludeRef } from '@lib/helper';
+import { TEventOnChange } from '@typescript/modules/ui/ui-types';
 import {
   DefaultValues,
   FieldValues,
@@ -8,7 +9,6 @@ import {
   UseFormRegister,
   UseFormSetValue,
 } from 'react-hook-form';
-import { TEventOnChange } from 'types/ui-types';
 import { ZodSchema } from 'zod';
 
 export interface TOnFieldChange<TFormSchema extends FieldValues> {

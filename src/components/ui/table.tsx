@@ -1,4 +1,4 @@
-import { TColumn, TSettingTable } from 'types/ui-types';
+import { TColumn, TSettingTable } from '@typescript/modules/ui/ui-types';
 import React, { useMemo } from 'react';
 import InputCheckbox from '@components/ui/input/input-checkbox';
 import { cn } from '@lib/helper';

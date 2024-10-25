@@ -3,7 +3,7 @@ import {
   socialLinkContext,
   TSocialLink,
 } from '@context/modules/personal-info/social-link-context';
-import { TEventOnChange } from 'types/ui-types';
+import { TEventOnChange } from '@typescript/modules/ui/ui-types';
 import { useContext, useEffect, useState } from 'react';
 import Image from '@components/ui/image';
 import Button from '@components/ui/button';

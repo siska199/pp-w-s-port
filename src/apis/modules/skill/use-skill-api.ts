@@ -1,12 +1,12 @@
 import ENDPOINT from '@apis/constant';
-import useAPI from '@hooks/useAPI';
+import useAPI from '@hooks/use-api';
 
 const useSkillAPI = () => {
   const { apiClient } = useAPI();
 
   const getListSkill = async () => {
     const result = await apiClient({
-      endpoint: ENDPOINT.GET_LIST_SKILL,
+      endpoint: ENDPOINT.SKILL.GET_LIST_SKILL,
     });
     return result?.data?.data;
   };

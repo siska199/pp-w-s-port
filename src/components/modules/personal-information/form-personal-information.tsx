@@ -5,7 +5,7 @@ import InputSelect from '@components/ui/input/input-select';
 import InputTextArea from '@components/ui/input/input-text-area';
 import InputTextEditor from '@components/ui/input/input-text-editor';
 import InputUploadFile from '@components/ui/input/input-upload-file';
-import useFormCustome, { TOnFieldChange } from '@hooks/useFormCustome';
+import useFormCustome, { TOnFieldChange } from '@hooks/use-form-custome';
 import { generateOptions } from '@lib/helper';
 import personalInformationSchema, {
   initialFormPersonalInformation,

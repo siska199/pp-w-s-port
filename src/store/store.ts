@@ -12,9 +12,10 @@ import {
 } from 'redux-persist';
 import { encryptTransform } from 'redux-persist-transform-encrypt';
 import storage from 'redux-persist/lib/storage';
-import authSlice from './features/auth/auth-slice';
-import uiSlice from '@store/features/ui/ui-slice';
+
 import CONFIG from '@lib/config/config';
+import authSlice from '@store/modules/auth/auth-slice';
+import uiSlice from '@store/modules/ui/ui-slice';
 
 const encryptor = encryptTransform({
   secretKey: CONFIG.SECRET_KEY,

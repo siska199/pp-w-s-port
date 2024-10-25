@@ -5,14 +5,14 @@ import {
   skillContext,
   TTypeActionModalFormSkill,
 } from '@context/modules/skill/skill-context';
-import useTable from '@hooks/useTable';
+import useTable from '@hooks/use-table';
 import { skills } from '@lib/data/dummy';
 import { delay } from '@lib/helper';
 import variantBadge from '@lib/variant/variant-badge';
-import { handleSetModalConfirmation } from '@store/features/ui/ui-slice';
+import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice';
 import { useAppDispatch, useAppSelector } from '@store/store';
+import { TSettingTable } from '@typescript/modules/ui/ui-types';
 import { useContext } from 'react';
-import { TSettingTable } from 'types/ui-types';
 
 type TData = (typeof skills)[0];
 
@@ -45,7 +45,7 @@ const TableSkill = () => {
         key: 'level',
         isSorted: true,
         className: '   md:min-w-[10rem]',
-        customeComponent: (data) => {
+        customeComponent: (data: TData) => {
           const level = data.level;
           let variant = 'soft-primary' as keyof typeof variantBadge;
           switch (level) {
@@ -66,7 +66,7 @@ const TableSkill = () => {
         name: 'Related Project',
         key: 'projects',
         className: ' min-w-[15rem]',
-        customeComponent: (data) => {
+        customeComponent: (data: TData) => {
           return (
             <div className="flex flex-col gap-2">
               {data?.projects.map((project, i) => (

@@ -4,7 +4,8 @@ import { generateUrlQueryParams, isEmptyValue } from '@lib/helper';
 import {
   handleSetAlertConfig,
   handleSetIsloading,
-} from '@store/features/ui/ui-slice';
+} from '@store/modules/ui/ui-slice';
+
 import axios, { CancelTokenSource } from 'axios';
 import { useRef, useState } from 'react';
 

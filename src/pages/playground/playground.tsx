@@ -3,7 +3,10 @@ import InputBase from '@components/ui/input/input-base';
 import InputSelect from '@components/ui/input/input-select';
 import InputUploadFile from '@components/ui/input/input-upload-file';
 import { useState } from 'react';
-import { TCustomeEventOnChange, TTypeFile } from 'types/ui-types';
+import {
+  TCustomeEventOnChange,
+  TTypeFile,
+} from '@typescript/modules/ui/ui-types';
 
 const PlaygroundPage = () => {
   const [form, setForm] = useState({

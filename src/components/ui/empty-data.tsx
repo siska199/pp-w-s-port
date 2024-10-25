@@ -1,12 +1,11 @@
-import Image from "@components/ui/image";
-import { cn } from "@lib/helper";
-
+import Image from '@components/ui/image';
+import { cn } from '@lib/helper';
 
 interface TProps {
-  customeClass? : {
-    container?  : string;
-    img?        : string;
-    label?      : string;
+  customeClass?: {
+    container?: string;
+    img?: string;
+    label?: string;
   };
 }
 
@@ -19,9 +18,7 @@ const EmptyData = (props: TProps) => {
         [customeClass?.container || '']: customeClass?.container,
       })}
     >
-      <div
-        className={`${customeClass?.img}`}
-      >
+      <div className={`${customeClass?.img}`}>
         <Image
           className={cn({
             'object-cover': true,

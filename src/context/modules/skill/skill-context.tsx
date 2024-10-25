@@ -6,6 +6,7 @@ import React, { createContext, useReducer } from 'react';
 
 export const ACTION_TYPE_SKILL = {
   SET_MODAL_FORM_SKILL: 'SET_MODAL_FORM_SKILL',
+  SET_MODAL_DETAIL_SKILL: 'SET_MODAL_DETAIL_SKILL:',
   SET_SKILL: 'SET_SKILL',
 } as const;
 
@@ -20,6 +21,9 @@ interface TSkillState {
     isShow: boolean;
     action: TTypeActionModalFormSkill;
   };
+  modalDetailSkill: {
+    isShow: boolean;
+  };
   skill: TFormSkill;
 }
 
@@ -27,6 +31,10 @@ type TSkillAction =
   | {
       type: typeof ACTION_TYPE_SKILL.SET_MODAL_FORM_SKILL;
       payload: Partial<TSkillState['modalFormSkill']>;
+    }
+  | {
+      type: typeof ACTION_TYPE_SKILL.SET_MODAL_DETAIL_SKILL;
+      payload: TSkillState['modalDetailSkill'];
     }
   | {
       type: typeof ACTION_TYPE_SKILL.SET_SKILL;
@@ -45,6 +53,9 @@ const initialValue: TSkillState = {
     isShow: false,
     action: TTypeActionModalFormSkill.ADD,
   },
+  modalDetailSkill: {
+    isShow: false,
+  },
   skill: skillDefaultValues,
 };
 
@@ -62,6 +73,14 @@ const reducer = (state: TSkillState, action: TSkillAction) => {
         ...state,
         modalFormSkill: {
           ...state.modalFormSkill,
+          ...action.payload,
+        },
+      };
+    case ACTION_TYPE_SKILL.SET_MODAL_DETAIL_SKILL:
+      return {
+        ...state,
+        modalDetailSkill: {
+          ...state.modalDetailSkill,
           ...action.payload,
         },
       };

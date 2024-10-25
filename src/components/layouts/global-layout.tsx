@@ -1,10 +1,10 @@
-import useCurrentPath from '@/hooks/useCurrentPath';
+import useCurrentPath from '@hooks/use-current-path';
 import ModalConfirmation from '@components/ui/modal/modal-confirmation';
 import { routes } from '@routes/constant';
-import { handleSetModalConfirmation } from '@store/features/ui/ui-slice';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice';
 interface TPropsGlobalLayout {
   children: React.ReactNode;
 }

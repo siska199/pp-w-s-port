@@ -6,8 +6,12 @@ import {
   skillContext,
   TTypeActionModalFormSkill,
 } from '@context/modules/skill/skill-context';
-import useFormCustome, { TOnFieldChange } from '@hooks/useFormCustome';
-import skillSchema, { initialFormSkill, skillDefaultValues, TFormSkill } from '@lib/validation/module/skill/skill-schema';
+import useFormCustome, { TOnFieldChange } from '@hooks/use-form-custome';
+import skillSchema, {
+  initialFormSkill,
+  skillDefaultValues,
+  TFormSkill,
+} from '@lib/validation/module/skill/skill-schema';
 
 import { useContext, useState } from 'react';
 

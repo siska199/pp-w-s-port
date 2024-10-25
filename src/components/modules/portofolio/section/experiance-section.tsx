@@ -4,7 +4,7 @@ import Container from '@components/ui/container/container';
 import { experiances } from '@lib/data/dummy';
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
-import { useAnimateScrollCustome } from '@hooks/useAnimateScrollCustome';
+import { useAnimateScrollCustome } from '@hooks/use-animate-scroll-custome';
 
 const ExperianceSection = () => {
   return (

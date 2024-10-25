@@ -1,6 +1,6 @@
 import ContainerModal from '@components/ui/modal/container-modal';
-import { TBaseModal } from 'types/ui-types';
 import Button from '../button';
+import { TBaseModal } from '@typescript/modules/ui/ui-types';
 
 export interface TPropsModalConfirmation extends Omit<TBaseModal, 'onClose'> {
   title?: string;

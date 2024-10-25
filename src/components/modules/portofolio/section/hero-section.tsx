@@ -5,7 +5,7 @@ import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
 import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
-import useMediaQuery from '@hooks/useMediaQuery';
+import useMediaQuery from '@hooks/use-media-query';
 import { socialLinks } from '@lib/data/dummy';
 import { motion } from 'framer-motion';
 
