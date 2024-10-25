@@ -1,8 +1,8 @@
-import IntroductionSection from '@components/modules/project-detail/introduction-section';
-import MenuSection from '@components/modules/project-detail/menu-section';
-import TechStackSection from '@components/modules/project-detail/tech-stack-section';
-import ContainerLandingPage from '@components/ui/container/container-landing-page';
-import ResponsibilitySection from '@components/modules/project-detail/responsibility-section';
+import IntroductionSection from "@components/modules/project/project-detail/introduction-section";
+import MenuSection from "@components/modules/project/project-detail/menu-section";
+import ResponsibilitySection from "@components/modules/project/project-detail/responsibility-section";
+import TechStackSection from "@components/modules/project/project-detail/tech-stack-section";
+import ContainerLandingPage from "@components/ui/container/container-landing-page";
 
 const ProjectDetailPage = () => {
   return (

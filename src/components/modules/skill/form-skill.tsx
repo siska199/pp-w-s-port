@@ -28,9 +28,11 @@ const FormSkill = () => {
       onFieldChange: handleFieldChange,
     });
 
-  const [formStaticAttrs, setFormStaticAttrs] = useState(initialFormSkill);
+  const [formStaticAttrs] = useState(initialFormSkill);
 
-  function handleFieldChange(params: TOnFieldChange<TFormSkill>) {}
+  function handleFieldChange(params: TOnFieldChange<TFormSkill>) {
+    console.log('params: ', params);
+  }
 
   const handleOnSubmit = handleSubmit(async (data) => {
     console.log('data: ', data);

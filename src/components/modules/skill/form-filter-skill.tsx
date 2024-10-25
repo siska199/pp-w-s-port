@@ -1,8 +1,8 @@
-import { IconSearch } from '@assets/icons';
-import InputBase from '@components/ui/input/input-base';
-import InputSelect from '@components/ui/input/input-select';
-import { useState } from 'react';
-import { TCustomeEventOnChange } from '@typescript/modules/ui/ui-types';
+import { IconSearch } from "@assets/icons";
+import InputBase from "@components/ui/input/input-base";
+import InputSelect from "@components/ui/input/input-select";
+import { TCustomeEventOnChange } from "@typescript/modules/ui/ui-types";
+import { useState } from "react";
 
 const FormFilterSKill = () => {
   const [form, setForm] = useState({
@@ -22,11 +22,11 @@ const FormFilterSKill = () => {
       ],
       placeholder: 'Category Skill',
     },
-    yearsOfexperiance: {
-      name: 'yearsOfexperiance',
-      options: [...Array(40)]?.map((data, i) => ({
-        label: `${i + 1} year`,
-        value: `${i + 1}`,
+    yearsOfexperiance : {
+      name : 'yearsOfexperiance',
+      options :[...Array(40)]?.map((data,i)=>({
+        label : `${i+1} year`,
+        value : `${i+1}`
       })),
       value: '',
       placeholder: 'Year of experiance',

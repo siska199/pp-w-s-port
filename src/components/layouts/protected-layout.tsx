@@ -13,6 +13,8 @@ const Protectedlayout = () => {
   const navigate = useNavigate();
   const { currentPath } = useCurrentPath();
 
+  console.log('current path: ', currentPath);
+
   useEffect(() => {
     if (!isAuthenticated)
       navigate(routes?.auth?.child?.signIn?.fullPath || '', { replace: true });

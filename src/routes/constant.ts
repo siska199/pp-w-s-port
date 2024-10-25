@@ -64,6 +64,11 @@ const route = {
           publicNavbar: true,
         },
       },
+      form: {
+        name: 'form',
+        fullPath: '/project/form',
+        isPrivate: true,
+      },
     },
   },
   certification: {

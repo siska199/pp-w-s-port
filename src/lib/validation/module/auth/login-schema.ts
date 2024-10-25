@@ -6,7 +6,7 @@ export const loginSchema = z.object({
   username: zString<true>({ name: 'username' }),
   password: zPassword<true>(),
   isRememberMe: zEnum<['false', 'true']>({
-    name: 'isRememberMe',
+    name: 'Is Remember Me',
     enum: ['false', 'true'],
     mandatory: false,
   }),

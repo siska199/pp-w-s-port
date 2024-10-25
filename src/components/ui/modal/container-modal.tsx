@@ -20,7 +20,6 @@ const ContainerModal = (props: TModalProps) => {
   const {
     isShow,
     customeClass,
-    className,
     title,
     onClose: handleOnClose,
     children,

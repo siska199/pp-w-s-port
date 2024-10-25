@@ -1,12 +1,12 @@
-import HeaderProject from '@components/modules/project/header-project';
 import ContainerProtectedPage from '@components/ui/container/container-protected-page';
+import HeaderPage from '@components/ui/header-page';
 
-const ProjectPage = () => {
+const ProjectForm = () => {
   return (
     <ContainerProtectedPage className="space-y-8">
-      <HeaderProject />
+      <HeaderPage title="Form Project" />
     </ContainerProtectedPage>
   );
 };
 
-export default ProjectPage;
+export default ProjectForm;
