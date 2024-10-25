@@ -6,12 +6,8 @@ import {
   skillContext,
   TTypeActionModalFormSkill,
 } from '@context/modules/skill/skill-context';
-import useFormCustome, { TOnFieldChange } from '@hooks/use-form-custome';
-import skillSchema, {
-  initialFormSkill,
-  skillDefaultValues,
-  TFormSkill,
-} from '@lib/validation/module/skill/skill-schema';
+import { initialFormSkill } from '@lib/validation/module/skill/skill-schema';
+import { TEventOnChange } from '@typescript/modules/ui/ui-types';
 
 import { useContext, useState } from 'react';
 
@@ -21,22 +17,7 @@ const FormSkill = () => {
     dispatch,
   } = useContext(skillContext);
 
-  const { handleSubmit, handleGetAttrs, handleOnChange, reset } =
-    useFormCustome<TFormSkill>({
-      formSchema: skillSchema,
-      defaultValues: skillDefaultValues,
-      onFieldChange: handleFieldChange,
-    });
-
-  const [formStaticAttrs] = useState(initialFormSkill);
-
-  function handleFieldChange(params: TOnFieldChange<TFormSkill>) {
-    console.log('params: ', params);
-  }
-
-  const handleOnSubmit = handleSubmit(async (data) => {
-    console.log('data: ', data);
-  });
+  const [form, setForm] = useState(initialFormSkill);
 
   const handlleCloseFormSkill = () => {
     dispatch({
@@ -45,8 +26,20 @@ const FormSkill = () => {
         isShow: false,
       },
     });
-    reset();
   };
+
+  const handleOnChange = (e: TEventOnChange) => {
+    const name = e.target.name as keyof typeof form;
+    const value = e.target.value;
+    const currForm = form;
+    currForm[name] = value;
+
+    setForm({
+      ...currForm,
+    });
+  };
+
+  const handleOnSubmit = () => {};
 
   return (
     <ContainerModal
@@ -69,32 +62,19 @@ const FormSkill = () => {
         mdModal: '!overflow-visible',
       }}
     >
-      <form onSubmit={handleOnSubmit} className="space-y-4 w-full mx-auto">
+      <form className="space-y-4 w-full mx-auto">
         <div className="grid md:grid-cols-2 gap-4">
+          <InputSelect {...form['id_category']} onChange={handleOnChange} />
+          <InputSelect {...form['skill']} onChange={handleOnChange} />
+        </div>
+        <div className="grid md:grid-cols-2 gap-4">
+          <InputSelect {...form['level']} onChange={handleOnChange} />
           <InputSelect
-            {...handleGetAttrs('category')}
-            {...formStaticAttrs['category']}
-            onChange={handleOnChange}
-          />
-          <InputSelect
-            {...handleGetAttrs('skill')}
-            {...formStaticAttrs['skill']}
+            {...form['year_of_experiance']}
             onChange={handleOnChange}
           />
         </div>
-        <div className="grid md:grid-cols-2 gap-4">
-          <InputSelect
-            {...handleGetAttrs('level')}
-            {...formStaticAttrs['level']}
-            onChange={handleOnChange}
-          />
-          <InputSelect
-            {...handleGetAttrs('yearOfExperiance')}
-            {...formStaticAttrs['yearOfExperiance']}
-            onChange={handleOnChange}
-          />
-        </div>
-        <Button type="submit" className="ml-auto">
+        <Button type="submit" onClick={handleOnSubmit} className="ml-auto">
           Save
         </Button>
       </form>

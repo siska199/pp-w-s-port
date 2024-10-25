@@ -1,4 +1,4 @@
-import FormSignIn from '@components/modules/auth/form-sign-in';
+import FormSignIn from '@components/modules/auth/form-login';
 
 const SignInPage = () => {
   return (

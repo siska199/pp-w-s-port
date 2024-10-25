@@ -1,7 +1,11 @@
 import clsx, { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { TOption, TTypeFile } from '@typescript/modules/ui/ui-types';
-import z, { ZodType } from 'zod';
+import {
+  TBasePropsInput,
+  TOption,
+  TTypeFile,
+} from '@typescript/modules/ui/ui-types';
+import z, { ZodSchema, ZodType } from 'zod';
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
@@ -190,4 +194,41 @@ export const generateOptionsFromEnum = (
     label: enumObject[key],
     value: enumObject[key],
   }));
+};
+
+export const generateFileFromUrl = async (url: string) => {
+  const result = await fetch(url).then((r) => r.blob());
+  console.log('result: ', result);
+  return result;
+};
+
+interface TMappingErrorsToForm<TSchema, TForm extends TObject> {
+  schema: ZodSchema<TSchema>;
+  form: TForm;
+}
+
+export const mappingErrorsToForm = <TSchema, TForm extends TObject>(
+  params: TMappingErrorsToForm<TSchema, TForm>
+) => {
+  const { schema, form } = params;
+  let isValid = true;
+
+  const result = schema.safeParse(
+    Object.keys(form).reduce((acc, key) => {
+      acc[key] = form[key as keyof TForm].value;
+      return acc;
+    }, {} as TObject)
+  );
+
+  if (!result?.success) {
+    const errors = result?.error?.flatten()?.fieldErrors;
+    Object?.keys(form)?.reduce((acc, key) => {
+      form[key as keyof TForm].errorMessage =
+        errors[key as keyof TForm]?.[0] || '';
+      if (errors[key as keyof TForm]?.[0]) isValid = false;
+      return acc;
+    }, {} as TObject);
+  }
+
+  return { isValid, updatedForm: form };
 };

@@ -3,7 +3,7 @@ import { zString } from '@lib/validation/reusable-schema';
 import z from 'zod';
 
 const skillSchema = z.object({
-  category: zString({ name: 'Category' }),
+  id_category: zString({ name: 'Category' }),
   skill: zString({ name: 'Skill' }),
   level: zString({ name: 'Level' }),
   yearOfExperiance: zString({
@@ -12,22 +12,26 @@ const skillSchema = z.object({
 });
 
 export const initialFormSkill = {
-  category: {
+  id_category: {
+    name: 'id_category',
     label: 'Category',
     placeholder: 'Select a category',
     options: [],
   },
   skill: {
+    name: 'skill',
     label: 'Skill',
     placeholder: 'Select a skill',
     options: [],
   },
   level: {
+    name: 'level',
     label: 'Level',
     placeholder: 'Select a level',
     options: [],
   },
-  yearOfExperiance: {
+  year_of_experiance: {
+    name: 'year_of_experiance',
     label: 'Year of Experience',
     placeholder: 'Select years of experience',
     options: [],

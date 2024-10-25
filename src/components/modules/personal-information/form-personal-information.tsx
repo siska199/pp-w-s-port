@@ -1,31 +1,19 @@
-import useReusableAPI from '@apis/use-reusable-api';
+import useGeneralAPI from '@apis/use-general-api';
 import Button from '@components/ui/button';
 import InputBase from '@components/ui/input/input-base';
 import InputSelect from '@components/ui/input/input-select';
 import InputTextArea from '@components/ui/input/input-text-area';
 import InputTextEditor from '@components/ui/input/input-text-editor';
 import InputUploadFile from '@components/ui/input/input-upload-file';
-import useFormCustome, { TOnFieldChange } from '@hooks/use-form-custome';
 import { generateOptions } from '@lib/helper';
-import personalInformationSchema, {
-  initialFormPersonalInformation,
-  personalInformationDefaultValues,
-  TFormPersonalInformation,
-} from '@lib/validation/module/personal-information/personal-information-schema';
+import { initialFormPersonalInformation } from '@lib/validation/module/personal-information/personal-information-schema';
+import { TEventOnChange } from '@typescript/modules/ui/ui-types';
 import { useEffect, useState } from 'react';
 
 const FormPersonlaInformation = () => {
-  const { getListProvince } = useReusableAPI();
-  const { handleSubmit, handleGetAttrs, watch, reset, handleOnChange } =
-    useFormCustome<TFormPersonalInformation>({
-      formSchema: personalInformationSchema,
-      defaultValues: personalInformationDefaultValues,
-      onFieldChange: handleFieldChange,
-    });
+  const { getListProvince } = useGeneralAPI();
 
-  const [formStaticAttrs, setFormStaticAttrs] = useState(
-    initialFormPersonalInformation
-  );
+  const [form, setForm] = useState(initialFormPersonalInformation);
 
   useEffect(() => {
     handleInitialData();
@@ -33,100 +21,64 @@ const FormPersonlaInformation = () => {
 
   const handleInitialData = async () => {
     const provinces = await getListProvince();
-    formStaticAttrs['province'].options = generateOptions({
+    form['id_province'].options = generateOptions({
       options: provinces,
       labelName: 'name',
-      valueName: 'code',
+      valueName: 'id',
     });
-    setFormStaticAttrs({ ...formStaticAttrs });
+
+    setForm({ ...form });
   };
 
-  function handleFieldChange(params: TOnFieldChange<TFormPersonalInformation>) {
-    const { fieldName } = params;
-    const currentValues = watch();
+  const handleOnChange = (e: TEventOnChange) => {
+    const currForm = form;
+    const name = e.target.name as keyof typeof form;
+    const value = e.target.value;
+    currForm[name] = value;
 
-    if (fieldName === 'province') {
-      currentValues.city = '';
-      currentValues.district = '';
-      currentValues.postalCode = '';
+    if (name == 'id_province') {
+      currForm['id_city'].value = '';
+      currForm['id_district'].value = '';
+      currForm['id_postal_code'].value = '';
     }
 
-    if (fieldName === 'city') {
-      currentValues.district = '';
+    if (name == 'id_city') {
+      currForm['id_district'].value = '';
+      currForm['id_postal_code'].value = '';
     }
 
-    if (fieldName === 'district') {
-      currentValues.postalCode = '';
+    if (name == 'id_district') {
+      currForm['id_postal_code'].value = '';
     }
 
-    formStaticAttrs['city'].disabled = !currentValues.province;
-    formStaticAttrs['district'].disabled = !currentValues.city;
-    formStaticAttrs['postalCode'].disabled = !currentValues.district;
+    if (['id_city', 'id_province', 'id_postalcode']?.includes(name)) {
+      form['id_city'].disabled = !currForm.id_province.value;
+      form['id_district'].disabled = !currForm.id_city.value;
+      form['id_postal_code'].disabled = !currForm.id_district.value;
+    }
 
-    reset({
-      ...currentValues,
+    setForm({
+      ...currForm,
     });
-    setFormStaticAttrs({ ...formStaticAttrs });
-  }
-
-  const handleOnSubmit = handleSubmit(async (data) => {
-    console.log('data: ', data);
-  });
+  };
 
   return (
-    <form onSubmit={handleOnSubmit} className="space-y-4">
+    <form className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
-        <InputBase
-          {...handleGetAttrs('firstName')}
-          {...formStaticAttrs['firstName']}
-          onChange={handleOnChange}
-        />
-        <InputBase
-          {...handleGetAttrs('lastName')}
-          {...formStaticAttrs['lastName']}
-          onChange={handleOnChange}
-        />
+        <InputBase {...form['first_name']} onChange={handleOnChange} />
+        <InputBase {...form['last_name']} onChange={handleOnChange} />
       </div>
-      <InputBase
-        {...handleGetAttrs('profession')}
-        {...formStaticAttrs['profession']}
-        onChange={handleOnChange}
-      />
+      <InputBase {...form['id_profession']} onChange={handleOnChange} />
       <div className="grid grid-cols-2 gap-4">
-        <InputSelect
-          {...handleGetAttrs('province')}
-          {...formStaticAttrs['province']}
-          onChange={handleOnChange}
-        />
-        <InputSelect
-          {...handleGetAttrs('city')}
-          {...formStaticAttrs['city']}
-          onChange={handleOnChange}
-        />
-        <InputSelect
-          {...handleGetAttrs('district')}
-          {...formStaticAttrs['district']}
-          onChange={handleOnChange}
-        />
-        <InputSelect
-          {...handleGetAttrs('postalCode')}
-          {...formStaticAttrs['postalCode']}
-          onChange={handleOnChange}
-        />
+        <InputSelect {...form['id_province']} onChange={handleOnChange} />
+        <InputSelect {...form['id_city']} onChange={handleOnChange} />
+        <InputSelect {...form['id_district']} onChange={handleOnChange} />
+        <InputSelect {...form['id_postal_code']} onChange={handleOnChange} />
       </div>
-      <InputTextArea
-        {...handleGetAttrs('bio')}
-        {...formStaticAttrs['bio']}
-        onChange={handleOnChange}
-      />
-      <InputTextEditor
-        {...handleGetAttrs('aboutMe')}
-        {...formStaticAttrs['aboutMe']}
-        onChange={handleOnChange}
-      />
+      <InputTextArea {...form['bio']} onChange={handleOnChange} />
+      <InputTextEditor {...form['about_me']} onChange={handleOnChange} />
       <InputUploadFile
-        {...handleGetAttrs('professionalImage')}
-        {...formStaticAttrs['professionalImage']}
+        {...form['professional_image']}
         onChange={handleOnChange}
       />
 

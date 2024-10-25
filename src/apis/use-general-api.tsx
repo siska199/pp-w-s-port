@@ -1,7 +1,7 @@
 import ENDPOINT from '@apis/constant';
 import useAPI from '@hooks/use-api';
 
-const useReusableAPI = () => {
+const useGeneralAPI = () => {
   const { apiClient } = useAPI();
 
   const getListProvince = async () => {
@@ -25,4 +25,4 @@ const useReusableAPI = () => {
   };
 };
 
-export default useReusableAPI;
+export default useGeneralAPI;

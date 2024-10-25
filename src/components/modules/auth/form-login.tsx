@@ -2,16 +2,16 @@ import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
 import InputBase from '@components/ui/input/input-base';
 import InputCheckbox from '@components/ui/input/input-checkbox';
-import useFormCustome, { TOnFieldChange } from '@hooks/use-form-custome';
+import { mappingErrorsToForm } from '@lib/helper';
 import {
   initialFormLogin,
-  loginDefaultValues,
   loginSchema,
   TFormLogin,
 } from '@lib/validation/module/auth/login-schema';
 import { routes } from '@routes/constant';
 import { handleSetAuth } from '@store/modules/auth/auth-slice';
 import { useAppDispatch } from '@store/store';
+import { TEventOnChange } from '@typescript/modules/ui/ui-types';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,23 +24,39 @@ const FormLogin = (props: TPropsFormLogin) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { handleSubmit, handleGetAttrs, handleOnChange } = useFormCustome({
-    formSchema: loginSchema,
-    defaultValues: loginDefaultValues,
-    onFieldChange: handleFieldChange,
-  });
+  const [form, setForm] = useState(initialFormLogin);
 
-  const [formStaticAttrs] = useState(initialFormLogin);
+  const handleOnChange = (e: TEventOnChange) => {
+    const currForm = form;
+    const name = e.target.name as keyof typeof form;
+    const value = e.target.value;
+    currForm[name] = value;
 
-  function handleFieldChange(params: TOnFieldChange<TFormLogin>) {
-    console.log('params: ', params);
-  }
+    setForm({
+      ...currForm,
+    });
+  };
 
-  const handleOnSubmit = handleSubmit(async (data) => {
-    console.log('data: ', data);
-    dispatch(handleSetAuth(true));
-    navigate(routes.personalInformation.fullPath);
-  });
+  const handleOnSubmit = (
+    e: React.MouseEvent<HTMLButtonElement | HTMLLinkElement, MouseEvent>
+  ) => {
+    e?.preventDefault();
+    const { isValid, updatedForm } = mappingErrorsToForm<
+      TFormLogin,
+      typeof form
+    >({
+      form,
+      schema: loginSchema,
+    });
+
+    if (isValid) {
+      dispatch(handleSetAuth(true));
+      navigate(routes.personalInformation.fullPath);
+    }
+    setForm({
+      ...updatedForm,
+    });
+  };
 
   return (
     <Container
@@ -54,24 +70,11 @@ const FormLogin = (props: TPropsFormLogin) => {
           Welcome back! Please enter your details.
         </p>
       </div>
-      <form onSubmit={handleOnSubmit} className="flex flex-col gap-4 w-full">
-        <InputBase
-          {...handleGetAttrs('username')}
-          {...formStaticAttrs['username']}
-          onChange={handleOnChange}
-        />
-        <InputBase
-          {...handleGetAttrs('password')}
-          {...formStaticAttrs['password']}
-          onChange={handleOnChange}
-        />
+      <form className="flex flex-col gap-4 w-full">
+        <InputBase {...form['username']} onChange={handleOnChange} />
+        <InputBase {...form['password']} onChange={handleOnChange} />
         <div className="flex justify-between items-center gap-2">
-          <InputCheckbox
-            {...formStaticAttrs['isRememberMe']}
-            {...handleGetAttrs('isRememberMe')}
-            value={handleGetAttrs('isRememberMe')?.value || 'false'}
-            onChange={handleOnChange}
-          />
+          <InputCheckbox {...form['isRememberMe']} onChange={handleOnChange} />
           <Button
             variant={'link-black'}
             className=" text-white  underline !p-0"
@@ -80,7 +83,7 @@ const FormLogin = (props: TPropsFormLogin) => {
             Forget Password
           </Button>
         </div>
-        <Button type="submit" className="w-full">
+        <Button onClick={handleOnSubmit} type="submit" className="w-full">
           Sign In
         </Button>
       </form>
