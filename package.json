@@ -8,6 +8,7 @@
     "lint": "eslint \"src/**/*.{ts,tsx,js,jsx,json}\"",
     "lint:fix": "npm run lint -- --fix",
     "dev": "vite",
+    "dev-expose": "vite --host",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
