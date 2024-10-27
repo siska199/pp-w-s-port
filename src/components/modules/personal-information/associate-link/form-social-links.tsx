@@ -18,9 +18,11 @@ const FormSocialLinks = () => {
 
   useEffect(() => {
     const updateListFormSocialLink = selectedSocialLinks?.map((data: TSocialLink) => {
+      const prevData = listFormSocialLink?.find((form) => form.name === data.name)
       const result = {
         ...data,
-        value: data.defaultValue || ''
+        value: data.defaultValue || '',
+        ...prevData
       }
       delete result.defaultValue
       return result
@@ -41,7 +43,7 @@ const FormSocialLinks = () => {
     try {
       let isValid = true
       const updatelistFormSocialLink = listFormSocialLink?.map((form) => {
-        const result = socialLinkSchema.safeParse({ url: form.value })
+        const result = socialLinkSchema(form.name).safeParse({ url: form.value })
         if (!result.success) isValid = false
         return {
           ...form,

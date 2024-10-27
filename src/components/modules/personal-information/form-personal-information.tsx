@@ -13,15 +13,20 @@ import personalInformationSchema, {
 } from '@lib/validation/module/personal-information/personal-information-schema'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
 
+import { deepCopy } from '../../../lib/helper'
+
 const FormPersonlaInformation = () => {
   const { getListProvince, getListCity, getListDistrict, getListProfession, getListPostalCode } =
     useGeneralAPI()
 
-  const [form, setForm] = useState(initialFormPersonalInformation)
+  const [form, setForm] = useState(deepCopy(initialFormPersonalInformation))
   type TKeyForm = keyof typeof form
 
   useEffect(() => {
     handleInitialData()
+    return () => {
+      setForm({ ...initialFormPersonalInformation })
+    }
   }, [])
 
   const handleInitialData = async () => {

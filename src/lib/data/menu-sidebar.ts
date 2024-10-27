@@ -8,6 +8,12 @@ const menuSidebar = [
     name: 'personal-information'
   },
   {
+    title: 'Education',
+    src: 'sidebar/education.png',
+    url: routes.education.fullPath,
+    name: 'education'
+  },
+  {
     title: 'Skill',
     src: 'sidebar/skill.png',
     url: routes.skill.fullPath,
@@ -18,12 +24,6 @@ const menuSidebar = [
     src: 'sidebar/experiance.png',
     url: routes.experiance.fullPath,
     name: 'experiance'
-  },
-  {
-    title: 'Education',
-    src: 'sidebar/education.png',
-    url: routes.education.fullPath,
-    name: 'education'
   },
   {
     title: 'Project',

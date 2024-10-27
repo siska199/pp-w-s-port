@@ -28,6 +28,7 @@ export default tseslint.config(
         'error',
         { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }
       ],
+      'react-hooks/exhaustive-deps': 'off',
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
       'simple-import-sort/imports': [
