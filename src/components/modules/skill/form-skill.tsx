@@ -2,12 +2,9 @@ import { useContext, useState } from 'react'
 import Button from '@components/ui/button'
 import InputSelect from '@components/ui/input/input-select'
 import ContainerModal from '@components/ui/modal/container-modal'
-import {
-  ACTION_TYPE_SKILL,
-  skillContext,
-  TTypeActionModalFormSkill
-} from '@context/modules/skill/skill-context'
+import { ACTION_TYPE_SKILL, skillContext } from '@context/modules/skill/skill-context'
 import { initialFormSkill } from '@lib/validation/module/skill/skill-schema'
+import { TTypeActionModalForm } from '@typescript/global.d'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
 
 const FormSkill = () => {
@@ -48,7 +45,7 @@ const FormSkill = () => {
         <>
           <div>Form Skill</div>
           <div className='text-body-base font-normal'>
-            Action: {modalFormSkill.action === TTypeActionModalFormSkill.ADD ? 'Add' : 'Edit'}
+            Action: {modalFormSkill.action === TTypeActionModalForm.ADD ? 'Add' : 'Edit'}
           </div>
         </>
       }
@@ -61,7 +58,7 @@ const FormSkill = () => {
       <form className='space-y-4 w-full mx-auto'>
         <div className='grid md:grid-cols-2 gap-4'>
           <InputSelect {...form['id_category']} onChange={handleOnChange} />
-          <InputSelect {...form['skill']} onChange={handleOnChange} />
+          <InputSelect {...form['id_skill']} onChange={handleOnChange} />
         </div>
         <div className='grid md:grid-cols-2 gap-4'>
           <InputSelect {...form['level']} onChange={handleOnChange} />

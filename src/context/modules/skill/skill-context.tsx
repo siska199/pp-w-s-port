@@ -1,5 +1,7 @@
 import React, { createContext, useReducer } from 'react'
-import { skillDefaultValues, TFormSkill } from '@lib/validation/module/skill/skill-schema'
+import { extractValueFromForm } from '@lib/helper'
+import { initialFormSkill, TFormSkill } from '@lib/validation/module/skill/skill-schema'
+import { TTypeActionModalForm } from '@typescript/global.d'
 
 export const ACTION_TYPE_SKILL = {
   SET_MODAL_FORM_SKILL: 'SET_MODAL_FORM_SKILL',
@@ -7,19 +9,11 @@ export const ACTION_TYPE_SKILL = {
   SET_SKILL: 'SET_SKILL'
 } as const
 
-export enum TTypeActionModalFormSkill {
-  EDIT = 'EDIT',
-  ADD = 'ADD'
-}
-
 /*-----------------------------------------------------------------------------------------*/
 interface TSkillState {
   modalFormSkill: {
     isShow: boolean
-    action: TTypeActionModalFormSkill
-  }
-  modalDetailSkill: {
-    isShow: boolean
+    action: TTypeActionModalForm
   }
   skill: TFormSkill
 }
@@ -28,10 +22,6 @@ type TSkillAction =
   | {
       type: typeof ACTION_TYPE_SKILL.SET_MODAL_FORM_SKILL
       payload: Partial<TSkillState['modalFormSkill']>
-    }
-  | {
-      type: typeof ACTION_TYPE_SKILL.SET_MODAL_DETAIL_SKILL
-      payload: TSkillState['modalDetailSkill']
     }
   | {
       type: typeof ACTION_TYPE_SKILL.SET_SKILL
@@ -48,12 +38,9 @@ interface TSkillContext {
 const initialValue: TSkillState = {
   modalFormSkill: {
     isShow: false,
-    action: TTypeActionModalFormSkill.ADD
+    action: TTypeActionModalForm.ADD
   },
-  modalDetailSkill: {
-    isShow: false
-  },
-  skill: skillDefaultValues
+  skill: extractValueFromForm(initialFormSkill)
 }
 
 const defaultDispatch: React.Dispatch<TSkillAction> = () => initialValue
@@ -70,14 +57,6 @@ const reducer = (state: TSkillState, action: TSkillAction) => {
         ...state,
         modalFormSkill: {
           ...state.modalFormSkill,
-          ...action.payload
-        }
-      }
-    case ACTION_TYPE_SKILL.SET_MODAL_DETAIL_SKILL:
-      return {
-        ...state,
-        modalDetailSkill: {
-          ...state.modalDetailSkill,
           ...action.payload
         }
       }

@@ -1,17 +1,14 @@
 import { useContext } from 'react'
 import Badge from '@components/ui/badge'
 import Table from '@components/ui/table'
-import {
-  ACTION_TYPE_SKILL,
-  skillContext,
-  TTypeActionModalFormSkill
-} from '@context/modules/skill/skill-context'
+import { ACTION_TYPE_SKILL, skillContext } from '@context/modules/skill/skill-context'
 import useTable from '@hooks/use-table'
 import { skills } from '@lib/data/dummy'
 import { delay } from '@lib/helper'
 import variantBadge from '@lib/variant/variant-badge'
 import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
+import { TTypeActionModalForm } from '@typescript/global.d'
 import { TSettingTable } from '@typescript/modules/ui/ui-types'
 
 type TData = (typeof skills)[0]
@@ -96,16 +93,16 @@ const TableSkill = () => {
       type: ACTION_TYPE_SKILL.SET_MODAL_FORM_SKILL,
       payload: {
         isShow: true,
-        action: TTypeActionModalFormSkill.EDIT
+        action: TTypeActionModalForm.EDIT
       }
     })
     dispatch({
       type: ACTION_TYPE_SKILL.SET_SKILL,
       payload: {
         id_category: '',
-        skill: '',
+        id_skill: '',
         level: '',
-        yearOfExperiance: ''
+        year_of_experiance: ''
       }
     })
   }

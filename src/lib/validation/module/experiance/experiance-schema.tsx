@@ -1,5 +1,6 @@
 import appMessage from '@lib/data/app-message'
 import { zString } from '@lib/validation/reusable-schema'
+import { TObject } from '@typescript/global.d'
 import z from 'zod'
 
 const experianceSchema = z.object({
@@ -10,7 +11,9 @@ const experianceSchema = z.object({
   description: zString({ name: 'Description', max: 1000 })
 })
 
-export const initialFormExperiance = {
+export type TFormExperiance = z.input<typeof experianceSchema>
+
+export const initialFormExperiance: Record<keyof TFormExperiance, TObject> = {
   id_company: {
     name: 'id_company',
     label: 'Company',
@@ -18,7 +21,7 @@ export const initialFormExperiance = {
     options: [],
     value: ''
   },
-  skill: {
+  id_profession: {
     name: 'profession',
     label: 'Profession',
     placeholder: appMessage.inputSelectPlaceholder('profession'),
@@ -34,9 +37,12 @@ export const initialFormExperiance = {
     name: 'end_at',
     label: 'End At',
     value: null
+  },
+  description: {
+    name: 'description',
+    label: 'Description',
+    value: ''
   }
 }
-
-export type TFormExperiance = z.input<typeof experianceSchema>
 
 export default experianceSchema

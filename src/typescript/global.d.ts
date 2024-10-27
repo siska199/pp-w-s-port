@@ -10,3 +10,8 @@ interface TPaginationQueryParams {
   sort_by: string
   sort_dir: TSettingTable<TObject>['sortDir']
 }
+
+export enum TTypeActionModalForm {
+  EDIT = 'EDIT',
+  ADD = 'ADD'
+}

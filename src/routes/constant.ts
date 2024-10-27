@@ -21,24 +21,31 @@ const route = {
       signIn: {
         name: 'sign-in',
         fullPath: '/auth/sign-in',
-        isPrivate: false,
+        isPrivate: false
       },
       signUp: {
         name: 'sign-up',
         fullPath: '/auth/sign-up',
-        isPrivate: false,
+        isPrivate: false
       }
     }
   },
   personalInformation: {
     name: 'personal-information',
     fullPath: '/personal-information',
-    isPrivate: true,
+    isPrivate: true
   },
   skill: {
     name: 'skill',
     fullPath: '/skill',
     isPrivate: true,
+    child: {
+      detail: {
+        name: 'detail',
+        fullPath: (id: string) => `/skill/detail/${id}`,
+        isPrivate: true
+      }
+    }
   },
   experiance: {
     name: 'experiance',

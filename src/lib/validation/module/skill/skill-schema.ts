@@ -1,15 +1,16 @@
-import { generateDefaultValue } from '@lib/helper'
 import { zString } from '@lib/validation/reusable-schema'
 import z from 'zod'
 
 const skillSchema = z.object({
   id_category: zString({ name: 'Category' }),
-  skill: zString({ name: 'Skill' }),
+  id_skill: zString({ name: 'Skill' }),
   level: zString({ name: 'Level' }),
-  yearOfExperiance: zString({
+  year_of_experiance: zString({
     name: 'Year of Experiance'
   })
 })
+
+export type TFormSkill = z.input<typeof skillSchema>
 
 export const initialFormSkill = {
   id_category: {
@@ -18,8 +19,8 @@ export const initialFormSkill = {
     placeholder: 'Select a category',
     options: []
   },
-  skill: {
-    name: 'skill',
+  id_skill: {
+    name: 'id_skill',
     label: 'Skill',
     placeholder: 'Select a skill',
     options: []
@@ -37,13 +38,5 @@ export const initialFormSkill = {
     options: []
   }
 }
-
-export const skillDefaultValues = {
-  ...generateDefaultValue(skillSchema),
-  level: '',
-  yearOfExperiance: ''
-} as TFormSkill
-
-export type TFormSkill = z.input<typeof skillSchema>
 
 export default skillSchema

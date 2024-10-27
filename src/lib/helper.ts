@@ -1,3 +1,4 @@
+import { TObject } from '@typescript/global.d'
 import { TOption, TTypeFile } from '@typescript/modules/ui/ui-types'
 import clsx, { ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
@@ -179,6 +180,15 @@ export const generateFileFromUrl = async (url: string) => {
   const result = await fetch(url).then((r) => r.blob())
   console.log('result: ', result)
   return result
+}
+
+export const extractValueFromForm = <TForm extends TObject>(
+  form: TForm
+): { [key in keyof TForm]: any } => {
+  Object.keys(form).map((key: keyof TForm) => {
+    form[key] = form[key]?.value
+  })
+  return form
 }
 
 interface TMappingErrorsToForm<TSchema, TForm extends TObject> {

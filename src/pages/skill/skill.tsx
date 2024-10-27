@@ -5,7 +5,7 @@ import TableSkill from '@components/modules/skill/table-skill'
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'
 import { SkillContextProvider } from '@context/modules/skill/skill-context'
 
-const Skill = () => {
+const SkillPage = () => {
   return (
     <SkillContextProvider>
       <ContainerProtectedPage className='space-y-8'>
@@ -18,4 +18,4 @@ const Skill = () => {
   )
 }
 
-export default Skill
+export default SkillPage
