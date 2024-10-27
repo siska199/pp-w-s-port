@@ -3,16 +3,7 @@ import CONFIG from '@lib/config/config'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import authSlice from '@store/modules/auth/auth-slice'
 import uiSlice from '@store/modules/ui/ui-slice'
-import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  persistReducer,
-  persistStore,
-  PURGE,
-  REGISTER,
-  REHYDRATE
-} from 'redux-persist'
+import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { encryptTransform } from 'redux-persist-transform-encrypt'
 
@@ -39,7 +30,6 @@ const rootReducers = () => {
       {
         key: 'ui',
         storage: storagePersist,
-        whitelist: ['isLoading', 'isToggleSidebar', 'alertConfig'],
         transforms: [encryptor]
       },
       uiSlice
@@ -60,9 +50,7 @@ const store = configureStore({
   reducer: mainPersistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-      }
+      serializableCheck: false
     })
 })
 

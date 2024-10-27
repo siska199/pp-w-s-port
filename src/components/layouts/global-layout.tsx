@@ -14,7 +14,7 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
 
   const { currentPath } = useCurrentPath()
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
+  const dispatchR = useAppDispatch()
 
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
   const modalConfirmation = useAppSelector((state) => state?.ui?.modalConfirmation)
@@ -29,6 +29,10 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
       )
   }, [currentPath])
 
+  useEffect(() => {
+    dispatchR(handleSetModalConfirmation({ isShow: false }))
+  }, [])
+
   return (
     <>
       {children}
@@ -38,7 +42,7 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
           ...modalConfirmation?.button,
           cancel: {
             ...modalConfirmation?.button?.cancel,
-            onClick: () => dispatch(handleSetModalConfirmation({ isShow: false }))
+            onClick: () => dispatchR(handleSetModalConfirmation({ isShow: false }))
           }
         }}
       />

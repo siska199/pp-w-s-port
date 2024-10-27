@@ -2,15 +2,17 @@ export const personalInformation = {}
 
 export const skills = [
   {
-    id: 1,
+    id: '1',
     name: 'React',
+    id_skill: 'React',
     category: 'Frontend',
+    id_cattegory: 'Frontend',
     years_of_experience: 3,
     level: 'Intermediate',
     projects: ['E-commerce Web App', 'Project Management Dashboard', 'Portfolio Website']
   },
   {
-    id: 2,
+    id: '2',
     name: 'Node.js',
     category: 'Backend',
     years_of_experience: 4,
@@ -22,7 +24,7 @@ export const skills = [
     ]
   },
   {
-    id: 3,
+    id: '3',
     name: 'Figma',
     category: 'UI/UX',
     years_of_experience: 2,

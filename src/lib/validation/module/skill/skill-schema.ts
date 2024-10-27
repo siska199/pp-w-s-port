@@ -1,3 +1,7 @@
+import categories_skill from '@lib/data/dummy/categories_skill.json'
+import skills from '@lib/data/dummy/skills.json'
+import { levelSkillOptions, yearsOfExperiances } from '@lib/data/options'
+import { generateOptions } from '@lib/helper'
 import { zString } from '@lib/validation/reusable-schema'
 import z from 'zod'
 
@@ -5,7 +9,7 @@ const skillSchema = z.object({
   id_category: zString({ name: 'Category' }),
   id_skill: zString({ name: 'Skill' }),
   level: zString({ name: 'Level' }),
-  year_of_experiance: zString({
+  year_of_experiances: zString({
     name: 'Year of Experiance'
   })
 })
@@ -17,25 +21,33 @@ export const initialFormSkill = {
     name: 'id_category',
     label: 'Category',
     placeholder: 'Select a category',
-    options: []
+    options: generateOptions({ options: categories_skill }),
+    value: '',
+    errorMessage: ''
   },
   id_skill: {
     name: 'id_skill',
     label: 'Skill',
     placeholder: 'Select a skill',
-    options: []
+    options: generateOptions({ options: skills }),
+    value: '',
+    errorMessage: ''
   },
   level: {
     name: 'level',
     label: 'Level',
     placeholder: 'Select a level',
-    options: []
+    options: levelSkillOptions,
+    value: '',
+    errorMessage: ''
   },
-  year_of_experiance: {
-    name: 'year_of_experiance',
+  year_of_experiances: {
+    name: 'year_of_experiances',
     label: 'Year of Experience',
     placeholder: 'Select years of experience',
-    options: []
+    options: yearsOfExperiances,
+    value: '',
+    errorMessage: ''
   }
 }
 

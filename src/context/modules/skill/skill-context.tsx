@@ -35,46 +35,48 @@ interface TSkillContext {
 
 /*---------------------------------------------------------------------------------------- */
 
-const initialValue: TSkillState = {
+const initialState: TSkillState = {
   modalFormSkill: {
     isShow: false,
     action: TTypeActionModalForm.ADD
   },
-  skill: extractValueFromForm(initialFormSkill)
+  skill: extractValueFromForm({ ...initialFormSkill })
 }
 
-const defaultDispatch: React.Dispatch<TSkillAction> = () => initialValue
+const defaultDispatch: React.Dispatch<TSkillAction> = () => initialState
 
 export const skillContext = createContext<TSkillContext>({
-  state: initialValue,
+  state: initialState,
   dispatch: defaultDispatch
 })
 
 const reducer = (state: TSkillState, action: TSkillAction) => {
+  const currState = state
   switch (action.type) {
     case ACTION_TYPE_SKILL.SET_MODAL_FORM_SKILL:
+      currState.modalFormSkill = {
+        ...currState.modalFormSkill,
+        ...action.payload
+      }
+      if (action.payload.action === TTypeActionModalForm.ADD) {
+        currState.skill = initialState.skill
+      }
       return {
-        ...state,
-        modalFormSkill: {
-          ...state.modalFormSkill,
-          ...action.payload
-        }
+        ...currState
       }
     case ACTION_TYPE_SKILL.SET_SKILL:
+      currState.skill = { ...action.payload }
       return {
-        ...state,
-        skill: {
-          ...action.payload
-        }
+        ...currState
       }
     default:
-      return state
+      return currState
   }
 }
 
 export const SkillContextProvider = (props: { children: React.ReactNode }) => {
   const { children } = props
-  const [state, dispatch] = useReducer(reducer, initialValue)
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   return <skillContext.Provider value={{ state, dispatch }}>{children}</skillContext.Provider>
 }

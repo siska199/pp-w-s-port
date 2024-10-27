@@ -245,7 +245,7 @@ const InputSelect = (props: TPropsInputSelect) => {
             ) : (
               <div onScroll={handleOnScroll} className='py-0 overflow-y-auto max-h-[10rem]'>
                 {filteredOptions?.map((option, i) => {
-                  const isSelected = option?.value === attrs?.value
+                  const isSelected = String(option?.value) === String(attrs?.value)
 
                   return (
                     <div

@@ -41,7 +41,7 @@ const route = {
     isPrivate: true,
     child: {
       detail: {
-        name: 'detail',
+        name: 'detail/:id',
         fullPath: (id: string) => `/skill/detail/${id}`,
         isPrivate: true
       }

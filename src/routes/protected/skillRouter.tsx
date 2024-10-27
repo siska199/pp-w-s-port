@@ -13,6 +13,7 @@ const skillRouter: RouteObject[] = [
         index: true
       },
       {
+        path: routes.skill.child.detail.name,
         element: <SkillDetailPage />,
         handle: routes.skill.child.detail
       }

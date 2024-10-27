@@ -39,7 +39,7 @@ const ContainerModal = (props: TModalProps) => {
         )}
       >
         <div
-          className={`md-content bottom-0 relative flex flex-col gap-2  w-full ${customeClass?.mdContent}`}
+          className={`md-content bottom-0 relative flex flex-col gap-4  w-full ${customeClass?.mdContent}`}
           onClick={handleStopPropagation}
         >
           {title && (

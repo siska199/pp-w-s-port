@@ -44,15 +44,12 @@ const FormFilterSKill = () => {
   })
 
   const handleOnChange = (e: TCustomeEventOnChange<any>) => {
+    const currForm = form
     const value = e.target.value
     const name = e.target.name as keyof typeof form
-    setForm({
-      ...form,
-      [name]: {
-        ...form[name],
-        value
-      }
-    })
+    currForm[name].value = value
+
+    setForm({ ...currForm })
   }
 
   return (

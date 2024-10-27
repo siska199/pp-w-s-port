@@ -1,19 +1,27 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Button from '@components/ui/button'
 import InputSelect from '@components/ui/input/input-select'
 import ContainerModal from '@components/ui/modal/container-modal'
 import { ACTION_TYPE_SKILL, skillContext } from '@context/modules/skill/skill-context'
-import { initialFormSkill } from '@lib/validation/module/skill/skill-schema'
+import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper'
+import skillSchema, {
+  initialFormSkill,
+  TFormSkill
+} from '@lib/validation/module/skill/skill-schema'
 import { TTypeActionModalForm } from '@typescript/global.d'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
 
 const FormSkill = () => {
   const {
-    state: { modalFormSkill },
+    state: { modalFormSkill, skill },
     dispatch
   } = useContext(skillContext)
 
-  const [form, setForm] = useState(initialFormSkill)
+  const [form, setForm] = useState(deepCopy({ ...initialFormSkill }))
+
+  useEffect(() => {
+    setForm({ ...mappingValuesToForm({ values: skill, form }) })
+  }, [skill])
 
   const handlleCloseFormSkill = () => {
     dispatch({
@@ -22,20 +30,34 @@ const FormSkill = () => {
         isShow: false
       }
     })
+    setForm({ ...initialFormSkill })
   }
 
   const handleOnChange = (e: TEventOnChange) => {
     const name = e.target.name as keyof typeof form
     const value = e.target.value
     const currForm = form
-    currForm[name] = value
+    currForm[name].value = value
 
     setForm({
       ...currForm
     })
   }
 
-  const handleOnSubmit = () => {}
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e?.preventDefault()
+    const { isValid, updatedForm } = mappingErrorsToForm<TFormSkill, typeof form>({
+      form,
+      schema: skillSchema
+    })
+
+    if (isValid) {
+      handlleCloseFormSkill()
+    }
+    setForm({
+      ...updatedForm
+    })
+  }
 
   return (
     <ContainerModal
@@ -55,16 +77,16 @@ const FormSkill = () => {
         mdModal: '!overflow-visible'
       }}
     >
-      <form className='space-y-4 w-full mx-auto'>
+      <form onSubmit={handleOnSubmit} className='space-y-4 w-full mx-auto'>
         <div className='grid md:grid-cols-2 gap-4'>
           <InputSelect {...form['id_category']} onChange={handleOnChange} />
           <InputSelect {...form['id_skill']} onChange={handleOnChange} />
         </div>
         <div className='grid md:grid-cols-2 gap-4'>
           <InputSelect {...form['level']} onChange={handleOnChange} />
-          <InputSelect {...form['year_of_experiance']} onChange={handleOnChange} />
+          <InputSelect {...form['year_of_experiances']} onChange={handleOnChange} />
         </div>
-        <Button type='submit' onClick={handleOnSubmit} className='ml-auto'>
+        <Button type='submit' className='ml-auto'>
           Save
         </Button>
       </form>

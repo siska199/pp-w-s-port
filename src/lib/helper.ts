@@ -222,6 +222,19 @@ export const mappingErrorsToForm = <TSchema, TForm extends TObject>(
   return { isValid, updatedForm: form }
 }
 
+interface TMappingValuesToForm<TForm extends TObject> {
+  values: Record<keyof TForm, any>
+  form: TForm
+}
+export const mappingValuesToForm = <TForm extends TObject>(params: TMappingValuesToForm<TForm>) => {
+  const { form, values } = params
+  Object.keys(form).forEach((key) => {
+    form[key].value = values[key]
+  })
+
+  return { ...form }
+}
+
 export const fetchOptions = async <T>(
   fetchFunction: (params?: any) => Promise<T[]>,
   params?: any
@@ -235,4 +248,20 @@ export const isHtmlHasText = (html: string): boolean => {
   tempElement.innerHTML = html
 
   return (tempElement?.textContent?.trim().length || 0) > 0
+}
+
+export const deepCopy = <T extends object>(input: T): T => {
+  if (input === null || typeof input !== 'object') return input
+  if (input instanceof Date) return new Date(input.getTime()) as T
+  if (Array.isArray(input)) return input.map((item) => deepCopy(item)) as unknown as T
+
+  const result: any = {}
+  for (const key in input) {
+    if (Object.prototype.hasOwnProperty.call(input, key)) {
+      const value = (input as any)[key]
+      result[key] = deepCopy(value)
+    }
+  }
+
+  return result
 }

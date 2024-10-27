@@ -1,7 +1,7 @@
 import { handleValidateType } from '@lib/helper'
 import validation, { messageError } from '@lib/validation'
 import { TTypeFile } from '@typescript/modules/ui/ui-types'
-import z, { ZodEffects, ZodString } from 'zod'
+import z, { ZodEffects, ZodNumber, ZodString } from 'zod'
 
 export const zString = (params: {
   name: string
@@ -31,19 +31,18 @@ export const zNumber = (params: {
   min?: number
   max?: number
   mandatory?: boolean
-}): z.ZodNumber | z.ZodOptional<z.ZodNumber> => {
+}): z.ZodNumber => {
   const { name, max = 255, min = 1, mandatory = true } = params
 
   const numberSchema = z.number().max(max, {
     message: messageError.maxNumber(name, max)
   })
 
-  if (mandatory)
-    return numberSchema.min(min, {
-      message: messageError.minNumber(name, min)
-    })
-
-  return numberSchema.optional()
+  return (mandatory
+    ? numberSchema.min(min, {
+        message: messageError.minNumber(name, min)
+      })
+    : numberSchema.optional()) as ZodNumber
 }
 
 export const zDate = (params: { name: string; mandatory?: boolean }) => {
