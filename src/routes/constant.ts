@@ -4,7 +4,7 @@ interface RouteComponent {
 
 export interface TRoute {
   name: string
-  fullPath: string
+  fullPath: string | ((id: string) => void)
   isPrivate?: boolean
   isOpenRoute?: boolean
   component?: RouteComponent
@@ -40,10 +40,26 @@ const route = {
     fullPath: '/skill',
     isPrivate: true
   },
-  workHistory: {
-    name: 'work-history',
-    fullPath: '/work-history',
-    isPrivate: true
+  experiance: {
+    name: 'experiance',
+    fullPath: '/experiance',
+    isPrivate: true,
+    child: {
+      detail: {
+        name: 'detail',
+        fullPath: (id: string) => `/experiance/detail/${id}`,
+        isPrivate: true
+      },
+      edit: {
+        name: 'edit',
+        fullPath: (id: string) => `/experiance/edit/${id}`,
+        isPrivate: true
+      },
+      add: {
+        name: 'add',
+        fullPath: '/experiance/add'
+      }
+    }
   },
   education: {
     name: 'education',
@@ -96,4 +112,4 @@ export type TRoutes = {
   [K in keyof typeof route]: TRoute
 }
 
-export const routes: TRoutes = route
+export const routes = route

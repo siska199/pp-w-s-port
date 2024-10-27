@@ -14,10 +14,10 @@ const menuSidebar = [
     name: 'skill'
   },
   {
-    title: 'Work History',
-    src: 'sidebar/work-history.png',
-    url: routes.workHistory.fullPath,
-    name: 'work-history'
+    title: 'Experiance',
+    src: 'sidebar/experiance.png',
+    url: routes.experiance.fullPath,
+    name: 'experiance'
   },
   {
     title: 'Education',

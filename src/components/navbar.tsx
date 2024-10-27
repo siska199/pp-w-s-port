@@ -11,11 +11,9 @@ import { handleToggleSidebar } from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
 
 const Navbar = () => {
-  const {
-    currentPath: { handle }
-  } = useCurrentPath()
+  const { currentPath } = useCurrentPath()
 
-  const isUsingPublicNavabr = handle?.component?.publicNavbar
+const isUsingPublicNavabr = currentPath?.handle?.component?.publicNavbar
 
   return (
     <nav
