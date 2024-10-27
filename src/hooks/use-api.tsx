@@ -3,6 +3,7 @@ import CONFIG from '@lib/config/config'
 import appMessage from '@lib/data/app-message'
 import { generateUrlQueryParams, isEmptyValue } from '@lib/helper'
 import { handleSetAlertConfig, handleSetIsloading } from '@store/modules/ui/ui-slice'
+import { TObject } from '@typescript/global.d'
 import axios, { CancelTokenSource } from 'axios'
 
 interface TParamsApiClient {
@@ -81,7 +82,7 @@ const useAPI = () => {
     } catch (error: any) {
       handleSetAlertConfig({
         show: true,
-        message: message?.error || appMessage.systemErrorMessage,
+        message: message?.error || error?.message || appMessage.systemErrorMessage,
         type: 'error',
         withIcon: true
       })
