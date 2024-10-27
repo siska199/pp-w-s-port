@@ -2,8 +2,8 @@ import { zEnum, zPassword, zString } from '@lib/validation/reusable-schema'
 import * as z from 'zod'
 
 export const loginSchema = z.object({
-  username: zString<true>({ name: 'username' }),
-  password: zPassword<true>(),
+  username: zString({ name: 'username', mandatory: true }),
+  password: zPassword(true),
   isRememberMe: zEnum<['false', 'true']>({
     name: 'Is Remember Me',
     enum: ['false', 'true'],

@@ -10,8 +10,6 @@ const useCurrentPath = () => {
     handle: TRoute
   }
 
-  console.log(matches)
-
   return { currentPath }
 }
 

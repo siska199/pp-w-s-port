@@ -104,7 +104,10 @@ export interface TColumn<TData, TKey extends keyof TData> {
   isSorted?: boolean
 }
 
-export interface TSettingTable<TData> {
+
+
+
+export interface TSettingTable<TData,> {
   sortBy?: keyof TData
   sortDir?: 'asc' | 'desc'
   checked?: boolean

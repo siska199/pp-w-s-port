@@ -13,8 +13,6 @@ export const AnimatedCountNumber = (props: TAnimatedCountNumber) => {
   const springValue = useSpring(motionValue, { duration: 3000 })
   const isInView = useInView(ref)
 
-  console.log(isInView)
-
   useEffect(() => {
     motionValue.set(isInView ? number : 0)
   }, [isInView, number, motionValue])

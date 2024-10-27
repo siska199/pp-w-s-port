@@ -1,0 +1,198 @@
+[
+  {
+    "id": "1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o1p",
+    "id_company": "9f8e7d6c-5b4a-3z2x-1w0v-9u8t7s6r5q1a",
+    "company_name": "Tech Solutions Inc.",
+    "id_profession": "8a7b6c5d-4e3f-2g1h-9i0j-7k6l5m4n3o1a",
+    "profession_name": "Software Engineer",
+    "projects": [
+      { "id": "a1b2c3d4", "name": "Project A" },
+      { "id": "e5f6g7h8", "name": "Project B" }
+    ],
+    "tech_stacks": ["JavaScript", "React", "Node.js"],
+    "created_at": "2024-10-27T10:30:00.000Z",
+    "updated_at": "2024-10-27T10:30:00.000Z"
+  },
+  {
+    "id": "0p9o8n7m-6l5k-4j3i-2h1g-8f7e6d5c4b2b",
+    "id_company": "7s6r5q4p-3z2x-1w0v-9u8t-5d4c3b2a1k2b",
+    "company_name": "Innovatech LLC",
+    "id_profession": "9l8k7j6h-5g4f-3e2d-1c0b-2a3z4x5w6v2b",
+    "profession_name": "Product Manager",
+    "projects": [
+      { "id": "i9j8k7l6", "name": "Project X" },
+      { "id": "m5n4o3p2", "name": "Project Y" }
+    ],
+    "tech_stacks": ["Python", "Django", "PostgreSQL"],
+    "created_at": "2024-10-26T14:45:00.000Z",
+    "updated_at": "2024-10-26T14:45:00.000Z"
+  },
+  {
+    "id": "3c4d5e6f-1a2b-9h8g-7i0j-6k5l4m3n2o3c",
+    "id_company": "5f6g7h8i-4j3k-1l0m-9n8o-7p6q5r4s3t3c",
+    "company_name": "Creative Minds Ltd.",
+    "id_profession": "2h3j4k5l-6m7n-1o0p-8q9r-5s4t3u2v1w3d",
+    "profession_name": "UX Designer",
+    "projects": [
+      { "id": "c1d2e3f4", "name": "Design Project Alpha" },
+      { "id": "g5h6i7j8", "name": "Website Redesign" }
+    ],
+    "tech_stacks": ["Figma", "Sketch", "Photoshop"],
+    "created_at": "2024-10-25T08:20:00.000Z",
+    "updated_at": "2024-10-25T08:20:00.000Z"
+  },
+  {
+    "id": "4e5f6g7h-3c2b-1a0j-9k8l-7m6n5o4p3q4e",
+    "id_company": "9r8q7p6o-5n4m-1k2j-3c4d-5e6f7g8h9i4f",
+    "company_name": "Tech Innovators",
+    "id_profession": "4f5g6h7i-1j2k-3l4m-8o9p-2q3r4s5t6u4g",
+    "profession_name": "Data Analyst",
+    "projects": [
+      { "id": "h1i2j3k4", "name": "Data Mining Project" },
+      { "id": "l5m6n7o8", "name": "Market Analysis" }
+    ],
+    "tech_stacks": ["Python", "R", "Tableau"],
+    "created_at": "2024-10-24T11:50:00.000Z",
+    "updated_at": "2024-10-24T11:50:00.000Z"
+  },
+  {
+    "id": "5f6g7h8i-4e3d-2b1c-9j0k-8l7m6n5o4p5f",
+    "id_company": "6r5q4p3o-2n1m-9l8k-7j6i-3f4d5g6h7i5g",
+    "company_name": "Global Solutions",
+    "id_profession": "6g7h8i9j-2k3l-5m4n-8o9p-1q2r3s4t5u5h",
+    "profession_name": "Project Manager",
+    "projects": [
+      { "id": "p1q2r3s4", "name": "Expansion Project" },
+      { "id": "t5u6v7x8", "name": "Budget Analysis" }
+    ],
+    "tech_stacks": ["MS Project", "Jira", "Confluence"],
+    "created_at": "2024-10-23T09:35:00.000Z",
+    "updated_at": "2024-10-23T09:35:00.000Z"
+  },
+  {
+    "id": "6h7i8j9k-5f4e-3d2c-1b0a-9l8m7n6o5p6h",
+    "id_company": "8o9p7q6r-5m4n-3j2k-1l0a-9i8h7g6f5e6i",
+    "company_name": "Data Driven Corp",
+    "id_profession": "3h4i5j6k-7l8m-9n0o-2p1q-5r6s7t8u9v6j",
+    "profession_name": "Data Scientist",
+    "projects": [
+      { "id": "x1y2z3a4", "name": "AI Research" },
+      { "id": "b5c6d7e8", "name": "Predictive Analysis" }
+    ],
+    "tech_stacks": ["Python", "TensorFlow", "Pandas"],
+    "created_at": "2024-10-22T13:40:00.000Z",
+    "updated_at": "2024-10-22T13:40:00.000Z"
+  },
+  {
+    "id": "7j8k9l0m-6g5f-4e3d-2b1a-8n7o6p5q4r7k",
+    "id_company": "0v1w2x3y-9t8s-7r6q-5p4o-3m2n1l0j9k8l",
+    "company_name": "CodeWorks",
+    "id_profession": "8l9m0n1o-5j6k-4g3f-7p8q-2r1s3t5u6v7m",
+    "profession_name": "Full Stack Developer",
+    "projects": [
+      { "id": "f9g8h7i6", "name": "API Development" },
+      { "id": "j5k4l3m2", "name": "Frontend Overhaul" }
+    ],
+    "tech_stacks": ["Node.js", "Express", "Vue.js"],
+    "created_at": "2024-10-21T12:15:00.000Z",
+    "updated_at": "2024-10-21T12:15:00.000Z"
+  },
+  {
+    "id": "8k9l0m1n-7h6i-5j4g-3e2d-1b0a9l8o7p8n",
+    "id_company": "3y2x1w0v-8t7s-6r5q-4p3o-2n1m0l9j8k9o",
+    "company_name": "Green Technologies",
+    "id_profession": "0p1q2r3s-5t6u-9v8w-3x4y-6z7a8b9c0d2o",
+    "profession_name": "Environmental Engineer",
+    "projects": [
+      { "id": "k1l2m3n4", "name": "Sustainability Initiative" },
+      { "id": "o5p6q7r8", "name": "Energy Study" }
+    ],
+    "tech_stacks": ["AutoCAD", "Matlab", "GIS"],
+    "created_at": "2024-10-20T11:25:00.000Z",
+    "updated_at": "2024-10-20T11:25:00.000Z"
+  },
+  {
+    "id": "9l0m1n2o-8h7i-6j5g-4e3d-2b1a0k9l8m7n",
+    "id_company": "5p4o3n2m-1l0k-9j8h-7g6f-4e3d2b1a0p9q",
+    "company_name": "HealthTech Solutions",
+    "id_profession": "1m2n3o4p-5q6r-9s8t-2u0v-3w4x5y6z7a8b",
+    "profession_name": "Clinical Researcher",
+    "projects": [
+      { "id": "z9a8b7c6", "name": "Vaccine Study" },
+      { "id": "d5e6f7g8", "name": "Patient Safety Review" }
+    ],
+    "tech_stacks": ["SAS", "SPSS", "R"],
+    "created_at": "2024-10-19T15:55:00.000Z",
+    "updated_at": "2024-10-19T15:55:00.000Z"
+  },
+  {
+    "id": "0m1n2o3p-4q5r-6s7t-8u9v-1w2x3y4z5a6b",
+    "id_company": "2f3g4h5i-6j7k-8l9m-0n1o-2p3q4r5s6t7u",
+    "company_name": "Travel Solutions",
+    "id_profession": "3v4w5x6y-7z8a-9b0c-1d2e-3f4g5h6i7j8k",
+    "profession_name": "Travel Consultant",
+    "projects": [
+      { "id": "q1r2s3t4", "name": "Travel Agency Revamp" },
+      { "id": "u5v6w7x8", "name": "Customer Experience Survey" }
+    ],
+    "tech_stacks": ["CRM Software", "Excel", "WordPress"],
+    "created_at": "2024-10-18T09:40:00.000Z",
+    "updated_at": "2024-10-18T09:40:00.000Z"
+  },
+  {
+    "id": "1n2o3p4q-5r6s-7t8u-9v0w-1x2y3z4a5b6c",
+    "id_company": "9b8c7d6e-5f4g-3h2i-1j0k-8l9m0n1o2p3q",
+    "company_name": "Fitness Hub",
+    "id_profession": "3k4l5m6n-7o8p-9q0r-1s2t-3u4v5w6x7y8z",
+    "profession_name": "Fitness Trainer",
+    "projects": [
+      { "id": "a5b6c7d8", "name": "New Program Launch" },
+      { "id": "e9f0g1h2", "name": "Client Satisfaction Review" }
+    ],
+    "tech_stacks": ["PT Software", "Excel", "Social Media"],
+    "created_at": "2024-10-17T16:30:00.000Z",
+    "updated_at": "2024-10-17T16:30:00.000Z"
+  },
+  {
+    "id": "2o3p4q5r-6s7t-8u9v-0w1x-2y3z4a5b6c7d",
+    "id_company": "1c2d3e4f-5g6h-7i8j-0k1l-2m3n4o5p6q7r",
+    "company_name": "Construction Pros",
+    "id_profession": "8b9c0d1e-2f3g-4h5i-6j7k-8l9m0n1o2p3q",
+    "profession_name": "Civil Engineer",
+    "projects": [
+      { "id": "f1g2h3i4", "name": "Bridge Construction" },
+      { "id": "j5k6l7m8", "name": "Highway Expansion" }
+    ],
+    "tech_stacks": ["AutoCAD", "Revit", "Project Management Software"],
+    "created_at": "2024-10-16T11:25:00.000Z",
+    "updated_at": "2024-10-16T11:25:00.000Z"
+  },
+  {
+    "id": "3p4q5r6s-7t8u-9v0w-1x2y-3z4a5b6c7d8e",
+    "id_company": "0x1y2z3a-4b5c-6d7e-8f9g-0h1i2j3k4l5m",
+    "company_name": "Marketing Gurus",
+    "id_profession": "2a3b4c5d-6e7f-8g9h-0j1k-2l3m4n5o6p7q",
+    "profession_name": "Marketing Specialist",
+    "projects": [
+      { "id": "r1s2t3u4", "name": "Social Media Campaign" },
+      { "id": "v5w6x7y8", "name": "SEO Strategy" }
+    ],
+    "tech_stacks": ["Google Analytics", "Hootsuite", "Mailchimp"],
+    "created_at": "2024-10-15T13:40:00.000Z",
+    "updated_at": "2024-10-15T13:40:00.000Z"
+  },
+  {
+    "id": "4q5r6s7t-8u9v-0w1x-2y3z-4a5b6c7d8e9f",
+    "id_company": "3e4f5g6h-7i8j-0k1l-2m3n-4o5p6q7r8s9t",
+    "company_name": "E-Commerce Experts",
+    "id_profession": "1a2b3c4d-5e6f-7g8h-9i0j-2k3l4m5n6o7p",
+    "profession_name": "E-Commerce Manager",
+    "projects": [
+      { "id": "d5e6f7g8", "name": "Website Launch" },
+      { "id": "j9k0l1m2", "name": "Sales Analysis" }
+    ],
+    "tech_stacks": ["Shopify", "Magento", "WooCommerce"],
+    "created_at": "2024-10-14T11:00:00.000Z",
+    "updated_at": "2024-10-14T11:00:00.000Z"
+  }
+]

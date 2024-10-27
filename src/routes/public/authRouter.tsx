@@ -8,7 +8,8 @@ const authRouter: RouteObject[] = [
     children: [
       {
         path: routes.auth?.child?.signIn.name,
-        element: <SignInPage />
+        element: <SignInPage />,
+        handle: routes?.auth
       }
     ]
   }

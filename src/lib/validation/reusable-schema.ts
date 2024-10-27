@@ -1,33 +1,29 @@
 import { handleValidateType } from '@lib/helper'
 import validation, { messageError } from '@lib/validation'
 import { TTypeFile } from '@typescript/modules/ui/ui-types'
-import z, { ZodEffects, ZodOptional, ZodString } from 'zod'
+import z, { ZodEffects, ZodString } from 'zod'
 
-export const zString = <TMandatory extends boolean = true>(params: {
+export const zString = (params: {
   name: string
   min?: number
   max?: number
-  mandatory?: TMandatory
-}): TMandatory extends true ? ZodString : ZodOptional<ZodString> => {
+  mandatory?: boolean
+}): ZodString => {
   const { name, max = 255, min = 1, mandatory = true } = params
 
-  let stringSchema: ZodString | ZodOptional<ZodString> = z.string().max(max, {
+  const stringSchema = z.string().max(max, {
     message: messageError.maxCharacter(name, max)
   })
 
-  if (mandatory) {
-    stringSchema = stringSchema
-      .nonempty({
-        message: messageError.required(name)
-      })
-      .min(min, {
-        message: messageError.minCharacter(name, min)
-      })
-  } else {
-    stringSchema = stringSchema.optional()
-  }
-
-  return stringSchema as TMandatory extends true ? ZodString : ZodOptional<ZodString>
+  return mandatory
+    ? stringSchema
+        .nonempty({
+          message: messageError.required(name)
+        })
+        .min(min, {
+          message: messageError.minCharacter(name, min)
+        })
+    : stringSchema.min(0)
 }
 
 export const zNumber = (params: {
@@ -50,19 +46,24 @@ export const zNumber = (params: {
   return numberSchema.optional()
 }
 
-type TResultZPassword<TMandatory extends boolean> = TMandatory extends true
-  ? ZodEffects<ZodString, string, string>
-  : ZodEffects<ZodOptional<ZodString>, string | undefined, string | undefined>
+export const zDate = (params: { name: string; mandatory?: boolean }) => {
+  const { name, mandatory = true } = params
+  const dateSchema = zString({ name, mandatory })?.datetime({ message: 'Invalid Date' })
+  return mandatory
+    ? dateSchema.nonempty({
+        message: messageError.required(name)
+      })
+    : dateSchema?.optional()
+}
 
-export const zPassword = <TMandatory extends boolean = true>(
-  mandatory: TMandatory = true as TMandatory
-): TResultZPassword<TMandatory> => {
-  return zString<TMandatory>({ name: 'Password', mandatory }).refine(
+type TResultZPassword = ZodEffects<ZodString, string, string>
+export const zPassword = (mandatory: boolean = true): TResultZPassword => {
+  return zString({ name: 'Password', mandatory }).refine(
     (val) => (mandatory ? validation.password.regex.test(val as string) : true),
     {
       message: validation.password.message
     }
-  ) as TResultZPassword<TMandatory>
+  ) as TResultZPassword
 }
 
 export const zEmail = (mandatory = true) => {
