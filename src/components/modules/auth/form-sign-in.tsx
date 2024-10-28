@@ -9,7 +9,11 @@ import InputCheckbox from '@components/ui/input/input-checkbox'
 import { handleSetAuth } from '@store/modules/auth/auth-slice'
 import { useAppDispatch } from '@store/store'
 import { mappingErrorsToForm } from '@lib/helper'
-import { initialFormLogin, loginSchema, TFormLogin } from '@lib/validation/module/auth/login-schema'
+import {
+  initialFormSignIn,
+  signInSchema,
+  TFormLSignIn
+} from '@lib/validation/module/auth/sign-in-schema'
 import { routes } from '@routes/constant'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
 
@@ -22,7 +26,7 @@ const FormLogin = (props: TPropsFormLogin) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const [form, setForm] = useState(initialFormLogin)
+  const [form, setForm] = useState(initialFormSignIn)
 
   const handleOnChange = (e: TEventOnChange) => {
     const currForm = form
@@ -37,9 +41,9 @@ const FormLogin = (props: TPropsFormLogin) => {
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault()
-    const { isValid, updatedForm } = mappingErrorsToForm<TFormLogin, typeof form>({
+    const { isValid, updatedForm } = mappingErrorsToForm<TFormLSignIn, typeof form>({
       form,
-      schema: loginSchema
+      schema: signInSchema
     })
 
     if (isValid) {

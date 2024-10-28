@@ -2,7 +2,7 @@ import * as z from 'zod'
 
 import { zEnum, zPassword, zString } from '@lib/validation/reusable-schema'
 
-export const loginSchema = z.object({
+export const signInSchema = z.object({
   username: zString({ name: 'username', mandatory: true }),
   password: zPassword(true),
   isRememberMe: zEnum<['false', 'true']>({
@@ -12,7 +12,7 @@ export const loginSchema = z.object({
   })
 })
 
-export const initialFormLogin = {
+export const initialFormSignIn = {
   username: {
     name: 'username',
     label: 'Username',
@@ -35,4 +35,4 @@ export const initialFormLogin = {
   }
 }
 
-export type TFormLogin = z.input<typeof loginSchema>
+export type TFormLSignIn = z.input<typeof signInSchema>
