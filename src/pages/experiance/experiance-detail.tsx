@@ -1,4 +1,3 @@
-
 const ExperianceDetailPage = () => {
   return <div>ExperianceDetailPage</div>
 }

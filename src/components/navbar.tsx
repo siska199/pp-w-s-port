@@ -15,7 +15,7 @@ import { IconHumburger, IconLogout, IconUser } from '@assets/icons'
 const Navbar = () => {
   const { currentPath } = useCurrentPath()
 
-const isUsingPublicNavabr = currentPath?.handle?.component?.publicNavbar
+  const isUsingPublicNavabr = currentPath?.handle?.component?.publicNavbar
 
   return (
     <nav

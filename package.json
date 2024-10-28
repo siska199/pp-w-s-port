@@ -9,7 +9,7 @@
     "lint:fix": "npm run lint -- --fix",
     "dev": "vite",
     "dev-expose": "vite --host",
-    "build": "tsc -b && vite build",
+    "build": "npm run lint:fix && npm run format &&tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

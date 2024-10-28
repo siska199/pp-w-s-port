@@ -3,6 +3,6 @@ const appMessage = {
   warning: {
     deleteData: 'Are you sure you want to delete this data?'
   },
-  inputSelectPlaceholder : (name:string)=>`Select a ${name}`
+  inputSelectPlaceholder: (name: string) => `Select a ${name}`
 }
 export default appMessage

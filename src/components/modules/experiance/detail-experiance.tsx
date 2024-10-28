@@ -1,6 +1,5 @@
-
 const DetailExperiance = () => {
-  return <div>DetailExperiance</div>;
-};
+  return <div>DetailExperiance</div>
+}
 
-export default DetailExperiance;
+export default DetailExperiance

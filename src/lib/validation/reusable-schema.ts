@@ -39,11 +39,13 @@ export const zNumber = (params: {
     message: messageError.maxNumber(name, max)
   })
 
-  return (mandatory
-    ? numberSchema.min(min, {
-        message: messageError.minNumber(name, min)
-      })
-    : numberSchema.optional()) as ZodNumber
+  return (
+    mandatory
+      ? numberSchema.min(min, {
+          message: messageError.minNumber(name, min)
+        })
+      : numberSchema.optional()
+  ) as ZodNumber
 }
 
 export const zDate = (params: { name: string; mandatory?: boolean }) => {
