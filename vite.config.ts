@@ -25,9 +25,7 @@ export default defineConfig({
     watch: {
       usePolling: true
     },
-    hmr: {
-      port: 5174
-    }
+
   },
   preview: {
     port: 3000,

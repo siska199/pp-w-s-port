@@ -1,5 +1,5 @@
 FROM node:20-alpine
-WORKDIR /app
+WORKDIR /kyuuchan-199/app-s-port-client
 COPY package.json .
 RUN npm install
 COPY . .
