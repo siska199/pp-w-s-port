@@ -1,11 +1,11 @@
 import js from '@eslint/js'
-import globals from 'globals'
+import checkFile from 'eslint-plugin-check-file'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
-import checkFile from 'eslint-plugin-check-file'
-
+import globals from 'globals'
+import tseslint from 'typescript-eslint'
+import reactPlugin from 'eslint-plugin-react'
 export default tseslint.config(
   { ignores: ['dist'] },
   {
@@ -19,7 +19,8 @@ export default tseslint.config(
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       'simple-import-sort': simpleImportSort,
-      'check-file': checkFile
+      'check-file': checkFile,
+      react: reactPlugin
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -31,6 +32,12 @@ export default tseslint.config(
         { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }
       ],
       'react-hooks/exhaustive-deps': 'off',
+
+      'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }], // only allow .tsx file extension for write react component
+      'react/prefer-stateless-function': 'error', // forbidden using class component
+      'react/no-unused-prop-types': 'error', // forbidden to defint props that unused
+
+
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
       'simple-import-sort/imports': [
@@ -44,18 +51,6 @@ export default tseslint.config(
           ]
         }
       ]
-      // 'check-file/filename-naming-convention': [
-      //   'error',
-      //   {
-      //     '**/*.{ts,tsx}': ['regex:^([a-z0-9]+(-[a-z0-9]+)*)?$']
-      //   }
-      // ],
-      // 'check-file/folder-naming-convention': [
-      //   'error',
-      //   {
-      //     'src/**/': ['regex:^([a-z0-9]+(-[a-z0-9]+)*)?$']
-      //   }
-      // ]
     }
   }
 )

@@ -13,7 +13,7 @@ interface TProps {
   }
 }
 
-const Tooltip = forwardRef<HTMLDivElement, TProps>(function Tooltip(props, ref) {
+const Tooltip = forwardRef<HTMLDivElement, TProps>((props, ref) => {
   const { children, type, text, variant = 'top', customeClass } = props
   return (
     <div
