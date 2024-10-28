@@ -1,7 +1,8 @@
+import z, { ZodEffects, ZodNumber, ZodString } from 'zod'
+
 import { handleValidateType } from '@lib/helper'
 import validation, { messageError } from '@lib/validation'
 import { TTypeFile } from '@typescript/modules/ui/ui-types'
-import z, { ZodEffects, ZodNumber, ZodString } from 'zod'
 
 export const zString = (params: {
   name: string

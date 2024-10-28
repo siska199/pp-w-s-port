@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+
 import { TTableProps } from '@components/ui/table'
+
 import { TColumn, TSettingTable } from '@typescript/modules/ui/ui-types'
 
 interface TProps<TData, TIncludeChecked extends boolean = false> {

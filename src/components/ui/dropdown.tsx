@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react'
-import IconChevronToggle from '@assets/icons/icon-chevron-down'
+
 import useOnClickOutside from '@hooks/use-on-click-outside'
 import { cn } from '@lib/helper'
 import { TOption } from '@typescript/modules/ui/ui-types'
+import IconChevronToggle from '@assets/icons/icon-chevron-down'
 
 export type TOptionDropdown = TOption<string | React.ReactNode> & {
   className?: string

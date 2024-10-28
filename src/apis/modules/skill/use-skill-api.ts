@@ -1,4 +1,5 @@
 import ENDPOINT from '@apis/constant'
+
 import useAPI from '@hooks/use-api'
 
 const useSkillAPI = () => {

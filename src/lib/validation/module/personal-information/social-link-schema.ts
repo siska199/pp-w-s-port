@@ -1,6 +1,7 @@
+import z from 'zod'
+
 import { messageError } from '@lib/validation'
 import { zLink } from '@lib/validation/reusable-schema'
-import z from 'zod'
 
 const socialLinkSchema = (name: string) =>
   z.object({

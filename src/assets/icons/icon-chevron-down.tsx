@@ -1,5 +1,5 @@
-import { IconChevronDown } from '@assets/icons'
 import { cn } from '@lib/helper'
+import { IconChevronDown } from '@assets/icons'
 
 interface TProps {
   isOpen: boolean

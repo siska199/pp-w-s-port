@@ -46,6 +46,7 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-check-file": "^2.8.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
@@ -58,8 +59,5 @@
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",
     "vite-plugin-checker": "^0.8.0"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "4.9.5"
   }
 }

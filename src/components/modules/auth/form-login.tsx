@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import Button from '@components/ui/button'
 import Container from '@components/ui/container/container'
 import InputBase from '@components/ui/input/input-base'
 import InputCheckbox from '@components/ui/input/input-checkbox'
+
+import { handleSetAuth } from '@store/modules/auth/auth-slice'
+import { useAppDispatch } from '@store/store'
 import { mappingErrorsToForm } from '@lib/helper'
 import { initialFormLogin, loginSchema, TFormLogin } from '@lib/validation/module/auth/login-schema'
 import { routes } from '@routes/constant'
-import { handleSetAuth } from '@store/modules/auth/auth-slice'
-import { useAppDispatch } from '@store/store'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
 
 interface TPropsFormLogin {

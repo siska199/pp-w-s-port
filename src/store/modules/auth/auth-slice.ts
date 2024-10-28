@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { TRAuthState } from '@typescript/modules/auth/auth-types'
 
 const initialState: TRAuthState = {

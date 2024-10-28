@@ -1,7 +1,8 @@
+import z from 'zod'
+
 import appMessage from '@lib/data/app-message'
 import { zString } from '@lib/validation/reusable-schema'
 import { TObject } from '@typescript/global.d'
-import z from 'zod'
 
 const experianceSchema = z.object({
   id_company: zString({ name: 'Company' }),

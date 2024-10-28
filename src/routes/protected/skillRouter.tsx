@@ -1,6 +1,8 @@
 import { RouteObject } from 'react-router-dom'
+
 import SkillPage from '@pages/skill/skill'
 import SkillDetailPage from '@pages/skill/skill-detail'
+
 import { routes } from '@routes/constant'
 
 const skillRouter: RouteObject[] = [

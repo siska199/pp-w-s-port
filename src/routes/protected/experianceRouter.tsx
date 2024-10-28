@@ -1,6 +1,8 @@
 import { RouteObject } from 'react-router-dom'
+
 import ExperiancePage from '@pages/experiance/experiance'
 import ExperianceDetailPage from '@pages/experiance/experiance-detail'
+
 import { routes } from '@routes/constant'
 
 const experianceRouter: RouteObject[] = [

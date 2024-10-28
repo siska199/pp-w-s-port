@@ -1,9 +1,11 @@
-import { slideInAnimation } from '@assets/styles/animation'
+import { motion } from 'framer-motion'
+
 import { AnimatedCountNumber } from '@components/ui/animated/animated-count-number'
 import Container from '@components/ui/container/container'
 import ContainerSection from '@components/ui/container/container-section'
+
 import { aboutMeData } from '@lib/data/dummy'
-import { motion } from 'framer-motion'
+import { slideInAnimation } from '@assets/styles/animation'
 
 const AboutMeSection = () => {
   return (

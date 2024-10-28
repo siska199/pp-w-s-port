@@ -1,6 +1,7 @@
+import z from 'zod'
+
 import { zEmail, zFileLocale, zPhoneNumber, zString } from '@lib/validation/reusable-schema'
 import { TTypeFile } from '@typescript/modules/ui/ui-types'
-import z from 'zod'
 
 const personalInformationSchema = z
   .object({

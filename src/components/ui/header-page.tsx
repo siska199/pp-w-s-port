@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
-import { IconArrowUp } from '@assets/icons'
+
 import Button from '@components/ui/button'
+
+import { IconArrowUp } from '@assets/icons'
 
 interface TProps {
   title: string

@@ -1,7 +1,9 @@
 import React from 'react'
 import { RouteObject } from 'react-router-dom'
+
 import GlobalLayout from '@components/layouts/global-layout'
 import Protectedlayout from '@components/layouts/protected-layout'
+
 import certificationRouter from '@routes/protected/certificationRouter'
 import educationRouter from '@routes/protected/educationRouter'
 import workHistoryRouter from '@routes/protected/experianceRouter'

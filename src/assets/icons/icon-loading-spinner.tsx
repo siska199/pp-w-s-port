@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface TProps extends React.HTMLProps<HTMLDivElement> {}
+type TProps = React.HTMLProps<HTMLDivElement>
 
 const IconLoadingSpinner = (props: TProps) => {
   const { className } = props

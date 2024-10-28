@@ -1,10 +1,11 @@
 import { useRef, useState } from 'react'
+import axios, { CancelTokenSource } from 'axios'
+
+import { handleSetAlertConfig, handleSetIsloading } from '@store/modules/ui/ui-slice'
 import CONFIG from '@lib/config/config'
 import appMessage from '@lib/data/app-message'
 import { generateUrlQueryParams, isEmptyValue } from '@lib/helper'
-import { handleSetAlertConfig, handleSetIsloading } from '@store/modules/ui/ui-slice'
 import { TObject } from '@typescript/global.d'
-import axios, { CancelTokenSource } from 'axios'
 
 interface TParamsApiClient {
   baseUrl?: string

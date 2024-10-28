@@ -1,5 +1,7 @@
-import { TPropsModalConfirmation } from '@components/ui/modal/modal-confirmation'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
+import { TPropsModalConfirmation } from '@components/ui/modal/modal-confirmation'
+
 import { TRUiState } from '@typescript/modules/ui/ui-types'
 
 const initialState: TRUiState = {

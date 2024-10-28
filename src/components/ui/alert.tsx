@@ -1,5 +1,7 @@
 import { HTMLProps, useEffect, useState } from 'react'
-import { IconClose, IconDanger, IconInfo, IconNotification, IconSucess } from '@assets/icons'
+import { cva, VariantProps } from 'class-variance-authority'
+
+import { handleSetAlertConfig } from '@store/modules/ui/ui-slice'
 import { cn } from '@lib/helper'
 import variantsAlert, {
   variantAlertError,
@@ -7,9 +9,8 @@ import variantsAlert, {
   variantAlertWarning
 } from '@lib/variant/variant-alert'
 import variant from '@lib/variant/variant-color'
-import { handleSetAlertConfig } from '@store/modules/ui/ui-slice'
 import { TAlertConfig } from '@typescript/modules/ui/ui-types'
-import { cva, VariantProps } from 'class-variance-authority'
+import { IconClose, IconDanger, IconInfo, IconNotification, IconSucess } from '@assets/icons'
 
 interface TPropsVariantError extends VariantProps<typeof alertVariantError> {
   type: 'error'

@@ -1,7 +1,9 @@
 import { useMemo } from 'react'
-import { IconCheck } from '@assets/icons'
+
 import Container from '@components/ui/container/container'
+
 import { TBasePropsInput } from '@typescript/modules/ui/ui-types'
+import { IconCheck } from '@assets/icons'
 
 import HelperMessage from '../helper-message'
 

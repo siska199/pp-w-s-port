@@ -4,6 +4,7 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
+import checkFile from 'eslint-plugin-check-file'
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -17,7 +18,8 @@ export default tseslint.config(
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      'simple-import-sort': simpleImportSort
+      'simple-import-sort': simpleImportSort,
+      'check-file': checkFile
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -35,13 +37,25 @@ export default tseslint.config(
         'error',
         {
           groups: [
-            ['^react', '^@?\\w'], // Packages `react` related packages come first.
-            ['^\\.\\.(?!/?$)', '^\\.\\./?$'], // Parent imports. Put `..` last.
-            ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'], // Other relative imports. Put same-folder imports and `.` last.
-            ['^.+\\.?(css)$'] // Style imports.
+            ['^react', '^@?\\w'],
+            ['^@pages', '^@components', '^@apis'],
+            ['^@hooks', '^@store', '^@context', '^@lib', '^@routes', '^@typescript', '^@assets'],
+            ['^.+\\.?(css)$']
           ]
         }
       ]
+      // 'check-file/filename-naming-convention': [
+      //   'error',
+      //   {
+      //     '**/*.{ts,tsx}': ['regex:^([a-z0-9]+(-[a-z0-9]+)*)?$']
+      //   }
+      // ],
+      // 'check-file/folder-naming-convention': [
+      //   'error',
+      //   {
+      //     'src/**/': ['regex:^([a-z0-9]+(-[a-z0-9]+)*)?$']
+      //   }
+      // ]
     }
   }
 )

@@ -1,5 +1,6 @@
-import { zEnum, zPassword, zString } from '@lib/validation/reusable-schema'
 import * as z from 'zod'
+
+import { zEnum, zPassword, zString } from '@lib/validation/reusable-schema'
 
 export const loginSchema = z.object({
   username: zString({ name: 'username', mandatory: true }),

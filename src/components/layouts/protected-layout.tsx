@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
+
 import Navbar from '@components/navbar'
 import Sidebar from '@components/sidebar'
+
 import useCurrentPath from '@hooks/use-current-path'
-import { routes } from '@routes/constant'
 import { useAppSelector } from '@store/store'
+import { routes } from '@routes/constant'
 
 const Protectedlayout = () => {
   const refContainerPage = useRef<HTMLDivElement>(null)

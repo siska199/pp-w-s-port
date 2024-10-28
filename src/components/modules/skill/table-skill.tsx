@@ -1,15 +1,17 @@
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import Badge from '@components/ui/badge'
 import Table from '@components/ui/table'
-import { ACTION_TYPE_SKILL, skillContext } from '@context/modules/skill/skill-context'
+
 import useTable from '@hooks/use-table'
+import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice'
+import { useAppDispatch, useAppSelector } from '@store/store'
+import { ACTION_TYPE_SKILL, skillContext } from '@context/modules/skill/skill-context'
 import skills from '@lib/data/dummy/skills_user.json'
 import { delay } from '@lib/helper'
 import variantBadge from '@lib/variant/variant-badge'
 import { routes } from '@routes/constant'
-import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice'
-import { useAppDispatch, useAppSelector } from '@store/store'
 import { TTypeActionModalForm } from '@typescript/global.d'
 import { TSettingTable } from '@typescript/modules/ui/ui-types'
 

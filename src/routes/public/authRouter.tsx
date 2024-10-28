@@ -1,5 +1,7 @@
 import { RouteObject } from 'react-router-dom'
+
 import { SignInPage } from '@pages'
+
 import { routes } from '@routes/constant'
 
 const authRouter: RouteObject[] = [

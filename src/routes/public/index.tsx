@@ -1,7 +1,9 @@
 import React from 'react'
 import { RouteObject } from 'react-router-dom'
+
 import GlobalLayout from '@components/layouts/global-layout'
 import PublicLayout from '@components/layouts/public-layout'
+
 import authRouter from '@routes/public/authRouter'
 import portofolioRouter from '@routes/public/portofolioRouter'
 import projectDetailRouter from '@routes/public/projectDetailRouter'

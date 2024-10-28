@@ -1,13 +1,15 @@
 import { useState } from 'react'
-import { cardAnimation, slideInAnimation } from '@assets/styles/animation'
+import { motion } from 'framer-motion'
+
 import Badge from '@components/ui/badge'
 import Button from '@components/ui/button'
 import Container from '@components/ui/container/container'
 import ContainerSection from '@components/ui/container/container-section'
 import Image from '@components/ui/image'
+
 import { skillCategories } from '@lib/data/dummy'
 import { cn } from '@lib/helper'
-import { motion } from 'framer-motion'
+import { cardAnimation, slideInAnimation } from '@assets/styles/animation'
 
 const SkillSection = () => {
   const [activeIndex, setActiveIndex] = useState(0)

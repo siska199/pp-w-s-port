@@ -1,9 +1,10 @@
+import z from 'zod'
+
 import categories_skill from '@lib/data/dummy/categories_skill.json'
 import skills from '@lib/data/dummy/skills.json'
 import { levelSkillOptions, yearsOfExperiances } from '@lib/data/options'
 import { generateOptions } from '@lib/helper'
 import { zString } from '@lib/validation/reusable-schema'
-import z from 'zod'
 
 const skillSchema = z.object({
   id_category: zString({ name: 'Category' }),

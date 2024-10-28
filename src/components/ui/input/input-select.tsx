@@ -1,13 +1,15 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { IconClose } from '@assets/icons'
-import IconChevronToggle from '@assets/icons/icon-chevron-down'
+import clsx from 'clsx'
+
 import Badge from '@components/ui/badge'
 import ContainerInput from '@components/ui/input/container-input'
 import InputMultipleCheckbox from '@components/ui/input/input-multiple-checkbox'
+
 import useOnClickOutside from '@hooks/use-on-click-outside'
 import { debounce, getFieldLabelFromOptions, spreadArrayAttemp } from '@lib/helper'
 import { TBasePropsInput, TCustomeEventOnChange, TOption } from '@typescript/modules/ui/ui-types'
-import clsx from 'clsx'
+import { IconClose } from '@assets/icons'
+import IconChevronToggle from '@assets/icons/icon-chevron-down'
 
 import { isEmptyValue } from '../../../lib/helper'
 

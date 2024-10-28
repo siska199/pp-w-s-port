@@ -1,6 +1,7 @@
 import { HTMLProps } from 'react'
-import { IconLoadingThreeDots } from '@assets/icons'
+
 import { cn } from '@lib/helper'
+import { IconLoadingThreeDots } from '@assets/icons'
 
 type TPropsLoading = HTMLProps<HTMLDivElement>
 

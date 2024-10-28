@@ -1,9 +1,10 @@
 import { HTMLProps } from 'react'
 import { Link } from 'react-router-dom'
-import IconLoadingSpinner from '@assets/icons/icon-loading-spinner'
+import { cva, VariantProps } from 'class-variance-authority'
+
 import { cn } from '@lib/helper'
 import { variantButton } from '@lib/variant/variant-button'
-import { cva, VariantProps } from 'class-variance-authority'
+import IconLoadingSpinner from '@assets/icons/icon-loading-spinner'
 
 interface TPropsLink {
   to?: string

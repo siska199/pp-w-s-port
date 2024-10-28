@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import { IconSearch } from '@assets/icons'
+
 import InputBase from '@components/ui/input/input-base'
 import InputSelect from '@components/ui/input/input-select'
+
 import { TCustomeEventOnChange } from '@typescript/modules/ui/ui-types'
+import { IconSearch } from '@assets/icons'
 
 const FormFilterSKill = () => {
   const [form, setForm] = useState({

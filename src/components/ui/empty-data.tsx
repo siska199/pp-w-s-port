@@ -1,4 +1,5 @@
 import Image from '@components/ui/image'
+
 import { cn } from '@lib/helper'
 
 interface TProps {
