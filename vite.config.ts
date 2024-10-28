@@ -24,10 +24,13 @@ export default defineConfig({
     host: true,
     watch: {
       usePolling: true
+    },
+    hmr: {
+      host: '0.0.0.0'
     }
   },
   preview: {
     port: 3000,
     strictPort: true
-  },
+  }
 })
