@@ -87,6 +87,8 @@ const FormPersonlaInformation = () => {
       schema: personalInformationSchema
     })
 
+    console.log('form: ', updatedForm.about_me)
+
     if (isValid) {
       //
     }
@@ -108,7 +110,9 @@ const FormPersonlaInformation = () => {
         <InputSelect {...form['id_district']} onChange={handleOnChange} />
         <InputSelect {...form['id_postal_code']} onChange={handleOnChange} />
       </div>
-      <InputTextArea {...form['bio']} onChange={handleOnChange} />
+      <InputBase {...form['bio']} onChange={handleOnChange} />
+      <InputTextArea {...form['about_me']} onChange={handleOnChange} />
+
       <InputTextEditor {...form['about_me']} onChange={handleOnChange} />
       <InputUploadFile {...form['professional_image']} onChange={handleOnChange} />
 

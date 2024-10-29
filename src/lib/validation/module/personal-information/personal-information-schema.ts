@@ -89,7 +89,9 @@ export const initialFormPersonalInformation = {
     name: 'about_me',
     label: 'About Me',
     placeholder: 'Write a brief summary about your professional background and skills',
-    value: ''
+    value: '',
+    maxLength: 500,
+    rows: 4
   },
   professional_image: {
     name: 'professional_image',
