@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useReducer } from 'react'
 
-import { extractValueFromForm } from '@lib/helper'
+import { extractValueFromForm } from '@lib/helper/function'
 import { initialFormSkill, TFormSkill } from '@lib/validation/module/skill/skill-schema'
 import { TTypeActionModalForm } from '@typescript/global.d'
 

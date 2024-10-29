@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 
 interface TProps {
   children: React.ReactNode

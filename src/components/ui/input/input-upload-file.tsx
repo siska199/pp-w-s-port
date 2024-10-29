@@ -11,15 +11,10 @@ import {
   getGeneralTypeFile,
   handleDownloadFile,
   handleValidateType
-} from '@lib/helper'
+} from '@lib/helper/function'
 import { messageError } from '@lib/validation'
+import { TBasePropsInput, TCustomeEventOnChange, TTypeFile } from '@typescript/modules/ui/ui-types'
 import { IconCamera } from '@assets/icons'
-
-import {
-  TBasePropsInput,
-  TCustomeEventOnChange,
-  TTypeFile
-} from '../../../typescript/modules/ui/ui-types'
 
 type TFileWithPreview = File & { preview?: string }
 export type TFileValue = TFileWithPreview | null

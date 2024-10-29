@@ -9,7 +9,7 @@ import useMediaQuery from '@hooks/use-media-query'
 import { handleToggleSidebar } from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
 import menuSidebar from '@lib/data/menu-sidebar'
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 
 const Sidebar = () => {
   const isToggleSidebar = useAppSelector((state) => state?.ui?.isToggleSidebar)

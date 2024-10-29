@@ -5,7 +5,7 @@ import draftToHtml from 'draftjs-to-html'
 
 import ContainerInput from '@components/ui/input/container-input'
 
-import { isHtmlHasText } from '@lib/helper'
+import { isHtmlHasText } from '@lib/helper/function'
 import { TBasePropsInput, TCustomeEventOnChange } from '@typescript/modules/ui/ui-types'
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
@@ -39,11 +39,10 @@ const InputTextEditor = (props: TProps) => {
   }
 
   return (
-    <ContainerInput {...attrs} customeClass={{ ciV2: '!p-0 !overflow-visible' }}>
+    <ContainerInput {...attrs} customeClass={{ ciV2: '!p-1 !overflow-visible' }}>
       <Editor
         editorState={editorState}
         onEditorStateChange={handleOnChangeEditorState}
-        toolbar={[['fontsize', ['fontsize']]]}
         editorClassName={`h-[5rem] px-2 ${editorClassName}`}
         wrapperClassName={`h-auto  ${wrapperClassName}`}
         {...attrs}

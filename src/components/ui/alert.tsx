@@ -2,7 +2,7 @@ import { HTMLProps, useEffect, useState } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 
 import { handleSetAlertConfig } from '@store/modules/ui/ui-slice'
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 import variantsAlert, {
   variantAlertError,
   variantAlertSucess,

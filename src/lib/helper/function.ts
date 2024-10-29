@@ -74,7 +74,7 @@ interface TParamsGetAssetURl {
 }
 export const getAssetURL = (params: TParamsGetAssetURl) => {
   const { name, folder = 'images' } = params
-  return new URL(`../assets/${folder}/${name}`, import.meta.url)?.href
+  return new URL(`../../assets/${folder}/${name}`, import.meta.url)?.href
 }
 
 export const convertBytesToMegabytes = (bytes: number): number => {

@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 import Image from '@components/ui/image'
 
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 import variantsAvatar from '@lib/variant/variant-avatar'
 
 interface TPropsImage {

@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from 'react'
 
-import { isEmptyValue } from '@lib/helper'
+import { isEmptyValue } from '@lib/helper/function'
 
 interface TProps<T> {
   handler: () => void

@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 
 export interface TPropsContainer
   extends React.HTMLProps<HTMLDivElement>,

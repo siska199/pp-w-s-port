@@ -4,18 +4,17 @@ import Button from '@components/ui/button'
 import InputBase from '@components/ui/input/input-base'
 import InputSelect from '@components/ui/input/input-select'
 import InputTextArea from '@components/ui/input/input-text-area'
-import InputTextEditor from '@components/ui/input/input-text-editor'
 import InputUploadFile from '@components/ui/input/input-upload-file'
 import useGeneralAPI from '@apis/use-general-api'
 
-import { fetchOptions, mappingErrorsToForm } from '@lib/helper'
+import { fetchOptions, mappingErrorsToForm } from '@lib/helper/function'
 import personalInformationSchema, {
   initialFormPersonalInformation,
   TFormPersonalInformation
 } from '@lib/validation/module/personal-information/personal-information-schema'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
 
-import { deepCopy } from '../../../lib/helper'
+import { deepCopy } from '../../../lib/helper/function'
 
 const FormPersonlaInformation = () => {
   const { getListProvince, getListCity, getListDistrict, getListProfession, getListPostalCode } =
@@ -112,10 +111,7 @@ const FormPersonlaInformation = () => {
       </div>
       <InputBase {...form['bio']} onChange={handleOnChange} />
       <InputTextArea {...form['about_me']} onChange={handleOnChange} />
-
-      <InputTextEditor {...form['about_me']} onChange={handleOnChange} />
       <InputUploadFile {...form['professional_image']} onChange={handleOnChange} />
-
       <Button className='ml-auto'>Save</Button>
     </form>
   )

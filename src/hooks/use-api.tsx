@@ -4,7 +4,7 @@ import axios, { CancelTokenSource } from 'axios'
 import { handleSetAlertConfig, handleSetIsloading } from '@store/modules/ui/ui-slice'
 import CONFIG from '@lib/config/config'
 import appMessage from '@lib/data/app-message'
-import { generateUrlQueryParams, isEmptyValue } from '@lib/helper'
+import { generateUrlQueryParams, isEmptyValue } from '@lib/helper/function'
 import { TObject } from '@typescript/global.d'
 
 interface TParamsApiClient {

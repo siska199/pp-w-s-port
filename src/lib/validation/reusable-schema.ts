@@ -1,6 +1,6 @@
 import z, { ZodEffects, ZodNumber, ZodString } from 'zod'
 
-import { handleValidateType } from '@lib/helper'
+import { handleValidateType } from '@lib/helper/function'
 import validation, { messageError } from '@lib/validation'
 import { TTypeFile } from '@typescript/modules/ui/ui-types'
 

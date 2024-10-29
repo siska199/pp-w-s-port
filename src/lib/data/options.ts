@@ -1,5 +1,5 @@
 import { TTypeLevelSkill } from '@lib/data/enum'
-import { generateOptionsFromEnum } from '@lib/helper'
+import { generateOptionsFromEnum } from '@lib/helper/function'
 
 export const levelSkillOptions = generateOptionsFromEnum(TTypeLevelSkill)
 

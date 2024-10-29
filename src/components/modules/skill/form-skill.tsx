@@ -5,7 +5,7 @@ import InputSelect from '@components/ui/input/input-select'
 import ContainerModal from '@components/ui/modal/container-modal'
 
 import { skillContext } from '@context/modules/skill/skill-context'
-import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper'
+import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function'
 import skillSchema, {
   initialFormSkill,
   TFormSkill

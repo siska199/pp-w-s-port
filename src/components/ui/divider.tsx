@@ -1,4 +1,4 @@
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 
 interface TProps {
   variant?: 'left-aligned' | 'center-aligned' | 'right-aligned'

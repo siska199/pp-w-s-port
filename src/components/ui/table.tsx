@@ -5,7 +5,7 @@ import Button from '@components/ui/button'
 import EmptyData from '@components/ui/empty-data'
 import InputCheckbox from '@components/ui/input/input-checkbox'
 
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 import { TColumn, TSettingTable } from '@typescript/modules/ui/ui-types'
 import {
   IconArrowUp,

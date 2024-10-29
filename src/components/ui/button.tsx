@@ -2,7 +2,7 @@ import { HTMLProps } from 'react'
 import { Link } from 'react-router-dom'
 import { cva, VariantProps } from 'class-variance-authority'
 
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 import { variantButton } from '@lib/variant/variant-button'
 import IconLoadingSpinner from '@assets/icons/icon-loading-spinner'
 

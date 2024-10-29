@@ -1,7 +1,7 @@
 import React, { HTMLProps } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 import variantBadge from '@lib/variant/variant-badge'
 
 interface TProps

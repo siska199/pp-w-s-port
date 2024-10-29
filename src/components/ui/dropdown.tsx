@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 
 import useOnClickOutside from '@hooks/use-on-click-outside'
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 import { TOption } from '@typescript/modules/ui/ui-types'
 import IconChevronToggle from '@assets/icons/icon-chevron-down'
 

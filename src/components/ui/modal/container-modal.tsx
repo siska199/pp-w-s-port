@@ -2,7 +2,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 
 import Button from '@components/ui/button'
 
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 import { TBaseModal } from '@typescript/modules/ui/ui-types'
 import { IconClose } from '@assets/icons'
 

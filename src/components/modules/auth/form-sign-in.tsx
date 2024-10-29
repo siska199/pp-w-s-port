@@ -8,7 +8,7 @@ import InputCheckbox from '@components/ui/input/input-checkbox'
 
 import { handleSetAuth } from '@store/modules/auth/auth-slice'
 import { useAppDispatch } from '@store/store'
-import { mappingErrorsToForm } from '@lib/helper'
+import { mappingErrorsToForm } from '@lib/helper/function'
 import {
   initialFormSignIn,
   signInSchema,

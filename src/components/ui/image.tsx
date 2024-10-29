@@ -1,6 +1,6 @@
 import React, { HTMLProps, useState } from 'react'
 
-import { cn, getAssetURL } from '@lib/helper'
+import { cn, getAssetURL } from '@lib/helper/function'
 
 interface TProps extends Omit<Partial<HTMLProps<HTMLImageElement>>, ''> {
   src: string

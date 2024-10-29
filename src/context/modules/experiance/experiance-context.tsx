@@ -1,6 +1,6 @@
 import { createContext, useReducer } from 'react'
 
-import { extractValueFromForm } from '@lib/helper'
+import { extractValueFromForm } from '@lib/helper/function'
 import {
   initialFormExperiance,
   TFormExperiance

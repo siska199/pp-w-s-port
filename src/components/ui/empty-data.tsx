@@ -1,6 +1,6 @@
 import Image from '@components/ui/image'
 
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 
 interface TProps {
   customeClass?: {

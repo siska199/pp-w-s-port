@@ -1,4 +1,4 @@
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 import { IconChevronDown } from '@assets/icons'
 
 interface TProps {

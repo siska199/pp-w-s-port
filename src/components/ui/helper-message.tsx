@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react'
 
-import { cn } from '@lib/helper'
+import { cn } from '@lib/helper/function'
 
 interface TProps extends HTMLAttributes<HTMLParagraphElement> {
   message?: string
