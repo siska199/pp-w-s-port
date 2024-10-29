@@ -31,10 +31,6 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
       )
   }, [currentPath])
 
-  useEffect(() => {
-    dispatchR(handleSetModalConfirmation({ isShow: false }))
-  }, [])
-
   return (
     <>
       {children}

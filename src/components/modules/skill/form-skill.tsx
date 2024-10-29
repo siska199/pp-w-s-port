@@ -4,7 +4,7 @@ import Button from '@components/ui/button'
 import InputSelect from '@components/ui/input/input-select'
 import ContainerModal from '@components/ui/modal/container-modal'
 
-import { ACTION_TYPE_SKILL, skillContext } from '@context/modules/skill/skill-context'
+import { skillContext } from '@context/modules/skill/skill-context'
 import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper'
 import skillSchema, {
   initialFormSkill,
@@ -14,10 +14,7 @@ import { TTypeActionModalForm } from '@typescript/global.d'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
 
 const FormSkill = () => {
-  const {
-    state: { modalFormSkill, skill },
-    dispatch
-  } = useContext(skillContext)
+  const { modalFormSkill, skill, handleToggleModalFormSkill } = useContext(skillContext)
 
   const [form, setForm] = useState(deepCopy({ ...initialFormSkill }))
 
@@ -26,13 +23,11 @@ const FormSkill = () => {
   }, [skill])
 
   const handlleCloseFormSkill = () => {
-    dispatch({
-      type: ACTION_TYPE_SKILL.SET_MODAL_FORM_SKILL,
-      payload: {
-        isShow: false
-      }
+    setForm(deepCopy({ ...initialFormSkill }))
+    handleToggleModalFormSkill({
+      isShow: false,
+      action: modalFormSkill?.action
     })
-    setForm({ ...initialFormSkill })
   }
 
   const handleOnChange = (e: TEventOnChange) => {
@@ -60,6 +55,13 @@ const FormSkill = () => {
       ...updatedForm
     })
   }
+
+  useEffect(() => {
+    handleToggleModalFormSkill({
+      isShow: false,
+      action: modalFormSkill?.action
+    })
+  }, [])
 
   return (
     <ContainerModal

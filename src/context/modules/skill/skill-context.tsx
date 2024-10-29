@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useCallback, useReducer } from 'react'
 
 import { extractValueFromForm } from '@lib/helper'
 import { initialFormSkill, TFormSkill } from '@lib/validation/module/skill/skill-schema'
@@ -29,9 +29,9 @@ type TSkillAction =
       payload: TSkillState['skill']
     }
 
-interface TSkillContext {
-  state: TSkillState
-  dispatch: React.Dispatch<TSkillAction>
+interface TSkillContext extends TSkillState {
+  handleToggleModalFormSkill: (payload: TSkillState['modalFormSkill']) => void
+  handelSetSkill: (payload: TSkillState['skill']) => void
 }
 
 /*---------------------------------------------------------------------------------------- */
@@ -44,11 +44,10 @@ const initialState: TSkillState = {
   skill: extractValueFromForm({ ...initialFormSkill })
 }
 
-const defaultDispatch: React.Dispatch<TSkillAction> = () => initialState
-
 export const skillContext = createContext<TSkillContext>({
-  state: initialState,
-  dispatch: defaultDispatch
+  ...initialState,
+  handleToggleModalFormSkill: () => null,
+  handelSetSkill: () => null
 })
 
 const reducer = (state: TSkillState, action: TSkillAction) => {
@@ -79,5 +78,34 @@ export const SkillContextProvider = (props: { children: React.ReactNode }) => {
   const { children } = props
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  return <skillContext.Provider value={{ state, dispatch }}>{children}</skillContext.Provider>
+  const handleToggleModalFormSkill = useCallback(
+    (payload: TSkillState['modalFormSkill']) =>
+      dispatch({
+        type: ACTION_TYPE_SKILL.SET_MODAL_FORM_SKILL,
+        payload: payload
+      }),
+    []
+  )
+
+  const handelSetSkill = useCallback(
+    (payload: TSkillState['skill']) =>
+      dispatch({
+        type: ACTION_TYPE_SKILL.SET_SKILL,
+        payload
+      }),
+    []
+  )
+
+  return (
+    <skillContext.Provider
+      value={{
+        modalFormSkill: state.modalFormSkill,
+        skill: state.skill,
+        handleToggleModalFormSkill,
+        handelSetSkill
+      }}
+    >
+      {children}
+    </skillContext.Provider>
+  )
 }

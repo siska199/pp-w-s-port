@@ -7,7 +7,7 @@ import Table from '@components/ui/table'
 import useTable from '@hooks/use-table'
 import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
-import { ACTION_TYPE_SKILL, skillContext } from '@context/modules/skill/skill-context'
+import { skillContext } from '@context/modules/skill/skill-context'
 import skills from '@lib/data/dummy/skills_user.json'
 import { delay } from '@lib/helper'
 import variantBadge from '@lib/variant/variant-badge'
@@ -19,7 +19,7 @@ type TData = (typeof skills)[0]
 
 const TableSkill = () => {
   const isLoading = useAppSelector((state) => state.ui.isLoading)
-  const { dispatch } = useContext(skillContext)
+  const { handleToggleModalFormSkill, handelSetSkill } = useContext(skillContext)
   const dispatchR = useAppDispatch()
   const navigate = useNavigate()
 
@@ -92,27 +92,21 @@ const TableSkill = () => {
   })
 
   async function handleFetchData(params: TSettingTable<TData>): Promise<TData[]> {
-    console.log('params: ', params)
+    console.log('params : ', params)
     delay(1500)
     return skills as TData[]
   }
 
   const handleEditData = (data: TData) => {
-    dispatch({
-      type: ACTION_TYPE_SKILL.SET_MODAL_FORM_SKILL,
-      payload: {
-        isShow: true,
-        action: TTypeActionModalForm.EDIT
-      }
+    handleToggleModalFormSkill({
+      isShow: true,
+      action: TTypeActionModalForm.EDIT
     })
-    dispatch({
-      type: ACTION_TYPE_SKILL.SET_SKILL,
-      payload: {
-        id_category: data?.id_category,
-        id_skill: data?.id_skill,
-        level: data?.level,
-        year_of_experiances: String(data?.years_of_experience)
-      }
+    handelSetSkill({
+      id_category: data?.id_category,
+      id_skill: data?.id_skill,
+      level: data?.level,
+      year_of_experiances: String(data?.years_of_experience)
     })
   }
 
