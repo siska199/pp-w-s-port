@@ -38,10 +38,8 @@ const InputDate = (props: TProps) => {
           value: valueDate
         }
       })
-      inputRef.current?.blur()
-
     }, 50)
-    setShowTypeDate(showTypeDate === 'date' ? '' : 'date')
+    setShowTypeDate('')
     setIsShouldCloseOnSelect(true)
   }
 
@@ -151,6 +149,7 @@ const InputDate = (props: TProps) => {
             </div>
           )}
           onCalendarOpen={()=>setShowTypeDate('date')}
+          
           shouldCloseOnSelect={isShouldCloseOnSelect}
           enableTabLoop={true}
           yearItemNumber={8}
