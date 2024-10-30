@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { TPropsModalConfirmation } from '@components/ui/modal/modal-confirmation'
+import { TPropsModalConfirmation } from '@components/ui/modal/container-modal-confirmation'
 
 import { TRUiState } from '@typescript/modules/ui/ui-types'
 

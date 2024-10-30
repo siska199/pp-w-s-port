@@ -48,14 +48,16 @@ export const zNumber = (params: {
   ) as ZodNumber
 }
 
-export const zDate = (params: { name: string; mandatory?: boolean }) => {
+export const zDate = (params: { name: string; mandatory?: boolean }): z.ZodString => {
   const { name, mandatory = true } = params
   const dateSchema = zString({ name, mandatory })?.datetime({ message: 'Invalid Date' })
-  return mandatory
-    ? dateSchema.nonempty({
-        message: messageError.required(name)
-      })
-    : dateSchema?.optional()
+  return (
+    mandatory
+      ? dateSchema.nonempty({
+          message: messageError.required(name)
+        })
+      : dateSchema?.optional()
+  ) as z.ZodString
 }
 
 type TResultZPassword = ZodEffects<ZodString, string, string>

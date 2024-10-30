@@ -3,6 +3,7 @@ import React, { createContext, useCallback, useReducer } from 'react'
 import { extractValueFromForm } from '@lib/helper/function'
 import { initialFormSkill, TFormSkill } from '@lib/validation/module/skill/skill-schema'
 import { TTypeActionModalForm } from '@typescript/global.d'
+/*CONSTANTS-----------------------------------------------------------------------------------------*/
 
 export const ACTION_TYPE_SKILL = {
   SET_MODAL_FORM_SKILL: 'SET_MODAL_FORM_SKILL',
@@ -10,7 +11,7 @@ export const ACTION_TYPE_SKILL = {
   SET_SKILL: 'SET_SKILL'
 } as const
 
-/*-----------------------------------------------------------------------------------------*/
+/*TYPESCRIPT-----------------------------------------------------------------------------------------*/
 interface TSkillState {
   modalFormSkill: {
     isShow: boolean
@@ -33,8 +34,7 @@ interface TSkillContext extends TSkillState {
   handleToggleModalFormSkill: (payload: TSkillState['modalFormSkill']) => void
   handelSetSkill: (payload: TSkillState['skill']) => void
 }
-
-/*---------------------------------------------------------------------------------------- */
+/*REDUCER---------------------------------------------------------------------------------------- */
 
 const initialState: TSkillState = {
   modalFormSkill: {
@@ -74,6 +74,7 @@ const reducer = (state: TSkillState, action: TSkillAction) => {
   }
 }
 
+/*PROVIDER---------------------------------------------------------------------------------------- */
 export const SkillContextProvider = (props: { children: React.ReactNode }) => {
   const { children } = props
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -99,8 +100,7 @@ export const SkillContextProvider = (props: { children: React.ReactNode }) => {
   return (
     <skillContext.Provider
       value={{
-        modalFormSkill: state.modalFormSkill,
-        skill: state.skill,
+        ...state,
         handleToggleModalFormSkill,
         handelSetSkill
       }}

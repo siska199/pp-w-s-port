@@ -1,5 +1,5 @@
 import { TAlertProps } from '@components/ui/alert'
-import { TPropsModalConfirmation } from '@components/ui/modal/modal-confirmation'
+import { TPropsModalConfirmation } from '@components/ui/modal/container-modal-confirmation'
 
 export interface TOption<TLabel = string> {
   label: TLabel

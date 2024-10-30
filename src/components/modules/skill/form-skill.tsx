@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 
-import Button from '@components/ui/button'
 import InputSelect from '@components/ui/input/input-select'
-import ContainerModal from '@components/ui/modal/container-modal'
+import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
 import { skillContext } from '@context/modules/skill/skill-context'
 import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function'
@@ -10,25 +9,19 @@ import skillSchema, {
   initialFormSkill,
   TFormSkill
 } from '@lib/validation/module/skill/skill-schema'
-import { TTypeActionModalForm } from '@typescript/global.d'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
 
 const FormSkill = () => {
   const { modalFormSkill, skill, handleToggleModalFormSkill } = useContext(skillContext)
-
   const [form, setForm] = useState(deepCopy({ ...initialFormSkill }))
+
+  useEffect(() => {
+    handlleCloseFormSkill()
+  }, [])
 
   useEffect(() => {
     setForm({ ...mappingValuesToForm({ values: skill, form }) })
   }, [skill])
-
-  const handlleCloseFormSkill = () => {
-    setForm(deepCopy({ ...initialFormSkill }))
-    handleToggleModalFormSkill({
-      isShow: false,
-      action: modalFormSkill?.action
-    })
-  }
 
   const handleOnChange = (e: TEventOnChange) => {
     const name = e.target.name as keyof typeof form
@@ -56,45 +49,32 @@ const FormSkill = () => {
     })
   }
 
-  useEffect(() => {
+  const handlleCloseFormSkill = () => {
+    setForm(deepCopy({ ...initialFormSkill }))
     handleToggleModalFormSkill({
       isShow: false,
       action: modalFormSkill?.action
     })
-  }, [])
+  }
 
   return (
-    <ContainerModal
+    <ContainerModalForm
+      moduleName={'Skill'}
+      action={modalFormSkill.action}
       isShow={modalFormSkill.isShow}
       onClose={handlleCloseFormSkill}
-      title={
-        <>
-          <div>Form Skill</div>
-          <div className='text-body-base font-normal'>
-            Action: {modalFormSkill.action === TTypeActionModalForm.ADD ? 'Add' : 'Edit'}
-          </div>
-        </>
-      }
-      customeClass={{
-        mdBody: '!overflow-visible',
-        mdContent: '!overflow-visible w-[32rem]',
-        mdModal: '!overflow-visible'
-      }}
+      customeClass={{ mdBody: 'md:min-w-[32rem]' }}
+      onSubmit={handleOnSubmit}
     >
-      <form onSubmit={handleOnSubmit} className='space-y-4 w-full mx-auto'>
-        <div className='grid md:grid-cols-2 gap-4'>
-          <InputSelect {...form['id_category']} onChange={handleOnChange} />
-          <InputSelect {...form['id_skill']} onChange={handleOnChange} />
-        </div>
-        <div className='grid md:grid-cols-2 gap-4'>
-          <InputSelect {...form['level']} onChange={handleOnChange} />
-          <InputSelect {...form['year_of_experiances']} onChange={handleOnChange} />
-        </div>
-        <Button type='submit' className='ml-auto'>
-          Save
-        </Button>
-      </form>
-    </ContainerModal>
+      <div className='grid md:grid-cols-2 gap-4'>
+        <InputSelect {...form['id_category']} onChange={handleOnChange} />
+        <InputSelect {...form['id_skill']} onChange={handleOnChange} />
+      </div>
+      <div className='grid md:grid-cols-2 gap-4'>
+        <InputSelect {...form['level']} onChange={handleOnChange} />
+        <InputSelect {...form['year_of_experiances']} onChange={handleOnChange} />
+      </div>
+    </ContainerModalForm>
   )
 }
 

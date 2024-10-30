@@ -4,7 +4,7 @@ import { TBaseModal } from '@typescript/modules/ui/ui-types'
 
 import Button from '../button'
 
-export interface TPropsModalConfirmation extends Omit<TBaseModal, 'onClose'> {
+export interface TPropsContainerModalConfirmation extends Omit<TBaseModal, 'onClose'> {
   title?: string
   button?: {
     cancel?: {
@@ -23,7 +23,7 @@ export interface TPropsModalConfirmation extends Omit<TBaseModal, 'onClose'> {
   }
 }
 
-const ModalConfirmation = (props: TPropsModalConfirmation) => {
+const ContainerModalConfirmation = (props: TPropsContainerModalConfirmation) => {
   const { title, isShow, children, button, customeClass } = props
 
   const handleConfirmationBtn = () => {
@@ -53,4 +53,4 @@ const ModalConfirmation = (props: TPropsModalConfirmation) => {
   )
 }
 
-export default ModalConfirmation
+export default ContainerModalConfirmation

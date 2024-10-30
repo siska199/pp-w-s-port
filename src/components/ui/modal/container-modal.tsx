@@ -6,17 +6,16 @@ import { cn } from '@lib/helper/function'
 import { TBaseModal } from '@typescript/modules/ui/ui-types'
 import { IconClose } from '@assets/icons'
 
-export interface TModalProps extends TBaseModal, VariantProps<typeof modalVariants> {
+export interface TContainerModalProps extends TBaseModal, VariantProps<typeof modalVariants> {
   customeClass?: {
     mdModal?: string
     mdContent?: string
     mdBody?: string
     mdHeader?: string
   }
-  className?: string
 }
 
-const ContainerModal = (props: TModalProps) => {
+const ContainerModal = (props: TContainerModalProps) => {
   const {
     isShow,
     customeClass,
@@ -46,7 +45,7 @@ const ContainerModal = (props: TModalProps) => {
         >
           {title && (
             <div
-              className={`md-header border-b pb-2 font-bold text-gray-900 text-body-large ${customeClass?.mdHeader}`}
+              className={`md-header border-b p-4 font-bold text-gray-900 text-body-large ${customeClass?.mdHeader}`}
             >
               {title}
             </div>
@@ -58,7 +57,7 @@ const ContainerModal = (props: TModalProps) => {
           >
             <IconClose />
           </Button>
-          <div className={`max-h-[90vh] flex flex-col  space-y-2 ${customeClass?.mdBody}`}>
+          <div className={`max-h-[90vh] flex flex-col space-y-4 px-4 pb-4 ${customeClass?.mdBody}`}>
             {children}
           </div>
         </div>

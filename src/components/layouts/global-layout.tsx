@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import ModalConfirmation from '@components/ui/modal/modal-confirmation'
+import ModalConfirmation from '@components/ui/modal/container-modal-confirmation'
 
 import useCurrentPath from '@hooks/use-current-path'
 import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice'

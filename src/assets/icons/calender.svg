@@ -1,0 +1,12 @@
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="2.33333" width="12" height="12" rx="3.33333" stroke="currentColor" strokeWidth="1"/>
+    <path d="M2 5.66667H14" stroke="currentColor" strokeWidth="1" strokeLinejoin="round"/>
+    <path d="M11 1.33333L11 3.33333" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M5 1.33333L5 3.33333" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M4.33333 8.33333H5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M7.66667 8.33333H8.33333" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M11 8.33333H11.6667" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M4.33333 11H5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M7.66667 11H8.33333" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M11 11H11.6667" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>

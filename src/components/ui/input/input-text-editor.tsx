@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Editor, EditorProps } from 'react-draft-wysiwyg'
-import { ContentState, convertToRaw, EditorState } from 'draft-js'
+import { ContentState, convertToRaw, EditorState, RichUtils } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
 
 import ContainerInput from '@components/ui/input/container-input'
@@ -21,6 +21,7 @@ const InputTextEditor = (props: TProps) => {
   const [editorState, setEditorState] = useState(
     EditorState.createWithContent(ContentState.createFromText(value))
   )
+  const currentBlockType = RichUtils.getCurrentBlockType(editorState);
 
   const handleOnChangeEditorState = (editorState: EditorState) => {
     setEditorState(editorState)
@@ -38,14 +39,16 @@ const InputTextEditor = (props: TProps) => {
     })
   }
 
+
   return (
     <ContainerInput {...attrs} customeClass={{ ciV2: '!p-1 !overflow-visible' }}>
       <Editor
         editorState={editorState}
         onEditorStateChange={handleOnChangeEditorState}
-        editorClassName={`h-[5rem] px-2 ${editorClassName}`}
-        wrapperClassName={`h-auto  ${wrapperClassName}`}
+        editorClassName={`px-2 ${editorClassName}`}
+        wrapperClassName={`min-h-[5rem] ${wrapperClassName}`}
         {...attrs}
+        placeholder={!value &&currentBlockType=='unstyled' ?attrs?.placeholder : ''}
       />
     </ContainerInput>
   )

@@ -6,6 +6,12 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from '@store/store'
 import router from '@routes'
 
+import '@assets/styles/index.css'
+import '@assets/styles/slider.css'
+import '@assets/styles/tooltip.css'
+import '@assets/styles/modal.css'
+import '@assets/styles/input.css'
+
 const Providers = () => {
   return (
     <Provider store={store}>

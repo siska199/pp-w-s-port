@@ -94,7 +94,7 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
                 true,
               [`${customeClass?.ciV2}`]: customeClass?.ciV2,
               '!bg-disabled !border': disabled,
-              'focus-within:ring-primary-200 focus-within:!border-primary': !errorMessage,
+              'focus-within:ring-primary-200 focus-within:border-primary': !errorMessage,
               'border-error focus-within:!ring-error-200 focus-within:!border-error': errorMessage,
               'px-3 py-2': !customeElement?.preStart && !customeElement?.preEnd,
               'overflow-hidden': customeElement?.preStart || customeElement?.preEnd

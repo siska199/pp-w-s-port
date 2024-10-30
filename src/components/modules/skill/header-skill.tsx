@@ -9,14 +9,10 @@ const HeaderSkill = () => {
   const { handleToggleModalFormSkill } = useContext(skillContext)
 
   const handleAddSkill = () => {
-    try {
-      handleToggleModalFormSkill({
-        isShow: true,
-        action: TTypeActionModalForm.ADD
-      })
-    } catch (error: any) {
-      console.log('error: ', error.mesage)
-    }
+    handleToggleModalFormSkill({
+      isShow: true,
+      action: TTypeActionModalForm.ADD
+    })
   }
   return <HeaderPage title={'Skill'} onClickAddData={handleAddSkill} />
 }
