@@ -2,7 +2,7 @@ import SocialLinks from '@components/modules/personal-information/associate-link
 import FormPersonlaInformation from '@components/modules/personal-information/form-personal-information'
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'
 import Divider from '@components/ui/divider'
-import HeaderPage from '@components/ui/header-page'
+import HeaderPage from '@components/ui/header/header-page'
 
 const PersonalInformationPage = () => {
   return (

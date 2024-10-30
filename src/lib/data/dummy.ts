@@ -580,7 +580,60 @@ export const experiances = [
   }
 ]
 
-export const educations = []
+export const educations = [
+  {
+    level: 'Bachelor Degree',
+    major: 'Physics',
+    school: 'University State Of Malang',
+    description: `<ul>
+        <li>PPA scholarship recipients for 2018-2019 period.</li>
+        <li>PPA scholarship recipients for 2019-2020 period.</li>
+        <li>Adora scholarship recipients for 2020-2021 period.</li>
+        <li>The best graduate majoring in physics, the 109th graduate</li>
+        </ul>`,
+    start_at: '2017',
+    end_at: '2022'
+  },
+  {
+    level: 'Bachelor Degree',
+    major: 'Physics',
+    school: 'University State Of Malang',
+    description: `<ul>
+        <li>PPA scholarship recipients for 2018-2019 period.</li>
+        <li>PPA scholarship recipients for 2019-2020 period.</li>
+        <li>Adora scholarship recipients for 2020-2021 period.</li>
+        <li>The best graduate majoring in physics, the 109th graduate</li>
+        </ul>`,
+    start_at: '2017',
+    end_at: '2022'
+  },
+  {
+    level: 'Bachelor Degree',
+    major: 'Physics',
+    school: 'University State Of Malang',
+    description: `<ul>
+        <li>PPA scholarship recipients for 2018-2019 period.</li>
+        <li>PPA scholarship recipients for 2019-2020 period.</li>
+        <li>Adora scholarship recipients for 2020-2021 period.</li>
+        <li>The best graduate majoring in physics, the 109th graduate</li>
+        </ul>`,
+    start_at: '2017',
+    end_at: '2022'
+  },
+  {
+    level: 'Bachelor Degree',
+    major: 'Physics',
+    school: 'University State Of Malang',
+    description: `<ul>
+        <li>PPA scholarship recipients for 2018-2019 period.</li>
+        <li>PPA scholarship recipients for 2019-2020 period.</li>
+        <li>Adora scholarship recipients for 2020-2021 period.</li>
+        <li>The best graduate majoring in physics, the 109th graduate</li>
+        </ul>`,
+    start_at: '2017',
+    end_at: '2022'
+  }
+]
 
 export const projectDetail = {
   thumbnail: 'dummy-images/goa.png',

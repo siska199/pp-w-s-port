@@ -1,5 +1,7 @@
+import ContainerProtectedPage from '@components/ui/container/container-protected-page'
+
 const Certification = () => {
-  return <div>Certification</div>
+  return <ContainerProtectedPage>SISKA</ContainerProtectedPage>
 }
 
 export default Certification

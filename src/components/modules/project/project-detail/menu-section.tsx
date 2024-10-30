@@ -1,6 +1,6 @@
 import ContainerSection from '@components/ui/container/container-section'
 import Image from '@components/ui/image'
-import Slider3D from '@components/ui/slider-3d'
+import Slider3D from '@components/ui/slider/slider-3d'
 
 const MenuSection = () => {
   const listImage = [

@@ -15,7 +15,7 @@ const HeroSection = () => {
   const { isMaxMd } = useMediaQuery()
 
   return (
-    <ContainerSection gap='xl' className='mt-10 md:mt-0 '>
+    <ContainerSection gap='xl' className='mt-10 md:mt-0  h-screen'>
       <Container gap='base' className='w-auto '>
         <AnimatedText
           text={`I'm Siska Apriana Rifianti`}
@@ -56,7 +56,6 @@ const HeroSection = () => {
           </Container>
         </motion.div>
       </Container>
-
       <motion.div {...opacityAnimation()} className='hidden md:flex w-full md:w-auto'>
         <Image
           className='animate-waved-border mx-auto rounded-full md:rounded-none w-[10rem] md:w-[25rem] aspect-square bg-transparent'

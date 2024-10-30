@@ -1,4 +1,5 @@
 import Container, { TPropsContainer } from '@components/ui/container/container'
+import HeaderSection from '@components/ui/header/header-section'
 
 interface TProps extends TPropsContainer {
   children: React.ReactNode
@@ -14,11 +15,7 @@ const ContainerSection = (props: TProps) => {
       className={`p-8 md:p-16  ${className}`}
       {...attrs}
     >
-      {title && (
-        <h3 className=' text-heading-05 md:text-heading-03 text-center font-bubblegum-sans capitalize '>
-          {title}
-        </h3>
-      )}
+      <HeaderSection title={title} />
       {children}
     </Container>
   )

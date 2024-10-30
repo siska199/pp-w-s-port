@@ -1,4 +1,4 @@
-import HeaderPage from '@components/ui/header-page'
+import HeaderPage from '@components/ui/header/header-page'
 
 const HeaderProject = () => {
   const handleAddProject = () => {}

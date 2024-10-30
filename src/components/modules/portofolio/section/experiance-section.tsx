@@ -23,7 +23,6 @@ interface TPropsExperiance {
   position: string
   startDate: string
   endDate: string
-  description: string
   projects: string[]
   techStack: string[]
 }
