@@ -20,7 +20,7 @@ type TData = (typeof skills)[0]
 const TableSkill = () => {
   const isLoading = useAppSelector((state) => state.ui.isLoading)
   const { handleToggleModalFormSkill, handelSetSkill } = useContext(skillContext)
-  const dispatchR = useAppDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const configTable = useTable<TData, false>({
@@ -116,13 +116,13 @@ const TableSkill = () => {
 
   const handleDeleteData = (data: TData) => {
     console.log('data: ', data)
-    dispatchR(
+    dispatch(
       handleSetModalConfirmation({
         isShow: true,
         children: 'Are you sure want to delete this data?',
         button: {
           confirm: {
-            onClick: () => dispatchR(handleSetModalConfirmation({ isShow: false }))
+            onClick: () => dispatch(handleSetModalConfirmation({ isShow: false }))
           }
         }
       })

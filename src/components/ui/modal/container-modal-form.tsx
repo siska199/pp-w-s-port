@@ -3,11 +3,17 @@ import ContainerModal, { TContainerModalProps } from '@components/ui/modal/conta
 
 import { TTypeActionModalForm } from '@typescript/global.d'
 
-interface TProps extends TContainerModalProps {
+interface TCustomeClass extends TContainerModalProps{
+  form? : string;
+  containerInputs? : string
+}
+
+interface TProps extends TContainerModalProps,TCustomeClass {
   moduleName: string
   action: TTypeActionModalForm
   children: React.ReactNode
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+
 }
 
 const ContainerModalForm = (props: TProps) => {

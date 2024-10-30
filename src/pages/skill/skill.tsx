@@ -9,7 +9,7 @@ import { SkillContextProvider } from '@context/modules/skill/skill-context'
 const SkillPage = () => {
   return (
     <SkillContextProvider>
-      <ContainerProtectedPage className='space-y-8'>
+      <ContainerProtectedPage>
         <HeaderSkill />
         <FormFilterSKill />
         <TableSkill />

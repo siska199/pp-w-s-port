@@ -46,7 +46,7 @@ const InputTextEditor = (props: TProps) => {
         editorState={editorState}
         onEditorStateChange={handleOnChangeEditorState}
         editorClassName={`px-2 ${editorClassName}`}
-        wrapperClassName={`min-h-[5rem] ${wrapperClassName}`}
+        wrapperClassName={`min-h-[10rem] ${wrapperClassName}`}
         {...attrs}
         placeholder={!value &&currentBlockType=='unstyled' ?attrs?.placeholder : ''}
       />

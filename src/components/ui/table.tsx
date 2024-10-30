@@ -187,7 +187,7 @@ const Table = <TData, TIncludeChecked extends boolean = false>(
                     ))}
                     {isShowColumnAction && (
                       <td>
-                        <div className='min-w-[5rem] flex justify-center items-center gap-2'>
+                        <div className='min-w-[5rem] flex justify-center items-center gap-2 pr-2'>
                           {actionBtn?.view && (
                             <Badge
                               variant={'softborder-blue'}

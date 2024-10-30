@@ -3,47 +3,12 @@ import { useState } from 'react'
 import InputBase from '@components/ui/input/input-base'
 import InputSelect from '@components/ui/input/input-select'
 
+import { deepCopy } from '@lib/helper/function'
 import { TCustomeEventOnChange } from '@typescript/modules/ui/ui-types'
 import { IconSearch } from '@assets/icons'
 
 const FormFilterSKill = () => {
-  const [form, setForm] = useState({
-    keyword: {
-      name: 'keyword',
-      value: '',
-      placeholder: 'Search by skill name...',
-      customeClass: {}
-    },
-    category: {
-      name: 'category',
-      value: [],
-      options: [
-        { label: 'Backend', value: 'backend' },
-        { label: 'Frotnend', value: 'forntend' },
-        { label: 'Fullstack', value: 'fullstack' }
-      ],
-      placeholder: 'Category Skill'
-    },
-    yearsOfexperiance: {
-      name: 'yearsOfexperiance',
-      options: [...Array(40)]?.map((_, i) => ({
-        label: `${i + 1} year`,
-        value: `${i + 1}`
-      })),
-      value: '',
-      placeholder: 'Year of experiance'
-    },
-    level: {
-      name: 'level',
-      value: [],
-      options: [
-        { label: 'Beginner', value: 'Beginner' },
-        { label: 'Intermediet', value: 'Intermediet' },
-        { label: 'Advance', value: 'Advance' }
-      ],
-      placeholder: 'Level'
-    }
-  })
+  const [form, setForm] = useState(deepCopy({...initialFormFilter}))
 
   const handleOnChange = (e: TCustomeEventOnChange<any>) => {
     const currForm = form
@@ -68,6 +33,45 @@ const FormFilterSKill = () => {
       <InputSelect onChange={handleOnChange} {...form['yearsOfexperiance']} />
     </div>
   )
+}
+
+
+const initialFormFilter = {
+  keyword: {
+    name: 'keyword',
+    value: '',
+    placeholder: 'Search by skill name...',
+    customeClass: {}
+  },
+  category: {
+    name: 'category',
+    value: [],
+    options: [
+      { label: 'Backend', value: 'backend' },
+      { label: 'Frotnend', value: 'forntend' },
+      { label: 'Fullstack', value: 'fullstack' }
+    ],
+    placeholder: 'Category Skill'
+  },
+  yearsOfexperiance: {
+    name: 'yearsOfexperiance',
+    options: [...Array(40)]?.map((_, i) => ({
+      label: `${i + 1} year`,
+      value: `${i + 1}`
+    })),
+    value: '',
+    placeholder: 'Year of experiance'
+  },
+  level: {
+    name: 'level',
+    value: [],
+    options: [
+      { label: 'Beginner', value: 'Beginner' },
+      { label: 'Intermediet', value: 'Intermediet' },
+      { label: 'Advance', value: 'Advance' }
+    ],
+    placeholder: 'Level'
+  }
 }
 
 export default FormFilterSKill

@@ -62,7 +62,14 @@ const route = {
   education: {
     name: 'education',
     fullPath: '/education',
-    isPrivate: true
+    isPrivate: true,
+    child: {
+      detail: {
+        name: 'detail',
+        fullPath: (id: string) => `/education/detail/${id}`,
+        isPrivate: true
+      }
+    }
   },
   project: {
     name: 'project',
