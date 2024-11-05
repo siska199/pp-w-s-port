@@ -1,3 +1,4 @@
+import Footer from '@components/footer'
 import AboutMeSection from '@components/modules/portofolio/section/aboutme-section'
 import EducationSection from '@components/modules/portofolio/section/education-section'
 import ExperianceSection from '@components/modules/portofolio/section/experiance-section'
@@ -15,6 +16,7 @@ const Portofolio = () => {
       <ProjectSection />
       <ExperianceSection />
       <EducationSection />
+      <Footer />
     </ContainerLandingPage>
   )
 }

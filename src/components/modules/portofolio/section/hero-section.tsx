@@ -15,7 +15,7 @@ const HeroSection = () => {
   const { isMaxMd } = useMediaQuery()
 
   return (
-    <ContainerSection gap='xl' className='mt-10 md:mt-0  h-screen'>
+    <ContainerSection gap='xl' className='mt-10 md:mt-0  h-screen !p-8'>
       <Container gap='base' className='w-auto '>
         <AnimatedText
           text={`I'm Siska Apriana Rifianti`}

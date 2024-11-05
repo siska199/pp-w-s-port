@@ -6,6 +6,8 @@ import Container from '@components/ui/container/container'
 import ContainerSection from '@components/ui/container/container-section'
 
 import { useAnimateScrollCustome } from '@hooks/use-animate-scroll-custome'
+import { handleSetModal } from '@store/modules/ui/ui-slice'
+import { useAppDispatch } from '@store/store'
 import { experiances } from '@lib/data/dummy'
 
 const ExperianceSection = () => {
@@ -29,7 +31,6 @@ interface TPropsExperiance {
 
 const CardExperiance = (props: TPropsExperiance) => {
   const { companyName, position, startDate, endDate, projects, techStack } = props
-
   const targetRef = useRef<HTMLDivElement | null>(null)
   const { scrollYProgress } = useAnimateScrollCustome({
     targetRef,
@@ -63,22 +64,102 @@ const CardExperiance = (props: TPropsExperiance) => {
           </Container>
         </div>
 
-        <div className='space-y-2'>
-          <p className='font-medium'>Projects</p>
-          <ul className='flex flex-col gap-2'>
-            {projects?.map((project, i) => (
-              <li
-                key={i}
-                className='p-2 bg-glass-animation border-b cursor-pointer-custome rounded-md font-thin'
-              >
-                {'-'} {project}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <CardProjects projects={projects} />
       </div>
     </motion.div>
   )
 }
 
+interface TPropsProjects {
+  projects: string[]
+}
+const CardProjects = (props: TPropsProjects) => {
+  const { projects } = props
+  const dispatch = useAppDispatch()
+
+  const handleClickItemProject = (idProject: string) => {
+    dispatch(
+      handleSetModal({
+        isShow: true,
+        title: `My Responsibilities in ${idProject} Project`,
+        customeClass: {
+          mdModal: '',
+          mdContent: 'bg-white/0 shadow-none border-none',
+          mdBody: 'overflow-y-auto ',
+          mdOverlay: 'blur-4xl bg-white'
+        },
+        children: <ListResponsibility />
+      })
+    )
+  }
+
+  return (
+    <div className='space-y-2'>
+      <p className='font-medium'>Projects</p>
+      <ul className='flex flex-col gap-2'>
+        {projects?.map((project, i) => (
+          <li
+            key={i}
+            onClick={() => handleClickItemProject(project)}
+            className='p-2 bg-glass-animation border-b cursor-pointer-custome rounded-md font-thin'
+          >
+            {'-'} {project}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+export const ListResponsibility = () => {
+  return (
+    <ul className='ml-4 list-disc  space-y-4'>
+      <li className='p-2  border-b  rounded-md font-thin'>
+        Reengineered the GOA application, transitioning from an outdated .NET 4 UI to a modern
+        React-based interface using Vite, resulting in a 62% increase in speed compared to the
+        previous application. This transition also led to improved user satisfaction, evidenced by
+        positive feedback from users regarding the enhanced performance and usability of the new
+        interface.{' '}
+      </li>
+      <li className='p-2  border-b  rounded-md font-thin'>
+        Contributed to the setup of the application, including organizing the file and folder
+        structure, configuring public and private routes, implementing global state management using
+        Zustand with persistent data encryption, and utilizing session storage with
+        secure-web-storage for enhanced security.{' '}
+      </li>
+      <li className='p-2  border-b  rounded-md font-thin'>
+        Proposed the use of functional components to enhance code readability, advocated for the
+        adoption of hooks to separate the presentation layer from business logic, and suggested
+        using absolute imports and implementing custom hooks to replace higher-order components
+        (HOCs), resulting in cleaner and more maintainable code.{' '}
+      </li>
+      <li className='p-2  border-b  rounded-md font-thin'>
+        Restyled legacy codebase components to align with Figma designs provided by the UI/UX team
+        and created new reusable components that increased development speed by approximately 40%
+        (2md faster), streamlining the overall development process.{' '}
+      </li>
+      <li className='p-2  border-b  rounded-md font-thin'>
+        Restyled legacy codebase components to align with Figma designs provided by the UI/UX team
+        and created new reusable components that increased development speed by approximately 40%
+        (2md faster), streamlining the overall development process.{' '}
+      </li>
+      <li className='p-2  border-b  rounded-md font-thin'>
+        Restyled legacy codebase components to align with Figma designs provided by the UI/UX team
+        and created new reusable components that increased development speed by approximately 40%
+        (2md faster), streamlining the overall development process.{' '}
+      </li>
+      <li className='p-2  border-b  rounded-md font-thin'>
+        Restyled legacy codebase components to align with Figma designs provided by the UI/UX team
+        and created new reusable components that increased development speed by approximately 40%
+        (2md faster), streamlining the overall development process.{' '}
+      </li>
+
+      <li className='p-2  border-b  rounded-md font-thin'>
+        Restyled legacy codebase components to align with Figma designs provided by the UI/UX team
+        and created new reusable components that increased development speed by approximately 40%
+        (2md faster), streamlining the overall development process.{' '}
+      </li>
+    </ul>
+  )
+}
 export default ExperianceSection

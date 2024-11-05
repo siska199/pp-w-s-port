@@ -1,10 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { TPropsModalConfirmation } from '@components/ui/modal/container-modal-confirmation'
+import { TAlertProps } from '@components/ui/alert'
+import { TContainerModalProps } from '@components/ui/modal/container-modal'
+import { TPropsContainerModalConfirmation } from '@components/ui/modal/container-modal-confirmation'
 
-import { TRUiState } from '@typescript/modules/ui/ui-types'
+import { TAlertConfig } from '@typescript/modules/ui/ui-types'
 
-const initialState: TRUiState = {
+export interface TStateUI {
+  isLoading: boolean
+  isToggleSidebar: boolean
+  alertConfig: Omit<Partial<TAlertConfig>, 'show'> & {
+    show: boolean
+    type?: TAlertProps['type']
+  }
+  modalConfirmation: TPropsContainerModalConfirmation
+  modal: Partial<TContainerModalProps>
+}
+const initialState: TStateUI = {
   isLoading: false,
   isToggleSidebar: false,
   alertConfig: {
@@ -15,6 +27,10 @@ const initialState: TRUiState = {
   },
   modalConfirmation: {
     title: 'Confirmation',
+    isShow: false,
+    children: null
+  },
+  modal: {
     isShow: false,
     children: null
   }
@@ -30,7 +46,7 @@ const authSlice = createSlice({
     handleSetIsloading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload
     },
-    handleSetAlertConfig: (state, action: PayloadAction<TRUiState['alertConfig']>) => {
+    handleSetAlertConfig: (state, action: PayloadAction<TStateUI['alertConfig']>) => {
       state.alertConfig = {
         ...state.alertConfig,
         ...action.payload
@@ -38,10 +54,16 @@ const authSlice = createSlice({
     },
     handleSetModalConfirmation: (
       state,
-      action: PayloadAction<Partial<TPropsModalConfirmation>>
+      action: PayloadAction<Partial<TPropsContainerModalConfirmation>>
     ) => {
       state.modalConfirmation = {
         ...state.modalConfirmation,
+        ...action.payload
+      }
+    },
+    handleSetModal: (state, action: PayloadAction<Partial<TContainerModalProps>>) => {
+      state.modal = {
+        ...state.modal,
         ...action.payload
       }
     }
@@ -54,5 +76,6 @@ export const {
   handleSetIsloading,
   handleSetAlertConfig,
   handleToggleSidebar,
-  handleSetModalConfirmation
+  handleSetModalConfirmation,
+  handleSetModal
 } = authSlice.actions

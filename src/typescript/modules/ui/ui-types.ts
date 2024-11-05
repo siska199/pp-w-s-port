@@ -1,5 +1,3 @@
-import { TAlertProps } from '@components/ui/alert'
-import { TPropsModalConfirmation } from '@components/ui/modal/container-modal-confirmation'
 
 export interface TOption<TLabel = string> {
   label: TLabel
@@ -121,13 +119,4 @@ export interface TBaseModal {
   title?: React.ReactNode
 }
 
-/*--->Redux */
-export interface TRUiState {
-  isLoading: boolean
-  isToggleSidebar: boolean
-  alertConfig: Omit<Partial<TAlertConfig>, 'show'> & {
-    show: boolean
-    type?: TAlertProps['type']
-  }
-  modalConfirmation: TPropsModalConfirmation
-}
+

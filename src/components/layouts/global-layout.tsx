@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import ContainerModal from '@components/ui/modal/container-modal'
 import ModalConfirmation from '@components/ui/modal/container-modal-confirmation'
 
 import useCurrentPath from '@hooks/use-current-path'
-import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice'
+import { handleSetModal, handleSetModalConfirmation } from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
 import { routes } from '@routes/constant'
 interface TPropsGlobalLayout {
@@ -20,6 +22,7 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
 
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
   const modalConfirmation = useAppSelector((state) => state?.ui?.modalConfirmation)
+  const modal = useAppSelector((state) => state?.ui?.modal)
 
   useEffect(() => {
     if (currentPath?.pathname === '/')
@@ -31,6 +34,7 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
 
   useEffect(() => {
     dispatch(handleSetModalConfirmation({ isShow: false }))
+    dispatch(handleSetModal({ isShow: false }))
   }, [])
 
   return (
@@ -45,6 +49,13 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
             onClick: () => dispatch(handleSetModalConfirmation({ isShow: false }))
           }
         }}
+      />
+      <ContainerModal
+        {...modal}
+        isShow={modal.isShow || false}
+        // @ts-expect-error
+        children={modal.children?._source ? modal.children : <></>}
+        onClose={() => dispatch(handleSetModal({ isShow: false }))}
       />
     </>
   )

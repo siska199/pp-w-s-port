@@ -1,14 +1,19 @@
+import { motion } from 'framer-motion'
+
 import ContainerSection from '@components/ui/container/container-section'
 import SliderBase from '@components/ui/slider/slider-base'
 
 import { educations } from '@lib/data/dummy'
+import { slideInAnimation } from '@assets/styles/animation'
 
 const EducationSection = () => {
   return (
     <ContainerSection title='Education'>
-      <SliderBase
-        items={educations?.map((education, i) => <CardEducation key={i} {...education} />)}
-      />
+      <motion.div {...slideInAnimation({ direction: 'left' })} className=' max-w-full'>
+        <SliderBase
+          items={educations?.map((education, i) => <CardEducation key={i} {...education} />)}
+        />
+      </motion.div>
     </ContainerSection>
   )
 }

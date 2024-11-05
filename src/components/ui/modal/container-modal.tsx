@@ -12,6 +12,7 @@ export interface TContainerModalProps extends TBaseModal, VariantProps<typeof mo
     mdContent?: string
     mdBody?: string
     mdHeader?: string
+    mdOverlay?: string
   }
 }
 
@@ -40,7 +41,7 @@ const ContainerModal = (props: TContainerModalProps) => {
         )}
       >
         <div
-          className={`md-content bottom-0 relative flex flex-col gap-4  w-full ${customeClass?.mdContent}`}
+          className={`md-content bg-white bottom-0 relative flex flex-col gap-4  w-full ${customeClass?.mdContent}`}
           onClick={handleStopPropagation}
         >
           {title && (
@@ -63,7 +64,9 @@ const ContainerModal = (props: TContainerModalProps) => {
         </div>
       </div>
 
-      <div className={`${isShow && 'md-show'} md-overlay h-screen max-h-screeen`} />
+      <div
+        className={`${isShow && 'md-show'} md-overlay ${customeClass?.mdOverlay}  h-screen max-h-screeen`}
+      />
     </>
   )
 }

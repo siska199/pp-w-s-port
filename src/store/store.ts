@@ -31,7 +31,8 @@ const rootReducers = () => {
       {
         key: 'ui',
         storage: storagePersist,
-        transforms: [encryptor]
+        transforms: [encryptor],
+        blacklist: ['modalConfirmation', 'modal']
       },
       uiSlice
     )

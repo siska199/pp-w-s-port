@@ -533,8 +533,6 @@ export const experiances = [
     position: 'Frontend Developer',
     startDate: '2024-01-14',
     endDate: 'Present',
-    description:
-      'Responsible for reengineering the GOA application from .NET to a modern React-based interface.',
     projects: ['GOA', 'Vehicle Management System'],
     techStack: ['React', 'Vite', 'Zustand', 'Chart.js']
   },
