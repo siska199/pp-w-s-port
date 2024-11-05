@@ -10,7 +10,6 @@ const authRouter: RouteObject[] = [
     children: [
       {
         index: true,
-        path: routes.auth?.child?.signIn.name,
         element: <AuthPage />,
         handle: routes?.auth
       }

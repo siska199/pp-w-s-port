@@ -31,7 +31,7 @@ const ProjectSection = () => {
           onChange={(e) => setKeyword(e.target.value)}
           placeholder='Search Project by Name, Category Skill, Skill or Company... '
         />
-        <div className='grid md:grid-cols-3 gap-8  mx-auto '>
+        <div className='grid md:grid-cols-3 gap-8 px-4  mx-auto '>
           {projects?.map((project, i) => <CardProject key={i} index={i} {...project} />)}
         </div>
 

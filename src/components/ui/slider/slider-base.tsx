@@ -1,8 +1,6 @@
 import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperProps, SwiperSlide, SwiperSlideProps } from 'swiper/react'
 
-import Image from '@components/ui/image'
-
 import { IconChevronLeft, IconChevronRight } from '@assets/icons'
 
 import 'swiper/css'
@@ -11,12 +9,16 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 export interface TPropsSliderBase extends SwiperProps {
-  images: string[]
+  items: React.ReactNode[]
   swiperSlideProps?: SwiperSlideProps
+  customeClassBtn?: {
+    next: string
+    prev: string
+  }
 }
 
 const SliderBase = (props: TPropsSliderBase) => {
-  const { images, swiperSlideProps, ...swiperProps } = props
+  const { items, swiperSlideProps, customeClassBtn, ...swiperProps } = props
   return (
     <Swiper
       grabCursor={true}
@@ -26,24 +28,20 @@ const SliderBase = (props: TPropsSliderBase) => {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev'
       }}
-      className='swiper_container'
+      className='swiper_container px-[5rem]'
       modules={[Navigation]}
+      spaceBetween={40}
       {...swiperProps}
     >
-      {images?.map((image, i) => (
-        <SwiperSlide key={i} {...swiperSlideProps}>
-          <Image
-            src={image}
-            alt={`slide_image_${i}`}
-            customeClassName={{ image: 'object-cover' }}
-            className=' w-full h-full '
-          />
+      {items?.map((item, i) => (
+        <SwiperSlide key={i} className='flex items-center  justify-center' {...swiperSlideProps}>
+          {item}
         </SwiperSlide>
       ))}
-      <div className='swiper-button-next'>
+      <div className={`swiper-button-next ${customeClassBtn?.next}`}>
         <IconChevronRight className='icon-white' />
       </div>
-      <div className='swiper-button-prev'>
+      <div className={`swiper-button-prev ${customeClassBtn?.prev}`}>
         <IconChevronLeft className='icon-white' />
       </div>
     </Swiper>

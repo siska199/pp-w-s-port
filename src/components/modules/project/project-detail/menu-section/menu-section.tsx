@@ -3,7 +3,7 @@ import { SwiperClass } from 'swiper/react'
 
 import ContainerSection from '@components/ui/container/container-section'
 import Image from '@components/ui/image'
-import Slider3D from '@components/ui/slider/slider-3d'
+import SliderImage3D from '@components/ui/slider/slider-image-3d'
 
 const MenuSection = () => {
   const listImage = [
@@ -24,10 +24,14 @@ const MenuSection = () => {
   }
   return (
     <ContainerSection title='Menu' className=' '>
-      <Slider3D
+      <SliderImage3D
         images={listImage}
         onClick={handleOnChangeSlide}
         onSlideChange={handleOnChangeSlide}
+        swiperSlideProps={{
+          className:
+            `min-w-auto md:min-h-[20rem] min-w-[25rem] max-w-[25rem] md:min-w-[40rem] md:max-w-[40rem] rounded-lg overflow-hidden`
+        }}
       />
 
       <div className='space-y-4 w-full'>

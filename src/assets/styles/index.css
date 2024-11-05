@@ -161,6 +161,10 @@
 }
 
 @layer utilities {
+  .container-list-disc-style ul {
+    @apply ml-4 list-disc;
+  }
+  /*->Effect */
   .zoom-out-effect {
     @apply hover:scale-125 ease-in duration-150;
   }
