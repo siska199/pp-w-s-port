@@ -6,12 +6,14 @@ import ContainerLandingPage from '@components/ui/container/container-landing-pag
 
 const ProjectDetailPage = () => {
   return (
-    <ContainerLandingPage className='p-8 flex flex-col items-center'>
-      <IntroductionSection />
-      <TechStackSection />
-      <MenuSection />
-      <ResponsibilitySection />
-    </ContainerLandingPage>
+    <>
+      <ContainerLandingPage className='p-8 flex flex-col items-center'>
+        <IntroductionSection />
+        <TechStackSection />
+        <MenuSection />
+        <ResponsibilitySection />
+      </ContainerLandingPage>
+    </>
   )
 }
 

@@ -108,7 +108,7 @@ const ContentPortofolio = () => {
   const navigate = useNavigate()
 
   const handleRedirect = () => {
-    navigate('/')
+    navigate(0)
   }
 
   return (

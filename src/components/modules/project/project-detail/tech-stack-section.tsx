@@ -5,8 +5,8 @@ import { skillCategories } from '@lib/data/dummy'
 
 const TechStackSection = () => {
   return (
-    <ContainerSection title='Tech Stack' gap='large'>
-      <div className='flex  h-full gap-8 max-w-md flex-wrap items-center justify-center mx-auto'>
+    <ContainerSection title='Tech Stack' gap='large' className=''>
+      <div className='flex flex-wrap h-auto gap-8  w-full max-w-md  items-center justify-center mx-auto'>
         {skillCategories[0]?.skills.map((skill, j) => (
           <div key={j}>
             <Image

@@ -1,4 +1,3 @@
-import basicSsl from '@vitejs/plugin-basic-ssl'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import checker from 'vite-plugin-checker'
@@ -10,7 +9,6 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
     svgr(),
-    basicSsl(),
     checker({
       typescript: true
     })
@@ -19,7 +17,6 @@ export default defineConfig({
     global: 'window'
   },
   server: {
-    https: true,
     port: 5173,
     host: true,
     watch: {

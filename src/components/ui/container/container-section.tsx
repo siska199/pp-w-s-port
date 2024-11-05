@@ -12,7 +12,7 @@ const ContainerSection = (props: TProps) => {
     <Container
       gap='base'
       variant={title ? 'vcc' : 'hcc'}
-      className={`p-8 md:p-16  ${className}`}
+      className={`p-0 md:p-16  ${className}`}
       {...attrs}
     >
       <HeaderSection title={title} />

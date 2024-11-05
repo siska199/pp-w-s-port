@@ -22,19 +22,16 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
   const modalConfirmation = useAppSelector((state) => state?.ui?.modalConfirmation)
 
   useEffect(() => {
-    
     if (currentPath?.pathname === '/')
       navigate(
-        (isAuthenticated
-          ? routes.personalInformation.fullPath
-          : routes?.auth?.child?.signIn.fullPath) || '',
+        (isAuthenticated ? routes.personalInformation.fullPath : routes?.auth?.fullPath) || '',
         { replace: true }
       )
   }, [currentPath])
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     dispatch(handleSetModalConfirmation({ isShow: false }))
-  },[])
+  }, [])
 
   return (
     <>

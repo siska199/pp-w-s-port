@@ -3,6 +3,7 @@ import { RouteObject } from 'react-router-dom'
 
 import GlobalLayout from '@components/layouts/global-layout'
 import Protectedlayout from '@components/layouts/protected-layout'
+import Loading from '@components/loading'
 
 import certificationRouter from '@routes/protected/certificationRouter'
 import educationRouter from '@routes/protected/educationRouter'
@@ -15,7 +16,7 @@ const protectedRoutes: RouteObject[] = [
   {
     path: '',
     element: (
-      <React.Suspense fallback={'Loading...'}>
+      <React.Suspense fallback={<Loading />}>
         <GlobalLayout>
           <Protectedlayout />
         </GlobalLayout>

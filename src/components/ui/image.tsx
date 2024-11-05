@@ -2,7 +2,7 @@ import React, { HTMLProps, useState } from 'react'
 
 import { cn, getAssetURL } from '@lib/helper/function'
 
-interface TProps extends Omit<Partial<HTMLProps<HTMLImageElement>>, ''> {
+export interface TPropsImage extends Omit<Partial<HTMLProps<HTMLImageElement>>, ''> {
   src: string
   alt?: string
   customeClassName?: {
@@ -21,7 +21,7 @@ interface TProps extends Omit<Partial<HTMLProps<HTMLImageElement>>, ''> {
   withLoadEffect?: boolean
 }
 
-const Image = (props: TProps) => {
+const Image = (props: TPropsImage) => {
   const {
     src,
     alt,

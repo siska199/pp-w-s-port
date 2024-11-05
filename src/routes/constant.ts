@@ -16,19 +16,7 @@ export interface TRoute {
 const route = {
   auth: {
     name: 'auth',
-    fullPath: '/auth',
-    child: {
-      signIn: {
-        name: 'sign-in',
-        fullPath: '/auth/sign-in',
-        isPrivate: false
-      },
-      signUp: {
-        name: 'sign-up',
-        fullPath: '/auth/sign-up',
-        isPrivate: false
-      }
-    }
+    fullPath: '/auth'
   },
   personalInformation: {
     name: 'personal-information',

@@ -3,6 +3,7 @@ import { RouteObject } from 'react-router-dom'
 
 import GlobalLayout from '@components/layouts/global-layout'
 import PublicLayout from '@components/layouts/public-layout'
+import Loading from '@components/loading'
 
 import authRouter from '@routes/public/authRouter'
 import portofolioRouter from '@routes/public/portofolioRouter'
@@ -14,7 +15,7 @@ const publicRoutes: RouteObject[] = [
   {
     path: '',
     element: (
-      <React.Suspense fallback={'Loading...'}>
+      <React.Suspense fallback={<Loading />}>
         <GlobalLayout>
           <PublicLayout />
         </GlobalLayout>
