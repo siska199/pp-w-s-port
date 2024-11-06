@@ -8,4 +8,7 @@ export const basicToolbarConfig = {
   }
 }
 
-
+export const navigationSliderClass = {
+  nextEl: '.swiper-button-next',
+  prevEl: '.swiper-button-prev'
+}

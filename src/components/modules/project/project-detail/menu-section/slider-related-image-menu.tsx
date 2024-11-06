@@ -4,6 +4,7 @@ import { Swiper } from 'swiper/types'
 import SliderImageBase from '@components/ui/slider/slider-image-base'
 
 import useMediaQuery from '@hooks/use-media-query'
+import { navigationSliderClass } from '@lib/helper/constants'
 interface TPropsSliderRelatedImageMenu {
   activeIndex: number
 }
@@ -36,7 +37,7 @@ const SliderRelatedImageMenu = (props: TPropsSliderRelatedImageMenu) => {
       }}
       spaceBetween={5}
       className='px-0'
-      navigation={isMaxMd ? false : true}
+      navigation={isMaxMd ? false : navigationSliderClass}
     />
   )
 }
