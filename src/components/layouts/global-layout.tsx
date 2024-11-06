@@ -29,7 +29,7 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
   const modal = useAppSelector((state) => state?.ui?.modal)
 
   useEffect(() => {
-    if (currentPath?.pathname === '/')
+    if (currentPath?.pathname === '/' || !currentPath?.pathname)
       navigate(
         (isAuthenticated ? routes.personalInformation.fullPath : routes?.auth?.fullPath) || '',
         { replace: true }
