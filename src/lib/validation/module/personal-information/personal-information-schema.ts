@@ -51,7 +51,8 @@ export const initialFormPersonalInformation = {
     options: [],
     label: 'Province',
     placeholder: 'e.g Jawa Timur',
-    value: ''
+    value: '',
+    autoComplete: 'new-password'
   },
   id_city: {
     name: 'id_city',
@@ -59,7 +60,8 @@ export const initialFormPersonalInformation = {
     label: 'City',
     options: [],
     disabled: true,
-    value: ''
+    value: '',
+    autoComplete: 'new-password'
   },
   id_district: {
     name: 'id_district',
@@ -67,7 +69,8 @@ export const initialFormPersonalInformation = {
     placeholder: 'e.g Besuki',
     options: [],
     disabled: true,
-    value: ''
+    value: '',
+    autoComplete: 'new-password'
   },
 
   id_postal_code: {

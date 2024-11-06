@@ -3,21 +3,20 @@ import ContainerModal, { TContainerModalProps } from '@components/ui/modal/conta
 
 import { TTypeActionModalForm } from '@typescript/global.d'
 
-interface TCustomeClass extends TContainerModalProps{
-  form? : string;
-  containerInputs? : string
+interface TCustomeClass extends TContainerModalProps {
+  form?: string
+  containerInputs?: string
 }
 
-interface TProps extends TContainerModalProps,TCustomeClass {
+interface TProps extends TContainerModalProps, TCustomeClass {
   moduleName: string
   action: TTypeActionModalForm
   children: React.ReactNode
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-
 }
 
 const ContainerModalForm = (props: TProps) => {
-  const { action, children,moduleName, onSubmit, customeClass, ...attrs } = props
+  const { action, children, moduleName, onSubmit, customeClass, ...attrs } = props
   return (
     <ContainerModal
       title={
@@ -31,14 +30,14 @@ const ContainerModalForm = (props: TProps) => {
       customeClass={{
         mdModal: `overflow-visible ${customeClass?.mdModal}`,
         mdContent: `overflow-visible  ${customeClass?.mdContent}`,
-        mdBody: `overflow-y-auto overflow-visible px-0 pb-2 ${customeClass?.mdBody}`,
+        mdBody: `overflow-y-auto overflow-visible px-0 pb-2 ${customeClass?.mdBody}`
       }}
       {...attrs}
     >
-      <form onSubmit={onSubmit} className='overflow-y-auto px-4'>
+      <form onSubmit={onSubmit} autoComplete='off' className='overflow-y-auto px-4'>
         <div className='space-y-4 w-full mx-auto  '>{children}</div>
       </form>
-      <div className=' '>
+      <div className=''>
         <Button type='submit' className='ml-auto'>
           Save
         </Button>

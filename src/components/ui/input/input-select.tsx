@@ -321,7 +321,8 @@ const InputSelect = (props: TPropsInputSelect) => {
               onChange={handleSearchChange}
               value={String(searchQuery) || ''}
               ref={refInput}
-              autoComplete={'password-off'}
+              type='search'
+              autoComplete={attrsInput?.autoComplete ?? 'off'}
               placeholder={isEmptyValue(attrs.value) ? attrs.placeholder : ''}
             />
           </div>
