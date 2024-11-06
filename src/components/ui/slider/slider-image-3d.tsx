@@ -18,7 +18,7 @@ const SliderImage3D = (props: TPropsSlider3D) => {
       images={images}
       effect={'coverflow'}
       coverflowEffect={{
-        rotate: 0,
+        rotate: 10,
         stretch: 0,
         depth: 100,
         modifier: 10
@@ -26,8 +26,8 @@ const SliderImage3D = (props: TPropsSlider3D) => {
       slidesPerView={'auto'}
       modules={[EffectCoverflow, Pagination, Navigation]}
       customeClassBtn={{
-        next: 'top-[5rem]',
-        prev: 'top-[5rem]'
+        next: 'top-[2rem] md:top-[5rem]',
+        prev: 'top-[2rem] md:top-[5rem]'
       }}
       {...attrs}
     />

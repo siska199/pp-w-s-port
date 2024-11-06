@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import { SwiperClass } from 'swiper/react'
 
+import SliderRelatedImageMenu from '@components/modules/project/project-detail/menu-section/slider-related-image-menu'
 import ContainerSection from '@components/ui/container/container-section'
 import Image from '@components/ui/image'
 import SliderImage3D from '@components/ui/slider/slider-image-3d'
+
+import { handleSetModal } from '@store/modules/ui/ui-slice'
+import { useAppDispatch } from '@store/store'
 
 const MenuSection = () => {
   const listImage = [
@@ -22,6 +26,7 @@ const MenuSection = () => {
   const handleOnChangeSlide = (swiper: SwiperClass) => {
     setCurrIndexImg(swiper.realIndex)
   }
+
   return (
     <ContainerSection title='Menu' className=' '>
       <SliderImage3D
@@ -29,12 +34,12 @@ const MenuSection = () => {
         onClick={handleOnChangeSlide}
         onSlideChange={handleOnChangeSlide}
         swiperSlideProps={{
-          className:
-            `min-w-auto md:min-h-[20rem] min-w-[25rem] max-w-[25rem] md:min-w-[40rem] md:max-w-[40rem] rounded-lg overflow-hidden`
+          className: `min-w-auto md:min-h-[20rem] min-w-[20rem] max-w-[25rem] md:min-w-[40rem] md:max-w-[40rem] rounded-lg overflow-hidden`
         }}
+
       />
 
-      <div className='space-y-4 w-full'>
+      <div className='-mt-[6rem] space-y-4 w-full'>
         <CardIntroMenu
           title={'Menu Login'}
           description={`Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero vitae temporibus quasi
@@ -69,17 +74,32 @@ interface TPropsRelatedImagesMenu {
 
 const ListRelatedImageMenu = (props: TPropsRelatedImagesMenu) => {
   const { images } = props
-
+  const dispatch = useAppDispatch()
+  const handleOnClickMenu = (index: number) => {
+    dispatch(
+      handleSetModal({
+        isShow: true,
+        children: <SliderRelatedImageMenu activeIndex={index} />,
+        customeClass: {
+          mdContent: 'bg-white/0  h-[90vh]',
+          btnClose: {
+            icon: '!w-[2rem] !h-[2rem] icon-white'
+          }
+        }
+      })
+    )
+  }
   return (
     <>
       <div className='space-y-2'>
         <p className='text-body-large font-medium'>Related Image</p>
-        <div className='flex gap-4'>
+        <div className='flex gap-4 overflow-x-auto py-4 pr-4'>
           {images?.map((image, i) => (
             <Image
+              onClick={() => handleOnClickMenu(i)}
               key={i}
               src={image}
-              className='w-[10rem] zoom-out-effect cursor-pointer rounded-md'
+              className='min-w-[10rem] zoom-out-effect cursor-pointer rounded-md'
             />
           ))}
         </div>

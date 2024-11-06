@@ -14,6 +14,10 @@ export interface TContainerModalProps extends TBaseModal, VariantProps<typeof mo
     mdBody?: string
     mdHeader?: string
     mdOverlay?: string
+    btnClose?: {
+      container?: string
+      icon?: string
+    }
   }
 }
 
@@ -58,11 +62,13 @@ const ContainerModal = (props: TContainerModalProps) => {
             </div>
           )}
           <Button
-            className='absolute top-3 right-2 rounded-full w-[2rem] h-[2rem] '
-            variant={'plain'}
+            className={`absolute top-3 z-[4] right-2 rounded-full p-1 ${customeClass?.btnClose?.container}`}
+            variant={'transparent'}
             onClick={handleOnClose}
           >
-            <IconClose />
+            <IconClose
+              className={`icon-black w-[1.25rem] h-[1.25rem] ${customeClass?.btnClose?.icon}`}
+            />
           </Button>
           <div
             ref={bodyRef}

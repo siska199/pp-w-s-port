@@ -6,7 +6,11 @@ import ContainerModal from '@components/ui/modal/container-modal'
 import ModalConfirmation from '@components/ui/modal/container-modal-confirmation'
 
 import useCurrentPath from '@hooks/use-current-path'
-import { handleSetModal, handleSetModalConfirmation } from '@store/modules/ui/ui-slice'
+import {
+  handleSetModal,
+  handleSetModalConfirmation,
+  initialStateAuthSlice
+} from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
 import { routes } from '@routes/constant'
 interface TPropsGlobalLayout {
@@ -33,8 +37,8 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
   }, [currentPath])
 
   useEffect(() => {
-    dispatch(handleSetModalConfirmation({ isShow: false }))
-    dispatch(handleSetModal({ isShow: false }))
+    dispatch(handleSetModalConfirmation({ ...initialStateAuthSlice.modalConfirmation }))
+    dispatch(handleSetModal({ ...initialStateAuthSlice.modal }))
   }, [])
 
   return (
@@ -46,7 +50,8 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
           ...modalConfirmation?.button,
           cancel: {
             ...modalConfirmation?.button?.cancel,
-            onClick: () => dispatch(handleSetModalConfirmation({ isShow: false }))
+            onClick: () =>
+              dispatch(handleSetModalConfirmation({ ...initialStateAuthSlice.modalConfirmation }))
           }
         }}
       />
@@ -55,7 +60,7 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
         isShow={modal.isShow || false}
         // @ts-expect-error
         children={modal.children?._source ? modal.children : <></>}
-        onClose={() => dispatch(handleSetModal({ isShow: false }))}
+        onClose={() => dispatch(handleSetModal({ ...initialStateAuthSlice.modal }))}
       />
     </>
   )

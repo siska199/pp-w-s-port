@@ -14,9 +14,9 @@ export interface TStateUI {
     type?: TAlertProps['type']
   }
   modalConfirmation: TPropsContainerModalConfirmation
-  modal: Partial<TContainerModalProps>
+  modal: TContainerModalProps
 }
-const initialState: TStateUI = {
+export const initialStateAuthSlice: TStateUI = {
   isLoading: false,
   isToggleSidebar: false,
   alertConfig: {
@@ -28,17 +28,21 @@ const initialState: TStateUI = {
   modalConfirmation: {
     title: 'Confirmation',
     isShow: false,
-    children: null
+    children: null,
+    customeClass: {}
   },
   modal: {
+    title: '',
     isShow: false,
-    children: null
+    children: null,
+    customeClass: {},
+    onClose: () => null
   }
 }
 
 const authSlice = createSlice({
   name: 'ui',
-  initialState,
+  initialState: initialStateAuthSlice,
   reducers: {
     handleToggleSidebar: (state, action: PayloadAction<boolean>) => {
       state.isToggleSidebar = action.payload

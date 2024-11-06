@@ -19,7 +19,7 @@ const SliderImageBase = (props: TPropsSliderImageBase) => {
         <Image
           src={image}
           alt={`slide_image_${i}`}
-          customeClassName={{ image: 'object-contain' }}
+          customeClassName={{ image: 'object-contain  ' }}
           className=' w-full h-full '
         />
       ))}

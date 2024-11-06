@@ -38,12 +38,16 @@ const SliderBase = (props: TPropsSliderBase) => {
           {item}
         </SwiperSlide>
       ))}
-      <div className={`swiper-button-next ${customeClassBtn?.next}`}>
-        <IconChevronRight className='icon-white' />
-      </div>
-      <div className={`swiper-button-prev ${customeClassBtn?.prev}`}>
-        <IconChevronLeft className='icon-white' />
-      </div>
+      {swiperProps.navigation !== false && (
+        <>
+          <div className={`swiper-button-next ${customeClassBtn?.next}`}>
+            <IconChevronRight className='icon-white' />
+          </div>
+          <div className={`swiper-button-prev ${customeClassBtn?.prev}`}>
+            <IconChevronLeft className='icon-white' />
+          </div>
+        </>
+      )}
     </Swiper>
   )
 }
