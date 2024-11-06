@@ -16,7 +16,7 @@ const Protectedlayout = () => {
   const { currentPath } = useCurrentPath()
 
   useEffect(() => {
-    if (!isAuthenticated) navigate(routes?.auth?.child?.signIn?.fullPath || '', { replace: true })
+    if (!isAuthenticated) navigate(routes?.auth?.fullPath, { replace: true })
   }, [])
 
   useEffect(() => {

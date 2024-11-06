@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 
 import Button from '@components/ui/button'
@@ -29,6 +30,11 @@ const ContainerModal = (props: TContainerModalProps) => {
   const handleStopPropagation = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation()
   }
+  const bodyRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    isShow && bodyRef?.current?.scrollTo(0, 0)
+  }, [isShow])
 
   return (
     <>
@@ -58,7 +64,10 @@ const ContainerModal = (props: TContainerModalProps) => {
           >
             <IconClose />
           </Button>
-          <div className={`max-h-[90vh] flex flex-col space-y-4 px-4 pb-4 ${customeClass?.mdBody}`}>
+          <div
+            ref={bodyRef}
+            className={`max-h-[90vh] flex flex-col space-y-4 px-4 pb-4 ${customeClass?.mdBody}`}
+          >
             {children}
           </div>
         </div>
