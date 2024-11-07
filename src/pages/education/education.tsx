@@ -4,18 +4,17 @@ import HeaderEducation from '@components/modules/education/header-education'
 import TableEducation from '@components/modules/education/table-education'
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'
 
-import { EducationContextProvider } from '@context/modules/education/education-context'
 
 const Education = () => {
   return (
-    <EducationContextProvider>
-      <ContainerProtectedPage>
-        <HeaderEducation />
-        <FormFilterEducation/>
-        <TableEducation/>
-      </ContainerProtectedPage>
-      <FormEducation />
-    </EducationContextProvider>
+      <>
+        <ContainerProtectedPage>
+          <HeaderEducation />
+          <FormFilterEducation/>
+          <TableEducation/>
+        </ContainerProtectedPage>
+        <FormEducation />
+      </>
   )
 }
 

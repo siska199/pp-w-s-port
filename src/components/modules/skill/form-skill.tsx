@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import skillEvent from '@event-emmitter/modules/skill/skill-event'
+import skillEvent from '@event-emmitter/modules/skill-event'
 
 import InputSelect from '@components/ui/input/input-select'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
@@ -47,14 +47,14 @@ const FormSkill = () => {
     })
 
     if (isValid) {
-      handlleCloseFormSkill()
+      handleCloseFormSkill()
     }
     setForm({
       ...updatedForm
     })
   }
 
-  const handlleCloseFormSkill = () => {
+  const handleCloseFormSkill = () => {
     setForm(deepCopy({ ...initialFormSkill }))
     setModalFormSkill({ ...modalFormSkill, isShow: false })
   }
@@ -64,7 +64,7 @@ const FormSkill = () => {
       moduleName={'Skill'}
       action={modalFormSkill.action}
       isShow={modalFormSkill.isShow}
-      onClose={handlleCloseFormSkill}
+      onClose={handleCloseFormSkill}
       customeClass={{ mdBody: 'md:min-w-[32rem]' }}
       onSubmit={handleOnSubmit}
     >

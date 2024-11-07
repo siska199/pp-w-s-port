@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import { eventEmitter } from '@event-emmitter'
-import skillEvent from '@event-emmitter/modules/skill/skill-event'
+import { default as EVENT_NAME_SKILL, default as skillEvent } from '@event-emmitter/modules/skill-event'
 
 import Badge from '@components/ui/badge'
 import Table from '@components/ui/table'
 
+import useEventEmitter from '@hooks/use-event-emitter'
 import useTable from '@hooks/use-table'
 import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
@@ -88,6 +89,14 @@ const TableSkill = () => {
       totalPage: 10
     },
     onFetchData: handleFetchData
+  })
+
+
+  useEventEmitter(EVENT_NAME_SKILL.SEARCH_DATA_TABLE_SKILL,async(formFilter)=>{
+    await handleFetchData({
+      ...configTable.setting,
+      formFilter
+    })
   })
 
   async function handleFetchData(params: TSettingTable<TData>): Promise<TData[]> {

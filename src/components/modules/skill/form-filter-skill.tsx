@@ -1,14 +1,30 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { eventEmitter } from '@event-emmitter'
+import EVENT_NAME_SKILL from '@event-emmitter/modules/skill-event'
 
 import InputBase from '@components/ui/input/input-base'
 import InputSelect from '@components/ui/input/input-select'
 
+import useDebounce from '@hooks/use-debounce'
 import { deepCopy } from '@lib/helper/function'
 import { TCustomeEventOnChange } from '@typescript/modules/ui/ui-types'
 import { IconSearch } from '@assets/icons'
 
 const FormFilterSKill = () => {
   const [form, setForm] = useState(deepCopy({...initialFormFilter}))
+
+  const debounceValues = useDebounce({
+    value :  form
+  })
+
+  useEffect(()=>{
+    eventEmitter.emit(EVENT_NAME_SKILL.SEARCH_DATA_TABLE_SKILL,{
+      keyword : form.keyword.value,
+      category: form.category.value,
+      yearsOfExperiance: form.yearsOfExperiance.value,
+      level :form.level.value
+    })
+  },[debounceValues])
 
   const handleOnChange = (e: TCustomeEventOnChange<any>) => {
     const currForm = form
@@ -30,7 +46,7 @@ const FormFilterSKill = () => {
       />
       <InputSelect onChange={handleOnChange} {...form['category']} isMultiple />
       <InputSelect onChange={handleOnChange} {...form['level']} isMultiple />
-      <InputSelect onChange={handleOnChange} {...form['yearsOfexperiance']} />
+      <InputSelect onChange={handleOnChange} {...form['yearsOfExperiance']} />
     </div>
   )
 }
@@ -53,8 +69,8 @@ const initialFormFilter = {
     ],
     placeholder: 'Category Skill'
   },
-  yearsOfexperiance: {
-    name: 'yearsOfexperiance',
+  yearsOfExperiance: {
+    name: 'yearsOfExperiance',
     options: [...Array(40)]?.map((_, i) => ({
       label: `${i + 1} year`,
       value: `${i + 1}`
@@ -72,6 +88,13 @@ const initialFormFilter = {
     ],
     placeholder: 'Level'
   }
+}
+
+export type TFormFilterSkill ={
+  keyword : string;
+  category : string[];
+  level : string[];
+  yearsOfExperiance : string;
 }
 
 export default FormFilterSKill

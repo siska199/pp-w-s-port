@@ -1,30 +1,37 @@
-import { useContext, useEffect, useState } from 'react'
+import { useState } from 'react'
+import EVENT_NAME_EDUCATION from '@event-emmitter/modules/education-event'
 
 import InputDate from '@components/ui/input/input-date'
 import InputSelect from '@components/ui/input/input-select'
 import InputTextEditor from '@components/ui/input/input-text-editor'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
-import { educationContext } from '@context/modules/education/education-context'
+import useEventEmitter from '@hooks/use-event-emitter'
 import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function'
 import educationSchema, {
   initialFormEducation,
   TFormEducation
 } from '@lib/validation/module/education/education-schema'
-import { TEventOnChange } from '@typescript/modules/ui/ui-types'
+import { TTypeActionModalForm } from '@typescript/global.d'
+import { TEventOnChange, TEventSubmitForm } from '@typescript/modules/ui/ui-types'
 
 const FormEducation = () => {
-  const { modalFormEducation, education, handleToggleModalFormEducation } =
-    useContext(educationContext)
+  const [modalForm, setModalForm] =useState({
+    isShow :false,
+    action :TTypeActionModalForm.ADD
+  })
   const [form, setForm] = useState(deepCopy({ ...initialFormEducation }))
 
-  useEffect(() => {
-    setForm({ ...mappingValuesToForm({ values: education, form }) })
-  }, [education])
 
-  useEffect(() => {
-    handlleCloseFormEducation()
-  }, [])
+  useEventEmitter(EVENT_NAME_EDUCATION.SET_MODAL_FORM_EDUCATION, (data)=>{
+    setModalForm({
+      ...data
+    })
+  })
+
+  useEventEmitter(EVENT_NAME_EDUCATION.SET_EDUCATION, (data)=>{
+    setForm({ ...mappingValuesToForm({ values: data, form }) })
+  })
 
   const handleOnChange = (e: TEventOnChange) => {
     const name = e.target.name as keyof typeof form
@@ -39,13 +46,13 @@ const FormEducation = () => {
 
   const handlleCloseFormEducation = () => {
     setForm(deepCopy({ ...initialFormEducation }))
-    handleToggleModalFormEducation({
-      isShow: false,
-      action: modalFormEducation?.action
+    setModalForm({
+      ...modalForm,
+      isShow:false
     })
   }
 
-  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = (e: TEventSubmitForm) => {
     e?.preventDefault()
     const { isValid, updatedForm } = mappingErrorsToForm<TFormEducation, typeof form>({
       form,
@@ -64,8 +71,8 @@ const FormEducation = () => {
   return (
     <ContainerModalForm
       moduleName='Education'
-      action={modalFormEducation.action}
-      isShow={modalFormEducation.isShow}
+      action={modalForm.action}
+      isShow={modalForm.isShow}
       onClose={handlleCloseFormEducation}
       onSubmit={handleOnSubmit}
       customeClass={{ mdBody: '  md:w-auto  space-y-4' }}

@@ -1,10 +1,9 @@
 import { useCallback, useEffect } from 'react'
-import { eventEmitter } from '@event-emmitter'
-import { TEventSkillMap } from '@event-emmitter/modules/skill/skill-event'
+import { eventEmitter, TEventMap } from '@event-emmitter'
 
-const useEventEmitter = <T extends keyof TEventSkillMap>(
+const useEventEmitter = <T extends keyof TEventMap>(
   event: T,
-  callback: (data: TEventSkillMap[T]) => void
+  callback: (data: TEventMap[T]) => void
 ) => {
   const memoizedCallback = useCallback(callback, [callback])
 

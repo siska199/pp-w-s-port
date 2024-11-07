@@ -1,5 +1,7 @@
 import { FormEvent, MouseEvent } from 'react'
 
+import { TObject } from '@typescript/global'
+
 export interface TOption<TLabel = string> {
   label: TLabel
   value: string
@@ -114,7 +116,8 @@ export interface TSettingTable<TData> {
   pagination?: boolean
   currentPage: number
   totalPage: number
-  itemsPerPage: number
+  itemsPerPage: number;
+  formFilter? : TObject;
 }
 
 export interface TBaseModal {

@@ -1,6 +1,8 @@
-import { TEventSkillMap } from '@event-emmitter/modules/skill/skill-event'
+import { TEventMapEducation } from "@event-emmitter/modules/education-event"
+import { TEventMapExperiance } from "@event-emmitter/modules/experiance-event"
+import { TEventMapSkill } from "@event-emmitter/modules/skill-event"
 
-type TEventMap = TEventSkillMap
+export type TEventMap = TEventMapSkill & TEventMapEducation & TEventMapExperiance
 
 type TEventCallback<T = any> = (data: T) => void
 
