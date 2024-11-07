@@ -7,14 +7,12 @@ import InputTextArea from '@components/ui/input/input-text-area'
 import InputUploadFile from '@components/ui/input/input-upload-file'
 import useGeneralAPI from '@apis/use-general-api'
 
-import { fetchOptions, mappingErrorsToForm } from '@lib/helper/function'
+import { deepCopy, fetchOptions, mappingErrorsToForm } from '@lib/helper/function'
 import personalInformationSchema, {
   initialFormPersonalInformation,
   TFormPersonalInformation
 } from '@lib/validation/module/personal-information/personal-information-schema'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
-
-import { deepCopy } from '../../../lib/helper/function'
 
 const FormPersonlaInformation = () => {
   const { getListProvince, getListCity, getListDistrict, getListProfession, getListPostalCode } =

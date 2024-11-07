@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { eventEmitter } from '@event-emmitter'
-import EVENT_NAME_SKILL from '@event-emmitter/modules/skill/skill-event'
+import EVENT_SKILL from '@event-emmitter/modules/skill/skill-event'
 
 import InputBase from '@components/ui/input/input-base'
 import InputSelect from '@components/ui/input/input-select'
@@ -11,20 +11,20 @@ import { TCustomeEventOnChange } from '@typescript/modules/ui/ui-types'
 import { IconSearch } from '@assets/icons'
 
 const FormFilterSKill = () => {
-  const [form, setForm] = useState(deepCopy({...initialFormFilter}))
+  const [form, setForm] = useState(deepCopy({ ...initialFormFilter }))
 
   const debounceValues = useDebounce({
-    value :  form
+    value: form
   })
 
-  useEffect(()=>{
-    eventEmitter.emit(EVENT_NAME_SKILL.SEARCH_DATA_TABLE_SKILL,{
-      keyword : form.keyword.value,
+  useEffect(() => {
+    eventEmitter.emit(EVENT_SKILL.SEARCH_DATA_TABLE_SKILL, {
+      keyword: form.keyword.value,
       category: form.category.value,
       yearsOfExperiance: form.yearsOfExperiance.value,
-      level :form.level.value
+      level: form.level.value
     })
-  },[debounceValues])
+  }, [debounceValues])
 
   const handleOnChange = (e: TCustomeEventOnChange<any>) => {
     const currForm = form
@@ -50,7 +50,6 @@ const FormFilterSKill = () => {
     </div>
   )
 }
-
 
 const initialFormFilter = {
   keyword: {
@@ -90,11 +89,11 @@ const initialFormFilter = {
   }
 }
 
-export type TFormFilterSkill ={
-  keyword : string;
-  category : string[];
-  level : string[];
-  yearsOfExperiance : string;
+export type TFormFilterSkill = {
+  keyword: string
+  category: string[]
+  level: string[]
+  yearsOfExperiance: string
 }
 
 export default FormFilterSKill

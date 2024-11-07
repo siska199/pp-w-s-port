@@ -1,24 +1,22 @@
 import { useNavigate } from 'react-router-dom'
 import { eventEmitter } from '@event-emmitter'
-import EVENT_PROJECT from '@event-emmitter/modules/project/project-event'
-import { default as EVENT_SKILL } from '@event-emmitter/modules/skill/skill-event'
+import EVENT_EDUCATION from '@event-emmitter/modules/education/education-event'
 
-import Badge from '@components/ui/badge'
 import Table from '@components/ui/table'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import useTable from '@hooks/use-table'
 import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
-import { projects } from '@lib/data/dummy'
+import educations from '@lib/data/dummy/educations.json'
 import { delay } from '@lib/helper/function'
 import { routes } from '@routes/constant'
 import { TTypeActionModalForm } from '@typescript/global.d'
 import { TSettingTable } from '@typescript/modules/ui/ui-types'
 
-type TData = (typeof projects)[0]
+type TData = (typeof educations)[0]
 
-const TableProject = () => {
+const TableEducation = () => {
   const isLoading = useAppSelector((state) => state.ui.isLoading)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -26,43 +24,30 @@ const TableProject = () => {
   const configTable = useTable<TData, false>({
     initialColumn: [
       {
-        name: 'Title',
-        key: 'title',
+        name: 'Level',
+        key: 'level_name',
+        isSorted: true,
         className: ' md:min-w-0'
       },
       {
-        name: 'Company',
-        key: 'company_name',
-        isSorted: true
+        name: 'Major',
+        key: 'major_name'
       },
       {
-        name: 'Category',
-        key: 'category',
-        isSorted: true
+        name: 'Shool',
+        key: 'school_name'
       },
       {
-        name: 'Type',
-        key: 'type',
-        isSorted: true
+        name: 'Start At',
+        key: 'start_at',
+        isSorted: true,
+        className: 'min-w-[12rem]'
       },
       {
-        name: 'Tech Stack',
-        key: 'tech_stacks',
-        className: ' min-w-[15rem]',
-        customeComponent: (data: TData) => {
-          return (
-            <div className='flex flex-col gap-2'>
-              {data?.tech_stacks.map((techStack, i) => (
-                <Badge
-                  key={i}
-                  variant={'soft-gray'}
-                  label={techStack}
-                  className='text-start px-4'
-                />
-              ))}
-            </div>
-          )
-        }
+        name: 'End At',
+        key: 'end_at',
+        isSorted: true,
+        className: 'min-w-[12rem]'
       }
     ],
     initialSetting: {
@@ -72,7 +57,7 @@ const TableProject = () => {
     onFetchData: handleFetchData
   })
 
-  useEventEmitter(EVENT_SKILL.SEARCH_DATA_TABLE_SKILL, async (formFilter) => {
+  useEventEmitter(EVENT_EDUCATION.SEARCH_DATA_TABLE_EDUCATION, async (formFilter) => {
     await handleFetchData({
       ...configTable.setting,
       formFilter
@@ -82,19 +67,27 @@ const TableProject = () => {
   async function handleFetchData(params: TSettingTable<TData>): Promise<TData[]> {
     console.log('params : ', params)
     delay(1500)
-    return projects as TData[]
+    return educations as TData[]
   }
 
   const handleEditData = (data: TData) => {
-    eventEmitter.emit(EVENT_PROJECT.SET_FORM_PROJECT, {
-      action: TTypeActionModalForm.EDIT,
-      id: String(data?.id)
+    eventEmitter.emit(EVENT_EDUCATION.SET_MODAL_FORM_EDUCATION, {
+      isShow: true,
+      action: TTypeActionModalForm.EDIT
     })
-    navigate(routes.project.child.form.fullPath)
+
+    eventEmitter.emit(EVENT_EDUCATION.SET_EDUCATION, {
+      description: data.description,
+      id_level: data.id_level,
+      id_major: data.id_major,
+      id_school: data.id_school,
+      start_at: data.start_at,
+      end_at: data.end_at
+    })
   }
 
   const handleViewData = (data: TData) => {
-    navigate(routes.project.child.detail.fullPath(String(data?.id)))
+    navigate(routes.education.child.detail.fullPath(String(data?.id)))
   }
 
   const handleDeleteData = (data: TData) => {
@@ -128,4 +121,4 @@ const TableProject = () => {
   )
 }
 
-export default TableProject
+export default TableEducation

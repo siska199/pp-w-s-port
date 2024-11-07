@@ -1,14 +1,14 @@
-import FormFilterExperiance from '@components/modules/experiance/form-filter-experiance'
-import HeaderExperiance from '@components/modules/experiance/header-experiance'
-import TableExperiance from '@components/modules/experiance/table-experiance'
+import FormFilterExperiance from '@components/modules/experiance/experiance-list/form-filter-experiance'
+import HeaderExperiance from '@components/modules/experiance/experiance-list/header-experiance'
+import TableExperiance from '@components/modules/experiance/experiance-list/table-experiance'
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'
 
 const ExperiancePage = () => {
   return (
     <ContainerProtectedPage>
       <HeaderExperiance />
-      <FormFilterExperiance/>
-      <TableExperiance/>
+      <FormFilterExperiance />
+      <TableExperiance />
     </ContainerProtectedPage>
   )
 }

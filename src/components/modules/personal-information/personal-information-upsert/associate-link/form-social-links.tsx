@@ -1,24 +1,28 @@
-import { useContext, useEffect, useState } from 'react'
+import { useState } from 'react'
+import { eventEmitter } from '@event-emmitter'
+import EVENT_SOCIAL_LINK from '@event-emmitter/modules/personal-project/social-link-event'
 import z from 'zod'
 
 import Button from '@components/ui/button'
 import Image from '@components/ui/image'
 import InputBase from '@components/ui/input/input-base'
 
-import { socialLinkContext, TSocialLink } from '@context/modules/personal-info/social-link-context'
 import socialLinkSchema from '@lib/validation/module/personal-information/social-link-schema'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
 
-const FormSocialLinks = () => {
-  const {
-    state: { selectedSocialLinks }
-  } = useContext(socialLinkContext)
+export interface TSocialLink {
+  name: string
+  image: string
+  placeholder: string
+  defaultValue?: string
+}
 
+const FormSocialLinks = () => {
   const [listFormSocialLink, setListFormSocialLink] = useState<(TSocialLink & { value: string })[]>(
     []
   )
 
-  useEffect(() => {
+  eventEmitter.on(EVENT_SOCIAL_LINK.ONCHANGE_SOCIAL_LINKS, (selectedSocialLinks: TSocialLink[]) => {
     const updateListFormSocialLink = selectedSocialLinks?.map((data: TSocialLink) => {
       const prevData = listFormSocialLink?.find((form) => form.name === data.name)
       const result = {
@@ -30,7 +34,7 @@ const FormSocialLinks = () => {
       return result
     })
     setListFormSocialLink([...updateListFormSocialLink])
-  }, [selectedSocialLinks])
+  })
 
   const handleOnChangeListFormSocialLink = (index: number, e: TEventOnChange) => {
     listFormSocialLink[index] = {

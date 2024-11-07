@@ -1,9 +1,14 @@
-import { TEventMapEducation } from "@event-emmitter/modules/education/education-event"
-import { TEventMapExperiance } from "@event-emmitter/modules/experiance/experiance-event"
-import { TEventMapProject } from "@event-emmitter/modules/project/project-event"
-import { TEventMapSkill } from "@event-emmitter/modules/skill/skill-event"
+import { TEventMapEducation } from '@event-emmitter/modules/education/education-event'
+import { TEventMapExperiance } from '@event-emmitter/modules/experiance/experiance-event'
+import { TEventMapSocailLink } from '@event-emmitter/modules/personal-project/social-link-event'
+import { TEventMapProject } from '@event-emmitter/modules/project/project-event'
+import { TEventMapSkill } from '@event-emmitter/modules/skill/skill-event'
 
-export type TEventMap = TEventMapSkill & TEventMapEducation & TEventMapExperiance& TEventMapProject
+export type TEventMap = TEventMapSkill &
+  TEventMapEducation &
+  TEventMapExperiance &
+  TEventMapProject &
+  TEventMapSocailLink
 
 type TEventCallback<T = any> = (data: T) => void
 

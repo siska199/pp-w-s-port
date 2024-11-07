@@ -66,16 +66,16 @@ const route = {
     child: {
       detail: {
         name: 'project-detail',
-        fullPath: (id:string)=>`/project/${id}`,
+        fullPath: (id: string) => `/project/${id}`,
         isPrivate: true,
         isOpenRoute: true,
         component: {
           publicNavbar: true
         }
       },
-      form: {
-        name: 'form',
-        fullPath: '/project/form',
+      upsert: {
+        name: 'upsert',
+        fullPath: '/project/upsert',
         isPrivate: true
       }
     }

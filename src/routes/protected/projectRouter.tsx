@@ -1,9 +1,10 @@
 import { RouteObject } from 'react-router-dom'
 
 import ProjectPage from '@pages/project/project'
-import ProjectForm from '@pages/project/project-form'
 
 import { routes } from '@routes/constant'
+
+import ProjectUpSert from '../../pages/project/project-upsert'
 
 const projectRouter: RouteObject[] = [
   {
@@ -15,9 +16,9 @@ const projectRouter: RouteObject[] = [
         handle: routes.project
       },
       {
-        path: routes.project.child?.form.name,
-        element: <ProjectForm />,
-        handle: routes.project.child?.form
+        path: routes.project.child?.upsert.name,
+        element: <ProjectUpSert />,
+        handle: routes.project.child?.upsert
       }
     ]
   }
