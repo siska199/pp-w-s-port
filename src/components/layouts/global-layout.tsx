@@ -24,21 +24,21 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
+  const isAuthenticated = useAppSelector((state) => state?.auth?.isAuthenticated)
   const modalConfirmation = useAppSelector((state) => state?.ui?.modalConfirmation)
   const modal = useAppSelector((state) => state?.ui?.modal)
 
   useEffect(() => {
     if (currentPath?.pathname === '/' || !currentPath?.pathname)
       navigate(
-        (isAuthenticated ? routes.personalInformation.fullPath : routes?.auth?.fullPath) || '',
+        (isAuthenticated ? routes?.personalInformation?.fullPath : routes?.auth?.fullPath) || '',
         { replace: true }
       )
   }, [currentPath])
 
   useEffect(() => {
-    dispatch(handleSetModalConfirmation({ ...initialStateAuthSlice.modalConfirmation }))
-    dispatch(handleSetModal({ ...initialStateAuthSlice.modal }))
+    dispatch(handleSetModalConfirmation({ ...initialStateAuthSlice?.modalConfirmation }))
+    dispatch(handleSetModal({ ...initialStateAuthSlice?.modal }))
   }, [])
 
   return (
@@ -51,16 +51,16 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
           cancel: {
             ...modalConfirmation?.button?.cancel,
             onClick: () =>
-              dispatch(handleSetModalConfirmation({ ...initialStateAuthSlice.modalConfirmation }))
+              dispatch(handleSetModalConfirmation({ ...initialStateAuthSlice?.modalConfirmation }))
           }
         }}
       />
       <ContainerModal
         {...modal}
-        isShow={modal.isShow || false}
+        isShow={modal?.isShow || false}
         // @ts-expect-error
-        children={modal.children?._source ? modal.children : <></>}
-        onClose={() => dispatch(handleSetModal({ ...initialStateAuthSlice.modal }))}
+        children={modal?.children?._source ? modal?.children : <></>}
+        onClose={() => dispatch(handleSetModal({ ...initialStateAuthSlice?.modal }))}
       />
     </>
   )
