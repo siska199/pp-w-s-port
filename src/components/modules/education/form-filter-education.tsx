@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { eventEmitter } from "@event-emmitter"
-import EVENT_NAME_EDUCATION from "@event-emmitter/modules/education-event"
+import EVENT_NAME_EDUCATION from "@event-emmitter/modules/education/education-event"
 
 import InputBase from "@components/ui/input/input-base"
 import InputSelect from "@components/ui/input/input-select"

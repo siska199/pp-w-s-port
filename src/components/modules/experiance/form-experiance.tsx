@@ -1,5 +1,5 @@
 import { useState } from "react"
-import EVENT_NAME_EXPERIANCE from "@event-emmitter/modules/experiance-event"
+import EVENT_NAME_EXPERIANCE from "@event-emmitter/modules/experiance/experiance-event"
 
 import InputDate from "@components/ui/input/input-date"
 import InputSelect from "@components/ui/input/input-select"

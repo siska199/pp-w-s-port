@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import EVENT_NAME_EDUCATION from '@event-emmitter/modules/education-event'
+import EVENT_NAME_EDUCATION from '@event-emmitter/modules/education/education-event'
 
 import InputDate from '@components/ui/input/input-date'
 import InputSelect from '@components/ui/input/input-select'

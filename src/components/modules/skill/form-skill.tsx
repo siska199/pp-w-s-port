@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import skillEvent from '@event-emmitter/modules/skill-event'
+import skillEvent from '@event-emmitter/modules/skill/skill-event'
 
 import InputSelect from '@components/ui/input/input-select'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'

@@ -1,6 +1,6 @@
 
 import { eventEmitter } from '@event-emmitter'
-import EVENT_NAME_EDUCATION from '@event-emmitter/modules/education-event'
+import EVENT_NAME_EDUCATION from '@event-emmitter/modules/education/education-event'
 
 import HeaderPage from '@components/ui/header/header-page'
 

@@ -1,5 +1,5 @@
 import { eventEmitter } from '@event-emmitter'
-import skillEvent from '@event-emmitter/modules/skill-event'
+import skillEvent from '@event-emmitter/modules/skill/skill-event'
 
 import HeaderPage from '@components/ui/header/header-page'
 

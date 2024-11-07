@@ -66,7 +66,7 @@ const route = {
     child: {
       detail: {
         name: 'project-detail',
-        fullPath: '/project/:id',
+        fullPath: (id:string)=>`/project/${id}`,
         isPrivate: true,
         isOpenRoute: true,
         component: {
