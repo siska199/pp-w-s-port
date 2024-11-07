@@ -1,27 +1,32 @@
-import { useContext, useEffect, useState } from 'react'
+import { useState } from 'react'
+import skillEvent from '@event-emmitter/modules/skill/skill-event'
 
 import InputSelect from '@components/ui/input/input-select'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
-import { skillContext } from '@context/modules/skill/skill-context'
+import useEventEmitter from '@hooks/use-event-emitter'
 import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function'
 import skillSchema, {
   initialFormSkill,
   TFormSkill
 } from '@lib/validation/module/skill/skill-schema'
-import { TEventOnChange } from '@typescript/modules/ui/ui-types'
+import { TTypeActionModalForm } from '@typescript/global.d'
+import { TEventOnChange, TEventSubmitForm } from '@typescript/modules/ui/ui-types'
 
 const FormSkill = () => {
-  const { modalFormSkill, skill, handleToggleModalFormSkill } = useContext(skillContext)
+  const [modalFormSkill, setModalFormSkill] = useState({
+    isShow: false,
+    action: TTypeActionModalForm.ADD
+  })
   const [form, setForm] = useState(deepCopy({ ...initialFormSkill }))
 
-  useEffect(() => {
-    handlleCloseFormSkill()
-  }, [])
+  useEventEmitter(skillEvent.SET_MODAL_FORM_SKILL, (data) => {
+    setModalFormSkill({ ...data })
+  })
 
-  useEffect(() => {
-    setForm({ ...mappingValuesToForm({ values: skill, form }) })
-  }, [skill])
+  useEventEmitter(skillEvent.SET_SKILL, (data) => {
+    setForm({ ...mappingValuesToForm({ values: data, form }) })
+  })
 
   const handleOnChange = (e: TEventOnChange) => {
     const name = e.target.name as keyof typeof form
@@ -34,7 +39,7 @@ const FormSkill = () => {
     })
   }
 
-  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = (e: TEventSubmitForm) => {
     e?.preventDefault()
     const { isValid, updatedForm } = mappingErrorsToForm<TFormSkill, typeof form>({
       form,
@@ -51,10 +56,7 @@ const FormSkill = () => {
 
   const handlleCloseFormSkill = () => {
     setForm(deepCopy({ ...initialFormSkill }))
-    handleToggleModalFormSkill({
-      isShow: false,
-      action: modalFormSkill?.action
-    })
+    setModalFormSkill({ ...modalFormSkill, isShow: false })
   }
 
   return (

@@ -2,6 +2,7 @@ import Button from '@components/ui/button'
 import ContainerModal, { TContainerModalProps } from '@components/ui/modal/container-modal'
 
 import { TTypeActionModalForm } from '@typescript/global.d'
+import { TEventSubmitForm } from '@typescript/modules/ui/ui-types'
 
 interface TCustomeClass extends TContainerModalProps {
   form?: string
@@ -12,11 +13,12 @@ interface TProps extends TContainerModalProps, TCustomeClass {
   moduleName: string
   action: TTypeActionModalForm
   children: React.ReactNode
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+  onSubmit: (e: TEventSubmitForm) => void
 }
 
 const ContainerModalForm = (props: TProps) => {
   const { action, children, moduleName, onSubmit, customeClass, ...attrs } = props
+
   return (
     <ContainerModal
       title={
@@ -38,7 +40,7 @@ const ContainerModalForm = (props: TProps) => {
         <div className='space-y-4 w-full mx-auto  '>{children}</div>
       </form>
       <div className=''>
-        <Button type='submit' className='ml-auto'>
+        <Button type='submit' className='ml-auto' onClick={onSubmit}>
           Save
         </Button>
       </div>

@@ -1,5 +1,6 @@
-import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { eventEmitter } from '@event-emmitter'
+import skillEvent from '@event-emmitter/modules/skill/skill-event'
 
 import Badge from '@components/ui/badge'
 import Table from '@components/ui/table'
@@ -7,7 +8,6 @@ import Table from '@components/ui/table'
 import useTable from '@hooks/use-table'
 import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
-import { skillContext } from '@context/modules/skill/skill-context'
 import skills from '@lib/data/dummy/skills_user.json'
 import { delay } from '@lib/helper/function'
 import variantBadge from '@lib/variant/variant-badge'
@@ -19,7 +19,6 @@ type TData = (typeof skills)[0]
 
 const TableSkill = () => {
   const isLoading = useAppSelector((state) => state.ui.isLoading)
-  const { handleToggleModalFormSkill, handelSetSkill } = useContext(skillContext)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -98,11 +97,12 @@ const TableSkill = () => {
   }
 
   const handleEditData = (data: TData) => {
-    handleToggleModalFormSkill({
+    eventEmitter.emit(skillEvent.SET_MODAL_FORM_SKILL, {
       isShow: true,
       action: TTypeActionModalForm.EDIT
     })
-    handelSetSkill({
+
+    eventEmitter.emit(skillEvent.SET_SKILL, {
       id_category: data?.id_category,
       id_skill: data?.id_skill,
       level: data?.level,

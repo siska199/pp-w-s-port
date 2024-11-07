@@ -1,3 +1,4 @@
+import { FormEvent, MouseEvent } from 'react'
 
 export interface TOption<TLabel = string> {
   label: TLabel
@@ -94,6 +95,10 @@ export type TEventOnChange =
   | TCustomeEventOnChange<any>
   | TCustomeEventOnChange<TValueFile, { files: FileList; listUploadedFile?: TUploadedFile[] }>
 
+  export type TEventSubmitForm =
+  | FormEvent<HTMLFormElement>
+  | MouseEvent<HTMLButtonElement | HTMLLinkElement>
+
 export interface TColumn<TData, TKey extends keyof TData> {
   name: string
   key: TKey
@@ -118,5 +123,3 @@ export interface TBaseModal {
   children: React.ReactNode
   title?: React.ReactNode
 }
-
-

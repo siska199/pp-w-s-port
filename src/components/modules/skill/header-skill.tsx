@@ -1,15 +1,13 @@
-import { useContext } from 'react'
+import { eventEmitter } from '@event-emmitter'
+import skillEvent from '@event-emmitter/modules/skill/skill-event'
 
 import HeaderPage from '@components/ui/header/header-page'
 
-import { skillContext } from '@context/modules/skill/skill-context'
 import { TTypeActionModalForm } from '@typescript/global.d'
 
 const HeaderSkill = () => {
-  const { handleToggleModalFormSkill } = useContext(skillContext)
-
   const handleAddSkill = () => {
-    handleToggleModalFormSkill({
+    eventEmitter.emit(skillEvent.SET_MODAL_FORM_SKILL, {
       isShow: true,
       action: TTypeActionModalForm.ADD
     })
