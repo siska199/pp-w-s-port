@@ -31,18 +31,6 @@ const menuSidebar = [
     url: routes.project.fullPath,
     name: 'project'
   },
-  {
-    title: 'Certification',
-    src: 'sidebar/certification.png',
-    url: routes.certification.fullPath,
-    name: 'certification'
-  },
-  {
-    title: 'Generate Resume',
-    src: 'sidebar/generate-resume.png',
-    url: routes.generateResume.fullPath,
-    name: 'generate-resume'
-  }
 ]
 
 export default menuSidebar

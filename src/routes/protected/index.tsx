@@ -5,7 +5,6 @@ import GlobalLayout from '@components/layouts/global-layout'
 import Protectedlayout from '@components/layouts/protected-layout'
 import Loading from '@components/loading'
 
-import certificationRouter from '@routes/protected/certificationRouter'
 import educationRouter from '@routes/protected/educationRouter'
 import workHistoryRouter from '@routes/protected/experianceRouter'
 import personalInformationRouter from '@routes/protected/personalInformationRouter'
@@ -29,7 +28,6 @@ const protectedRoutes: RouteObject[] = [
       ...workHistoryRouter,
       ...educationRouter,
       ...projectRouter,
-      ...certificationRouter
     ]
   }
 ]
