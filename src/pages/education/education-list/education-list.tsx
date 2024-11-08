@@ -4,7 +4,7 @@ import HeaderEducation from '@components/modules/education/education-list/header
 import TableEducation from '@components/modules/education/education-list/table-education'
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'
 
-const Education = () => {
+const EducationList = () => {
   return (
     <>
       <ContainerProtectedPage>
@@ -17,4 +17,4 @@ const Education = () => {
   )
 }
 
-export default Education
+export default EducationList

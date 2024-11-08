@@ -2,7 +2,7 @@ import ContainerProtectedPage from '@components/ui/container/container-protected
 import Divider from '@components/ui/divider'
 import HeaderPage from '@components/ui/header/header-page'
 
-const ProjectUpSert = () => {
+const ProjectUpsertPage = () => {
   return (
     <ContainerProtectedPage className='space-y-8'>
       <HeaderPage title='Form Project' />
@@ -11,4 +11,4 @@ const ProjectUpSert = () => {
   )
 }
 
-export default ProjectUpSert
+export default ProjectUpsertPage

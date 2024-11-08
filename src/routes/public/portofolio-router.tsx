@@ -1,6 +1,6 @@
 import { RouteObject } from 'react-router-dom'
 
-import Portofolio from '@pages/portofolio/portofolio'
+import { PortofolioDetailPage } from '@pages'
 
 import { routes } from '@routes/constant'
 
@@ -10,7 +10,7 @@ const portofolioRouter: RouteObject[] = [
     children: [
       {
         path: ':id',
-        element: <Portofolio />,
+        element: <PortofolioDetailPage />,
         handle: {
           ...routes.portofolio
         }

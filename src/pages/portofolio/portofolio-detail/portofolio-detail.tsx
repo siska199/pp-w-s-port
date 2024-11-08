@@ -7,7 +7,7 @@ import ProjectSection from '@components/modules/portofolio/portofolio-detail/pro
 import SkillSection from '@components/modules/portofolio/portofolio-detail/skill-section'
 import ContainerLandingPage from '@components/ui/container/container-landing-page'
 
-const Portofolio = () => {
+const PortofolioDetailPage = () => {
   return (
     <ContainerLandingPage id='container-page-portofolio'>
       <HeroSection />
@@ -21,4 +21,4 @@ const Portofolio = () => {
   )
 }
 
-export default Portofolio
+export default PortofolioDetailPage

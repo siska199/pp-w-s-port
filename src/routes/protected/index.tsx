@@ -5,11 +5,11 @@ import GlobalLayout from '@components/layouts/global-layout'
 import Protectedlayout from '@components/layouts/protected-layout'
 import Loading from '@components/loading'
 
-import educationRouter from '@routes/protected/educationRouter'
-import workHistoryRouter from '@routes/protected/experianceRouter'
-import personalInformationRouter from '@routes/protected/personalInformationRouter'
-import projectRouter from '@routes/protected/projectRouter'
-import skillRouter from '@routes/protected/skillRouter'
+import educationRouter from '@routes/protected/education-router'
+import workHistoryRouter from '@routes/protected/experiance-router'
+import personalInformationRouter from '@routes/protected/personal-information-router'
+import projectRouter from '@routes/protected/project-router'
+import skillRouter from '@routes/protected/skill-router'
 
 const protectedRoutes: RouteObject[] = [
   {

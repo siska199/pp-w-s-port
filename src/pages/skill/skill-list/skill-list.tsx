@@ -4,7 +4,7 @@ import HeaderSkill from '@components/modules/skill/skill-list/header-skill'
 import TableSkill from '@components/modules/skill/skill-list/table-skill'
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'
 
-const SkillPage = () => {
+const SkillListPage = () => {
   return (
     <>
       <ContainerProtectedPage>
@@ -17,4 +17,4 @@ const SkillPage = () => {
   )
 }
 
-export default SkillPage
+export default SkillListPage

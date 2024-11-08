@@ -1,10 +1,8 @@
 import { RouteObject } from 'react-router-dom'
 
-import ProjectPage from '@pages/project/project'
+import { ProjectListPage, ProjectUpsertPage } from '@pages'
 
 import { routes } from '@routes/constant'
-
-import ProjectUpSert from '../../pages/project/project-upsert'
 
 const projectRouter: RouteObject[] = [
   {
@@ -12,12 +10,12 @@ const projectRouter: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <ProjectPage />,
+        element: <ProjectListPage />,
         handle: routes.project
       },
       {
         path: routes.project.child?.upsert.name,
-        element: <ProjectUpSert />,
+        element: <ProjectUpsertPage />,
         handle: routes.project.child?.upsert
       }
     ]

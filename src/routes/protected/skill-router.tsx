@@ -1,7 +1,7 @@
 import { RouteObject } from 'react-router-dom'
 
-import SkillPage from '@pages/skill/skill'
-import SkillDetailPage from '@pages/skill/skill-detail'
+import { SkillListPage } from '@pages'
+import SkillDetailPage from '@pages/skill/skill-detail/skill-detail'
 
 import { routes } from '@routes/constant'
 
@@ -10,7 +10,7 @@ const skillRouter: RouteObject[] = [
     path: routes.skill.name,
     children: [
       {
-        element: <SkillPage />,
+        element: <SkillListPage />,
         handle: routes.skill,
         index: true
       },

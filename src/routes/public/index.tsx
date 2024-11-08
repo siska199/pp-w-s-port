@@ -5,11 +5,9 @@ import GlobalLayout from '@components/layouts/global-layout'
 import PublicLayout from '@components/layouts/public-layout'
 import Loading from '@components/loading'
 
-import authRouter from '@routes/public/authRouter'
-import portofolioRouter from '@routes/public/portofolioRouter'
-import projectDetailRouter from '@routes/public/projectDetailRouter'
-
-import playgroundRouter from './playgroundRouter'
+import authRouter from '@routes/public/auth-router'
+import portofolioRouter from '@routes/public/portofolio-router'
+import projectDetailRouter from '@routes/public/project-detail-router'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -21,7 +19,7 @@ const publicRoutes: RouteObject[] = [
         </GlobalLayout>
       </React.Suspense>
     ),
-    children: [...authRouter, ...playgroundRouter, ...portofolioRouter, ...projectDetailRouter]
+    children: [...authRouter, ...portofolioRouter, ...projectDetailRouter]
   }
 ]
 

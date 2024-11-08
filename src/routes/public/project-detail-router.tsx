@@ -1,6 +1,6 @@
 import { RouteObject } from 'react-router-dom'
 
-import ProjectDetailPage from '@pages/project/project-detail'
+import ProjectDetailPage from '@pages/project/project-detail/project-detail'
 
 import { routes } from '@routes/constant'
 

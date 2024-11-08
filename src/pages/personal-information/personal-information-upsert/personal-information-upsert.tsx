@@ -4,7 +4,7 @@ import ContainerProtectedPage from '@components/ui/container/container-protected
 import Divider from '@components/ui/divider'
 import HeaderPage from '@components/ui/header/header-page'
 
-const PersonalInformationPage = () => {
+const PersonalInformationUpsertPage = () => {
   return (
     <ContainerProtectedPage className='mb-8 space-y-8'>
       <HeaderPage title='Personal Information' />
@@ -15,4 +15,4 @@ const PersonalInformationPage = () => {
   )
 }
 
-export default PersonalInformationPage
+export default PersonalInformationUpsertPage

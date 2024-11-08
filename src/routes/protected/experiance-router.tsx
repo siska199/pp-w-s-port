@@ -1,7 +1,7 @@
 import { RouteObject } from 'react-router-dom'
 
-import ExperiancePage from '@pages/experiance/experiance'
-import ExperianceDetailPage from '@pages/experiance/experiance-detail'
+import { ExperianceListPage } from '@pages'
+import ExperianceDetailPage from '@pages/experiance/experiace-detail/experiance-detail'
 
 import { routes } from '@routes/constant'
 
@@ -10,7 +10,7 @@ const experianceRouter: RouteObject[] = [
     path: routes.experiance.name,
     children: [
       {
-        element: <ExperiancePage />,
+        element: <ExperianceListPage />,
         index: true,
         handle: routes.experiance
       },

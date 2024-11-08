@@ -3,7 +3,7 @@ import HeaderExperiance from '@components/modules/experiance/experiance-list/hea
 import TableExperiance from '@components/modules/experiance/experiance-list/table-experiance'
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'
 
-const ExperiancePage = () => {
+const ExperianceListPage = () => {
   return (
     <ContainerProtectedPage>
       <HeaderExperiance />
@@ -13,4 +13,4 @@ const ExperiancePage = () => {
   )
 }
 
-export default ExperiancePage
+export default ExperianceListPage

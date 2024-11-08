@@ -3,14 +3,14 @@ import HeaderProject from '@components/modules/project/project-list/header-proje
 import TableProject from '@components/modules/project/project-list/table-project'
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'
 
-const ProjectPage = () => {
+const ProjectListPage = () => {
   return (
     <ContainerProtectedPage className='space-y-8'>
       <HeaderProject />
-      <FormFilterProject/>
-      <TableProject/>
+      <FormFilterProject />
+      <TableProject />
     </ContainerProtectedPage>
   )
 }
 
-export default ProjectPage
+export default ProjectListPage
