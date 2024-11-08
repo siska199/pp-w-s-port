@@ -1,16 +1,12 @@
+import { zBooleanCheckbox, zPassword, zString } from '@validation/reusable-schema'
 import * as z from 'zod'
 
-import { zEnum, zPassword, zString } from '@lib/validation/reusable-schema'
-
-export const signInSchema = z.object({
+const signInSchema = z.object({
   username: zString({ name: 'username', mandatory: true }),
   password: zPassword(true),
-  isRememberMe: zEnum<['false', 'true']>({
-    name: 'Is Remember Me',
-    enum: ['false', 'true'],
-    mandatory: false
-  })
+  isRememberMe: zBooleanCheckbox({ name: 'Is Remember Me' })
 })
+export type TSignInSchema = z.input<typeof signInSchema>
 
 export const initialFormSignIn = {
   username: {
@@ -35,4 +31,4 @@ export const initialFormSignIn = {
   }
 }
 
-export type TFormLSignIn = z.input<typeof signInSchema>
+export default signInSchema

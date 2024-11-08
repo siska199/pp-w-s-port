@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import ContainerSection from '@components/ui/container/container-section'
 import SliderBase from '@components/ui/slider/slider-base'
 
-import { educations } from '@lib/data/dummy'
+import { educations } from '@lib/data/dummy/dummy'
 import { slideInAnimation } from '@assets/styles/animation'
 
 const EducationSection = () => {

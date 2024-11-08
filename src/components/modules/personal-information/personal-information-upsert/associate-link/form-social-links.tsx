@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { eventEmitter } from '@event-emmitter'
 import EVENT_SOCIAL_LINK from '@event-emmitter/modules/personal-project/social-link-event'
+import socialLinkSchema from '@validation/module/personal-information/social-link-schema'
 import z from 'zod'
 
 import Button from '@components/ui/button'
 import Image from '@components/ui/image'
 import InputBase from '@components/ui/input/input-base'
 
-import socialLinkSchema from '@lib/validation/module/personal-information/social-link-schema'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
 
 export interface TSocialLink {

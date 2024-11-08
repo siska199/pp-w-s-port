@@ -1,7 +1,7 @@
 import ContainerSection from '@components/ui/container/container-section'
 import Image from '@components/ui/image'
 
-import { skillCategories } from '@lib/data/dummy'
+import { skillCategories } from '@lib/data/dummy/dummy'
 
 const TechStackSection = () => {
   return (

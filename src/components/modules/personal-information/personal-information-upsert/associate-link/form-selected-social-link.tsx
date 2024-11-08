@@ -4,7 +4,7 @@ import EVENT_SOCIAL_LINK from '@event-emmitter/modules/personal-project/social-l
 
 import InputSelect from '@components/ui/input/input-select'
 
-import { categoriesSocialLink } from '@lib/data/dummy'
+import { categoriesSocialLink } from '@lib/data/dummy/dummy'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
 
 const FormSelectedSocialLink = () => {

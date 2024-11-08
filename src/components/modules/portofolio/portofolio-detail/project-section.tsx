@@ -8,7 +8,7 @@ import ContainerSection from '@components/ui/container/container-section'
 import Image from '@components/ui/image'
 import InputBase from '@components/ui/input/input-base'
 
-import { projects } from '@lib/data/dummy'
+import { projects } from '@lib/data/dummy/dummy'
 import { routes } from '@routes/constant'
 import { IconArrowUp, IconSearch } from '@assets/icons'
 import { cardAnimation } from '@assets/styles/animation'

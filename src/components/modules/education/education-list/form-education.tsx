@@ -1,5 +1,9 @@
 import { useState } from 'react'
 import EVENT_EDUCATION from '@event-emmitter/modules/education/education-event'
+import educationSchema, {
+  initialFormEducation,
+  TEducationSchema
+} from '@validation/module/education/education-schema'
 
 import InputDate from '@components/ui/input/input-date'
 import InputSelect from '@components/ui/input/input-select'
@@ -8,10 +12,6 @@ import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function'
-import educationSchema, {
-  initialFormEducation,
-  TFormEducation
-} from '@lib/validation/module/education/education-schema'
 import { TTypeActionModalForm } from '@typescript/global.d'
 import { TEventOnChange, TEventSubmitForm } from '@typescript/modules/ui/ui-types'
 
@@ -53,7 +53,7 @@ const FormEducation = () => {
 
   const handleOnSubmit = (e: TEventSubmitForm) => {
     e?.preventDefault()
-    const { isValid, updatedForm } = mappingErrorsToForm<TFormEducation, typeof form>({
+    const { isValid, updatedForm } = mappingErrorsToForm<TEducationSchema, typeof form>({
       form,
       schema: educationSchema
     })
@@ -74,7 +74,7 @@ const FormEducation = () => {
       isShow={modalForm.isShow}
       onClose={handlleCloseFormEducation}
       onSubmit={handleOnSubmit}
-      customeClass={{ mdBody: '  md:w-auto  space-y-4' }}
+      customeClass={{ mdBody: '  md:min-w-[30rem]  space-y-4' }}
     >
       <div className='grid md:grid-cols-2 gap-4'>
         <InputSelect {...form['id_level']} onChange={handleOnChange} />

@@ -1,5 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import signInSchema, {
+  initialFormSignIn,
+  TSignInSchema
+} from '@validation/module/auth/sign-in-schema'
 
 import Button from '@components/ui/button'
 import Container from '@components/ui/container/container'
@@ -9,11 +13,6 @@ import InputCheckbox from '@components/ui/input/input-checkbox'
 import { handleSetAuth } from '@store/modules/auth/auth-slice'
 import { useAppDispatch } from '@store/store'
 import { mappingErrorsToForm } from '@lib/helper/function'
-import {
-  initialFormSignIn,
-  signInSchema,
-  TFormLSignIn
-} from '@lib/validation/module/auth/sign-in-schema'
 import { routes } from '@routes/constant'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
 
@@ -41,7 +40,7 @@ const FormLogin = (props: TPropsFormLogin) => {
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault()
-    const { isValid, updatedForm } = mappingErrorsToForm<TFormLSignIn, typeof form>({
+    const { isValid, updatedForm } = mappingErrorsToForm<TSignInSchema, typeof form>({
       form,
       schema: signInSchema
     })

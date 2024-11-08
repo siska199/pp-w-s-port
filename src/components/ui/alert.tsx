@@ -7,8 +7,8 @@ import variantsAlert, {
   variantAlertError,
   variantAlertSucess,
   variantAlertWarning
-} from '@lib/variant/variant-alert'
-import variant from '@lib/variant/variant-color'
+} from '@lib/helper/variant/variant-alert'
+import variant from '@lib/helper/variant/variant-color'
 import { TAlertConfig } from '@typescript/modules/ui/ui-types'
 import { IconClose, IconDanger, IconInfo, IconNotification, IconSucess } from '@assets/icons'
 

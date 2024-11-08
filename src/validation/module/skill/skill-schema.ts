@@ -1,10 +1,10 @@
+import { zString } from '@validation/reusable-schema'
 import z from 'zod'
 
 import categories_skill from '@lib/data/dummy/categories_skill.json'
 import skills from '@lib/data/dummy/skills.json'
-import { levelSkillOptions, yearsOfExperiances } from '@lib/data/options'
 import { generateOptions } from '@lib/helper/function'
-import { zString } from '@lib/validation/reusable-schema'
+import { levelSkillOptions, yearsOfExperiances } from '@lib/helper/options'
 
 const skillSchema = z.object({
   id_category: zString({ name: 'Category' }),
@@ -15,7 +15,7 @@ const skillSchema = z.object({
   })
 })
 
-export type TFormSkill = z.input<typeof skillSchema>
+export type TSkill = z.input<typeof skillSchema>
 
 export const initialFormSkill = {
   id_category: {

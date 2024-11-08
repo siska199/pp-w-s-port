@@ -1,5 +1,9 @@
 import { useState } from 'react'
 import EVENT_EXPERIANCE from '@event-emmitter/modules/experiance/experiance-event'
+import experianceSchema, {
+  initialFormExperiance,
+  TExperianceSchema
+} from '@validation/module/experiance/experiance-schema'
 
 import InputDate from '@components/ui/input/input-date'
 import InputSelect from '@components/ui/input/input-select'
@@ -8,10 +12,6 @@ import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function'
-import experianceSchema, {
-  initialFormExperiance,
-  TFormExperiance
-} from '@lib/validation/module/experiance/experiance-schema'
 import { TTypeActionModalForm } from '@typescript/global'
 import { TEventOnChange, TEventSubmitForm } from '@typescript/modules/ui/ui-types'
 
@@ -44,7 +44,7 @@ const FormExperiance = () => {
 
   const handleOnSubmit = (e: TEventSubmitForm) => {
     e?.preventDefault()
-    const { isValid, updatedForm } = mappingErrorsToForm<TFormExperiance, typeof form>({
+    const { isValid, updatedForm } = mappingErrorsToForm<TExperianceSchema, typeof form>({
       form,
       schema: experianceSchema
     })

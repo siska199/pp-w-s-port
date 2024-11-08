@@ -7,7 +7,7 @@ import Container from '@components/ui/container/container'
 import ContainerSection from '@components/ui/container/container-section'
 import Image from '@components/ui/image'
 
-import { skillCategories } from '@lib/data/dummy'
+import { skillCategories } from '@lib/data/dummy/dummy'
 import { cn } from '@lib/helper/function'
 import { cardAnimation, slideInAnimation } from '@assets/styles/animation'
 

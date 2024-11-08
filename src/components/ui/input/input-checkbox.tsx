@@ -13,7 +13,7 @@ interface TProps
   name: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   label?: string
-  value: string
+  value: 'false' | 'true'
   classNameContainer?: string
   customeClassnameCheckbox?: {
     container?: string

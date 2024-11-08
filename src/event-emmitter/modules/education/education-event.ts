@@ -1,6 +1,7 @@
+import { TEducation } from '@validation/module/education/education-schema'
+
 import { TFormFilterEducation } from '@components/modules/education/education-list/form-filter-education'
 
-import { TFormEducation } from '@lib/validation/module/education/education-schema'
 import { TTypeActionModalForm } from '@typescript/global'
 
 const EVENT_EDUCATION = {
@@ -14,7 +15,7 @@ export type TEventMapEducation = {
     isShow: boolean
     action: TTypeActionModalForm
   }
-  [EVENT_EDUCATION.SET_EDUCATION]: TFormEducation
+  [EVENT_EDUCATION.SET_EDUCATION]: TEducation
   [EVENT_EDUCATION.SEARCH_DATA_TABLE_EDUCATION]: TFormFilterEducation
 }
 

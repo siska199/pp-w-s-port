@@ -1,7 +1,7 @@
+import { messageError, regexValidation } from '@validation/const'
 import z, { ZodEffects, ZodNumber, ZodString } from 'zod'
 
 import { handleValidateType } from '@lib/helper/function'
-import validation, { messageError } from '@lib/validation'
 import { TTypeFile } from '@typescript/modules/ui/ui-types'
 
 export const zString = (params: {
@@ -63,18 +63,18 @@ export const zDate = (params: { name: string; mandatory?: boolean }): z.ZodStrin
 type TResultZPassword = ZodEffects<ZodString, string, string>
 export const zPassword = (mandatory: boolean = true): TResultZPassword => {
   return zString({ name: 'Password', mandatory }).refine(
-    (val) => (mandatory ? validation.password.regex.test(val as string) : true),
+    (val) => (mandatory ? regexValidation.password.test(val as string) : true),
     {
-      message: validation.password.message
+      message: messageError.password
     }
   ) as TResultZPassword
 }
 
 export const zEmail = (mandatory = true) => {
   return zString({ name: 'Email', mandatory }).refine(
-    (val) => (mandatory ? validation.email.regex.test(val as string) : true),
+    (val) => (mandatory ? regexValidation.email.test(val as string) : true),
     {
-      message: validation.email.message
+      message: messageError.invalid('Email')
     }
   )
 }
@@ -130,4 +130,13 @@ export const zLink = (params: { mandatory?: boolean }) => {
     message: messageError.url
   })
   return mandatory ? linkSchema : linkSchema?.optional()
+}
+
+export const zBooleanCheckbox = (params: { name: string; mandatory?: boolean }) => {
+  const { name, mandatory = false } = params
+  return zEnum({
+    name: name,
+    enum: ['false', 'true'] as const,
+    mandatory: mandatory
+  })
 }

@@ -1,4 +1,4 @@
-import variant from '@lib/variant/variant-color'
+import variant from '@lib/helper/variant/variant-color'
 
 export const variantAlertError = {
   'error-solid': variant['solid-error'],

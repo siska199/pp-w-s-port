@@ -1,6 +1,7 @@
+import { TSkill } from '@validation/module/skill/skill-schema'
+
 import { TFormFilterSkill } from '@components/modules/skill/skill-list/form-filter-skill'
 
-import { TFormSkill } from '@lib/validation/module/skill/skill-schema'
 import { TTypeActionModalForm } from '@typescript/global'
 
 const EVENT_SKILL = {
@@ -14,7 +15,7 @@ export type TEventMapSkill = {
     isShow: boolean
     action: TTypeActionModalForm
   }
-  [EVENT_SKILL.SET_SKILL]: TFormSkill
+  [EVENT_SKILL.SET_SKILL]: TSkill
   [EVENT_SKILL.SEARCH_DATA_TABLE_SKILL]: TFormFilterSkill
 }
 

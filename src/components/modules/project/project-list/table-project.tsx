@@ -10,7 +10,7 @@ import useEventEmitter from '@hooks/use-event-emitter'
 import useTable from '@hooks/use-table'
 import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
-import { projects } from '@lib/data/dummy'
+import { projects } from '@lib/data/dummy/dummy'
 import { delay } from '@lib/helper/function'
 import { routes } from '@routes/constant'
 import { TTypeActionModalForm } from '@typescript/global.d'
@@ -90,7 +90,7 @@ const TableProject = () => {
       action: TTypeActionModalForm.EDIT,
       id: String(data?.id)
     })
-    navigate(routes.project.child.form.fullPath)
+    navigate(routes.project.child.detail.fullPath(String(data.id)))
   }
 
   const handleViewData = (data: TData) => {

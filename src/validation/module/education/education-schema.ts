@@ -1,7 +1,7 @@
+import { zDate, zString } from '@validation/reusable-schema'
 import z from 'zod'
 
-import { basicToolbarConfig } from '@lib/helper/constants'
-import { zDate, zString } from '@lib/validation/reusable-schema'
+import { basicToolbarConfig } from '@lib/helper/constant'
 
 const educationSchema = z.object({
   id_level: zString({ name: 'Level' }),
@@ -12,7 +12,7 @@ const educationSchema = z.object({
   description: zString({ name: 'Description' })
 })
 
-export type TFormEducation = z.input<typeof educationSchema>
+export type TEducationSchema = z.input<typeof educationSchema>
 
 export const initialFormEducation = {
   id_level: {

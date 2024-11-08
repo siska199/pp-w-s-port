@@ -8,7 +8,7 @@ import ContainerSection from '@components/ui/container/container-section'
 import { useAnimateScrollCustome } from '@hooks/use-animate-scroll-custome'
 import { handleSetModal } from '@store/modules/ui/ui-slice'
 import { useAppDispatch } from '@store/store'
-import { experiances } from '@lib/data/dummy'
+import { experiances } from '@lib/data/dummy/dummy'
 
 const ExperianceSection = () => {
   return (

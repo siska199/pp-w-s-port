@@ -4,7 +4,7 @@ import { AnimatedCountNumber } from '@components/ui/animated/animated-count-numb
 import Container from '@components/ui/container/container'
 import ContainerSection from '@components/ui/container/container-section'
 
-import { aboutMeData } from '@lib/data/dummy'
+import { aboutMeData } from '@lib/data/dummy/dummy'
 import { slideInAnimation } from '@assets/styles/animation'
 
 const AboutMeSection = () => {

@@ -7,7 +7,7 @@ import ContainerSection from '@components/ui/container/container-section'
 import Image from '@components/ui/image'
 
 import useMediaQuery from '@hooks/use-media-query'
-import { socialLinks } from '@lib/data/dummy'
+import { socialLinks } from '@lib/data/dummy/dummy'
 import { IconDownload } from '@assets/icons'
 import { opacityAnimation } from '@assets/styles/animation'
 

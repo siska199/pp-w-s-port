@@ -31,7 +31,7 @@ interface SingleSelectProps
 interface MultipleSelectProps
   extends TBasePropsInput,
     Omit<React.HTMLProps<HTMLInputElement>, 'onChange'> {
-  isMultiple?: true 
+  isMultiple?: true
   value?: string[]
   withSelectAll?: boolean
 }

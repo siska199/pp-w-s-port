@@ -1,4 +1,8 @@
 import { useEffect, useState } from 'react'
+import personalInformationSchema, {
+  initialFormPersonalInformation,
+  TPersonalInformationSchema
+} from '@validation/module/personal-information/personal-information-schema'
 
 import Button from '@components/ui/button'
 import InputBase from '@components/ui/input/input-base'
@@ -8,10 +12,6 @@ import InputUploadFile from '@components/ui/input/input-upload-file'
 import useGeneralAPI from '@apis/use-general-api'
 
 import { deepCopy, fetchOptions, mappingErrorsToForm } from '@lib/helper/function'
-import personalInformationSchema, {
-  initialFormPersonalInformation,
-  TFormPersonalInformation
-} from '@lib/validation/module/personal-information/personal-information-schema'
 import { TEventOnChange } from '@typescript/modules/ui/ui-types'
 
 const FormPersonlaInformation = () => {
@@ -79,7 +79,7 @@ const FormPersonlaInformation = () => {
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const { isValid, updatedForm } = mappingErrorsToForm<TFormPersonalInformation, typeof form>({
+    const { isValid, updatedForm } = mappingErrorsToForm<TPersonalInformationSchema, typeof form>({
       form,
       schema: personalInformationSchema
     })

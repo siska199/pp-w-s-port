@@ -1,6 +1,7 @@
+import { TExperiance } from '@validation/module/experiance/experiance-schema'
+
 import { TFormFilterExperiance } from '@components/modules/experiance/experiance-list/form-filter-experiance'
 
-import { TFormExperiance } from '@lib/validation/module/experiance/experiance-schema'
 import { TTypeActionModalForm } from '@typescript/global'
 
 const EVENT_EXPERIANCE = {
@@ -14,7 +15,7 @@ export type TEventMapExperiance = {
     isShow: boolean
     action: TTypeActionModalForm
   }
-  [EVENT_EXPERIANCE.SET_EXPERIANCE]: TFormExperiance
+  [EVENT_EXPERIANCE.SET_EXPERIANCE]: TExperiance
   [EVENT_EXPERIANCE.SEARCH_DATA_TABLE_EXPERIANCE]: TFormFilterExperiance
 }
 

@@ -1,7 +1,6 @@
+import { messageError } from '@validation/const'
+import { zLink } from '@validation/reusable-schema'
 import z from 'zod'
-
-import { messageError } from '@lib/validation'
-import { zLink } from '@lib/validation/reusable-schema'
 
 const socialLinkSchema = (name: string) =>
   z.object({
@@ -17,6 +16,6 @@ const socialLinkSchema = (name: string) =>
       },
       { message: messageError.required(name) }
     )
-  })
+})
 
 export default socialLinkSchema

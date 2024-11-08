@@ -4,7 +4,7 @@ import { Swiper } from 'swiper/types'
 import SliderImageBase from '@components/ui/slider/slider-image-base'
 
 import useMediaQuery from '@hooks/use-media-query'
-import { navigationSliderClass } from '@lib/helper/constants'
+import { navigationSliderClass } from '@lib/helper/constant'
 interface TPropsSliderRelatedImageMenu {
   activeIndex: number
 }

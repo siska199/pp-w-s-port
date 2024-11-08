@@ -21,7 +21,7 @@ const InputTextEditor = (props: TProps) => {
   const [editorState, setEditorState] = useState(
     EditorState.createWithContent(ContentState.createFromText(value))
   )
-  const currentBlockType = RichUtils.getCurrentBlockType(editorState);
+  const currentBlockType = RichUtils.getCurrentBlockType(editorState)
 
   const handleOnChangeEditorState = (editorState: EditorState) => {
     setEditorState(editorState)
@@ -39,7 +39,6 @@ const InputTextEditor = (props: TProps) => {
     })
   }
 
-
   return (
     <ContainerInput {...attrs} customeClass={{ ciV2: '!p-1 !overflow-visible' }}>
       <Editor
@@ -48,7 +47,7 @@ const InputTextEditor = (props: TProps) => {
         editorClassName={`px-2 ${editorClassName}`}
         wrapperClassName={`min-h-[10rem] ${wrapperClassName}`}
         {...attrs}
-        placeholder={!value &&currentBlockType=='unstyled' ?attrs?.placeholder : ''}
+        placeholder={!value && currentBlockType == 'unstyled' ? attrs?.placeholder : ''}
       />
     </ContainerInput>
   )

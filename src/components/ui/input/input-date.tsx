@@ -23,15 +23,14 @@ interface TProps extends TBasePropsInput, Omit<DatePickerProps, 'onChange' | 'va
 }
 
 const InputDate = (props: TProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null)
   const { name, value, iconPosition = 'start', placeholder, onChange, ...attrs } = props
 
   const [showTypeDate, setShowTypeDate] = useState<'date' | 'month' | 'year' | ''>('')
   const [isShouldCloseOnSelect, setIsShouldCloseOnSelect] = useState(true)
-  
 
   const handleOnChange = (valueDate: TValueDate) => {
-    setTimeout(()=>{
+    setTimeout(() => {
       onChange({
         target: {
           name,
@@ -57,23 +56,23 @@ const InputDate = (props: TProps) => {
     setShowTypeDate('')
   }
 
-
   const date = useCallback(
     (index: number = 0) =>
       Array.isArray(value) ? (value[index] ?? undefined) : (value ?? undefined),
     [value]
   )
   return (
-    <ContainerInput {...attrs} value={value}
-    
+    <ContainerInput
+      {...attrs}
+      value={value}
       customeClass={{
         ...attrs.customeClass,
-        ciV2 : `${showTypeDate? '!border-primary ': 'focus-within:!border-gray-200 focus-within:!ring-gray-200 '} ${attrs?.customeClass?.ciV2}`
+        ciV2: `${showTypeDate ? '!border-primary ' : 'focus-within:!border-gray-200 focus-within:!ring-gray-200 '} ${attrs?.customeClass?.ciV2}`
       }}
     >
       {() => (
         <DatePicker
-          customInput={<CustomeInput ref={inputRef}/>}
+          customInput={<CustomeInput ref={inputRef} />}
           onCalendarClose={handleOnCalenderClose}
           selected={date(0)}
           startDate={date(0)}
@@ -97,8 +96,7 @@ const InputDate = (props: TProps) => {
           }) => (
             <div className='flex items-center rounded-[16px] justify-between px-2'>
               <Button
-                onClick={
-                  (e) => {
+                onClick={(e) => {
                   e.preventDefault()
                   return ['year', 'month']?.includes(showTypeDate)
                     ? decreaseYear()
@@ -148,8 +146,7 @@ const InputDate = (props: TProps) => {
               </Button>
             </div>
           )}
-          onCalendarOpen={()=>setShowTypeDate('date')}
-          
+          onCalendarOpen={() => setShowTypeDate('date')}
           shouldCloseOnSelect={isShouldCloseOnSelect}
           enableTabLoop={true}
           yearItemNumber={8}
@@ -176,22 +173,16 @@ const InputDate = (props: TProps) => {
             'right-[0.65rem]': iconPosition === 'end'
           })}
           onKeyDown={(e) => {
-            e.preventDefault();
-         }}
-         
+            e.preventDefault()
+          }}
         />
       )}
     </ContainerInput>
   )
 }
 
-const CustomeInput = forwardRef<HTMLInputElement, any>((props, ref)=>{
-  return <input
-    {...props}
-    ref={ref}
-    readOnly
-  />
+const CustomeInput = forwardRef<HTMLInputElement, any>((props, ref) => {
+  return <input {...props} ref={ref} readOnly />
 })
 
 export default InputDate
-

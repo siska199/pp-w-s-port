@@ -1,6 +1,6 @@
+import { zEmail, zFileLocale, zPhoneNumber, zString } from '@validation/reusable-schema'
 import z from 'zod'
 
-import { zEmail, zFileLocale, zPhoneNumber, zString } from '@lib/validation/reusable-schema'
 import { TTypeFile } from '@typescript/modules/ui/ui-types'
 
 const personalInformationSchema = z
@@ -24,6 +24,8 @@ const personalInformationSchema = z
     })
   })
   ?.strict()
+
+export type TPersonalInformationSchema = z.input<typeof personalInformationSchema>
 
 export const initialFormPersonalInformation = {
   first_name: {
@@ -102,7 +104,5 @@ export const initialFormPersonalInformation = {
     value: null
   }
 }
-
-export type TFormPersonalInformation = z.input<typeof personalInformationSchema>
 
 export default personalInformationSchema

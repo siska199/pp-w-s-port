@@ -1,15 +1,12 @@
 import { useState } from 'react'
 import skillEvent from '@event-emmitter/modules/skill/skill-event'
+import skillSchema, { initialFormSkill, TSkill } from '@validation/module/skill/skill-schema'
 
 import InputSelect from '@components/ui/input/input-select'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function'
-import skillSchema, {
-  initialFormSkill,
-  TFormSkill
-} from '@lib/validation/module/skill/skill-schema'
 import { TTypeActionModalForm } from '@typescript/global.d'
 import { TEventOnChange, TEventSubmitForm } from '@typescript/modules/ui/ui-types'
 
@@ -41,7 +38,7 @@ const FormSkill = () => {
 
   const handleOnSubmit = (e: TEventSubmitForm) => {
     e?.preventDefault()
-    const { isValid, updatedForm } = mappingErrorsToForm<TFormSkill, typeof form>({
+    const { isValid, updatedForm } = mappingErrorsToForm<TSkill, typeof form>({
       form,
       schema: skillSchema
     })
