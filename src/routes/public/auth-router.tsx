@@ -1,6 +1,7 @@
 import { RouteObject } from 'react-router-dom'
 
 import { AuthPage } from '@pages'
+import LazyLoad from '@components/ui/lazy-load'
 
 import { routes } from '@routes/constant'
 
@@ -10,7 +11,11 @@ const authRouter: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <AuthPage />,
+        element: (
+          <LazyLoad>
+            <AuthPage />
+          </LazyLoad>
+        ),
         handle: routes?.auth
       }
     ]

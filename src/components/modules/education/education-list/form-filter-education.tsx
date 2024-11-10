@@ -31,17 +31,18 @@ const FormFilterEducation = () => {
   }
 
   return (
-    <div className='grid md:grid-cols-2 lg:grid-cols-2 gap-4'>
+    <div className='grid md:grid-cols-4 gap-4'>
       <InputBase
         customeElement={{
           start: <IconSearch className='icon-gray icon-gray-fill' />
         }}
         {...form['keyword']}
         onChange={handleOnChange}
+        customeClass={{
+          ciV4: 'col-span-2'
+        }}
       />
-      <div className='grid lg:grid-cols-2'>
-        <InputSelect {...form['level']} onChange={handleOnChange} />
-      </div>
+      <InputSelect {...form['level']} onChange={handleOnChange} />
     </div>
   )
 }

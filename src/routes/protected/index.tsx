@@ -1,9 +1,7 @@
-import React from 'react'
 import { RouteObject } from 'react-router-dom'
 
 import GlobalLayout from '@components/layouts/global-layout'
 import Protectedlayout from '@components/layouts/protected-layout'
-import Loading from '@components/loading'
 
 import educationRouter from '@routes/protected/education-router'
 import workHistoryRouter from '@routes/protected/experiance-router'
@@ -15,11 +13,9 @@ const protectedRoutes: RouteObject[] = [
   {
     path: '',
     element: (
-      <React.Suspense fallback={<Loading />}>
-        <GlobalLayout>
-          <Protectedlayout />
-        </GlobalLayout>
-      </React.Suspense>
+      <GlobalLayout>
+        <Protectedlayout />
+      </GlobalLayout>
     ),
     errorElement: <div>Not Found</div>,
     children: [
@@ -27,7 +23,7 @@ const protectedRoutes: RouteObject[] = [
       ...skillRouter,
       ...workHistoryRouter,
       ...educationRouter,
-      ...projectRouter,
+      ...projectRouter
     ]
   }
 ]

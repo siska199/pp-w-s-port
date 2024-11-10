@@ -1,6 +1,7 @@
 import { RouteObject } from 'react-router-dom'
 
 import ProjectDetailPage from '@pages/project/project-detail/project-detail'
+import LazyLoad from '@components/ui/lazy-load'
 
 import { routes } from '@routes/constant'
 
@@ -10,7 +11,11 @@ const projectDetailRouter: RouteObject[] = [
     children: [
       {
         path: ':id',
-        element: <ProjectDetailPage />,
+        element: (
+          <LazyLoad>
+            <ProjectDetailPage />
+          </LazyLoad>
+        ),
         handle: {
           ...routes.project?.child?.detail
         }

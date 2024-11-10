@@ -1,6 +1,7 @@
 import { RouteObject } from 'react-router-dom'
 
 import { ProjectListPage, ProjectUpsertPage } from '@pages'
+import LazyLoad from '@components/ui/lazy-load'
 
 import { routes } from '@routes/constant'
 
@@ -10,12 +11,20 @@ const projectRouter: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <ProjectListPage />,
+        element: (
+          <LazyLoad>
+            <ProjectListPage />
+          </LazyLoad>
+        ),
         handle: routes.project
       },
       {
         path: routes.project.child?.upsert.name,
-        element: <ProjectUpsertPage />,
+        element: (
+          <LazyLoad>
+            <ProjectUpsertPage />
+          </LazyLoad>
+        ),
         handle: routes.project.child?.upsert
       }
     ]

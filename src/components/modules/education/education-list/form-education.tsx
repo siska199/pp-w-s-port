@@ -74,7 +74,7 @@ const FormEducation = () => {
       isShow={modalForm.isShow}
       onClose={handlleCloseFormEducation}
       onSubmit={handleOnSubmit}
-      customeClass={{ mdBody: '  md:min-w-[30rem]  space-y-4' }}
+      customeClass={{ mdBody: '  md:min-w-[35rem]  space-y-4' }}
     >
       <div className='grid md:grid-cols-2 gap-4'>
         <InputSelect {...form['id_level']} onChange={handleOnChange} />

@@ -45,6 +45,10 @@ input[type='radio']:disabled {
 
 /* Customize input date */
 /* Remove border in the popper modal */
+.react-datepicker-popper.react-datepicker-left {
+  @apply !left-[-1rem];
+}
+
 .react-datepicker {
   @apply !overflow-hidden mx-auto flex flex-col !border-gray-200 rounded-[16px] shadow-md;
 }
@@ -116,7 +120,6 @@ input[type='radio']:disabled {
 
 .react-datepicker__year-text--in-range {
   @apply !bg-primary z-[10] hover:!bg-primary-400 !text-white;
-
 }
 
 .react-datepicker__month {
@@ -224,5 +227,6 @@ input[type='radio']:disabled {
   background-position: center;
 }
 
-.react-datepicker-wrapper input[readonly]{cursor: pointer;}
-
+.react-datepicker-wrapper input[readonly] {
+  cursor: pointer;
+}

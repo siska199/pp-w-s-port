@@ -1,6 +1,7 @@
 import { RouteObject } from 'react-router-dom'
 
 import { PortofolioDetailPage } from '@pages'
+import LazyLoad from '@components/ui/lazy-load'
 
 import { routes } from '@routes/constant'
 
@@ -10,7 +11,11 @@ const portofolioRouter: RouteObject[] = [
     children: [
       {
         path: ':id',
-        element: <PortofolioDetailPage />,
+        element: (
+          <LazyLoad>
+            <PortofolioDetailPage />
+          </LazyLoad>
+        ),
         handle: {
           ...routes.portofolio
         }

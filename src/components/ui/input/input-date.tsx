@@ -151,7 +151,7 @@ const InputDate = (props: TProps) => {
           enableTabLoop={true}
           yearItemNumber={8}
           showIcon={true}
-          icon={<IconCalender />}
+          icon={<IconCalender className=''/>}
           disabled={attrs.disabled}
           isClearable={!!value}
           toggleCalendarOnIconClick={true}

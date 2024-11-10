@@ -3,7 +3,6 @@ import React, { useMemo } from 'react'
 import Badge from '@components/ui/badge'
 import Button from '@components/ui/button'
 import EmptyData from '@components/ui/empty-data'
-import InputCheckbox from '@components/ui/input/input-checkbox'
 
 import { cn } from '@lib/helper/function'
 import { TColumn, TSettingTable } from '@typescript/modules/ui/ui-types'
@@ -25,7 +24,6 @@ type WithOptionalChecked<T, TInclude extends boolean> = TInclude extends true
 export interface TTableProps<TData, TIncludeChecked extends boolean = false> {
   columns: TColumn<TData, keyof TData>[]
   data: WithId<WithOptionalChecked<TData, TIncludeChecked>>[]
-  setData: React.Dispatch<React.SetStateAction<WithOptionalChecked<TData, TIncludeChecked>[]>>
   setting: TSettingTable<TData>
   onChange: (params: any) => void
   isLoading?: boolean
@@ -40,36 +38,7 @@ export interface TTableProps<TData, TIncludeChecked extends boolean = false> {
 const Table = <TData, TIncludeChecked extends boolean = false>(
   props: TTableProps<TData, TIncludeChecked>
 ) => {
-  const { columns, isLoading, data, setData, setting, onChange, withNo, actionBtn } = props
-
-  const isCheckedAll = useMemo(
-    () =>
-      data?.length > 0
-        ? !data?.some((dataRow: WithOptionalChecked<TData, TIncludeChecked>) => !dataRow.isChecked)
-        : false,
-    [data]
-  )
-
-  const handleOnChangeChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name
-    const value = e?.target?.value
-    const isChecked = e?.target?.checked
-
-    if (name === 'cheked-all') {
-      const newData = data?.map((dataRow) => ({
-        ...dataRow,
-        isChecked
-      }))
-      setData(newData)
-    } else {
-      const valueParse = JSON.parse(value)
-      const dataChecked = data?.map((data) => {
-        const isCheckedCurrData = valueParse?.id === data?.id ? isChecked : data?.isChecked
-        return { ...data, isChecked: isCheckedCurrData }
-      })
-      setData(dataChecked)
-    }
-  }
+  const { columns, isLoading, data, setting, onChange, withNo, actionBtn } = props
 
   const handleSortColumn = (params: { key: keyof TData }) => {
     const sortDir =
@@ -106,18 +75,9 @@ const Table = <TData, TIncludeChecked extends boolean = false>(
     <div className='border border-warning-100 rounded-lg w-full overflow-hidden'>
       <div className='relative  overflow-y-auto   max-h-[30rem] '>
         <table className={`table-auto  w-full ${data?.length === 0 && 'flex flex-col'}`}>
+          
           <thead className='sticky z-[2] top-0  text-warning-700 bg-warning-50 '>
             <tr className='border-b border-warning-100'>
-              {setting?.checked && (
-                <th className={`${style.columnChecked}`}>
-                  <InputCheckbox
-                    checked={isCheckedAll}
-                    value={'cheked-all'}
-                    onChange={handleOnChangeChecked}
-                    name={'cheked-all'}
-                  />
-                </th>
-              )}
               {withNo && <th className={`${style.columnNo}`}>No.</th>}
               {columns?.map((column, i) => (
                 <th key={i}>
@@ -156,21 +116,12 @@ const Table = <TData, TIncludeChecked extends boolean = false>(
               )}
             </tr>
           </thead>
+
           {data?.length >= 0 && (
             <tbody className={`text-gray `}>
               {data?.map((dataRow, i) => {
                 return (
                   <tr key={i} className='border-b border-warning-100'>
-                    {setting?.checked && handleOnChangeChecked && (
-                      <td className={`${style.columnChecked}`}>
-                        <InputCheckbox
-                          onChange={handleOnChangeChecked}
-                          checked={dataRow?.isChecked}
-                          value={JSON.stringify(dataRow)}
-                          name={`checked-${i}`}
-                        />
-                      </td>
-                    )}
                     {withNo && (
                       <td className={`${style.columnNo}`}>
                         {(setting?.currentPage - 1) * setting?.itemsPerPage + i + 1}
@@ -224,6 +175,7 @@ const Table = <TData, TIncludeChecked extends boolean = false>(
             </tbody>
           )}
         </table>
+        
         {data?.length === 0 && (
           <div className='w-full h-[20rem] flex items-center justify-center'>
             {isLoading ? (

@@ -36,18 +36,23 @@ const FormFilterSKill = () => {
   }
 
   return (
-    <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4'>
-      <InputBase
-        customeElement={{
-          start: <IconSearch className='icon-gray icon-gray-fill' />
-        }}
-        {...form['keyword']}
-        onChange={handleOnChange}
-      />
-      <InputSelect onChange={handleOnChange} {...form['category']} isMultiple />
-      <InputSelect onChange={handleOnChange} {...form['level']} isMultiple />
-      <InputSelect onChange={handleOnChange} {...form['yearsOfExperiance']} />
-    </div>
+    <>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+        <InputBase
+          customeElement={{
+            start: <IconSearch className='icon-gray icon-gray-fill' />
+          }}
+          {...form['keyword']}
+          onChange={handleOnChange}
+          customeClass={{
+            ciV4: 'md:col-span-2'
+          }}
+        />
+        <InputSelect onChange={handleOnChange} {...form['category']} isMultiple />
+        <InputSelect onChange={handleOnChange} {...form['level']} isMultiple />
+        <InputSelect onChange={handleOnChange} {...form['yearsOfExperiance']} />
+      </div>
+    </>
   )
 }
 
@@ -55,8 +60,7 @@ const initialFormFilter = {
   keyword: {
     name: 'keyword',
     value: '',
-    placeholder: 'Search by skill name...',
-    customeClass: {}
+    placeholder: 'Search by skill name...'
   },
   category: {
     name: 'category',

@@ -1,5 +1,5 @@
 export const basicToolbarConfig = {
-  options: ['list', 'inline', ' colorPicker'],
+  options: ['list', 'inline', 'colorPicker'],
   list: {
     options: ['unordered']
   },

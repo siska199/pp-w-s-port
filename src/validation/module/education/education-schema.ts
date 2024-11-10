@@ -59,7 +59,7 @@ export const initialFormEducation = {
     placeholder: 'Enter a brief description of your education or experience',
     value: '',
     errorMessage: '',
-    options: basicToolbarConfig
+    toolbar: basicToolbarConfig
   }
 }
 

@@ -48,6 +48,7 @@ const InputTextEditor = (props: TProps) => {
         wrapperClassName={`min-h-[10rem] ${wrapperClassName}`}
         {...attrs}
         placeholder={!value && currentBlockType == 'unstyled' ? attrs?.placeholder : ''}
+
       />
     </ContainerInput>
   )
