@@ -10,10 +10,10 @@ import useTable from '@hooks/use-table'
 import { handleSetModalConfirmation } from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
 import experiances from '@lib/data/dummy/experiances.json'
-import { delay } from '@lib/helper/function'
+import { delay, formatDate } from '@lib/helper/function'
 import { routes } from '@routes/constant'
 import { TTypeActionModalForm } from '@typescript/global.d'
-import { TSettingTable } from '@typescript/modules/ui/ui-types'
+import { TSettingTable, TTypeDateFormat } from '@typescript/modules/ui/ui-types'
 
 type TData = (typeof experiances)[0]
 
@@ -38,7 +38,11 @@ const TableExperiance = () => {
       {
         name: 'Start At',
         key: 'start_at',
-        isSorted: true
+        isSorted: true,
+        customeComponent: (data:TData)=>{
+          console.log(new Date(data.start_at))
+          return <div>{formatDate({date: new Date(data.start_at),format:TTypeDateFormat['DD/MM/YYYY']})}</div>
+        }
       },
       {
         name: 'End At',

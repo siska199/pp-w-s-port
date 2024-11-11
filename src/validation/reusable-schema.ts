@@ -1,8 +1,8 @@
 import { messageError, regexValidation } from '@validation/const'
 import z, { ZodEffects, ZodNumber, ZodString } from 'zod'
 
-import { handleValidateType } from '@lib/helper/function'
-import { TTypeFile } from '@typescript/modules/ui/ui-types'
+import { formatDate, handleValidateType } from '@lib/helper/function'
+import { TTypeDateFormat, TTypeFile } from '@typescript/modules/ui/ui-types'
 
 export const zString = (params: {
   name: string
@@ -48,16 +48,21 @@ export const zNumber = (params: {
   ) as ZodNumber
 }
 
-export const zDate = (params: { name: string; mandatory?: boolean }): z.ZodString => {
-  const { name, mandatory = true } = params
-  const dateSchema = zString({ name, mandatory })?.datetime({ message: 'Invalid Date' })
+export const zDate = (params: {mandatory?: boolean, format?: TTypeDateFormat }):ZodString=> {
+  const {  mandatory = true, format= TTypeDateFormat.ISO } = params
+  
+  const dateSchema = z.coerce.date().transform((date)=>{
+    const newFormat = formatDate({date,  format})
+    return date?newFormat:null
+  }).refine((date)=>{
+    return date && date!=='1970-01-01T00:00:00.000Z'
+  },{message:messageError.required('Date')})
+  
   return (
     mandatory
-      ? dateSchema.nonempty({
-          message: messageError.required(name)
-        })
+      ? dateSchema
       : dateSchema?.optional()
-  ) as z.ZodString
+  ) as unknown as ZodString
 }
 
 type TResultZPassword = ZodEffects<ZodString, string, string>

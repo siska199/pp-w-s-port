@@ -7,8 +7,8 @@ const educationSchema = z.object({
   id_level: zString({ name: 'Level' }),
   id_major: zString({ name: 'Major' }),
   id_school: zString({ name: 'School' }),
-  start_at: zDate({ name: 'Start At' }),
-  end_at: zDate({ name: 'End At' }),
+  start_at: zDate({mandatory:false}),
+  end_at: zDate({mandatory:false}),
   description: zString({ name: 'Description' })
 })
 

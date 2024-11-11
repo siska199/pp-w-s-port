@@ -83,7 +83,7 @@ const FormEducation = () => {
       <InputSelect {...form['id_school']} onChange={handleOnChange} />
       <div className='grid md:grid-cols-2 gap-4 overflow-visible'>
         <InputDate {...form['start_at']} onChange={handleOnChange} />
-        <InputDate {...form['end_at']} onChange={handleOnChange} />
+        <InputDate {...form['end_at']} minDate={form.start_at.value??undefined} onChange={handleOnChange} />
       </div>
       <InputTextEditor {...form['description']} onChange={handleOnChange} />
     </ContainerModalForm>

@@ -173,6 +173,8 @@ const InputDate = (props: TProps) => {
           onKeyDown={(e) => {
             e.preventDefault()
           }}
+          minDate={attrs.minDate}
+          maxDate={attrs.maxDate}
         />
       )}
     </ContainerInput>
