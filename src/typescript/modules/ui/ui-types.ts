@@ -97,7 +97,7 @@ export type TEventOnChange =
   | TCustomeEventOnChange<any>
   | TCustomeEventOnChange<TValueFile, { files: FileList; listUploadedFile?: TUploadedFile[] }>
 
-  export type TEventSubmitForm =
+export type TEventSubmitForm =
   | FormEvent<HTMLFormElement>
   | MouseEvent<HTMLButtonElement | HTMLLinkElement>
 
@@ -116,8 +116,8 @@ export interface TSettingTable<TData> {
   pagination?: boolean
   currentPage: number
   totalPage: number
-  itemsPerPage: number;
-  formFilter? : TObject;
+  itemsPerPage: number
+  formFilter?: TObject
 }
 
 export interface TBaseModal {
@@ -125,4 +125,13 @@ export interface TBaseModal {
   onClose: () => void
   children: React.ReactNode
   title?: React.ReactNode
+}
+
+export enum TTypeDateFormat {
+  DD_MM_YYYY = 'dd-mm-yyyy',
+  YYYY_MM_DD = 'yyyy-mm-dd',
+  DD_SLASH_MM_SLASH_YYYY = 'dd/mm/yyyy',
+  DD_MONTH_YYYY = 'dd Month yyyy',
+  HH_MM = 'hh:mm',
+  ISO = 'ISO'
 }

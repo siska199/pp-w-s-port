@@ -12,6 +12,7 @@ export const PersonalInformationUpsertPage = React.lazy(
 export const EducationListPage = React.lazy(
   () => import('@pages/education/education-list/education-list')
 )
+
 export const SkillListPage = React.lazy(() => import('@pages/skill/skill-list/skill-list'))
 export const ExperianceDetailPage = React.lazy(
   () => import('@pages/experiance/experiace-detail/experiance-detail')

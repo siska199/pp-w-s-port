@@ -10,8 +10,6 @@ import { cn } from '@lib/helper/function'
 import { TBasePropsInput, TCustomeEventOnChange } from '@typescript/modules/ui/ui-types'
 import { IconCalender, IconChevronLeft, IconChevronRight } from '@assets/icons'
 
-import 'react-datepicker/dist/react-datepicker.css'
-
 type TValueDate = [Date | null, Date | null] | Date | null
 
 interface TProps extends TBasePropsInput, Omit<DatePickerProps, 'onChange' | 'value'> {
@@ -151,7 +149,7 @@ const InputDate = (props: TProps) => {
           enableTabLoop={true}
           yearItemNumber={8}
           showIcon={true}
-          icon={<IconCalender className=''/>}
+          icon={<IconCalender className='' />}
           disabled={attrs.disabled}
           isClearable={!!value}
           toggleCalendarOnIconClick={true}
