@@ -5,7 +5,7 @@ import ContainerInput from '@components/ui/input/container-input'
 import InputCheckbox from '@components/ui/input/input-checkbox'
 
 import { arraysHaveSameMembers, cn, handlePreventDefault } from '@lib/helper/function'
-import { TBasePropsInput, TCustomeEventOnChange } from '@typescript/modules/ui/ui-types'
+import { TBasePropsInput, TCustomeEventOnChange } from '@typescript/ui-types'
 
 interface TProps
   extends TBasePropsInput,

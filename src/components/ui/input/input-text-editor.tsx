@@ -6,7 +6,7 @@ import draftToHtml from 'draftjs-to-html'
 import ContainerInput from '@components/ui/input/container-input'
 
 import { isHtmlHasText } from '@lib/helper/function'
-import { TBasePropsInput, TCustomeEventOnChange } from '@typescript/modules/ui/ui-types'
+import { TBasePropsInput, TCustomeEventOnChange } from '@typescript/ui-types'
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
@@ -48,7 +48,6 @@ const InputTextEditor = (props: TProps) => {
         wrapperClassName={`min-h-[10rem] ${wrapperClassName}`}
         {...attrs}
         placeholder={!value && currentBlockType == 'unstyled' ? attrs?.placeholder : ''}
-
       />
     </ContainerInput>
   )

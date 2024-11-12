@@ -7,7 +7,7 @@ import InputMultipleCheckbox from '@components/ui/input/input-multiple-checkbox'
 
 import useOnClickOutside from '@hooks/use-on-click-outside'
 import { debounce, getFieldLabelFromOptions, spreadArrayAttemp } from '@lib/helper/function'
-import { TBasePropsInput, TCustomeEventOnChange, TOption } from '@typescript/modules/ui/ui-types'
+import { TBasePropsInput, TCustomeEventOnChange, TOption } from '@typescript/ui-types'
 import { IconClose } from '@assets/icons'
 import IconChevronToggle from '@assets/icons/icon-chevron-down'
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { messageError } from '@validation/const'
+import { messageError } from '@validation/constant'
 
 import Avatar from '@components/ui/avatar'
 import Button from '@components/ui/button'
@@ -13,7 +13,7 @@ import {
   handleDownloadFile,
   handleValidateType
 } from '@lib/helper/function'
-import { TBasePropsInput, TCustomeEventOnChange, TTypeFile } from '@typescript/modules/ui/ui-types'
+import { TBasePropsInput, TCustomeEventOnChange, TTypeFile } from '@typescript/ui-types'
 import { IconCamera } from '@assets/icons'
 
 type TFileWithPreview = File & { preview?: string }

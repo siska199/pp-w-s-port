@@ -2,12 +2,13 @@
 export default {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/features/**/*.{js,ts,jsx,tsx,mdx, svg}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdxg}',
     './src/assets/**/*.{js,ts,jsx,tsx,mdx, svg}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/hooks/**/*.{js,ts,jsx,tsx,mdx}',
     './src/lib/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/styles/**/*.{js,ts,jsx,tsx,mdx,css,}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/styles/**/*.{js,ts,jsx,tsx,mdx,css,svg}',
+    './src/**/*.{js,ts,jsx,tsx,mdx, svg}',
     './src/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {

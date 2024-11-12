@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import axios, { CancelTokenSource } from 'axios'
 
-import { handleSetAlertConfig, handleSetIsloading } from '@store/modules/ui/ui-slice'
+import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice'
 import CONFIG from '@lib/config/config'
 import appMessage from '@lib/data/app-message'
 import { generateUrlQueryParams, isEmptyValue } from '@lib/helper/function'

@@ -4,8 +4,9 @@ import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { encryptTransform } from 'redux-persist-transform-encrypt'
 
-import authSlice from '@store/modules/auth/auth-slice'
-import uiSlice from '@store/modules/ui/ui-slice'
+import authSlice from '@features/auth/store/auth-slice'
+
+import uiSlice from '@store/ui-slice'
 import CONFIG from '@lib/config/config'
 
 const encryptor = encryptTransform({

@@ -5,7 +5,7 @@ import Button from '@components/ui/button'
 import EmptyData from '@components/ui/empty-data'
 
 import { cn } from '@lib/helper/function'
-import { TColumn, TSettingTable } from '@typescript/modules/ui/ui-types'
+import { TColumn, TSettingTable } from '@typescript/ui-types'
 import {
   IconArrowUp,
   IconChevronLeft,
@@ -75,7 +75,6 @@ const Table = <TData, TIncludeChecked extends boolean = false>(
     <div className='border border-warning-100 rounded-lg w-full overflow-hidden'>
       <div className='relative  overflow-y-auto   max-h-[30rem] '>
         <table className={`table-auto  w-full ${data?.length === 0 && 'flex flex-col'}`}>
-          
           <thead className='sticky z-[2] top-0  text-warning-700 bg-warning-50 '>
             <tr className='border-b border-warning-100'>
               {withNo && <th className={`${style.columnNo}`}>No.</th>}
@@ -175,7 +174,7 @@ const Table = <TData, TIncludeChecked extends boolean = false>(
             </tbody>
           )}
         </table>
-        
+
         {data?.length === 0 && (
           <div className='w-full h-[20rem] flex items-center justify-center'>
             {isLoading ? (

@@ -1,14 +1,14 @@
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { handleSetAuth } from '@features/auth/store/auth-slice'
 
 import Logo from '@components/logo'
 import Avatar from '@components/ui/avatar'
 import DropdownBase, { TOptionDropdown } from '@components/ui/dropdown'
 
 import useCurrentPath from '@hooks/use-current-path'
-import { handleSetAuth } from '@store/modules/auth/auth-slice'
-import { handleToggleSidebar } from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
+import { handleToggleSidebar } from '@store/ui-slice'
 import { routes } from '@routes/constant'
 import { IconHumburger, IconLogout, IconUser } from '@assets/icons'
 
@@ -43,7 +43,7 @@ const ContentProtectedRoute = () => {
         break
       case 'logout':
         dispatch(handleSetAuth(false))
-        navigate(routes.auth?.child?.signIn?.fullPath as string, {
+        navigate(routes.auth?.fullPath as string, {
           replace: true
         })
         break

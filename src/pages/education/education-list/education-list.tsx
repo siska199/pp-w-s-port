@@ -1,7 +1,7 @@
-import FormEducation from '@components/modules/education/education-list/form-education'
-import FormFilterEducation from '@components/modules/education/education-list/form-filter-education'
-import HeaderEducation from '@components/modules/education/education-list/header-education'
-import TableEducation from '@components/modules/education/education-list/table-education'
+import FormEducation from '@features/education/components/education-list/form-education'
+import FormFilterEducation from '@features/education/components/education-list/form-filter-education'
+import HeaderEducation from '@features/education/components/education-list/header-education'
+import TableEducation from '@features/education/components/education-list/table-education'
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'
 
 const EducationList = () => {

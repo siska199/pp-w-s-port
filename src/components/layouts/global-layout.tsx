@@ -6,12 +6,8 @@ import ContainerModal from '@components/ui/modal/container-modal'
 import ModalConfirmation from '@components/ui/modal/container-modal-confirmation'
 
 import useCurrentPath from '@hooks/use-current-path'
-import {
-  handleSetModal,
-  handleSetModalConfirmation,
-  initialStateAuthSlice
-} from '@store/modules/ui/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
+import { handleSetModal, handleSetModalConfirmation, initialStateAuthSlice } from '@store/ui-slice'
 import { routes } from '@routes/constant'
 interface TPropsGlobalLayout {
   children: React.ReactNode

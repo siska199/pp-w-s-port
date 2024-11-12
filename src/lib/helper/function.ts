@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge'
 import z, { ZodSchema, ZodType } from 'zod'
 
 import { TObject } from '@typescript/global.d'
-import { TOption, TTypeDateFormat, TTypeFile } from '@typescript/modules/ui/ui-types'
+import { TOption, TTypeDateFormat, TTypeFile } from '@typescript/ui-types'
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs))
@@ -275,16 +275,32 @@ interface TFormatDate {
 export const formatDate = (params: TFormatDate) => {
   const { date, format, timeZone = 'UTC' } = params
 
-  if(format===TTypeDateFormat.ISO)return date?.toISOString()
+  if (format === TTypeDateFormat.ISO) return date?.toISOString()
 
   const formatOptions: { [key in TTypeDateFormat]?: Intl.DateTimeFormatOptions } = {
-    [TTypeDateFormat['DD MONTH YEAR']]: { day: "2-digit", month:"long", year: "numeric", timeZone },
-    [TTypeDateFormat['DD-MM-YYYY']]: { day: "2-digit", month: "2-digit", year: "numeric", timeZone },
-    [TTypeDateFormat['DD/MM/YYYY']]: { year: "numeric", month: "2-digit", day: "2-digit", timeZone },
-    [TTypeDateFormat['hh:mm']]: { hour: "2-digit", minute: "2-digit", hour12: false, timeZone },
-  };
+    [TTypeDateFormat['DD MONTH YEAR']]: {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+      timeZone
+    },
+    [TTypeDateFormat['DD-MM-YYYY']]: {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      timeZone
+    },
+    [TTypeDateFormat['DD/MM/YYYY']]: {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      timeZone
+    },
+    [TTypeDateFormat['hh:mm']]: { hour: '2-digit', minute: '2-digit', hour12: false, timeZone }
+  }
 
-  const formattedDate = new Intl.DateTimeFormat("en-GB", formatOptions[format]!).format(date);
-  return format === TTypeDateFormat['DD-MM-YYYY'] ? formattedDate.replace(/\//g, "-") : formattedDate;
+  const formattedDate = new Intl.DateTimeFormat('en-GB', formatOptions[format]!).format(date)
+  return format === TTypeDateFormat['DD-MM-YYYY']
+    ? formattedDate.replace(/\//g, '-')
+    : formattedDate
 }
-

@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import Container from '@components/ui/container/container'
 
-import { TBasePropsInput } from '@typescript/modules/ui/ui-types'
+import { TBasePropsInput } from '@typescript/ui-types'
 import { IconCheck } from '@assets/icons'
 
 import HelperMessage from '../helper-message'
@@ -13,7 +13,7 @@ interface TProps
   name: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   label?: string
-  value: 'false' | 'true'
+  value: string
   classNameContainer?: string
   customeClassnameCheckbox?: {
     container?: string

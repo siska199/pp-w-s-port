@@ -1,7 +1,7 @@
-import IntroductionSection from '@components/modules/project/project-detail/introduction-section'
-import MenuSection from '@components/modules/project/project-detail/menu-section/menu-section'
-import ResponsibilitySection from '@components/modules/project/project-detail/responsibility-section'
-import TechStackSection from '@components/modules/project/project-detail/tech-stack-section'
+import IntroductionSection from '@features/project/components/project-detail/introduction-section'
+import MenuSection from '@features/project/components/project-detail/menu-section/menu-section'
+import ResponsibilitySection from '@features/project/components/project-detail/responsibility-section'
+import TechStackSection from '@features/project/components/project-detail/tech-stack-section'
 import ContainerLandingPage from '@components/ui/container/container-landing-page'
 
 const ProjectDetailPage = () => {

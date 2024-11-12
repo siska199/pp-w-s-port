@@ -6,7 +6,7 @@ import Image from '@components/ui/image'
 
 import useCurrentPath from '@hooks/use-current-path'
 import useMediaQuery from '@hooks/use-media-query'
-import { handleToggleSidebar } from '@store/modules/ui/ui-slice'
+import { handleToggleSidebar } from '@store/ui-slice'
 import { useAppDispatch, useAppSelector } from '@store/store'
 import menuSidebar from '@lib/data/menu-sidebar'
 import { cn } from '@lib/helper/function'

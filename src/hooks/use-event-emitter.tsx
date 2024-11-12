@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react'
-import { eventEmitter, TEventMap } from '@event-emmitter'
+import { eventEmitter, TEventMap } from '@event-emitters'
 
 const useEventEmitter = <T extends keyof TEventMap>(
   event: T,

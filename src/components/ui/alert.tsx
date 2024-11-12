@@ -1,7 +1,7 @@
 import { HTMLProps, useEffect, useState } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 
-import { handleSetAlertConfig } from '@store/modules/ui/ui-slice'
+import { handleSetAlertConfig } from '@store/ui-slice'
 import { cn } from '@lib/helper/function'
 import variantsAlert, {
   variantAlertError,
@@ -9,7 +9,7 @@ import variantsAlert, {
   variantAlertWarning
 } from '@lib/helper/variant/variant-alert'
 import variant from '@lib/helper/variant/variant-color'
-import { TAlertConfig } from '@typescript/modules/ui/ui-types'
+import { TAlertConfig } from '@typescript/ui-types'
 import { IconClose, IconDanger, IconInfo, IconNotification, IconSucess } from '@assets/icons'
 
 interface TPropsVariantError extends VariantProps<typeof alertVariantError> {

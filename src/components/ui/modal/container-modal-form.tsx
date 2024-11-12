@@ -2,7 +2,7 @@ import Button from '@components/ui/button'
 import ContainerModal, { TContainerModalProps } from '@components/ui/modal/container-modal'
 
 import { TTypeActionModalForm } from '@typescript/global.d'
-import { TEventSubmitForm } from '@typescript/modules/ui/ui-types'
+import { TEventSubmitForm } from '@typescript/ui-types'
 
 interface TCustomeClass extends TContainerModalProps {
   form?: string

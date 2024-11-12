@@ -1,6 +1,6 @@
 import ContainerModal from '@components/ui/modal/container-modal'
 
-import { TBaseModal } from '@typescript/modules/ui/ui-types'
+import { TBaseModal } from '@typescript/ui-types'
 
 import Button from '../button'
 

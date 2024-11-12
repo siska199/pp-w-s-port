@@ -7,7 +7,7 @@ import Button from '@components/ui/button'
 import ContainerInput from '@components/ui/input/container-input'
 
 import { cn } from '@lib/helper/function'
-import { TBasePropsInput, TCustomeEventOnChange } from '@typescript/modules/ui/ui-types'
+import { TBasePropsInput, TCustomeEventOnChange } from '@typescript/ui-types'
 import { IconCalender, IconChevronLeft, IconChevronRight } from '@assets/icons'
 
 type TValueDate = [Date | null, Date | null] | Date | null

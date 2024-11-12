@@ -45,7 +45,7 @@ export default tseslint.config(
         {
           groups: [
             ['^react', '^@?\\w'],
-            ['^@pages', '^@components', '^@apis'],
+            ['^@pages','^@features', '^@components', '^@apis'],
             ['^@hooks', '^@store', '^@context', '^@lib', '^@routes', '^@typescript', '^@assets'],
             ['^.+\\.?(css)$']
           ]

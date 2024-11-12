@@ -6,8 +6,6 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from '@store/store'
 import router from '@routes'
 
-
-
 const Providers = () => {
   return (
     <Provider store={store}>

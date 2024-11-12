@@ -4,7 +4,7 @@ import Container from '@components/ui/container/container'
 import HelperMessage from '@components/ui/helper-message'
 
 import { cn, isEmptyValue } from '@lib/helper/function'
-import { TBasePropsInput } from '@typescript/modules/ui/ui-types'
+import { TBasePropsInput } from '@typescript/ui-types'
 import { IconClose, IconEye, IconEyeClose } from '@assets/icons'
 
 export interface TPropsInput<TInput> extends TBasePropsInput {
@@ -71,20 +71,7 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
   return (
     <Container className={`${customeClass?.ciV4} relative flex flex-col gap-1`}>
       <section className={`${customeClass?.ciV3} flex flex-col gap-2 w-full`}>
-        {label && (
-          <div className='flex justify-between gap-4'>
-            <label htmlFor={name} className={'font-medium w-fit'}>
-              {label}
-            </label>
-
-            {maxLength && (
-              <span className='text-gray text-body-small'>
-                {maxLength - Number(value?.length ?? 0)}
-              </span>
-            )}
-          </div>
-        )}
-
+        <Label label={label} name={name} value={value} maxLength={maxLength} />
         {onlyContainer && typeof children !== 'function' ? (
           children
         ) : (
@@ -151,15 +138,42 @@ interface TPropsCustomeElement {
   elmn1?: React.ReactNode
   elmn2?: React.ReactNode
 }
-
 const CustomeElement = (props: TPropsCustomeElement) => {
   const { elmn1, elmn2 } = props
+  return (
+    <>
+      {elmn1 && (
+        <div className={`hidden ${elmn1 && 'shrink-0 !flex bg-gray-100 p-2'}`}>{elmn1}</div>
+      )}
+      {elmn2 && <div className={`hidden ${elmn2 && 'shrink-0 !flex'}`}>{elmn2}</div>}
+    </>
+  )
+}
+
+interface TPropsLabel {
+  label?: string
+  maxLength?: number
+  name?: string
+  value: any
+}
+const Label = (props: TPropsLabel) => {
+  const { label, maxLength, value, name } = props
 
   return (
     <>
-      <div className={`hidden ${elmn1 && 'shrink-0 !flex bg-gray-100 p-2'}`}>{elmn1}</div>
+      {label && (
+        <div className='flex justify-between gap-4'>
+          <label htmlFor={name} className={'font-medium w-fit'}>
+            {label}
+          </label>
 
-      <div className={`hidden ${elmn2 && 'shrink-0 !flex'}`}>{elmn2}</div>
+          {maxLength && (
+            <span className='text-gray text-body-small'>
+              {maxLength - Number(value?.length ?? 0)}
+            </span>
+          )}
+        </div>
+      )}
     </>
   )
 }

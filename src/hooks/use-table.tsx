@@ -2,20 +2,16 @@ import React, { useEffect, useState } from 'react'
 
 import { TTableProps } from '@components/ui/table'
 
-import { TColumn, TSettingTable } from '@typescript/modules/ui/ui-types'
-
-
-
+import { TColumn, TSettingTable } from '@typescript/ui-types'
 
 interface TProps<TData, TIncludeChecked extends boolean = false> {
   initialColumn: TTableProps<TData, TIncludeChecked>['columns']
   initialData?: TData[]
   initialSetting: Partial<TSettingTable<TData>>
-  onFetchData: (params:TSettingTable<TData>) => Promise<TData[]>
+  onFetchData: (params: TSettingTable<TData>) => Promise<TData[]>
 }
 
-const 
-useTable = <TData extends object, TIncludeChecked extends boolean = false>(
+const useTable = <TData extends object, TIncludeChecked extends boolean = false>(
   props: TProps<TData, TIncludeChecked> &
     Omit<
       TTableProps<TData, TIncludeChecked>,

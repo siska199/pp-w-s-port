@@ -4,7 +4,7 @@ import { cva, VariantProps } from 'class-variance-authority'
 import Button from '@components/ui/button'
 
 import { cn } from '@lib/helper/function'
-import { TBaseModal } from '@typescript/modules/ui/ui-types'
+import { TBaseModal } from '@typescript/ui-types'
 import { IconClose } from '@assets/icons'
 
 export interface TContainerModalProps extends TBaseModal, VariantProps<typeof modalVariants> {
