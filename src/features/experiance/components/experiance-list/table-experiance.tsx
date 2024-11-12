@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { eventEmitter } from '@event-emitters'
-import EVENT_EXPERIANCE from '@features/experiance/event-emitters/experiance-event'
 
+import EVENT_EXPERIANCE from '@features/experiance/event-emitters/experiance-event'
 import Badge from '@components/ui/badge'
 import Table from '@components/ui/table'
 

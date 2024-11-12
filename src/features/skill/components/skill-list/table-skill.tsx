@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { eventEmitter } from '@event-emitters'
-import EVENT_SKILL from '@features/skill/event-emitters/skill-event'
 
+import EVENT_SKILL from '@features/skill/event-emitters/skill-event'
 import Badge from '@components/ui/badge'
 import Table from '@components/ui/table'
 

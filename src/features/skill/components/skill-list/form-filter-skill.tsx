@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { eventEmitter } from '@event-emitters'
-import EVENT_SKILL from '@features/skill/event-emitters/skill-event'
 
+import EVENT_SKILL from '@features/skill/event-emitters/skill-event'
 import InputBase from '@components/ui/input/input-base'
 import InputSelect from '@components/ui/input/input-select'
 

@@ -10,11 +10,11 @@
       { "id": "e5f6g7h8", "name": "Project B" }
     ],
     "tech_stacks": ["JavaScript", "React", "Node.js"],
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "created_at": "2024-10-27T10:30:00.000Z",
     "updated_at": "2024-10-27T10:30:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   },
   {
     "id": "0p9o8n7m-6l5k-4j3i-2h1g-8f7e6d5c4b2b",
@@ -27,12 +27,11 @@
       { "id": "m5n4o3p2", "name": "Project Y" }
     ],
     "tech_stacks": ["Python", "Django", "PostgreSQL"],
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "created_at": "2024-10-26T14:45:00.000Z",
     "updated_at": "2024-10-26T14:45:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
-
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   },
   {
     "id": "3c4d5e6f-1a2b-9h8g-7i0j-6k5l4m3n2o3c",
@@ -45,12 +44,11 @@
       { "id": "g5h6i7j8", "name": "Website Redesign" }
     ],
     "tech_stacks": ["Figma", "Sketch", "Photoshop"],
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "created_at": "2024-10-25T08:20:00.000Z",
     "updated_at": "2024-10-25T08:20:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
-
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   },
   {
     "id": "4e5f6g7h-3c2b-1a0j-9k8l-7m6n5o4p3q4e",
@@ -63,12 +61,11 @@
       { "id": "l5m6n7o8", "name": "Market Analysis" }
     ],
     "tech_stacks": ["Python", "R", "Tableau"],
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "created_at": "2024-10-24T11:50:00.000Z",
     "updated_at": "2024-10-24T11:50:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
-
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   },
   {
     "id": "5f6g7h8i-4e3d-2b1c-9j0k-8l7m6n5o4p5f",
@@ -81,12 +78,11 @@
       { "id": "t5u6v7x8", "name": "Budget Analysis" }
     ],
     "tech_stacks": ["MS Project", "Jira", "Confluence"],
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "created_at": "2024-10-23T09:35:00.000Z",
     "updated_at": "2024-10-23T09:35:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
-
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   },
   {
     "id": "6h7i8j9k-5f4e-3d2c-1b0a-9l8m7n6o5p6h",
@@ -99,12 +95,11 @@
       { "id": "b5c6d7e8", "name": "Predictive Analysis" }
     ],
     "tech_stacks": ["Python", "TensorFlow", "Pandas"],
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "created_at": "2024-10-22T13:40:00.000Z",
     "updated_at": "2024-10-22T13:40:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
-
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   },
   {
     "id": "7j8k9l0m-6g5f-4e3d-2b1a-8n7o6p5q4r7k",
@@ -117,12 +112,11 @@
       { "id": "j5k4l3m2", "name": "Frontend Overhaul" }
     ],
     "tech_stacks": ["Node.js", "Express", "Vue.js"],
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "created_at": "2024-10-21T12:15:00.000Z",
     "updated_at": "2024-10-21T12:15:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
-
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   },
   {
     "id": "8k9l0m1n-7h6i-5j4g-3e2d-1b0a9l8o7p8n",
@@ -135,12 +129,11 @@
       { "id": "o5p6q7r8", "name": "Energy Study" }
     ],
     "tech_stacks": ["AutoCAD", "Matlab", "GIS"],
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "created_at": "2024-10-20T11:25:00.000Z",
     "updated_at": "2024-10-20T11:25:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
-
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   },
   {
     "id": "9l0m1n2o-8h7i-6j5g-4e3d-2b1a0k9l8m7n",
@@ -154,11 +147,10 @@
     ],
     "tech_stacks": ["SAS", "SPSS", "R"],
     "created_at": "2024-10-19T15:55:00.000Z",
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "updated_at": "2024-10-19T15:55:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
-
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   },
   {
     "id": "0m1n2o3p-4q5r-6s7t-8u9v-1w2x3y4z5a6b",
@@ -172,11 +164,10 @@
     ],
     "tech_stacks": ["CRM Software", "Excel", "WordPress"],
     "created_at": "2024-10-18T09:40:00.000Z",
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "updated_at": "2024-10-18T09:40:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
-
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   },
   {
     "id": "1n2o3p4q-5r6s-7t8u-9v0w-1x2y3z4a5b6c",
@@ -190,11 +181,10 @@
     ],
     "tech_stacks": ["PT Software", "Excel", "Social Media"],
     "created_at": "2024-10-17T16:30:00.000Z",
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "updated_at": "2024-10-17T16:30:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
-
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   },
   {
     "id": "2o3p4q5r-6s7t-8u9v-0w1x-2y3z4a5b6c7d",
@@ -208,11 +198,10 @@
     ],
     "tech_stacks": ["AutoCAD", "Revit", "Project Management Software"],
     "created_at": "2024-10-16T11:25:00.000Z",
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "updated_at": "2024-10-16T11:25:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
-
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   },
   {
     "id": "3p4q5r6s-7t8u-9v0w-1x2y-3z4a5b6c7d8e",
@@ -225,12 +214,11 @@
       { "id": "v5w6x7y8", "name": "SEO Strategy" }
     ],
     "tech_stacks": ["Google Analytics", "Hootsuite", "Mailchimp"],
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "created_at": "2024-10-15T13:40:00.000Z",
     "updated_at": "2024-10-15T13:40:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
-
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   },
   {
     "id": "4q5r6s7t-8u9v-0w1x-2y3z-4a5b6c7d8e9f",
@@ -243,11 +231,10 @@
       { "id": "j9k0l1m2", "name": "Sales Analysis" }
     ],
     "tech_stacks": ["Shopify", "Magento", "WooCommerce"],
-    "start_at":"2024-03-12T00:00:00Z",
-    "end_at":"2024-03-12T00:00:00Z",
+    "start_at": "2024-03-12T00:00:00Z",
+    "end_at": "2024-03-12T00:00:00Z",
     "created_at": "2024-10-14T11:00:00.000Z",
     "updated_at": "2024-10-14T11:00:00.000Z",
-    "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
-
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nihil adipisci aliquid et consequatur nobis aspernatur atque facere ab a!"
   }
 ]

@@ -3,16 +3,19 @@
 @font-face {
   font-family: 'Circle Of Love';
   src: url('../fonts/circle-of-love.ttf');
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Bubblegum Sans';
   src: url('../fonts/bubblegum-sans.ttf');
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Shaky Hand';
   src: url('../fonts/shaky-hand.otf');
+  font-display: swap;
 }
 
 @tailwind base;

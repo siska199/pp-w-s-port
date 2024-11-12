@@ -128,9 +128,9 @@ export interface TBaseModal {
 }
 
 export enum TTypeDateFormat {
-  "DD MONTH YEAR"="DD MONTH YEAR",
-  "DD-MM-YYYY" = 'DD-MM-YEAR',
-  "DD/MM/YYYY"="DD/MM/YYYY",
-  "hh:mm" ="hh:mm",
-  "ISO" = 'ISO'  
+  'DD MONTH YEAR' = 'DD MONTH YEAR',
+  'DD-MM-YYYY' = 'DD-MM-YEAR',
+  'DD/MM/YYYY' = 'DD/MM/YYYY',
+  'hh:mm' = 'hh:mm',
+  'ISO' = 'ISO'
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import SliderRelatedImageMenu from '@features/project/components/project-detail/menu-section/slider-related-image-menu'
 import { SwiperClass } from 'swiper/react'
 
+import SliderRelatedImageMenu from '@features/project/components/project-detail/menu-section/slider-related-image-menu'
 import ContainerSection from '@components/ui/container/container-section'
 import Image from '@components/ui/image'
 import SliderImage3D from '@components/ui/slider/slider-image-3d'

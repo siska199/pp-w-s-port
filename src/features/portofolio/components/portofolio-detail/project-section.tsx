@@ -53,7 +53,7 @@ interface TPropsCardProject {
   id: number
   title: string
   description: string
-  techStack: string[]
+  tech_stacks: string[]
   index: number
 }
 
@@ -94,7 +94,9 @@ const CardProject = (props: TPropsCardProject) => {
           illo, enim accusantium repellat?
         </p>
         <Container variant={'hsc'} className='!flex-wrap gap-3'>
-          {props?.techStack?.map((tect, i) => <Badge key={i} variant={'soft-gray'} label={tect} />)}
+          {props?.tech_stacks?.map((tect, i) => (
+            <Badge key={i} variant={'soft-gray'} label={tect} />
+          ))}
         </Container>
         <Button to={`/${routes.project?.child?.detail?.name}/${index}`} variant={'solid-black'}>
           View Project <IconArrowUp className='icon-white rotate-90 mt-1' />

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { handleSetAuth } from '@features/auth/store/auth-slice'
 
+import { handleSetAuth } from '@features/auth/store/auth-slice'
 import Logo from '@components/logo'
 import Avatar from '@components/ui/avatar'
 import DropdownBase, { TOptionDropdown } from '@components/ui/dropdown'

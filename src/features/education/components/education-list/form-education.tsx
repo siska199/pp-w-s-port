@@ -1,10 +1,10 @@
 import { useState } from 'react'
+
 import EVENT_EDUCATION from '@features/education/event-emitters/education-event'
 import educationSchema, {
   initialFormEducation,
   TEducationSchema
 } from '@features/education/validations/education-schema'
-
 import InputDate from '@components/ui/input/input-date'
 import InputSelect from '@components/ui/input/input-select'
 import InputTextEditor from '@components/ui/input/input-text-editor'

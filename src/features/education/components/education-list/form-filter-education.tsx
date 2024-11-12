@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { eventEmitter } from '@event-emitters'
-import EVENT_EDUCATION from '@features/education/event-emitters/education-event'
 
+import EVENT_EDUCATION from '@features/education/event-emitters/education-event'
 import InputBase from '@components/ui/input/input-base'
 import InputSelect from '@components/ui/input/input-select'
 

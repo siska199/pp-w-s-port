@@ -113,22 +113,22 @@ export const projects = [
   {
     id: 1,
     title: 'DevPort - Developer Portfolio Generator',
-    id_company : '123', 
-    company_name : 'PT Asuransi Astra',
-    category :'Web Application', 
-    type:'Company project',
+    id_company: '123',
+    company_name: 'PT Asuransi Astra',
+    category: 'Web Application',
+    type: 'Company project',
     description:
       'A web app that allows developers to showcase their projects, resumes, and work experiences in an organized manner. It provides recruiters with an intuitive way to search for candidates.',
     thumbnail: 'dummy-images/s-port.png',
-    tech_stacks: ['Next.js', 'TypeScript', 'Preline UI', 'NextAuth.js', 'Tailwind CSS'],
+    tech_stacks: ['Next.js', 'TypeScript', 'Preline UI', 'NextAuth.js', 'Tailwind CSS']
   },
   {
     id: 2,
     title: 'GOA - Garda Oto Akses',
-    id_company : '123', 
-    company_name : 'PT Asuransi Astra',
-    category :'Web Application', 
-    type:'Company project',
+    id_company: '123',
+    company_name: 'PT Asuransi Astra',
+    category: 'Web Application',
+    type: 'Company project',
     description:
       'Reengineered the GOA application, transforming it from .NET 4 to a modern React-based application with a focus on enhanced user experience and global state management.',
     thumbnail: 'dummy-images/goa.png',
@@ -137,10 +137,10 @@ export const projects = [
   {
     id: 3,
     title: 'Endcustomer Reseller Eiger',
-    id_company : '123', 
-    company_name : 'PT Asuransi Astra',
-    category :'Web Application', 
-    type:'Company project',
+    id_company: '123',
+    company_name: 'PT Asuransi Astra',
+    category: 'Web Application',
+    type: 'Company project',
     description:
       "An e-commerce platform for Eiger's resellers, enabling seamless catalog browsing, shopping cart management, and product customization using drag-and-drop features.",
     thumbnail: 'dummy-images/riang.png',
@@ -149,10 +149,10 @@ export const projects = [
   {
     id: 4,
     title: 'Quadra - Employee Management System',
-    id_company : '123', 
-    company_name : 'PT Asuransi Astra',
-    category :'Web Application', 
-    type:'Company project',
+    id_company: '123',
+    company_name: 'PT Asuransi Astra',
+    category: 'Web Application',
+    type: 'Company project',
     description:
       'An employee management system providing secure login, timesheet management, and authorization control. Developed with a full stack approach for efficient and automated workflows.',
     thumbnail: 'https://dummyimage.com/600x400/333/fff&text=Quadra',
@@ -169,10 +169,10 @@ export const projects = [
   {
     id: 5,
     title: 'iPast - Real-Time Asset Tracking',
-    id_company : '123', 
-    company_name : 'PT Asuransi Astra',
-    category :'Web Application', 
-    type:'Company project',
+    id_company: '123',
+    company_name: 'PT Asuransi Astra',
+    category: 'Web Application',
+    type: 'Company project',
     description:
       'A web app for real-time asset tracking, improving efficiency in managing the location and status of valuable company assets.',
     thumbnail: 'https://dummyimage.com/600x400/444/fff&text=iPast',
@@ -181,22 +181,22 @@ export const projects = [
   {
     id: 6,
     title: 'DevPort - Developer Portfolio Generator',
-    id_company : '123', 
-    company_name : 'PT Asuransi Astra',
-    category :'Web Application', 
-    type:'Company project',
+    id_company: '123',
+    company_name: 'PT Asuransi Astra',
+    category: 'Web Application',
+    type: 'Company project',
     description:
       'A web app that allows developers to showcase their projects, resumes, and work experiences in an organized manner. It provides recruiters with an intuitive way to search for candidates.',
     thumbnail: 'dummy-images/s-port.png',
-    tech_stacks: ['Next.js', 'TypeScript', 'Preline UI', 'NextAuth.js', 'Tailwind CSS'],
+    tech_stacks: ['Next.js', 'TypeScript', 'Preline UI', 'NextAuth.js', 'Tailwind CSS']
   },
   {
     id: 7,
     title: 'GOA - Garda Oto Akses',
-    id_company : '123', 
-    company_name : 'PT Asuransi Astra',
-    category :'Web Application', 
-    type:'Company project',
+    id_company: '123',
+    company_name: 'PT Asuransi Astra',
+    category: 'Web Application',
+    type: 'Company project',
     description:
       'Reengineered the GOA application, transforming it from .NET 4 to a modern React-based application with a focus on enhanced user experience and global state management.',
     thumbnail: 'dummy-images/goa.png',
@@ -205,10 +205,10 @@ export const projects = [
   {
     id: 8,
     title: 'Endcustomer Reseller Eiger',
-    id_company : '123', 
-    company_name : 'PT Asuransi Astra',
-    category :'Web Application', 
-    type:'Company project',
+    id_company: '123',
+    company_name: 'PT Asuransi Astra',
+    category: 'Web Application',
+    type: 'Company project',
     description:
       "An e-commerce platform for Eiger's resellers, enabling seamless catalog browsing, shopping cart management, and product customization using drag-and-drop features.",
     thumbnail: 'dummy-images/riang.png',
@@ -217,10 +217,10 @@ export const projects = [
   {
     id: 9,
     title: 'Quadra - Employee Management System',
-    id_company : '123', 
-    company_name : 'PT Asuransi Astra',
-    category :'Web Application', 
-    type:'Company project',
+    id_company: '123',
+    company_name: 'PT Asuransi Astra',
+    category: 'Web Application',
+    type: 'Company project',
     description:
       'An employee management system providing secure login, timesheet management, and authorization control. Developed with a full stack approach for efficient and automated workflows.',
     thumbnail: 'https://dummyimage.com/600x400/333/fff&text=Quadra',
@@ -237,15 +237,15 @@ export const projects = [
   {
     id: 10,
     title: 'iPast - Real-Time Asset Tracking',
-    id_company : '123', 
-    company_name : 'PT Asuransi Astra',
-    category :'Web Application', 
-    type:'Company project',
+    id_company: '123',
+    company_name: 'PT Asuransi Astra',
+    category: 'Web Application',
+    type: 'Company project',
     description:
       'A web app for real-time asset tracking, improving efficiency in managing the location and status of valuable company assets.',
     thumbnail: 'https://dummyimage.com/600x400/444/fff&text=iPast',
     tech_stacks: ['React', 'TypeScript', 'Formik', 'React-Hook-Form', 'Tailwind CSS', 'Node.js']
-  },
+  }
 ]
 
 export const skillCategories = [

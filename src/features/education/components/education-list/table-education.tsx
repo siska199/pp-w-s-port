@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { eventEmitter } from '@event-emitters'
-import EVENT_EDUCATION from '@features/education/event-emitters/education-event'
 
+import EVENT_EDUCATION from '@features/education/event-emitters/education-event'
 import Table from '@components/ui/table'
 
 import useEventEmitter from '@hooks/use-event-emitter'

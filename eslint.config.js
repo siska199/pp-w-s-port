@@ -37,7 +37,6 @@ export default tseslint.config(
       'react/prefer-stateless-function': 'error', // forbidden using class component
       'react/no-unused-prop-types': 'error', // forbidden to defint props that unused
 
-
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
       'simple-import-sort/imports': [
@@ -45,7 +44,7 @@ export default tseslint.config(
         {
           groups: [
             ['^react', '^@?\\w'],
-            ['^@pages','^@features', '^@components', '^@apis'],
+            ['^@pages', '^@features', '^@components', '^@apis'],
             ['^@hooks', '^@store', '^@context', '^@lib', '^@routes', '^@typescript', '^@assets'],
             ['^.+\\.?(css)$']
           ]

@@ -30,7 +30,7 @@ const menuSidebar = [
     src: 'sidebar/project.png',
     url: routes.project.fullPath,
     name: 'project'
-  },
+  }
 ]
 
 export default menuSidebar

@@ -15,4 +15,3 @@ export enum TTypeActionModalForm {
   EDIT = 'EDIT',
   ADD = 'ADD'
 }
-
