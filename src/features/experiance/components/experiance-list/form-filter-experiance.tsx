@@ -3,7 +3,7 @@ import { useState } from 'react'
 import InputBase from '@components/ui/input/input-base'
 import InputDate from '@components/ui/input/input-date'
 
-import { deepCopy } from '@lib/helper/function'
+import { deepCopy, generateMaxDateOneYear } from '@lib/helper/function'
 import { TEventOnChange } from '@typescript/ui-types'
 import { IconSearch } from '@assets/icons'
 
@@ -16,6 +16,9 @@ const FormFilterExperiance = () => {
     const name = e.target.name as keyof typeof form
     currForm[name].value = value
 
+    if (name === 'start_at') {
+      currForm['end_at'].value = null
+    }
     setForm({ ...currForm })
   }
 
@@ -30,7 +33,12 @@ const FormFilterExperiance = () => {
       />
       <div className='grid grid-cols-2 gap-4'>
         <InputDate {...form['start_at']} onChange={handleOnChange} />
-        <InputDate {...form['end_at']} onChange={handleOnChange} />
+        <InputDate
+          {...form['end_at']}
+          minDate={form['start_at'].value}
+          maxDate={generateMaxDateOneYear(form['start_at'].value)}
+          onChange={handleOnChange}
+        />
       </div>
     </div>
   )

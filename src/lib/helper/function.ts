@@ -268,12 +268,17 @@ export const deepCopy = <T extends object>(input: T): T => {
 }
 
 interface TFormatDate {
-  date: Date
-  format: TTypeDateFormat
+  date: Date | string | null
+  format?: TTypeDateFormat
   timeZone?: string
 }
 export const formatDate = (params: TFormatDate) => {
-  const { date, format, timeZone = 'UTC' } = params
+  const { format = TTypeDateFormat['DD/MM/YYYY'], timeZone = 'UTC' } = params
+  let { date } = params
+
+  if (!date) return null
+
+  date = new Date(date)
 
   if (format === TTypeDateFormat.ISO) return date?.toISOString()
 
@@ -303,4 +308,18 @@ export const formatDate = (params: TFormatDate) => {
   return format === TTypeDateFormat['DD-MM-YYYY']
     ? formattedDate.replace(/\//g, '-')
     : formattedDate
+}
+
+export const generateMaxDateOneYear = (date: string | Date | null): Date | null => {
+  if (!date) return null
+  const parseDate = new Date(date)
+  const maxDate = parseDate.setFullYear(parseDate.getFullYear() + 1)
+  return new Date(maxDate)
+}
+
+export const getRandomKey = <T extends object>(obj: T): keyof T => {
+  const keys = Object.keys(obj) as Array<keyof T>
+
+  const randomIndex = Math.floor(Math.random() * keys.length)
+  return keys[randomIndex]
 }

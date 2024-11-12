@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useRef, useState } from 'react'
+import { forwardRef, useCallback, useMemo, useRef, useState } from 'react'
 import DatePicker, { DatePickerProps } from 'react-datepicker'
 import clsx from 'clsx'
 import { format } from 'date-fns'
@@ -12,9 +12,13 @@ import { IconCalender, IconChevronLeft, IconChevronRight } from '@assets/icons'
 
 type TValueDate = [Date | null, Date | null] | Date | null
 
-interface TProps extends TBasePropsInput, Omit<DatePickerProps, 'onChange' | 'value'> {
+interface TProps
+  extends TBasePropsInput,
+    Omit<DatePickerProps, 'onChange' | 'value' | 'minDate' | 'maxDate'> {
   name: string
   value: TValueDate
+  minDate?: Date | null
+  maxDate?: Date | null
   onChange: (e: TCustomeEventOnChange<TValueDate>) => void
   placeholder?: string
   iconPosition?: 'start' | 'end'
@@ -22,7 +26,16 @@ interface TProps extends TBasePropsInput, Omit<DatePickerProps, 'onChange' | 'va
 
 const InputDate = (props: TProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const { name, value, iconPosition = 'start', placeholder, onChange, ...attrs } = props
+  const {
+    name,
+    value,
+    iconPosition = 'start',
+    placeholder,
+    onChange,
+    maxDate,
+    minDate,
+    ...attrs
+  } = props
 
   const [showTypeDate, setShowTypeDate] = useState<'date' | 'month' | 'year' | ''>('')
   const [isShouldCloseOnSelect, setIsShouldCloseOnSelect] = useState(true)
@@ -59,6 +72,14 @@ const InputDate = (props: TProps) => {
       Array.isArray(value) ? (value[index] ?? undefined) : (value ?? undefined),
     [value]
   )
+
+  const memoizedMinDate = useMemo(() => {
+    return minDate ?? undefined
+  }, [minDate])
+  const memoizedMaxDate = useMemo(() => {
+    return maxDate ?? undefined
+  }, [maxDate])
+
   return (
     <ContainerInput
       {...attrs}
@@ -75,6 +96,8 @@ const InputDate = (props: TProps) => {
           selected={date(0)}
           startDate={date(0)}
           endDate={date(1)}
+          minDate={memoizedMinDate}
+          maxDate={memoizedMaxDate}
           onChange={handleOnChange}
           nextMonthButtonLabel='>'
           previousMonthButtonLabel='<'
@@ -173,8 +196,6 @@ const InputDate = (props: TProps) => {
           onKeyDown={(e) => {
             e.preventDefault()
           }}
-          minDate={attrs.minDate}
-          maxDate={attrs.maxDate}
         />
       )}
     </ContainerInput>

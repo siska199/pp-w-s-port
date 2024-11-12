@@ -10,10 +10,11 @@ import useTable from '@hooks/use-table'
 import { useAppDispatch, useAppSelector } from '@store/store'
 import { handleSetModalConfirmation } from '@store/ui-slice'
 import experiances from '@lib/data/dummy/experiances.json'
-import { delay, formatDate } from '@lib/helper/function'
+import { delay, formatDate, getRandomKey } from '@lib/helper/function'
+import variantBadge from '@lib/helper/variant/variant-badge'
 import { routes } from '@routes/constant'
 import { TTypeActionModalForm } from '@typescript/global.d'
-import { TSettingTable, TTypeDateFormat } from '@typescript/ui-types'
+import { TSettingTable } from '@typescript/ui-types'
 
 type TData = (typeof experiances)[0]
 
@@ -39,19 +40,19 @@ const TableExperiance = () => {
         name: 'Start At',
         key: 'start_at',
         isSorted: true,
+        className: 'min-w-[8rem]',
         customeComponent: (data: TData) => {
-          console.log(new Date(data.start_at))
-          return (
-            <div>
-              {formatDate({ date: new Date(data.start_at), format: TTypeDateFormat['DD/MM/YYYY'] })}
-            </div>
-          )
+          return <div>{formatDate({ date: data.start_at })}</div>
         }
       },
       {
         name: 'End At',
         key: 'end_at',
-        isSorted: true
+        className: 'min-w-[8rem]',
+        isSorted: true,
+        customeComponent: (data: TData) => {
+          return <div>{formatDate({ date: data.start_at })}</div>
+        }
       },
       {
         name: 'Project',
@@ -59,28 +60,26 @@ const TableExperiance = () => {
         className: ' min-w-[15rem]',
         customeComponent: (data: TData) => {
           return (
-            <div className='flex flex-col gap-2'>
-              {data?.projects.map((project, i) => (
-                <Badge
-                  key={i}
-                  variant={'soft-gray'}
-                  label={project.name}
-                  className='text-start px-4'
-                />
-              ))}
-            </div>
+            <ul className='list-disc ml-5'>
+              {data?.projects?.map((project, i) => <li key={i}>{project?.name}</li>)}
+            </ul>
           )
         }
       },
       {
         name: 'Tech Stack',
         key: 'tech_stacks',
-        className: 'md:min-w-[10rem]',
+        className: 'md:min-w-[20rem]',
         customeComponent: (data: TData) => {
           return (
-            <div className='flex flex-col gap-2'>
+            <div className='flex gap-2'>
               {data?.tech_stacks.map((stack, i) => (
-                <Badge key={i} variant={'soft-gray'} label={stack} className='text-start px-4' />
+                <Badge
+                  key={i}
+                  variant={getRandomKey(variantBadge)}
+                  label={stack}
+                  className='text-start px-4'
+                />
               ))}
             </div>
           )
