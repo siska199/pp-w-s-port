@@ -67,6 +67,10 @@
 }
 
 @layer components {
+  /*->Custome padding th and td table*/
+  .p-th-td {
+    @apply p-[1rem];
+  }
   /*->Customize scrollbar */
   ::-webkit-scrollbar {
     @apply w-2 h-2;

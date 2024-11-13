@@ -13,4 +13,6 @@ const variantBadge = {
   'softborder-white': 'bg-white-50 text-white-700 border-white border'
 }
 
+export type TKeyVariantBadge = keyof typeof variantBadge
+
 export default variantBadge

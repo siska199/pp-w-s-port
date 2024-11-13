@@ -1,18 +1,22 @@
-import React, { useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import Badge from '@components/ui/badge'
 import Button from '@components/ui/button'
 import EmptyData from '@components/ui/empty-data'
 
+import useDebounce from '@hooks/use-debounce'
 import { cn } from '@lib/helper/function'
-import { TColumn, TSettingTable } from '@typescript/ui-types'
+import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge'
+import { TColumn, TEventOnChange, TSettingTable } from '@typescript/ui-types'
 import {
   IconArrowUp,
-  IconChevronLeft,
-  IconChevronRight,
   IconDelete,
   IconEdit,
   IconEye,
+  IconFastForward,
+  IconFastRewind,
+  IconSkipNext,
+  IconSkipPrevious,
   IconSort
 } from '@assets/icons'
 
@@ -38,32 +42,13 @@ export interface TTableProps<TData, TIncludeChecked extends boolean = false> {
 const Table = <TData, TIncludeChecked extends boolean = false>(
   props: TTableProps<TData, TIncludeChecked>
 ) => {
-  const { columns, isLoading, data, setting, onChange, withNo, actionBtn } = props
-
-  const handleSortColumn = (params: { key: keyof TData }) => {
-    const sortDir =
-      params?.key !== setting?.sortBy ? 'desc' : setting?.sortDir === 'desc' ? 'asc' : 'desc'
-    if (data?.length !== 0 && !isLoading) {
-      onChange({
-        ...setting,
-        sortBy: params.key,
-        sortDir: sortDir
-      })
-    }
-  }
+  const { data, setting, onChange, actionBtn, isLoading } = props
 
   const handleOnChangePage = (pageNumber: number) => {
     onChange({
       ...setting,
       currentPage: pageNumber
     })
-  }
-
-  const style = {
-    columnChecked: 'flex items-center justify-center py-2 px-4 ',
-    columnData: 'py-2 px-6 ',
-    columnNo: 'py-2 px-4 ',
-    iconAction: '!p-1 !min-h-auto !min-w-auto cursor-pointer-custome'
   }
 
   const isShowColumnAction = useMemo(
@@ -73,130 +58,198 @@ const Table = <TData, TIncludeChecked extends boolean = false>(
 
   return (
     <div className='border border-warning-100 rounded-lg w-full overflow-hidden'>
-      <div className='relative  overflow-y-auto   max-h-[30rem] '>
+      <div className='relative  overflow-y-auto max-h-[30rem] '>
         <table className={`table-auto  w-full ${data?.length === 0 && 'flex flex-col'}`}>
-          <thead className='sticky z-[2] top-0  text-warning-700 bg-warning-50 '>
-            <tr className='border-b border-warning-100'>
-              {withNo && <th className={`${style.columnNo}`}>No.</th>}
-              {columns?.map((column, i) => (
-                <th key={i}>
-                  <div
-                    className={`flex ${style.columnData}  items-center text-center ${column?.className}`}
-                  >
-                    {column?.name}
-                    {column?.isSorted && (
-                      <span
-                        onClick={() => handleSortColumn({ key: column.key })}
-                        className={`cursor-pointer ${
-                          (isLoading || data?.length === 0) && '!cursor-not-allowed'
-                        }`}
-                      >
-                        {setting?.sortBy === column?.key ? (
-                          <IconArrowUp
-                            className={cn({
-                              'icon-warning h-[1.25rem] transition-transform duration-300': true,
-                              'rotate-180':
-                                setting?.sortDir === 'desc' && setting?.sortBy === column?.key
-                            })}
-                          />
-                        ) : (
-                          <IconSort className='ml-1 w-[1.1rem] h-[1.1rem] icon-warning' />
-                        )}
-                      </span>
-                    )}
-                  </div>
-                </th>
-              ))}
-              {isShowColumnAction && (
-                <th>
-                  {' '}
-                  <div className='min-w-[5rem] flex justify-center items-center'>Action</div>
-                </th>
-              )}
-            </tr>
-          </thead>
-
-          {data?.length >= 0 && (
-            <tbody className={`text-gray `}>
-              {data?.map((dataRow, i) => {
-                return (
-                  <tr key={i} className='border-b border-warning-100'>
-                    {withNo && (
-                      <td className={`${style.columnNo}`}>
-                        {(setting?.currentPage - 1) * setting?.itemsPerPage + i + 1}
-                      </td>
-                    )}
-                    {columns?.map((column, j) => (
-                      <td key={j}>
-                        <div className={`flex ${style.columnData} ${column?.className}`}>
-                          {column?.customeComponent
-                            ? column?.customeComponent(dataRow)
-                            : (dataRow[column.key] as string)}
-                        </div>
-                      </td>
-                    ))}
-                    {isShowColumnAction && (
-                      <td>
-                        <div className='min-w-[5rem] flex justify-center items-center gap-2 pr-2'>
-                          {actionBtn?.view && (
-                            <Badge
-                              variant={'softborder-blue'}
-                              label={<IconEye className='icon-blue' />}
-                              shape={'pilled'}
-                              className={style.iconAction}
-                              onClick={() => actionBtn?.view && actionBtn?.view(dataRow)}
-                            />
-                          )}
-                          {actionBtn?.edit && (
-                            <Badge
-                              variant={'softborder-warning'}
-                              label={<IconEdit className='icon-warning' />}
-                              shape={'pilled'}
-                              className={style.iconAction}
-                              onClick={() => actionBtn?.edit && actionBtn?.edit(dataRow)}
-                            />
-                          )}
-                          {actionBtn?.delete && (
-                            <Badge
-                              variant={'softborder-warning'}
-                              label={<IconDelete className='icon-error' />}
-                              shape={'pilled'}
-                              className={style.iconAction}
-                              onClick={() => actionBtn?.delete && actionBtn?.delete(dataRow)}
-                            />
-                          )}
-                        </div>
-                      </td>
-                    )}
-                  </tr>
-                )
-              })}
-            </tbody>
-          )}
+          <TableHeader {...props} isShowColumnAction={Boolean(isShowColumnAction)} />
+          <TableBody {...props} isShowColumnAction={Boolean(isShowColumnAction)} />
+          <EmptyStageTable dataLength={data?.length} isLoading={Boolean(isLoading)} />
         </table>
+      </div>
+      <PaginationTable<TData, TIncludeChecked>
+        setting={setting}
+        onChangePage={handleOnChangePage}
+        dataLength={data.length}
+      />
+    </div>
+  )
+}
 
-        {data?.length === 0 && (
-          <div className='w-full h-[20rem] flex items-center justify-center'>
-            {isLoading ? (
-              'Loading...'
-            ) : (
-              <EmptyData
-                customeClass={{
-                  container: 'w-full !border-none',
-                  img: 'h-[5rem]'
-                }}
-              />
+type TTableHeaderProps<TData, TIncludeChecked extends boolean = false> = Omit<
+  TTableProps<TData, TIncludeChecked>,
+  ''
+> & {
+  isShowColumnAction?: boolean
+}
+
+const TableHeader = <TData, TIncludeChecked extends boolean = false>(
+  props: TTableHeaderProps<TData, TIncludeChecked>
+) => {
+  const { withNo, columns, setting, isLoading, data, onChange, isShowColumnAction } = props
+
+  const handleSortColumn = useCallback(
+    ({ key }: { key: keyof TData }) => {
+      const sortDir =
+        key !== setting?.sortBy ? 'desc' : setting?.sortDir === 'desc' ? 'asc' : 'desc'
+      if (data?.length && !isLoading) {
+        onChange({
+          ...setting,
+          sortBy: key,
+          sortDir
+        })
+      }
+    },
+    [data?.length, isLoading, onChange, setting]
+  )
+
+  const IconSorted = useCallback(
+    (column: TColumn<TData, keyof TData>) => (
+      <span
+        onClick={() => handleSortColumn({ key: column.key })}
+        className={`cursor-pointer ${(isLoading || data?.length === 0) && '!cursor-not-allowed'}`}
+      >
+        {setting?.sortBy === column.key ? (
+          <IconArrowUp
+            className={cn({
+              'icon-warning h-[1.25rem] transition-transform duration-300': true,
+              'rotate-180': setting?.sortDir === 'desc' && setting?.sortBy === column.key
+            })}
+          />
+        ) : (
+          <IconSort className='ml-1 w-[1.1rem] h-[1.1rem] icon-warning' />
+        )}
+      </span>
+    ),
+    [handleSortColumn, isLoading, data?.length, setting]
+  )
+
+  return (
+    <thead className='sticky z-[2] top-0 text-warning-700 bg-warning-50'>
+      <tr className='border-b border-warning-100'>
+        {withNo && <th className='p-th-td'>No.</th>}
+        {columns?.map((column, i) => (
+          <th key={i}>
+            <div className={`flex p-th-td items-center text-center ${column?.className}`}>
+              {column?.name}
+              {column?.isSorted && IconSorted(column)}
+            </div>
+          </th>
+        ))}
+        {isShowColumnAction && (
+          <th className='p-th-td'>
+            <div className='min-w-[5rem] flex justify-center items-center'>Action</div>
+          </th>
+        )}
+      </tr>
+    </thead>
+  )
+}
+
+type TTableBodyProps<TData, TIncludeChecked extends boolean = false> = Omit<
+  TTableProps<TData, TIncludeChecked>,
+  'isLoading'
+> & {
+  isShowColumnAction?: boolean
+}
+
+const TableBody = <TData, TIncludeChecked extends boolean = false>(
+  props: TTableBodyProps<TData, TIncludeChecked>
+) => {
+  const { data, columns, withNo, setting, actionBtn = {}, isShowColumnAction } = props
+
+  const renderActionButtons = useCallback(
+    (dataRow: TData) => {
+      return Object.entries(actionBtn).map(([key, onClick]) => {
+        let Icon = <IconEye className='icon-blue' />
+        let variant: TKeyVariantBadge = 'softborder-blue'
+
+        switch (key) {
+          case 'edit':
+            Icon = <IconEdit className='icon-warning' />
+            variant = 'softborder-warning'
+            break
+          case 'delete':
+            Icon = <IconDelete className='icon-error' />
+            variant = 'softborder-error'
+            break
+          default:
+            break
+        }
+
+        return (
+          <Badge
+            key={key}
+            variant={variant}
+            label={Icon}
+            shape='pilled'
+            className='!p-1 !min-h-auto !min-w-auto cursor-pointer-custome'
+            onClick={() => onClick(dataRow)}
+          />
+        )
+      })
+    },
+    [actionBtn]
+  )
+
+  if (data.length === 0) return null
+
+  return (
+    <tbody>
+      {data?.map((dataRow, i) => {
+        return (
+          <tr key={i} className='border-b border-warning-100'>
+            {withNo && (
+              <td className={`p-th-td `}>
+                {(setting?.currentPage - 1) * setting?.itemsPerPage + i + 1}
+              </td>
             )}
-          </div>
+
+            {columns?.map((column, j) => (
+              <td key={j}>
+                <div className={`flex p-th-td  ${column?.className}`}>
+                  {column?.customeComponent
+                    ? column?.customeComponent(dataRow)
+                    : (dataRow[column.key] as string)}
+                </div>
+              </td>
+            ))}
+
+            {isShowColumnAction && (
+              <td>
+                <div className='min-w-[5rem] flex justify-center items-center gap-2 pr-2'>
+                  {renderActionButtons(dataRow)}
+                </div>
+              </td>
+            )}
+          </tr>
+        )
+      })}
+    </tbody>
+  )
+}
+
+interface TPropsEmptyStageTable {
+  isLoading: boolean
+  dataLength: number
+}
+
+const EmptyStageTable = (props: TPropsEmptyStageTable) => {
+  const { isLoading, dataLength } = props
+
+  return (
+    dataLength === 0 && (
+      <div className='w-full h-[20rem] flex items-center justify-center'>
+        {isLoading ? (
+          'Loading...'
+        ) : (
+          <EmptyData
+            customeClass={{
+              container: 'w-full !border-none',
+              img: 'h-[5rem]'
+            }}
+          />
         )}
       </div>
-      {setting?.pagination && data?.length !== 0 && (
-        <PaginationTable<TData, TIncludeChecked>
-          setting={setting}
-          onChangePage={handleOnChangePage}
-        />
-      )}
-    </div>
+    )
   )
 }
 
@@ -205,106 +258,89 @@ type TPropsPagination<TData, TIncludeChecked extends boolean> = Pick<
   'setting'
 > & {
   onChangePage: (params: any) => void
+  dataLength: number
 }
 
 const PaginationTable = <TData, TIncludeChecked extends boolean>(
   props: TPropsPagination<TData, TIncludeChecked>
 ) => {
-  const { setting, onChangePage: handleOnChangePage } = props
+  const { setting, onChangePage: handleOnChangePage, dataLength } = props
+  const iShowpPagination = setting.pagination && dataLength > 0
+  const [valuePage, setValuePage] = useState(setting.currentPage)
+  const debounceValue = useDebounce({ value: valuePage, delay: 500 })
 
-  const pageNumbers = React.useMemo(
-    () => Array.from({ length: setting.totalPage }, (_, index) => index + 1),
-    [setting.totalPage]
+  useEffect(() => {
+    handleOnChangePage(valuePage)
+  }, [debounceValue])
+
+  const listBtn = useMemo(
+    () => [
+      [
+        {
+          icon: <IconFastRewind />,
+          onClick: () => handleOnChangePage(1)
+        },
+        {
+          icon: <IconSkipPrevious />,
+          onClick: () => handleOnChangePage(setting.currentPage - 1)
+        }
+      ],
+      [
+        {
+          icon: <IconSkipNext />,
+          onClick: () => handleOnChangePage(setting.currentPage + 1)
+        },
+        {
+          icon: <IconFastForward />,
+          onClick: () => handleOnChangePage(setting.totalPage)
+        }
+      ]
+    ],
+    [JSON.stringify(setting)]
   )
-  const currentPage = setting?.currentPage
 
-  const [listPageNumberStart, listPageNumberEnd] = React.useMemo(() => {
-    if (setting?.totalPage <= 6) return [pageNumbers, []]
-
-    const adjacentPageCount = 1
-    let startIndex = currentPage - adjacentPageCount - 1
-    let endIndex = currentPage + adjacentPageCount
-
-    if (startIndex < 0) {
-      startIndex = 0
-      endIndex = Math.min(3, setting?.totalPage)
-    } else if (endIndex == pageNumbers.length - 2) {
-      startIndex -= 1
-      endIndex -= 1
-    } else if (endIndex >= pageNumbers?.length - 1) {
-      startIndex = 0
-      endIndex = 3
-    }
-
-    const startPages = pageNumbers.slice(startIndex, endIndex)
-    const endPages = pageNumbers.slice(setting?.totalPage - 3, setting?.totalPage)
-
-    return [startPages, endPages]
-  }, [setting.totalPage, currentPage, pageNumbers])
-
-  const ButtonPageNumber = (pageNumber: number) => (
-    <Button
-      onClick={() => handleOnChangePage(pageNumber)}
-      variant={'plain'}
-      className={cn({
-        'w-[2.5rem] h-[2.5rem]': true,
-        '!bg-gray-100 font-bold': pageNumber === currentPage
-      })}
-    >
-      {pageNumber}
-    </Button>
-  )
+  const handleOnChange = (e: TEventOnChange) => {
+    setValuePage(e.target.value)
+  }
 
   return (
-    <div className='flex items-center justify-between px-4 py-2 border-t'>
-      <Button
-        variant={'solid-white'}
-        disabled={currentPage <= 1}
-        onClick={() => handleOnChangePage(setting?.currentPage - 1)}
-        className='font-medium text-gray'
-      >
-        <>
-          <IconChevronLeft />
-          <span className='hidden md:block'>Previous</span>
-        </>
-      </Button>
-
-      <div className='items-center hidden md:flex'>
-        {setting?.totalPage > 6 ? (
-          <div className='flex items-center gap-1'>
-            {listPageNumberStart.map((pageNumber, i) => (
-              <span key={i}>{ButtonPageNumber(pageNumber)}</span>
-            ))}
-            {listPageNumberEnd[0] - listPageNumberStart[listPageNumberStart?.length - 1] !== 1 && (
-              <div>...</div>
-            )}
-            {listPageNumberEnd?.map((pageNumber, i) => (
-              <span key={i}>{ButtonPageNumber(pageNumber)}</span>
-            ))}
+    iShowpPagination && (
+      <div className='flex w-full justify-end px-4 py-2'>
+        <div className=' flex border rounded-md overflow-hidden'>
+          {listBtn[0]?.map((btn, i) => (
+            <Button
+              key={i}
+              onClick={btn.onClick}
+              variant='no-style'
+              className='rounded-none !border-r h-full'
+              disabled={setting.currentPage == 1}
+            >
+              {btn.icon}
+            </Button>
+          ))}
+          <div className='px-2 py-1 !border-r flex items-center justify-center gap-2'>
+            <input
+              value={valuePage}
+              onChange={handleOnChange}
+              className='outline-none w-10 text-center focus:border-primary border  p-0 rounded-md'
+            />
+            <span>of {setting.currentPage}</span>
           </div>
-        ) : (
-          pageNumbers.map((pageNumber, i) => <span key={i}>{ButtonPageNumber(pageNumber)}</span>)
-        )}
-      </div>
-      <div className='md:hidden'>
-        <p>
-          <span className='font-medium'>{setting?.currentPage} </span>of{' '}
-          <span className='font-medium'>{setting.totalPage}</span>
-        </p>
-      </div>
 
-      <Button
-        disabled={setting?.currentPage >= setting?.totalPage}
-        onClick={() => handleOnChangePage(setting?.currentPage + 1)}
-        variant={'solid-white'}
-        className='font-medium text-gray'
-      >
-        <>
-          <span className='hidden md:block'>Next</span>
-          <IconChevronRight />
-        </>
-      </Button>
-    </div>
+          {listBtn[1]?.map((btn, i) => (
+            <Button
+              key={i}
+              onClick={btn.onClick}
+              variant='no-style'
+              className='rounded-none !border-r h-full'
+              disabled={setting.currentPage == setting.totalPage}
+            >
+              {btn.icon}
+            </Button>
+          ))}
+        </div>
+      </div>
+    )
   )
 }
 
