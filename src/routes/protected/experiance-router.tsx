@@ -1,7 +1,6 @@
 import { RouteObject } from 'react-router-dom'
 
-import { ExperianceListPage } from '@pages'
-import ExperianceDetailPage from '@pages/experiance/experiace-detail/experiance-detail'
+import { ExperianceDetailPage, ExperianceListPage } from '@pages'
 import LazyLoad from '@components/ui/lazy-load'
 
 import { routes } from '@routes/constant'

@@ -69,31 +69,33 @@ const InputUploadFile = (props: TPropsInputUploadFile) => {
         value: isValidFile ? file : null
       }
     })
-    isValidFile && setErrorMessageDynamic('')
   }
 
   const handleValidationInputFile = (file: File): boolean => {
-    let isValid = true
+    const totalSize = convertBytesToMegabytes(file.size)
 
-    const totalSize: number = convertBytesToMegabytes(file?.size)
     if (totalSize > totalMaxSize) {
       setErrorMessageDynamic(messageError.maxSizeFile)
       return false
     }
 
-    isValid = handleValidateType({
-      file,
-      listAcceptedType: listAcceptedTypeFile
-    })
-    return isValid
+    if (!handleValidateType({ file, listAcceptedTypeFile })) {
+      setErrorMessageDynamic(messageError.fileType(listAcceptedTypeFile))
+      return false
+    }
+
+    setErrorMessageDynamic('')
+    return true
   }
 
   const handleOnDownloadFile = () => {
-    attrsInput?.value &&
+    const file = attrsInput?.value as TFileWithPreview | undefined
+    if (file?.preview && file?.name) {
       handleDownloadFile({
-        url: (attrsInput?.value as TFileWithPreview)?.preview as string,
-        filename: attrsInput?.value?.name as string
+        url: file.preview,
+        filename: file.name
       })
+    }
   }
 
   return (

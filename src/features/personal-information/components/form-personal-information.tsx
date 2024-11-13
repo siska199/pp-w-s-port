@@ -69,7 +69,6 @@ const FormPersonlaInformation = () => {
     if (['id_city', 'id_province', 'id_district']?.includes(name)) {
       form['id_city'].disabled = !currForm.id_province.value
       form['id_district'].disabled = !currForm.id_city.value
-      form['id_postal_code'].disabled = !currForm.id_district.value
     }
 
     setForm({

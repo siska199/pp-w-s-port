@@ -1,7 +1,7 @@
 import { RouteObject } from 'react-router-dom'
 
 import { SkillListPage } from '@pages'
-import SkillDetailPage from '@pages/skill/skill-detail/skill-detail'
+import SkillDetailPage from '@features/skill/pages/skill-detail/skill-detail'
 import LazyLoad from '@components/ui/lazy-load'
 
 import { routes } from '@routes/constant'

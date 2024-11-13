@@ -21,7 +21,6 @@ export interface TPropsInput<TInput> extends TBasePropsInput {
     input?: boolean
   }
   onCustomeClearHandler?: () => void
-  customeClearValue?: string
   maxLength?: number
 }
 
@@ -30,7 +29,6 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
     name,
     children,
     onCustomeClearHandler,
-    customeClearValue,
     isNotUsingDefaultStyle,
     childrenOverlay,
     label,
@@ -114,7 +112,7 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
               )}
             </div>
 
-            {isClerable && !isEmptyValue(customeClearValue) && (
+            {isClerable && !isEmptyValue(value) && (
               <IconClose className='cursor-pointer' onClick={handleOnClearValue} />
             )}
 

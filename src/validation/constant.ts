@@ -13,7 +13,7 @@ export const messageError = {
   url: 'Please enter a valid URL. Ensure it starts with http:// or https://',
   maxSizeFile: 'File upload cancelled due to size limit exceeded.',
   fileType: (fileTypes: TTypeFile[]) => {
-    const updateFileType = fileTypes?.join(',')
+    const updateFileType = fileTypes?.join(', ')
     return `Please upload the correct type file : ${updateFileType}`
   },
   phoneNumberFormat: 'Phone Number should be in 08XXXXXXXXXX format',

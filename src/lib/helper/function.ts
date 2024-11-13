@@ -87,13 +87,13 @@ export const handleGetFileTypeFromName = (name: string) => {
   return `.${type?.toLowerCase()}`
 }
 
-export const handleValidateType = (params: { file: File; listAcceptedType: TTypeFile[] }) => {
-  const { file, listAcceptedType } = params
+export const handleValidateType = (params: { file: File; listAcceptedTypeFile: TTypeFile[] }) => {
+  const { file, listAcceptedTypeFile } = params
   const type = handleGetFileTypeFromName(file?.name) as TTypeFile
 
-  const isAllTypeAllow = listAcceptedType?.includes(TTypeFile.ALL)
-  const isAllImageTypeAllow = listAcceptedType?.includes(TTypeFile.IMAGE_ALL)
-  const isTypeAllow = isAllTypeAllow || listAcceptedType?.includes(type) || isAllImageTypeAllow
+  const isAllTypeAllow = listAcceptedTypeFile?.includes(TTypeFile.ALL)
+  const isAllImageTypeAllow = listAcceptedTypeFile?.includes(TTypeFile.IMAGE_ALL)
+  const isTypeAllow = isAllTypeAllow || listAcceptedTypeFile?.includes(type) || isAllImageTypeAllow
 
   return isTypeAllow
 }
@@ -171,10 +171,12 @@ export const generateOptions = (params: {
 }
 
 export const generateOptionsFromEnum = (enumObject: TObject): TOption<string>[] => {
-  return Object?.keys(enumObject)?.map((key) => ({
-    label: enumObject[key],
-    value: enumObject[key]
-  }))
+  return Object?.keys(enumObject)?.map((key) => {
+    return {
+      label: toCapitalize(enumObject[key]?.replace(/_/g, ' ')),
+      value: enumObject[key]
+    }
+  })
 }
 
 export const generateFileFromUrl = async (url: string) => {
@@ -322,4 +324,11 @@ export const getRandomKey = <T extends object>(obj: T): keyof T => {
 
   const randomIndex = Math.floor(Math.random() * keys.length)
   return keys[randomIndex]
+}
+
+export const toCapitalize = (str: string) => {
+  return str
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1)?.toLowerCase())
+    .join(' ')
 }

@@ -20,7 +20,7 @@ const personalInformationSchema = z
     about_me: zString({ name: 'About Me', max: 1000 }),
     professional_image: zFileLocale({
       name: 'Professional Image',
-      listAcceptedType: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG]
+      listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG]
     })
   })
   ?.strict()
@@ -101,7 +101,8 @@ export const initialFormPersonalInformation = {
   professional_image: {
     name: 'professional_image',
     label: 'Professional Image',
-    value: null
+    value: null,
+    listAcceptedType: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG]
   }
 }
 

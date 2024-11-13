@@ -18,27 +18,27 @@ export const initialFormExperiance = {
   id_company: {
     name: 'id_company',
     label: 'Company',
-    placeholder: appMessage.inputSelectPlaceholder('company'),
+    placeholder: appMessage.selectInputPlaceolder('company'),
     options: [],
     value: ''
   },
   id_profession: {
     name: 'profession',
     label: 'Profession',
-    placeholder: appMessage.inputSelectPlaceholder('profession'),
+    placeholder: appMessage.selectInputPlaceolder('profession'),
     options: [],
     value: ''
   },
   start_at: {
     name: 'start_at',
     label: 'Start At',
-    placeholder: 'Select a Start At',
+    placeholder: appMessage.selectInputPlaceolder('start at date'),
     value: null
   },
   end_at: {
     name: 'end_at',
     label: 'End At',
-    placeholder: 'Select a End At',
+    placeholder: appMessage.selectInputPlaceolder('end at date'),
     value: null
   },
   description: {

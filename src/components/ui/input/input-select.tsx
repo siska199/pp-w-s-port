@@ -112,6 +112,7 @@ const InputSelect = (props: TPropsInputSelect) => {
           }) as string[])
       setSearchQuery('')
     } else {
+      setSearchQuery(data?.label)
       setIsOpen(false)
     }
     attrs?.onChange({
@@ -128,6 +129,15 @@ const InputSelect = (props: TPropsInputSelect) => {
     e?.stopPropagation()
     setIsSearch(true)
     setSearchQuery(e.target.value)
+
+    if (!isMultiple && attrs.value) {
+      attrs?.onChange({
+        target: {
+          name: attrs?.name,
+          value: ''
+        }
+      })
+    }
   }
 
   const handleOnClearValue = () => {
@@ -202,7 +212,7 @@ const InputSelect = (props: TPropsInputSelect) => {
       {...attrs}
       isClerable
       onCustomeClearHandler={handleOnClearValue}
-      customeClearValue={isMultiple ? searchQuery : String(attrs?.value ?? '') || searchQuery}
+      value={searchQuery}
       customeElement={{
         ...attrs?.customeElement,
         end: (

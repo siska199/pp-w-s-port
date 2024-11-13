@@ -117,20 +117,20 @@ export const zEnum = <TEnum extends [string, ...string[]]>(params: {
 export const zFileLocale = (params: {
   name: string
   size?: number
-  listAcceptedType: TTypeFile[]
+  listAcceptedTypeFile: TTypeFile[]
   mandatory?: boolean
 }): z.ZodType<File | null | undefined> => {
-  const { size = 5, listAcceptedType, mandatory = true } = params
+  const { size = 5, listAcceptedTypeFile, mandatory = true } = params
   const fileSchema = z
     .instanceof(File, { message: 'File is required' })
-    ?.refine((file) => file.size > size * 1024 * 1024, messageError.fileType(listAcceptedType))
+    ?.refine((file) => file.size > size * 1024 * 1024, messageError.fileType(listAcceptedTypeFile))
     .refine((file) => {
       const isValid = handleValidateType({
         file,
-        listAcceptedType
+        listAcceptedTypeFile
       })
       return isValid
-    }, messageError.fileType(listAcceptedType))
+    }, messageError.fileType(listAcceptedTypeFile))
 
   return mandatory ? fileSchema : fileSchema?.optional()?.nullable()
 }

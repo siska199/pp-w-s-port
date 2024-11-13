@@ -31,15 +31,16 @@ const TableProject = () => {
         className: ' md:min-w-0'
       },
       {
-        name: 'Company',
-        key: 'company_name',
-        isSorted: true
-      },
-      {
         name: 'Category',
         key: 'category',
         isSorted: true
       },
+      {
+        name: 'Company',
+        key: 'company_name',
+        isSorted: true
+      },
+
       {
         name: 'Type',
         key: 'type',
