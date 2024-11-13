@@ -12,10 +12,13 @@ const menuProjectSchema = z.object({
   related_images: z
     .array(zFileLocale({ name: 'Related Images', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL] }))
     .nonempty({ message: 'At least one related image is required' })
-    .max(5, { message: 'A maximum of 5 images are allowed' })
+    .max(5, { message: 'A maximum of 5 images are allowed' }),
+  tech_tacks: zString({ name: 'Tech Stacks', max: 5000 })
 })
 
-export type TMenuProject = z.input<typeof menuProjectSchema>
+export type TMenuProject = z.input<typeof menuProjectSchema> & {
+  id: string
+}
 
 export const initialFormMenuProject = {
   name: {
@@ -37,6 +40,7 @@ export const initialFormMenuProject = {
     rows: 5,
     placeholder: 'Write a description about your menu project'
   },
+
   features: {
     name: 'features',
     label: 'Features',

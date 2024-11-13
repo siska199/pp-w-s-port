@@ -1,7 +1,11 @@
 import { zEnum, zFileLocale, zString } from '@validation/reusable-schema'
 import { z } from 'zod'
 
-import { optionsCategoryProject, optionsTypeProject } from '@features/project/constants'
+import {
+  optionsCategoryProject,
+  optionsTechStack,
+  optionsTypeProject
+} from '@features/project/constants'
 
 import appMessage from '@lib/data/app-message'
 import { TTypeFile } from '@typescript/ui-types'
@@ -35,6 +39,13 @@ export const initialFormProject = {
     options: optionsCategoryProject,
     placeholder: appMessage.selectInputPlaceolder('category'),
     label: 'Category'
+  },
+  tech_stacks: {
+    label: 'Tech Stacks',
+    placeholder: 'e.g React, Node js, Golang',
+    name: 'tech_stacks',
+    options: optionsTechStack,
+    value: []
   },
   type: {
     name: 'type',

@@ -104,7 +104,7 @@ interface TParamsDownloadFile {
 }
 export const handleDownloadFile = (params: TParamsDownloadFile) => {
   const { url, filename } = params
-  
+
   const anchor = document.createElement('a')
   anchor.href = url
   anchor.download = filename || 'file'

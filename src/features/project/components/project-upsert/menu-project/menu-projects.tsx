@@ -1,8 +1,9 @@
 import { useMemo } from 'react'
 import { eventEmitter } from '@event-emitters'
 
-import { listMenuProject } from '@features/project/constants'
 import EVENT_PROJECT from '@features/project/event-emitters/project-event'
+import useMenuProject from '@features/project/hooks/use-menu-project'
+import { TMenuProject } from '@features/project/validation/menu-project-schema'
 import Badge from '@components/ui/badge'
 import Header from '@components/ui/header/header'
 import Image from '@components/ui/image'
@@ -12,6 +13,8 @@ import { TTypeActionModalForm } from '@typescript/global.d'
 import { IconDelete, IconEdit } from '@assets/icons'
 
 const MenuProjects = () => {
+  const { listMenuProject } = useMenuProject()
+
   const handleOnClickAddData = () => {
     eventEmitter.emit(EVENT_PROJECT.SET_MODAL_FORM_MENU_PROJECT, {
       isShow: true,
@@ -19,28 +22,18 @@ const MenuProjects = () => {
     })
   }
   return (
-    <>
-      <div className='space-y-8'>
-        <Header title='Menu Project' onClickAddData={handleOnClickAddData} />
-        <div className='md:w-[50%] space-y-4'>
-          {listMenuProject?.map((menuProject) => (
-            <CardMenuProject key={menuProject.id} {...menuProject} />
-          ))}
-        </div>
+    <div className='space-y-10'>
+      <Header title='Menu Project' onClickAddData={handleOnClickAddData} />
+      <div className='md:w-[50%] space-y-4'>
+        {listMenuProject?.map((menuProject) => (
+          <CardMenuProject key={menuProject.id} {...menuProject} />
+        ))}
       </div>
-    </>
+    </div>
   )
 }
 
-interface TPropsCardMenuProject {
-  id: string
-  name: string
-  description: string
-  main_image?: string
-  features?: string
-}
-
-const CardMenuProject = (props: TPropsCardMenuProject) => {
+const CardMenuProject = (props: TMenuProject) => {
   const { name, id, description, main_image, features } = props
 
   const handleEditProject = (id: string) => {
@@ -80,7 +73,7 @@ const CardMenuProject = (props: TPropsCardMenuProject) => {
         ))}
       </div>
       <h4 className='text-body-large text-normal'>{name}</h4>
-      {main_image && <Image src={main_image} className='w-[5rem] aspect-video' />}
+      {main_image && <Image src={main_image.preview ?? ''} className='w-[5rem] aspect-video' />}
       <p className='line-clamp-2 '>{description}</p>
       <div>
         <h5 className='text-body-base font-medium'>Features : </h5>

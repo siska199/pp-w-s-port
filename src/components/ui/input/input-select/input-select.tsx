@@ -37,7 +37,6 @@ interface MultipleSelectProps
 
 const InputSelect = (props: TPropsInputSelect) => {
   const { options, isMultiple, withSelectAll, onLoadMore, ...attrs } = props
-
   const refContainerDropdown = useRef<HTMLDivElement | null>(null)
   const refContainerValue = useRef<HTMLDivElement | null>(null)
   const refIconChevron = useRef<HTMLDivElement | null>(null)
@@ -100,7 +99,7 @@ const InputSelect = (props: TPropsInputSelect) => {
   ) => {
     e?.stopPropagation()
     let valueUpdates: string[] | string = data?.value
-
+    console.log(data)
     if (isMultiple && Array.isArray(attrs?.value)) {
       const isSelected = attrs?.value?.some((singleValue) => singleValue === data?.value)
       valueUpdates = isSelected

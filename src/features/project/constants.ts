@@ -6,7 +6,7 @@ export const optionsCategoryProject = generateOptionsFromEnum(TTypeCategoryProje
 
 export const optionsTypeProject = generateOptionsFromEnum(TTypeTypeProject)
 
-export const listMenuProject = [
+export const listMenuProjectDummy = [
   {
     id: '1',
     name: 'Menu Login',
@@ -71,5 +71,85 @@ export const listMenuProject = [
     description: 'Logout from the application securely.',
     main_image: '',
     features: `<ul><li>Logout</li><li>Redirect to login screen</li><li>Session management</li></ul>`
+  }
+]
+
+export const optionsTechStack = [
+  {
+    label: 'Github',
+    value: JSON.stringify({
+      name: 'Github',
+      src: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original-wordmark.svg'
+    })
+  },
+  {
+    label: 'React',
+    value: JSON.stringify({
+      name: 'React',
+      src: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg'
+    })
+  },
+  {
+    label: 'JavaScript',
+    value: JSON.stringify({
+      name: 'JavaScript',
+      src: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg'
+    })
+  },
+  {
+    label: 'HTML',
+    value: JSON.stringify({
+      name: 'HTML',
+      src: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg'
+    })
+  },
+  {
+    label: 'CSS',
+    value: JSON.stringify({
+      name: 'CSS',
+      src: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg'
+    })
+  },
+  {
+    label: 'TypeScript',
+    value: JSON.stringify({
+      name: 'TypeScript',
+      src: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg'
+    })
+  },
+  {
+    label: 'Redux',
+    value: JSON.stringify({
+      name: 'Redux',
+      src: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg'
+    })
+  },
+  {
+    label: 'Next.js',
+    value: JSON.stringify({
+      name: 'Next.js',
+      src: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original-wordmark.svg'
+    })
+  },
+  {
+    label: 'Vue.js',
+    value: JSON.stringify({
+      name: 'Vue.js',
+      src: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original-wordmark.svg'
+    })
+  },
+  {
+    label: 'Angular',
+    value: JSON.stringify({
+      name: 'Angular',
+      src: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/angularjs/angularjs-original.svg'
+    })
+  },
+  {
+    label: 'Tailwind CSS',
+    value: JSON.stringify({
+      name: 'Tailwind CSS',
+      src: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-plain.svg'
+    })
   }
 ]

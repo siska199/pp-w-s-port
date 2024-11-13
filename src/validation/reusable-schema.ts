@@ -1,6 +1,8 @@
 import { messageError, regexValidation } from '@validation/constant'
 import z, { ZodEffects, ZodNumber, ZodString } from 'zod'
 
+import { TFileValue } from '@components/ui/input/input-file/input-file-v1'
+
 import { formatDate, isValidTypeFile } from '@lib/helper/function'
 import { TTypeDateFormat, TTypeFile } from '@typescript/ui-types'
 
@@ -119,7 +121,7 @@ export const zFileLocale = (params: {
   size?: number
   listAcceptedTypeFile: TTypeFile[]
   mandatory?: boolean
-}): z.ZodType<File> => {
+}): z.ZodType<TFileValue> => {
   const { size = 5, listAcceptedTypeFile, mandatory = true } = params
   const fileSchema = z
     .instanceof(File, { message: 'File is required' })

@@ -15,3 +15,9 @@ export enum TTypeActionModalForm {
   EDIT = 'EDIT',
   ADD = 'ADD'
 }
+
+export enum TTypeActionData {
+  EDIT = 'EDIT',
+  ADD = 'ADD',
+  DELETE = 'DELETE'
+}
