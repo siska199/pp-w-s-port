@@ -119,7 +119,7 @@ export const zFileLocale = (params: {
   size?: number
   listAcceptedTypeFile: TTypeFile[]
   mandatory?: boolean
-}): z.ZodType<File | null | undefined> => {
+}): z.ZodType<File> => {
   const { size = 5, listAcceptedTypeFile, mandatory = true } = params
   const fileSchema = z
     .instanceof(File, { message: 'File is required' })
@@ -132,7 +132,7 @@ export const zFileLocale = (params: {
       return isValid
     }, messageError.fileType(listAcceptedTypeFile))
 
-  return mandatory ? fileSchema : fileSchema?.optional()?.nullable()
+  return (mandatory ? fileSchema : fileSchema?.optional()?.nullable()) as z.ZodType<File>
 }
 
 export const zLink = (params: { mandatory?: boolean }) => {

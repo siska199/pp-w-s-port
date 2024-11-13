@@ -1,3 +1,5 @@
+import { TTypeFile } from '@typescript/ui-types'
+
 export const basicToolbarConfig = {
   options: ['list', 'inline', 'colorPicker'],
   list: {
@@ -7,6 +9,8 @@ export const basicToolbarConfig = {
     options: ['bold', 'underline', 'italic']
   }
 }
+
+export const defaultTTypeImage = [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG]
 
 export const navigationSliderClass = {
   nextEl: '.swiper-button-next',

@@ -6,9 +6,9 @@ import personalInformationSchema, {
 } from '@features/personal-information/validations/personal-information-schema'
 import Button from '@components/ui/button'
 import InputBase from '@components/ui/input/input-base'
+import InputUploadFile from '@components/ui/input/input-file/input-file-v1'
 import InputSelect from '@components/ui/input/input-select/input-select'
 import InputTextArea from '@components/ui/input/input-text-area'
-import InputUploadFile from '@components/ui/input/input-file/input-file-v1'
 import useGeneralAPI from '@apis/use-general-api'
 
 import { deepCopy, fetchOptions, mappingErrorsToForm } from '@lib/helper/function'

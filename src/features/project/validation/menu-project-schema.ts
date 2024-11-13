@@ -1,6 +1,7 @@
 import { zFileLocale, zString } from '@validation/reusable-schema'
 import { z } from 'zod'
 
+import { defaultTTypeImage } from '@lib/helper/constant'
 import { TTypeFile } from '@typescript/ui-types'
 
 const menuProjectSchema = z.object({
@@ -22,6 +23,25 @@ export const initialFormMenuProject = {
     label: 'Name',
     placeholder: 'e.g Login',
     value: ''
+  },
+  main_image: {
+    name: 'main_image',
+    label: 'Main Image',
+    value: null,
+    listAcceptedTypeFile: defaultTTypeImage
+  },
+  description: {
+    name: 'description',
+    label: 'Desription',
+    value: '',
+    rows: 5,
+    placeholder: 'Write a description about your menu project'
+  },
+  features: {
+    name: 'features',
+    label: 'Features',
+    value: '',
+    placeholder: 'List the features of your menu project'
   },
   related_images: {
     name: 'related_images',

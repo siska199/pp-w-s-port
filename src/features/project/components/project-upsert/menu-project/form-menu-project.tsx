@@ -4,7 +4,10 @@ import educationSchema, { TEducationSchema } from '@features/education/validatio
 import EVENT_PROJECT from '@features/project/event-emitters/project-event'
 import { initialFormMenuProject } from '@features/project/validation/menu-project-schema'
 import InputBase from '@components/ui/input/input-base'
+import InputFileV1 from '@components/ui/input/input-file/input-file-v1'
 import InputFileV2 from '@components/ui/input/input-file/input-file-v2'
+import InputTextArea from '@components/ui/input/input-text-area'
+import InputTextEditor from '@components/ui/input/input-text-editor'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
 import useEventEmitter from '@hooks/use-event-emitter'
@@ -73,6 +76,9 @@ const FormMenuProject = () => {
       onSubmit={handleOnSubmit}
     >
       <InputBase {...form['name']} onChange={handleOnChange} />
+      <InputFileV1 {...form['main_image']} onChange={handleOnChange} />
+      <InputTextArea {...form['description']} onChange={handleOnChange} />
+      <InputTextEditor {...form['features']} onChange={handleOnChange} />
       <InputFileV2 {...form['related_images']} onChange={handleOnChange} />
     </ContainerModalForm>
   )
