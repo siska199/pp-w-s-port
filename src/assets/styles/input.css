@@ -166,7 +166,7 @@ input[type='radio']:disabled {
 }
 
 .react-datepicker__day {
-  @apply mb-1 w-8 h-8 flex items-center justify-center py-1 text-body-small leading-loose transition text-gray-700 rounded;
+  @apply hover:!bg-gray-200 mb-1 w-8 h-8 flex items-center justify-center py-1 text-body-small leading-loose transition text-gray-700 rounded;
 }
 
 .react-datepicker__day--disabled {
