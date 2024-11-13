@@ -7,11 +7,10 @@ import InputMultipleCheckbox from '@components/ui/input/input-multiple-checkbox'
 
 import useOnClickOutside from '@hooks/use-on-click-outside'
 import { debounce, getFieldLabelFromOptions, spreadArrayAttemp } from '@lib/helper/function'
+import { isEmptyValue } from '@lib/helper/function'
 import { TBasePropsInput, TCustomeEventOnChange, TOption } from '@typescript/ui-types'
 import { IconClose } from '@assets/icons'
 import IconChevronToggle from '@assets/icons/icon-chevron-down'
-
-import { isEmptyValue } from '../../../lib/helper/function'
 
 export type TPropsInputSelect = {
   name: string
@@ -233,7 +232,7 @@ const InputSelect = (props: TPropsInputSelect) => {
         <div
           ref={refContainerDropdown}
           className={clsx({
-            'absolute   z-10 mt-0 origin-bottom-right rounded-md bg-white  ring-1 ring-black ring-opacity-5 focus:outline-none':
+            'absolute  overflow-hidden z-10 mt-0 origin-bottom-right rounded-md bg-white  ring-1 ring-black ring-opacity-5 focus:outline-none':
               true,
             ' h-auto shadow-lg w-full': isOpen,
             ' h-0 shadow-none': !isOpen
@@ -270,7 +269,7 @@ const InputSelect = (props: TPropsInputSelect) => {
                         handleOnClickOption(e, option)
                       }
                       className={clsx({
-                        'hover:bg-gray-100 block px-4 py-2 cursor-pointer ': true,
+                        'hover:bg-gray-100 block px-4 py-2 cursor-pointer  ': true,
                         '!bg-primary-50 text-primary-700 ': isSelected,
                         '!bg-gray-100': (isSearch && i === 0 && searchQuery) || activeIndex - 1 == i
                       })}

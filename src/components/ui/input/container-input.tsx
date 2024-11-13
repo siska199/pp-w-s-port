@@ -74,15 +74,11 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
           children
         ) : (
           <div
-            className={cn({
-              'bg-white flex flex-nowrap items-center gap-2 text-body-base border border-input rounded-lg  w-full ':
-                true,
-              [`${customeClass?.ciV2}`]: customeClass?.ciV2,
-              '!bg-disabled !border': disabled,
-              'focus-within:ring-primary-200 focus-within:border-primary': !errorMessage,
-              'border-error focus-within:!ring-error-200 focus-within:!border-error': errorMessage,
-              'px-3 py-2': !customeElement?.preStart && !customeElement?.preEnd,
-              'overflow-hidden': customeElement?.preStart || customeElement?.preEnd
+            className={classNameCIV2({
+              ciV2: customeClass?.ciV2,
+              ...customeElement,
+              errorMessage,
+              disabled
             })}
           >
             <CustomeElement elmn1={customeElement?.preStart} elmn2={customeElement?.start} />
@@ -92,12 +88,10 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
                 <>
                   {children({
                     ...(attrsInput as TInput),
-                    className: cn({
-                      'peer w-full shrink !outline-none border-none focus:border-none focus:ring-0 p-0 text-body-base placeholder:text-gray-400':
-                        !isNotUsingDefaultStyle?.input,
-                      'px-4': customeElement?.preEnd,
-                      'pr-4 pl-1': customeElement?.preStart,
-                      [customeClass?.input || '']: customeClass?.input
+                    className: classNameInput({
+                      customeClassInput: customeClass?.input,
+                      ...customeElement,
+                      isNotUsingDefaultStyleInput: isNotUsingDefaultStyle?.input
                     }),
                     name,
                     type: dynamicType,
@@ -176,4 +170,49 @@ const Label = (props: TPropsLabel) => {
   )
 }
 
+interface TClassNameCIV2 {
+  ciV2: string
+  preStart: React.ReactNode
+  preEnd: React.ReactNode
+  errorMessage: string
+  disabled: boolean
+}
+const classNameCIV2 = ({
+  ciV2,
+  preStart,
+  preEnd,
+  errorMessage,
+  disabled
+}: Partial<TClassNameCIV2>) =>
+  cn({
+    'bg-white flex flex-nowrap items-center gap-2 text-body-base border border-input rounded-lg  w-full ':
+      true,
+    [`${ciV2}`]: ciV2,
+    '!bg-disabled !border': disabled,
+    'focus-within:ring-primary-200 focus-within:border-primary': !errorMessage,
+    'border-error focus-within:!ring-error-200 focus-within:!border-error': errorMessage,
+    'px-3 py-2': !preStart && !preEnd,
+    'overflow-hidden': preStart || preEnd
+  })
+
+interface TClassNameInput {
+  preStart: React.ReactNode
+  preEnd: React.ReactNode
+  isNotUsingDefaultStyleInput: boolean
+  customeClassInput: string
+}
+
+const classNameInput = ({
+  preEnd,
+  preStart,
+  isNotUsingDefaultStyleInput,
+  customeClassInput
+}: Partial<TClassNameInput>) =>
+  cn({
+    'peer w-full shrink !outline-none border-none focus:border-none focus:ring-0 p-0 text-body-base placeholder:text-gray-400':
+      !isNotUsingDefaultStyleInput,
+    'px-4': preEnd,
+    'pr-4 pl-1': preStart,
+    [customeClassInput || '']: customeClassInput
+  })
 export default ContainerInput

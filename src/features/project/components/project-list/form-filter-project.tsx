@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import InputBase from '@components/ui/input/input-base'
-import InputSelect from '@components/ui/input/input-select'
+import InputSelect from '@components/ui/input/input-select/input-select'
 
 import { deepCopy } from '@lib/helper/function'
 import { TEventOnChange } from '@typescript/ui-types'

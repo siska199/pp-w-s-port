@@ -11,14 +11,14 @@ import {
   convertBytesToMegabytes,
   getGeneralTypeFile,
   handleDownloadFile,
-  handleValidateType
+  isValidTypeFile
 } from '@lib/helper/function'
 import { TBasePropsInput, TCustomeEventOnChange, TTypeFile } from '@typescript/ui-types'
 import { IconCamera } from '@assets/icons'
 
 type TFileWithPreview = File & { preview?: string }
 export type TFileValue = TFileWithPreview | null
-export interface TPropsInputUploadFile
+export interface TPropsInputFileV1
   extends Omit<TBasePropsInput, 'variant'>,
     Omit<Partial<React.HTMLProps<HTMLInputElement>>, 'value' | 'onChange'> {
   name: string
@@ -29,7 +29,7 @@ export interface TPropsInputUploadFile
   variant?: 'change-profile' | 'general'
 }
 
-const InputUploadFile = (props: TPropsInputUploadFile) => {
+const InputFileV1 = (props: TPropsInputFileV1) => {
   const {
     listAcceptedTypeFile = [TTypeFile.ALL],
     totalMaxSize = 5,
@@ -58,7 +58,7 @@ const InputUploadFile = (props: TPropsInputUploadFile) => {
     inputFileRef?.current?.click()
   }
 
-  const handleUpdateOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target?.files?.[0] as TFileWithPreview
     const isValidFile = handleValidationInputFile(file)
     file.preview = URL.createObjectURL(file)
@@ -79,7 +79,7 @@ const InputUploadFile = (props: TPropsInputUploadFile) => {
       return false
     }
 
-    if (!handleValidateType({ file, listAcceptedTypeFile })) {
+    if (!isValidTypeFile({ file, listAcceptedTypeFile })) {
       setErrorMessageDynamic(messageError.fileType(listAcceptedTypeFile))
       return false
     }
@@ -167,7 +167,7 @@ const InputUploadFile = (props: TPropsInputUploadFile) => {
         accept={acceptedFile}
         value={''}
         multiple={false}
-        onChange={(e) => handleUpdateOnChange(e)}
+        onChange={(e) => handleOnChange(e)}
       />
     </ContainerInput>
   )
@@ -202,4 +202,4 @@ const Thumbnail = (props: TPropsThumbnail) => {
   )
 }
 
-export default InputUploadFile
+export default InputFileV1

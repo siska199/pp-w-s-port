@@ -1,7 +1,7 @@
 import { messageError, regexValidation } from '@validation/constant'
 import z, { ZodEffects, ZodNumber, ZodString } from 'zod'
 
-import { formatDate, handleValidateType } from '@lib/helper/function'
+import { formatDate, isValidTypeFile } from '@lib/helper/function'
 import { TTypeDateFormat, TTypeFile } from '@typescript/ui-types'
 
 export const zString = (params: {
@@ -125,7 +125,7 @@ export const zFileLocale = (params: {
     .instanceof(File, { message: 'File is required' })
     ?.refine((file) => file.size > size * 1024 * 1024, messageError.fileType(listAcceptedTypeFile))
     .refine((file) => {
-      const isValid = handleValidateType({
+      const isValid = isValidTypeFile({
         file,
         listAcceptedTypeFile
       })

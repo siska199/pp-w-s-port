@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { eventEmitter } from '@event-emitters'
 
 import EVENT_SOCIAL_LINK from '@features/personal-information/event-emitters/social-link-event'
-import InputSelect from '@components/ui/input/input-select'
+import InputSelect from '@components/ui/input/input-select/input-select'
 
 import { categoriesSocialLink } from '@lib/data/dummy/dummy'
 import { TEventOnChange } from '@typescript/ui-types'

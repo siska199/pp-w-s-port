@@ -87,7 +87,7 @@ export const handleGetFileTypeFromName = (name: string) => {
   return `.${type?.toLowerCase()}`
 }
 
-export const handleValidateType = (params: { file: File; listAcceptedTypeFile: TTypeFile[] }) => {
+export const isValidTypeFile = (params: { file: File; listAcceptedTypeFile: TTypeFile[] }) => {
   const { file, listAcceptedTypeFile } = params
   const type = handleGetFileTypeFromName(file?.name) as TTypeFile
 
@@ -104,6 +104,7 @@ interface TParamsDownloadFile {
 }
 export const handleDownloadFile = (params: TParamsDownloadFile) => {
   const { url, filename } = params
+  
   const anchor = document.createElement('a')
   anchor.href = url
   anchor.download = filename || 'file'

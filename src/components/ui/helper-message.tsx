@@ -8,7 +8,7 @@ interface TProps extends HTMLAttributes<HTMLParagraphElement> {
 }
 const HelperMessage = (props: TProps) => {
   const { message, variant, className, ...attrs } = props
-  if (message) return null
+  if (!message) return null
   return (
     <div
       className={cn({

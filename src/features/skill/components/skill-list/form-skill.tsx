@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import EVENT_SKILL from '@features/skill/event-emitters/skill-event'
 import skillSchema, { initialFormSkill, TSkill } from '@features/skill/validation/skill-schema'
-import InputSelect from '@components/ui/input/input-select'
+import InputSelect from '@components/ui/input/input-select/input-select'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
 import useEventEmitter from '@hooks/use-event-emitter'
