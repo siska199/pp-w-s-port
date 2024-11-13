@@ -7,12 +7,12 @@ import experianceSchema, {
 } from '@features/experiance/validation/experiance-schema'
 import InputDate from '@components/ui/input/input-date'
 import InputSelect from '@components/ui/input/input-select'
-import InputTextArea from '@components/ui/input/input-text-area'
+import InputTextEditor from '@components/ui/input/input-text-editor'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function'
-import { TTypeActionModalForm } from '@typescript/global'
+import { TTypeActionModalForm } from '@typescript/global.d'
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types'
 
 const FormExperiance = () => {
@@ -64,11 +64,10 @@ const FormExperiance = () => {
 
   return (
     <ContainerModalForm
-      moduleName={'Skill'}
-      action={modalForm.action}
-      isShow={modalForm.isShow}
+      moduleName={'Experiance'}
+      {...modalForm}
       onClose={handleCloseFormExperiance}
-      customeClass={{ mdBody: 'md:min-w-[32rem]' }}
+      customeClass={{ mdBody: 'md:min-w-[38rem]' }}
       onSubmit={handleOnSubmit}
     >
       <div className='grid md:grid-cols-2 gap-4'>
@@ -79,7 +78,7 @@ const FormExperiance = () => {
         <InputDate {...form['start_at']} onChange={handleOnChange} />
         <InputDate {...form['end_at']} onChange={handleOnChange} />
       </div>
-      <InputTextArea {...form['description']} onChange={handleOnChange} rows={5} />
+      <InputTextEditor {...form['description']} onChange={handleOnChange} />
     </ContainerModalForm>
   )
 }

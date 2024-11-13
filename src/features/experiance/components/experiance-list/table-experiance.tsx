@@ -72,13 +72,13 @@ const TableExperiance = () => {
         className: 'md:min-w-[20rem]',
         customeComponent: (data: TData) => {
           return (
-            <div className='flex gap-2'>
+            <div className='gap-2 flex flex-wrap'>
               {data?.tech_stacks.map((stack, i) => (
                 <Badge
                   key={i}
                   variant={getRandomKey(variantBadge)}
                   label={stack}
-                  className='text-start px-4'
+                  className=' px-4 min-w-[5rem]'
                 />
               ))}
             </div>

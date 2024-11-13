@@ -5,6 +5,7 @@ import draftToHtml from 'draftjs-to-html'
 
 import ContainerInput from '@components/ui/input/container-input'
 
+import { basicToolbarConfig } from '@lib/helper/constant'
 import { isHtmlHasText } from '@lib/helper/function'
 import { TBasePropsInput, TCustomeEventOnChange } from '@typescript/ui-types'
 
@@ -17,7 +18,15 @@ interface TProps extends TBasePropsInput, Omit<EditorProps, 'onChange'> {
 }
 
 const InputTextEditor = (props: TProps) => {
-  const { value, onChange, name, editorClassName, wrapperClassName, ...attrs } = props
+  const {
+    value,
+    onChange,
+    name,
+    editorClassName,
+    wrapperClassName,
+    toolbar = basicToolbarConfig,
+    ...attrs
+  } = props
   const [editorState, setEditorState] = useState(
     EditorState.createWithContent(ContentState.createFromText(value))
   )
@@ -46,6 +55,7 @@ const InputTextEditor = (props: TProps) => {
         onEditorStateChange={handleOnChangeEditorState}
         editorClassName={`px-2 ${editorClassName}`}
         wrapperClassName={`min-h-[10rem] ${wrapperClassName}`}
+        toolbar={toolbar}
         {...attrs}
         placeholder={!value && currentBlockType == 'unstyled' ? attrs?.placeholder : ''}
       />

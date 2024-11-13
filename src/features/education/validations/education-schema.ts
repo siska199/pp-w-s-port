@@ -1,8 +1,6 @@
 import { zDate, zString } from '@validation/reusable-schema'
 import z from 'zod'
 
-import { basicToolbarConfig } from '@lib/helper/constant'
-
 const educationSchema = z.object({
   id_level: zString({ name: 'Level' }),
   id_major: zString({ name: 'Major' }),
@@ -58,8 +56,7 @@ export const initialFormEducation = {
     label: 'Description',
     placeholder: 'Enter a brief description of your education or experience',
     value: '',
-    errorMessage: '',
-    toolbar: basicToolbarConfig
+    errorMessage: ''
   }
 }
 

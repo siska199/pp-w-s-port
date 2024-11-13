@@ -5,7 +5,7 @@ const variant = {
   'solid-error': 'bg-error border-error text-white',
   'solid-black': 'bg-black border-black text-white',
   'solid-gray': 'bg-gray border-gray text-white',
-  'solid-white': 'bg-white border text-black ',
+  'solid-white': 'bg-white border !text-black ',
   'solid-blue': 'bg-blue border-blue text-white ',
 
   'soft-primary': 'bg-primary-100 text-primary-700',
@@ -25,7 +25,7 @@ const variant = {
   'outline-error': 'text-error border-error border bg-transparent',
   'outline-black': 'text-black border-black border bg-transparent',
   'outline-gray': 'text-gray border-gray border bg-transparent',
-  'outline-white': 'text-white border-white border bg-transparent'
+  'outline-white': 'text-black border-white border bg-transparent'
 }
 
 export default variant

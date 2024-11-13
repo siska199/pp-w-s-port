@@ -22,7 +22,7 @@ const Badge = (props: TProps) => {
 }
 
 const badgeVariants = cva(
-  'w-fit font-medium bg-white h-fit text-white flex-inline gap-1 text-center font-medium rounded items-center justify-center',
+  'w-fit font-medium  h-fit  flex-inline gap-1 text-center font-medium rounded items-center justify-center',
   {
     variants: {
       variant: variantBadge,

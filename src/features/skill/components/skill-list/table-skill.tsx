@@ -76,7 +76,7 @@ const TableSkill = () => {
                   key={i}
                   variant={'soft-gray'}
                   label={project.name}
-                  className='text-start px-4'
+                  className='text-start px-4 '
                 />
               ))}
             </div>

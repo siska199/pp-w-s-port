@@ -32,11 +32,13 @@ export const initialFormExperiance = {
   start_at: {
     name: 'start_at',
     label: 'Start At',
+    placeholder: 'Select a Start At',
     value: null
   },
   end_at: {
     name: 'end_at',
     label: 'End At',
+    placeholder: 'Select a End At',
     value: null
   },
   description: {
