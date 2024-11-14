@@ -29,21 +29,21 @@ const ContainerModalForm = (props: TProps) => {
           </div>
         </>
       }
-      customeClass={{
-        mdModal: `overflow-visible ${customeClass?.mdModal}`,
-        mdContent: `overflow-visible  ${customeClass?.mdContent}`,
-        mdBody: `overflow-y-auto overflow-visible px-0 pb-2 ${customeClass?.mdBody}`
-      }}
-      {...attrs}
-    >
-      <form onSubmit={onSubmit} autoComplete='off' className='overflow-y-auto px-4'>
-        <div className='space-y-4 w-full mx-auto  '>{children}</div>
-      </form>
-      <div className=''>
+      footer={
         <Button type='submit' className='ml-auto' onClick={onSubmit}>
           Save
         </Button>
-      </div>
+      }
+      customeClass={{
+        mdModal: `overflow-visible ${customeClass?.mdModal}`,
+        mdContent: `overflow-visible  ${customeClass?.mdContent}`,
+        mdBody: ` ${customeClass?.mdBody}`
+      }}
+      {...attrs}
+    >
+      <form onSubmit={onSubmit} autoComplete='off' className=' w-full space-y-4 h-full mx-auto '>
+        {children}
+      </form>
     </ContainerModal>
   )
 }

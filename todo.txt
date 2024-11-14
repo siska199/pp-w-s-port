@@ -1,0 +1,2 @@
+- Create preview component for image, pdf and etc
+- Create progress step horizontal and vertical clean version

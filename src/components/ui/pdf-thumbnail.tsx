@@ -1,18 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
-import { Document, DocumentProps, Page, pdfjs } from 'react-pdf'
-
-import 'react-pdf/dist/Page/AnnotationLayer.css'
-
-pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js'
+import { Document, DocumentProps, Page } from 'react-pdf'
 
 interface TProps extends DocumentProps {
   customeClass?: {
     container: string
   }
+  onClick?: () => void
 }
 
 const PDFThumbnail = (props: TProps) => {
-  const { ...attrsDocument } = props
+  const { onClick, ...attrsDocument } = props
   const [containerSize, setContainerSize] = useState({ width: 0 })
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -30,14 +27,11 @@ const PDFThumbnail = (props: TProps) => {
     <div
       className={`border overflow-hidden flex items-center justify-center ${props.customeClass?.container || ''}`}
       ref={containerRef}
+      onClick={onClick}
     >
       {containerSize.width > 0 && (
         <Document {...attrsDocument}>
-          <Page
-            pageNumber={1}
-            width={containerSize.width} // Only set the width to ensure the page scales proportionally
-            renderTextLayer={false}
-          />
+          <Page pageNumber={1} width={containerSize.width} renderTextLayer={false} />
         </Document>
       )}
     </div>

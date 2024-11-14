@@ -14,7 +14,7 @@
   -ms-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
   max-width: 95vw;
-  max-height: 95vh;
+  max-height: 100vh;
   overflow: hidden;
 }
 .md-fadein-scaleup.md-modal,

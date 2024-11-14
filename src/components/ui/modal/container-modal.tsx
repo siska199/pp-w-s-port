@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 
 import Button from '@components/ui/button'
@@ -9,16 +9,18 @@ import { IconClose } from '@assets/icons'
 
 export interface TContainerModalProps extends TBaseModal, VariantProps<typeof modalVariants> {
   customeClass?: {
+    mdOverlay?: string
     mdModal?: string
     mdContent?: string
     mdBody?: string
     mdHeader?: string
-    mdOverlay?: string
+    mdFooter?: string
     btnClose?: {
       container?: string
       icon?: string
     }
   }
+  footer?: React.ReactNode
 }
 
 const ContainerModal = (props: TContainerModalProps) => {
@@ -28,7 +30,8 @@ const ContainerModal = (props: TContainerModalProps) => {
     title,
     onClose: handleOnClose,
     children,
-    variant = 'fadein-scaleup'
+    variant = 'fadein-scaleup',
+    footer
   } = props
 
   const handleStopPropagation = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -46,17 +49,17 @@ const ContainerModal = (props: TContainerModalProps) => {
         className={cn(
           modalVariants({
             variant,
-            className: `md-modal  ${isShow && 'md-show flex'} ${customeClass?.mdModal}`
+            className: `md-modal p-0 px-4 ${isShow && 'md-show flex'} ${customeClass?.mdModal}`
           })
         )}
       >
         <div
-          className={`md-content bg-white bottom-0 relative flex flex-col gap-4  w-full ${customeClass?.mdContent}`}
+          className={`md-content max-h-[95vh] bg-white relative flex flex-col gap-4 w-full ${customeClass?.mdContent}`}
           onClick={handleStopPropagation}
         >
           {title && (
             <div
-              className={`md-header border-b p-4 font-bold text-gray-900 text-body-large ${customeClass?.mdHeader}`}
+              className={`md-header border-b p-4 !pt-2 font-bold text-gray-900 text-body-large ${customeClass?.mdHeader}`}
             >
               {title}
             </div>
@@ -72,10 +75,11 @@ const ContainerModal = (props: TContainerModalProps) => {
           </Button>
           <div
             ref={bodyRef}
-            className={`max-h-[90vh] flex flex-col space-y-4 px-4 pb-4 ${customeClass?.mdBody}`}
+            className={`overflow-y-scroll  flex flex-col space-y-4 px-4 ${customeClass?.mdBody}`}
           >
             {children}
           </div>
+          {footer && <div className={`${customeClass?.mdFooter}`}>{footer}</div>}
         </div>
       </div>
 

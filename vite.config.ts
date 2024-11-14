@@ -17,6 +17,7 @@ export default defineConfig({
     global: 'window'
   },
   server: {
+    open: true,
     port: 5173,
     host: true,
     watch: {

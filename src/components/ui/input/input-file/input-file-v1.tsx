@@ -6,6 +6,7 @@ import Button from '@components/ui/button'
 import Image from '@components/ui/image'
 import ContainerInput from '@components/ui/input/container-input'
 import PDFThumbnail from '@components/ui/pdf-thumbnail'
+import ModalPreviewPDF from '@components/ui/preview-file/modal-preview-pdf'
 
 import {
   convertBytesToMegabytes,
@@ -41,7 +42,6 @@ const InputFileV1 = (props: TPropsInputFileV1) => {
   } = props
 
   const inputFileRef = useRef<HTMLInputElement | null>(null)
-
   const [acceptedFile, setAcceptedFile] = useState('')
   const [errorMessageDynamic, setErrorMessageDynamic] = useState('')
 
@@ -99,77 +99,79 @@ const InputFileV1 = (props: TPropsInputFileV1) => {
   }
 
   return (
-    <ContainerInput<React.HTMLProps<HTMLInputElement>>
-      {...attrsInput}
-      customeClass={{
-        ...attrsInput.customeClass,
-        ciV2: '!border-none !p-0'
-      }}
-      errorMessage={errorMessageDynamic}
-      isClerable={false}
-    >
-      {variant === 'change-profile' && (
-        <Avatar
-          size={'large'}
-          src={(attrsInput?.value as TFileWithPreview)?.preview || ''}
-          customeIcon={
-            <IconCamera className='icon-primary-fill' onClick={(e) => handleOnClickInput(e)} />
-          }
-        />
-      )}
+    <>
+      <ContainerInput<React.HTMLProps<HTMLInputElement>>
+        {...attrsInput}
+        customeClass={{
+          ...attrsInput.customeClass,
+          ciV2: '!border-none !p-0'
+        }}
+        errorMessage={errorMessageDynamic}
+        isClerable={false}
+      >
+        {variant === 'change-profile' && (
+          <Avatar
+            size={'large'}
+            src={(attrsInput?.value as TFileWithPreview)?.preview || ''}
+            customeIcon={
+              <IconCamera className='icon-primary-fill' onClick={(e) => handleOnClickInput(e)} />
+            }
+          />
+        )}
 
-      {variant === 'general' && (
-        <div className='flex gap-4 '>
-          {attrsInput.value ? (
-            <Thumbnail file={attrsInput.value} />
-          ) : (
-            <Image
-              className={`self-center !h-[7rem] !w-[7rem] border ${
-                errorMessageDynamic && '!border-error'
-              }`}
-              width={500}
-              height={500}
-              src={'placeholder-image.png'}
-              alt='Initial Image'
-            />
-          )}
-
-          <div className='space-y-3 my-auto'>
-            <p className='font-italic'>
-              Please upload a file (Max size: {totalMaxSize}MB, Formats:{' '}
-              {listAcceptedTypeFile?.includes(TTypeFile.ALL)
-                ? 'All files'
-                : listAcceptedTypeFile?.join(', ')}
-              )
-            </p>
-            <div className='flex gap-2'>
-              <Button variant={'outline-primary'} onClick={handleOnClickInput}>
-                Choose File
-              </Button>
-              <span
-                className={`my-auto text-gray ${
-                  attrsInput?.value && 'cursor-pointer hover:underline'
+        {variant === 'general' && (
+          <div className='flex gap-4 '>
+            {attrsInput.value ? (
+              <Thumbnail file={attrsInput.value} />
+            ) : (
+              <Image
+                className={`self-center h-[clamp(7rem,7rem,7rem)]  w-[clamp(7rem,7rem,7rem)] flex-shrink-0 border ${
+                  errorMessageDynamic && '!border-error'
                 }`}
-                onClick={handleOnDownloadFile}
-              >
-                {attrsInput?.value?.name ?? 'No File Choosen'}
-              </span>
+                width={500}
+                height={500}
+                src={'placeholder-image.png'}
+                alt='Initial Image'
+              />
+            )}
+
+            <div className='space-y-3 my-auto'>
+              <p className='font-italic'>
+                Please upload a file (Max size: {totalMaxSize}MB, Formats:{' '}
+                {listAcceptedTypeFile?.includes(TTypeFile.ALL)
+                  ? 'All files'
+                  : listAcceptedTypeFile?.join(', ')}
+                )
+              </p>
+              <div className='flex gap-2'>
+                <Button variant={'outline-primary'} onClick={handleOnClickInput}>
+                  Choose File
+                </Button>
+                <span
+                  className={`my-auto text-gray ${
+                    attrsInput?.value && 'cursor-pointer hover:underline'
+                  }`}
+                  onClick={handleOnDownloadFile}
+                >
+                  {attrsInput?.value?.name ?? 'No File Choosen'}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <input
-        {...attrsInput}
-        ref={inputFileRef}
-        className='hidden'
-        type='file'
-        accept={acceptedFile}
-        value={''}
-        multiple={false}
-        onChange={(e) => handleOnChange(e)}
-      />
-    </ContainerInput>
+        <input
+          {...attrsInput}
+          ref={inputFileRef}
+          className='hidden '
+          type='file'
+          accept={acceptedFile}
+          value={''}
+          multiple={false}
+          onChange={(e) => handleOnChange(e)}
+        />
+      </ContainerInput>
+    </>
   )
 }
 
@@ -179,11 +181,13 @@ interface TPropsThumbnail {
 
 const Thumbnail = (props: TPropsThumbnail) => {
   const { file } = props
+  const [showPreview, setShowPreview] = useState(false)
+
   return (
     <>
       {getGeneralTypeFile(file?.type) === 'image' && (
         <Image
-          className='self-center  !h-[7rem] !w-[7rem] border '
+          className='self-center  flex-shrink-0   h-[clamp(7rem,7rem,7rem)]  w-[clamp(7rem,7rem,7rem)] border '
           width={500}
           height={500}
           src={(file as TFileWithPreview)?.preview || ''}
@@ -193,11 +197,14 @@ const Thumbnail = (props: TPropsThumbnail) => {
       {getGeneralTypeFile(file?.type) === 'pdf' && (
         <PDFThumbnail
           customeClass={{
-            container: '!h-[7rem] !w-[7rem] !max-h-[7rem] !max-w-[7rem] !min-w-[7rem]'
+            container:
+              'flex-shrink-0  h-[clamp(7rem,7rem,7rem)]  w-[clamp(7rem,7rem,7rem)] cursor-zoom-in '
           }}
           file={file}
+          onClick={() => setShowPreview(true)}
         />
       )}
+      <ModalPreviewPDF file={file} isShow={showPreview} onClose={() => setShowPreview(false)} />
     </>
   )
 }

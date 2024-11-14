@@ -198,10 +198,16 @@ const CardFileUploaded = (props: TPropsCardFileUploaded) => {
 
       <div className='flex flex-col gap-2 flex-grow max-w-[calc(100%-3rem)] '>
         <div className='flex justify-between items-center gap-2 w-full'>
-          <span onClick={handleOnDownloadFile} className='cursor-pointer-custome hover:underline'>
+          <p
+            onClick={handleOnDownloadFile}
+            className='cursor-pointer-custome hover:underline truncate text-wrap w-full  '
+          >
             {value?.name}
-          </span>
-          <IconClose className='cursor-pointer-custome' onClick={() => handleRemoveItem(i)} />
+          </p>
+          <IconClose
+            className='cursor-pointer-custome flex-shrink-0'
+            onClick={() => handleRemoveItem(i)}
+          />
         </div>
       </div>
     </div>
