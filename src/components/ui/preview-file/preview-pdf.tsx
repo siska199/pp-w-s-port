@@ -1,10 +1,11 @@
-import { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { Document, DocumentProps, Page } from 'react-pdf'
 import type { PDFDocumentProxy } from 'pdfjs-dist'
 
 import Button from '@components/ui/button'
 
 import useResizeObserver from '@hooks/use-resize-observer'
+import { IconZoomIn, IconZoomOut } from '@assets/icons'
 
 type TPropsPreviewPDF = DocumentProps & {
   customeClass?: {
@@ -18,6 +19,7 @@ const PreviewPDF = (props: TPropsPreviewPDF) => {
   const [pages, setPages] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 })
+  const [scale, setScale] = useState(1.0)
 
   const handleOnResize = useCallback<ResizeObserverCallback>(
     (entries) => {
@@ -46,10 +48,23 @@ const PreviewPDF = (props: TPropsPreviewPDF) => {
     setPages(numPages)
   }
 
+
+  const handleScale =(type: "zoom-in" | 'zoom-out')=>{
+
+    let updatedScale = scale
+    if(type==='zoom-in'){
+      updatedScale +=0.1
+    }else{
+      updatedScale-=0.1
+    }
+    setScale(updatedScale)
+  }
+
+
   return (
     <>
-      <div className={`overflow-y-auto h-full  border ${customeClass?.container}`} ref={containerRef}>
-        <Document onLoadSuccess={handleOnLoadSuccess} {...attrsDocument}>
+      <div className={`overflow-auto w-full flex h-full   ${customeClass?.container}`} ref={containerRef}>
+        <Document className={'mx-auto max-w-full'} onLoadSuccess={handleOnLoadSuccess} {...attrsDocument}>
           {[...new Array(pages)]?.map((_, index) => (
             <Page
               key={`page_${index}`}
@@ -57,15 +72,29 @@ const PreviewPDF = (props: TPropsPreviewPDF) => {
               className={`${customeClass?.page}`}
               width={containerSize.width}
               height={containerSize.height}
+              scale={scale}
             />
           ))}
         </Document>
       </div>
-      <div className='sticky bottom-0 bg-white flex justify-end'>
-        <Button>Download</Button>
+      <div className='sticky bottom-0 bg-white flex justify-between gap-2'>
+
+        <div className='flex gap-2'>
+          <Button onClick={()=>handleScale('zoom-in')} variant={'no-style'}>
+            <IconZoomIn className='icon-primary icon-primary-fill'/>
+          </Button>
+          <Button onClick={()=>handleScale('zoom-out')} variant={'no-style'}>
+            <IconZoomOut className='icon-primary icon-primary-fill'/>
+          </Button>
+        </div>
+
+        <Button variant={'outline-primary'} shape={'circle'}>Download</Button>
       </div>
     </>
   )
 }
 
-export default PreviewPDF
+
+
+
+export default React.memo(PreviewPDF)

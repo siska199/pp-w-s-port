@@ -29,3 +29,5 @@ export { default as IconSkipPrevious } from '@assets/icons/skip-previous.svg?rea
 export { default as IconSort } from '@assets/icons/sort.svg?react'
 export { default as IconSucess } from '@assets/icons/sucess.svg?react'
 export { default as IconUser } from '@assets/icons/user.svg?react'
+export { default as IconZoomIn } from '@assets/icons/zoom-in.svg?react'
+export { default as IconZoomOut } from '@assets/icons/zoom-out.svg?react'

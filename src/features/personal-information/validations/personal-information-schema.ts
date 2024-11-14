@@ -20,7 +20,7 @@ const personalInformationSchema = z
     about_me: zString({ name: 'About Me', max: 1000 }),
     professional_image: zFileLocale({
       name: 'Professional Image',
-      listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG]
+      listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG, TTypeFile.PDF]
     })
   })
   ?.strict()

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import personalInformationSchema, {
   initialFormPersonalInformation,
@@ -14,7 +14,7 @@ import useGeneralAPI from '@apis/use-general-api'
 import { deepCopy, fetchOptions, mappingErrorsToForm } from '@lib/helper/function'
 import { TEventOnChange } from '@typescript/ui-types'
 
-const FormPersonlaInformation = () => {
+const FormPersonlaInformation = memo(() => {
   const { getListProvince, getListCity, getListDistrict, getListProfession, getListPostalCode } =
     useGeneralAPI()
 
@@ -83,7 +83,6 @@ const FormPersonlaInformation = () => {
       schema: personalInformationSchema
     })
 
-    console.log('form: ', updatedForm.about_me)
 
     if (isValid) {
       //
@@ -92,6 +91,7 @@ const FormPersonlaInformation = () => {
       ...updatedForm
     })
   }
+
 
   return (
     <form className='space-y-4' onSubmit={handleOnSubmit}>
@@ -113,5 +113,5 @@ const FormPersonlaInformation = () => {
     </form>
   )
 }
-
+)
 export default FormPersonlaInformation

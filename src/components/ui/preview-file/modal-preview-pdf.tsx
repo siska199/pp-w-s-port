@@ -11,7 +11,7 @@ const ModalPreviewPDF = (props: TPropsModalPreviewPDF) => {
     <ContainerModal
       {...attrsModal}
       title='Preview PDF'
-      customeClass={{ mdBody: 'md:min-w-[50rem] px-0 border border-error' }}
+      customeClass={{ mdBody: 'md:max-w-[10rem] md:min-w-[50rem] px-0 ' }}
     >
       <PreviewPDF file={file} customeClass={{ container: 'max-h-full h-full w-full' }} />
     </ContainerModal>

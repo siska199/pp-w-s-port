@@ -46,7 +46,6 @@ export default {
       }
     },
     fontFamily: {
-      poppins: ['Poppins', 'sans-serif'],
       'circle-of-love': ['Circle Of Love', 'sans-serif'],
       'bubblegum-sans': ['Bubblegum Sans', 'sans-serif'],
       'shaky-hand': ['Shaky Hand', 'sans-serif']
