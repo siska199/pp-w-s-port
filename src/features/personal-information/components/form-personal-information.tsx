@@ -83,7 +83,6 @@ const FormPersonlaInformation = memo(() => {
       schema: personalInformationSchema
     })
 
-
     if (isValid) {
       //
     }
@@ -91,7 +90,6 @@ const FormPersonlaInformation = memo(() => {
       ...updatedForm
     })
   }
-
 
   return (
     <form className='space-y-4' onSubmit={handleOnSubmit}>
@@ -112,6 +110,5 @@ const FormPersonlaInformation = memo(() => {
       <Button className='ml-auto'>Save</Button>
     </form>
   )
-}
-)
+})
 export default FormPersonlaInformation

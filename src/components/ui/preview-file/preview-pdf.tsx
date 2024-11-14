@@ -48,23 +48,27 @@ const PreviewPDF = (props: TPropsPreviewPDF) => {
     setPages(numPages)
   }
 
-
-  const handleScale =(type: "zoom-in" | 'zoom-out')=>{
-
+  const handleScale = (type: 'zoom-in' | 'zoom-out') => {
     let updatedScale = scale
-    if(type==='zoom-in'){
-      updatedScale +=0.1
-    }else{
-      updatedScale-=0.1
+    if (type === 'zoom-in') {
+      updatedScale += 0.1
+    } else {
+      updatedScale -= 0.1
     }
     setScale(updatedScale)
   }
 
-
   return (
     <>
-      <div className={`overflow-auto w-full flex h-full   ${customeClass?.container}`} ref={containerRef}>
-        <Document className={'mx-auto max-w-full'} onLoadSuccess={handleOnLoadSuccess} {...attrsDocument}>
+      <div
+        className={`overflow-auto w-full flex h-full   ${customeClass?.container}`}
+        ref={containerRef}
+      >
+        <Document
+          className={'mx-auto max-w-full'}
+          onLoadSuccess={handleOnLoadSuccess}
+          {...attrsDocument}
+        >
           {[...new Array(pages)]?.map((_, index) => (
             <Page
               key={`page_${index}`}
@@ -78,23 +82,21 @@ const PreviewPDF = (props: TPropsPreviewPDF) => {
         </Document>
       </div>
       <div className='sticky bottom-0 bg-white flex justify-between gap-2'>
-
         <div className='flex gap-2'>
-          <Button onClick={()=>handleScale('zoom-in')} variant={'no-style'}>
-            <IconZoomIn className='icon-primary icon-primary-fill'/>
+          <Button onClick={() => handleScale('zoom-in')} variant={'no-style'}>
+            <IconZoomIn className='icon-primary icon-primary-fill' />
           </Button>
-          <Button onClick={()=>handleScale('zoom-out')} variant={'no-style'}>
-            <IconZoomOut className='icon-primary icon-primary-fill'/>
+          <Button onClick={() => handleScale('zoom-out')} variant={'no-style'}>
+            <IconZoomOut className='icon-primary icon-primary-fill' />
           </Button>
         </div>
 
-        <Button variant={'outline-primary'} shape={'circle'}>Download</Button>
+        <Button variant={'outline-primary'} shape={'circle'}>
+          Download
+        </Button>
       </div>
     </>
   )
 }
-
-
-
 
 export default React.memo(PreviewPDF)

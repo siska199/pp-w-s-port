@@ -30,6 +30,8 @@ const FormProject = () => {
     e?.preventDefault()
   }
 
+  console.log('list menu project: ', listMenuProject)
+
   return (
     <div className='space-y-10 '>
       <form className='space-y-4' onClick={handleOnSubmit}>
