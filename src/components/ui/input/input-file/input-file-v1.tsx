@@ -182,7 +182,11 @@ interface TPropsThumbnail {
 const Thumbnail = (props: TPropsThumbnail) => {
   const { file } = props
   const [showPreview, setShowPreview] = useState(false)
-
+  const handleTogglePreview = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e?.stopPropagation()
+    e?.preventDefault()
+    setShowPreview(!showPreview)
+  }
   return (
     <>
       {getGeneralTypeFile(file?.type) === 'image' && (
@@ -201,10 +205,10 @@ const Thumbnail = (props: TPropsThumbnail) => {
               'flex-shrink-0  h-[clamp(7rem,7rem,7rem)]  w-[clamp(7rem,7rem,7rem)] cursor-zoom-in '
           }}
           file={file}
-          onClick={() => setShowPreview(true)}
+          onClick={handleTogglePreview}
         />
       )}
-      <ModalPreviewPDF file={file} isShow={showPreview} onClose={() => setShowPreview(false)} />
+      <ModalPreviewPDF file={file} isShow={showPreview} onClose={handleTogglePreview} />
     </>
   )
 }

@@ -29,6 +29,14 @@ export default defineConfig({
     strictPort: true
   },
   build: {
-    minify: true
+    minify: true,
+    rollupOptions: {
+      treeshake: true
+    },
+    sourcemap: true
+  },
+
+  esbuild: {
+    drop: ['console', 'debugger']
   }
 })

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import EVENT_EDUCATION from '@features/education/event-emitters/education-event'
 import educationSchema, {
@@ -7,13 +7,14 @@ import educationSchema, {
 } from '@features/education/validations/education-schema'
 import InputDate from '@components/ui/input/input-date'
 import InputSelect from '@components/ui/input/input-select/input-select'
-import InputTextEditor from '@components/ui/input/input-text-editor'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function'
 import { TTypeActionModalForm } from '@typescript/global.d'
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types'
+
+const InputTextEditor = React.lazy(() => import('@components/ui/input/input-text-editor'))
 
 const FormEducation = () => {
   const [modalForm, setModalForm] = useState({
@@ -89,6 +90,7 @@ const FormEducation = () => {
           onChange={handleOnChange}
         />
       </div>
+
       <InputTextEditor {...form['description']} onChange={handleOnChange} />
     </ContainerModalForm>
   )

@@ -1,8 +1,14 @@
-import FormEducation from '@features/education/components/education-list/form-education'
+import React from 'react'
+
 import FormFilterEducation from '@features/education/components/education-list/form-filter-education'
 import HeaderEducation from '@features/education/components/education-list/header-education'
 import TableEducation from '@features/education/components/education-list/table-education'
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'
+import LazyLoad from '@components/ui/lazy-load'
+
+const FormEducation = React.lazy(
+  () => import('@features/education/components/education-list/form-education')
+)
 
 const EducationListPage = () => {
   return (
@@ -12,7 +18,9 @@ const EducationListPage = () => {
         <FormFilterEducation />
         <TableEducation />
       </ContainerProtectedPage>
-      <FormEducation />
+      <LazyLoad fallback={'Loading...'}>
+        <FormEducation />
+      </LazyLoad>
     </>
   )
 }

@@ -113,7 +113,7 @@ export interface TSettingTable<TData> {
 
 export interface TBaseModal {
   isShow: boolean
-  onClose: () => void
+  onClose: (e?: any) => void
   children: React.ReactNode
   title?: React.ReactNode
 }

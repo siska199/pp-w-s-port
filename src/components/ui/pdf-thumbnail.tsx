@@ -5,7 +5,7 @@ interface TProps extends DocumentProps {
   customeClass?: {
     container: string
   }
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 const PDFThumbnail = (props: TProps) => {

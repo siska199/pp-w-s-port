@@ -15,7 +15,7 @@ import '@assets/styles/tooltip.css'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
 
-pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js'
+pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.mjs'
 
 const Providers = () => {
   return (
