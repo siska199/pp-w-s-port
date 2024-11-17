@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 
 import Container from '@components/ui/container/container'
 
@@ -86,4 +86,4 @@ const InputCheckbox = (props: TProps) => {
   )
 }
 
-export default InputCheckbox
+export default React.memo(InputCheckbox)

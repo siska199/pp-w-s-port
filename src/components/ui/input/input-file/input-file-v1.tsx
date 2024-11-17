@@ -179,7 +179,7 @@ interface TPropsThumbnail {
   file: File
 }
 
-const Thumbnail = (props: TPropsThumbnail) => {
+const Thumbnail = React.memo((props: TPropsThumbnail) => {
   const { file } = props
   const [showPreview, setShowPreview] = useState(false)
   const handleTogglePreview = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -211,6 +211,6 @@ const Thumbnail = (props: TPropsThumbnail) => {
       <ModalPreviewPDF file={file} isShow={showPreview} onClose={handleTogglePreview} />
     </>
   )
-}
+})
 
-export default InputFileV1
+export default React.memo(InputFileV1)

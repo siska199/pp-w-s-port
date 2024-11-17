@@ -62,8 +62,8 @@ const Table = <TData, TIncludeChecked extends boolean = false>(
         <table className={`table-auto  w-full ${data?.length === 0 && 'flex flex-col'}`}>
           <TableHeader {...props} isShowColumnAction={Boolean(isShowColumnAction)} />
           <TableBody {...props} isShowColumnAction={Boolean(isShowColumnAction)} />
-          <EmptyStageTable dataLength={data?.length} isLoading={Boolean(isLoading)} />
         </table>
+        <EmptyStageTable dataLength={data?.length} isLoading={Boolean(isLoading)} />
       </div>
       <PaginationTable<TData, TIncludeChecked>
         setting={setting}
@@ -227,32 +227,6 @@ const TableBody = <TData, TIncludeChecked extends boolean = false>(
   )
 }
 
-interface TPropsEmptyStageTable {
-  isLoading: boolean
-  dataLength: number
-}
-
-const EmptyStageTable = (props: TPropsEmptyStageTable) => {
-  const { isLoading, dataLength } = props
-
-  return (
-    dataLength === 0 && (
-      <div className='w-full h-[20rem] flex items-center justify-center'>
-        {isLoading ? (
-          'Loading...'
-        ) : (
-          <EmptyData
-            customeClass={{
-              container: 'w-full !border-none',
-              img: 'h-[5rem]'
-            }}
-          />
-        )}
-      </div>
-    )
-  )
-}
-
 type TPropsPagination<TData, TIncludeChecked extends boolean> = Pick<
   TTableProps<TData, TIncludeChecked>,
   'setting'
@@ -339,6 +313,32 @@ const PaginationTable = <TData, TIncludeChecked extends boolean>(
             </Button>
           ))}
         </div>
+      </div>
+    )
+  )
+}
+
+interface TPropsEmptyStageTable {
+  isLoading: boolean
+  dataLength: number
+}
+
+const EmptyStageTable = (props: TPropsEmptyStageTable) => {
+  const { isLoading, dataLength } = props
+
+  return (
+    dataLength === 0 && (
+      <div className='w-full h-[20rem] flex items-center justify-center'>
+        {isLoading ? (
+          'Loading...'
+        ) : (
+          <EmptyData
+            customeClass={{
+              container: 'w-full !border-none',
+              img: 'h-[5rem]'
+            }}
+          />
+        )}
       </div>
     )
   )

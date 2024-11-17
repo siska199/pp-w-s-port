@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Container from '@components/ui/container/container'
 import ContainerInput from '@components/ui/input/container-input'
@@ -111,4 +111,4 @@ const InputMultipleCheckbox = (props: TProps) => {
   )
 }
 
-export default InputMultipleCheckbox
+export default React.memo(InputMultipleCheckbox)

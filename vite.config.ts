@@ -36,7 +36,7 @@ export default defineConfig({
     sourcemap: true
   },
 
-  esbuild: {
-    drop: ['console', 'debugger']
-  }
+  // esbuild: {
+  //   drop: ['console', 'debugger']
+  // }
 })

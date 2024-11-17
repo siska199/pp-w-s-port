@@ -99,7 +99,6 @@ const InputSelect = (props: TPropsInputSelect) => {
   ) => {
     e?.stopPropagation()
     let valueUpdates: string[] | string = data?.value
-    console.log(data)
     if (isMultiple && Array.isArray(attrs?.value)) {
       const isSelected = attrs?.value?.some((singleValue) => singleValue === data?.value)
       valueUpdates = isSelected
@@ -240,8 +239,8 @@ const InputSelect = (props: TPropsInputSelect) => {
           {isOpen &&
             (isMultiple ? (
               <InputMultipleCheckbox
+                name={attrs.name}
                 options={filteredOptions}
-                {...attrs}
                 value={attrs.value as string[]}
                 onScroll={handleOnScroll}
                 customeClassMulCheckbox={{
@@ -341,4 +340,4 @@ const InputSelect = (props: TPropsInputSelect) => {
 
 InputSelect.displayName = 'InputSelect'
 
-export default InputSelect
+export default React.memo(InputSelect)

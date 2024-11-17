@@ -182,7 +182,6 @@ export const generateOptionsFromEnum = (enumObject: TObject): TOption<string>[] 
 
 export const generateFileFromUrl = async (url: string) => {
   const result = await fetch(url).then((r) => r.blob())
-  console.log('result: ', result)
   return result
 }
 
@@ -332,4 +331,14 @@ export const toCapitalize = (str: string) => {
     .split(' ')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1)?.toLowerCase())
     .join(' ')
+}
+
+export const catchErrors = <T, Args extends any[]>(fn: (...args: Args) => T | Promise<T>) => {
+  return async (...args: Args): Promise<T | void> => {
+    try {
+      return await fn(...args)
+    } catch (error: any) {
+      console.log('error message: ', error?.message)
+    }
+  }
 }

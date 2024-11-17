@@ -21,3 +21,9 @@ export enum TTypeActionData {
   ADD = 'ADD',
   DELETE = 'DELETE'
 }
+
+export interface TResponseSuccessAPI<TData extends object> {
+  data: TData
+  status: number
+  message: string
+}

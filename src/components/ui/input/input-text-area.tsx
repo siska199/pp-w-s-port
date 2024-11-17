@@ -25,4 +25,4 @@ const InputTextArea = (props: TProps) => {
   )
 }
 
-export default InputTextArea
+export default React.memo(InputTextArea)

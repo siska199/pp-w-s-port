@@ -3,8 +3,10 @@ import { Document, DocumentProps, Page } from 'react-pdf'
 import type { PDFDocumentProxy } from 'pdfjs-dist'
 
 import Button from '@components/ui/button'
+import { TFileValue } from '@components/ui/input/input-file/input-file-v1'
 
 import useResizeObserver from '@hooks/use-resize-observer'
+import { handleDownloadFile } from '@lib/helper/function'
 import { IconZoomIn, IconZoomOut } from '@assets/icons'
 
 type TPropsPreviewPDF = DocumentProps & {
@@ -48,7 +50,12 @@ const PreviewPDF = (props: TPropsPreviewPDF) => {
     setPages(numPages)
   }
 
-  const handleScale = (type: 'zoom-in' | 'zoom-out') => {
+  const handleScale = (
+    e: React.MouseEvent<HTMLButtonElement | HTMLLinkElement, MouseEvent>,
+    type: 'zoom-in' | 'zoom-out'
+  ) => {
+    e.preventDefault()
+    e?.stopPropagation()
     let updatedScale = scale
     if (type === 'zoom-in') {
       updatedScale += 0.1
@@ -58,6 +65,19 @@ const PreviewPDF = (props: TPropsPreviewPDF) => {
     setScale(updatedScale)
   }
 
+  const handleOnDownloadFile = (
+    e: React.MouseEvent<HTMLButtonElement | HTMLLinkElement, MouseEvent>
+  ) => {
+    e?.preventDefault()
+    e?.stopPropagation()
+    const file = attrsDocument.file as TFileValue
+    if (file?.preview && file?.name) {
+      handleDownloadFile({
+        url: file.preview,
+        filename: file.name
+      })
+    }
+  }
   return (
     <>
       <div
@@ -83,15 +103,15 @@ const PreviewPDF = (props: TPropsPreviewPDF) => {
       </div>
       <div className='sticky bottom-0 bg-white flex justify-between gap-2'>
         <div className='flex gap-2'>
-          <Button onClick={() => handleScale('zoom-in')} variant={'no-style'}>
+          <Button onClick={(e) => handleScale(e, 'zoom-in')} variant={'no-style'}>
             <IconZoomIn className='icon-primary icon-primary-fill' />
           </Button>
-          <Button onClick={() => handleScale('zoom-out')} variant={'no-style'}>
+          <Button onClick={(e) => handleScale(e, 'zoom-out')} variant={'no-style'}>
             <IconZoomOut className='icon-primary icon-primary-fill' />
           </Button>
         </div>
 
-        <Button variant={'outline-primary'} shape={'circle'}>
+        <Button onClick={handleOnDownloadFile} variant={'outline-primary'} shape={'circle'}>
           Download
         </Button>
       </div>

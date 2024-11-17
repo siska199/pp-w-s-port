@@ -3,6 +3,8 @@ import z from 'zod'
 
 import { TTypeFile } from '@typescript/ui-types'
 
+const listAcceptedTypeFile = [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG, TTypeFile.PDF]
+
 const personalInformationSchema = z
   .object({
     first_name: zString({ name: 'First Name', max: 50 }),
@@ -20,7 +22,7 @@ const personalInformationSchema = z
     about_me: zString({ name: 'About Me', max: 1000 }),
     professional_image: zFileLocale({
       name: 'Professional Image',
-      listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG, TTypeFile.PDF]
+      listAcceptedTypeFile
     })
   })
   ?.strict()
@@ -102,7 +104,7 @@ export const initialFormPersonalInformation = {
     name: 'professional_image',
     label: 'Professional Image',
     value: null,
-    listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG, TTypeFile.PDF]
+    listAcceptedTypeFile
   }
 }
 

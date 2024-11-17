@@ -6,15 +6,18 @@ const socialLinkSchema = (name: string) =>
   z.object({
     url: zLink({ mandatory: true })?.refine(
       (data) => {
-        const patterns = [
-          /your_linkeind_name/i,
-          /your_gmail/i,
-          /your_phone_number/i,
-          /your_github_username/i
-        ]
-        return !patterns.some((pattern) => pattern.test(data || ''))
+        const patterns = {
+          github: /github\.com\/([a-zA-Z0-9-_]{1,39})$/,
+          linkedin: /linkedin\.com\/in\/([a-zA-Z0-9_-]+)$/,
+          gmail:
+            /mail\.google\.com\/mail\/u\/\d+\/\?fs=1&to=[^&]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}&tf=cm/,
+          whatsapp: /wa\.me\/\d+/
+        }
+        const pattern = patterns[name.toLowerCase() as keyof typeof patterns]
+        const isValid = pattern?.test(data || '')
+        return isValid
       },
-      { message: messageError.required(name) }
+      { message: messageError.invalid(`${name} name`) }
     )
   })
 

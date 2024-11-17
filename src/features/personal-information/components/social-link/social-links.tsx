@@ -1,5 +1,5 @@
-import FormSelectedSocialLink from '@features/personal-information/components/associate-link/form-selected-social-link'
-import FormSocialLinks from '@features/personal-information/components/associate-link/form-social-links'
+import FormSelectedSocialLink from '@features/personal-information/components/social-link/form-selected-social-link'
+import FormSocialLinks from '@features/personal-information/components/social-link/form-social-links'
 import Divider from '@components/ui/divider'
 
 const SocialLinks = () => {

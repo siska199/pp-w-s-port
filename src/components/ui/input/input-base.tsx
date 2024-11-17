@@ -4,13 +4,13 @@ import ContainerInput from '@components/ui/input/container-input'
 
 import { TBasePropsInput } from '@typescript/ui-types'
 
-interface TProps extends TBasePropsInput, React.HTMLProps<HTMLInputElement> {
+export interface TPropsInputBase extends TBasePropsInput, React.HTMLProps<HTMLInputElement> {
   name: string
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const InputBase = (props: TProps) => {
+const InputBase = (props: TPropsInputBase) => {
   const { ...attrs } = props
   return (
     <ContainerInput<React.HTMLProps<HTMLInputElement>> {...attrs} isClerable>
@@ -19,4 +19,4 @@ const InputBase = (props: TProps) => {
   )
 }
 
-export default InputBase
+export default React.memo(InputBase)

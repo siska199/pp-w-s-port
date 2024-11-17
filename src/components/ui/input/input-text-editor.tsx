@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Editor, EditorProps } from 'react-draft-wysiwyg'
 import { ContentState, convertToRaw, EditorState, RichUtils } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
@@ -63,4 +63,4 @@ const InputTextEditor = (props: TProps) => {
   )
 }
 
-export default InputTextEditor
+export default React.memo(InputTextEditor)

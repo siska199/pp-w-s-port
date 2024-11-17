@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { eventEmitter } from '@event-emitters'
 
-import EVENT_SOCIAL_LINK from '@features/personal-information/event-emitters/social-link-event'
+import usePersonalInformation from '@features/personal-information/apis/use-personal-information-api'
+import EVENT_SOCIAL_LINK from '@features/personal-information/event-emitters/personal-information-event'
 import InputSelect from '@components/ui/input/input-select/input-select'
 
 import { categoriesSocialLink } from '@lib/data/dummy/dummy'
+import { catchErrors } from '@lib/helper/function'
 import { TEventOnChange } from '@typescript/ui-types'
 
 const FormSelectedSocialLink = () => {
@@ -14,6 +16,23 @@ const FormSelectedSocialLink = () => {
     options: categoriesSocialLink,
     isMultiple: true,
     value: []
+  })
+
+  const { getListCategorySocialLink } = usePersonalInformation()
+
+  useEffect(() => {
+    handleInitData()
+  }, [])
+
+  const handleInitData = catchErrors(async () => {
+    const resultCatSosLink = await getListCategorySocialLink()
+    setFormSocialLink({
+      ...formSocialLink,
+      options: resultCatSosLink?.data?.map((data) => ({
+        label: data.name,
+        value: JSON.stringify(data)
+      }))
+    })
   })
 
   const handleOnChange = (e: TEventOnChange) => {
