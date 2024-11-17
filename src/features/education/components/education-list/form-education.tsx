@@ -57,7 +57,7 @@ const FormEducation = () => {
 
   const handleOnSubmit = (e: TEventSubmitForm) => {
     e?.preventDefault()
-    const { isValid, updatedForm } = mappingErrorsToForm<TEducationSchema, typeof form>({
+    const { isValid, form: updatedForm } = mappingErrorsToForm<TEducationSchema, typeof form>({
       form,
       schema: educationSchema
     })

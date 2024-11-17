@@ -24,7 +24,7 @@ export const initialFormSignIn = {
     value: '',
     errorMessage: ''
   },
-  isRememberMe: {
+  is_remember_me: {
     name: 'is_remember_me',
     value: 'false',
     errorMessage: '',

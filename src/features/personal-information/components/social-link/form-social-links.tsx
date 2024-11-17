@@ -67,7 +67,10 @@ const FormSocialLink = React.memo((props: TSocialLink) => {
 
   useEventEmitter(EVENT_PERSONAL_INFORMATION.VALIDATE_FORM_PERSONAL_INFORMATION, () => {
     validateFormSocialLink()
-    eventEmitter.emit(EVENT_PERSONAL_INFORMATION.IS_FORM_SOCIAL_LINK_VALID, validateFormSocialLink())
+    eventEmitter.emit(
+      EVENT_PERSONAL_INFORMATION.IS_FORM_SOCIAL_LINK_VALID,
+      validateFormSocialLink()
+    )
   })
 
   const validateFormSocialLink = () => {

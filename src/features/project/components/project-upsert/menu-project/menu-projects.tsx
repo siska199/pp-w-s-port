@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { eventEmitter } from '@event-emitters'
 
 import EVENT_PROJECT from '@features/project/event-emitters/project-event'
@@ -12,7 +12,7 @@ import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge'
 import { TTypeActionModalForm } from '@typescript/global.d'
 import { IconDelete, IconEdit } from '@assets/icons'
 
-const MenuProjects = () => {
+const MenuProjects = React.memo(() => {
   const { listMenuProject } = useMenuProject()
 
   const handleOnClickAddData = () => {
@@ -31,9 +31,9 @@ const MenuProjects = () => {
       </div>
     </div>
   )
-}
+})
 
-const CardMenuProject = (props: TMenuProject) => {
+const CardMenuProject = React.memo((props: TMenuProject) => {
   const { name, id, description, main_image, features } = props
 
   const handleEditProject = (id: string) => {
@@ -84,5 +84,5 @@ const CardMenuProject = (props: TMenuProject) => {
       </div>
     </div>
   )
-}
+})
 export default MenuProjects

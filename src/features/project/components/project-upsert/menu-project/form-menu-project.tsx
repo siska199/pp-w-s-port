@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import educationSchema, { TEducationSchema } from '@features/education/validations/education-schema'
 import EVENT_PROJECT from '@features/project/event-emitters/project-event'
@@ -34,7 +34,7 @@ const FormMenuProject = () => {
     setForm({ ...mappingValuesToForm({ values: data, form }) })
   })
 
-  const handleOnChange = (e: TEventOnChange) => {
+  const handleOnChange = useCallback((e: TEventOnChange) => {
     const name = e.target.name as keyof typeof form
     const value = e.target.value
     const currForm = form
@@ -43,7 +43,7 @@ const FormMenuProject = () => {
     setForm({
       ...currForm
     })
-  }
+  }, [])
 
   const handlleCloseFormEducation = () => {
     setForm(deepCopy({ ...initialFormMenuProject }))
@@ -55,7 +55,7 @@ const FormMenuProject = () => {
 
   const handleOnSubmit = (e: TEventSubmitForm) => {
     e?.preventDefault()
-    const { isValid, updatedForm } = mappingErrorsToForm<TEducationSchema, typeof form>({
+    const { isValid, form: updatedForm } = mappingErrorsToForm<TEducationSchema, typeof form>({
       form,
       schema: educationSchema
     })
@@ -84,4 +84,4 @@ const FormMenuProject = () => {
   )
 }
 
-export default FormMenuProject
+export default React.memo(FormMenuProject)

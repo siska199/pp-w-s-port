@@ -38,7 +38,7 @@ const FormSkill = () => {
 
   const handleOnSubmit = (e: TEventSubmitForm) => {
     e?.preventDefault()
-    const { isValid, updatedForm } = mappingErrorsToForm<TSkill, typeof form>({
+    const { isValid, form: updatedForm } = mappingErrorsToForm<TSkill, typeof form>({
       form,
       schema: skillSchema
     })

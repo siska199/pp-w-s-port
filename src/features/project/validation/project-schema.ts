@@ -10,22 +10,6 @@ import {
 import appMessage from '@lib/data/app-message'
 import { TTypeFile } from '@typescript/ui-types'
 
-const projectSchema = z.object({
-  name: zString({ name: 'Name' }),
-  category: zEnum({ name: 'Category', enum: ['WEBSITE', 'MOBILE', 'API', 'UI-UX'] as const }),
-  type: zEnum({
-    name: 'Type',
-    enum: ['PERSONAL_PROJECT', 'COMPANY_PROJECT', 'FREELANCE'] as const
-  }),
-  thumbnail: zFileLocale({
-    name: 'thumbnail',
-    listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG]
-  }),
-  description: zString({ name: 'Description', max: 2555 })
-})
-
-export type TProjectSchema = z.input<typeof projectSchema>
-
 export const initialFormProject = {
   name: {
     name: 'name',
@@ -65,8 +49,25 @@ export const initialFormProject = {
     label: 'Description',
     placeholder: 'Enter a brief description of your project',
     value: '',
-    errorMessage: ''
+    errorMessage: '',
+    rows: 5,
+    maxLength: 500
   }
 }
+const projectSchema = z.object({
+  name: zString({ name: 'Name' }),
+  category: zEnum({ name: 'Category', enum: ['WEBSITE', 'MOBILE', 'API', 'UI-UX'] as const }),
+  type: zEnum({
+    name: 'Type',
+    enum: ['PERSONAL_PROJECT', 'COMPANY_PROJECT', 'FREELANCE'] as const
+  }),
+  thumbnail: zFileLocale({
+    name: 'thumbnail',
+    listAcceptedTypeFile: initialFormProject.thumbnail.listAcceptedTypeFile
+  }),
+  description: zString({ name: 'Description', max: initialFormProject.description.maxLength })
+})
+
+export type TProjectSchema = z.input<typeof projectSchema>
 
 export default projectSchema

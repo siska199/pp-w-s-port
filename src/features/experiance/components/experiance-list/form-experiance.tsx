@@ -44,7 +44,7 @@ const FormExperiance = () => {
 
   const handleOnSubmit = (e: TEventSubmitForm) => {
     e?.preventDefault()
-    const { isValid, updatedForm } = mappingErrorsToForm<TExperianceSchema, typeof form>({
+    const { isValid, form: updatedForm } = mappingErrorsToForm<TExperianceSchema, typeof form>({
       form,
       schema: experianceSchema
     })

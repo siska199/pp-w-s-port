@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { handleSetAuth } from '@features/auth/store/auth-slice'
@@ -22,20 +22,19 @@ const FormSignIn = () => {
 
   const [form, setForm] = useState(initialFormSignIn)
 
-  const handleOnChange = (e: TEventOnChange) => {
+  const handleOnChange = useCallback((e: TEventOnChange) => {
     const currForm = form
     const name = e.target.name as keyof typeof form
     const value = e.target.value
     currForm[name].value = value
-
     setForm({
       ...currForm
     })
-  }
+  }, [])
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault()
-    const { isValid, updatedForm } = mappingErrorsToForm<TSignInSchema, typeof form>({
+    const { isValid, form: updatedForm } = mappingErrorsToForm<TSignInSchema, typeof form>({
       form,
       schema: signInSchema
     })
@@ -59,7 +58,7 @@ const FormSignIn = () => {
         <InputBase {...form['username']} onChange={handleOnChange} />
         <InputBase {...form['password']} onChange={handleOnChange} />
         <div className='flex justify-between items-center gap-2'>
-          <InputCheckbox {...form['isRememberMe']} onChange={handleOnChange} />
+          <InputCheckbox {...form['is_remember_me']} onChange={handleOnChange} />
           <Button
             variant={'link-black'}
             className=' text-white  underline !p-0'

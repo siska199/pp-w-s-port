@@ -59,12 +59,13 @@ const InputCheckbox = (props: TProps) => {
         className={`${!label && '!w-fit'} ${customeClassnameCheckbox?.container} `}
       >
         <label
-          className='  relative flex items-center py-1 rounded-full cursor-pointer'
-          htmlFor='radio'
+          className='relative flex items-center py-1 rounded-full cursor-pointer'
+          htmlFor={name}
         >
           <input
             {...attrsInput}
             type='checkbox'
+            id={name}
             name={name}
             checked={updatedChecked}
             value={String(value)}
@@ -76,7 +77,7 @@ const InputCheckbox = (props: TProps) => {
           </span>
         </label>
         {label && (
-          <label className='mt-px cursor-pointer select-none' htmlFor={'radio'}>
+          <label className='mt-px cursor-pointer select-none' htmlFor={name}>
             {label}
           </label>
         )}
