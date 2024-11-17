@@ -2,7 +2,9 @@ import { memo, useCallback, useEffect, useState } from 'react'
 import { eventEmitter } from '@event-emitters'
 
 import SocialLinks from '@features/personal-information/components/social-link/social-links'
-import { default as EVENT_SOCIAL_LINK } from '@features/personal-information/event-emitters/personal-information-event'
+import EVENT_PERSONAL_INFORMATION, {
+  default as EVENT_SOCIAL_LINK
+} from '@features/personal-information/event-emitters/personal-information-event'
 import personalInformationSchema, {
   initialFormPersonalInformation,
   TPersonalInformationSchema
@@ -24,9 +26,12 @@ const FormPersonlaInformation = memo(() => {
     useGeneralAPI()
 
   const [form, setForm] = useState(deepCopy(initialFormPersonalInformation))
+  const [formSocialLinks, setFormSocialLinks] = useState({})
 
-  // const [formSocialLinks, setFormSocialLinks] = useState({})
-
+  const [validateResult, setValidateResult] = useState({
+    formPersonalInformation: true,
+    formSocialLinks: true
+  })
   type TKeyForm = keyof typeof form
 
   useEffect(() => {
@@ -48,6 +53,7 @@ const FormPersonlaInformation = memo(() => {
     const value = e.target.value
 
     currForm[name].value = value
+    currForm[name].errorMessage = ''
 
     if (name == 'id_province') {
       ;['id_city', 'id_district', 'id_postal_code']?.map((key) => {
@@ -68,10 +74,11 @@ const FormPersonlaInformation = memo(() => {
     }
 
     if (name == 'id_district') {
-      currForm['id_postal_code'].value = ''
-      currForm['id_postal_code'].options = await fetchOptions(getListPostalCode, {
+      const postalCodes = await fetchOptions(getListPostalCode, {
         id_district: value
       })
+      currForm['id_postal_code'].options = postalCodes
+      currForm['id_postal_code'].value = postalCodes?.[0]?.value
     }
 
     if (['id_city', 'id_province', 'id_district']?.includes(name)) {
@@ -85,33 +92,55 @@ const FormPersonlaInformation = memo(() => {
   }, [])
 
   useEventEmitter(EVENT_SOCIAL_LINK.VALIDATE_FORM_PERSONAL_INFORMATION, () => {
-    validateFormPersonalInformation()
+    const { isValid } = validateFormPersonalInformation()
+    setValidateResult({
+      ...validateResult,
+      formPersonalInformation: isValid
+    })
   })
 
   const validateFormPersonalInformation = useCallback(() => {
-    const { isValid, updatedForm } = mappingErrorsToForm<TPersonalInformationSchema, typeof form>({
+    const { isValid, form: updatedForm } = mappingErrorsToForm<
+      TPersonalInformationSchema,
+      typeof form
+    >({
       form,
       schema: personalInformationSchema
     })
     setForm({
       ...updatedForm
     })
-    return isValid
+    return {
+      isValid,
+      form: updatedForm
+    }
   }, [])
 
-  const handleOnSubmit = (e: React.MouseEvent<HTMLButtonElement | HTMLLinkElement, MouseEvent>) => {
+  const handleOnValidate = (
+    e: React.MouseEvent<HTMLButtonElement | HTMLLinkElement, MouseEvent>
+  ) => {
     e?.preventDefault()
     eventEmitter.emit(EVENT_SOCIAL_LINK.VALIDATE_FORM_PERSONAL_INFORMATION, true)
   }
 
-  // useEventEmitter(EVENT_PERSONAL_INFORMATION.IS_FORM_SOCIAL_LINK_VALID, (data) => {
-  //   const updateFormSocialLinks = Object.assign(formSocialLinks ?? {}, {
-  //     [data?.form?.name]: data
-  //   })
-  //   setFormSocialLinks({
-  //     ...updateFormSocialLinks
-  //   })
-  // })
+  useEventEmitter(EVENT_PERSONAL_INFORMATION.IS_FORM_SOCIAL_LINK_VALID, (data) => {
+    const updateFormSocialLinks = Object.assign(formSocialLinks ?? {}, {
+      [data?.form?.name]: data.form
+    })
+    if (!data.isValid) {
+      setValidateResult({
+        ...validateResult,
+        formSocialLinks: false
+      })
+    }
+    setFormSocialLinks({
+      ...updateFormSocialLinks
+    })
+  })
+
+  useEffect(() => {
+    console.log('SUBMITED', validateResult)
+  }, [validateResult])
 
   return (
     <form className='space-y-4' onSubmit={(e) => e?.preventDefault()}>
@@ -131,7 +160,7 @@ const FormPersonlaInformation = memo(() => {
       <InputUploadFile {...form['professional_image']} onChange={handleOnChange} />
       <Divider />
       <SocialLinks />
-      <Button onClick={handleOnSubmit} className='ml-auto'>
+      <Button onClick={handleOnValidate} className='ml-auto'>
         Save
       </Button>
     </form>

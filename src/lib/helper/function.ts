@@ -167,7 +167,7 @@ export const generateOptions = (params: {
 
   return options?.map((option: TObject) => ({
     label: option[labelName],
-    value: option[valueName]
+    value: option?.[valueName]?.toString()
   }))
 }
 
@@ -222,7 +222,7 @@ export const mappingErrorsToForm = <TSchema, TForm extends TObject>(
     }, {} as TObject)
   }
 
-  return { isValid, updatedForm: form }
+  return { isValid, form }
 }
 
 interface TMappingValuesToForm<TForm extends TObject> {

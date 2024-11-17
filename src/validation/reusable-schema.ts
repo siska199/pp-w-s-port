@@ -125,7 +125,9 @@ export const zFileLocale = (params: {
   const { size = 5, listAcceptedTypeFile, mandatory = true } = params
   const fileSchema = z
     .instanceof(File, { message: 'File is required' })
-    ?.refine((file) => file.size > size * 1024 * 1024, messageError.fileType(listAcceptedTypeFile))
+    ?.refine((file) => {
+      return file.size <= size * 1024 * 1024
+    }, messageError.maxSizeFile)
     .refine((file) => {
       const isValid = isValidTypeFile({
         file,
