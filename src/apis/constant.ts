@@ -8,6 +8,10 @@ const ENDPOINT = {
   PERSONAL_INFORMATION: {
     GET_DETAIL_PERSONAL_INFORMATION: (id: string) => `/personal-information/${id}`
   },
+  EDUCATION: {
+    GET_LIST_EDUCATION: '/educations',
+    GET_DETAIL_EDUCATION: (id: string) => `/education/${id}`
+  },
   SKILL: {
     GET_LIST_SKILL: '/skills'
   },

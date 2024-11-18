@@ -17,8 +17,6 @@ const Sidebar = () => {
   const { currentPath } = useCurrentPath()
   const { isMaxMd } = useMediaQuery()
 
-  console.log('currentpath: ', currentPath)
-
   useEffect(() => {
     dispatch(handleToggleSidebar(isMaxMd ? true : false))
   }, [isMaxMd])

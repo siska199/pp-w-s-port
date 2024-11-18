@@ -1,6 +1,6 @@
 import { RouteObject } from 'react-router-dom'
 
-import { ProjectDetailPage } from '@pages'
+import { ProjectDetailPage } from '@features/project/pages'
 import LazyLoad from '@components/ui/lazy-load'
 
 import { routes } from '@routes/constant'

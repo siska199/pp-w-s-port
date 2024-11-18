@@ -1,8 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { TRAuthState } from '@features/auth/types/auth-types'
+export interface TStateAuth {
+  isAuthenticated: boolean
+  user: null
+}
 
-const initialState: TRAuthState = {
+const initialState: TStateAuth = {
   isAuthenticated: false,
   user: null
 }

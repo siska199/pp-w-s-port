@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { eventEmitter } from '@event-emitters'
 
+import { educations } from '@features/education/constants'
 import EVENT_EDUCATION from '@features/education/event-emitters/education-event'
 import Table from '@components/ui/table'
 
@@ -8,7 +9,6 @@ import useEventEmitter from '@hooks/use-event-emitter'
 import useTable from '@hooks/use-table'
 import { useAppDispatch, useAppSelector } from '@store/store'
 import { handleSetModalConfirmation } from '@store/ui-slice'
-import educations from '@lib/data/dummy/educations.json'
 import { delay, formatDate } from '@lib/helper/function'
 import { routes } from '@routes/constant'
 import { TTypeActionModalForm } from '@typescript/global.d'
@@ -42,8 +42,8 @@ const TableEducation = () => {
         key: 'start_at',
         isSorted: true,
         className: 'min-w-[12rem]',
-        customeComponent:(data)=>{
-          return <div>{formatDate({date:data.start_at})}</div>
+        customeComponent: (data) => {
+          return <div>{formatDate({ date: data.start_at })}</div>
         }
       },
       {
@@ -51,8 +51,8 @@ const TableEducation = () => {
         key: 'end_at',
         isSorted: true,
         className: 'min-w-[12rem]',
-        customeComponent:(data)=>{
-          return <div>{formatDate({date:data.end_at})}</div>
+        customeComponent: (data) => {
+          return <div>{formatDate({ date: data.end_at })}</div>
         }
       }
     ],
@@ -93,7 +93,8 @@ const TableEducation = () => {
   }
 
   const handleViewData = (data: TData) => {
-    navigate(routes.education.child.detail.fullPath(String(data?.id)))
+    const id = data.id
+    navigate(routes.education.child.detail.fullPath(id))
   }
 
   const handleDeleteData = (data: TData) => {

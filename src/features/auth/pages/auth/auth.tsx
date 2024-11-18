@@ -1,4 +1,4 @@
-import FormSignIn from '@features/auth/components/sign-in/form-sign-in'
+import FormSignIn from '@features/auth/components/form-sign-in'
 
 const AuthPage = () => {
   return (

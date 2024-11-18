@@ -1,20 +1,34 @@
 import { RouteObject } from 'react-router-dom'
 
-import { EducationListPage } from '@pages'
+import { EducationListPage } from '@features/education/pages'
+import EducationDetail from '@features/education/pages/education-detail/education-detail'
 import LazyLoad from '@components/ui/lazy-load'
 
-import menuSidebar from '@lib/data/menu-sidebar'
 import { routes } from '@routes/constant'
 
 const educationRouter: RouteObject[] = [
   {
-    path: routes.education.fullPath,
-    element: (
-      <LazyLoad>
-        <EducationListPage />
-      </LazyLoad>
-    ),
-    handle: menuSidebar?.filter((data) => data.name === routes.education.name)[0]
+    path: routes.education.name,
+    children: [
+      {
+        index: true,
+        element: (
+          <LazyLoad>
+            <EducationListPage />
+          </LazyLoad>
+        ),
+        handle: routes.education
+      },
+      {
+        path: routes.education.child.detail.name,
+        element: (
+          <LazyLoad>
+            <EducationDetail />
+          </LazyLoad>
+        ),
+        handle: routes.education.child.detail
+      }
+    ]
   }
 ]
 
