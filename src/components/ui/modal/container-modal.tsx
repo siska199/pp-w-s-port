@@ -100,4 +100,4 @@ const modalVariants = cva(' min-w-full p-4 md:min-w-[20rem] max-w-[90%] ', {
   }
 })
 
-export default ContainerModal
+export default React.memo(ContainerModal)

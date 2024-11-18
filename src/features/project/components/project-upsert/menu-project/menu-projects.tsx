@@ -47,14 +47,18 @@ const CardMenuProject = React.memo((props: TMenuProject) => {
   const listBtnAction = useMemo(
     () => [
       {
+        name: 'edit',
         variant: 'softborder-warning' as TKeyVariantBadge,
         label: <IconEdit className='icon-warning' />,
-        onClick: () => handleEditProject(id)
+        onClick: () => handleEditProject(id),
+        isShow: true
       },
       {
+        name: 'delete',
         variant: 'softborder-error' as TKeyVariantBadge,
         label: <IconDelete className='icon-error' />,
-        onClick: () => handleDeleteProject(id)
+        onClick: () => handleDeleteProject(id),
+        isShow: true
       }
     ],
     [id, handleDeleteProject, handleEditProject]

@@ -9,23 +9,27 @@ import { IconSearch } from '@assets/icons'
 
 const FormFilterProject = () => {
   const [form, setForm] = useState(deepCopy({ ...initialFormFilter }))
+  type TKeyForm = keyof typeof form
 
   const handleOnChange = (e: TEventOnChange) => {
     const currForm = form
     const value = e.target.value
-    const name = e.target.name as keyof typeof form
+    const name = e.target.name as TKeyForm
     currForm[name].value = value
 
     setForm({ ...currForm })
   }
   return (
-    <div className='grid grid-cols-2 lg:grid-cols-4 gap-4'>
+    <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
       <InputBase
         customeElement={{
           start: <IconSearch className='icon-gray icon-gray-fill' />
         }}
         {...form['keyword']}
         onChange={handleOnChange}
+        customeClass={{
+          ciV4: 'col-span-4'
+        }}
       />
       <InputSelect onChange={handleOnChange} {...form['category']} isMultiple />
       <InputSelect onChange={handleOnChange} {...form['type']} isMultiple />

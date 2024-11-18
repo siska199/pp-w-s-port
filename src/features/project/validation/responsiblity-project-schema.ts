@@ -19,4 +19,6 @@ const responsibilitySchema = z.object({
   description: zString({ name: 'Description', max: 2000 })
 })
 
+export type TResponsibilityProject = z.input<typeof responsibilitySchema>
+
 export default responsibilitySchema

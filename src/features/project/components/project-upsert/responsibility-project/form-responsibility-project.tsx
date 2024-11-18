@@ -19,6 +19,7 @@ const FormResponsiblityProject = () => {
   })
   const [form, setForm] = useState(deepCopy(initialFormResponsibilityProject))
   type TKeyForm = keyof typeof form
+
   useEventEmitter(EVENT_PROJECT.SET_MODAL_FORM_RESPONSIBILITY_PROJECT, (data) => {
     setModalForm({
       ...modalForm,
@@ -36,6 +37,7 @@ const FormResponsiblityProject = () => {
       ...currForm
     })
   }, [])
+
   const handleCloseModalForm = () => {
     setForm(deepCopy({ ...initialFormResponsibilityProject }))
     setModalForm({

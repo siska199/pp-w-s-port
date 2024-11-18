@@ -1,3 +1,5 @@
+import React from 'react'
+
 import Button from '@components/ui/button'
 import ContainerModal, { TContainerModalProps } from '@components/ui/modal/container-modal'
 
@@ -37,7 +39,8 @@ const ContainerModalForm = (props: TProps) => {
       customeClass={{
         mdModal: `overflow-visible ${customeClass?.mdModal}`,
         mdContent: `overflow-visible  ${customeClass?.mdContent}`,
-        mdBody: ` ${customeClass?.mdBody}`
+        mdBody: ` ${customeClass?.mdBody}`,
+        mdFooter: 'mr-6'
       }}
       {...attrs}
     >
@@ -48,4 +51,4 @@ const ContainerModalForm = (props: TProps) => {
   )
 }
 
-export default ContainerModalForm
+export default React.memo(ContainerModalForm)

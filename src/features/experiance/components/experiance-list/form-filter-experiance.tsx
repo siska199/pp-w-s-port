@@ -23,23 +23,24 @@ const FormFilterExperiance = () => {
   }
 
   return (
-    <div className='grid md:grid-cols-2 gap-4'>
+    <div className='grid md:grid-cols-4 gap-4'>
       <InputBase
         customeElement={{
           start: <IconSearch className='icon-gray icon-gray-fill' />
         }}
         {...form['keyword']}
+        customeClass={{
+          ciV4: 'md:col-span-2'
+        }}
         onChange={handleOnChange}
       />
-      <div className='grid grid-cols-2 gap-4'>
-        <InputDate {...form['start_at']} onChange={handleOnChange} />
-        <InputDate
-          {...form['end_at']}
-          minDate={form['start_at'].value}
-          maxDate={generateMaxDateOneYear(form['start_at'].value)}
-          onChange={handleOnChange}
-        />
-      </div>
+      <InputDate {...form['start_at']} onChange={handleOnChange} />
+      <InputDate
+        {...form['end_at']}
+        minDate={form['start_at'].value}
+        maxDate={generateMaxDateOneYear(form['start_at'].value)}
+        onChange={handleOnChange}
+      />
     </div>
   )
 }
