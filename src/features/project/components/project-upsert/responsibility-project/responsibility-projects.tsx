@@ -17,7 +17,7 @@ const ResponsibilityProjects = () => {
   return (
     <div className='space-y-10'>
       <Header title='Responsibility Project' onClickAddData={handleOnClickAddData} />
-      <ul className='space-y-4 list-disc ml-[1rem]'>
+      <ul className='space-y-4 list-disc'>
         {responsibilities?.map((responsibility, i) => (
           <CardResponsibility key={i} {...responsibility} />
         ))}

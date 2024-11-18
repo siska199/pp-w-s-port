@@ -17,6 +17,8 @@ const Sidebar = () => {
   const { currentPath } = useCurrentPath()
   const { isMaxMd } = useMediaQuery()
 
+  console.log('currentpath: ', currentPath)
+
   useEffect(() => {
     dispatch(handleToggleSidebar(isMaxMd ? true : false))
   }, [isMaxMd])
@@ -49,14 +51,16 @@ const Sidebar = () => {
                   className={cn({
                     'gap-4 w-full justify-start py-2  bg-glassmorphism  border-none hover:!text-black !text-white':
                       true,
-                    'bg-white !text-black ': currentPath?.handle?.name === data?.name
+                    'bg-white !text-black ': currentPath?.pathname?.includes(data?.name)
                   })}
                 >
                   <Image
                     src={data.src || ''}
                     className={cn({
                       'w-6 h-6 bg-white border p-1 rounded-full  z-[9]': true,
-                      'bg-primary-100 border-primary-700': currentPath?.handle?.name === data?.name
+                      'bg-primary-100 border-primary-700': currentPath?.pathname?.includes(
+                        data?.name
+                      )
                     })}
                     customeClassName={{ image: 'object-contain' }}
                     alt='icon menu sidebar'

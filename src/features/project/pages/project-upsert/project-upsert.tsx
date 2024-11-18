@@ -8,7 +8,7 @@ const ProjectUpsertPage = () => {
   return (
     <>
       <ContainerProtectedPage className=' mb-0'>
-        <HeaderPage title='Form Project' />
+        <HeaderPage title='Form Project' isNested />
         <FormProject />
       </ContainerProtectedPage>
       <FormMenuProject />
