@@ -21,13 +21,13 @@ const FormFilterEducation = () => {
     })
   }, [debounceValue])
 
-  const handleOnChange = useCallback((e:TEventOnChange)=>{
+  const handleOnChange = useCallback((e: TEventOnChange) => {
     const currForm = form
     const value = e.target.value
     const name = e.target.name as keyof typeof form
     currForm[name].value = value
     setForm({ ...currForm })
-  },[])
+  }, [])
 
   return (
     <div className='grid md:grid-cols-4 gap-4'>

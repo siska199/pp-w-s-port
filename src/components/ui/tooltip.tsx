@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, useEffect } from 'react'
 
 import { cn } from '@lib/helper/function'
 
@@ -15,6 +15,9 @@ interface TProps {
 
 const Tooltip = forwardRef<HTMLDivElement, TProps>((props, ref) => {
   const { children, type, text, variant = 'top', customeClass } = props
+  useEffect(() => {
+    import('@assets/styles/tooltip.css')
+  }, [])
   return (
     <div
       data-text={text}

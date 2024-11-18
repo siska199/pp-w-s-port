@@ -40,6 +40,10 @@ const ContainerModal = (props: TContainerModalProps) => {
   const bodyRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    import('@assets/styles/modal.css')
+  }, [])
+
+  useEffect(() => {
     isShow && bodyRef?.current?.scrollTo(0, 0)
   }, [isShow])
 
@@ -49,7 +53,7 @@ const ContainerModal = (props: TContainerModalProps) => {
         className={cn(
           modalVariants({
             variant,
-            className: `md-modal p-0 px-4 ${isShow && 'md-show flex'} ${customeClass?.mdModal}`
+            className: `md-modal invisible  p-0 px-4 ${isShow && 'md-show flex visible'} ${customeClass?.mdModal}`
           })
         )}
       >

@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useMemo, useRef, useState } from 'react'
+import React, { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import DatePicker, { DatePickerProps, ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 import clsx from 'clsx'
 import { format } from 'date-fns'
@@ -39,6 +39,10 @@ const InputDate = (props: TProps) => {
 
   const [showTypeDate, setShowTypeDate] = useState<'date' | 'month' | 'year' | ''>('')
   const [isShouldCloseOnSelect, setIsShouldCloseOnSelect] = useState(true)
+
+  useEffect(() => {
+    import('@assets/styles/input/input-date.css')
+  }, [])
 
   const handleOnChange = (valueDate: TValueDate) => {
     setTimeout(() => {

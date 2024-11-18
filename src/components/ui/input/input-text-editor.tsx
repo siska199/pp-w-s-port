@@ -42,20 +42,20 @@ const InputTextEditor = (props: TProps) => {
   const handleOnChangeEditorState = async (editorState: EditorState) => {
     setEditorState(editorState)
     const contentState = editorState.getCurrentContent()
-    const draftJS = await import('draft-js')
 
+    const draftJS = await import('draft-js')
     const rawContentState = draftJS.convertToRaw(contentState)
 
-    await import('draftjs-to-html')?.then((module) => {
-      const draftJsToHTML = module.default
-      const htmlContent = draftJsToHTML(rawContentState)
-      const isEmptyValue = !isHtmlHasText(htmlContent)
-      onChange({
-        target: {
-          name,
-          value: isEmptyValue ? '' : htmlContent
-        }
-      })
+    const module = await import('draftjs-to-html')
+    const draftJsToHTML = module.default
+    const htmlContent = draftJsToHTML(rawContentState)
+    const isEmptyValue = !isHtmlHasText(htmlContent)
+
+    onChange({
+      target: {
+        name,
+        value: isEmptyValue ? '' : htmlContent
+      }
     })
   }
 

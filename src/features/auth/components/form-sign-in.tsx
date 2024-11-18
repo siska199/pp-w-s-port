@@ -63,11 +63,12 @@ const FormSignIn = () => {
             variant={'link-black'}
             className=' text-white  underline !p-0'
             href={'/auth/forget-password'}
+            name='forgot-password'
           >
             Forget Password
           </Button>
         </div>
-        <Button type='submit' className='w-full'>
+        <Button type='submit' name='sign-in' className='w-full'>
           Sign In
         </Button>
       </form>

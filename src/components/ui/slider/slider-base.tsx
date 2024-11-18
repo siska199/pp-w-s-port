@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperProps, SwiperSlide, SwiperSlideProps } from 'swiper/react'
 
@@ -19,6 +20,9 @@ export interface TPropsSliderBase extends SwiperProps {
 
 const SliderBase = (props: TPropsSliderBase) => {
   const { items, swiperSlideProps, customeClassBtn, ...swiperProps } = props
+  useEffect(() => {
+    import('@assets/styles/slider.css')
+  }, [])
   return (
     <Swiper
       grabCursor={true}

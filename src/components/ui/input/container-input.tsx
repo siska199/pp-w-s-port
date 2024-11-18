@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Container from '@components/ui/container/container'
 import HelperMessage from '@components/ui/helper-message'
@@ -46,6 +46,10 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
   } = props
 
   const [dynamicType, setDynamicType] = useState(type)
+
+  useEffect(() => {
+    import('@assets/styles/input/input-base.css')
+  }, [])
 
   const handleToggleTypePassword = () => {
     setDynamicType(dynamicType === 'password' ? 'text' : 'password')

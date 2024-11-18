@@ -10,7 +10,7 @@ const Loading = (props: TPropsLoading) => {
   return (
     <div
       className={cn({
-        'sticky top-0 z-[999] bottom-0    h-[calc(100vh-5rem)] w-full m-auto flex items-center justify-center':
+        'sticky top-0 z-[999] bottom-0  h-[calc(100vh-5rem)] w-full m-auto flex items-center justify-center':
           true,
         [`${className}`]: true
       })}

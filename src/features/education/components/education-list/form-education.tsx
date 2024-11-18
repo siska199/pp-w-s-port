@@ -45,7 +45,7 @@ const FormEducation = () => {
     setForm({
       ...currForm
     })
-  },[])
+  }, [])
 
   const handlleCloseFormEducation = () => {
     setForm(deepCopy({ ...initialFormEducation }))

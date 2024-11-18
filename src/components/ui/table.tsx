@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import Badge from '@components/ui/badge'
 import Button from '@components/ui/button'
@@ -239,7 +239,7 @@ const PaginationTable = <TData, TIncludeChecked extends boolean>(
   props: TPropsPagination<TData, TIncludeChecked>
 ) => {
   const { setting, onChangePage: handleOnChangePage, dataLength } = props
-  const iShowpPagination = setting.pagination && dataLength > 0
+  const iShowPagination = setting.pagination && dataLength > 0
   const [valuePage, setValuePage] = useState(setting.currentPage)
   const debounceValue = useDebounce({ value: valuePage, delay: 500 })
 
@@ -277,44 +277,46 @@ const PaginationTable = <TData, TIncludeChecked extends boolean>(
     setValuePage(e.target.value)
   }
 
-  return (
-    iShowpPagination && (
-      <div className='flex w-full justify-end px-4 py-2'>
-        <div className=' flex border rounded-md overflow-hidden'>
-          {listBtn[0]?.map((btn, i) => (
-            <Button
-              key={i}
-              onClick={btn.onClick}
-              variant='no-style'
-              className='rounded-none !border-r h-full'
-              disabled={setting.currentPage == 1}
-            >
-              {btn.icon}
-            </Button>
-          ))}
-          <div className='px-2 py-1 !border-r flex items-center justify-center gap-2'>
-            <input
-              value={valuePage}
-              onChange={handleOnChange}
-              className='outline-none w-10 text-center focus:border-primary border  p-0 rounded-md'
-            />
-            <span>of {setting.currentPage}</span>
-          </div>
+  if (!iShowPagination) return null
 
-          {listBtn[1]?.map((btn, i) => (
-            <Button
-              key={i}
-              onClick={btn.onClick}
-              variant='no-style'
-              className='rounded-none !border-r h-full'
-              disabled={setting.currentPage == setting.totalPage}
-            >
-              {btn.icon}
-            </Button>
-          ))}
+  return (
+    <div className='flex w-full justify-end px-4 py-2'>
+      <div className=' flex border rounded-md overflow-hidden'>
+        {listBtn[0]?.map((btn, i) => (
+          <Button
+            name={'prev-btn'}
+            key={i}
+            onClick={btn.onClick}
+            variant='no-style'
+            className='rounded-none !border-r h-full'
+            disabled={setting.currentPage == 1}
+          >
+            {btn.icon}
+          </Button>
+        ))}
+        <div className='px-2 py-1 !border-r flex items-center justify-center gap-2'>
+          <input
+            value={valuePage}
+            onChange={handleOnChange}
+            className='outline-none w-10 text-center focus:border-primary border  p-0 rounded-md'
+          />
+          <span>of {setting.currentPage}</span>
         </div>
+
+        {listBtn[1]?.map((btn, i) => (
+          <Button
+            name={'next-btn'}
+            key={i}
+            onClick={btn.onClick}
+            variant='no-style'
+            className='rounded-none !border-r h-full'
+            disabled={setting.currentPage == setting.totalPage}
+          >
+            {btn.icon}
+          </Button>
+        ))}
       </div>
-    )
+    </div>
   )
 }
 

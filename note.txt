@@ -1,1 +1,3 @@
-SEE bundle visualizer:  npx vite-bundle-visualizer
+SEE bundle visualizer: npx vite-bundle-visualizer
+SEE outdated package : npm outdated
+SEE unused dependencies : npx depcheck

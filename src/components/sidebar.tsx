@@ -51,6 +51,7 @@ const Sidebar = () => {
                       true,
                     'bg-white !text-black ': currentPath?.pathname?.includes(data?.name)
                   })}
+                  name={`menu-${name}`}
                 >
                   <Image
                     src={data.src || ''}
