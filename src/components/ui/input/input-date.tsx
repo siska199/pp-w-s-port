@@ -1,5 +1,5 @@
-import { forwardRef, useCallback, useMemo, useRef, useState } from 'react'
-import DatePicker, { DatePickerProps } from 'react-datepicker'
+import React, { forwardRef, useCallback, useMemo, useRef, useState } from 'react'
+import DatePicker, { DatePickerProps, ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 import clsx from 'clsx'
 import { format } from 'date-fns'
 
@@ -106,73 +106,20 @@ const InputDate = (props: TProps) => {
           showYearPicker={showTypeDate === 'year'}
           showMonthYearPicker={showTypeDate === 'month'}
           showFullMonthYearPicker={showTypeDate === 'date'}
-          renderCustomHeader={({
-            date,
-            decreaseMonth,
-            increaseMonth,
-            decreaseYear,
-            increaseYear,
-            prevMonthButtonDisabled,
-            nextMonthButtonDisabled
-          }) => (
-            <div className='flex items-center rounded-[16px] justify-between px-2'>
-              <Button
-                onClick={(e) => {
-                  e.preventDefault()
-                  return ['year', 'month']?.includes(showTypeDate)
-                    ? decreaseYear()
-                    : decreaseMonth()
-                }}
-                disabled={prevMonthButtonDisabled}
-                shape={'circle'}
-                variant={'solid-white'}
-                className={clsx({
-                  'p-2': true,
-                  'cursor-not-allowed opacity-50 ': prevMonthButtonDisabled
-                })}
-              >
-                <IconChevronLeft />
-              </Button>
-
-              <div className='text-body-medium font-semibold flex gap-2 text-gray-700'>
-                {['date', ''].includes(showTypeDate) && (
-                  <span onClick={handleShowMonth} className='cursor-pointer'>
-                    {format(date || '', 'MMMM')}
-                  </span>
-                )}
-
-                <span
-                  onClick={showTypeDate === 'year' ? () => null : handleShowYear}
-                  className={showTypeDate === 'year' ? '' : 'cursor-pointer'}
-                >
-                  {format(date || '', 'yyyy')}
-                </span>
-              </div>
-              <Button
-                shape={'circle'}
-                variant={'solid-white'}
-                onClick={(e) => {
-                  e.preventDefault()
-                  return ['year', 'month']?.includes(showTypeDate)
-                    ? increaseYear()
-                    : increaseMonth()
-                }}
-                disabled={nextMonthButtonDisabled}
-                className={clsx({
-                  'p-2': true,
-                  'cursor-not-allowed opacity-50': nextMonthButtonDisabled
-                })}
-              >
-                <IconChevronRight />
-              </Button>
-            </div>
+          renderCustomHeader={(propsCustomeHeader) => (
+            <HeaderDateCustome
+              showTypeDate={showTypeDate}
+              handleShowMonth={handleShowMonth}
+              handleShowYear={handleShowYear}
+              {...propsCustomeHeader}
+            />
           )}
           onCalendarOpen={() => setShowTypeDate('date')}
           shouldCloseOnSelect={isShouldCloseOnSelect}
           enableTabLoop={true}
           yearItemNumber={8}
           showIcon={true}
-          icon={<IconCalender className='' />}
+          icon={<IconCalender />}
           disabled={attrs.disabled}
           isClearable={!!value}
           toggleCalendarOnIconClick={true}
@@ -202,8 +149,82 @@ const InputDate = (props: TProps) => {
   )
 }
 
+interface TPropsHeaderDateCustome extends ReactDatePickerCustomHeaderProps {
+  showTypeDate: 'date' | 'month' | 'year' | ''
+  handleShowYear: () => void
+  handleShowMonth: () => void
+}
+
+const HeaderDateCustome = (props: TPropsHeaderDateCustome) => {
+  const { date, showTypeDate, handleShowMonth, handleShowYear, ...attrsHeader } = props
+  return (
+    <div className='flex items-center rounded-[16px] justify-between px-2'>
+      <BtnIconPrevNext type={'next'} showTypeDate={showTypeDate} {...attrsHeader} date={date} />
+      <div className='text-body-medium font-semibold flex gap-2 text-gray-700'>
+        {['date', ''].includes(showTypeDate) && (
+          <span onClick={handleShowMonth} className='cursor-pointer'>
+            {format(date || '', 'MMMM')}
+          </span>
+        )}
+
+        <span
+          onClick={showTypeDate === 'year' ? () => null : handleShowYear}
+          className={showTypeDate === 'year' ? '' : 'cursor-pointer'}
+        >
+          {format(date || '', 'yyyy')}
+        </span>
+      </div>
+      <BtnIconPrevNext type={'prev'} showTypeDate={showTypeDate} {...attrsHeader} date={date} />
+    </div>
+  )
+}
+
+interface TPropsBtnIconPrevNext extends ReactDatePickerCustomHeaderProps {
+  type: 'prev' | 'next'
+  showTypeDate: 'date' | 'month' | 'year' | ''
+}
+
+const BtnIconPrevNext = (props: TPropsBtnIconPrevNext) => {
+  const {
+    type,
+    decreaseMonth,
+    decreaseYear,
+    showTypeDate,
+    prevMonthButtonDisabled,
+    nextMonthButtonDisabled,
+    increaseYear,
+    increaseMonth
+  } = props
+  const isNext = type === 'next'
+
+  const handleOnClik = (e: React.MouseEvent<HTMLButtonElement | HTMLLinkElement, MouseEvent>) => {
+    e.preventDefault()
+    return ['year', 'month']?.includes(showTypeDate)
+      ? isNext
+        ? increaseYear()
+        : decreaseYear()
+      : isNext
+        ? increaseMonth()
+        : decreaseMonth()
+  }
+  return (
+    <Button
+      onClick={handleOnClik}
+      disabled={isNext ? nextMonthButtonDisabled : prevMonthButtonDisabled}
+      shape={'circle'}
+      variant={'solid-white'}
+      className={clsx({
+        'p-2': true,
+        'cursor-not-allowed opacity-50 ': isNext ? nextMonthButtonDisabled : prevMonthButtonDisabled
+      })}
+    >
+      {isNext ? <IconChevronLeft /> : <IconChevronRight />}
+    </Button>
+  )
+}
+
 const CustomeInput = forwardRef<HTMLInputElement, any>((props, ref) => {
   return <input {...props} ref={ref} readOnly />
 })
 
-export default InputDate
+export default React.memo(InputDate)

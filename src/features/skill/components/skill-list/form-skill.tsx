@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import EVENT_SKILL from '@features/skill/event-emitters/skill-event'
 import skillSchema, { initialFormSkill, TSkill } from '@features/skill/validation/skill-schema'
@@ -25,7 +25,7 @@ const FormSkill = () => {
     setForm({ ...mappingValuesToForm({ values: data, form }) })
   })
 
-  const handleOnChange = (e: TEventOnChange) => {
+  const handleOnChange = useCallback((e: TEventOnChange) => {
     const name = e.target.name as keyof typeof form
     const value = e.target.value
     const currForm = form
@@ -34,7 +34,7 @@ const FormSkill = () => {
     setForm({
       ...currForm
     })
-  }
+  }, [])
 
   const handleOnSubmit = (e: TEventSubmitForm) => {
     e?.preventDefault()

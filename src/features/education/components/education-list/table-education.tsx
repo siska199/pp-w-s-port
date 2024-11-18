@@ -9,7 +9,7 @@ import useTable from '@hooks/use-table'
 import { useAppDispatch, useAppSelector } from '@store/store'
 import { handleSetModalConfirmation } from '@store/ui-slice'
 import educations from '@lib/data/dummy/educations.json'
-import { delay } from '@lib/helper/function'
+import { delay, formatDate } from '@lib/helper/function'
 import { routes } from '@routes/constant'
 import { TTypeActionModalForm } from '@typescript/global.d'
 import { TSettingTable } from '@typescript/ui-types'
@@ -41,13 +41,19 @@ const TableEducation = () => {
         name: 'Start At',
         key: 'start_at',
         isSorted: true,
-        className: 'min-w-[12rem]'
+        className: 'min-w-[12rem]',
+        customeComponent:(data)=>{
+          return <div>{formatDate({date:data.start_at})}</div>
+        }
       },
       {
         name: 'End At',
         key: 'end_at',
         isSorted: true,
-        className: 'min-w-[12rem]'
+        className: 'min-w-[12rem]',
+        customeComponent:(data)=>{
+          return <div>{formatDate({date:data.end_at})}</div>
+        }
       }
     ],
     initialSetting: {

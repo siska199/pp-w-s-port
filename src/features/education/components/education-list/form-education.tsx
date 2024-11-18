@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import EVENT_EDUCATION from '@features/education/event-emitters/education-event'
 import educationSchema, {
@@ -36,7 +36,7 @@ const FormEducation = () => {
     setForm({ ...mappingValuesToForm({ values: data, form }) })
   })
 
-  const handleOnChange = (e: TEventOnChange) => {
+  const handleOnChange = useCallback((e: TEventOnChange) => {
     const name = e.target.name as keyof typeof form
     const value = e.target.value
     const currForm = form
@@ -45,7 +45,7 @@ const FormEducation = () => {
     setForm({
       ...currForm
     })
-  }
+  },[])
 
   const handlleCloseFormEducation = () => {
     setForm(deepCopy({ ...initialFormEducation }))

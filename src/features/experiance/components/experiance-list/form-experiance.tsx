@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import EVENT_EXPERIANCE from '@features/experiance/event-emitters/experiance-event'
 import experianceSchema, {
@@ -31,7 +31,7 @@ const FormExperiance = () => {
     setForm({ ...mappingValuesToForm({ values: data, form }) })
   })
 
-  const handleOnChange = (e: TEventOnChange) => {
+  const handleOnChange = useCallback((e: TEventOnChange) => {
     const name = e.target.name as keyof typeof form
     const value = e.target.value
     const currForm = form
@@ -40,7 +40,7 @@ const FormExperiance = () => {
     setForm({
       ...currForm
     })
-  }
+  }, [])
 
   const handleOnSubmit = (e: TEventSubmitForm) => {
     e?.preventDefault()

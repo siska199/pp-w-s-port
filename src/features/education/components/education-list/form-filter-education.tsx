@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { eventEmitter } from '@event-emitters'
 
 import EVENT_EDUCATION from '@features/education/event-emitters/education-event'
@@ -7,7 +7,7 @@ import InputSelect from '@components/ui/input/input-select/input-select'
 
 import useDebounce from '@hooks/use-debounce'
 import { deepCopy } from '@lib/helper/function'
-import { TCustomeEventOnChange } from '@typescript/ui-types'
+import { TEventOnChange } from '@typescript/ui-types'
 import { IconSearch } from '@assets/icons'
 
 const FormFilterEducation = () => {
@@ -21,14 +21,13 @@ const FormFilterEducation = () => {
     })
   }, [debounceValue])
 
-  const handleOnChange = (e: TCustomeEventOnChange<any>) => {
+  const handleOnChange = useCallback((e:TEventOnChange)=>{
     const currForm = form
     const value = e.target.value
     const name = e.target.name as keyof typeof form
     currForm[name].value = value
-
     setForm({ ...currForm })
-  }
+  },[])
 
   return (
     <div className='grid md:grid-cols-4 gap-4'>
@@ -39,7 +38,7 @@ const FormFilterEducation = () => {
         {...form['keyword']}
         onChange={handleOnChange}
         customeClass={{
-          ciV4: 'col-span-2'
+          ciV4: 'md:col-span-2'
         }}
       />
       <InputSelect {...form['level']} onChange={handleOnChange} />

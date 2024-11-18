@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
-import { Editor, EditorProps } from 'react-draft-wysiwyg'
-import { ContentState, convertToRaw, EditorState, RichUtils } from 'draft-js'
-import draftToHtml from 'draftjs-to-html'
+import React, { useEffect, useState } from 'react'
+import { ContentState, EditorState, RichUtils } from 'draft-js'
 
 import ContainerInput from '@components/ui/input/container-input'
 
@@ -9,9 +7,13 @@ import { basicToolbarConfig } from '@lib/helper/constant'
 import { isHtmlHasText } from '@lib/helper/function'
 import { TBasePropsInput, TCustomeEventOnChange } from '@typescript/ui-types'
 
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+const LazyEditor = React.lazy(() =>
+  import('react-draft-wysiwyg')?.then((module) => ({ default: module.Editor }))
+)
 
-interface TProps extends TBasePropsInput, Omit<EditorProps, 'onChange'> {
+interface TProps
+  extends TBasePropsInput,
+    Omit<React.ComponentProps<typeof LazyEditor>, 'onChange'> {
   value: string
   name: string
   onChange: (e: TCustomeEventOnChange<string>) => void
@@ -30,27 +32,36 @@ const InputTextEditor = (props: TProps) => {
   const [editorState, setEditorState] = useState(
     EditorState.createWithContent(ContentState.createFromText(value))
   )
+
+  useEffect(() => {
+    import('react-draft-wysiwyg/dist/react-draft-wysiwyg.css')
+  }, [])
+
   const currentBlockType = RichUtils.getCurrentBlockType(editorState)
 
-  const handleOnChangeEditorState = (editorState: EditorState) => {
+  const handleOnChangeEditorState = async (editorState: EditorState) => {
     setEditorState(editorState)
     const contentState = editorState.getCurrentContent()
-    const rawContentState = convertToRaw(contentState)
+    const draftJS = await import('draft-js')
 
-    const htmlContent = draftToHtml(rawContentState)
-    const isEmptyValue = !isHtmlHasText(htmlContent)
+    const rawContentState = draftJS.convertToRaw(contentState)
 
-    onChange({
-      target: {
-        name,
-        value: isEmptyValue ? '' : htmlContent
-      }
+    await import('draftjs-to-html')?.then((module) => {
+      const draftJsToHTML = module.default
+      const htmlContent = draftJsToHTML(rawContentState)
+      const isEmptyValue = !isHtmlHasText(htmlContent)
+      onChange({
+        target: {
+          name,
+          value: isEmptyValue ? '' : htmlContent
+        }
+      })
     })
   }
 
   return (
     <ContainerInput {...attrs} customeClass={{ ciV2: '!p-1 !overflow-visible' }}>
-      <Editor
+      <LazyEditor
         editorState={editorState}
         onEditorStateChange={handleOnChangeEditorState}
         editorClassName={`px-2 ${editorClassName}`}

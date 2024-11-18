@@ -275,8 +275,8 @@ interface TFormatDate {
   timeZone?: string
 }
 export const formatDate = (params: TFormatDate) => {
-  const { format = TTypeDateFormat['DD/MM/YYYY'], timeZone = 'UTC' } = params
   let { date } = params
+  const { format = TTypeDateFormat['DD/MM/YYYY'], timeZone = 'UTC' } = params
 
   if (!date) return null
 
