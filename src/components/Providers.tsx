@@ -1,4 +1,3 @@
-import { pdfjs } from 'react-pdf'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
@@ -12,10 +11,6 @@ import '@assets/styles/input.css'
 import '@assets/styles/modal.css'
 import '@assets/styles/slider.css'
 import '@assets/styles/tooltip.css'
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
-import 'react-pdf/dist/esm/Page/TextLayer.css'
-
-pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.mjs'
 
 const Providers = () => {
   return (

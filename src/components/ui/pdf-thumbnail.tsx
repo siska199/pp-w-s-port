@@ -1,7 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
-import { Document, DocumentProps, Page } from 'react-pdf'
+import React, { useEffect, useRef, useState } from 'react'
 
-interface TProps extends DocumentProps {
+const LazyDocument = React.lazy(() =>
+  import('react-pdf').then((module) => ({ default: module.Document }))
+)
+const LazyPage = React.lazy(() => import('react-pdf').then((module) => ({ default: module.Page })))
+
+interface TProps extends React.ComponentProps<typeof LazyDocument> {
   customeClass?: {
     container: string
   }
@@ -13,6 +17,14 @@ const PDFThumbnail = (props: TProps) => {
   const [containerSize, setContainerSize] = useState({ width: 0 })
 
   const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    import('react-pdf').then((module) => {
+      module.pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.mjs'
+    })
+    import('react-pdf/dist/esm/Page/AnnotationLayer.css')
+    import('react-pdf/dist/esm/Page/TextLayer.css')
+  }, [])
 
   useEffect(() => {
     if (containerRef.current) {
@@ -30,12 +42,12 @@ const PDFThumbnail = (props: TProps) => {
       onClick={onClick}
     >
       {containerSize.width > 0 && (
-        <Document {...attrsDocument}>
-          <Page pageNumber={1} width={containerSize.width} renderTextLayer={false} />
-        </Document>
+        <LazyDocument {...attrsDocument}>
+          <LazyPage pageNumber={1} width={containerSize.width} renderTextLayer={false} />
+        </LazyDocument>
       )}
     </div>
   )
 }
 
-export default PDFThumbnail
+export default React.memo(PDFThumbnail)

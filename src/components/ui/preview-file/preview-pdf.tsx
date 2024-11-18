@@ -1,5 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
-import { Document, DocumentProps, Page } from 'react-pdf'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import type { PDFDocumentProxy } from 'pdfjs-dist'
 
 import Button from '@components/ui/button'
@@ -8,8 +7,12 @@ import { TFileValue } from '@components/ui/input/input-file/input-file-v1'
 import useResizeObserver from '@hooks/use-resize-observer'
 import { handleDownloadFile } from '@lib/helper/function'
 import { IconZoomIn, IconZoomOut } from '@assets/icons'
+const LazyDocument = React.lazy(() =>
+  import('react-pdf').then((module) => ({ default: module.Document }))
+)
+const LazyPage = React.lazy(() => import('react-pdf').then((module) => ({ default: module.Page })))
 
-type TPropsPreviewPDF = DocumentProps & {
+type TPropsPreviewPDF = React.ComponentProps<typeof LazyDocument> & {
   customeClass?: {
     container?: string
     page?: string
@@ -22,6 +25,14 @@ const PreviewPDF = (props: TPropsPreviewPDF) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 })
   const [scale, setScale] = useState(1.0)
+
+  useEffect(() => {
+    import('react-pdf').then((module) => {
+      module.pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.mjs'
+    })
+    import('react-pdf/dist/esm/Page/AnnotationLayer.css')
+    import('react-pdf/dist/esm/Page/TextLayer.css')
+  }, [])
 
   const handleOnResize = useCallback<ResizeObserverCallback>(
     (entries) => {
@@ -84,13 +95,13 @@ const PreviewPDF = (props: TPropsPreviewPDF) => {
         className={`overflow-auto w-full flex h-full   ${customeClass?.container}`}
         ref={containerRef}
       >
-        <Document
+        <LazyDocument
           className={'mx-auto max-w-full'}
           onLoadSuccess={handleOnLoadSuccess}
           {...attrsDocument}
         >
           {[...new Array(pages)]?.map((_, index) => (
-            <Page
+            <LazyPage
               key={`page_${index}`}
               pageNumber={index + 1}
               className={`${customeClass?.page}`}
@@ -99,7 +110,7 @@ const PreviewPDF = (props: TPropsPreviewPDF) => {
               scale={scale}
             />
           ))}
-        </Document>
+        </LazyDocument>
       </div>
       <div className='sticky bottom-0 bg-white flex justify-between gap-2'>
         <div className='flex gap-2'>

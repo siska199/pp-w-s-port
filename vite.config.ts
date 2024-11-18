@@ -33,7 +33,8 @@ export default defineConfig({
     rollupOptions: {
       treeshake: true
     },
-    sourcemap: true
+    sourcemap: true,
+    chunkSizeWarningLimit: 300
   },
 
   esbuild: {
