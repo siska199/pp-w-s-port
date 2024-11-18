@@ -20,7 +20,7 @@ const FormFilterProject = () => {
     setForm({ ...currForm })
   }
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
+    <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
       <InputBase
         customeElement={{
           start: <IconSearch className='icon-gray icon-gray-fill' />
@@ -28,7 +28,7 @@ const FormFilterProject = () => {
         {...form['keyword']}
         onChange={handleOnChange}
         customeClass={{
-          ciV4: 'col-span-4'
+          ciV4: 'md:col-span-2'
         }}
       />
       <InputSelect onChange={handleOnChange} {...form['category']} isMultiple />
