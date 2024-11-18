@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react'
 
 import MenuProjects from '@features/project/components/project-upsert/menu-project/menu-projects'
+import ResponsibilityProjects from '@features/project/components/project-upsert/responsibility-project/responsibility-projects'
 import { initialFormProject } from '@features/project/validation/project-schema'
 import Button from '@components/ui/button'
 import InputBase from '@components/ui/input/input-base'
@@ -43,7 +44,7 @@ const FormProject = () => {
         <InputTextArea {...form['description']} onChange={handleOnChange} />
       </form>
       <MenuProjects />
-
+      <ResponsibilityProjects />
       <Button type='submit' className='ml-auto'>
         Save
       </Button>

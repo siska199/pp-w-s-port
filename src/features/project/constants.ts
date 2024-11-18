@@ -153,3 +153,26 @@ export const optionsTechStack = [
     })
   }
 ]
+
+export const responsibilities = [
+  {
+    id: '1',
+    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum ipsa porro repudiandae sunt neque natus vero ut nam. Maxime obcaecati quam culpa praesentium nisi tempore similique eligendi! Exercitationem, ut beatae?`
+  },
+  {
+    id: '2',
+    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum ipsa porro repudiandae sunt neque natus vero ut nam. Maxime obcaecati quam culpa praesentium nisi tempore similique eligendi! Exercitationem, ut beatae?`
+  },
+  {
+    id: '3',
+    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum ipsa porro repudiandae sunt neque natus vero ut nam. Maxime obcaecati quam culpa praesentium nisi tempore similique eligendi! Exercitationem, ut beatae?`
+  },
+  {
+    id: '4',
+    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum ipsa porro repudiandae sunt neque natus vero ut nam. Maxime obcaecati quam culpa praesentium nisi tempore similique eligendi! Exercitationem, ut beatae?`
+  },
+  {
+    id: '5',
+    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum ipsa porro repudiandae sunt neque natus vero ut nam. Maxime obcaecati quam culpa praesentium nisi tempore similique eligendi! Exercitationem, ut beatae?`
+  }
+]
