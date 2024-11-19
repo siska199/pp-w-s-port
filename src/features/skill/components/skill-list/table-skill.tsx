@@ -46,7 +46,7 @@ const TableSkill = () => {
         name: 'Level',
         key: 'level',
         isSorted: true,
-        className: '   md:min-w-[10rem]',
+        className: ' flex items-center  justify-center  md:min-w-[10rem]',
         customeComponent: (data: TData) => {
           const level = data.level
           let variant = 'soft-primary' as keyof typeof variantBadge

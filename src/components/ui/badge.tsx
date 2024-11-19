@@ -14,10 +14,10 @@ interface TProps
 const Badge = (props: TProps) => {
   const { label, className, variant, customeElement, shape, size, ...attrs } = props
   return (
-    <span className={`${cn(badgeVariants({ className, variant, shape, size }))}`} {...attrs}>
+    <div className={`${cn(badgeVariants({ className, variant, shape, size }))}`} {...attrs}>
       {label}
       {customeElement}
-    </span>
+    </div>
   )
 }
 

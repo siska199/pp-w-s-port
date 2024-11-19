@@ -1,9 +1,5 @@
 @import url('./index.css');
 
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
 .tooltip:hover .rectangle {
   border-width: 5px;
   border-style: solid;
@@ -17,7 +13,8 @@
   border-radius: 5px;
   padding: 7px;
   text-align: center;
-  z-index: 10;
+  z-index: 1;
+  min-width: 5rem;
 }
 
 /* TOP */

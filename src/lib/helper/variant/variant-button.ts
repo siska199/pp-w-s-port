@@ -82,3 +82,6 @@ Object.entries(variantButton)?.forEach(([key, value]) => {
     } cursor-pointer-custome`
   }
 })
+
+
+export type TKeyVariantButton = keyof typeof variantButton

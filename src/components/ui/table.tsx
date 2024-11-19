@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import Badge from '@components/ui/badge'
 import Button from '@components/ui/button'
 import EmptyData from '@components/ui/empty-data'
+import Tooltip from '@components/ui/tooltip'
 
 import useDebounce from '@hooks/use-debounce'
 import { cn } from '@lib/helper/function'
-import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge'
+import { TKeyVariantButton } from '@lib/helper/variant/variant-button'
 import { TColumn, TEventOnChange, TSettingTable } from '@typescript/ui-types'
 import {
   IconArrowUp,
@@ -160,37 +160,42 @@ const TableBody = <TData, TIncludeChecked extends boolean = false>(
     (dataRow: TData) => {
       return Object.entries(actionBtn).map(([key, onClick]) => {
         let Icon = <IconEye className='icon-blue' />
-        let variant: TKeyVariantBadge = 'softborder-blue'
-
+        let variant: TKeyVariantButton = 'softborder-blue'
+        let tooltipInformation = 'See detail data'
         switch (key) {
           case 'edit':
             Icon = <IconEdit className='icon-warning' />
             variant = 'softborder-warning'
+            tooltipInformation = 'Edit detail data'
             break
           case 'delete':
             Icon = <IconDelete className='icon-error' />
             variant = 'softborder-error'
+            tooltipInformation = 'Delete data'
             break
           default:
             break
         }
 
         return (
-          <Badge
-            key={key}
-            variant={variant}
-            label={Icon}
-            shape='pilled'
-            className='!p-1 !min-h-auto !min-w-auto cursor-pointer-custome'
-            onClick={() => onClick(dataRow)}
-          />
+          <Tooltip text={tooltipInformation} variant='bottom'>
+            <Button
+              key={key}
+              className=''
+              variant={variant}
+              shape='circle'
+              onClick={() => onClick(dataRow)}
+            >
+              {Icon}
+            </Button>
+          </Tooltip>
         )
       })
     },
     [actionBtn]
   )
 
-  if (data.length === 0) return null
+  if (data?.length === 0) return null
 
   return (
     <tbody>
@@ -215,7 +220,7 @@ const TableBody = <TData, TIncludeChecked extends boolean = false>(
 
             {isShowColumnAction && (
               <td>
-                <div className='min-w-[5rem] flex justify-center items-center gap-2 pr-2'>
+                <div className='min-w-[5rem] overflow-visible flex justify-center items-center pr-2'>
                   {renderActionButtons(dataRow)}
                 </div>
               </td>
@@ -247,29 +252,33 @@ const PaginationTable = <TData, TIncludeChecked extends boolean>(
     handleOnChangePage(valuePage)
   }, [debounceValue])
 
-  const listBtn = useMemo(
-    () => [
-      [
+  const listButton = useMemo(
+    () => ({
+      left: [
         {
           icon: <IconFastRewind />,
-          onClick: () => handleOnChangePage(1)
+          onClick: () => handleOnChangePage(1),
+          title: 'fast rewind button'
         },
         {
           icon: <IconSkipPrevious />,
-          onClick: () => handleOnChangePage(setting.currentPage - 1)
+          onClick: () => handleOnChangePage(setting.currentPage - 1),
+          title: 'previous button'
         }
       ],
-      [
+      right: [
         {
           icon: <IconSkipNext />,
-          onClick: () => handleOnChangePage(setting.currentPage + 1)
+          onClick: () => handleOnChangePage(setting.currentPage + 1),
+          title: 'next button'
         },
         {
           icon: <IconFastForward />,
-          onClick: () => handleOnChangePage(setting.totalPage)
+          onClick: () => handleOnChangePage(setting.totalPage),
+          title: 'fast forward button'
         }
       ]
-    ],
+    }),
     [JSON.stringify(setting)]
   )
 
@@ -282,9 +291,9 @@ const PaginationTable = <TData, TIncludeChecked extends boolean>(
   return (
     <div className='flex w-full justify-end px-4 py-2'>
       <div className=' flex border rounded-md overflow-hidden'>
-        {listBtn[0]?.map((btn, i) => (
+        {listButton?.left?.map((btn, i) => (
           <Button
-            name={'prev-btn'}
+            title={btn.title}
             key={i}
             onClick={btn.onClick}
             variant='no-style'
@@ -298,14 +307,15 @@ const PaginationTable = <TData, TIncludeChecked extends boolean>(
           <input
             value={valuePage}
             onChange={handleOnChange}
+            aria-label='current-page'
             className='outline-none w-10 text-center focus:border-primary border  p-0 rounded-md'
           />
           <span>of {setting.currentPage}</span>
         </div>
 
-        {listBtn[1]?.map((btn, i) => (
+        {listButton?.right?.map((btn, i) => (
           <Button
-            name={'next-btn'}
+            title={btn.title}
             key={i}
             onClick={btn.onClick}
             variant='no-style'

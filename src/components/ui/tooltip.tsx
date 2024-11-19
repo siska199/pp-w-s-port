@@ -2,7 +2,7 @@ import { forwardRef, useEffect } from 'react'
 
 import { cn } from '@lib/helper/function'
 
-interface TProps {
+interface TPropsTooltip {
   children: React.ReactNode
   text: string
   variant?: 'top' | 'bottom' | 'left' | 'right'
@@ -13,37 +13,53 @@ interface TProps {
   }
 }
 
-const Tooltip = forwardRef<HTMLDivElement, TProps>((props, ref) => {
+const Tooltip = forwardRef<HTMLDivElement, TPropsTooltip>((props, ref) => {
   const { children, type, text, variant = 'top', customeClass } = props
+
   useEffect(() => {
     import('@assets/styles/tooltip.css')
   }, [])
+
+  if (!text) return null
+
   return (
     <div
       data-text={text}
-      className={cn({
-        'p-1 inline-block relative !overflow-visible w-fit': true,
-        [customeClass?.tooltip || '']: !!customeClass?.tooltip,
-        'tooltip ': !!text,
-        [`${variant}`]: !!variant,
-        'hover:before:!bg-white/15': type === 'glass'
-      })}
+      className={classNameContainerTooltip({ customeClass, text, variant })}
       ref={ref}
     >
       {children}
-      {text && (
-        <span
-          className={cn({
-            'rectangle ': true,
-            [customeClass?.rectangle || '']: !!customeClass?.rectangle,
-            [`${variant}`]: !!variant,
-            '!border-transparent !border-t-transparent !border-b-white/15 !border-l-transparent !border-r-transparent':
-              type === 'glass'
-          })}
-        ></span>
-      )}
+      <span className={classNameContainerText({ customeClass, variant, type })}></span>
     </div>
   )
 })
+
+type TPropsClassNameContainerTooltip = Pick<
+  TPropsTooltip,
+  'text' | 'variant' | 'type' | 'customeClass'
+>
+
+const classNameContainerTooltip = ({
+  customeClass,
+  variant,
+  type
+}: TPropsClassNameContainerTooltip) =>
+  cn({
+    'tooltip p-1  relative !overflow-visible w-fit  relative': true,
+    [customeClass?.tooltip || '']: true,
+    [variant || '']: true,
+    'hover:before:!bg-white/15': type === 'glass'
+  })
+
+type TPropsClassNameContainerText = Pick<TPropsTooltip, 'customeClass' | 'variant' | 'type'>
+
+const classNameContainerText = ({ customeClass, variant, type }: TPropsClassNameContainerText) =>
+  cn({
+    'rectangle ': true,
+    [customeClass?.rectangle || '']: true,
+    [variant || '']: true,
+    '!border-transparent !border-t-transparent !border-b-white/15 !border-l-transparent !border-r-transparent':
+      type === 'glass'
+  })
 
 export default Tooltip

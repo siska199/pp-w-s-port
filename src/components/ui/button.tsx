@@ -19,7 +19,6 @@ type TProps = Omit<
     isLoading?: boolean
     to?: string
     children: React.ReactNode
-    name: string
   } & TPropsLink
 
 const Button = (props: TProps) => {
@@ -52,7 +51,7 @@ const Button = (props: TProps) => {
 }
 
 const buttonVariants = cva(
-  'w-fit min-w-auto  gap-1 font-bold h-fit items-center  text-white justify-center font-normal flex gap-sm disabled:cursor-not-allowed  disabled:opacity-50 ',
+  'w-fit min-w-auto  gap-1 font-medium h-fit items-center  text-white justify-center  flex gap-sm disabled:cursor-not-allowed  disabled:opacity-50 ',
   {
     variants: {
       variant: {
@@ -60,7 +59,7 @@ const buttonVariants = cva(
       },
       shape: {
         rounded: 'rounded-lg',
-        circle: 'rounded-full'
+        circle: 'rounded-full !p-1'
       },
       size: {
         small: 'py-1 px-4 ',

@@ -94,6 +94,7 @@ const Dropdown = (props: TProps) => {
               isDefaultStyle,
             [customeClass?.btnDropdown || '']: customeClass?.btnDropdown
           })}
+          title='dropdown-button'
         >
           {label}
           {customeButtonTriger ?? <IconChevronToggle isOpen={isOpen} className='w-[1rem]' />}
