@@ -2,13 +2,11 @@ import { useEffect, useState } from 'react'
 import { eventEmitter } from '@event-emitters'
 
 import EVENT_SKILL from '@features/skill/event-emitters/skill-event'
-import InputBase from '@components/ui/input/input-base'
 import InputSelect from '@components/ui/input/input-select/input-select'
 
 import useDebounce from '@hooks/use-debounce'
 import { deepCopy } from '@lib/helper/function'
 import { TCustomeEventOnChange } from '@typescript/ui-types'
-import { IconSearch } from '@assets/icons'
 
 const FormFilterSKill = () => {
   const [form, setForm] = useState(deepCopy({ ...initialFormFilter }))
@@ -19,10 +17,9 @@ const FormFilterSKill = () => {
 
   useEffect(() => {
     eventEmitter.emit(EVENT_SKILL.SEARCH_DATA_TABLE_SKILL, {
-      keyword: form.keyword.value,
-      category: form.category.value,
-      yearsOfExperiance: form.yearsOfExperiance.value,
-      level: form.level.value
+      years_of_experiance: form.years_of_experiance.value,
+      level: form.level.value,
+      id_skills: form.id_skills.value
     })
   }, [debounceValues])
 
@@ -38,42 +35,31 @@ const FormFilterSKill = () => {
   return (
     <>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-        <InputBase
-          customeElement={{
-            start: <IconSearch className='icon-gray icon-gray-fill' />
-          }}
-          {...form['keyword']}
+        <InputSelect
           onChange={handleOnChange}
           customeClass={{
             ciV4: 'md:col-span-2'
           }}
+          {...form['id_skills']}
+          isMultiple
         />
-        <InputSelect onChange={handleOnChange} {...form['category']} isMultiple />
         <InputSelect onChange={handleOnChange} {...form['level']} isMultiple />
-        <InputSelect onChange={handleOnChange} {...form['yearsOfExperiance']} />
+        <InputSelect onChange={handleOnChange} {...form['years_of_experiance']} />
       </div>
     </>
   )
 }
 
 const initialFormFilter = {
-  keyword: {
-    name: 'keyword',
-    value: '',
-    placeholder: 'Search by skill name...'
+  id_skills: {
+    name: 'id_skills',
+    options: [],
+    placeholder: 'Skill',
+    value: []
   },
-  category: {
-    name: 'category',
-    value: [],
-    options: [
-      { label: 'Backend', value: 'backend' },
-      { label: 'Frotnend', value: 'forntend' },
-      { label: 'Fullstack', value: 'fullstack' }
-    ],
-    placeholder: 'Category Skill'
-  },
-  yearsOfExperiance: {
-    name: 'yearsOfExperiance',
+
+  years_of_experiance: {
+    name: 'years_of_experiance',
     options: [...Array(40)]?.map((_, i) => ({
       label: `${i + 1} year`,
       value: `${i + 1}`
