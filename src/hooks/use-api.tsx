@@ -19,6 +19,8 @@ interface TParamsApiClient {
     error?: string
   }
   queryObject?: TObject
+  noChace?: boolean
+  isNoCache?: boolean
 }
 
 type TResultApiClient = Promise<{
@@ -41,15 +43,20 @@ const useAPI = () => {
       isForm = false,
       payload,
       message,
-      queryObject
+      queryObject,
+      isNoCache = false
     } = params
     try {
       cancelTokenRef.current = axios.CancelToken.source()
-
+      
       let url = endpoint
-
       if (method === 'get' && queryObject) {
         url = generateUrlQueryParams({ url, queryObject })
+      }
+      const noCacheConfig = {
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache',
+        Expires: '0'
       }
 
       const response = await axios({
@@ -58,7 +65,9 @@ const useAPI = () => {
         method: !isEmptyValue(payload) ? 'post' : method,
         headers: {
           Authorization: bareerToken ? `Bearer ${bareerToken}` : null,
-          'Content-Type': isForm ? 'multipart/form-data' : 'application/json'
+
+          'Content-Type': isForm ? 'multipart/form-data' : 'application/json',
+          ...(isNoCache && noCacheConfig)
         },
         withCredentials: !!bareerToken,
         cancelToken: cancelTokenRef.current.token,

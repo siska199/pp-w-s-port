@@ -1,4 +1,4 @@
-import ENDPOINT from '@apis/constant'
+import ENDPOINT from '@apis/endpoints'
 
 import useAPI from '@hooks/use-api'
 
