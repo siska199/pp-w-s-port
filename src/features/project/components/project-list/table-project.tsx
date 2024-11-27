@@ -13,7 +13,7 @@ import { handleSetModalConfirmation } from '@store/ui-slice'
 import { projects } from '@lib/data/dummy/dummy'
 import { delay } from '@lib/helper/function'
 import { routes } from '@routes/constant'
-import { TTypeActionModalForm } from '@typescript/global.d'
+import { TTypeActionModalForm } from '@typescript/index-type'
 import { TSettingTable } from '@typescript/ui-types'
 
 type TData = (typeof projects)[0]

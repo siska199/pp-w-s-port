@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 
+import useAuth, { TTypeComponentNameUseAuth } from '@features/auth/hooks/use-auth'
 import ContainerModal from '@components/ui/modal/container-modal'
 import ModalConfirmation from '@components/ui/modal/container-modal-confirmation'
 
-import useCurrentPath from '@hooks/use-current-path'
 import { useAppDispatch, useAppSelector } from '@store/store'
 import { handleSetModal, handleSetModalConfirmation, initialStateAuthSlice } from '@store/ui-slice'
-import { routes } from '@routes/constant'
 interface TPropsGlobalLayout {
   children: React.ReactNode
 }
@@ -16,21 +14,11 @@ interface TPropsGlobalLayout {
 const GlobalLayout = (props: TPropsGlobalLayout) => {
   const { children } = props
 
-  const { currentPath } = useCurrentPath()
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
-
-  const isAuthenticated = useAppSelector((state) => state?.auth?.isAuthenticated)
   const modalConfirmation = useAppSelector((state) => state?.ui?.modalConfirmation)
   const modal = useAppSelector((state) => state?.ui?.modal)
 
-  useEffect(() => {
-    if (currentPath?.pathname === '/' || !currentPath?.pathname)
-      navigate(
-        (isAuthenticated ? routes?.personalInformation?.fullPath : routes?.auth?.fullPath) || '',
-        { replace: true }
-      )
-  }, [currentPath])
+  useAuth({ componentName: TTypeComponentNameUseAuth.GlobalLayout })
 
   useEffect(() => {
     dispatch(handleSetModalConfirmation({ ...initialStateAuthSlice?.modalConfirmation }))

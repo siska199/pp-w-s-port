@@ -1,23 +1,17 @@
 import { useEffect, useRef } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 
+import useAuth from '@features/auth/hooks/use-auth'
 import Navbar from '@components/navbar'
 import Sidebar from '@components/sidebar'
 
 import useCurrentPath from '@hooks/use-current-path'
-import { useAppSelector } from '@store/store'
-import { routes } from '@routes/constant'
 
-const Protectedlayout = () => {
+const ProtectedLayout = () => {
   const refContainerPage = useRef<HTMLDivElement>(null)
-
-  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
-  const navigate = useNavigate()
   const { currentPath } = useCurrentPath()
 
-  useEffect(() => {
-    if (!isAuthenticated) navigate(routes?.auth?.fullPath, { replace: true })
-  }, [])
+  useAuth({ componentName: 'ProtectedLayout' })
 
   useEffect(() => {
     refContainerPage?.current?.scrollTo(0, 0)
@@ -39,4 +33,4 @@ const Protectedlayout = () => {
   )
 }
 
-export default Protectedlayout
+export default ProtectedLayout

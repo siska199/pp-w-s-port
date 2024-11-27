@@ -3,7 +3,7 @@ import { eventEmitter } from '@event-emitters'
 import EVENT_SKILL from '@features/skill/event-emitters/skill-event'
 import HeaderPage from '@components/ui/header/header-page'
 
-import { TTypeActionModalForm } from '@typescript/global.d'
+import { TTypeActionModalForm } from '@typescript/index-type'
 
 const HeaderSkill = () => {
   const handleAddSkill = () => {

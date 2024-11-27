@@ -3,7 +3,7 @@ import { eventEmitter } from '@event-emitters'
 import EVENT_EXPERIANCE from '@features/experiance/event-emitters/experiance-event'
 import HeaderPage from '@components/ui/header/header-page'
 
-import { TTypeActionModalForm } from '@typescript/global.d'
+import { TTypeActionModalForm } from '@typescript/index-type'
 
 const HeaderExperiance = () => {
   const handleAddData = () => {

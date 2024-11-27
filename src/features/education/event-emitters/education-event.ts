@@ -1,7 +1,7 @@
 import { TFormFilterEducation } from '@features/education/components/education-list/form-filter-education'
 import { TEducationSchema } from '@features/education/validations/education-schema'
 
-import { TTypeActionModalForm } from '@typescript/global'
+import { TTypeActionModalForm } from '@typescript/index-type'
 
 const EVENT_EDUCATION = {
   SET_MODAL_FORM_EDUCATION: 'SET_MODAL_FORM_EDUCATION',

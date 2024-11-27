@@ -5,7 +5,7 @@ import EVENT_PROJECT from '@features/project/event-emitters/project-event'
 import CardAction from '@components/ui/card/card-action'
 import Header from '@components/ui/header/header'
 
-import { TTypeActionModalForm } from '@typescript/global.d'
+import { TTypeActionModalForm } from '@typescript/index-type'
 
 const ResponsibilityProjects = () => {
   const handleOnClickAddData = () => {

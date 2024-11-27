@@ -1,6 +1,6 @@
 import { TMenuProject } from '@features/project/validation/menu-project-schema'
 
-import { TTypeActionData, TTypeActionModalForm } from '@typescript/global'
+import { TTypeActionData, TTypeActionModalForm } from '@typescript/index-type'
 
 const EVENT_PROJECT = {
   SET_FORM_PROJECT: 'SET_FORM_PROJECT',

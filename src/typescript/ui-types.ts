@@ -1,6 +1,6 @@
 import { FormEvent, MouseEvent } from 'react'
 
-import { TObject } from '@typescript/global'
+import { TObject } from '@typescript/index-type'
 
 export interface TOption<TLabel = string> {
   label: TLabel

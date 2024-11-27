@@ -6,22 +6,25 @@ export interface TStateAuth {
   isAuthenticated: boolean
   user: TUser | null
   token: string
+  isRememberMe: boolean
 }
 
-const initialState: TStateAuth = {
+export const initialStateAuthStore: TStateAuth = {
   isAuthenticated: false,
   user: null,
-  token: ''
+  token: '',
+  isRememberMe: false
 }
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState,
+  initialState: initialStateAuthStore,
   reducers: {
     handleSetAuth: (state, action: PayloadAction<TStateAuth>) => {
       state.isAuthenticated = action.payload.isAuthenticated
       state.user = action.payload.user
       state.token = action.payload.token
+      state.isRememberMe = action.payload.isRememberMe
     }
   }
 })

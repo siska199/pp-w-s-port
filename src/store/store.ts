@@ -1,13 +1,16 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore, Middleware } from '@reduxjs/toolkit'
 import { persistReducer, persistStore } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import localStorageRedux from 'redux-persist/lib/storage'
+import sessionStorageRedux from 'redux-persist/lib/storage/session'
 import { encryptTransform } from 'redux-persist-transform-encrypt'
 
 import authSlice from '@features/auth/store/auth-slice'
 
 import uiSlice from '@store/ui-slice'
 import CONFIG from '@lib/config/config'
+import STORAGE_VARIABLE from '@lib/config/storage-variable'
+import { getItemSecureWebstorage } from '@lib/helper/secure-storage'
 
 const encryptor = encryptTransform({
   secretKey: CONFIG.SECRET_KEY,
@@ -16,8 +19,27 @@ const encryptor = encryptTransform({
   }
 })
 
+/*------- Middleware Log Out--------*/
+
+const middlewareLogout: Middleware = (_storeAPI) => (next) => (action: any) => {
+  if (action?.payload?.isAuthenticated === false) {
+    persistor.pause()
+    persistor.flush().then(() => {
+      return persistor.purge()
+    })
+    localStorage.clear()
+    sessionStorage.clear()
+  }
+
+  return next(action)
+}
+
+/*--------------------------------------------- */
+const isRememberMe = getItemSecureWebstorage(STORAGE_VARIABLE.IS_REMEMBER_ME)
+
+const storagePersist = isRememberMe ? localStorageRedux : sessionStorageRedux
+
 const rootReducers = () => {
-  const storagePersist = storage
   return combineReducers({
     auth: persistReducer(
       {
@@ -40,21 +62,12 @@ const rootReducers = () => {
   })
 }
 
-const mainPersistedReducer = persistReducer(
-  {
-    key: 'root',
-    storage,
-    blacklist: ['']
-  },
-  rootReducers()
-)
-
 const store = configureStore({
-  reducer: mainPersistedReducer,
+  reducer: rootReducers(),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false
-    })
+    }).concat(middlewareLogout)
 })
 
 const persistor = persistStore(store)

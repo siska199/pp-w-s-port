@@ -1,7 +1,7 @@
 import { TFilterSkill } from '@features/skill/components/skill-list/form-filter-skill'
 import { TSkill } from '@features/skill/validation/skill-schema'
 
-import { TTypeActionModalForm } from '@typescript/global'
+import { TTypeActionModalForm } from '@typescript/index-type'
 
 const EVENT_SKILL = {
   SET_MODAL_FORM_SKILL: 'SET_MODAL_FORM_SKILL',

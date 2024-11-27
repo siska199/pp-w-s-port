@@ -13,7 +13,7 @@ import experiances from '@lib/data/dummy/experiances.json'
 import { delay, formatDate, getRandomKey } from '@lib/helper/function'
 import variantBadge from '@lib/helper/variant/variant-badge'
 import { routes } from '@routes/constant'
-import { TTypeActionModalForm } from '@typescript/global.d'
+import { TTypeActionModalForm } from '@typescript/index-type'
 import { TSettingTable } from '@typescript/ui-types'
 
 type TData = (typeof experiances)[0]

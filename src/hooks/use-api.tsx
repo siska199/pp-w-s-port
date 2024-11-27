@@ -5,7 +5,7 @@ import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice'
 import CONFIG from '@lib/config/config'
 import appMessage from '@lib/data/app-message'
 import { generateUrlQueryParams, isEmptyValue } from '@lib/helper/function'
-import { TObject } from '@typescript/global.d'
+import { TObject } from '@typescript/index-type'
 
 interface TParamsApiClient {
   baseUrl?: string
@@ -48,7 +48,7 @@ const useAPI = () => {
     } = params
     try {
       cancelTokenRef.current = axios.CancelToken.source()
-      
+
       let url = endpoint
       if (method === 'get' && queryObject) {
         url = generateUrlQueryParams({ url, queryObject })
@@ -90,6 +90,8 @@ const useAPI = () => {
         message: 'Success'
       }
     } catch (error: any) {
+      console.log('error: ', error?.message)
+
       handleSetAlertConfig({
         show: true,
         message: message?.error || error?.message || appMessage.systemErrorMessage,

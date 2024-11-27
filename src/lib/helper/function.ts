@@ -2,7 +2,7 @@ import clsx, { ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import z, { ZodSchema, ZodType } from 'zod'
 
-import { TObject } from '@typescript/global.d'
+import { TObject } from '@typescript/index-type'
 import { TOption, TTypeDateFormat, TTypeFile } from '@typescript/ui-types'
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -213,15 +213,17 @@ export const mappingErrorsToForm = <TSchema, TForm extends TObject>(
     }, {} as TObject)
   )
 
-  if (!result?.success) {
-    const errors = result?.error?.flatten()?.fieldErrors
-    Object?.keys(form)?.reduce((acc, key) => {
-      form[key as keyof TForm].errorMessage = errors[key as keyof TForm]?.[0] || ''
-      if (errors[key as keyof TForm]?.[0]) isValid = false
-      return acc
-    }, {} as TObject)
-  }
+  isValid = result?.success
 
+  Object?.keys(form)?.reduce((acc, key) => {
+    const errorMessage = !isValid
+      ? result?.error?.flatten()?.fieldErrors[key as keyof TForm]?.[0]
+      : ''
+
+    form[key as keyof TForm].errorMessage = errorMessage
+
+    return acc
+  }, {} as TObject)
   return { isValid, form }
 }
 

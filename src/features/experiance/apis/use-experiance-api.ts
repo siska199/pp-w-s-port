@@ -2,7 +2,7 @@ import ENDPOINT from '@apis/endpoints'
 
 import useAPI from '@hooks/use-api'
 import experiances from '@lib/data/dummy/experiances.json'
-import { TPaginationQueryParams } from '@typescript/global.d'
+import { TPaginationQueryParams } from '@typescript/index-type'
 
 const useExperianceAPI = () => {
   const { apiClient } = useAPI()

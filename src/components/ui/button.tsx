@@ -1,4 +1,4 @@
-import { HTMLProps } from 'react'
+import { HTMLProps, memo } from 'react'
 import { Link } from 'react-router-dom'
 import { cva, VariantProps } from 'class-variance-authority'
 
@@ -76,4 +76,4 @@ const buttonVariants = cva(
   }
 )
 
-export default Button
+export default memo(Button)

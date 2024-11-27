@@ -1,6 +1,6 @@
 import { TSocialLink } from '@features/personal-information/components/social-link/form-social-links'
 
-import { TObject } from '@typescript/global'
+import { TObject } from '@typescript/index-type'
 
 const EVENT_PERSONAL_INFORMATION = {
   ONCHANGE_SOCIAL_LINKS: 'ONCHANGE_SOCIAL_LINKS',

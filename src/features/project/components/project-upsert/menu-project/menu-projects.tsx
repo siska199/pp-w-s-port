@@ -9,7 +9,7 @@ import Header from '@components/ui/header/header'
 import Image from '@components/ui/image'
 
 import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge'
-import { TTypeActionModalForm } from '@typescript/global.d'
+import { TTypeActionModalForm } from '@typescript/index-type'
 import { IconDelete, IconEdit } from '@assets/icons'
 
 const MenuProjects = React.memo(() => {

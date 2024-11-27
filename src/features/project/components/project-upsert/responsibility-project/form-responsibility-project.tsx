@@ -7,7 +7,7 @@ import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import { deepCopy } from '@lib/helper/function'
-import { TTypeActionModalForm } from '@typescript/global.d'
+import { TTypeActionModalForm } from '@typescript/index-type'
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types'
 
 const FormResponsiblityProject = () => {

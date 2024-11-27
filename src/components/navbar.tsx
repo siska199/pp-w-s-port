@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { handleSetAuth } from '@features/auth/store/auth-slice'
+import { handleSetAuth, initialStateAuthStore } from '@features/auth/store/auth-slice'
 import Logo from '@components/logo'
 import Avatar from '@components/ui/avatar'
 import DropdownBase, { TOptionDropdown } from '@components/ui/dropdown'
@@ -42,7 +42,7 @@ const ContentProtectedRoute = () => {
       case 'profile':
         break
       case 'logout':
-        dispatch(handleSetAuth(false))
+        dispatch(handleSetAuth(initialStateAuthStore))
         navigate(routes.auth?.fullPath as string, {
           replace: true
         })

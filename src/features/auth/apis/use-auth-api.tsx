@@ -6,7 +6,7 @@ const useAuthAPI = () => {
   const { apiClient } = useAPI()
 
   interface TParamsSignIn {
-    username: string
+    email: string
     password: string
   }
   const signIn = async (params: TParamsSignIn) => {

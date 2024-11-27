@@ -1,8 +1,7 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import useAuthAPI from '@features/auth/apis/use-auth-api'
-import { handleSetAuth } from '@features/auth/store/auth-slice'
 import signInSchema, {
   initialFormSignIn,
   TSignInSchema
@@ -12,23 +11,35 @@ import Container from '@components/ui/container/container'
 import InputBase from '@components/ui/input/input-base'
 import InputCheckbox from '@components/ui/input/input-checkbox'
 
-import { useAppDispatch } from '@store/store'
-import { extractValueFromForm, mappingErrorsToForm } from '@lib/helper/function'
+import STORAGE_VARIABLE from '@lib/config/storage-variable'
+import { deepCopy, extractValueFromForm, mappingErrorsToForm } from '@lib/helper/function'
+import { setItemSecureWebstorage } from '@lib/helper/secure-storage'
 import { routes } from '@routes/constant'
 import { TEventOnChange } from '@typescript/ui-types'
 
 const FormSignIn = () => {
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
 
   const { signIn } = useAuthAPI()
-  const [form, setForm] = useState(initialFormSignIn)
+  const [form, setForm] = useState(deepCopy({ ...initialFormSignIn }))
+
+  useEffect(() => {
+    setItemSecureWebstorage(STORAGE_VARIABLE.IS_REMEMBER_ME, false)
+  }, [])
 
   const handleOnChange = useCallback(async (e: TEventOnChange) => {
     const currForm = form
     const name = e.target.name as keyof typeof form
     const value = e.target.value
     currForm[name].value = value
+
+    if (name === 'is_remember_me') {
+      setItemSecureWebstorage(
+        STORAGE_VARIABLE.IS_REMEMBER_ME,
+        Boolean(value === 'true' ? true : false)
+      )
+    }
+
     setForm({
       ...currForm
     })
@@ -42,24 +53,31 @@ const FormSignIn = () => {
     })
 
     if (isValid) {
-      const payload = extractValueFromForm(updatedForm)
+      const payload = extractValueFromForm(deepCopy(updatedForm))
       const result = await signIn({
-        username: payload.username,
+        email: payload.username,
         password: payload.password
       })
-      dispatch(
-        handleSetAuth({
-          isAuthenticated: result?.sucess,
-          token: result?.data?.token,
-          user: result?.data?.user
-        })
-      )
-      navigate(routes.personalInformation.fullPath)
-    } else {
-      setForm({
-        ...updatedForm
-      })
+      if (result?.sucess) {
+        const isRememberMe = payload?.is_remember_me === 'false' ? false : true
+        setItemSecureWebstorage(STORAGE_VARIABLE.IS_REMEMBER_ME, isRememberMe)
+        setItemSecureWebstorage(
+          STORAGE_VARIABLE.AUTH,
+          {
+            isAuthenticated: result?.sucess,
+            token: result?.data?.token,
+            user: result?.data?.user,
+            isRememberMe
+          },
+          isRememberMe ? localStorage : sessionStorage
+        )
+        navigate(routes.personalInformation.fullPath)
+        navigate(0)
+      }
     }
+    setForm({
+      ...updatedForm
+    })
   }
 
   return (

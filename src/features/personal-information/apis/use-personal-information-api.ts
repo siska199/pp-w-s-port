@@ -2,7 +2,7 @@ import { listCategorySocialLink } from '@features/personal-information/constants
 import ENDPOINT from '@apis/endpoints'
 
 import useAPI from '@hooks/use-api'
-import { TResponseSuccessAPI } from '@typescript/global'
+import { TResponseSuccessAPI } from '@typescript/index-type'
 
 const usePersonalInformation = () => {
   const { apiClient } = useAPI()
