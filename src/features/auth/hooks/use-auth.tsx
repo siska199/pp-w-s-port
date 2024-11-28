@@ -22,25 +22,24 @@ const useAuth = (props: { componentName: TTypeComponentNameUseAuth }) => {
 
   const isAuthenticated = useAppSelector((state) => state?.auth?.isAuthenticated)
   const isRememberMe = getItemSecureWebstorage(STORAGE_VARIABLE.IS_REMEMBER_ME)
+
   const authStorage = getItemSecureWebstorage<TStateAuth>(
     STORAGE_VARIABLE.AUTH,
     isRememberMe ? localStorage : sessionStorage
   )
+  const isProtectedLayout = componentName === TTypeComponentNameUseAuth.ProtectedLayout
+  const isGlobalLayout = TTypeComponentNameUseAuth.GlobalLayout === componentName
 
+  /*------------------------PROTECTED LAYOUT AUTH-------------------------------------------- */
   useEffect(() => {
-    if (
-      !isAuthenticated &&
-      !authStorage?.isAuthenticated &&
-      componentName === TTypeComponentNameUseAuth.ProtectedLayout
-    )
+    if (!isAuthenticated && !authStorage?.isAuthenticated && isProtectedLayout)
       navigate(routes?.auth?.fullPath, { replace: true })
   }, [])
 
+  /*------------------------GLOBAL LAYOUT AUTH-------------------------------------------- */
+
   useEffect(() => {
-    if (
-      (currentPath?.pathname === '/' || !currentPath?.pathname) &&
-      TTypeComponentNameUseAuth.GlobalLayout
-    )
+    if (['/', null, undefined]?.includes(currentPath?.pathname) && isGlobalLayout)
       navigate(
         (isAuthenticated && authStorage?.isAuthenticated
           ? routes?.personalInformation?.fullPath
@@ -50,7 +49,7 @@ const useAuth = (props: { componentName: TTypeComponentNameUseAuth }) => {
   }, [currentPath])
 
   useEffect(() => {
-    if (authStorage && TTypeComponentNameUseAuth.GlobalLayout) {
+    if (authStorage && isGlobalLayout) {
       dispatch(handleSetAuth(authStorage))
     }
   }, [JSON.stringify(authStorage)])

@@ -1,4 +1,4 @@
-import FormProject from '@features/project/components/project-upsert/form-project'
+import FormProject from '@features/project/components/project-upsert/form-information-project'
 import FormMenuProject from '@features/project/components/project-upsert/menu-project/form-menu-project'
 import FormResponsiblityProject from '@features/project/components/project-upsert/responsibility-project/form-responsibility-project'
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'

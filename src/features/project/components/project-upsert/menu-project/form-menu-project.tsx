@@ -1,6 +1,7 @@
-import React, { useCallback, useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import educationSchema, { TEducationSchema } from '@features/education/validations/education-schema'
+import { contextFormProject } from '@features/project/context/form-project-context'
 import EVENT_PROJECT from '@features/project/event-emitters/project-event'
 import { initialFormMenuProject } from '@features/project/validation/menu-project-schema'
 import InputBase from '@components/ui/input/input-base'
@@ -11,39 +12,30 @@ import InputTextEditor from '@components/ui/input/input-text-editor'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
 import useEventEmitter from '@hooks/use-event-emitter'
-import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function'
+import { deepCopy, mappingErrorsToForm } from '@lib/helper/function'
 import { TTypeActionModalForm } from '@typescript/index-type'
-import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types'
+import { TEventSubmitForm } from '@typescript/ui-types'
 
 const FormMenuProject = () => {
+  const {
+    formMenuProject: form,
+    handleOnChangeFormMenuProject: handleOnChange,
+    setFormMenuProject: setForm
+  } = useContext(contextFormProject)
+
   const [modalForm, setModalForm] = useState({
     moduleName: 'Menu Project',
     isShow: false,
     action: TTypeActionModalForm.ADD,
     customeClass: { mdBody: '  md:min-w-[38rem]  space-y-4' }
   })
-  const [form, setForm] = useState(deepCopy({ ...initialFormMenuProject }))
+
   useEventEmitter(EVENT_PROJECT.SET_MODAL_FORM_MENU_PROJECT, (data) => {
     setModalForm({
       ...modalForm,
       ...data
     })
   })
-
-  useEventEmitter(EVENT_PROJECT.SET_MENU_PROJECT, (data) => {
-    setForm({ ...mappingValuesToForm({ values: data, form }) })
-  })
-
-  const handleOnChange = useCallback((e: TEventOnChange) => {
-    const name = e.target.name as keyof typeof form
-    const value = e.target.value
-    const currForm = form
-    currForm[name].value = value
-
-    setForm({
-      ...currForm
-    })
-  }, [])
 
   const handlleCloseFormEducation = () => {
     setForm(deepCopy({ ...initialFormMenuProject }))

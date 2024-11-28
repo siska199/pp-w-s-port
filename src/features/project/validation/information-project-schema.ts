@@ -10,7 +10,7 @@ import {
 import appMessage from '@lib/data/app-message'
 import { TTypeFile } from '@typescript/ui-types'
 
-export const initialFormProject = {
+export const initialFormInformationProject = {
   name: {
     name: 'name',
     label: 'Name',
@@ -54,7 +54,7 @@ export const initialFormProject = {
     maxLength: 500
   }
 }
-const projectSchema = z.object({
+const informationProjectSchema = z.object({
   name: zString({ name: 'Name' }),
   category: zEnum({ name: 'Category', enum: ['WEBSITE', 'MOBILE', 'API', 'UI-UX'] as const }),
   type: zEnum({
@@ -63,11 +63,14 @@ const projectSchema = z.object({
   }),
   thumbnail: zFileLocale({
     name: 'thumbnail',
-    listAcceptedTypeFile: initialFormProject.thumbnail.listAcceptedTypeFile
+    listAcceptedTypeFile: initialFormInformationProject.thumbnail.listAcceptedTypeFile
   }),
-  description: zString({ name: 'Description', max: initialFormProject.description.maxLength })
+  description: zString({
+    name: 'Description',
+    max: initialFormInformationProject.description.maxLength
+  })
 })
 
-export type TProjectSchema = z.input<typeof projectSchema>
+export type TProjectSchema = z.input<typeof informationProjectSchema>
 
-export default projectSchema
+export default informationProjectSchema

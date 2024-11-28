@@ -4,11 +4,11 @@ import axios, { CancelTokenSource } from 'axios'
 import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice'
 import CONFIG from '@lib/config/config'
 import appMessage from '@lib/data/app-message'
-import { generateUrlQueryParams, isEmptyValue } from '@lib/helper/function'
-import { TObject } from '@typescript/index-type'
+import { generateUrlQueryParams } from '@lib/helper/function'
+import { TObject, TResponseAPI } from '@typescript/index-type'
 
 interface TParamsApiClient {
-  baseUrl?: string
+  baseURL?: string
   method?: 'get' | 'post' | 'put' | 'post'
   bareerToken?: string
   endpoint: string
@@ -23,52 +23,54 @@ interface TParamsApiClient {
   isNoCache?: boolean
 }
 
-type TResultApiClient = Promise<{
-  data: TObject | null
-  sucess: boolean
-  message: string
-}>
-
 const useAPI = () => {
   const [progress, setProgress] = useState(0)
   const cancelTokenRef = useRef<CancelTokenSource | null>(null)
 
-  const apiClient = async (params: TParamsApiClient): TResultApiClient => {
+  const apiClient = async <TData extends object>({
+    baseURL,
+    method = 'get',
+    bareerToken,
+    endpoint,
+    isForm = false,
+    payload,
+    message,
+    queryObject,
+    isNoCache
+  }: TParamsApiClient): Promise<Partial<TResponseAPI<TData>>> => {
     handleSetIsloading(true)
-    const {
-      baseUrl,
-      method = 'get',
-      bareerToken,
-      endpoint,
-      isForm = false,
-      payload,
-      message,
-      queryObject,
-      isNoCache = false
-    } = params
     try {
-      cancelTokenRef.current = axios.CancelToken.source()
+      /*BASE URL */
+      baseURL = baseURL || CONFIG.SERVER_BASE_URL
 
+      /*SET URL WITH QUERY PARAM */
       let url = endpoint
       if (method === 'get' && queryObject) {
         url = generateUrlQueryParams({ url, queryObject })
       }
+
+      /*CACHE CONTROL*/
       const noCacheConfig = {
         'Cache-Control': 'no-cache',
         Pragma: 'no-cache',
         Expires: '0'
       }
 
-      const response = await axios({
-        baseURL: baseUrl || CONFIG.SERVER_BASE_URL,
-        url,
-        method: !isEmptyValue(payload) ? 'post' : method,
-        headers: {
-          Authorization: bareerToken ? `Bearer ${bareerToken}` : null,
+      /*HEADER CONFIGURATION*/
+      const headers = {
+        Authorization: bareerToken ? `Bearer ${bareerToken}` : null,
+        'Content-Type': isForm ? 'multipart/form-data' : 'application/json',
+        ...(isNoCache && noCacheConfig)
+      }
 
-          'Content-Type': isForm ? 'multipart/form-data' : 'application/json',
-          ...(isNoCache && noCacheConfig)
-        },
+      /*CANCEL TOKEN */
+      cancelTokenRef.current = axios.CancelToken.source()
+
+      const response = await axios({
+        baseURL,
+        url,
+        method,
+        headers,
         withCredentials: !!bareerToken,
         cancelToken: cancelTokenRef.current.token,
         data: payload,
@@ -84,11 +86,7 @@ const useAPI = () => {
         withIcon: true
       })
 
-      return {
-        sucess: true,
-        data: response.data,
-        message: 'Success'
-      }
+      return response.data
     } catch (error: any) {
       console.log('error: ', error?.message)
 
@@ -99,8 +97,7 @@ const useAPI = () => {
         withIcon: true
       })
       return {
-        sucess: false,
-        data: null,
+        status: false,
         message: 'error'
       }
     } finally {

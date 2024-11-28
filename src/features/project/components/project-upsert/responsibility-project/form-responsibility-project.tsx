@@ -1,5 +1,6 @@
-import { useCallback, useState } from 'react'
+import { useContext, useState } from 'react'
 
+import { contextFormProject } from '@features/project/context/form-project-context'
 import EVENT_PROJECT from '@features/project/event-emitters/project-event'
 import { initialFormResponsibilityProject } from '@features/project/validation/responsiblity-project-schema'
 import InputTextEditor from '@components/ui/input/input-text-editor'
@@ -8,7 +9,7 @@ import ContainerModalForm from '@components/ui/modal/container-modal-form'
 import useEventEmitter from '@hooks/use-event-emitter'
 import { deepCopy } from '@lib/helper/function'
 import { TTypeActionModalForm } from '@typescript/index-type'
-import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types'
+import { TEventSubmitForm } from '@typescript/ui-types'
 
 const FormResponsiblityProject = () => {
   const [modalForm, setModalForm] = useState({
@@ -17,8 +18,11 @@ const FormResponsiblityProject = () => {
     action: TTypeActionModalForm.ADD,
     customeClass: { mdBody: '  md:min-w-[38rem]  space-y-4' }
   })
-  const [form, setForm] = useState(deepCopy(initialFormResponsibilityProject))
-  type TKeyForm = keyof typeof form
+  const {
+    formResponsibilityProject: form,
+    handleOnChangeFormResponsibilityProject: handleOnChange,
+    setFormResponsibilityProject: setForm
+  } = useContext(contextFormProject)
 
   useEventEmitter(EVENT_PROJECT.SET_MODAL_FORM_RESPONSIBILITY_PROJECT, (data) => {
     setModalForm({
@@ -26,17 +30,6 @@ const FormResponsiblityProject = () => {
       ...data
     })
   })
-
-  const handleOnChange = useCallback((e: TEventOnChange) => {
-    const currForm = form
-    const name = e.target.name as TKeyForm
-    const value = e.target.value
-    currForm[name].value = value
-
-    setForm({
-      ...currForm
-    })
-  }, [])
 
   const handleCloseModalForm = () => {
     setForm(deepCopy({ ...initialFormResponsibilityProject }))

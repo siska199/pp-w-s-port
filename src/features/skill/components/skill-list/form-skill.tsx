@@ -7,7 +7,7 @@ import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function'
-import { TTypeActionModalForm } from '@typescript/global-type'
+import { TTypeActionModalForm } from '@typescript/index-type'
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types'
 
 const FormSkill = () => {

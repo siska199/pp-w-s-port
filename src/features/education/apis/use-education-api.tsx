@@ -1,29 +1,37 @@
-import { educationDetail } from '@features/education/constants'
+import { TEducation } from '@features/education/types/education-type'
 import ENDPOINT from '@apis/endpoints'
 
 import useAPI from '@hooks/use-api'
-import { TResponseSuccessAPI } from '@typescript/index-type'
 
 const useEducationApi = () => {
   const { apiClient } = useAPI()
-  const getEducationDetail = async (
-    param: string
-  ): Promise<TResponseSuccessAPI<{ id: string }>> => {
+
+  interface TParamsListEducation {
+    keyword?: string
+    id_level?: string
+  }
+  const getListEducation = async (params: TParamsListEducation) => {
+    const response = await apiClient<TEducation[]>({
+      endpoint: ENDPOINT.EDUCATION.GET_LIST_EDUCATION,
+      queryObject: params
+    })
+
+    return response
+  }
+
+  const getEducationDetail = async (param: string) => {
     const id = param
 
-    await apiClient({
+    const response = await apiClient<TEducation>({
       endpoint: ENDPOINT.EDUCATION.GET_DETAIL_EDUCATION(id)
     })
 
-    return {
-      status: 200,
-      message: 'Successfully Get Data',
-      data: educationDetail
-    }
+    return response
   }
 
   return {
-    getEducationDetail
+    getEducationDetail,
+    getListEducation
   }
 }
 

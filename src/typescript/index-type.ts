@@ -22,8 +22,8 @@ export enum TTypeActionData {
   DELETE = 'DELETE'
 }
 
-export interface TResponseSuccessAPI<TData extends object> {
+export type TResponseAPI<TData extends object> = {
+  status: boolean
   data: TData
-  status: number
   message: string
 }

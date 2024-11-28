@@ -188,6 +188,7 @@ export const generateFileFromUrl = async (url: string) => {
 export const extractValueFromForm = <TForm extends TObject>(
   form: TForm
 ): { [key in keyof TForm]: any } => {
+  form = { ...deepCopy(form) }
   Object.keys(form).map((key: keyof TForm) => {
     form[key] = form[key]?.value
   })

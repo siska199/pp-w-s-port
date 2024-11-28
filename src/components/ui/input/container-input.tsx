@@ -102,7 +102,8 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
                     disabled,
                     value,
                     onChange: handelOnChange,
-                    maxLength
+                    maxLength,
+                    id: name
                   })}
                 </>
               ) : (

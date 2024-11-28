@@ -23,7 +23,7 @@ const FormFilterEducation = () => {
 
   const handleEmitEventSearchDataTable = debounce(() => {
     eventEmitter.emit(EVENT_EDUCATION.SEARCH_DATA_TABLE_EDUCATION, {
-      level: form.level.value
+      level: form.id_level.value
     })
   }, 3000)
 
@@ -39,7 +39,7 @@ const FormFilterEducation = () => {
           ciV4: 'md:col-span-2'
         }}
       />
-      <InputSelect {...form['level']} onChange={handleOnChange} />
+      <InputSelect {...form['id_level']} onChange={handleOnChange} />
     </div>
   )
 }
@@ -51,7 +51,7 @@ const initialFormFilter = {
     placeholder: 'Search by school or major name...',
     customeClass: {}
   },
-  level: {
+  id_level: {
     name: 'level',
     value: [],
     options: [
