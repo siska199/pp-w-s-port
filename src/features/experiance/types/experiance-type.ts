@@ -1,4 +1,4 @@
-import { TCompany, TProfession } from '@typescript/global-module-types'
+import { TCompany, TProfession } from '@typescript/general-module-types'
 
 export interface TExperiance {
   id: string
@@ -11,5 +11,4 @@ export interface TExperiance {
   description: string
   company: TCompany
   profession: TProfession
-  
 }
