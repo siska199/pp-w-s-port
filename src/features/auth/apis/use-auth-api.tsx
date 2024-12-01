@@ -1,15 +1,12 @@
 import ENDPOINTS from '@apis/endpoints'
 
 import useAPI from '@hooks/use-api'
+import { TUser } from '@typescript/general-module-types'
 
 const useAuthAPI = () => {
   const { apiClient } = useAPI()
 
-  interface TParamsSignIn {
-    email: string
-    password: string
-  }
-  const signIn = async (params: TParamsSignIn) => {
+  const signIn = async (params: Pick<TUser, 'email' | 'password'>) => {
     const payload = params
     const result = await apiClient({
       endpoint: ENDPOINTS.AUTH.SIGN_IN,
@@ -20,15 +17,7 @@ const useAuthAPI = () => {
     return result
   }
 
-  interface TParamsSignUp {
-    first_name: string
-    last_name: string
-    email: string
-    username: string
-    password: string
-    id_profession: string
-  }
-  const signUp = async (params: TParamsSignUp) => {
+  const signUp = async (params: Omit<TUser, 'id' | 'image' | 'profession'>) => {
     const payload = params
     const result = await apiClient({
       endpoint: ENDPOINTS.AUTH.SIGN_UP,

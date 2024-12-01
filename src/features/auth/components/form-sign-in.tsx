@@ -58,7 +58,7 @@ const FormSignIn = () => {
         email: payload.username,
         password: payload.password
       })
-      if (result?.sucess) {
+      if (result?.status) {
         const isRememberMe = payload?.is_remember_me === 'false' ? false : true
         setItemSecureWebstorage(STORAGE_VARIABLE.IS_REMEMBER_ME, isRememberMe)
         setItemSecureWebstorage(

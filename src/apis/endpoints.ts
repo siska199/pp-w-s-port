@@ -21,7 +21,8 @@ const ENDPOINTS = {
   SKILL_USER: {},
   EXPERIANCE: {
     GET_LIST_EXPERIANCE: '/experiances',
-    UPSERT_EXPERIANCE: '/experiance'
+    UPSERT_EXPERIANCE: '/experiance',
+    GET_DETAIL_EXPERIANCE: (id: string) => `/GET_DETAIL_EXPERIANCE/${id}`
   }
 }
 

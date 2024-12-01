@@ -48,13 +48,15 @@ export interface TSkill {
 }
 
 export interface TUser {
-  id: string
   first_name: string
   last_name: string
   username: string
+  password: string
   email: string
   phone_number: number
-  image: string
   id_profession: string
+  
+  id: string
+  image: string
   profession: TProfession
 }

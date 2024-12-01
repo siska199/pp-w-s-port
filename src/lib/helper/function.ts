@@ -276,10 +276,15 @@ interface TFormatDate {
   date: Date | string | null
   format?: TTypeDateFormat
   timeZone?: string
+  formatLanguage: 'en-GB' | 'en-US'
 }
 export const formatDate = (params: TFormatDate) => {
   let { date } = params
-  const { format = TTypeDateFormat['DD/MM/YYYY'], timeZone = 'UTC' } = params
+  const {
+    format = TTypeDateFormat['DD/MM/YYYY'],
+    timeZone = 'UTC',
+    formatLanguage = 'en-GB'
+  } = params
 
   if (!date) return null
 
@@ -309,7 +314,7 @@ export const formatDate = (params: TFormatDate) => {
     [TTypeDateFormat['hh:mm']]: { hour: '2-digit', minute: '2-digit', hour12: false, timeZone }
   }
 
-  const formattedDate = new Intl.DateTimeFormat('en-GB', formatOptions[format]!).format(date)
+  const formattedDate = new Intl.DateTimeFormat(formatLanguage, formatOptions[format]!).format(date)
   return format === TTypeDateFormat['DD-MM-YYYY']
     ? formattedDate.replace(/\//g, '-')
     : formattedDate
