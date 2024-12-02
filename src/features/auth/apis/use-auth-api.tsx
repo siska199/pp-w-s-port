@@ -17,7 +17,7 @@ const useAuthAPI = () => {
     return result
   }
 
-  const signUp = async (params: Omit<TUser, 'id' | 'image' | 'profession'>) => {
+  const signUp = async (params: Omit<TUser, 'id' | 'image' | 'profession' | 'phone_number'>) => {
     const payload = params
     const result = await apiClient<TUser>({
       endpoint: ENDPOINTS.AUTH.SIGN_UP,

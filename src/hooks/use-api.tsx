@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import axios, { CancelTokenSource } from 'axios'
 
+import { useAppDispatch } from '@store/store'
 import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice'
 import CONFIG from '@lib/config/config'
 import appMessage from '@lib/data/app-message'
@@ -26,7 +27,7 @@ interface TParamsApiClient {
 const useAPI = () => {
   const [progress, setProgress] = useState(0)
   const cancelTokenRef = useRef<CancelTokenSource | null>(null)
-
+  const dispatch = useAppDispatch()
   const apiClient = async <TData extends object>({
     baseURL,
     method = 'get',
@@ -79,23 +80,31 @@ const useAPI = () => {
         }
       })
 
-      handleSetAlertConfig({
-        show: true,
-        message: message?.sucess || 'Successfully',
-        type: 'sucess',
-        withIcon: true
-      })
+      dispatch(
+        handleSetAlertConfig({
+          show: true,
+          message: message?.sucess || response?.data?.data?.message || 'Successfully',
+          type: 'sucess',
+          withIcon: true
+        })
+      )
 
       return response.data
     } catch (error: any) {
-      console.log('error: ', error?.message)
+      const messageError =
+        message?.error ||
+        error?.response?.data?.message ||
+        error?.message ||
+        appMessage.systemErrorMessage
 
-      handleSetAlertConfig({
-        show: true,
-        message: message?.error || error?.message || appMessage.systemErrorMessage,
-        type: 'error',
-        withIcon: true
-      })
+      dispatch(
+        handleSetAlertConfig({
+          message: messageError,
+          show: true,
+          type: 'error',
+          withIcon: true
+        })
+      )
       return {
         status: false,
         message: 'error'

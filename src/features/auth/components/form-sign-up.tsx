@@ -2,8 +2,10 @@ import { useCallback, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import useAuthAPI from '@features/auth/apis/use-auth-api'
-import signInSchema, { TSignInSchema } from '@features/auth/validations/sign-in-schema'
-import { initialFormSignUp } from '@features/auth/validations/sign-up-schema'
+import signUpSchema, {
+  initialFormSignUp,
+  TSignUpSchema
+} from '@features/auth/validations/sign-up-schema'
 import Button from '@components/ui/button'
 import Container from '@components/ui/container/container'
 import InputBase from '@components/ui/input/input-base'
@@ -13,6 +15,7 @@ import useGeneralAPI from '@apis/use-general-api'
 import {
   deepCopy,
   extractValueFromForm,
+  filterKeysObject,
   generateOptions,
   mappingErrorsToForm
 } from '@lib/helper/function'
@@ -21,7 +24,7 @@ import { TEventOnChange } from '@typescript/ui-types'
 const FormSignUp = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const { signIn } = useAuthAPI()
+  const { signUp } = useAuthAPI()
   const [form, setForm] = useState(deepCopy({ ...initialFormSignUp }))
   const { getListProfession } = useGeneralAPI()
   useEffect(() => {
@@ -45,7 +48,6 @@ const FormSignUp = () => {
     const name = e.target.name as keyof typeof form
     const value = e.target.value
     currForm[name].value = value
-
     setForm({
       ...currForm
     })
@@ -54,19 +56,25 @@ const FormSignUp = () => {
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault()
     e?.stopPropagation()
-    const { isValid, form: updatedForm } = mappingErrorsToForm<TSignInSchema, typeof form>({
+    const { isValid, form: updatedForm } = mappingErrorsToForm<TSignUpSchema, typeof form>({
       form,
-      schema: signInSchema
+      schema: signUpSchema
     })
+
+    console.log(updatedForm)
 
     if (isValid) {
       const payload = extractValueFromForm(deepCopy(updatedForm))
-      const result = await signIn({
-        email: payload.username,
-        password: payload.password
+      const result = await signUp({
+        ...filterKeysObject({
+          object: payload,
+          keys: ['confirmation_password']
+        })
       })
       if (result?.status) {
-        navigate(`${pathname}?type=sign-in`)
+        setTimeout(() => {
+          navigate(`${pathname}?type=sign-in`)
+        }, 3000)
       }
     }
     setForm({
@@ -74,12 +82,10 @@ const FormSignUp = () => {
     })
   }
 
-  console.log('test:', `/${pathname}?type=sign-in`)
-
   return (
     <Container variant={'vcc'} gap='base' className={` flex-nowrap `}>
       <div className='text-center space-y-3 w-full'>
-        <h5 className='text-body-2xl font-bold'>Sign in to your account</h5>
+        <h5 className='text-body-2xl font-bold'>Sign Up to create your account</h5>
         <p className='text-center text-white'>Welcome back! Please enter your details.</p>
       </div>
       <form onSubmit={handleOnSubmit} className='flex w-full flex-col gap-4  px-8'>
@@ -94,12 +100,12 @@ const FormSignUp = () => {
           </div>
           <div className='grid grid-cols-2 gap-4'>
             <InputBase {...form['password']} onChange={handleOnChange} />
-            <InputBase {...form['confirm_password']} onChange={handleOnChange} />
+            <InputBase {...form['confirmation_password']} onChange={handleOnChange} />
           </div>
           <InputSelect {...form['id_profession']} onChange={handleOnChange} />
         </div>
         <Button type='submit' name='sign-in' className='w-full'>
-          Sign In
+          Sign Up
         </Button>
       </form>
       <p className='mx-auto'>

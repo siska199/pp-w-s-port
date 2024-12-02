@@ -3,18 +3,28 @@ import * as z from 'zod'
 
 import appMessage from '@lib/data/app-message'
 
-const signUpSchema = z.object({
-  first_name: zString({ name: 'First Name' }),
-  last_name: zString({ name: 'Last Name' }),
+const signUpSchema = z
+  .object({
+    first_name: zString({ name: 'First Name' }),
+    last_name: zString({ name: 'Last Name' }),
 
-  email: zString({ name: 'Email' }),
-  username: zString({ name: 'Username' }),
+    email: zString({ name: 'Email' }),
+    username: zString({ name: 'Username' }),
 
-  password: zPassword(true),
-  confirm_password: zPassword(true),
+    password: zPassword(true),
+    confirmation_password: zString({ name: 'Confirmation password' }),
 
-  id_profession: zString({ name: 'Profession' })
-})
+    id_profession: zString({ name: 'Profession' })
+  })
+  ?.superRefine((data, ctx) => {
+    if (data.password !== data.confirmation_password) {
+      ctx.addIssue({
+        code: 'custom',
+        message: `Password and Confirmation Password dosen't match`,
+        path: ['confirmation_password']
+      })
+    }
+  })
 
 export type TSignUpSchema = z.input<typeof signUpSchema>
 
@@ -55,8 +65,8 @@ export const initialFormSignUp = {
     value: '',
     errorMessage: ''
   },
-  confirm_password: {
-    name: 'confirm_password',
+  confirmation_password: {
+    name: 'confirmation_password',
     label: 'Confirm Password',
     placeholder: 'Confirm your password',
     type: 'password',
@@ -64,7 +74,7 @@ export const initialFormSignUp = {
     errorMessage: ''
   },
   id_profession: {
-    name: 'profession',
+    name: 'id_profession',
     label: 'Profession',
     placeholder: appMessage.selectInputPlaceolder('profession'),
     options: [],

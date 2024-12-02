@@ -1,6 +1,7 @@
 import { HTMLProps, useEffect, useState } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 
+import { useAppDispatch } from '@store/store'
 import { handleSetAlertConfig } from '@store/ui-slice'
 import { cn } from '@lib/helper/function'
 import variantsAlert, {
@@ -35,18 +36,19 @@ const Alert = (props: TAlertProps) => {
   const {
     variant,
     customeIcon,
-    type = 'info',
     withIcon,
     show,
     message,
+    className = '',
+    type = 'info',
     isFixed = true,
     withCloseBtn = false,
     autoClose = true,
-    className = '',
     position = 'top-right',
     timeout = 3000,
     onDismiss: handleOnDismiss
   } = props
+  const dispatch = useAppDispatch()
   const [isCloseAlert, setIsCloseAlert] = useState(!show)
 
   useEffect(() => {
@@ -57,7 +59,7 @@ const Alert = (props: TAlertProps) => {
     if (timeout > 0 && autoClose && show) {
       const timer = setTimeout(() => {
         setIsCloseAlert(true)
-        handleOnDismiss ? handleOnDismiss() : handleSetAlertConfig({ show: false })
+        handleOnDismiss ? handleOnDismiss() : dispatch(handleSetAlertConfig({ show: false }))
       }, timeout)
       return () => clearTimeout(timer)
     }
@@ -75,7 +77,7 @@ const Alert = (props: TAlertProps) => {
       case 'info':
         return alertVariantGeneral
       default:
-        return alertVariantError // Default to error variant if type is not specified or unrecognized
+        return alertVariantError
     }
   }
 

@@ -23,7 +23,11 @@ export const initialStateAuthSlice: TStateUI = {
     show: false,
     message: '',
     autoClose: true,
-    type: 'error'
+    type: 'error',
+    timeout: 3000,
+    isFixed: true,
+    withCloseBtn: false,
+    position: 'top-right'
   },
   modalConfirmation: {
     title: 'Confirmation',

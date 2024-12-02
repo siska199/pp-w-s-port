@@ -119,10 +119,10 @@ const FormSignIn = () => {
           type='link'
           variant={'link-white'}
           className='underline'
-          to={`${pathname}?type=sign-in`}
+          to={`${pathname}?type=sign-up`}
           onClick={(e) => e?.stopPropagation()}
         >
-          Sign In
+          Sign Up
         </Button>{' '}
       </p>
     </Container>

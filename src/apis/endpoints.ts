@@ -8,7 +8,7 @@ const ENDPOINTS = {
     GET_LIST_PROFESSION: '/professions'
   },
   AUTH: {
-    SIGN_UP: '/signup',
+    SIGN_UP: '/sign-up',
     SIGN_IN: '/sign-in'
   },
   PERSONAL_INFORMATION: {
