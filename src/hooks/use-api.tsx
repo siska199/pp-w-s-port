@@ -22,6 +22,7 @@ interface TParamsApiClient {
   queryObject?: TObject
   noChace?: boolean
   isNoCache?: boolean
+  isShowAlert?: boolean
 }
 
 const useAPI = () => {
@@ -37,7 +38,8 @@ const useAPI = () => {
     payload,
     message,
     queryObject,
-    isNoCache
+    isNoCache,
+    isShowAlert = true
   }: TParamsApiClient): Promise<Partial<TResponseAPI<TData>>> => {
     handleSetIsloading(true)
     try {
@@ -80,14 +82,15 @@ const useAPI = () => {
         }
       })
 
-      dispatch(
-        handleSetAlertConfig({
-          show: true,
-          message: message?.sucess || response?.data?.data?.message || 'Successfully',
-          type: 'sucess',
-          withIcon: true
-        })
-      )
+      isShowAlert &&
+        dispatch(
+          handleSetAlertConfig({
+            show: true,
+            message: message?.sucess || response?.data?.data?.message || 'Successfully',
+            type: 'sucess',
+            withIcon: true
+          })
+        )
 
       return response.data
     } catch (error: any) {
@@ -97,14 +100,15 @@ const useAPI = () => {
         error?.message ||
         appMessage.systemErrorMessage
 
-      dispatch(
-        handleSetAlertConfig({
-          message: messageError,
-          show: true,
-          type: 'error',
-          withIcon: true
-        })
-      )
+      isShowAlert &&
+        dispatch(
+          handleSetAlertConfig({
+            message: messageError,
+            show: true,
+            type: 'error',
+            withIcon: true
+          })
+        )
       return {
         status: false,
         message: 'error'

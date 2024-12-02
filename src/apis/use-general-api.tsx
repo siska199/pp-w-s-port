@@ -34,7 +34,8 @@ const useGeneralAPI = () => {
 
   const getListProfession = async () => {
     const result = await apiClient<TProfession[]>({
-      endpoint: ENDPOINTS.MASTER.GET_LIST_PROFESSION
+      endpoint: ENDPOINTS.GENERAL.GET_LIST_PROFESSION,
+      isShowAlert: false
     })
 
     return result

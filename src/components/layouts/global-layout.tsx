@@ -7,7 +7,12 @@ import ContainerModal from '@components/ui/modal/container-modal'
 import ModalConfirmation from '@components/ui/modal/container-modal-confirmation'
 
 import { useAppDispatch, useAppSelector } from '@store/store'
-import { handleSetModal, handleSetModalConfirmation, initialStateAuthSlice } from '@store/ui-slice'
+import {
+  handleSetAlertConfig,
+  handleSetModal,
+  handleSetModalConfirmation,
+  initialStateUISlice
+} from '@store/ui-slice'
 interface TPropsGlobalLayout {
   children: React.ReactNode
 }
@@ -24,11 +29,11 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
   useAuth({ componentName: TTypeComponentNameUseAuth.GlobalLayout })
 
   useEffect(() => {
-    dispatch(handleSetModalConfirmation({ ...initialStateAuthSlice?.modalConfirmation }))
-    dispatch(handleSetModal({ ...initialStateAuthSlice?.modal }))
+    dispatch(handleSetModalConfirmation({ ...initialStateUISlice?.modalConfirmation }))
+    dispatch(handleSetModal({ ...initialStateUISlice?.modal }))
+    dispatch(handleSetAlertConfig({ ...initialStateUISlice?.alertConfig }))
   }, [])
 
-  console.log('alertConfig:', alertConfig)
   return (
     <>
       {children}
@@ -39,7 +44,7 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
           cancel: {
             ...modalConfirmation?.button?.cancel,
             onClick: () =>
-              dispatch(handleSetModalConfirmation({ ...initialStateAuthSlice?.modalConfirmation }))
+              dispatch(handleSetModalConfirmation({ ...initialStateUISlice?.modalConfirmation }))
           }
         }}
       />
@@ -48,7 +53,7 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
         isShow={modal?.isShow || false}
         // @ts-expect-error
         children={modal?.children?._source ? modal?.children : <></>}
-        onClose={() => dispatch(handleSetModal({ ...initialStateAuthSlice?.modal }))}
+        onClose={() => dispatch(handleSetModal({ ...initialStateUISlice?.modal }))}
       />
       <Alert {...alertConfig} message={alertConfig?.message} show={alertConfig?.show} />
     </>

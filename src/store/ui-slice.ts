@@ -16,18 +16,13 @@ export interface TStateUI {
   modalConfirmation: TPropsContainerModalConfirmation
   modal: TContainerModalProps
 }
-export const initialStateAuthSlice: TStateUI = {
+export const initialStateUISlice: TStateUI = {
   isLoading: false,
   isToggleSidebar: false,
   alertConfig: {
     show: false,
     message: '',
-    autoClose: true,
-    type: 'error',
-    timeout: 3000,
-    isFixed: true,
-    withCloseBtn: false,
-    position: 'top-right'
+    type: 'error'
   },
   modalConfirmation: {
     title: 'Confirmation',
@@ -46,7 +41,7 @@ export const initialStateAuthSlice: TStateUI = {
 
 const authSlice = createSlice({
   name: 'ui',
-  initialState: initialStateAuthSlice,
+  initialState: initialStateUISlice,
   reducers: {
     handleToggleSidebar: (state, action: PayloadAction<boolean>) => {
       state.isToggleSidebar = action.payload

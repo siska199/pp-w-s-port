@@ -61,8 +61,6 @@ const FormSignUp = () => {
       schema: signUpSchema
     })
 
-    console.log(updatedForm)
-
     if (isValid) {
       const payload = extractValueFromForm(deepCopy(updatedForm))
       const result = await signUp({

@@ -1,5 +1,5 @@
 const ENDPOINTS = {
-  MASTER: {
+  GENERAL: {
     GET_LIST_PROVINCE: '/provinces',
     GET_LIST_CITY: '/cities',
     GET_LIST_DISTRICTS: '/districts',

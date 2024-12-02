@@ -2,29 +2,18 @@ import { listCategorySocialLink } from '@features/personal-information/constants
 import ENDPOINT from '@apis/endpoints'
 
 import useAPI from '@hooks/use-api'
-import { TResponseSuccessAPI } from '@typescript/index-type'
 
 const usePersonalInformation = () => {
   const { apiClient } = useAPI()
 
-  const getDetailPersonalInformation = async (param: string) => {
-    const idPortofolio = param
+  const getDetailPersonalInformation = async () => {
     const result = await apiClient({
-      endpoint: `${ENDPOINT.PERSONAL_INFORMATION.GET_DETAIL_PERSONAL_INFORMATION}/${idPortofolio}`
+      endpoint: `${ENDPOINT.PERSONAL_INFORMATION.GET_DETAIL_PERSONAL_INFORMATION}`
     })
-    return result?.data?.data
+    return result?.data
   }
 
-  const getListCategorySocialLink = async (): Promise<
-    TResponseSuccessAPI<
-      {
-        name: string
-        image: string
-        placeholder: string
-        defaultValue: string
-      }[]
-    >
-  > => {
+  const getListCategorySocialLink = async () => {
     return {
       data: listCategorySocialLink,
       message: 'Successfully Get Data',
