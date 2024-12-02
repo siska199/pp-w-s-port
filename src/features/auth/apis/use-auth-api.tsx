@@ -6,9 +6,9 @@ import { TUser } from '@typescript/general-module-types'
 const useAuthAPI = () => {
   const { apiClient } = useAPI()
 
-  const signIn = async (params: Pick<TUser, 'email' | 'password'>) => {
+  const signIn = async (params: Pick<TUser, 'username' | 'password'>) => {
     const payload = params
-    const result = await apiClient({
+    const result = await apiClient<TUser & { token: string }>({
       endpoint: ENDPOINTS.AUTH.SIGN_IN,
       payload,
       method: 'post'
@@ -19,7 +19,7 @@ const useAuthAPI = () => {
 
   const signUp = async (params: Omit<TUser, 'id' | 'image' | 'profession'>) => {
     const payload = params
-    const result = await apiClient({
+    const result = await apiClient<TUser>({
       endpoint: ENDPOINTS.AUTH.SIGN_UP,
       payload,
       method: 'post'

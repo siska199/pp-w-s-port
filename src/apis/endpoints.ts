@@ -4,7 +4,8 @@ const ENDPOINTS = {
     GET_LIST_CITY: '/cities',
     GET_LIST_DISTRICTS: '/districts',
     GET_LIST_POSTAL_CODE: '/postal-codes',
-    GET_LIST_SKILL: '/skills'
+    GET_LIST_SKILL: '/skills',
+    GET_LIST_PROFESSION: '/professions'
   },
   AUTH: {
     SIGN_UP: '/signup',

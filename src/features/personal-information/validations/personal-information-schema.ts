@@ -18,6 +18,13 @@ export const initialFormPersonalInformation = {
     value: '',
     errorMessage: ''
   },
+  email: {
+    name: 'email',
+    label: 'email',
+    placeholder: 'e.g XXXXX@gmail.com',
+    value: '',
+    errorMessage: ''
+  },
   id_profession: {
     name: 'id_profession',
     label: 'Profession',

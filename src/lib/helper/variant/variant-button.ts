@@ -3,6 +3,7 @@ import variant from '@lib/helper/variant/variant-color'
 export const variantButton = {
   ...variant,
   'link-black': 'bg-white text-black',
+  'link-white': 'bg-transparent text-white',
   'link-gray': 'bg-white text-gray !font-medium hover:underline ',
   'link-primary': 'bg-white text-primary',
   'link-sucess': 'bg-white text-sucess',
@@ -82,6 +83,5 @@ Object.entries(variantButton)?.forEach(([key, value]) => {
     } cursor-pointer-custome`
   }
 })
-
 
 export type TKeyVariantButton = keyof typeof variantButton

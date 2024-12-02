@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import useAuthAPI from '@features/auth/apis/use-auth-api'
 import signInSchema, {
@@ -12,13 +12,19 @@ import InputBase from '@components/ui/input/input-base'
 import InputCheckbox from '@components/ui/input/input-checkbox'
 
 import STORAGE_VARIABLE from '@lib/config/storage-variable'
-import { deepCopy, extractValueFromForm, mappingErrorsToForm } from '@lib/helper/function'
+import {
+  deepCopy,
+  extractValueFromForm,
+  filterKeysObject,
+  mappingErrorsToForm
+} from '@lib/helper/function'
 import { setItemSecureWebstorage } from '@lib/helper/secure-storage'
 import { routes } from '@routes/constant'
 import { TEventOnChange } from '@typescript/ui-types'
 
 const FormSignIn = () => {
   const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   const { signIn } = useAuthAPI()
   const [form, setForm] = useState(deepCopy({ ...initialFormSignIn }))
@@ -55,7 +61,7 @@ const FormSignIn = () => {
     if (isValid) {
       const payload = extractValueFromForm(deepCopy(updatedForm))
       const result = await signIn({
-        email: payload.username,
+        username: payload.username,
         password: payload.password
       })
       if (result?.status) {
@@ -64,9 +70,12 @@ const FormSignIn = () => {
         setItemSecureWebstorage(
           STORAGE_VARIABLE.AUTH,
           {
-            isAuthenticated: result?.sucess,
+            isAuthenticated: result?.status,
             token: result?.data?.token,
-            user: result?.data?.user,
+            user: filterKeysObject({
+              object: { ...result?.data },
+              keys: ['token']
+            }),
             isRememberMe
           },
           isRememberMe ? localStorage : sessionStorage
@@ -104,6 +113,18 @@ const FormSignIn = () => {
           Sign In
         </Button>
       </form>
+      <p className='mx-auto'>
+        Don't Have an Account?{' '}
+        <Button
+          type='link'
+          variant={'link-white'}
+          className='underline'
+          to={`${pathname}?type=sign-in`}
+          onClick={(e) => e?.stopPropagation()}
+        >
+          Sign In
+        </Button>{' '}
+      </p>
     </Container>
   )
 }

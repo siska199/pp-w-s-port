@@ -350,3 +350,19 @@ export const catchErrors = <T, Args extends any[]>(fn: (...args: Args) => T | Pr
     }
   }
 }
+
+interface TParamsFilterKeysObject<TObject extends object> {
+  object: TObject
+  keys: (keyof TObject)[]
+}
+export const filterKeysObject = <TObject extends object>(
+  params: TParamsFilterKeysObject<TObject>
+) => {
+  const { object, keys } = params
+
+  keys?.forEach((key) => {
+    delete object[key]
+  })
+
+  return object
+}

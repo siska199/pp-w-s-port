@@ -1,10 +1,15 @@
+import ENDPOINTS from '@apis/endpoints'
+
+import useAPI from '@hooks/use-api'
 import cities from '@lib/data/dummy/cities.json'
 import districts from '@lib/data/dummy/districts.json'
 import postal_codes from '@lib/data/dummy/postal_codes.json'
-import professions from '@lib/data/dummy/professions.json'
 import provinces from '@lib/data/dummy/provinces.json'
+import { TProfession } from '@typescript/general-module-types'
 
 const useGeneralAPI = () => {
+  const { apiClient } = useAPI()
+
   const getListProvince = async () => {
     return provinces
   }
@@ -28,7 +33,11 @@ const useGeneralAPI = () => {
   }
 
   const getListProfession = async () => {
-    return professions
+    const result = await apiClient<TProfession[]>({
+      endpoint: ENDPOINTS.MASTER.GET_LIST_PROFESSION
+    })
+
+    return result
   }
 
   return {
