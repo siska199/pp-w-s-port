@@ -18,8 +18,9 @@ const FormGeneralPersonlaInfo = memo(() => {
       </div>
       <div className='grid grid-cols-2 gap-4'>
         <InputBase {...form['email']} onChange={handleOnChange} />
-        <InputSelect {...form['id_profession']} onChange={handleOnChange} />
+        <InputBase {...form['phone_number']} onChange={handleOnChange} />
       </div>
+      <InputSelect {...form['id_profession']} onChange={handleOnChange} />
       <div className='grid grid-cols-2 gap-4'>
         <InputSelect {...form['province']} onChange={handleOnChange} />
         <InputSelect {...form['city']} onChange={handleOnChange} />

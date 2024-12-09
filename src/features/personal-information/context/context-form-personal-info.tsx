@@ -12,7 +12,12 @@ import personalInformationSchema, {
 import socialLinkSchema from '@features/personal-information/validations/social-link-schema'
 import useGeneralAPI from '@apis/use-general-api'
 
-import { extractValueFromForm, generateOptions, mappingErrorsToForm } from '@lib/helper/function'
+import {
+  extractValueFromForm,
+  generateOptions,
+  mappingErrorsToForm,
+  mappingValuesToForm
+} from '@lib/helper/function'
 import { TEventOnChange, TEventSubmitForm, TOption } from '@typescript/ui-types'
 
 interface TStateFormPersonalInfo {
@@ -37,7 +42,8 @@ export const contextFormPersonalInfo = createContext<TStateFormPersonalInfo>(
 
 const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
   const { children } = props
-  const { upsertPersonalInformation, upsertBulkSocialLink } = usePersonalInformationAPI()
+  const { upsertPersonalInformation, upsertBulkSocialLink, getDetailPersonalInformation } =
+    usePersonalInformationAPI()
   const [formGeneralPersonalInfo, setFormGeneralInfoPersonalInfo] = useState(
     intialStateFormPersonalInformation.formGeneralPersonalInfo
   )
@@ -54,14 +60,23 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
   }, [])
 
   const handleInitialData = async () => {
-    formGeneralPersonalInfo['province'].options = generateOptions({
+    let updatedFormGeneralPersonalInfo = formGeneralPersonalInfo
+    const resultPersonalInfo = await getDetailPersonalInformation()
+    if (resultPersonalInfo?.data) {
+      updatedFormGeneralPersonalInfo = mappingValuesToForm({
+        form: formGeneralPersonalInfo,
+        values: resultPersonalInfo?.data
+      })
+    }
+
+    updatedFormGeneralPersonalInfo['province'].options = generateOptions({
       options: (await getListProvince())?.data || []
     })
-    formGeneralPersonalInfo['id_profession'].options = generateOptions({
+    updatedFormGeneralPersonalInfo['id_profession'].options = generateOptions({
       options: (await getListProfession())?.data || []
     })
 
-    setFormGeneralInfoPersonalInfo({ ...formGeneralPersonalInfo })
+    setFormGeneralInfoPersonalInfo({ ...updatedFormGeneralPersonalInfo })
   }
 
   const handleOnChangeFormGeneralPersonalInfo = useCallback(async (e: TEventOnChange) => {

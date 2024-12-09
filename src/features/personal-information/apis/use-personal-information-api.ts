@@ -10,10 +10,10 @@ const usePersonalInformationAPI = () => {
   const { apiClient } = useAPI()
 
   const getDetailPersonalInformation = async () => {
-    const result = await apiClient({
+    const result = await apiClient<TPersonalInformation>({
       endpoint: `${ENDPOINT.PERSONAL_INFORMATION.GET_DETAIL_PERSONAL_INFORMATION}`
     })
-    return result?.data
+    return result
   }
 
   const getListSocialLink = async () => {

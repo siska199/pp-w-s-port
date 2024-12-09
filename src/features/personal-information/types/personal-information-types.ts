@@ -16,7 +16,7 @@ export interface TSelectedSocialLink extends TSocialLink {
 }
 
 export interface TPersonalInformation {
-  id?: string
+  id: string
   professional_image: string
   first_name: string
   last_name: string
@@ -28,6 +28,7 @@ export interface TPersonalInformation {
   postal_code: string
 
   email: string
+  phone_number: string
   about_me: string
   bio: string
 

@@ -17,7 +17,7 @@ const ENDPOINTS = {
     UPSERT_BULK_SOCIAL_LINKS: '/social-links'
   },
   PERSONAL_INFORMATION: {
-    GET_DETAIL_PERSONAL_INFORMATION: (id: string) => `/personal-information/${id}`,
+    GET_DETAIL_PERSONAL_INFORMATION: '/personal-information',
     UPSERT_PERSONAL_INFORMATION: '/personal-information'
   },
   EDUCATION: {

@@ -11,7 +11,10 @@ const useAuthAPI = () => {
     const result = await apiClient<TUser & { token: string }>({
       endpoint: ENDPOINTS.AUTH.SIGN_IN,
       payload,
-      method: 'post'
+      method: 'post',
+      message: {
+        sucess: 'Successfully Register'
+      }
     })
 
     return result

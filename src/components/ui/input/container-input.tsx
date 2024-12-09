@@ -56,7 +56,8 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
   }
 
   const handelOnChange = (e: any) => {
-    if (maxLength != Number(e.target.value?.length ?? 0) && onChange) return onChange(e)
+    const isReachLimit = Number(e.target.value?.length ?? 0) > Number(maxLength)
+    if (!isReachLimit && onChange) return onChange(e)
   }
 
   const handleOnClearValue = () => {
