@@ -27,7 +27,6 @@ const variant = {
   'outline-gray': 'text-gray border-gray border bg-transparent',
   'outline-white': 'text-black border-white border bg-transparent',
 
-
   'softborder-black': 'bg-gray-100 text-gray-900 border-black/10 border',
   'softborder-gray': 'bg-gray-50  text-gray-700 border-gray-100 border',
   'softborder-primary': 'bg-primary-50 text-primary-700 border-primary-100 border',

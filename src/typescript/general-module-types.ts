@@ -55,7 +55,7 @@ export interface TUser {
   email: string
   phone_number: number
   id_profession: string
-  
+
   id: string
   image: string
   profession: TProfession

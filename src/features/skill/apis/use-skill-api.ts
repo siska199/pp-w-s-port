@@ -7,9 +7,9 @@ const useSkillAPI = () => {
 
   const getListSkill = async () => {
     const result = await apiClient({
-      endpoint: ENDPOINT.SKILL.GET_LIST_SKILL
+      endpoint: ENDPOINT.SKILL_USER.GET_LIST_SKILL_USER
     })
-    return result?.data?.data
+    return result
   }
 
   return {

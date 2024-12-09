@@ -1,13 +1,16 @@
-import FormPersonlaInformation from '@features/personal-information/components/form-personal-information'
+import FormPersonalInfo from '@features/personal-information/components/form-personal-info'
+import ContextFormPersonalInfo from '@features/personal-information/context/context-form-personal-info'
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'
 import HeaderPage from '@components/ui/header/header-page'
 
 const PersonalInformationUpsertPage = () => {
   return (
-    <ContainerProtectedPage className='mb-8 space-y-8'>
-      <HeaderPage title='Personal Information' />
-      <FormPersonlaInformation />
-    </ContainerProtectedPage>
+    <ContextFormPersonalInfo>
+      <ContainerProtectedPage className='mb-8 space-y-8'>
+        <HeaderPage title='Personal Information' />
+        <FormPersonalInfo />
+      </ContainerProtectedPage>
+    </ContextFormPersonalInfo>
   )
 }
 

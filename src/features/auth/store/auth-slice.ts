@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { TUser } from '@features/auth/types/auth-types'
+import { TUser } from '@typescript/general-module-types'
 
 export interface TStateAuth {
   isAuthenticated: boolean

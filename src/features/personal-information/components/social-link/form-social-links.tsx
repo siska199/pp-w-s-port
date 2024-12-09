@@ -1,30 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { eventEmitter } from '@event-emitters'
+import React, { useCallback, useContext } from 'react'
 
-import {
-  default as EVENT_PERSONAL_INFORMATION,
-  default as EVENT_SOCIAL_LINK
-} from '@features/personal-information/event-emitters/personal-information-event'
-import socialLinkSchema from '@features/personal-information/validations/social-link-schema'
+import { contextFormPersonalInfo } from '@features/personal-information/context/context-form-personal-info'
+import { TSelectedSocialLink } from '@features/personal-information/types/personal-information-types'
 import Image from '@components/ui/image'
 import InputBase from '@components/ui/input/input-base'
 
-import useEventEmitter from '@hooks/use-event-emitter'
 import { TEventOnChange } from '@typescript/ui-types'
 
-export interface TSocialLink {
-  name: string
-  image: string
-  placeholder: string
-  defaultValue?: string
-}
-
 const FormSocialLinks = () => {
-  const [listSelectedSocialLink, setListSelectedSocialLink] = useState<TSocialLink[]>([])
-
-  eventEmitter.on(EVENT_SOCIAL_LINK.ONCHANGE_SOCIAL_LINKS, (selectedSocialLinks: TSocialLink[]) => {
-    setListSelectedSocialLink(selectedSocialLinks)
-  })
+  const { listSelectedSocialLink } = useContext(contextFormPersonalInfo)
 
   return (
     <div className='h-auto space-y-4'>
@@ -35,57 +19,38 @@ const FormSocialLinks = () => {
   )
 }
 
-const FormSocialLink = React.memo((props: TSocialLink) => {
-  const [form, setForm] = useState({
-    name: '',
-    customeElement: {
-      start: <></>
-    },
-    label: '',
-    value: '',
-    errorMessage: ''
-  })
+const FormSocialLink = React.memo((props: TSelectedSocialLink) => {
+  const { name, image, value, errorMessage } = props
+  const { setListSelectedSocialLink } = useContext(contextFormPersonalInfo)
 
-  useEffect(() => {
-    setForm({
-      ...form,
-      name: props.name,
-      customeElement: {
-        start: <Image src={props.image} className='w-4 h-4' />
-      },
-      label: props.name,
-      value: props.defaultValue || ''
-    })
+  const handleOnChange = useCallback((e: TEventOnChange) => {
+    const name = e.target.name
+    const value = e.target?.value
+
+    setListSelectedSocialLink((prev) =>
+      prev?.map((socialLink) => {
+        const isChangedData = socialLink?.name === name
+        return {
+          ...socialLink,
+          value: isChangedData ? value : socialLink?.value,
+          errorMessage: isChangedData ? '' : socialLink?.errorMessage
+        }
+      })
+    )
   }, [])
 
-  const handleOnChange = (e: TEventOnChange) => {
-    setForm({
-      ...form,
-      value: e.target.value
-    })
-  }
-
-  useEventEmitter(EVENT_PERSONAL_INFORMATION.VALIDATE_FORM_PERSONAL_INFORMATION, () => {
-    validateFormSocialLink()
-    eventEmitter.emit(
-      EVENT_PERSONAL_INFORMATION.IS_FORM_SOCIAL_LINK_VALID,
-      validateFormSocialLink()
-    )
-  })
-
-  const validateFormSocialLink = () => {
-    const result = socialLinkSchema(form.name).safeParse({ url: form.value })
-    const updatedForm = {
-      ...form,
-      errorMessage: result.error?.errors[0]?.message || ''
-    }
-    setForm({ ...updatedForm })
-    return {
-      isValid: result?.success,
-      form: updatedForm
-    }
-  }
-  return <InputBase {...form} onChange={handleOnChange} />
+  return (
+    <InputBase
+      name={name}
+      customeElement={{
+        start: <Image src={image} className='w-4 h-4' />
+      }}
+      value={value}
+      label={name}
+      errorMessage={errorMessage}
+      onChange={handleOnChange}
+    />
+  )
 })
 
 export default FormSocialLinks

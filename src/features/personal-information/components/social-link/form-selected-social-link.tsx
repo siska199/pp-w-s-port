@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'
-import { eventEmitter } from '@event-emitters'
+import { useContext, useEffect, useState } from 'react'
 import { messageError } from '@validation/constant'
 
-import usePersonalInformation from '@features/personal-information/apis/use-personal-information-api'
-import EVENT_SOCIAL_LINK from '@features/personal-information/event-emitters/personal-information-event'
-import EVENT_PERSONAL_INFORMATION from '@features/personal-information/event-emitters/personal-information-event'
+import usePersonalInformationAPI from '@features/personal-information/apis/use-personal-information-api'
+import { contextFormPersonalInfo } from '@features/personal-information/context/context-form-personal-info'
+import EVENT_PERSONAL_INFO from '@features/personal-information/event-emitters/personal-info-event'
 import InputSelect from '@components/ui/input/input-select/input-select'
 
 import useEventEmitter from '@hooks/use-event-emitter'
@@ -22,19 +21,33 @@ const FormSelectedSocialLink = () => {
     errorMessage: ''
   })
 
-  const { getListCategorySocialLink } = usePersonalInformation()
+  const { getListSocialLink } = usePersonalInformationAPI()
+  const { setListSelectedSocialLink } = useContext(contextFormPersonalInfo)
 
   useEffect(() => {
     handleInitData()
   }, [])
 
-  const handleInitData = catchErrors(async () => {
-    const resultCatSosLink = await getListCategorySocialLink()
+  useEventEmitter(EVENT_PERSONAL_INFO.ON_VALIDATE_PERSONAL_INFO, (isValid) => {
     setFormSocialLink({
       ...formSocialLink,
-      options: resultCatSosLink?.data?.map((data) => ({
-        label: data.name,
-        value: JSON.stringify(data)
+      errorMessage: isValid ? '' : messageError?.required('Social Links')
+    })
+  })
+
+  const handleInitData = catchErrors(async () => {
+    const resultCatSosLink = (await getListSocialLink())?.data || []
+
+    setFormSocialLink({
+      ...formSocialLink,
+      options: resultCatSosLink?.map((data) => ({
+        label: data.category?.name,
+        value: JSON.stringify({
+          ...data,
+          name: data?.category?.name,
+          value: data?.category?.default_value,
+          image: data?.category?.image
+        })
       }))
     })
   })
@@ -43,27 +56,13 @@ const FormSelectedSocialLink = () => {
     const value = e.target.value
     setFormSocialLink({
       ...formSocialLink,
-      value
+      value,
+      errorMessage: ''
     })
 
-    eventEmitter.emit(
-      EVENT_SOCIAL_LINK.ONCHANGE_SOCIAL_LINKS,
-      value?.map((data: string) => JSON.parse(data))
-    )
+    setListSelectedSocialLink(value?.map((data: string) => JSON.parse(data)))
   }
 
-  useEventEmitter(EVENT_PERSONAL_INFORMATION.VALIDATE_FORM_PERSONAL_INFORMATION, () => {
-    const isValid = formSocialLink.value?.length > 0
-
-    eventEmitter.emit(EVENT_PERSONAL_INFORMATION.IS_FORM_SOCIAL_LINK_VALID, {
-      isValid,
-      form: {}
-    })
-    setFormSocialLink({
-      ...formSocialLink,
-      errorMessage: isValid ? '' : messageError.required('Social Links')
-    })
-  })
   return (
     <div>
       <InputSelect {...formSocialLink} onChange={handleOnChange} isMultiple />

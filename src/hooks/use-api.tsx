@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import axios, { CancelTokenSource } from 'axios'
 
-import { useAppDispatch } from '@store/store'
+import { useAppDispatch, useAppSelector } from '@store/store'
 import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice'
 import CONFIG from '@lib/config/config'
 import appMessage from '@lib/data/app-message'
@@ -29,18 +29,24 @@ const useAPI = () => {
   const [progress, setProgress] = useState(0)
   const cancelTokenRef = useRef<CancelTokenSource | null>(null)
   const dispatch = useAppDispatch()
-  const apiClient = async <TData extends object>({
-    baseURL,
-    method = 'get',
-    bareerToken,
-    endpoint,
-    isForm = false,
-    payload,
-    message,
-    queryObject,
-    isNoCache,
-    isShowAlert = true
-  }: TParamsApiClient): Promise<Partial<TResponseAPI<TData>>> => {
+  const jwtToken = useAppSelector((state) => state?.auth?.token)
+
+  const apiClient = async <TData extends object>(
+    params: TParamsApiClient
+  ): Promise<Partial<TResponseAPI<TData>>> => {
+    const {
+      method = 'get',
+      bareerToken,
+      endpoint,
+      isForm = false,
+      payload,
+      message,
+      queryObject,
+      isNoCache
+    } = params
+
+    let { baseURL, isShowAlert } = params
+
     handleSetIsloading(true)
     try {
       /*BASE URL */
@@ -61,13 +67,16 @@ const useAPI = () => {
 
       /*HEADER CONFIGURATION*/
       const headers = {
-        Authorization: bareerToken ? `Bearer ${bareerToken}` : null,
+        Authorization: `Bearer ${bareerToken || jwtToken}`,
         'Content-Type': isForm ? 'multipart/form-data' : 'application/json',
         ...(isNoCache && noCacheConfig)
       }
 
       /*CANCEL TOKEN */
       cancelTokenRef.current = axios.CancelToken.source()
+
+      /*SHOW ALERT */
+      isShowAlert = method === 'get' ? false : true
 
       const response = await axios({
         baseURL,

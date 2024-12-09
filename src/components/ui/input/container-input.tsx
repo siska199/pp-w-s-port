@@ -61,7 +61,7 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
 
   const handleOnClearValue = () => {
     if (onCustomeClearHandler) return onCustomeClearHandler()
-    if (onChange)
+    if (onChange && !disabled)
       return onChange({
         target: {
           name: name || '',
@@ -111,7 +111,7 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
               )}
             </div>
 
-            {isClerable && !isEmptyValue(value) && (
+            {isClerable && !isEmptyValue(value) && !disabled && (
               <IconClose className='cursor-pointer' onClick={handleOnClearValue} />
             )}
 

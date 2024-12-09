@@ -1,0 +1,9 @@
+export const EVENT_PERSONAL_INFO = {
+  ON_VALIDATE_PERSONAL_INFO: 'ON_VALIDATE_PERSONAL_INFO'
+} as const
+
+export type TEventMapPersonalInfo = {
+  [EVENT_PERSONAL_INFO.ON_VALIDATE_PERSONAL_INFO]: boolean
+}
+
+export default EVENT_PERSONAL_INFO

@@ -188,7 +188,6 @@ export const generateFileFromUrl = async (url: string) => {
 export const extractValueFromForm = <TForm extends TObject>(
   form: TForm
 ): { [key in keyof TForm]: any } => {
-  form = { ...deepCopy(form) }
   Object.keys(form).map((key: keyof TForm) => {
     form[key] = form[key]?.value
   })
@@ -215,7 +214,6 @@ export const mappingErrorsToForm = <TSchema, TForm extends TObject>(
   )
 
   isValid = result?.success
-
   Object?.keys(form)?.reduce((acc, key) => {
     const errorMessage = !isValid
       ? result?.error?.flatten()?.fieldErrors[key as keyof TForm]?.[0]
@@ -225,6 +223,7 @@ export const mappingErrorsToForm = <TSchema, TForm extends TObject>(
 
     return acc
   }, {} as TObject)
+
   return { isValid, form }
 }
 
@@ -276,7 +275,7 @@ interface TFormatDate {
   date: Date | string | null
   format?: TTypeDateFormat
   timeZone?: string
-  formatLanguage: 'en-GB' | 'en-US'
+  formatLanguage?: 'en-GB' | 'en-US'
 }
 export const formatDate = (params: TFormatDate) => {
   let { date } = params

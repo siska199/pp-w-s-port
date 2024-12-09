@@ -1,41 +1,64 @@
 import ENDPOINTS from '@apis/endpoints'
 
 import useAPI from '@hooks/use-api'
-import cities from '@lib/data/dummy/cities.json'
-import districts from '@lib/data/dummy/districts.json'
-import postal_codes from '@lib/data/dummy/postal_codes.json'
-import provinces from '@lib/data/dummy/provinces.json'
 import { TProfession } from '@typescript/general-module-types'
 
 const useGeneralAPI = () => {
   const { apiClient } = useAPI()
 
   const getListProvince = async () => {
-    return provinces
+    const result = await apiClient<{ id: string; name: string }[]>({
+      endpoint: ENDPOINTS.GENERAL.GET_LIST_PROVINCE
+    })
+    return result
   }
 
-  const getListCity = async (queryObject: { id_province: string }) => {
-    const { id_province } = queryObject
-    const data = cities?.filter((data) => data?.id_province === Number(id_province))
-    return data
+  const getListCity = async (queryObject: { province_code: string }) => {
+    const { province_code } = queryObject
+    const result = await apiClient<{ id: string; name: string }[]>({
+      endpoint: ENDPOINTS.GENERAL.GET_LIST_CITY,
+      queryObject: {
+        province_code
+      }
+    })
+    return result
   }
 
-  const getListDistrict = async (queryObject: { id_city: string }) => {
-    const { id_city } = queryObject
-    const data = districts?.filter((data) => data?.id_city === Number(id_city))
-    return data
+  const getListDistrict = async (queryObject: { city_code: string }) => {
+    const { city_code } = queryObject
+    const result = await apiClient<{ id: string; name: string }[]>({
+      endpoint: ENDPOINTS.GENERAL.GET_LIST_DISTRICT,
+      queryObject: {
+        city_code
+      }
+    })
+    return result
   }
 
-  const getListPostalCode = async (queryObject: { id_district: string }) => {
-    const { id_district } = queryObject
-    const data = postal_codes?.filter((data) => data?.id_district === Number(id_district))
-    return data
+  const getListPostalCode = async (queryObject: { city_name: string; district_name: string }) => {
+    const { city_name, district_name } = queryObject
+
+    const result = await apiClient({
+      endpoint: ENDPOINTS.GENERAL.GET_LIST_POSTAL_CODE,
+      queryObject: {
+        city_name,
+        district_name
+      }
+    })
+    return result
   }
 
   const getListProfession = async () => {
     const result = await apiClient<TProfession[]>({
-      endpoint: ENDPOINTS.GENERAL.GET_LIST_PROFESSION,
-      isShowAlert: false
+      endpoint: ENDPOINTS.GENERAL.GET_LIST_PROFESSION
+    })
+
+    return result
+  }
+
+  const getListCategorySocialLink = async () => {
+    const result = await apiClient({
+      endpoint: ENDPOINTS.GENERAL.GET_LIST_CATEGORY_SOCIAL_LINK
     })
 
     return result
@@ -46,7 +69,8 @@ const useGeneralAPI = () => {
     getListCity,
     getListDistrict,
     getListPostalCode,
-    getListProfession
+    getListProfession,
+    getListCategorySocialLink
   }
 }
 

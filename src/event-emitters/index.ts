@@ -1,6 +1,6 @@
 import { TEventMapEducation } from '@features/education/event-emitters/education-event'
 import { TEventMapExperiance } from '@features/experiance/event-emitters/experiance-event'
-import { TEventMapPersonalInformation } from '@features/personal-information/event-emitters/personal-information-event'
+import { TEventMapPersonalInfo } from '@features/personal-information/event-emitters/personal-info-event'
 import { TEventMapProject } from '@features/project/event-emitters/project-event'
 import { TEventMapSkill } from '@features/skill/event-emitters/skill-event'
 
@@ -8,7 +8,7 @@ export type TEventMap = TEventMapSkill &
   TEventMapEducation &
   TEventMapExperiance &
   TEventMapProject &
-  TEventMapPersonalInformation
+  TEventMapPersonalInfo
 
 type TEventCallback<T = any> = (data: T) => void
 

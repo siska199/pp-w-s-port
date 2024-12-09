@@ -1,6 +1,6 @@
 enum STORAGE_VARIABLE {
   IS_REMEMBER_ME = 'IS_REMEMBER_ME',
-  AUTH ='AUTH'
+  AUTH = 'AUTH'
 }
 
 export type TKeyStorageVariable = STORAGE_VARIABLE
