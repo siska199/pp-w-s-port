@@ -8,7 +8,8 @@ const useGeneralAPI = () => {
 
   const getListProvince = async () => {
     const result = await apiClient<{ id: string; name: string }[]>({
-      endpoint: ENDPOINTS.GENERAL.GET_LIST_PROVINCE
+      endpoint: ENDPOINTS.GENERAL.GET_LIST_PROVINCE,
+      isLodiang: false
     })
     return result
   }
@@ -19,7 +20,8 @@ const useGeneralAPI = () => {
       endpoint: ENDPOINTS.GENERAL.GET_LIST_CITY,
       queryObject: {
         province_code
-      }
+      },
+      isLodiang: false
     })
     return result
   }
@@ -30,7 +32,8 @@ const useGeneralAPI = () => {
       endpoint: ENDPOINTS.GENERAL.GET_LIST_DISTRICT,
       queryObject: {
         city_code
-      }
+      },
+      isLodiang: false
     })
     return result
   }
@@ -43,14 +46,16 @@ const useGeneralAPI = () => {
       queryObject: {
         city_name,
         district_name
-      }
+      },
+      isLodiang: false
     })
     return result
   }
 
   const getListProfession = async () => {
     const result = await apiClient<TProfession[]>({
-      endpoint: ENDPOINTS.GENERAL.GET_LIST_PROFESSION
+      endpoint: ENDPOINTS.GENERAL.GET_LIST_PROFESSION,
+      isLodiang: false
     })
 
     return result
@@ -58,7 +63,8 @@ const useGeneralAPI = () => {
 
   const getListCategorySocialLink = async () => {
     const result = await apiClient<TCategorySocialLink[]>({
-      endpoint: ENDPOINTS.GENERAL.GET_LIST_CATEGORY_SOCIAL_LINK
+      endpoint: ENDPOINTS.GENERAL.GET_LIST_CATEGORY_SOCIAL_LINK,
+      isLodiang: false
     })
 
     return result

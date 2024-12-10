@@ -8,7 +8,11 @@ interface TProps {
 }
 const LazyLoad = (props: TProps) => {
   const { children, fallback } = props
-  return <React.Suspense fallback={fallback ?? <Loading />}>{children}</React.Suspense>
+  return (
+    <React.Suspense fallback={fallback ?? <Loading type='lazy-load-page' />}>
+      {children}
+    </React.Suspense>
+  )
 }
 
 export default LazyLoad

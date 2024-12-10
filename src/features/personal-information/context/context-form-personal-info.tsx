@@ -15,7 +15,7 @@ import useGeneralAPI from '@apis/use-general-api'
 
 import useFile from '@hooks/use-file'
 import { useAppDispatch } from '@store/store'
-import { handleSetAlertConfig } from '@store/ui-slice'
+import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice'
 import {
   extractValueFromForm,
   generateOptions,
@@ -56,13 +56,14 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
     usePersonalInformationAPI()
   const { getListProvince, getListCity, getListDistrict, getListProfession, getListPostalCode } =
     useGeneralAPI()
+  const dispatch = useAppDispatch()
   const { handleGetFileFromUrl } = useFile()
+
   const [listSelectedSocialLink, setListSelectedSocialLink] = useState<TSelectedSocialLink[]>([])
   const [formGeneralPersonalInfo, setFormGeneralInfoPersonalInfo] = useState(
     intialStateFormPersonalInformation.formGeneralPersonalInfo
   )
   const [isLoading, setIsLoading] = useState(false)
-  const dispatch = useAppDispatch()
   type TKeyFormGeneralPersonalInfo = keyof typeof formGeneralPersonalInfo
 
   useEffect(() => {
@@ -73,65 +74,73 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
   }, [])
 
   const handleInitialData = async () => {
-    let updatedFormGeneralPersonalInfo = formGeneralPersonalInfo
-    updatedFormGeneralPersonalInfo['id_province'].options = generateOptions({
-      options: (await getListProvince())?.data || []
-    })
-    updatedFormGeneralPersonalInfo['id_profession'].options = generateOptions({
-      options: (await getListProfession())?.data || []
-    })
+    dispatch(handleSetIsloading(true))
 
-    const resultPersonalInfo = await getDetailPersonalInformation()
-    if (resultPersonalInfo?.data) {
-      updatedFormGeneralPersonalInfo = mappingValuesToForm({
-        form: formGeneralPersonalInfo,
-        values: resultPersonalInfo?.data
+    try {
+      let updatedFormGeneralPersonalInfo = formGeneralPersonalInfo
+      updatedFormGeneralPersonalInfo['id_province'].options = generateOptions({
+        options: (await getListProvince())?.data || []
+      })
+      updatedFormGeneralPersonalInfo['id_profession'].options = generateOptions({
+        options: (await getListProfession())?.data || []
       })
 
-      updatedFormGeneralPersonalInfo['id_city'].options = generateOptions({
-        options:
-          (
-            await getListCity({
-              province_code: resultPersonalInfo?.data?.id_province
-            })
-          )?.data || []
-      })
-      updatedFormGeneralPersonalInfo['id_district'].options = await generateOptions({
-        options:
-          (
-            await getListDistrict({
-              city_code: resultPersonalInfo?.data?.id_city
-            })
-          )?.data || []
-      })
+      const resultPersonalInfo = await getDetailPersonalInformation()
+      if (resultPersonalInfo?.data) {
+        updatedFormGeneralPersonalInfo = mappingValuesToForm({
+          form: formGeneralPersonalInfo,
+          values: resultPersonalInfo?.data
+        })
 
-      const city_name = updatedFormGeneralPersonalInfo['id_city'].options?.filter(
-        (option) => option.value === resultPersonalInfo?.data?.id_city
-      )?.[0]?.label
-      const district_name = updatedFormGeneralPersonalInfo['id_district'].options?.filter(
-        (option) => option.value === resultPersonalInfo?.data?.id_district
-      )?.[0]?.label
+        updatedFormGeneralPersonalInfo['id_city'].options = generateOptions({
+          options:
+            (
+              await getListCity({
+                province_code: resultPersonalInfo?.data?.id_province
+              })
+            )?.data || []
+        })
+        updatedFormGeneralPersonalInfo['id_district'].options = await generateOptions({
+          options:
+            (
+              await getListDistrict({
+                city_code: resultPersonalInfo?.data?.id_city
+              })
+            )?.data || []
+        })
 
-      const postalCodes = await generateOptions({
-        options:
-          (
-            await getListPostalCode({
-              city_name,
-              district_name
-            })
-          )?.data || []
-      })
+        const city_name = updatedFormGeneralPersonalInfo['id_city'].options?.filter(
+          (option) => option.value === resultPersonalInfo?.data?.id_city
+        )?.[0]?.label
+        const district_name = updatedFormGeneralPersonalInfo['id_district'].options?.filter(
+          (option) => option.value === resultPersonalInfo?.data?.id_district
+        )?.[0]?.label
 
-      updatedFormGeneralPersonalInfo['id_postal_code'].options = postalCodes
-      updatedFormGeneralPersonalInfo['id_postal_code'].value = postalCodes?.[0]?.value
+        const postalCodes = await generateOptions({
+          options:
+            (
+              await getListPostalCode({
+                city_name,
+                district_name
+              })
+            )?.data || []
+        })
 
-      updatedFormGeneralPersonalInfo['professional_image'].value = await handleGetFileFromUrl({
-        url: resultPersonalInfo?.data?.professional_image,
-        filename: 'professional-image'
-      })
+        updatedFormGeneralPersonalInfo['id_postal_code'].options = postalCodes
+        updatedFormGeneralPersonalInfo['id_postal_code'].value = postalCodes?.[0]?.value
+
+        updatedFormGeneralPersonalInfo['professional_image'].value = await handleGetFileFromUrl({
+          url: resultPersonalInfo?.data?.professional_image,
+          filename: 'professional-image'
+        })
+      }
+
+      setFormGeneralInfoPersonalInfo({ ...updatedFormGeneralPersonalInfo })
+    } catch (error: any) {
+      console.log('error: ', error?.message)
+    } finally {
+      dispatch(handleSetIsloading(false))
     }
-
-    setFormGeneralInfoPersonalInfo({ ...updatedFormGeneralPersonalInfo })
   }
 
   const handleOnChangeFormGeneralPersonalInfo = useCallback(async (e: TEventOnChange) => {

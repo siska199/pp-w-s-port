@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Outlet } from 'react-router-dom'
 
-import useAuth from '@features/auth/hooks/use-auth'
+import useAuth, { TTypeComponentNameUseAuth } from '@features/auth/hooks/use-auth'
 import Navbar from '@components/navbar'
 import Sidebar from '@components/sidebar'
 
@@ -11,7 +11,7 @@ const ProtectedLayout = () => {
   const refContainerPage = useRef<HTMLDivElement>(null)
   const { currentPath } = useCurrentPath()
 
-  useAuth({ componentName: 'ProtectedLayout' })
+  useAuth({ componentName: TTypeComponentNameUseAuth.ProtectedLayout })
 
   useEffect(() => {
     refContainerPage?.current?.scrollTo(0, 0)

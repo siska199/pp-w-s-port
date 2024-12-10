@@ -3,16 +3,19 @@ import { HTMLProps } from 'react'
 import { cn } from '@lib/helper/function'
 import { IconLoadingThreeDots } from '@assets/icons'
 
-type TPropsLoading = HTMLProps<HTMLDivElement>
+type TPropsLoading = HTMLProps<HTMLDivElement> & {
+  type?: 'lazy-load-page' | 'page'
+}
 
 const Loading = (props: TPropsLoading) => {
-  const { className } = props
+  const { className, type } = props
   return (
     <div
       className={cn({
-        'sticky top-0 z-[999] bottom-0  h-[calc(100vh-5rem)] w-full m-auto flex items-center justify-center':
-          true,
-        [`${className}`]: true
+        'top-0 z-[999] w-full m-auto flex items-center justify-center': true,
+        'sticky h-[calc(100vh-5rem)]': type === 'lazy-load-page',
+        'fixed top-0 z-[999] h-screen bg-black/30': type === 'page',
+        [className || '']: true
       })}
     >
       <IconLoadingThreeDots className='w-[5rem] h-[5rem]' />

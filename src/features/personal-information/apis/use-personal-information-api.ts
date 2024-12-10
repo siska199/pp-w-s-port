@@ -11,14 +11,16 @@ const usePersonalInformationAPI = () => {
 
   const getDetailPersonalInformation = async () => {
     const result = await apiClient<TPersonalInformation>({
-      endpoint: `${ENDPOINT.PERSONAL_INFORMATION.GET_DETAIL_PERSONAL_INFORMATION}`
+      endpoint: `${ENDPOINT.PERSONAL_INFORMATION.GET_DETAIL_PERSONAL_INFORMATION}`,
+      isLodiang: false
     })
     return result
   }
 
   const getListSocialLink = async () => {
     const result = await apiClient<TSocialLink[]>({
-      endpoint: `${ENDPOINT.SOCIAL_LINK.GET_LIST_SOCIAL_LINK}`
+      endpoint: `${ENDPOINT.SOCIAL_LINK.GET_LIST_SOCIAL_LINK}`,
+      isLodiang: false
     })
     return result
   }

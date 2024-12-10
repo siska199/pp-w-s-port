@@ -23,6 +23,7 @@ interface TParamsApiClient {
   noChace?: boolean
   isNoCache?: boolean
   isShowAlert?: boolean
+  isLodiang?: boolean
 }
 
 const useAPI = () => {
@@ -42,12 +43,13 @@ const useAPI = () => {
       payload,
       message,
       queryObject,
-      isNoCache
+      isNoCache,
+      isLodiang = true
     } = params
 
     let { baseURL, isShowAlert } = params
 
-    dispatch(handleSetIsloading(true))
+    isLodiang && dispatch(handleSetIsloading(true))
     try {
       /*BASE URL */
       baseURL = baseURL || CONFIG.SERVER_BASE_URL
@@ -124,7 +126,7 @@ const useAPI = () => {
         message: 'error'
       }
     } finally {
-      dispatch(handleSetIsloading(false))
+      isLodiang && dispatch(handleSetIsloading(false))
     }
   }
 
