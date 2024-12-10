@@ -5,6 +5,7 @@ import usePersonalInformationAPI from '@features/personal-information/apis/use-p
 import { contextFormPersonalInfo } from '@features/personal-information/context/context-form-personal-info'
 import EVENT_PERSONAL_INFO from '@features/personal-information/event-emitters/personal-info-event'
 import InputSelect from '@components/ui/input/input-select/input-select'
+import useGeneralAPI from '@apis/use-general-api'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import { categoriesSocialLink } from '@lib/data/dummy/dummy'
@@ -17,11 +18,12 @@ const FormSelectedSocialLink = () => {
     name: 'social_link',
     options: categoriesSocialLink,
     isMultiple: true,
-    value: [],
+    value: [] as string[],
     errorMessage: ''
   })
 
   const { getListSocialLink } = usePersonalInformationAPI()
+  const { getListCategorySocialLink } = useGeneralAPI()
   const { setListSelectedSocialLink } = useContext(contextFormPersonalInfo)
 
   useEffect(() => {
@@ -36,20 +38,37 @@ const FormSelectedSocialLink = () => {
   })
 
   const handleInitData = catchErrors(async () => {
-    const resultCatSosLink = (await getListSocialLink())?.data || []
+    const catSosialLinks = (await getListCategorySocialLink())?.data || []
+    const socialLinksUsers = (await getListSocialLink())?.data || []
 
-    setFormSocialLink({
-      ...formSocialLink,
-      options: resultCatSosLink?.map((data) => ({
-        label: data.category?.name,
+    const options = catSosialLinks?.map((data) => {
+      const socialLinkUser = socialLinksUsers?.filter(
+        (socialLink) => socialLink?.category?.name === data?.name
+      )?.[0]
+
+      return {
+        label: data.name,
+        url: socialLinkUser?.url,
         value: JSON.stringify({
           ...data,
-          name: data?.category?.name,
-          value: data?.category?.default_value,
-          image: data?.category?.image
+          id: socialLinkUser?.id,
+          value: socialLinkUser?.url || data?.default_value
         })
-      }))
+      }
     })
+
+    const selectedSocialLinks = options
+      ?.filter((option) => option?.url)
+      ?.map((option) => option?.value)
+    setFormSocialLink({
+      ...formSocialLink,
+      options: options,
+      value: options?.filter((option) => option?.url)?.map((option) => option?.value)
+    })
+
+    setListSelectedSocialLink(
+      selectedSocialLinks?.map((selectedSocialLink) => JSON.parse(selectedSocialLink))
+    )
   })
 
   const handleOnChange = (e: TEventOnChange) => {

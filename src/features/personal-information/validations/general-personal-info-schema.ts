@@ -2,6 +2,7 @@ import { zEmail, zFileLocale, zPhoneNumber, zString } from '@validation/reusable
 import z from 'zod'
 
 import { TTypeFile } from '@typescript/ui-types'
+import { TOption } from '@typescript/ui-types'
 
 export const initialFormGeneralPersonalInfo = {
   id: {
@@ -41,7 +42,7 @@ export const initialFormGeneralPersonalInfo = {
   id_profession: {
     name: 'id_profession',
     label: 'Profession',
-    options: [],
+    options: [] as TOption[],
     placeholder: 'e.g Frontend Developer',
     value: '',
     errorMessage: ''
@@ -49,7 +50,7 @@ export const initialFormGeneralPersonalInfo = {
 
   id_province: {
     name: 'id_province',
-    options: [],
+    options: [] as TOption[],
     label: 'Province',
     placeholder: 'e.g Jawa Timur',
     value: '',
@@ -60,7 +61,7 @@ export const initialFormGeneralPersonalInfo = {
     name: 'id_city',
     placeholder: 'e.g Situbondo',
     label: 'City',
-    options: [],
+    options: [] as TOption[],
     disabled: true,
     value: '',
     autoComplete: 'new-password',
@@ -70,7 +71,7 @@ export const initialFormGeneralPersonalInfo = {
     name: 'id_district',
     label: 'District',
     placeholder: 'e.g Besuki',
-    options: [],
+    options: [] as TOption[],
     disabled: true,
     value: '',
     autoComplete: 'new-password',
@@ -79,7 +80,7 @@ export const initialFormGeneralPersonalInfo = {
 
   id_postal_code: {
     name: 'id_postal_code',
-    options: [],
+    options: [] as TOption[],
     label: 'Postal Code',
     placeholder: 'e.g 68356',
     disabled: true,
@@ -107,7 +108,7 @@ export const initialFormGeneralPersonalInfo = {
   professional_image: {
     name: 'professional_image',
     label: 'Professional Image',
-    value: null,
+    value: null as null | File,
     listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG, TTypeFile.PDF],
     errorMessage: ''
   }

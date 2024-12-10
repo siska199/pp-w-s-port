@@ -2,7 +2,7 @@ import clsx, { ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import z, { ZodSchema, ZodType } from 'zod'
 
-import { TObject } from '@typescript/index-type'
+import { TObject, TResponseAPI } from '@typescript/index-type'
 import { TOption, TTypeDateFormat, TTypeFile } from '@typescript/ui-types'
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -126,6 +126,11 @@ export const getGeneralTypeFile = (type: string): TTypeGeneralFile => {
   return generalType as TTypeGeneralFile
 }
 
+export const extractExtensionFile = (type: string) => {
+  const [_, extension] = type.split('/')
+  return extension
+}
+
 export const excludeRef = <T extends { ref?: any }>(input: T) => {
   const { ref: _, ...rest } = input
   return rest
@@ -181,8 +186,9 @@ export const generateOptionsFromEnum = (enumObject: TObject): TOption<string>[] 
 }
 
 export const generateFileFromUrl = async (url: string) => {
-  const result = await fetch(url).then((r) => r.blob())
-  return result
+  const blob = await fetch(url).then((r) => r.blob())
+  const file = new File([blob], 'random', { type: blob.type })
+  return file
 }
 
 export const extractValueFromForm = <TForm extends TObject>(
@@ -364,4 +370,29 @@ export const filterKeysObject = <TObject extends object>(
   })
 
   return object
+}
+
+export type TParamsMapErrorMessagePromiseAll = (TResponseAPI<TObject> & { moduleName: string })[]
+export const mapErrorMessagePromiseAll = (params: TParamsMapErrorMessagePromiseAll): string => {
+  const results = params
+
+  const listErrorMaessage = results?.map((result) => {
+    return `${result?.status ? 'Success' : 'Failed'} update ${result?.moduleName}`
+  })
+
+  const errorMessage = listErrorMaessage?.reduce((acc, message, i) => {
+    if (i === 0) return message
+
+    const seperator = i === listErrorMaessage?.length - 1 ? ' and ' : ', '
+    return `${acc}${seperator}${message}`
+  }, '')
+
+  return errorMessage
+}
+
+export const mergeArraysOfObjects = (arr1: object[], arr2: object[]): object[] => {
+  return arr1.map((obj, index) => ({
+    ...obj,
+    ...arr2[index]
+  }))
 }

@@ -9,7 +9,6 @@ import { TEventOnChange } from '@typescript/ui-types'
 
 const FormSocialLinks = () => {
   const { listSelectedSocialLink } = useContext(contextFormPersonalInfo)
-
   return (
     <div className='h-auto space-y-4'>
       {listSelectedSocialLink.map((data, index) => {
@@ -20,7 +19,7 @@ const FormSocialLinks = () => {
 }
 
 const FormSocialLink = React.memo((props: TSelectedSocialLink) => {
-  const { name, image, value, errorMessage } = props
+  const { name, image, value, errorMessage, placeholder } = props
   const { setListSelectedSocialLink } = useContext(contextFormPersonalInfo)
 
   const handleOnChange = useCallback((e: TEventOnChange) => {
@@ -49,6 +48,7 @@ const FormSocialLink = React.memo((props: TSelectedSocialLink) => {
       label={name}
       errorMessage={errorMessage}
       onChange={handleOnChange}
+      placeholder={placeholder}
     />
   )
 })

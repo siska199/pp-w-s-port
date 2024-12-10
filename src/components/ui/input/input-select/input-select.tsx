@@ -199,7 +199,7 @@ const InputSelect = (props: TPropsInputSelect) => {
     }
 
     if (e.key == 'Enter') {
-      const data = filteredOptions[currentActiveIndex - 1]
+      const data = filteredOptions[currentActiveIndex - 1 < 0 ? 0 : currentActiveIndex - 1]
       handleOnClickOption(e, data)
     }
     setActiveIndex(currentActiveIndex)

@@ -1,7 +1,7 @@
 import ENDPOINTS from '@apis/endpoints'
 
 import useAPI from '@hooks/use-api'
-import { TProfession } from '@typescript/general-module-types'
+import { TCategorySocialLink, TProfession } from '@typescript/general-module-types'
 
 const useGeneralAPI = () => {
   const { apiClient } = useAPI()
@@ -57,7 +57,7 @@ const useGeneralAPI = () => {
   }
 
   const getListCategorySocialLink = async () => {
-    const result = await apiClient({
+    const result = await apiClient<TCategorySocialLink[]>({
       endpoint: ENDPOINTS.GENERAL.GET_LIST_CATEGORY_SOCIAL_LINK
     })
 

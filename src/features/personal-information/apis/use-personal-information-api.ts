@@ -28,7 +28,8 @@ const usePersonalInformationAPI = () => {
       endpoint: ENDPOINT.PERSONAL_INFORMATION.UPSERT_PERSONAL_INFORMATION,
       payload: params,
       method: 'post',
-      isForm: true
+      isForm: true,
+      isShowAlert: false
     })
 
     return result
@@ -38,7 +39,8 @@ const usePersonalInformationAPI = () => {
     const result = await apiClient({
       endpoint: ENDPOINT.SOCIAL_LINK.UPSERT_BULK_SOCIAL_LINKS,
       payload: params,
-      method: 'post'
+      method: 'post',
+      isShowAlert: false
     })
 
     return result

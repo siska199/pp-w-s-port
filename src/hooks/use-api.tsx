@@ -76,7 +76,7 @@ const useAPI = () => {
       cancelTokenRef.current = axios.CancelToken.source()
 
       /*SHOW ALERT */
-      isShowAlert = method === 'get' ? false : true
+      isShowAlert = isShowAlert ?? (method === 'get' ? false : true)
 
       const response = await axios({
         baseURL,
@@ -95,7 +95,8 @@ const useAPI = () => {
         dispatch(
           handleSetAlertConfig({
             show: true,
-            message: message?.sucess || response?.data?.data?.message || 'Successfully',
+            message:
+              message?.sucess || JSON.stringify(response?.data?.data?.message) || 'Successfully',
             type: 'sucess',
             withIcon: true
           })
@@ -112,7 +113,7 @@ const useAPI = () => {
       isShowAlert &&
         dispatch(
           handleSetAlertConfig({
-            message: messageError,
+            message: JSON.stringify(messageError),
             show: true,
             type: 'error',
             withIcon: true

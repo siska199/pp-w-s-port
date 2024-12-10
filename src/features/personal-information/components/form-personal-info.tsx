@@ -7,13 +7,13 @@ import Button from '@components/ui/button'
 import Divider from '@components/ui/divider'
 
 const FormPersonalInfo = () => {
-  const { handleOnSubmit } = useContext(contextFormPersonalInfo)
+  const { handleOnSubmit, isLoading } = useContext(contextFormPersonalInfo)
   return (
     <>
       <FormGeneralPersonlaInfo />
       <Divider />
       <SocialLinks />
-      <Button onClick={handleOnSubmit} className='ml-auto'>
+      <Button onClick={handleOnSubmit} className='ml-auto' isLoading={isLoading}>
         Save
       </Button>
     </>

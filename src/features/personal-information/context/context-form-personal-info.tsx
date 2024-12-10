@@ -1,4 +1,5 @@
 import { createContext, useCallback, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { eventEmitter } from '@event-emitters'
 
 import usePersonalInformationAPI from '@features/personal-information/apis/use-personal-information-api'
@@ -12,11 +13,17 @@ import personalInformationSchema, {
 import socialLinkSchema from '@features/personal-information/validations/social-link-schema'
 import useGeneralAPI from '@apis/use-general-api'
 
+import useFile from '@hooks/use-file'
+import { useAppDispatch } from '@store/store'
+import { handleSetAlertConfig } from '@store/ui-slice'
 import {
   extractValueFromForm,
   generateOptions,
+  mapErrorMessagePromiseAll,
   mappingErrorsToForm,
-  mappingValuesToForm
+  mappingValuesToForm,
+  mergeArraysOfObjects,
+  TParamsMapErrorMessagePromiseAll
 } from '@lib/helper/function'
 import { TEventOnChange, TEventSubmitForm, TOption } from '@typescript/ui-types'
 
@@ -26,6 +33,7 @@ interface TStateFormPersonalInfo {
   setListSelectedSocialLink: React.Dispatch<React.SetStateAction<TSelectedSocialLink[]>>
   handleOnChangeFormGeneralPersonalInfo: (e: TEventOnChange) => void
   handleOnSubmit: (e: TEventSubmitForm) => void
+  isLoading: boolean
 }
 
 const intialStateFormPersonalInformation = {
@@ -33,7 +41,8 @@ const intialStateFormPersonalInformation = {
   listSelectedSocialLink: [],
   setListSelectedSocialLink: () => null,
   handleOnChangeFormGeneralPersonalInfo: () => null,
-  handleOnSubmit: (_e: TEventSubmitForm) => null
+  handleOnSubmit: (_e: TEventSubmitForm) => null,
+  isLoading: false
 }
 
 export const contextFormPersonalInfo = createContext<TStateFormPersonalInfo>(
@@ -42,15 +51,19 @@ export const contextFormPersonalInfo = createContext<TStateFormPersonalInfo>(
 
 const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
   const { children } = props
+  const navigate = useNavigate()
   const { upsertPersonalInformation, upsertBulkSocialLink, getDetailPersonalInformation } =
     usePersonalInformationAPI()
+  const { getListProvince, getListCity, getListDistrict, getListProfession, getListPostalCode } =
+    useGeneralAPI()
+  const { handleGetFileFromUrl } = useFile()
+  const [listSelectedSocialLink, setListSelectedSocialLink] = useState<TSelectedSocialLink[]>([])
   const [formGeneralPersonalInfo, setFormGeneralInfoPersonalInfo] = useState(
     intialStateFormPersonalInformation.formGeneralPersonalInfo
   )
+  const [isLoading, setIsLoading] = useState(false)
+  const dispatch = useAppDispatch()
   type TKeyFormGeneralPersonalInfo = keyof typeof formGeneralPersonalInfo
-  const [listSelectedSocialLink, setListSelectedSocialLink] = useState<TSelectedSocialLink[]>([])
-  const { getListProvince, getListCity, getListDistrict, getListProfession, getListPostalCode } =
-    useGeneralAPI()
 
   useEffect(() => {
     handleInitialData()
@@ -74,6 +87,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
         form: formGeneralPersonalInfo,
         values: resultPersonalInfo?.data
       })
+
       updatedFormGeneralPersonalInfo['id_city'].options = generateOptions({
         options:
           (
@@ -89,6 +103,31 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
               city_code: resultPersonalInfo?.data?.id_city
             })
           )?.data || []
+      })
+
+      const city_name = updatedFormGeneralPersonalInfo['id_city'].options?.filter(
+        (option) => option.value === resultPersonalInfo?.data?.id_city
+      )?.[0]?.label
+      const district_name = updatedFormGeneralPersonalInfo['id_district'].options?.filter(
+        (option) => option.value === resultPersonalInfo?.data?.id_district
+      )?.[0]?.label
+
+      const postalCodes = await generateOptions({
+        options:
+          (
+            await getListPostalCode({
+              city_name,
+              district_name
+            })
+          )?.data || []
+      })
+
+      updatedFormGeneralPersonalInfo['id_postal_code'].options = postalCodes
+      updatedFormGeneralPersonalInfo['id_postal_code'].value = postalCodes?.[0]?.value
+
+      updatedFormGeneralPersonalInfo['professional_image'].value = await handleGetFileFromUrl({
+        url: resultPersonalInfo?.data?.professional_image,
+        filename: 'professional-image'
       })
     }
 
@@ -165,58 +204,86 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
   }, [])
 
   const handleOnSubmit = async (e: TEventSubmitForm) => {
-    e?.preventDefault()
-    const { isValid: isValidFormGeneralInfo, form: updatedFormGeneralInfo } = mappingErrorsToForm<
-      TGeneralPersonalInfoSchema,
-      typeof formGeneralPersonalInfo
-    >({
-      form: formGeneralPersonalInfo,
-      schema: personalInformationSchema
-    })
-
-    eventEmitter.emit(
-      EVENT_PERSONAL_INFO.ON_VALIDATE_PERSONAL_INFO,
-      listSelectedSocialLink?.length > 0
-    )
-
-    let isValidFormListSelectedSocialLink = !(listSelectedSocialLink?.length == 0)
-    const updateListSelectedSocialLink = listSelectedSocialLink?.map((selectedSocialLink) => {
-      const form = {
-        url: {
-          name: 'url',
-          value: selectedSocialLink.value,
-          errorMessage: ''
-        }
-      }
-
-      const { isValid, form: updatedForm } = mappingErrorsToForm({
-        form,
-        schema: socialLinkSchema(selectedSocialLink?.category?.name)
+    setIsLoading(true)
+    try {
+      e?.preventDefault()
+      const { isValid: isValidFormGeneralInfo, form: updatedFormGeneralInfo } = mappingErrorsToForm<
+        TGeneralPersonalInfoSchema,
+        typeof formGeneralPersonalInfo
+      >({
+        form: formGeneralPersonalInfo,
+        schema: personalInformationSchema
       })
 
-      if (!isValid) isValidFormListSelectedSocialLink = false
-      return {
-        ...selectedSocialLink,
-        errorMessage: updatedForm?.url?.errorMessage
+      eventEmitter.emit(
+        EVENT_PERSONAL_INFO.ON_VALIDATE_PERSONAL_INFO,
+        listSelectedSocialLink?.length > 0
+      )
+
+      let isValidFormListSelectedSocialLink = !(listSelectedSocialLink?.length == 0)
+      const updateListSelectedSocialLink = listSelectedSocialLink?.map((selectedSocialLink) => {
+        const form = {
+          url: {
+            name: 'url',
+            value: selectedSocialLink.value,
+            errorMessage: ''
+          }
+        }
+
+        const { isValid, form: updatedForm } = mappingErrorsToForm({
+          form,
+          schema: socialLinkSchema(selectedSocialLink?.name)
+        })
+
+        if (!isValid) isValidFormListSelectedSocialLink = false
+        return {
+          ...selectedSocialLink,
+          errorMessage: updatedForm?.url?.errorMessage
+        }
+      })
+
+      setListSelectedSocialLink([...updateListSelectedSocialLink])
+      setFormGeneralInfoPersonalInfo({ ...updatedFormGeneralInfo })
+
+      if (isValidFormGeneralInfo && isValidFormListSelectedSocialLink) {
+        const personalInformation = extractValueFromForm({ ...formGeneralPersonalInfo })
+        const socialLinks = listSelectedSocialLink?.map((selectedSocliaLink) => ({
+          id_category: selectedSocliaLink.id_category,
+          id: selectedSocliaLink?.id,
+          url: selectedSocliaLink?.value
+        }))
+
+        const results = await Promise.all([
+          upsertPersonalInformation(personalInformation),
+          upsertBulkSocialLink(socialLinks)
+        ])
+
+        const errorMessage = mapErrorMessagePromiseAll(
+          mergeArraysOfObjects(results, [
+            { moduleName: 'General Personal Information' },
+            {
+              moduleName: 'Social Link'
+            }
+          ]) as TParamsMapErrorMessagePromiseAll
+        )
+
+        const isSuccess = results?.every((result) => result?.status)
+        dispatch(
+          handleSetAlertConfig({
+            show: true,
+            message: errorMessage,
+            type: isSuccess ? 'sucess' : 'error',
+            withIcon: true
+          })
+        )
+        setTimeout(() => {
+          navigate(0)
+        }, 3000)
       }
-    })
-
-    setListSelectedSocialLink([...updateListSelectedSocialLink])
-    setFormGeneralInfoPersonalInfo({ ...updatedFormGeneralInfo })
-
-    if (isValidFormGeneralInfo && isValidFormListSelectedSocialLink) {
-      const personalInformation = extractValueFromForm({ ...formGeneralPersonalInfo })
-      const socialLinks = listSelectedSocialLink?.map((selectedSocliaLink) => ({
-        id_category: selectedSocliaLink.id_category,
-        id: selectedSocliaLink?.id,
-        url: selectedSocliaLink?.value
-      }))
-
-      const results = await Promise.all([
-        upsertPersonalInformation(personalInformation),
-        upsertBulkSocialLink(socialLinks)
-      ])
-      console.log('personalInformation: ', results)
+    } catch (error: any) {
+      console.log('error: ', error?.message)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -227,7 +294,8 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
         listSelectedSocialLink,
         setListSelectedSocialLink,
         handleOnChangeFormGeneralPersonalInfo,
-        handleOnSubmit
+        handleOnSubmit,
+        isLoading
       }}
     >
       {children}

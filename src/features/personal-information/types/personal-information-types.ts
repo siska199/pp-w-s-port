@@ -13,6 +13,8 @@ export interface TSelectedSocialLink extends TSocialLink {
   default_value: string
   value: string
   image: string
+  name: string
+  placeholder: string
 }
 
 export interface TPersonalInformation {
