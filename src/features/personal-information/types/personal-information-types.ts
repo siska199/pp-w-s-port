@@ -21,11 +21,10 @@ export interface TPersonalInformation {
   first_name: string
   last_name: string
 
-  province: string
-  city: string
-  district: string
-
-  postal_code: string
+  id_province: string
+  id_city: string
+  id_district: string
+  id_postal_code: string
 
   email: string
   phone_number: string

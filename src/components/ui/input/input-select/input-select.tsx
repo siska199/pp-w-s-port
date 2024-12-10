@@ -56,6 +56,7 @@ const InputSelect = (props: TPropsInputSelect) => {
       if (filteredOptions?.length == 0) {
         setSearchQuery('')
       }
+      setActiveIndex(0)
     }
   })
 

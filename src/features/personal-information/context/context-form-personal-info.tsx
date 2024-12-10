@@ -61,20 +61,36 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
 
   const handleInitialData = async () => {
     let updatedFormGeneralPersonalInfo = formGeneralPersonalInfo
+    updatedFormGeneralPersonalInfo['id_province'].options = generateOptions({
+      options: (await getListProvince())?.data || []
+    })
+    updatedFormGeneralPersonalInfo['id_profession'].options = generateOptions({
+      options: (await getListProfession())?.data || []
+    })
+
     const resultPersonalInfo = await getDetailPersonalInformation()
     if (resultPersonalInfo?.data) {
       updatedFormGeneralPersonalInfo = mappingValuesToForm({
         form: formGeneralPersonalInfo,
         values: resultPersonalInfo?.data
       })
+      updatedFormGeneralPersonalInfo['id_city'].options = generateOptions({
+        options:
+          (
+            await getListCity({
+              province_code: resultPersonalInfo?.data?.id_province
+            })
+          )?.data || []
+      })
+      updatedFormGeneralPersonalInfo['id_district'].options = await generateOptions({
+        options:
+          (
+            await getListDistrict({
+              city_code: resultPersonalInfo?.data?.id_city
+            })
+          )?.data || []
+      })
     }
-
-    updatedFormGeneralPersonalInfo['province'].options = generateOptions({
-      options: (await getListProvince())?.data || []
-    })
-    updatedFormGeneralPersonalInfo['id_profession'].options = generateOptions({
-      options: (await getListProfession())?.data || []
-    })
 
     setFormGeneralInfoPersonalInfo({ ...updatedFormGeneralPersonalInfo })
   }
@@ -86,11 +102,11 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
     currForm[name].value = value
     currForm[name].errorMessage = ''
 
-    if (name == 'province') {
-      ;['city', 'district', 'postal_code']?.map((key) => {
+    if (name == 'id_province') {
+      ;['id_city', 'id_district', 'id_postal_code']?.map((key) => {
         currForm[key as TKeyFormGeneralPersonalInfo].value = ''
       })
-      currForm['city'].options = generateOptions({
+      currForm['id_city'].options = generateOptions({
         options:
           (
             await getListCity({
@@ -100,11 +116,11 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
       })
     }
 
-    if (name == 'city') {
-      ;['district', 'postal_code']?.map((key) => {
+    if (name == 'id_city') {
+      ;['id_district', 'id_postal_code']?.map((key) => {
         currForm[key as TKeyFormGeneralPersonalInfo].value = ''
       })
-      currForm['district'].options = await generateOptions({
+      currForm['id_district'].options = await generateOptions({
         options:
           (
             await getListDistrict({
@@ -114,13 +130,13 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
       })
     }
 
-    if (name == 'district') {
-      const city_code = currForm['city']?.value
-      const city_name = (currForm?.['city']?.options as TOption[])?.filter(
+    if (name == 'id_district') {
+      const city_code = currForm['id_city']?.value
+      const city_name = (currForm?.['id_city']?.options as TOption[])?.filter(
         (city) => city?.value === city_code
       )?.[0]?.label
 
-      const district_name = (currForm?.['district']?.options as TOption[])?.filter(
+      const district_name = (currForm?.['id_district']?.options as TOption[])?.filter(
         (district) => district?.value === value
       )?.[0]?.label
 
@@ -133,15 +149,14 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
             })
           )?.data || []
       })
-
-      currForm['postal_code'].options = postalCodes
-      currForm['postal_code'].value = postalCodes?.[0]?.value
-      currForm['postal_code'].errorMessage = ''
+      currForm['id_postal_code'].options = postalCodes
+      currForm['id_postal_code'].value = postalCodes?.[0]?.value
+      currForm['id_postal_code'].errorMessage = ''
     }
 
-    if (['city', 'province', 'district']?.includes(name)) {
-      formGeneralPersonalInfo['city'].disabled = !currForm.province.value
-      formGeneralPersonalInfo['district'].disabled = !currForm.city.value
+    if (['id_city', 'id_province', 'id_district']?.includes(name)) {
+      formGeneralPersonalInfo['id_city'].disabled = !currForm.id_province.value
+      formGeneralPersonalInfo['id_district'].disabled = !currForm.id_city.value
     }
 
     setFormGeneralInfoPersonalInfo({

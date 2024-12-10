@@ -47,8 +47,8 @@ export const initialFormGeneralPersonalInfo = {
     errorMessage: ''
   },
 
-  province: {
-    name: 'province',
+  id_province: {
+    name: 'id_province',
     options: [],
     label: 'Province',
     placeholder: 'e.g Jawa Timur',
@@ -56,8 +56,8 @@ export const initialFormGeneralPersonalInfo = {
     autoComplete: 'new-password',
     errorMessage: ''
   },
-  city: {
-    name: 'city',
+  id_city: {
+    name: 'id_city',
     placeholder: 'e.g Situbondo',
     label: 'City',
     options: [],
@@ -66,8 +66,8 @@ export const initialFormGeneralPersonalInfo = {
     autoComplete: 'new-password',
     errorMessage: ''
   },
-  district: {
-    name: 'district',
+  id_district: {
+    name: 'id_district',
     label: 'District',
     placeholder: 'e.g Besuki',
     options: [],
@@ -77,7 +77,7 @@ export const initialFormGeneralPersonalInfo = {
     errorMessage: ''
   },
 
-  postal_code: {
+  id_postal_code: {
     name: 'id_postal_code',
     options: [],
     label: 'Postal Code',
@@ -100,7 +100,7 @@ export const initialFormGeneralPersonalInfo = {
     label: 'About Me',
     placeholder: 'Write a brief summary about your professional background and skills',
     value: '',
-    maxLength: 500,
+    maxLength: 1500,
     rows: 4,
     errorMessage: ''
   },
@@ -122,14 +122,15 @@ const generalPersonalInfoSchema = z
     last_name: zString({ name: 'Last Name', max: 50 }),
     id_profession: zString({ name: 'Profession' }),
 
-    province: zString({ name: 'Province', max: 255 }),
-    city: zString({ name: 'City', max: 255 }),
-    district: zString({ name: 'District', max: 255 }),
-    postal_code: zString({ name: 'Postal Code', max: 255 }),
+    id_province: zString({ name: 'Province', max: 255 }),
+    id_city: zString({ name: 'City', max: 255 }),
+    id_district: zString({ name: 'District', max: 255 }),
+    id_postal_code: zString({ name: 'Postal Code', max: 255 }),
+
     phone_number: zPhoneNumber(true),
     email: zEmail(),
     bio: zString({ name: 'Bio', max: 100 }),
-    about_me: zString({ name: 'About Me', max: 1000 }),
+    about_me: zString({ name: 'About Me', max: initialFormGeneralPersonalInfo.about_me.maxLength }),
     professional_image: zFileLocale({
       name: 'Professional Image',
       listAcceptedTypeFile: initialFormGeneralPersonalInfo.professional_image.listAcceptedTypeFile

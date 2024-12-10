@@ -22,10 +22,10 @@ const FormGeneralPersonlaInfo = memo(() => {
       </div>
       <InputSelect {...form['id_profession']} onChange={handleOnChange} />
       <div className='grid grid-cols-2 gap-4'>
-        <InputSelect {...form['province']} onChange={handleOnChange} />
-        <InputSelect {...form['city']} onChange={handleOnChange} />
-        <InputSelect {...form['district']} onChange={handleOnChange} />
-        <InputSelect {...form['postal_code']} onChange={handleOnChange} />
+        <InputSelect {...form['id_province']} onChange={handleOnChange} />
+        <InputSelect {...form['id_city']} onChange={handleOnChange} />
+        <InputSelect {...form['id_district']} onChange={handleOnChange} />
+        <InputSelect {...form['id_postal_code']} onChange={handleOnChange} />
       </div>
       <InputBase {...form['bio']} onChange={handleOnChange} />
       <InputTextArea {...form['about_me']} onChange={handleOnChange} />
