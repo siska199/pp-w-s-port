@@ -13,7 +13,7 @@ const useAuthAPI = () => {
       payload,
       method: 'post',
       message: {
-        sucess: 'Successfully Register'
+        sucess: 'Login successful'
       }
     })
 
@@ -25,7 +25,10 @@ const useAuthAPI = () => {
     const result = await apiClient<TUser>({
       endpoint: ENDPOINTS.AUTH.SIGN_UP,
       payload,
-      method: 'post'
+      method: 'post',
+      message: {
+        sucess: 'Your account has been created successfully. You can now log in.'
+      }
     })
     return result
   }

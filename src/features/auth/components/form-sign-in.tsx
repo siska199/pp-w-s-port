@@ -25,9 +25,9 @@ import { TEventOnChange } from '@typescript/ui-types'
 const FormSignIn = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
-
   const { signIn } = useAuthAPI()
   const [form, setForm] = useState(deepCopy({ ...initialFormSignIn }))
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     setItemSecureWebstorage(STORAGE_VARIABLE.IS_REMEMBER_ME, false)
@@ -52,41 +52,49 @@ const FormSignIn = () => {
   }, [])
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e?.preventDefault()
-    const { isValid, form: updatedForm } = mappingErrorsToForm<TSignInSchema, typeof form>({
-      form,
-      schema: signInSchema
-    })
-
-    if (isValid) {
-      const payload = extractValueFromForm(deepCopy(updatedForm))
-      const result = await signIn({
-        username: payload.username,
-        password: payload.password
+    setIsLoading(true)
+    try {
+      e?.preventDefault()
+      const { isValid, form: updatedForm } = mappingErrorsToForm<TSignInSchema, typeof form>({
+        form,
+        schema: signInSchema
       })
-      if (result?.status) {
-        const isRememberMe = payload?.is_remember_me === 'false' ? false : true
-        setItemSecureWebstorage(STORAGE_VARIABLE.IS_REMEMBER_ME, isRememberMe)
-        setItemSecureWebstorage(
-          STORAGE_VARIABLE.AUTH,
-          {
-            isAuthenticated: result?.status,
-            token: result?.data?.token,
-            user: filterKeysObject({
-              object: { ...result?.data },
-              keys: ['token']
-            }),
-            isRememberMe
-          },
-          isRememberMe ? localStorage : sessionStorage
-        )
-        navigate(routes.personalInformation.fullPath)
-        navigate(0)
+
+      if (isValid) {
+        const payload = extractValueFromForm(deepCopy(updatedForm))
+        const result = await signIn({
+          username: payload.username,
+          password: payload.password
+        })
+        if (result?.status) {
+          const isRememberMe = payload?.is_remember_me === 'false' ? false : true
+          setItemSecureWebstorage(STORAGE_VARIABLE.IS_REMEMBER_ME, isRememberMe)
+          setItemSecureWebstorage(
+            STORAGE_VARIABLE.AUTH,
+            {
+              isAuthenticated: result?.status,
+              token: result?.data?.token,
+              user: filterKeysObject({
+                object: { ...result?.data },
+                keys: ['token']
+              }),
+              isRememberMe
+            },
+            isRememberMe ? localStorage : sessionStorage
+          )
+
+          navigate(routes.personalInformation.fullPath)
+          navigate(0)
+        }
       }
+      setForm({
+        ...updatedForm
+      })
+    } catch (error: any) {
+      console.log('error: ', error?.message)
+    } finally {
+      setIsLoading(false)
     }
-    setForm({
-      ...updatedForm
-    })
   }
 
   return (
@@ -109,7 +117,7 @@ const FormSignIn = () => {
             Forget Password
           </Button>
         </div>
-        <Button type='submit' name='sign-in' className='w-full'>
+        <Button type='submit' name='sign-in' className='w-full' isLoading={isLoading}>
           Sign In
         </Button>
       </form>

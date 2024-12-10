@@ -47,7 +47,7 @@ const useAPI = () => {
 
     let { baseURL, isShowAlert } = params
 
-    handleSetIsloading(true)
+    dispatch(handleSetIsloading(true))
     try {
       /*BASE URL */
       baseURL = baseURL || CONFIG.SERVER_BASE_URL
@@ -123,7 +123,7 @@ const useAPI = () => {
         message: 'error'
       }
     } finally {
-      handleSetIsloading(false)
+      dispatch(handleSetIsloading(false))
     }
   }
 

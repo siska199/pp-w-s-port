@@ -24,9 +24,12 @@ import { TEventOnChange } from '@typescript/ui-types'
 const FormSignUp = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  const { getListProfession } = useGeneralAPI()
   const { signUp } = useAuthAPI()
   const [form, setForm] = useState(deepCopy({ ...initialFormSignUp }))
-  const { getListProfession } = useGeneralAPI()
+
+  const [isLoading, setIsLoading] = useState(false)
+
   useEffect(() => {
     handleInitialData()
   }, [])
@@ -54,30 +57,35 @@ const FormSignUp = () => {
   }, [])
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e?.preventDefault()
-    e?.stopPropagation()
-    const { isValid, form: updatedForm } = mappingErrorsToForm<TSignUpSchema, typeof form>({
-      form,
-      schema: signUpSchema
-    })
-
-    if (isValid) {
-      const payload = extractValueFromForm(deepCopy(updatedForm))
-      const result = await signUp({
-        ...filterKeysObject({
-          object: payload,
-          keys: ['confirmation_password']
-        })
+    setIsLoading(true)
+    try {
+      e?.preventDefault()
+      e?.stopPropagation()
+      const { isValid, form: updatedForm } = mappingErrorsToForm<TSignUpSchema, typeof form>({
+        form,
+        schema: signUpSchema
       })
-      if (result?.status) {
-        setTimeout(() => {
+
+      if (isValid) {
+        const payload = extractValueFromForm(deepCopy(updatedForm))
+        const result = await signUp({
+          ...filterKeysObject({
+            object: payload,
+            keys: ['confirmation_password']
+          })
+        })
+        if (result?.status) {
           navigate(`${pathname}?type=sign-in`)
-        }, 3000)
+        }
       }
+      setForm({
+        ...updatedForm
+      })
+    } catch (error: any) {
+      console.log('error: ', error?.message)
+    } finally {
+      setIsLoading(false)
     }
-    setForm({
-      ...updatedForm
-    })
   }
 
   return (
@@ -102,7 +110,7 @@ const FormSignUp = () => {
           </div>
           <InputSelect {...form['id_profession']} onChange={handleOnChange} />
         </div>
-        <Button type='submit' name='sign-in' className='w-full'>
+        <Button type='submit' name='sign-in' className='w-full' isLoading={isLoading}>
           Sign Up
         </Button>
       </form>
