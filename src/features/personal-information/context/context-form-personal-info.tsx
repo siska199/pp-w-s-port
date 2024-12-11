@@ -149,7 +149,6 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
     const value = e.target.value
     currForm[name].value = value
     currForm[name].errorMessage = ''
-
     if (name == 'id_province') {
       ;['id_city', 'id_district', 'id_postal_code']?.map((key) => {
         currForm[key as TKeyFormGeneralPersonalInfo].value = ''

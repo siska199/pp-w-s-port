@@ -163,7 +163,7 @@ const HeaderDateCustome = (props: TPropsHeaderDateCustome) => {
   const { date, showTypeDate, handleShowMonth, handleShowYear, ...attrsHeader } = props
   return (
     <div className='flex items-center rounded-[16px] justify-between px-2'>
-      <BtnIconPrevNext type={'next'} showTypeDate={showTypeDate} {...attrsHeader} date={date} />
+      <BtnIconPrevNext type={'prev'} showTypeDate={showTypeDate} {...attrsHeader} date={date} />
       <div className='text-body-medium font-semibold flex gap-2 text-gray-700'>
         {['date', ''].includes(showTypeDate) && (
           <span onClick={handleShowMonth} className='cursor-pointer'>
@@ -178,7 +178,7 @@ const HeaderDateCustome = (props: TPropsHeaderDateCustome) => {
           {format(date || '', 'yyyy')}
         </span>
       </div>
-      <BtnIconPrevNext type={'prev'} showTypeDate={showTypeDate} {...attrsHeader} date={date} />
+      <BtnIconPrevNext type={'next'} showTypeDate={showTypeDate} {...attrsHeader} date={date} />
     </div>
   )
 }
@@ -222,7 +222,7 @@ const BtnIconPrevNext = (props: TPropsBtnIconPrevNext) => {
         'cursor-not-allowed opacity-50 ': isNext ? nextMonthButtonDisabled : prevMonthButtonDisabled
       })}
     >
-      {isNext ? <IconChevronLeft /> : <IconChevronRight />}
+      {isNext ? <IconChevronRight /> : <IconChevronLeft />}
     </Button>
   )
 }

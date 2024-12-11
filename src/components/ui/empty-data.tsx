@@ -34,7 +34,7 @@ const EmptyData = (props: TProps) => {
           [customeClass?.label || '']: customeClass?.label
         })}
       >
-        No data to show
+        No data available
       </p>
     </div>
   )

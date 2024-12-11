@@ -3,6 +3,7 @@ import { memo, useContext } from 'react'
 import { contextFormPersonalInfo } from '@features/personal-information/context/context-form-personal-info'
 import InputBase from '@components/ui/input/input-base'
 import InputUploadFile from '@components/ui/input/input-file/input-file-v1'
+import InputPhoneNumber from '@components/ui/input/input-phone-number'
 import InputSelect from '@components/ui/input/input-select/input-select'
 import InputTextArea from '@components/ui/input/input-text-area'
 
@@ -18,7 +19,7 @@ const FormGeneralPersonlaInfo = memo(() => {
       </div>
       <div className='grid grid-cols-2 gap-4'>
         <InputBase {...form['email']} onChange={handleOnChange} />
-        <InputBase {...form['phone_number']} onChange={handleOnChange} />
+        <InputPhoneNumber {...form['phone_number']} onChange={handleOnChange} />
       </div>
       <InputSelect {...form['id_profession']} onChange={handleOnChange} />
       <div className='grid grid-cols-2 gap-4'>

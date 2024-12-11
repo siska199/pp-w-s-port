@@ -108,14 +108,14 @@ const useAPI = () => {
     } catch (error: any) {
       const messageError =
         message?.error ||
-        error?.response?.data?.message ||
+        JSON.stringify(error?.response?.data?.message) ||
         error?.message ||
         appMessage.systemErrorMessage
 
       isShowAlert &&
         dispatch(
           handleSetAlertConfig({
-            message: JSON.stringify(messageError),
+            message: messageError,
             show: true,
             type: 'error',
             withIcon: true

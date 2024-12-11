@@ -126,7 +126,7 @@ const Alert = (props: TAlertProps) => {
 }
 
 const generalStyle =
-  'flex flex-shrink gap-3 px-3 py-2 border w-fit min-w-[15rem] rounded-md max-w-[20rem]'
+  'flex flex-shrink gap-3 px-3 py-2 border w-fit min-w-[15rem] rounded-md max-w-[20rem] '
 
 const alertVariantError = cva(generalStyle, {
   variants: {

@@ -35,7 +35,7 @@ const variantsAlert = {
     'bottom-right': 'bottom-6 right-6'
   },
   isFixed: {
-    true: 'fixed z-[99] ',
+    true: 'fixed z-[99999999] ',
     false: 'static  '
   }
 }

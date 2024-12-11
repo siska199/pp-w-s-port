@@ -26,12 +26,14 @@ export interface TEducationMajor {
   id: string
   name: string
   id_levels: string[]
+  levels: TEducationLevel[]
 }
 
 export interface TEducationSchool {
   id: string
   name: string
-  id_level: string
+  id_levels: string
+  levels: TEducationLevel[]
 }
 
 export interface TCategorySkill {

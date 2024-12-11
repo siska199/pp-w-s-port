@@ -13,7 +13,6 @@ const useDebounce = (props: TProps) => {
     }, delay)
 
     return () => {
-      console.log('value berubah dia bakal clear timeout')
       clearTimeout(handler)
     }
   }, [value, delay])

@@ -23,7 +23,8 @@ const FormFilterEducation = () => {
 
   const handleEmitEventSearchDataTable = debounce(() => {
     eventEmitter.emit(EVENT_EDUCATION.SEARCH_DATA_TABLE_EDUCATION, {
-      level: form.id_level.value
+      id_level: form.id_level.value,
+      keyword: form?.keyword?.value
     })
   }, 3000)
 
@@ -64,7 +65,8 @@ const initialFormFilter = {
 }
 
 export interface TFormFilterEducation {
-  level: string[]
+  id_level: string[]
+  keyword: string
 }
 
 export default FormFilterEducation

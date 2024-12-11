@@ -6,7 +6,10 @@ const ENDPOINTS = {
     GET_LIST_POSTAL_CODE: '/postal-codes',
     GET_LIST_SKILL: '/skills',
     GET_LIST_PROFESSION: '/professions',
-    GET_LIST_CATEGORY_SOCIAL_LINK: '/category-social-links'
+    GET_LIST_CATEGORY_SOCIAL_LINK: '/category-social-links',
+    GET_LIST_EDUCATION_LEVEL: '/education-levels',
+    GET_LIST_EDUCATION_MAJOR: '/education-majors',
+    GET_LIST_EDUCATION_SCHOOL: '/education-schools'
   },
   AUTH: {
     SIGN_UP: '/sign-up',
@@ -22,7 +25,8 @@ const ENDPOINTS = {
   },
   EDUCATION: {
     GET_LIST_EDUCATION: '/educations',
-    GET_DETAIL_EDUCATION: (id: string) => `/education/${id}`
+    GET_DETAIL_EDUCATION: (id: string) => `/education/${id}`,
+    UPSERT_EDUCATION: '/education'
   },
   SKILL_USER: {
     GET_LIST_SKILL_USER: '/skill-users'

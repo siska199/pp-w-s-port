@@ -1,27 +1,27 @@
 import { useNavigate } from 'react-router-dom'
 import { eventEmitter } from '@event-emitters'
 
-import { educations } from '@features/education/constants'
+import useEducationApi from '@features/education/apis/use-education-api'
 import EVENT_EDUCATION from '@features/education/event-emitters/education-event'
+import { TEducation } from '@features/education/types/education-type'
 import Table from '@components/ui/table'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import useTable from '@hooks/use-table'
 import { useAppDispatch, useAppSelector } from '@store/store'
 import { handleSetModalConfirmation } from '@store/ui-slice'
-import { delay, formatDate } from '@lib/helper/function'
+import { formatDate } from '@lib/helper/function'
 import { routes } from '@routes/constant'
 import { TTypeActionModalForm } from '@typescript/index-type'
+import { TResponseDataPaginationAPI } from '@typescript/index-type'
 import { TSettingTable } from '@typescript/ui-types'
-
-type TData = (typeof educations)[0]
 
 const TableEducation = () => {
   const isLoading = useAppSelector((state) => state.ui.isLoading)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-
-  const configTable = useTable<TData, false>({
+  const { getListEducation } = useEducationApi()
+  const configTable = useTable<TEducation, false>({
     initialColumn: [
       {
         name: 'Level',
@@ -58,7 +58,8 @@ const TableEducation = () => {
     ],
     initialSetting: {
       pagination: true,
-      totalPage: 10
+      itemsPerPage: 10,
+      currentPage: 1
     },
     onFetchData: handleFetchData
   })
@@ -70,34 +71,51 @@ const TableEducation = () => {
     })
   })
 
-  async function handleFetchData(params: TSettingTable<TData>): Promise<TData[]> {
-    console.log('params : ', params)
-    delay(1500)
-    return educations as TData[]
+  useEventEmitter(EVENT_EDUCATION.REFRESH_DATA_TABLE_EDUCATION, async () => {
+    console.log('refresh')
+    await handleFetchData({
+      ...configTable.setting
+    })
+  })
+
+  async function handleFetchData(
+    params: TSettingTable<TEducation> & { keyword?: string; id_level?: string }
+  ): Promise<TResponseDataPaginationAPI<TEducation>> {
+    const results = await getListEducation({
+      sort_by: params.sortBy,
+      sort_dir: params?.sortDir,
+      items_perpage: params?.itemsPerPage,
+      page_no: params?.currentPage,
+      keyword: params?.keyword,
+      id_level: params?.id_level
+    })
+    return results?.data as TResponseDataPaginationAPI<TEducation>
   }
 
-  const handleEditData = (data: TData) => {
+  const handleEditData = (data: TEducation) => {
     eventEmitter.emit(EVENT_EDUCATION.SET_MODAL_FORM_EDUCATION, {
       isShow: true,
       action: TTypeActionModalForm.EDIT
     })
 
     eventEmitter.emit(EVENT_EDUCATION.SET_EDUCATION, {
+      id: data?.id,
       description: data.description,
       id_level: data.id_level,
       id_major: data.id_major,
       id_school: data.id_school,
       start_at: data.start_at,
-      end_at: data.end_at
+      end_at: data.end_at,
+      gpa: String(data.gpa)
     })
   }
 
-  const handleViewData = (data: TData) => {
+  const handleViewData = (data: TEducation) => {
     const id = data.id
     navigate(routes.education.child.detail.fullPath(id))
   }
 
-  const handleDeleteData = (data: TData) => {
+  const handleDeleteData = (data: TEducation) => {
     console.log('data: ', data)
     dispatch(
       handleSetModalConfirmation({
@@ -114,7 +132,7 @@ const TableEducation = () => {
 
   return (
     <div>
-      <Table<TData, false>
+      <Table<TEducation, false>
         {...configTable}
         withNo
         isLoading={isLoading}

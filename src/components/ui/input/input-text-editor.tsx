@@ -30,7 +30,7 @@ const InputTextEditor = (props: TProps) => {
     ...attrs
   } = props
   const [editorState, setEditorState] = useState(
-    EditorState.createWithContent(ContentState.createFromText(value))
+    EditorState.createWithContent(ContentState.createFromText(String(value)))
   )
 
   useEffect(() => {

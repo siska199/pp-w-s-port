@@ -1,5 +1,5 @@
 import { messageError, regexValidation } from '@validation/constant'
-import z, { ZodEffects, ZodNumber, ZodString } from 'zod'
+import z, { ZodDate, ZodEffects, ZodString } from 'zod'
 
 import { TFileValue } from '@components/ui/input/input-file/input-file-v1'
 
@@ -29,32 +29,11 @@ export const zString = (params: {
     : stringSchema.min(0)
 }
 
-export const zNumber = (params: {
-  name: string
-  min?: number
-  max?: number
-  mandatory?: boolean
-}): z.ZodNumber => {
-  const { name, max = 255, min = 1, mandatory = true } = params
-
-  const numberSchema = z.number().max(max, {
-    message: messageError.maxNumber(name, max)
-  })
-
-  return (
-    mandatory
-      ? numberSchema.min(min, {
-          message: messageError.minNumber(name, min)
-        })
-      : numberSchema.optional()
-  ) as ZodNumber
-}
-
 export const zDate = (params: {
   name: string
   mandatory?: boolean
   format?: TTypeDateFormat
-}): ZodString => {
+}): ZodDate => {
   const { name = 'Date', mandatory = true, format = TTypeDateFormat.ISO } = params
 
   const dateSchema = z.coerce
@@ -70,7 +49,7 @@ export const zDate = (params: {
       { message: messageError.required(name) }
     )
 
-  return (mandatory ? dateSchema : dateSchema?.optional()) as unknown as ZodString
+  return (mandatory ? dateSchema : dateSchema?.optional()) as unknown as ZodDate
 }
 
 type TResultZPassword = ZodEffects<ZodString, string, string>
@@ -96,8 +75,10 @@ export const zPhoneNumber = (mandatory = true) => {
   const phoneSchema = z
     .string()
     .max(15, { message: messageError.phoneNumberExceedLength })
-    .refine((val) => /^08\d{8,13}$/.test(val), {
-      message: messageError.phoneNumberFormat
+    .transform((phoneNumber) => {
+      const isFormated = Number(phoneNumber?.charAt(0)) === 0
+      const updateFormatPhoneNumber = Number(`0${phoneNumber?.replace(/-/g, '')}`)
+      return isFormated ? phoneNumber : updateFormatPhoneNumber
     })
 
   return mandatory ? phoneSchema : phoneSchema.optional()

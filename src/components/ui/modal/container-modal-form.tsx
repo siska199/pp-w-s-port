@@ -3,6 +3,7 @@ import React from 'react'
 import Button from '@components/ui/button'
 import ContainerModal, { TContainerModalProps } from '@components/ui/modal/container-modal'
 
+import { useAppSelector } from '@store/store'
 import { TTypeActionModalForm } from '@typescript/index-type'
 import { TEventSubmitForm } from '@typescript/ui-types'
 
@@ -20,7 +21,7 @@ interface TProps extends TContainerModalProps, TCustomeClass {
 
 const ContainerModalForm = (props: TProps) => {
   const { action, children, moduleName, onSubmit, customeClass, ...attrs } = props
-
+  const isLoading = useAppSelector((state) => state?.ui?.isLoading)
   return (
     <ContainerModal
       title={
@@ -32,7 +33,7 @@ const ContainerModalForm = (props: TProps) => {
         </>
       }
       footer={
-        <Button type='submit' className='ml-auto' onClick={onSubmit}>
+        <Button type='submit' className='ml-auto' onClick={onSubmit} isLoading={isLoading}>
           Save
         </Button>
       }

@@ -1,14 +1,13 @@
-import { TSettingTable } from '@typescript/ui-types'
-
 export interface TObject {
   [key: string]: any
 }
 
 export interface TPaginationQueryParams {
   page_no: number
-  items_per_page: number
-  sort_by: string
-  sort_dir: TSettingTable<TObject>['sortDir']
+  items_perpage: number
+  total_items?: number
+  sort_by?: string
+  sort_dir?: string
 }
 
 export enum TTypeActionModalForm {
@@ -26,4 +25,11 @@ export type TResponseAPI<TData extends object> = {
   status: boolean
   data: TData
   message: string
+}
+
+export interface TResponseDataPaginationAPI<TData extends object> {
+  items: TData[]
+  current_page: number
+  total_items: number
+  total_pages: number
 }

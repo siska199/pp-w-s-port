@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react'
 
 import { TTableProps } from '@components/ui/table'
 
+import { TResponseDataPaginationAPI } from '@typescript/index-type'
 import { TColumn, TSettingTable } from '@typescript/ui-types'
 
-interface TProps<TData, TIncludeChecked extends boolean = false> {
+interface TProps<TData extends object, TIncludeChecked extends boolean = false> {
   initialColumn: TTableProps<TData, TIncludeChecked>['columns']
   initialData?: TData[]
   initialSetting: Partial<TSettingTable<TData>>
-  onFetchData: (params: TSettingTable<TData>) => Promise<TData[]>
+  onFetchData: <TObject extends object>(
+    params: TSettingTable<TData> & TObject
+  ) => Promise<TResponseDataPaginationAPI<TData>>
 }
 
 const useTable = <TData extends object, TIncludeChecked extends boolean = false>(
@@ -28,8 +31,8 @@ const useTable = <TData extends object, TIncludeChecked extends boolean = false>
   const [data, setData] = useState<TData[]>(initialData || [])
 
   const [setting, setSetting] = useState<TSettingTable<TData>>({
-    currentPage: 1,
-    totalPage: 10,
+    currentPage: 0,
+    totalPage: 0,
     itemsPerPage: 10,
     ...initialSetting
   })
@@ -42,8 +45,13 @@ const useTable = <TData extends object, TIncludeChecked extends boolean = false>
 
   const onChange = async (params: TSettingTable<TData>) => {
     const data = await handleFetchData(params)
-    setData(data)
-    params && setSetting(params)
+    setData(data?.items)
+
+    setSetting({
+      ...setting,
+      totalPage: data?.total_pages || 0,
+      currentPage: data?.current_page || 0
+    })
   }
 
   return {

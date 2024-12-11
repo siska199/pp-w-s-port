@@ -4,8 +4,7 @@ import Button from '@components/ui/button'
 import EmptyData from '@components/ui/empty-data'
 import Tooltip from '@components/ui/tooltip'
 
-import useDebounce from '@hooks/use-debounce'
-import { cn } from '@lib/helper/function'
+import { cn, debounce } from '@lib/helper/function'
 import { TKeyVariantButton } from '@lib/helper/variant/variant-button'
 import { TColumn, TEventOnChange, TSettingTable } from '@typescript/ui-types'
 import {
@@ -68,7 +67,6 @@ const Table = <TData, TIncludeChecked extends boolean = false>(
       <PaginationTable<TData, TIncludeChecked>
         setting={setting}
         onChangePage={handleOnChangePage}
-        dataLength={data.length}
       />
     </div>
   )
@@ -158,7 +156,7 @@ const TableBody = <TData, TIncludeChecked extends boolean = false>(
 
   const renderActionButtons = useCallback(
     (dataRow: TData) => {
-      return Object.entries(actionBtn).map(([key, onClick]) => {
+      return Object.entries(actionBtn).map(([key, onClick], i) => {
         let Icon = <IconEye className='icon-blue' />
         let variant: TKeyVariantButton = 'softborder-blue'
         let tooltipInformation = 'See detail data'
@@ -178,7 +176,7 @@ const TableBody = <TData, TIncludeChecked extends boolean = false>(
         }
 
         return (
-          <Tooltip text={tooltipInformation} variant='bottom'>
+          <Tooltip key={i} text={tooltipInformation} variant='bottom'>
             <Button
               key={key}
               className=''
@@ -237,20 +235,18 @@ type TPropsPagination<TData, TIncludeChecked extends boolean> = Pick<
   'setting'
 > & {
   onChangePage: (params: any) => void
-  dataLength: number
 }
 
 const PaginationTable = <TData, TIncludeChecked extends boolean>(
   props: TPropsPagination<TData, TIncludeChecked>
 ) => {
-  const { setting, onChangePage: handleOnChangePage, dataLength } = props
-  const iShowPagination = setting.pagination && dataLength > 0
+  const { setting, onChangePage: handleOnChangePage } = props
+  const iShowPagination = setting.pagination
   const [valuePage, setValuePage] = useState(setting.currentPage)
-  const debounceValue = useDebounce({ value: valuePage, delay: 500 })
 
   useEffect(() => {
-    handleOnChangePage(valuePage)
-  }, [debounceValue])
+    setValuePage(setting.currentPage)
+  }, [setting.currentPage])
 
   const listButton = useMemo(
     () => ({
@@ -283,8 +279,14 @@ const PaginationTable = <TData, TIncludeChecked extends boolean>(
   )
 
   const handleOnChange = (e: TEventOnChange) => {
-    setValuePage(e.target.value)
+    const value = Number(e.target.value)
+    if (value <= setting?.totalPage) {
+      setValuePage(value)
+      handleOnChangeDebounce(value)
+    }
   }
+
+  const handleOnChangeDebounce = debounce(handleOnChangePage, 1500)
 
   if (!iShowPagination) return null
 
@@ -310,7 +312,7 @@ const PaginationTable = <TData, TIncludeChecked extends boolean>(
             aria-label='current-page'
             className='outline-none w-10 text-center focus:border-primary border  p-0 rounded-md'
           />
-          <span>of {setting.currentPage}</span>
+          <span>of {setting.totalPage}</span>
         </div>
 
         {listButton?.right?.map((btn, i) => (

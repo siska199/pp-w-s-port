@@ -61,7 +61,6 @@ export const getFieldLabelFromOptions = (
 
 export function debounce(func?: (...args: any[]) => void, wait?: number) {
   let timeout: ReturnType<typeof setTimeout>
-
   return function (...args: any[]) {
     clearTimeout(timeout)
     timeout = setTimeout(() => (func ? func(...args) : null), wait)
@@ -167,13 +166,21 @@ export const generateOptions = (params: {
   options: TObject
   labelName?: string
   valueName?: string
+  listSaveField?: string[]
 }) => {
-  const { options, labelName = 'name', valueName = 'id' } = params
+  const { options, labelName = 'name', valueName = 'id', listSaveField } = params
 
-  return options?.map((option: TObject) => ({
-    label: option[labelName],
-    value: option?.[valueName]?.toString()
-  }))
+  return options?.map((option: TObject) => {
+    const saveFields = listSaveField?.reduce<Record<string, any>>((acc, field) => {
+      acc[field] = option[field]
+      return acc
+    }, {})
+    return {
+      label: option[labelName],
+      value: option?.[valueName]?.toString(),
+      ...saveFields
+    }
+  })
 }
 
 export const generateOptionsFromEnum = (enumObject: TObject): TOption<string>[] => {
@@ -395,4 +402,8 @@ export const mergeArraysOfObjects = (arr1: object[], arr2: object[]): object[] =
     ...obj,
     ...arr2[index]
   }))
+}
+
+export const removeKeyWithUndifienedValue = <TData extends object>(obj: TData) => {
+  return Object.fromEntries(Object.entries(obj).filter(([_, value]) => value !== undefined))
 }

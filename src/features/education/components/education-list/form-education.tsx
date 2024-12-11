@@ -1,22 +1,35 @@
-import React, { useCallback, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { eventEmitter } from '@event-emitters'
 
+import useEducationApi from '@features/education/apis/use-education-api'
 import EVENT_EDUCATION from '@features/education/event-emitters/education-event'
 import educationSchema, {
   initialFormEducation,
-  TEducationSchema
+  TEducationSchema,
+  TOptionsFormEducation
 } from '@features/education/validations/education-schema'
 import InputDate from '@components/ui/input/input-date'
+import InputNumber from '@components/ui/input/input-number'
 import InputSelect from '@components/ui/input/input-select/input-select'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
+import useGeneralAPI from '@apis/use-general-api'
 
 import useEventEmitter from '@hooks/use-event-emitter'
-import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function'
+import {
+  deepCopy,
+  extractValueFromForm,
+  generateOptions,
+  mappingErrorsToForm,
+  mappingValuesToForm
+} from '@lib/helper/function'
 import { TTypeActionModalForm } from '@typescript/index-type'
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types'
 
 const InputTextEditor = React.lazy(() => import('@components/ui/input/input-text-editor'))
 
 const FormEducation = () => {
+  const { getListEducationLevel, getListEducationMajor, getListEducationSchool } = useGeneralAPI()
+  const { upsertEducation } = useEducationApi()
   const [modalForm, setModalForm] = useState({
     moduleName: 'Education',
     isShow: false,
@@ -24,6 +37,11 @@ const FormEducation = () => {
     customeClass: { mdBody: '  md:min-w-[38rem]  space-y-4' }
   })
   const [form, setForm] = useState(deepCopy({ ...initialFormEducation }))
+  const [options, setOptions] = useState<TOptionsFormEducation>({
+    levels: [],
+    majors: [],
+    schools: []
+  })
 
   useEventEmitter(EVENT_EDUCATION.SET_MODAL_FORM_EDUCATION, (data) => {
     setModalForm({
@@ -36,18 +54,74 @@ const FormEducation = () => {
     setForm({ ...mappingValuesToForm({ values: data, form }) })
   })
 
-  const handleOnChange = useCallback((e: TEventOnChange) => {
+  useEffect(() => {
+    handleInitialData()
+  }, [])
+
+  const handleInitialData = async () => {
+    try {
+      const updatedForm = form
+      const levels = generateOptions({
+        options: (await getListEducationLevel())?.data || []
+      })
+      const majors = generateOptions({
+        options: (await getListEducationMajor())?.data || [],
+        listSaveField: ['levels']
+      })
+      const schools = generateOptions({
+        options: (await getListEducationSchool())?.data || [],
+        listSaveField: ['levels']
+      })
+
+      updatedForm['id_level'].options = [...levels]
+
+      setOptions({
+        levels: [...levels],
+        majors: [...majors],
+        schools: [...schools]
+      })
+      setForm({
+        ...updatedForm
+      })
+    } catch (error: any) {
+      console.log('error: ', error?.message)
+    }
+  }
+
+  const handleOnChange = (e: TEventOnChange) => {
     const name = e.target.name as keyof typeof form
     const value = e.target.value
     const currForm = form
     currForm[name].value = value
+    if (name === 'id_level') {
+      currForm['id_major'].disabled = !value
+      currForm['id_major'].options = options?.majors?.filter((option) =>
+        option?.levels?.some((level) => level?.id === value)
+      )
+
+      const levelName = currForm['id_level'].options?.filter((option) => option?.value)?.[0]?.label
+      const isUniversity = !['High School', 'Middle School']?.includes(levelName)
+      currForm['gpa'].max = isUniversity ? 4.0 : 100.0
+      currForm['gpa'].value = '0.0'
+    }
+
+    if (name === 'id_major') {
+      currForm['id_school'].disabled = !value
+      currForm['id_school'].options = options?.schools?.filter((option) =>
+        option?.levels?.some((level) => level?.id === currForm['id_level'].value)
+      )
+    }
+
+    if (name === 'start_at') {
+      currForm['end_at'].disabled = !value
+    }
 
     setForm({
       ...currForm
     })
-  }, [])
+  }
 
-  const handlleCloseFormEducation = () => {
+  const handleCloseFormEducation = () => {
     setForm(deepCopy({ ...initialFormEducation }))
     setModalForm({
       ...modalForm,
@@ -55,33 +129,35 @@ const FormEducation = () => {
     })
   }
 
-  const handleOnSubmit = (e: TEventSubmitForm) => {
+  const handleOnSubmit = async (e: TEventSubmitForm) => {
     e?.preventDefault()
     const { isValid, form: updatedForm } = mappingErrorsToForm<TEducationSchema, typeof form>({
-      form,
+      form: deepCopy({ ...form }),
       schema: educationSchema
     })
-
-    if (isValid) {
-      handlleCloseFormEducation()
-    }
-
     setForm({
       ...updatedForm
     })
-  }
 
+    if (isValid) {
+      const result = await upsertEducation(extractValueFromForm(form))
+
+      if (result?.status) {
+        handleCloseFormEducation()
+        eventEmitter.emit(EVENT_EDUCATION.REFRESH_DATA_TABLE_EDUCATION, true)
+      }
+    }
+  }
   return (
-    <ContainerModalForm
-      {...modalForm}
-      onClose={handlleCloseFormEducation}
-      onSubmit={handleOnSubmit}
-    >
+    <ContainerModalForm {...modalForm} onClose={handleCloseFormEducation} onSubmit={handleOnSubmit}>
       <div className='grid md:grid-cols-2 gap-4'>
         <InputSelect {...form['id_level']} onChange={handleOnChange} />
         <InputSelect {...form['id_major']} onChange={handleOnChange} />
       </div>
-      <InputSelect {...form['id_school']} onChange={handleOnChange} />
+      <div className='grid md:grid-cols-2 gap-4'>
+        <InputSelect {...form['id_school']} onChange={handleOnChange} />
+        <InputNumber {...form['gpa']} onChange={handleOnChange} />
+      </div>
       <div className='grid md:grid-cols-2 gap-4 overflow-visible'>
         <InputDate {...form['start_at']} onChange={handleOnChange} />
         <InputDate

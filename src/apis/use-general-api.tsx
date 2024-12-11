@@ -1,7 +1,13 @@
 import ENDPOINTS from '@apis/endpoints'
 
 import useAPI from '@hooks/use-api'
-import { TCategorySocialLink, TProfession } from '@typescript/general-module-types'
+import {
+  TCategorySocialLink,
+  TEducationLevel,
+  TEducationMajor,
+  TEducationSchool,
+  TProfession
+} from '@typescript/general-module-types'
 
 const useGeneralAPI = () => {
   const { apiClient } = useAPI()
@@ -70,13 +76,43 @@ const useGeneralAPI = () => {
     return result
   }
 
+  const getListEducationLevel = async () => {
+    const result = await apiClient<TEducationLevel[]>({
+      endpoint: ENDPOINTS.GENERAL.GET_LIST_EDUCATION_LEVEL,
+      isLodiang: false
+    })
+
+    return result
+  }
+
+  const getListEducationMajor = async () => {
+    const result = await apiClient<TEducationMajor[]>({
+      endpoint: ENDPOINTS.GENERAL.GET_LIST_EDUCATION_MAJOR,
+      isLodiang: false
+    })
+
+    return result
+  }
+
+  const getListEducationSchool = async () => {
+    const result = await apiClient<TEducationSchool[]>({
+      endpoint: ENDPOINTS.GENERAL.GET_LIST_EDUCATION_SCHOOL,
+      isLodiang: false
+    })
+
+    return result
+  }
+
   return {
     getListProvince,
     getListCity,
     getListDistrict,
     getListPostalCode,
     getListProfession,
-    getListCategorySocialLink
+    getListCategorySocialLink,
+    getListEducationLevel,
+    getListEducationMajor,
+    getListEducationSchool
   }
 }
 
