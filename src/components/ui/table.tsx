@@ -338,8 +338,7 @@ interface TPropsEmptyStageTable {
 }
 
 const EmptyStageTable = (props: TPropsEmptyStageTable) => {
-  const { isLoading, dataLength } = props
-
+  const { isLoading, dataLength = 0 } = props
   return (
     dataLength === 0 && (
       <div className='w-full h-[20rem] flex items-center justify-center'>

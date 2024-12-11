@@ -13,7 +13,7 @@ import skills from '@lib/data/dummy/skills_user.json'
 import { delay } from '@lib/helper/function'
 import variantBadge from '@lib/helper/variant/variant-badge'
 import { routes } from '@routes/constant'
-import { TTypeActionModalForm } from '@typescript/index-type'
+import { TObject, TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type'
 import { TSettingTable } from '@typescript/ui-types'
 
 type TData = (typeof skills)[0]
@@ -98,7 +98,9 @@ const TableSkill = () => {
     })
   })
 
-  async function handleFetchData(params: TSettingTable<TData>): Promise<TData[]> {
+  async function handleFetchData(
+    params: TSettingTable<TData> & TObject
+  ): Promise<TResponseDataPaginationAPI<TData>> {
     console.log('params : ', params)
     delay(1500)
     return skills as TData[]
