@@ -27,21 +27,23 @@ const TableEducation = () => {
         name: 'Level',
         key: 'level_name',
         isSorted: true,
-        className: ' md:min-w-0'
+        className: ' md:min-w-[10rem]'
       },
       {
         name: 'Major',
-        key: 'major_name'
+        key: 'major_name',
+        className: ' md:min-w-[10rem]'
       },
       {
         name: 'Shool',
-        key: 'school_name'
+        key: 'school_name',
+        className: ' md:min-w-[10rem]'
       },
       {
         name: 'Start At',
         key: 'start_at',
         isSorted: true,
-        className: 'min-w-[12rem]',
+        className: 'min-w-[10rem]',
         customeComponent: (data) => {
           return <div>{formatDate({ date: data.start_at })}</div>
         }
@@ -50,7 +52,7 @@ const TableEducation = () => {
         name: 'End At',
         key: 'end_at',
         isSorted: true,
-        className: 'min-w-[12rem]',
+        className: 'min-w-[10rem]',
         customeComponent: (data) => {
           return <div>{formatDate({ date: data.end_at })}</div>
         }
