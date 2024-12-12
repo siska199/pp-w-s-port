@@ -215,12 +215,14 @@ interface TMappingErrorsToForm<TSchema, TForm extends TObject> {
 export const mappingErrorsToForm = <TSchema, TForm extends TObject>(
   params: TMappingErrorsToForm<TSchema, TForm>
 ) => {
+  type TKForm = keyof TForm
+
   const { schema, form } = params
   let isValid = true
 
   const result = schema.safeParse(
     Object.keys(form).reduce((acc, key) => {
-      const value = form[key as keyof TForm].value
+      const value = form[key as TKForm].value
       acc[key] = typeof value === 'string' ? value?.trim() : value
       return acc
     }, {} as TObject)
@@ -228,12 +230,10 @@ export const mappingErrorsToForm = <TSchema, TForm extends TObject>(
 
   isValid = result?.success
   Object?.keys(form)?.reduce((acc, key) => {
-    const errorMessage = !isValid
-      ? result?.error?.flatten()?.fieldErrors[key as keyof TForm]?.[0]
-      : ''
+    const errorMessage = !isValid ? result?.error?.flatten()?.fieldErrors[key as TKForm]?.[0] : ''
 
-    form[key as keyof TForm].errorMessage = errorMessage
-
+    form[key as TKForm].errorMessage = errorMessage
+    form[key as TKForm].value = result?.data?.[key as keyof TSchema]
     return acc
   }, {} as TObject)
 

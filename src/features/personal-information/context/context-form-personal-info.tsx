@@ -5,7 +5,7 @@ import { eventEmitter } from '@event-emitters'
 import usePersonalInformationAPI from '@features/personal-information/apis/use-personal-information-api'
 import EVENT_PERSONAL_INFO from '@features/personal-information/event-emitters/personal-info-event'
 import { TSelectedSocialLink } from '@features/personal-information/types/personal-information-types'
-import personalInformationSchema, {
+import generalPersonalInfoSchema, {
   initialFormGeneralPersonalInfo,
   TFormGeneralPersonalInfo,
   TGeneralPersonalInfoSchema
@@ -220,7 +220,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
         typeof formGeneralPersonalInfo
       >({
         form: formGeneralPersonalInfo,
-        schema: personalInformationSchema
+        schema: generalPersonalInfoSchema
       })
 
       eventEmitter.emit(
@@ -284,9 +284,11 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
             withIcon: true
           })
         )
-        setTimeout(() => {
-          navigate(0)
-        }, 3000)
+
+        isSuccess &&
+          setTimeout(() => {
+            navigate(0)
+          }, 3000)
       }
     } catch (error: any) {
       console.log('error: ', error?.message)

@@ -76,8 +76,8 @@ export const zPhoneNumber = (mandatory = true) => {
     .string()
     .max(15, { message: messageError.phoneNumberExceedLength })
     .transform((phoneNumber) => {
-      const isFormated = Number(phoneNumber?.charAt(0)) === 0
-      const updateFormatPhoneNumber = Number(`0${phoneNumber?.replace(/-/g, '')}`)
+      const isFormated = String(phoneNumber?.charAt(0)) === '0'
+      const updateFormatPhoneNumber = String(`0${phoneNumber?.replace(/-/g, '')}`)
       return isFormated ? phoneNumber : updateFormatPhoneNumber
     })
 
