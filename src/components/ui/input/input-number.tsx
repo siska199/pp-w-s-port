@@ -34,7 +34,7 @@ const InputNumber = (props: TProps) => {
 
     const numericValue = parseFloat(valueFormatted)
 
-    if (!isNaN(numericValue)) {
+    if (min || max) {
       if (min && numericValue < min) {
         valueFormatted = String(min)
       } else if (max && numericValue > max) {

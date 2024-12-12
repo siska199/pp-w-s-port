@@ -93,20 +93,25 @@ const FormEducation = () => {
     const value = e.target.value
     const currForm = form
     currForm[name].value = value
+
     if (name === 'id_level') {
       currForm['id_major'].disabled = !value
       currForm['id_major'].options = options?.majors?.filter((option) =>
         option?.levels?.some((level) => level?.id === value)
       )
 
-      const levelName = currForm['id_level'].options?.filter((option) => option?.value)?.[0]?.label
+      const levelName = currForm['id_level'].options?.filter(
+        (option) => option?.value === value
+      )?.[0]?.label
       const isUniversity = !['High School', 'Middle School']?.includes(levelName)
+
       currForm['gpa'].max = isUniversity ? 4.0 : 100.0
       currForm['gpa'].value = '0.0'
     }
 
     if (name === 'id_major') {
       currForm['id_school'].disabled = !value
+      currForm['id_school'].value = ''
       currForm['id_school'].options = options?.schools?.filter((option) =>
         option?.levels?.some((level) => level?.id === currForm['id_level'].value)
       )
@@ -122,6 +127,10 @@ const FormEducation = () => {
   }
 
   const handleCloseFormEducation = () => {
+    initialFormEducation['id_level'].options = options?.levels
+    initialFormEducation['id_major'].options = options?.majors
+    initialFormEducation['id_school'].options = options?.schools
+
     setForm(deepCopy({ ...initialFormEducation }))
     setModalForm({
       ...modalForm,
@@ -148,6 +157,7 @@ const FormEducation = () => {
       }
     }
   }
+
   return (
     <ContainerModalForm {...modalForm} onClose={handleCloseFormEducation} onSubmit={handleOnSubmit}>
       <div className='grid md:grid-cols-2 gap-4'>

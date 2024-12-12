@@ -67,15 +67,14 @@ const TableEducation = () => {
   })
 
   useEventEmitter(EVENT_EDUCATION.SEARCH_DATA_TABLE_EDUCATION, async (formFilter) => {
-    await handleFetchData({
+    await configTable.onChange({
       ...configTable.setting,
       formFilter
     })
   })
 
   useEventEmitter(EVENT_EDUCATION.REFRESH_DATA_TABLE_EDUCATION, async () => {
-    console.log('refresh')
-    await handleFetchData({
+    await configTable.onChange({
       ...configTable.setting
     })
   })
