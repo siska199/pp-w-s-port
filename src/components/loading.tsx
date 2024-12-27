@@ -13,8 +13,8 @@ const Loading = (props: TPropsLoading) => {
     <div
       className={cn({
         'top-0 z-[999] w-full m-auto flex items-center justify-center': true,
-        'sticky h-[calc(100vh-5rem)]': type === 'lazy-load-page',
-        'fixed top-0 z-[999] h-screen bg-black/30': type === 'page',
+        'sticky h-[calc(100vh-5rem)] bg-black/30': type === 'lazy-load-page',
+        'fixed top-0 z-[999] h-screen bg-black/30 ': type === 'page',
         [className || '']: true
       })}
     >
