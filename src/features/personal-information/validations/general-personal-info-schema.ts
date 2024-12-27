@@ -55,7 +55,8 @@ export const initialFormGeneralPersonalInfo = {
     placeholder: 'e.g Jawa Timur',
     value: '',
     autoComplete: 'new-password',
-    errorMessage: ''
+    errorMessage: '',
+    disabled: false
   },
   id_city: {
     name: 'id_city',

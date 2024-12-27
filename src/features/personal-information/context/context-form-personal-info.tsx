@@ -25,7 +25,7 @@ import {
   mergeArraysOfObjects,
   TParamsMapErrorMessagePromiseAll
 } from '@lib/helper/function'
-import { TEventOnChange, TEventSubmitForm, TOption } from '@typescript/ui-types'
+import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types'
 
 interface TStateFormPersonalInfo {
   formGeneralPersonalInfo: TFormGeneralPersonalInfo
@@ -96,7 +96,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
           options:
             (
               await getListCity({
-                province_code: resultPersonalInfo?.data?.id_province
+                id_province: resultPersonalInfo?.data?.id_province
               })
             )?.data || []
         })
@@ -104,30 +104,19 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
           options:
             (
               await getListDistrict({
-                city_code: resultPersonalInfo?.data?.id_city
+                id_city: resultPersonalInfo?.data?.id_city
               })
             )?.data || []
         })
 
-        const city_name = updatedFormGeneralPersonalInfo['id_city'].options?.filter(
-          (option) => option.value === resultPersonalInfo?.data?.id_city
-        )?.[0]?.label
-        const district_name = updatedFormGeneralPersonalInfo['id_district'].options?.filter(
-          (option) => option.value === resultPersonalInfo?.data?.id_district
-        )?.[0]?.label
-
-        const postalCodes = await generateOptions({
+        updatedFormGeneralPersonalInfo['id_postal_code'].options = await generateOptions({
           options:
             (
               await getListPostalCode({
-                city_name,
-                district_name
+                id_district: resultPersonalInfo?.data?.id_district
               })
             )?.data || []
         })
-
-        updatedFormGeneralPersonalInfo['id_postal_code'].options = postalCodes
-        updatedFormGeneralPersonalInfo['id_postal_code'].value = postalCodes?.[0]?.value
 
         updatedFormGeneralPersonalInfo['professional_image'].value = await handleGetFileFromUrl({
           url: resultPersonalInfo?.data?.professional_image,
@@ -149,61 +138,79 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
     const value = e.target.value
     currForm[name].value = value
     currForm[name].errorMessage = ''
+
     if (name == 'id_province') {
-      ;['id_city', 'id_district', 'id_postal_code']?.map((key) => {
-        currForm[key as TKeyFormGeneralPersonalInfo].value = ''
+      const keys = ['id_city', 'id_district', 'id_postal_code'] as Extract<
+        TKeyFormGeneralPersonalInfo,
+        'id_city' | 'id_district' | 'id_postal_code'
+      >[]
+
+      keys?.map((key) => {
+        currForm[key].value = ''
+        if (!value) {
+          currForm[key].disabled = true
+        }
       })
+      currForm['id_city'].disabled = !currForm.id_province.value
+
       currForm['id_city'].options = generateOptions({
         options:
           (
             await getListCity({
-              province_code: value
+              id_province: value
             })
           )?.data || []
       })
     }
 
     if (name == 'id_city') {
-      ;['id_district', 'id_postal_code']?.map((key) => {
-        currForm[key as TKeyFormGeneralPersonalInfo].value = ''
+      const keys = ['id_district', 'id_postal_code'] as Extract<
+        TKeyFormGeneralPersonalInfo,
+        'id_district' | 'id_postal_code'
+      >[]
+
+      keys?.map((key) => {
+        currForm[key].value = ''
+        if (!value) {
+          currForm[key].disabled = true
+        }
       })
+      currForm['id_district'].disabled = !currForm.id_province.value
+
       currForm['id_district'].options = await generateOptions({
         options:
           (
             await getListDistrict({
-              city_code: value
+              id_city: value
             })
           )?.data || []
       })
     }
 
     if (name == 'id_district') {
-      const city_code = currForm['id_city']?.value
-      const city_name = (currForm?.['id_city']?.options as TOption[])?.filter(
-        (city) => city?.value === city_code
-      )?.[0]?.label
+      const keys = ['id_postal_code'] as Extract<TKeyFormGeneralPersonalInfo, 'id_postal_code'>[]
 
-      const district_name = (currForm?.['id_district']?.options as TOption[])?.filter(
-        (district) => district?.value === value
-      )?.[0]?.label
-
-      const postalCodes = await generateOptions({
-        options:
-          (
-            await getListPostalCode({
-              city_name,
-              district_name
-            })
-          )?.data || []
+      keys?.map((key) => {
+        currForm[key].value = ''
+        currForm[key].disabled = !currForm.id_province.value
       })
-      currForm['id_postal_code'].options = postalCodes
-      currForm['id_postal_code'].value = postalCodes?.[0]?.value
-      currForm['id_postal_code'].errorMessage = ''
-    }
 
-    if (['id_city', 'id_province', 'id_district']?.includes(name)) {
-      formGeneralPersonalInfo['id_city'].disabled = !currForm.id_province.value
-      formGeneralPersonalInfo['id_district'].disabled = !currForm.id_city.value
+      const postalCodes = (
+        await generateOptions({
+          options:
+            (
+              await getListPostalCode({
+                id_district: value
+              })
+            )?.data || [],
+          listSaveField: ['postal_code']
+        })
+      )?.map((data: any) => ({
+        label: `${data.postal_code}-(${data?.label})`,
+        value: data?.value
+      }))
+      currForm['id_postal_code'].options = postalCodes
+      currForm['id_postal_code'].errorMessage = ''
     }
 
     setFormGeneralInfoPersonalInfo({

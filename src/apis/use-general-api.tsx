@@ -20,38 +20,37 @@ const useGeneralAPI = () => {
     return result
   }
 
-  const getListCity = async (queryObject: { province_code: string }) => {
-    const { province_code } = queryObject
+  const getListCity = async (queryObject: { id_province: string }) => {
+    const { id_province } = queryObject
     const result = await apiClient<{ id: string; name: string }[]>({
       endpoint: ENDPOINTS.GENERAL.GET_LIST_CITY,
       queryObject: {
-        province_code
+        id_province
       },
       isLodiang: false
     })
     return result
   }
 
-  const getListDistrict = async (queryObject: { city_code: string }) => {
-    const { city_code } = queryObject
+  const getListDistrict = async (queryObject: { id_city: string }) => {
+    const { id_city } = queryObject
     const result = await apiClient<{ id: string; name: string }[]>({
       endpoint: ENDPOINTS.GENERAL.GET_LIST_DISTRICT,
       queryObject: {
-        city_code
+        id_city
       },
       isLodiang: false
     })
     return result
   }
 
-  const getListPostalCode = async (queryObject: { city_name: string; district_name: string }) => {
-    const { city_name, district_name } = queryObject
+  const getListPostalCode = async (queryObject: { id_district: string }) => {
+    const { id_district } = queryObject
 
-    const result = await apiClient({
+    const result = await apiClient<{ id: string; name: string; postal_code: string }[]>({
       endpoint: ENDPOINTS.GENERAL.GET_LIST_POSTAL_CODE,
       queryObject: {
-        city_name,
-        district_name
+        id_district
       },
       isLodiang: false
     })

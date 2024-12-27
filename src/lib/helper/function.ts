@@ -176,7 +176,7 @@ export const generateOptions = (params: {
       return acc
     }, {})
     return {
-      label: option[labelName],
+      label: toCapitalize(option[labelName]),
       value: option?.[valueName]?.toString(),
       ...saveFields
     }

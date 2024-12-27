@@ -204,7 +204,6 @@ const InputSelect = (props: TPropsInputSelect) => {
     }
     setActiveIndex(currentActiveIndex)
   }
-
   return (
     <ContainerInput<React.HTMLProps<HTMLInputElement>>
       {...attrs}
@@ -273,7 +272,9 @@ const InputSelect = (props: TPropsInputSelect) => {
                       className={clsx({
                         'hover:bg-gray-100 block px-4 py-2 cursor-pointer  ': true,
                         '!bg-primary-50 text-primary-700 ': isSelected,
-                        '!bg-gray-100': (isSearch && i === 0 && searchQuery) || activeIndex - 1 == i
+                        '!bg-gray-100':
+                          (isSearch && searchQuery && activeIndex == 1 && i === 0) ||
+                          activeIndex - 1 == i
                       })}
                     >
                       {option?.label}
