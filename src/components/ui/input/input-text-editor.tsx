@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ContentState, EditorState, RichUtils } from 'draft-js'
+import { ContentState, convertFromHTML, EditorState, RichUtils } from 'draft-js'
 
 import ContainerInput from '@components/ui/input/container-input'
 
@@ -29,6 +29,7 @@ const InputTextEditor = (props: TProps) => {
     toolbar = basicToolbarConfig,
     ...attrs
   } = props
+
   const [editorState, setEditorState] = useState(
     EditorState.createWithContent(ContentState.createFromText(String(value)))
   )
@@ -36,6 +37,13 @@ const InputTextEditor = (props: TProps) => {
   useEffect(() => {
     import('react-draft-wysiwyg/dist/react-draft-wysiwyg.css')
   }, [])
+
+  useEffect(() => {
+    const content = value ? convertFromHTML(value) : convertFromHTML('<p></p>')
+    setEditorState(
+      EditorState.createWithContent(ContentState.createFromBlockArray(content.contentBlocks))
+    )
+  }, [value])
 
   const currentBlockType = RichUtils.getCurrentBlockType(editorState)
 
@@ -68,7 +76,7 @@ const InputTextEditor = (props: TProps) => {
         wrapperClassName={`min-h-[10rem] ${wrapperClassName}`}
         toolbar={toolbar}
         {...attrs}
-        placeholder={!value && currentBlockType == 'unstyled' ? attrs?.placeholder : ''}
+        placeholder={!value && currentBlockType === 'unstyled' ? attrs?.placeholder : ''}
       />
     </ContainerInput>
   )

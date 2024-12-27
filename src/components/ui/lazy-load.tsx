@@ -1,15 +1,14 @@
 import React from 'react'
 
-import Loading from '@components/loading'
-
 interface TProps {
   children: React.ReactNode
   fallback?: React.ReactNode
 }
 const LazyLoad = (props: TProps) => {
   const { children, fallback } = props
+
   return (
-    <React.Suspense fallback={fallback ?? <Loading type='lazy-load-page' />}>
+    <React.Suspense fallback={fallback ?? <div className='p-4 md:p-8'>load page...</div>}>
       {children}
     </React.Suspense>
   )

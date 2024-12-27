@@ -31,7 +31,8 @@ const usePersonalInformationAPI = () => {
       payload: params,
       method: 'post',
       isForm: true,
-      isShowAlert: false
+      isShowAlert: false,
+      isLodiang: false
     })
 
     return result
@@ -42,7 +43,8 @@ const usePersonalInformationAPI = () => {
       endpoint: ENDPOINT.SOCIAL_LINK.UPSERT_BULK_SOCIAL_LINKS,
       payload: params,
       method: 'post',
-      isShowAlert: false
+      isShowAlert: false,
+      isLodiang: false
     })
 
     return result

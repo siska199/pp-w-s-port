@@ -21,7 +21,7 @@ const InputNumber = (props: TProps) => {
 
   useEffect(() => {
     setFormatedValue(formatValue(value))
-  }, [])
+  }, [value])
 
   function formatValue(value: string): string {
     if (type === 'integer') return parseInt(value)?.toString()

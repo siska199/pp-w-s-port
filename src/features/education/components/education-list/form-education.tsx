@@ -144,6 +144,7 @@ const FormEducation = () => {
       form: deepCopy({ ...form }),
       schema: educationSchema
     })
+
     setForm({
       ...updatedForm
     })

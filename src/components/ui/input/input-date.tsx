@@ -228,7 +228,14 @@ const BtnIconPrevNext = (props: TPropsBtnIconPrevNext) => {
 }
 
 const CustomeInput = forwardRef<HTMLInputElement, any>((props, ref) => {
-  return <input {...props} ref={ref} readOnly />
+  return (
+    <input
+      {...props}
+      className={`${props?.className} ${props?.disabled && '!cursor-default'}`}
+      ref={ref}
+      readOnly
+    />
+  )
 })
 
 export default React.memo(InputDate)

@@ -107,7 +107,7 @@ const TableEducation = () => {
       id_school: data.id_school,
       start_at: data.start_at,
       end_at: data.end_at,
-      gpa: String(data.gpa)
+      gpa: String(Number(data.gpa)?.toFixed(2))
     })
   }
 

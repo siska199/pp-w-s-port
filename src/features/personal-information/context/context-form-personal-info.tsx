@@ -219,6 +219,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
   }, [])
 
   const handleOnSubmit = async (e: TEventSubmitForm) => {
+    dispatch(handleSetIsloading(true))
     setIsLoading(true)
     try {
       e?.preventDefault()
@@ -301,6 +302,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
       console.log('error: ', error?.message)
     } finally {
       setIsLoading(false)
+      dispatch(handleSetIsloading(false))
     }
   }
 

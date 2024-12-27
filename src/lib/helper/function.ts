@@ -231,9 +231,7 @@ export const mappingErrorsToForm = <TSchema, TForm extends TObject>(
   isValid = result?.success
   Object?.keys(form)?.reduce((acc, key) => {
     const errorMessage = !isValid ? result?.error?.flatten()?.fieldErrors[key as TKForm]?.[0] : ''
-
     form[key as TKForm].errorMessage = errorMessage
-    form[key as TKForm].value = result?.data?.[key as keyof TSchema]
     return acc
   }, {} as TObject)
 

@@ -40,7 +40,10 @@ const useTable = <TData extends object, TIncludeChecked extends boolean = false>
   const columns: TColumn<TData, keyof TData>[] = React.useMemo(() => initialColumn, [initialColumn])
 
   useEffect(() => {
-    onChange(setting)
+    onChange({
+      ...setting,
+      ...initialSetting
+    })
   }, [])
 
   const onChange = async (params: TSettingTable<TData>) => {
