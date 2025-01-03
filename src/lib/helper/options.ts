@@ -1,5 +1,5 @@
 import { TTypeCategoryProject } from '@features/project/types/project-type'
-import { TTypeLevelSkill } from '@features/skill/types/skill-type'
+import { TTypeLevelSkill } from '@features/skill-user/types/skill-user-type'
 
 import { generateOptionsFromEnum } from '@lib/helper/function'
 

@@ -1,4 +1,4 @@
-import { TEducationMajor, TEducationSchool } from '@typescript/general-module-types'
+import { TEducationMajor, TEducationSchool } from '@typescript/master-module-types'
 
 export interface TEducation {
   id: string

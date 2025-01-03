@@ -2,9 +2,9 @@ import { TEventMapEducation } from '@features/education/event-emitters/education
 import { TEventMapExperiance } from '@features/experiance/event-emitters/experiance-event'
 import { TEventMapPersonalInfo } from '@features/personal-information/event-emitters/personal-info-event'
 import { TEventMapProject } from '@features/project/event-emitters/project-event'
-import { TEventMapSkill } from '@features/skill/event-emitters/skill-event'
+import { TEventMapSkillUser } from '@features/skill-user/event-emitters/skill-user-event'
 
-export type TEventMap = TEventMapSkill &
+export type TEventMap = TEventMapSkillUser &
   TEventMapEducation &
   TEventMapExperiance &
   TEventMapProject &

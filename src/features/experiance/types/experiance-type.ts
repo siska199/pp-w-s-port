@@ -1,4 +1,4 @@
-import { TCompany, TProfession } from '@typescript/general-module-types'
+import { TCompany, TProfession } from '@typescript/master-module-types'
 
 export interface TExperiance {
   id: string

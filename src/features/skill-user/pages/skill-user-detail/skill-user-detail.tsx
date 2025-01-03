@@ -1,7 +1,7 @@
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'
 import HeaderPage from '@components/ui/header/header-page'
 
-const SkillDetailPage = () => {
+const SkillUserDetailPage = () => {
   return (
     <ContainerProtectedPage>
       <HeaderPage title='Detail Skill' isNested />
@@ -9,4 +9,4 @@ const SkillDetailPage = () => {
   )
 }
 
-export default SkillDetailPage
+export default SkillUserDetailPage

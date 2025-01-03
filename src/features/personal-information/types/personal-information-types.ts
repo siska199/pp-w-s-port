@@ -1,4 +1,4 @@
-import { TCategorySocialLink, TProfession, TUser } from '@typescript/general-module-types'
+import { TCategorySocialLink, TProfession, TUser } from '@typescript/master-module-types'
 
 export interface TSocialLink {
   id: string

@@ -23,14 +23,14 @@ const route = {
     fullPath: '/personal-information',
     isPrivate: true
   },
-  skill: {
-    name: 'skill',
-    fullPath: '/skill',
+  skillUser: {
+    name: 'skill-user',
+    fullPath: '/skill-user',
     isPrivate: true,
     child: {
       detail: {
         name: 'detail/:id',
-        fullPath: (id: string) => `/skill/detail/${id}`,
+        fullPath: (id: string) => `/skill-user/detail/${id}`,
         isPrivate: true
       }
     }

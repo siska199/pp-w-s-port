@@ -12,7 +12,7 @@ import InputDate from '@components/ui/input/input-date'
 import InputNumber from '@components/ui/input/input-number'
 import InputSelect from '@components/ui/input/input-select/input-select'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
-import useGeneralAPI from '@apis/use-general-api'
+import useMasterAPI from '@apis/use-master-api'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import {
@@ -28,7 +28,8 @@ import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types'
 const InputTextEditor = React.lazy(() => import('@components/ui/input/input-text-editor'))
 
 const FormEducation = () => {
-  const { getListEducationLevel, getListEducationMajor, getListEducationSchool } = useGeneralAPI()
+  const { getListMasterEducationLevel, getListMasterEducationMajor, getListMasterEducationSchool } =
+    useMasterAPI()
   const { upsertEducation } = useEducationApi()
   const [modalForm, setModalForm] = useState({
     moduleName: 'Education',
@@ -65,15 +66,15 @@ const FormEducation = () => {
     try {
       const updatedForm = form
       const levels = generateOptions({
-        options: (await getListEducationLevel())?.data || []
+        options: (await getListMasterEducationLevel())?.data || []
       })
       const majors = generateOptions({
-        options: (await getListEducationMajor())?.data || [],
+        options: (await getListMasterEducationMajor())?.data || [],
         listSaveField: ['levels'],
         isFormatCapitalize: false
       })
       const schools = generateOptions({
-        options: (await getListEducationSchool())?.data || [],
+        options: (await getListMasterEducationSchool())?.data || [],
         listSaveField: ['levels'],
         isFormatCapitalize: false
       })

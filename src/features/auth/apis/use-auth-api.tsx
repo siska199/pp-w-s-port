@@ -1,7 +1,7 @@
 import ENDPOINTS from '@apis/endpoints'
 
 import useAPI from '@hooks/use-api'
-import { TUser } from '@typescript/general-module-types'
+import { TUser } from '@typescript/master-module-types'
 
 const useAuthAPI = () => {
   const { apiClient } = useAPI()

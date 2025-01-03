@@ -1,7 +1,10 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
-import EVENT_SKILL from '@features/skill/event-emitters/skill-event'
-import skillSchema, { initialFormSkill, TSkill } from '@features/skill/validation/skill-schema'
+import EVENT_SKILL_USER from '@features/skill-user/event-emitters/skill-user-event'
+import skillUserSchema, {
+  initialFormSkillUser,
+  TSkillUserSchema
+} from '@features/skill-user/validation/skill-user-schema'
 import InputSelect from '@components/ui/input/input-select/input-select'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
 
@@ -10,20 +13,32 @@ import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/
 import { TTypeActionModalForm } from '@typescript/index-type'
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types'
 
-const FormSkill = () => {
-  const [modalFormSkill, setModalFormSkill] = useState({
+const FormSkillUser = () => {
+  const [modalForm, setModalForm] = useState({
     isShow: false,
     action: TTypeActionModalForm.ADD
   })
-  const [form, setForm] = useState(deepCopy({ ...initialFormSkill }))
+  const [form, setForm] = useState(deepCopy({ ...initialFormSkillUser }))
 
-  useEventEmitter(EVENT_SKILL.SET_MODAL_FORM_SKILL, (data) => {
-    setModalFormSkill({ ...data })
+  useEffect(() => {
+    handleInitData()
+  }, [])
+
+  useEventEmitter(EVENT_SKILL_USER.SET_MODAL_FORM_SKILL, (data) => {
+    setModalForm({ ...data })
   })
 
-  useEventEmitter(EVENT_SKILL.SET_SKILL, (data) => {
+  useEventEmitter(EVENT_SKILL_USER.SET_SKILL, (data) => {
     setForm({ ...mappingValuesToForm({ values: data, form }) })
   })
+
+  const handleInitData = async () => {
+    try {
+      //
+    } catch (error: any) {
+      console.log('error: ', error?.message)
+    }
+  }
 
   const handleOnChange = useCallback((e: TEventOnChange) => {
     const name = e.target.name as keyof typeof form
@@ -38,9 +53,9 @@ const FormSkill = () => {
 
   const handleOnSubmit = (e: TEventSubmitForm) => {
     e?.preventDefault()
-    const { isValid, form: updatedForm } = mappingErrorsToForm<TSkill, typeof form>({
+    const { isValid, form: updatedForm } = mappingErrorsToForm<TSkillUserSchema, typeof form>({
       form,
-      schema: skillSchema
+      schema: skillUserSchema
     })
 
     if (isValid) {
@@ -52,15 +67,15 @@ const FormSkill = () => {
   }
 
   const handleCloseFormSkill = () => {
-    setForm(deepCopy({ ...initialFormSkill }))
-    setModalFormSkill({ ...modalFormSkill, isShow: false })
+    setForm(deepCopy({ ...initialFormSkillUser }))
+    setModalForm({ ...modalForm, isShow: false })
   }
 
   return (
     <ContainerModalForm
       moduleName={'Skill'}
-      action={modalFormSkill.action}
-      isShow={modalFormSkill.isShow}
+      action={modalForm.action}
+      isShow={modalForm.isShow}
       onClose={handleCloseFormSkill}
       customeClass={{ mdBody: 'md:min-w-[32rem]' }}
       onSubmit={handleOnSubmit}
@@ -71,10 +86,10 @@ const FormSkill = () => {
       </div>
       <div className='grid md:grid-cols-2 gap-4'>
         <InputSelect {...form['level']} onChange={handleOnChange} />
-        <InputSelect {...form['year_of_experiances']} onChange={handleOnChange} />
+        <InputSelect {...form['years_of_experiance']} onChange={handleOnChange} />
       </div>
     </ContainerModalForm>
   )
 }
 
-export default FormSkill
+export default FormSkillUser

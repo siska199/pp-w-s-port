@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
 import axios, { CancelTokenSource } from 'axios'
 
+import { handleSetAuth } from '@features/auth/store/auth-slice'
+
 import { useAppDispatch, useAppSelector } from '@store/store'
 import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice'
 import CONFIG from '@lib/config/config'
@@ -111,6 +113,20 @@ const useAPI = () => {
         JSON.stringify(error?.response?.data?.message) ||
         error?.message ||
         appMessage.systemErrorMessage
+
+      const status = error?.response?.status
+      console.log('status: ', status)
+
+      if (status === 403) {
+        dispatch(
+          handleSetAuth({
+            isAuthenticated: false,
+            user: null,
+            token: '',
+            isRememberMe: false
+          })
+        )
+      }
 
       isShowAlert &&
         dispatch(

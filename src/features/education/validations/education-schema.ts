@@ -1,7 +1,7 @@
 import { zDate, zString } from '@validation/reusable-schema'
 import z from 'zod'
 
-import { TEducationLevel } from '@typescript/general-module-types'
+import { TEducationLevel } from '@typescript/master-module-types'
 import { TOption } from '@typescript/ui-types'
 
 export interface TOptionsFormEducation {

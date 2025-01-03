@@ -1,15 +1,15 @@
 const ENDPOINTS = {
-  GENERAL: {
-    GET_LIST_PROVINCE: '/provinces',
-    GET_LIST_CITY: '/cities',
-    GET_LIST_DISTRICT: '/districts',
-    GET_LIST_POSTAL_CODE: '/postal-codes',
-    GET_LIST_SKILL: '/skills',
-    GET_LIST_PROFESSION: '/professions',
-    GET_LIST_CATEGORY_SOCIAL_LINK: '/category-social-links',
-    GET_LIST_EDUCATION_LEVEL: '/education-levels',
-    GET_LIST_EDUCATION_MAJOR: '/education-majors',
-    GET_LIST_EDUCATION_SCHOOL: '/education-schools'
+  MASTER: {
+    GET_LIST_MASTER_PROVINCE: '/provinces',
+    GET_LIST_MASTER_CITY: '/cities',
+    GET_LIST_MASTER_DISTRICT: '/districts',
+    GET_LIST_MASTER_POSTAL_CODE: '/postal-codes',
+    GET_LIST_MASTER_SKILL: '/skills',
+    GET_LIST_MASTER_PROFESSION: '/professions',
+    GET_LIST_MASTER_CATEGORY_SOCIAL_LINK: '/category-social-links',
+    GET_LIST_MASTER_EDUCATION_LEVEL: '/education-levels',
+    GET_LIST_MASTER_EDUCATION_MAJOR: '/education-majors',
+    GET_LIST_MASTER_EDUCATION_SCHOOL: '/education-schools'
   },
   AUTH: {
     SIGN_UP: '/sign-up',
@@ -30,7 +30,10 @@ const ENDPOINTS = {
     DELETE_EDUCATION: (id: string) => `/education/${id}`
   },
   SKILL_USER: {
-    GET_LIST_SKILL_USER: '/skill-users'
+    GET_LIST_SKILL_USER: '/skill-users',
+    GET_DETAIL_SKILL_USER: (id: string) => `/skill-users/${id}`,
+    UPSERT_SKILL_USER: '/skill-user',
+    DELETE_SKILL_USER: (id: string) => `/skill-user/${id}`
   },
   EXPERIANCE: {
     GET_LIST_EXPERIANCE: '/experiances',

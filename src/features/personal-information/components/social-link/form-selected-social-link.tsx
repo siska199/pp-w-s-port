@@ -5,7 +5,7 @@ import usePersonalInformationAPI from '@features/personal-information/apis/use-p
 import { contextFormPersonalInfo } from '@features/personal-information/context/context-form-personal-info'
 import EVENT_PERSONAL_INFO from '@features/personal-information/event-emitters/personal-info-event'
 import InputSelect from '@components/ui/input/input-select/input-select'
-import useGeneralAPI from '@apis/use-general-api'
+import useMasterAPI from '@apis/use-master-api'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import { categoriesSocialLink } from '@lib/data/dummy/dummy'
@@ -23,7 +23,7 @@ const FormSelectedSocialLink = () => {
   })
 
   const { getListSocialLink } = usePersonalInformationAPI()
-  const { getListCategorySocialLink } = useGeneralAPI()
+  const { getListMasterCategorySocialLink } = useMasterAPI()
   const { setListSelectedSocialLink } = useContext(contextFormPersonalInfo)
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const FormSelectedSocialLink = () => {
   })
 
   const handleInitData = catchErrors(async () => {
-    const catSosialLinks = (await getListCategorySocialLink())?.data || []
+    const catSosialLinks = (await getListMasterCategorySocialLink())?.data || []
     const socialLinksUsers = (await getListSocialLink())?.data || []
 
     const options = catSosialLinks?.map((data) => {

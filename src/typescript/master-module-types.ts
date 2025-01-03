@@ -1,15 +1,15 @@
-export interface TProfession {
+export interface TMasterProfession {
   id: string
   name: string
 }
 
-export interface TCompany {
+export interface TMasterCompany {
   id: string
   name: string
   image: string
 }
 
-export interface TCategorySocialLink {
+export interface TMasterCategorySocialLink {
   id: string
   name: string
   image: string
@@ -17,36 +17,23 @@ export interface TCategorySocialLink {
   default_value: string
 }
 
-export interface TEducationLevel {
+export interface TMasterEducationLevel {
   id: string
   name: string
 }
 
-export interface TEducationMajor {
+export interface TMasterEducationMajor {
   id: string
   name: string
   id_levels: string[]
-  levels: TEducationLevel[]
+  levels: TMasterEducationLevel[]
 }
 
-export interface TEducationSchool {
+export interface TMasterEducationSchool {
   id: string
   name: string
   id_levels: string
-  levels: TEducationLevel[]
-}
-
-export interface TCategorySkill {
-  id: string
-  name: string
-}
-
-export interface TSkill {
-  id: string
-  name: string
-  image: string
-  color: string
-  id_category: string
+  levels: TMasterEducationLevel[]
 }
 
 export interface TUser {
@@ -60,5 +47,5 @@ export interface TUser {
 
   id: string
   image: string
-  profession: TProfession
+  profession: TMasterProfession
 }

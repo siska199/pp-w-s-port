@@ -10,7 +10,7 @@ import Button from '@components/ui/button'
 import Container from '@components/ui/container/container'
 import InputBase from '@components/ui/input/input-base'
 import InputSelect from '@components/ui/input/input-select/input-select'
-import useGeneralAPI from '@apis/use-general-api'
+import useMasterAPI from '@apis/use-master-api'
 
 import {
   deepCopy,
@@ -24,7 +24,7 @@ import { TEventOnChange } from '@typescript/ui-types'
 const FormSignUp = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const { getListProfession } = useGeneralAPI()
+  const { getListMasterProfession } = useMasterAPI()
   const { signUp } = useAuthAPI()
   const [form, setForm] = useState(deepCopy({ ...initialFormSignUp }))
 
@@ -38,7 +38,7 @@ const FormSignUp = () => {
     const currForm = { ...form }
 
     const listProfession = generateOptions({
-      options: (await getListProfession())?.data || []
+      options: (await getListMasterProfession())?.data || []
     })
     currForm.id_profession.options = listProfession
     setForm({

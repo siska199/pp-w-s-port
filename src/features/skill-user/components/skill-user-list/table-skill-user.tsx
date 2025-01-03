@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import { eventEmitter } from '@event-emitters'
 
-import EVENT_SKILL from '@features/skill/event-emitters/skill-event'
+import useSkillUserAPI from '@features/skill-user/apis/use-skill-user-api'
+import EVENT_SKILL_USER from '@features/skill-user/event-emitters/skill-user-event'
+import { TSkillUser, TTypeLevelSkill } from '@features/skill-user/types/skill-user-type'
 import Badge from '@components/ui/badge'
 import Table from '@components/ui/table'
 
@@ -9,21 +11,19 @@ import useEventEmitter from '@hooks/use-event-emitter'
 import useTable from '@hooks/use-table'
 import { useAppDispatch, useAppSelector } from '@store/store'
 import { handleSetModalConfirmation } from '@store/ui-slice'
-import skills from '@lib/data/dummy/skills_user.json'
-import { delay } from '@lib/helper/function'
 import variantBadge from '@lib/helper/variant/variant-badge'
 import { routes } from '@routes/constant'
-import { TObject, TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type'
+import { TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type'
 import { TSettingTable } from '@typescript/ui-types'
 
-type TData = (typeof skills)[0]
-
-const TableSkill = () => {
+const TableSkillUser = () => {
   const isLoading = useAppSelector((state) => state.ui.isLoading)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const configTable = useTable<TData, false>({
+  const { getListSkillUser } = useSkillUserAPI()
+
+  const configTable = useTable<TSkillUser, false>({
     initialColumn: [
       {
         name: 'Categgory',
@@ -47,17 +47,17 @@ const TableSkill = () => {
         key: 'level',
         isSorted: true,
         className: ' flex items-center  justify-center  md:min-w-[10rem]',
-        customeComponent: (data: TData) => {
+        customeComponent: (data: TSkillUser) => {
           const level = data.level
           let variant = 'soft-primary' as keyof typeof variantBadge
           switch (level) {
-            case 'Beginner':
+            case TTypeLevelSkill.BEGINNER:
               variant = 'soft-warning'
               break
-            case 'Intermediate':
+            case TTypeLevelSkill.INTERMEDIATE:
               variant = 'soft-sucess'
               break
-            case 'Advanced':
+            case TTypeLevelSkill.ADVANCE:
               variant = 'soft-blue'
               break
           }
@@ -68,7 +68,7 @@ const TableSkill = () => {
         name: 'Related Project',
         key: 'projects',
         className: ' min-w-[15rem]',
-        customeComponent: (data: TData) => {
+        customeComponent: (data: TSkillUser) => {
           return (
             <div className='flex flex-col gap-2'>
               {data?.projects.map((project, i) => (
@@ -84,47 +84,56 @@ const TableSkill = () => {
         }
       }
     ],
-    initialSetting: {
-      pagination: true,
-      totalPage: 10
-    },
     onFetchData: handleFetchData
   })
 
-  useEventEmitter(EVENT_SKILL.SEARCH_DATA_TABLE_SKILL, async (formFilter) => {
-    await handleFetchData({
+  useEventEmitter(EVENT_SKILL_USER.SEARCH_DATA_TABLE_SKILL, async (formFilter) => {
+    configTable.onChange({
       ...configTable.setting,
-      formFilter
+      ...formFilter
     })
   })
 
   async function handleFetchData(
-    params: TSettingTable<TData> & TObject
-  ): Promise<TResponseDataPaginationAPI<TData>> {
-    console.log('params : ', params)
-    delay(1500)
-    return skills as TData[]
+    params: TSettingTable<TSkillUser> & {
+      keyword?: string
+      level?: TTypeLevelSkill
+      years_of_experiance?: string
+      id_category?: string
+    }
+  ): Promise<TResponseDataPaginationAPI<TSkillUser>> {
+    const result = await getListSkillUser({
+      sort_by: params.sortBy,
+      sort_dir: params?.sortDir,
+      items_perpage: params?.itemsPerPage,
+      page_no: params?.currentPage,
+      keyword: params?.keyword,
+      level: params?.level,
+      years_of_experiance: params?.years_of_experiance,
+      id_category: params?.id_category
+    })
+    return result?.data as TResponseDataPaginationAPI<TSkillUser>
   }
 
-  const handleEditData = (data: TData) => {
-    eventEmitter.emit(EVENT_SKILL.SET_MODAL_FORM_SKILL, {
+  const handleEditData = (data: TSkillUser) => {
+    eventEmitter.emit(EVENT_SKILL_USER.SET_MODAL_FORM_SKILL, {
       isShow: true,
       action: TTypeActionModalForm.EDIT
     })
 
-    eventEmitter.emit(EVENT_SKILL.SET_SKILL, {
+    eventEmitter.emit(EVENT_SKILL_USER.SET_SKILL, {
       id_category: data?.id_category,
       id_skill: data?.id_skill,
       level: data?.level,
-      year_of_experiances: String(data?.years_of_experience)
+      years_of_experiance: String(data?.years_of_experience)
     })
   }
 
-  const handleViewData = (data: TData) => {
+  const handleViewData = (data: TSkillUser) => {
     navigate(routes.skill.child.detail.fullPath(String(data?.id)))
   }
 
-  const handleDeleteData = (data: TData) => {
+  const handleDeleteData = (data: TSkillUser) => {
     console.log('data: ', data)
     dispatch(
       handleSetModalConfirmation({
@@ -141,7 +150,7 @@ const TableSkill = () => {
 
   return (
     <div>
-      <Table<TData, false>
+      <Table<TSkillUser, false>
         {...configTable}
         withNo
         isLoading={isLoading}
@@ -155,4 +164,4 @@ const TableSkill = () => {
   )
 }
 
-export default TableSkill
+export default TableSkillUser

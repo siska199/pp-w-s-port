@@ -1,28 +1,29 @@
 import { zString } from '@validation/reusable-schema'
 import z from 'zod'
 
-import categories_skill from '@lib/data/dummy/categories_skill.json'
-import skills from '@lib/data/dummy/skills.json'
-import { generateOptions } from '@lib/helper/function'
-import { levelSkillOptions, yearsOfExperiances } from '@lib/helper/options'
+import { TTypeLevelSkill } from '@features/skill-user/types/skill-user-type'
 
-const skillSchema = z.object({
+import { generateOptionsFromEnum } from '@lib/helper/function'
+import { yearsOfExperiances } from '@lib/helper/options'
+
+const skillUserSchema = z.object({
+  id: zString({ name: 'ID', mandatory: false }),
   id_category: zString({ name: 'Category' }),
   id_skill: zString({ name: 'Skill' }),
   level: zString({ name: 'Level' }),
-  year_of_experiances: zString({
-    name: 'Year of Experiance'
+  years_of_experiance: zString({
+    name: 'Years of Experiance'
   })
 })
 
-export type TSkill = z.input<typeof skillSchema>
+export type TSkillUserSchema = z.input<typeof skillUserSchema>
 
-export const initialFormSkill = {
+export const initialFormSkillUser = {
   id_category: {
     name: 'id_category',
     label: 'Category',
     placeholder: 'Select a category',
-    options: generateOptions({ options: categories_skill }),
+    options: [],
     value: '',
     errorMessage: ''
   },
@@ -30,7 +31,7 @@ export const initialFormSkill = {
     name: 'id_skill',
     label: 'Skill',
     placeholder: 'Select a skill',
-    options: generateOptions({ options: skills }),
+    options: [],
     value: '',
     errorMessage: ''
   },
@@ -38,13 +39,13 @@ export const initialFormSkill = {
     name: 'level',
     label: 'Level',
     placeholder: 'Select a level',
-    options: levelSkillOptions,
+    options: generateOptionsFromEnum(TTypeLevelSkill),
     value: '',
     errorMessage: ''
   },
-  year_of_experiances: {
-    name: 'year_of_experiances',
-    label: 'Year of Experience',
+  years_of_experiance: {
+    name: 'years_of_experiance',
+    label: 'Years of Experience',
     placeholder: 'Select years of experience',
     options: yearsOfExperiances,
     value: '',
@@ -52,4 +53,4 @@ export const initialFormSkill = {
   }
 }
 
-export default skillSchema
+export default skillUserSchema

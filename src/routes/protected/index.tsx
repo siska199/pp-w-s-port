@@ -7,7 +7,7 @@ import educationRouter from '@routes/protected/education-router'
 import workHistoryRouter from '@routes/protected/experiance-router'
 import personalInformationRouter from '@routes/protected/personal-information-router'
 import projectRouter from '@routes/protected/project-router'
-import skillRouter from '@routes/protected/skill-router'
+import skillRouter from '@routes/protected/skill-user-router'
 
 const protectedRoutes: RouteObject[] = [
   {

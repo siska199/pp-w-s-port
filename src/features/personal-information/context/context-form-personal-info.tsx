@@ -11,7 +11,7 @@ import generalPersonalInfoSchema, {
   TGeneralPersonalInfoSchema
 } from '@features/personal-information/validations/general-personal-info-schema'
 import socialLinkSchema from '@features/personal-information/validations/social-link-schema'
-import useGeneralAPI from '@apis/use-general-api'
+import useMasterAPI from '@apis/use-master-api'
 
 import useFile from '@hooks/use-file'
 import { useAppDispatch } from '@store/store'
@@ -55,8 +55,13 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
   const navigate = useNavigate()
   const { upsertPersonalInformation, upsertBulkSocialLink, getDetailPersonalInformation } =
     usePersonalInformationAPI()
-  const { getListProvince, getListCity, getListDistrict, getListProfession, getListPostalCode } =
-    useGeneralAPI()
+  const {
+    getListMasterProvince,
+    getListMasterCity,
+    getListMasterDistrict,
+    getListMasterProfession,
+    getListMasterPostalCode
+  } = useMasterAPI()
   const dispatch = useAppDispatch()
   const { handleGetFileFromUrl } = useFile()
 
@@ -80,10 +85,10 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
     try {
       let updatedFormGeneralPersonalInfo = formGeneralPersonalInfo
       updatedFormGeneralPersonalInfo['id_province'].options = generateOptions({
-        options: (await getListProvince())?.data || []
+        options: (await getListMasterProvince())?.data || []
       })
       updatedFormGeneralPersonalInfo['id_profession'].options = generateOptions({
-        options: (await getListProfession())?.data || []
+        options: (await getListMasterProfession())?.data || []
       })
 
       const resultPersonalInfo = await getDetailPersonalInformation()
@@ -268,7 +273,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
       ? await generateOptions({
           options:
             (
-              await getListCity({
+              await getListMasterCity({
                 id_province: id_province
               })
             )?.data || []
@@ -284,7 +289,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
       ? await generateOptions({
           options:
             (
-              await getListDistrict({
+              await getListMasterDistrict({
                 id_city: id_city
               })
             )?.data || []
@@ -299,7 +304,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
       ? (await generateOptions({
           options:
             (
-              await getListPostalCode({
+              await getListMasterPostalCode({
                 id_district: id_district
               })
             )?.data || [],
