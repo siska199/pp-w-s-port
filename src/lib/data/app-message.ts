@@ -9,6 +9,10 @@ const appMessage = {
   upsertModule: (id: string, moduleName: string) => ({
     sucess: `Success ${id ? 'update' : 'add'} ${moduleName}`,
     error: `Failed ${id ? 'update' : 'add'} ${moduleName}`
+  }),
+  deleteModule: (moduleName: string) => ({
+    sucess: `Success delete ${moduleName}`,
+    error: `Failed delete ${moduleName}`
   })
 }
 export default appMessage

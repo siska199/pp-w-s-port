@@ -48,10 +48,22 @@ const useEducationApi = () => {
     return response
   }
 
+  const deleteEducation = async (param: string) => {
+    const id = param
+    const response = await apiClient<TEducation>({
+      endpoint: ENDPOINT.EDUCATION.DELETE_EDUCATION(id),
+      method: 'delete',
+      message: appMessage.deleteModule('Education')
+    })
+
+    return response
+  }
+
   return {
     getEducationDetail,
     getListEducation,
-    upsertEducation
+    upsertEducation,
+    deleteEducation
   }
 }
 

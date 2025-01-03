@@ -10,7 +10,7 @@ import { TObject, TResponseAPI } from '@typescript/index-type'
 
 interface TParamsApiClient {
   baseURL?: string
-  method?: 'get' | 'post' | 'put' | 'post'
+  method?: 'get' | 'post' | 'put' | 'post' | 'delete'
   bareerToken?: string
   endpoint: string
   payload?: TObject

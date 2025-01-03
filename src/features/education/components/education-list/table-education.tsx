@@ -10,6 +10,7 @@ import useEventEmitter from '@hooks/use-event-emitter'
 import useTable from '@hooks/use-table'
 import { useAppDispatch, useAppSelector } from '@store/store'
 import { handleSetModalConfirmation } from '@store/ui-slice'
+import appMessage from '@lib/data/app-message'
 import { formatDate } from '@lib/helper/function'
 import { routes } from '@routes/constant'
 import { TTypeActionModalForm } from '@typescript/index-type'
@@ -20,7 +21,7 @@ const TableEducation = () => {
   const isLoading = useAppSelector((state) => state.ui.isLoading)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { getListEducation } = useEducationApi()
+  const { getListEducation, deleteEducation } = useEducationApi()
   const configTable = useTable<TEducation, false>({
     initialColumn: [
       {
@@ -113,14 +114,18 @@ const TableEducation = () => {
   }
 
   const handleDeleteData = (data: TEducation) => {
-    console.log('data: ', data)
     dispatch(
       handleSetModalConfirmation({
         isShow: true,
-        children: 'Are you sure want to delete this data?',
+        children: appMessage.warning.deleteData,
         button: {
           confirm: {
-            onClick: () => dispatch(handleSetModalConfirmation({ isShow: false }))
+            onClick: async () => {
+              const id = data?.id
+              await deleteEducation(id)
+              dispatch(handleSetModalConfirmation({ isShow: false }))
+              eventEmitter.emit(EVENT_EDUCATION.REFRESH_DATA_TABLE_EDUCATION, true)
+            }
           }
         }
       })

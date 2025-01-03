@@ -26,7 +26,8 @@ const ENDPOINTS = {
   EDUCATION: {
     GET_LIST_EDUCATION: '/educations',
     GET_DETAIL_EDUCATION: (id: string) => `/education/${id}`,
-    UPSERT_EDUCATION: '/education'
+    UPSERT_EDUCATION: '/education',
+    DELETE_EDUCATION: (id: string) => `/education/${id}`
   },
   SKILL_USER: {
     GET_LIST_SKILL_USER: '/skill-users'
