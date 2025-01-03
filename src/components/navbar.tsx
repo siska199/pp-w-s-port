@@ -32,6 +32,7 @@ const ContentProtectedRoute = () => {
   const isToggleSidebar = useAppSelector((state) => state?.ui?.isToggleSidebar)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const { user } = useAppSelector((state) => state?.auth)
 
   const handleOnToggle = () => {
     dispatch(handleToggleSidebar(!isToggleSidebar))
@@ -85,8 +86,10 @@ const ContentProtectedRoute = () => {
             className='self-center border-gray-200 rounded-full'
           />
           <div className='flex flex-col justify-center space-y-1'>
-            <p className='text-black font-semibold'>Siska Apriana</p>
-            <p>Frontend Developer</p>
+            <p className='text-black font-semibold'>
+              {user?.first_name} {user?.last_name}
+            </p>
+            <p>{user?.profession?.name}</p>
           </div>
           <DropdownBase
             options={optionDropdown}
