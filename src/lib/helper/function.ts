@@ -164,11 +164,18 @@ export const generateDefaultValue = (schema: ZodType<any>): any => {
 
 export const generateOptions = (params: {
   options: TObject
-  labelName?: string
-  valueName?: string
+  labelField?: string
+  valueField?: string
   listSaveField?: string[]
+  isFormatCapitalize?: boolean
 }) => {
-  const { options, labelName = 'name', valueName = 'id', listSaveField } = params
+  const {
+    options,
+    isFormatCapitalize = true,
+    labelField = 'name',
+    valueField = 'id',
+    listSaveField
+  } = params
 
   return options?.map((option: TObject) => {
     const saveFields = listSaveField?.reduce<Record<string, any>>((acc, field) => {
@@ -176,8 +183,8 @@ export const generateOptions = (params: {
       return acc
     }, {})
     return {
-      label: toCapitalize(option[labelName]),
-      value: option?.[valueName]?.toString(),
+      label: isFormatCapitalize ? toCapitalize(option[labelField]) : option[labelField],
+      value: option?.[valueField]?.toString(),
       ...saveFields
     }
   })

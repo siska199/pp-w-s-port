@@ -58,11 +58,6 @@ const TableEducation = () => {
         }
       }
     ],
-    initialSetting: {
-      pagination: true,
-      itemsPerPage: 10,
-      currentPage: 1
-    },
     onFetchData: handleFetchData
   })
 
@@ -75,15 +70,14 @@ const TableEducation = () => {
 
   useEventEmitter(EVENT_EDUCATION.REFRESH_DATA_TABLE_EDUCATION, async () => {
     await configTable.onChange({
-      ...configTable.setting
+      ...configTable.setting,
+      currentPage: configTable?.setting.currentPage === 0 ? 1 : configTable?.setting.currentPage
     })
   })
 
   async function handleFetchData(
     params: TSettingTable<TEducation> & { keyword?: string; id_level?: string }
   ): Promise<TResponseDataPaginationAPI<TEducation>> {
-    console.log(params)
-
     const results = await getListEducation({
       sort_by: params.sortBy,
       sort_dir: params?.sortDir,

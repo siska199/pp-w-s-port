@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ContentState, convertFromHTML, EditorState, RichUtils } from 'draft-js'
+import { ContentState, EditorState, RichUtils } from 'draft-js'
 
 import ContainerInput from '@components/ui/input/container-input'
 
@@ -38,12 +38,12 @@ const InputTextEditor = (props: TProps) => {
     import('react-draft-wysiwyg/dist/react-draft-wysiwyg.css')
   }, [])
 
-  useEffect(() => {
-    const content = value ? convertFromHTML(value) : convertFromHTML('<p></p>')
-    setEditorState(
-      EditorState.createWithContent(ContentState.createFromBlockArray(content.contentBlocks))
-    )
-  }, [value])
+  // useEffect(() => {
+  //   const content = value ? convertFromHTML(value) : convertFromHTML('<p></p>')
+  //   setEditorState(
+  //     EditorState.createWithContent(ContentState.createFromBlockArray(content.contentBlocks))
+  //   )
+  // }, [value])
 
   const currentBlockType = RichUtils.getCurrentBlockType(editorState)
 

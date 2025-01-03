@@ -38,7 +38,7 @@ const InputNumber = (props: TProps) => {
       if (min && numericValue < min) {
         valueFormatted = String(min)
       } else if (max && numericValue > max) {
-        valueFormatted = String(max)
+        valueFormatted = String(formatedValue)
       }
     }
 

@@ -43,6 +43,9 @@ const FormEducation = () => {
     schools: []
   })
 
+  type TKeyFormEducation = keyof typeof form
+  type TExtractKeyEducation<TKey> = Extract<TKeyFormEducation, TKey>[]
+
   useEventEmitter(EVENT_EDUCATION.SET_MODAL_FORM_EDUCATION, (data) => {
     setModalForm({
       ...modalForm,
@@ -66,11 +69,13 @@ const FormEducation = () => {
       })
       const majors = generateOptions({
         options: (await getListEducationMajor())?.data || [],
-        listSaveField: ['levels']
+        listSaveField: ['levels'],
+        isFormatCapitalize: false
       })
       const schools = generateOptions({
         options: (await getListEducationSchool())?.data || [],
-        listSaveField: ['levels']
+        listSaveField: ['levels'],
+        isFormatCapitalize: false
       })
 
       updatedForm['id_level'].options = [...levels]
@@ -89,7 +94,7 @@ const FormEducation = () => {
   }
 
   const handleOnChange = (e: TEventOnChange) => {
-    const name = e.target.name as keyof typeof form
+    const name = e.target.name as TKeyFormEducation
     const value = e.target.value
     const currForm = form
     currForm[name].value = value
@@ -103,10 +108,17 @@ const FormEducation = () => {
       const levelName = currForm['id_level'].options?.filter(
         (option) => option?.value === value
       )?.[0]?.label
-      const isUniversity = !['High School', 'Middle School']?.includes(levelName)
+      const isUniversity = !['High School', 'Middle School', 'Bootcamp']?.includes(levelName)
 
       currForm['gpa'].max = isUniversity ? 4.0 : 100.0
       currForm['gpa'].value = '0.0'
+
+      const keys = ['id_major', 'id_school'] as TExtractKeyEducation<'id_major' | 'id_school'>
+      keys?.map((key) => {
+        currForm[key].value = ''
+        currForm[key].disabled =
+          key === 'id_major' ? !value : !value ? true : currForm[key].disabled
+      })
     }
 
     if (name === 'id_major') {

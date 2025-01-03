@@ -1,17 +1,36 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { eventEmitter } from '@event-emitters'
 
 import EVENT_EDUCATION from '@features/education/event-emitters/education-event'
 import InputBase from '@components/ui/input/input-base'
 import InputSelect from '@components/ui/input/input-select/input-select'
+import useGeneralAPI from '@apis/use-general-api'
 
-import { debounce, deepCopy } from '@lib/helper/function'
+import { debounce, deepCopy, generateOptions } from '@lib/helper/function'
 import { TEventOnChange } from '@typescript/ui-types'
 import { IconSearch } from '@assets/icons'
 
 const FormFilterEducation = () => {
   const [form, setForm] = useState(deepCopy({ ...initialFormFilter }))
+  const { getListEducationLevel } = useGeneralAPI()
 
+  useEffect(() => {
+    handleInitData()
+  }, [])
+
+  const handleInitData = async () => {
+    try {
+      const currForm = form
+      currForm['id_level'].options = await generateOptions({
+        options: (await getListEducationLevel())?.data || []
+      })
+      setForm({
+        ...currForm
+      })
+    } catch (error: any) {
+      console.log('error: ', error?.message)
+    }
+  }
   const handleOnChange = useCallback((e: TEventOnChange) => {
     const currForm = form
     const value = e.target.value
@@ -55,11 +74,7 @@ const initialFormFilter = {
   id_level: {
     name: 'id_level',
     value: '',
-    options: [
-      { label: 'SMA', value: 'SMA' },
-      { label: 'S1', value: 'S1' },
-      { label: 'Bootcamp', value: 'Bootcamp' }
-    ],
+    options: [],
     placeholder: 'Level'
   }
 }
