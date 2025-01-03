@@ -54,7 +54,6 @@ const FormEducation = () => {
   })
 
   useEventEmitter(EVENT_EDUCATION.SET_EDUCATION, (data) => {
-    console.log('data: ', data)
     setForm({ ...mappingValuesToForm({ values: data, form }) })
   })
 
@@ -80,6 +79,8 @@ const FormEducation = () => {
       })
 
       updatedForm['id_level'].options = [...levels]
+      updatedForm['id_major'].options = [...majors]
+      updatedForm['id_school'].options = [...schools]
 
       setOptions({
         levels: [...levels],

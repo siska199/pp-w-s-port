@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ContentState, EditorState, RichUtils } from 'draft-js'
+import htmlToDraft from 'html-to-draftjs'
 
 import ContainerInput from '@components/ui/input/container-input'
 
@@ -30,20 +31,16 @@ const InputTextEditor = (props: TProps) => {
     ...attrs
   } = props
 
-  const [editorState, setEditorState] = useState(
-    EditorState.createWithContent(ContentState.createFromText(String(value)))
-  )
+  const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
   useEffect(() => {
     import('react-draft-wysiwyg/dist/react-draft-wysiwyg.css')
-  }, [])
 
-  // useEffect(() => {
-  //   const content = value ? convertFromHTML(value) : convertFromHTML('<p></p>')
-  //   setEditorState(
-  //     EditorState.createWithContent(ContentState.createFromBlockArray(content.contentBlocks))
-  //   )
-  // }, [value])
+    if (value) {
+      const initialState = getIntitialState(value)
+      handleOnChangeEditorState(initialState)
+    }
+  }, [])
 
   const currentBlockType = RichUtils.getCurrentBlockType(editorState)
 
@@ -65,6 +62,17 @@ const InputTextEditor = (props: TProps) => {
         value: isEmptyValue ? '' : htmlContent
       }
     })
+  }
+
+  const getIntitialState = (defaultValue: string) => {
+    if (defaultValue) {
+      const blocksFromHtml = htmlToDraft(defaultValue)
+      const { contentBlocks, entityMap } = blocksFromHtml
+      const contentState = ContentState?.createFromBlockArray(contentBlocks, entityMap)
+      return EditorState.createWithContent(contentState)
+    } else {
+      return EditorState.createEmpty()
+    }
   }
 
   return (

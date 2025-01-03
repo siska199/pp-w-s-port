@@ -45,9 +45,11 @@ const ContainerModalForm = (props: TProps) => {
       }}
       {...attrs}
     >
-      <form onSubmit={onSubmit} autoComplete='off' className=' w-full space-y-4 h-full mx-auto '>
-        {children}
-      </form>
+      {attrs?.isShow && (
+        <form onSubmit={onSubmit} autoComplete='off' className=' w-full space-y-4 h-full mx-auto '>
+          {children}
+        </form>
+      )}
     </ContainerModal>
   )
 }
