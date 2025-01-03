@@ -86,7 +86,8 @@ export const initialFormGeneralPersonalInfo = {
     placeholder: 'e.g 68356',
     disabled: true,
     value: '',
-    errorMessage: ''
+    errorMessage: '',
+    autoComplete: 'new-password'
   },
 
   bio: {

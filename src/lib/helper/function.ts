@@ -405,3 +405,10 @@ export const mergeArraysOfObjects = (arr1: object[], arr2: object[]): object[] =
 export const removeKeyWithUndifienedValue = <TData extends object>(obj: TData) => {
   return Object.fromEntries(Object.entries(obj).filter(([_, value]) => value !== undefined))
 }
+
+export const formatPhoneNumber = (phoneNumber: string): string => {
+  const isHaveFormated = phoneNumber?.charAt(0) === '0'
+  const formatedPhoneNumber = isHaveFormated ? phoneNumber : `0${phoneNumber?.replace(/-/gi, '')}`
+
+  return formatedPhoneNumber
+}

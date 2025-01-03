@@ -26,7 +26,7 @@ const FormFilterEducation = () => {
       id_level: form.id_level.value,
       keyword: form?.keyword?.value
     })
-  }, 3000)
+  }, 1500)
 
   return (
     <div className='grid md:grid-cols-4 gap-4'>
@@ -53,8 +53,8 @@ const initialFormFilter = {
     customeClass: {}
   },
   id_level: {
-    name: 'level',
-    value: [],
+    name: 'id_level',
+    value: '',
     options: [
       { label: 'SMA', value: 'SMA' },
       { label: 'S1', value: 'S1' },
@@ -65,7 +65,7 @@ const initialFormFilter = {
 }
 
 export interface TFormFilterEducation {
-  id_level: string[]
+  id_level: string
   keyword: string
 }
 

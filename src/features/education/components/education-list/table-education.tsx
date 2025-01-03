@@ -69,7 +69,7 @@ const TableEducation = () => {
   useEventEmitter(EVENT_EDUCATION.SEARCH_DATA_TABLE_EDUCATION, async (formFilter) => {
     await configTable.onChange({
       ...configTable.setting,
-      formFilter
+      ...formFilter
     })
   })
 
@@ -82,6 +82,8 @@ const TableEducation = () => {
   async function handleFetchData(
     params: TSettingTable<TEducation> & { keyword?: string; id_level?: string }
   ): Promise<TResponseDataPaginationAPI<TEducation>> {
+    console.log(params)
+
     const results = await getListEducation({
       sort_by: params.sortBy,
       sort_dir: params?.sortDir,

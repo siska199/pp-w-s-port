@@ -18,6 +18,7 @@ import { useAppDispatch } from '@store/store'
 import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice'
 import {
   extractValueFromForm,
+  formatPhoneNumber,
   generateOptions,
   mapErrorMessagePromiseAll,
   mappingErrorsToForm,
@@ -92,31 +93,18 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
           values: resultPersonalInfo?.data
         })
 
-        updatedFormGeneralPersonalInfo['id_city'].options = generateOptions({
-          options:
-            (
-              await getListCity({
-                id_province: resultPersonalInfo?.data?.id_province
-              })
-            )?.data || []
-        })
-        updatedFormGeneralPersonalInfo['id_district'].options = await generateOptions({
-          options:
-            (
-              await getListDistrict({
-                id_city: resultPersonalInfo?.data?.id_city
-              })
-            )?.data || []
+        updatedFormGeneralPersonalInfo['id_city'].options = await handleMappingOptionsCity({
+          id_province: resultPersonalInfo?.data?.id_province
         })
 
-        updatedFormGeneralPersonalInfo['id_postal_code'].options = await generateOptions({
-          options:
-            (
-              await getListPostalCode({
-                id_district: resultPersonalInfo?.data?.id_district
-              })
-            )?.data || []
+        updatedFormGeneralPersonalInfo['id_district'].options = await handleMappingOptionsDistrict({
+          id_city: resultPersonalInfo?.data?.id_city
         })
+
+        updatedFormGeneralPersonalInfo['id_postal_code'].options =
+          await handleMappingOptionsPostalCode({
+            id_district: resultPersonalInfo?.data?.id_district
+          })
 
         updatedFormGeneralPersonalInfo['professional_image'].value = await handleGetFileFromUrl({
           url: resultPersonalInfo?.data?.professional_image,
@@ -132,6 +120,8 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
     }
   }
 
+  type TExtractKeyPersonalInfo<TKey> = Extract<TKeyFormGeneralPersonalInfo, TKey>[]
+
   const handleOnChangeFormGeneralPersonalInfo = useCallback(async (e: TEventOnChange) => {
     const currForm = formGeneralPersonalInfo
     const name = e.target.name as TKeyFormGeneralPersonalInfo
@@ -140,77 +130,38 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
     currForm[name].errorMessage = ''
 
     if (name == 'id_province') {
-      const keys = ['id_city', 'id_district', 'id_postal_code'] as Extract<
-        TKeyFormGeneralPersonalInfo,
+      const keys = ['id_city', 'id_district', 'id_postal_code'] as TExtractKeyPersonalInfo<
         'id_city' | 'id_district' | 'id_postal_code'
-      >[]
+      >
 
       keys?.map((key) => {
         currForm[key].value = ''
-        if (!value) {
-          currForm[key].disabled = true
-        }
+        currForm[key].disabled = key === 'id_city' ? !value : !value ? true : currForm[key].disabled
       })
-      currForm['id_city'].disabled = !currForm.id_province.value
-
-      currForm['id_city'].options = generateOptions({
-        options:
-          (
-            await getListCity({
-              id_province: value
-            })
-          )?.data || []
-      })
+      currForm['id_city'].options = await handleMappingOptionsCity({ id_province: value })
     }
 
     if (name == 'id_city') {
-      const keys = ['id_district', 'id_postal_code'] as Extract<
-        TKeyFormGeneralPersonalInfo,
+      const keys = ['id_district', 'id_postal_code'] as TExtractKeyPersonalInfo<
         'id_district' | 'id_postal_code'
-      >[]
+      >
 
       keys?.map((key) => {
         currForm[key].value = ''
-        if (!value) {
-          currForm[key].disabled = true
-        }
+        currForm[key].disabled =
+          key === 'id_district' ? !value : !value ? true : currForm[key].disabled
       })
-      currForm['id_district'].disabled = !currForm.id_province.value
-
-      currForm['id_district'].options = await generateOptions({
-        options:
-          (
-            await getListDistrict({
-              id_city: value
-            })
-          )?.data || []
-      })
+      currForm['id_district'].options = await handleMappingOptionsDistrict({ id_city: value })
     }
 
     if (name == 'id_district') {
-      const keys = ['id_postal_code'] as Extract<TKeyFormGeneralPersonalInfo, 'id_postal_code'>[]
-
-      keys?.map((key) => {
-        currForm[key].value = ''
-        currForm[key].disabled = !currForm.id_province.value
-      })
-
-      const postalCodes = (
-        await generateOptions({
-          options:
-            (
-              await getListPostalCode({
-                id_district: value
-              })
-            )?.data || [],
-          listSaveField: ['postal_code']
-        })
-      )?.map((data: any) => ({
-        label: `${data.postal_code}-(${data?.label})`,
-        value: data?.value
-      }))
-      currForm['id_postal_code'].options = postalCodes
+      currForm['id_postal_code'].value = ''
+      currForm['id_postal_code'].disabled = !value
       currForm['id_postal_code'].errorMessage = ''
+
+      currForm['id_postal_code'].options = await handleMappingOptionsPostalCode({
+        id_district: value
+      })
     }
 
     setFormGeneralInfoPersonalInfo({
@@ -262,7 +213,9 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
       setFormGeneralInfoPersonalInfo({ ...updatedFormGeneralInfo })
 
       if (isValidFormGeneralInfo && isValidFormListSelectedSocialLink) {
-        const personalInformation = extractValueFromForm({ ...formGeneralPersonalInfo })
+        const personalInformation = {
+          ...extractValueFromForm({ ...formGeneralPersonalInfo })
+        }
         const socialLinks = listSelectedSocialLink?.map((selectedSocliaLink) => ({
           id_category: selectedSocliaLink.id_category,
           id: selectedSocliaLink?.id,
@@ -270,7 +223,10 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
         }))
 
         const results = await Promise.all([
-          upsertPersonalInformation(personalInformation),
+          upsertPersonalInformation({
+            ...personalInformation,
+            phone_number: formatPhoneNumber(personalInformation.phone_number)
+          }),
           upsertBulkSocialLink(socialLinks)
         ])
 
@@ -304,6 +260,57 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
       setIsLoading(false)
       dispatch(handleSetIsloading(false))
     }
+  }
+
+  const handleMappingOptionsCity = async (params: { id_province: string }) => {
+    const { id_province } = params
+    const options = id_province
+      ? await generateOptions({
+          options:
+            (
+              await getListCity({
+                id_province: id_province
+              })
+            )?.data || []
+        })
+      : []
+
+    return options
+  }
+
+  const handleMappingOptionsDistrict = async (params: { id_city: string }) => {
+    const { id_city } = params
+    const options = id_city
+      ? await generateOptions({
+          options:
+            (
+              await getListDistrict({
+                id_city: id_city
+              })
+            )?.data || []
+        })
+      : []
+    return options
+  }
+
+  const handleMappingOptionsPostalCode = async (params: { id_district: string }) => {
+    const { id_district } = params
+    const options = id_district
+      ? (await generateOptions({
+          options:
+            (
+              await getListPostalCode({
+                id_district: id_district
+              })
+            )?.data || [],
+          listSaveField: ['postal_code']
+        })?.map((data: any) => ({
+          label: `${data.postal_code}-(${data?.label})`,
+          value: data?.value
+        }))) || []
+      : []
+
+    return options
   }
 
   return (
