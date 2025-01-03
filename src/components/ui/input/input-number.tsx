@@ -53,7 +53,12 @@ const InputNumber = (props: TProps) => {
   }
 
   return (
-    <ContainerInput<React.HTMLProps<HTMLInputElement>> {...attrs} onChange={handleOnChange}>
+    <ContainerInput<React.HTMLProps<HTMLInputElement>>
+      {...attrs}
+      onChange={handleOnChange}
+      isClerable={true}
+      value={formatedValue}
+    >
       {(attrsInput) => (
         <input {...attrsInput} value={formatedValue} onChange={handleOnChangeFormatedValue} />
       )}

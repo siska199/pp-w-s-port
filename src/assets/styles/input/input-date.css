@@ -179,7 +179,7 @@
 .react-datepicker__close-icon::after {
   background-color: transparent;
   content: '';
-  background-image: url('../icons/close.svg');
+  background-image: url('../../icons/close.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

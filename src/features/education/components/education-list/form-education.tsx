@@ -54,6 +54,7 @@ const FormEducation = () => {
   })
 
   useEventEmitter(EVENT_EDUCATION.SET_EDUCATION, (data) => {
+    console.log('data: ', data)
     setForm({ ...mappingValuesToForm({ values: data, form }) })
   })
 
