@@ -1,16 +1,16 @@
-import { zDate, zString } from '@validation/reusable-schema'
+import { zDate, zNumber, zString } from '@validation/reusable-schema'
 import z from 'zod'
 
-import { TEducationLevel } from '@typescript/master-module-types'
+import { TMasterEducationLevel } from '@typescript/master-module-types'
 import { TOption } from '@typescript/ui-types'
 
 export interface TOptionsFormEducation {
   levels: TOption[]
   majors: (TOption & {
-    levels: TEducationLevel[]
+    levels: TMasterEducationLevel[]
   })[]
   schools: (TOption & {
-    levels: TEducationLevel[]
+    levels: TMasterEducationLevel[]
   })[]
 }
 
@@ -51,7 +51,7 @@ export const initialFormEducation = {
     name: 'gpa',
     label: 'GPA',
     placeholder: 'e.g 3.86',
-    value: '0.0',
+    value: 0.0,
     errorMessage: '',
     type: 'float' as const,
     max: 100,
@@ -86,8 +86,8 @@ const educationSchema = z.object({
   id_level: zString({ name: 'Level' }),
   id_major: zString({ name: 'Major' }),
   id_school: zString({ name: 'School' }),
-  gpa: zString({ name: 'GPA' }),
-  start_at: zDate({ name: 'Start At', mandatory: false }),
+  gpa: zNumber({ name: 'GPA' }),
+  start_at: zDate({ name: 'Start At', mandatory: true }),
   end_at: zDate({ name: 'End At', mandatory: false }),
   description: zString({ name: 'Description' })
 })

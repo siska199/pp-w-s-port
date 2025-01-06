@@ -9,7 +9,8 @@ const ENDPOINTS = {
     GET_LIST_MASTER_CATEGORY_SOCIAL_LINK: '/category-social-links',
     GET_LIST_MASTER_EDUCATION_LEVEL: '/education-levels',
     GET_LIST_MASTER_EDUCATION_MAJOR: '/education-majors',
-    GET_LIST_MASTER_EDUCATION_SCHOOL: '/education-schools'
+    GET_LIST_MASTER_EDUCATION_SCHOOL: '/education-schools',
+    GET_LIST_MASTER_CATEGORY_SKILL: '/category-skills'
   },
   AUTH: {
     SIGN_UP: '/sign-up',

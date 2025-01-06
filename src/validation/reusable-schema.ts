@@ -1,10 +1,28 @@
 import { messageError, regexValidation } from '@validation/constant'
-import z, { ZodDate, ZodEffects, ZodString } from 'zod'
+import z, { ZodDate, ZodEffects, ZodNumber, ZodString } from 'zod'
 
 import { TFileValue } from '@components/ui/input/input-file/input-file-v1'
 
 import { formatDate, isValidTypeFile } from '@lib/helper/function'
 import { TTypeDateFormat, TTypeFile } from '@typescript/ui-types'
+
+export const zNumber = (params: {
+  name: string
+  min?: number
+  max?: number
+  mandatory?: boolean
+}): z.ZodNumber => {
+  const { name, max = 255, min = 1, mandatory = true } = params
+  const numberSchema = z.number().max(max, {
+    message: messageError.maxNumber(name, max)
+  })
+
+  return (mandatory
+    ? numberSchema.min(min, {
+        message: messageError.minNumber(name, min)
+      })
+    : numberSchema.optional()) as unknown as ZodNumber
+}
 
 export const zString = (params: {
   name: string

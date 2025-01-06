@@ -1,12 +1,13 @@
 import { TFilterSkillUser } from '@features/skill-user/components/skill-user-list/form-filter-skill-user'
-import { TSkillUser } from '@features/skill-user/types/skill-user-type'
+import { TSkillUserSchema } from '@features/skill-user/validation/skill-user-schema'
 
 import { TTypeActionModalForm } from '@typescript/index-type'
 
 const EVENT_SKILL_USER = {
   SET_MODAL_FORM_SKILL_USER: 'SET_MODAL_FORM_SKILL_USER',
   SET_SKILL_USER: 'SET_SKILL_USER',
-  SEARCH_DATA_TABLE_SKILL_USER: 'SEARCH_DATA_TABLE_SKILL_USER'
+  SEARCH_DATA_TABLE_SKILL_USER: 'SEARCH_DATA_TABLE_SKILL_USER',
+  REFRESH_DATA_TABLE_SKILL_USER: 'REFRESH_DATA_TABLE_SKILL_USER'
 } as const
 
 export type TEventMapSkillUser = {
@@ -14,8 +15,9 @@ export type TEventMapSkillUser = {
     isShow: boolean
     action: TTypeActionModalForm
   }
-  [EVENT_SKILL_USER.SET_SKILL_USER]: TSkillUser
+  [EVENT_SKILL_USER.SET_SKILL_USER]: TSkillUserSchema
   [EVENT_SKILL_USER.SEARCH_DATA_TABLE_SKILL_USER]: TFilterSkillUser
+  [EVENT_SKILL_USER.REFRESH_DATA_TABLE_SKILL_USER]: boolean
 }
 
 export default EVENT_SKILL_USER

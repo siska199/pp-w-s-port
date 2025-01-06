@@ -23,6 +23,18 @@ const route = {
     fullPath: '/personal-information',
     isPrivate: true
   },
+  education: {
+    name: 'education',
+    fullPath: '/education',
+    isPrivate: true,
+    child: {
+      detail: {
+        name: 'detail/:id',
+        fullPath: (id: string) => `/education/detail/${id}`,
+        isPrivate: true
+      }
+    }
+  },
   skillUser: {
     name: 'skill-user',
     fullPath: '/skill-user',
@@ -43,18 +55,6 @@ const route = {
       detail: {
         name: 'detail',
         fullPath: (id: string) => `/experiance/detail/${id}`,
-        isPrivate: true
-      }
-    }
-  },
-  education: {
-    name: 'education',
-    fullPath: '/education',
-    isPrivate: true,
-    child: {
-      detail: {
-        name: 'detail/:id',
-        fullPath: (id: string) => `/education/detail/${id}`,
         isPrivate: true
       }
     }

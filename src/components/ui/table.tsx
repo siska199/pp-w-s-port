@@ -211,7 +211,7 @@ const TableBody = <TData, TIncludeChecked extends boolean = false>(
                 <div className={`flex p-th-td  ${column?.className}`}>
                   {column?.customeComponent
                     ? column?.customeComponent(dataRow)
-                    : (dataRow[column.key] as string)}
+                    : (dataRow?.[column.key] as string)}
                 </div>
               </td>
             ))}
@@ -242,7 +242,7 @@ const PaginationTable = <TData, TIncludeChecked extends boolean>(
 ) => {
   const { setting, onChangePage: handleOnChangePage } = props
   const iShowPagination = setting.pagination
-  const [valuePage, setValuePage] = useState(setting.currentPage)
+  const [valuePage, setValuePage] = useState(setting.currentPage || 0)
 
   useEffect(() => {
     setValuePage(setting.currentPage)

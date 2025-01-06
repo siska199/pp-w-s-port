@@ -115,9 +115,7 @@ const useAPI = () => {
         appMessage.systemErrorMessage
 
       const status = error?.response?.status
-      console.log('status: ', status)
-
-      if (status === 403) {
+      if ([401, 403]?.includes(status)) {
         dispatch(
           handleSetAuth({
             isAuthenticated: false,

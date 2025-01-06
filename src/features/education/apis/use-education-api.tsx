@@ -37,9 +37,7 @@ const useEducationApi = () => {
     const response = await apiClient<TEducation>({
       endpoint: ENDPOINT.EDUCATION.UPSERT_EDUCATION,
       payload: {
-        ...params,
-        gpa: Number(params?.gpa),
-        id: params?.id || undefined
+        ...params
       },
       method: 'post',
       message: appMessage.upsertModule(params?.id, 'Education')

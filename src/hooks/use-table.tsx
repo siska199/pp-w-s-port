@@ -54,7 +54,7 @@ const useTable = <TData extends object, TIncludeChecked extends boolean = false>
     setSetting({
       ...setting,
       totalPage: data?.total_pages,
-      currentPage: data?.current_page
+      currentPage: data?.current_page === 0 ? 1 : data?.current_page
     })
   }
 

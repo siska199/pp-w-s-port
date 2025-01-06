@@ -10,13 +10,13 @@ interface TProps
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   name: string
   value: string
-  type: 'float' | 'integer'
+  type?: 'float' | 'integer'
   min?: number
   max?: number
 }
 
 const InputNumber = (props: TProps) => {
-  const { onChange: handleOnChange, value, min, max, type, ...attrs } = props
+  const { onChange: handleOnChange, value, min, max, type = 'float', ...attrs } = props
   const [formatedValue, setFormatedValue] = useState<string>(value)
 
   useEffect(() => {

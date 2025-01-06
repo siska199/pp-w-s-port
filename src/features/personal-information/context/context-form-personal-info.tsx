@@ -101,15 +101,18 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
         updatedFormGeneralPersonalInfo['id_city'].options = await handleMappingOptionsCity({
           id_province: resultPersonalInfo?.data?.id_province
         })
+        updatedFormGeneralPersonalInfo['id_city'].disabled = false
 
         updatedFormGeneralPersonalInfo['id_district'].options = await handleMappingOptionsDistrict({
           id_city: resultPersonalInfo?.data?.id_city
         })
+        updatedFormGeneralPersonalInfo['id_district'].disabled = false
 
         updatedFormGeneralPersonalInfo['id_postal_code'].options =
           await handleMappingOptionsPostalCode({
             id_district: resultPersonalInfo?.data?.id_district
           })
+        updatedFormGeneralPersonalInfo['id_postal_code'].disabled = false
 
         updatedFormGeneralPersonalInfo['professional_image'].value = await handleGetFileFromUrl({
           url: resultPersonalInfo?.data?.professional_image,

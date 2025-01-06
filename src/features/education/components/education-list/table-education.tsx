@@ -71,8 +71,7 @@ const TableEducation = () => {
 
   useEventEmitter(EVENT_EDUCATION.REFRESH_DATA_TABLE_EDUCATION, async () => {
     await configTable.onChange({
-      ...configTable.setting,
-      currentPage: configTable?.setting.currentPage === 0 ? 1 : configTable?.setting.currentPage
+      ...configTable.setting
     })
   })
 
@@ -104,7 +103,7 @@ const TableEducation = () => {
       id_school: data.id_school,
       start_at: data.start_at,
       end_at: data.end_at,
-      gpa: String(Number(data.gpa)?.toFixed(2))
+      gpa: data.gpa
     })
   }
 

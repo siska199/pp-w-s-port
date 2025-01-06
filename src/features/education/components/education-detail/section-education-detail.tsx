@@ -96,7 +96,7 @@ const SectionEducationDetail = () => {
 
   return (
     <div className='w-full h-full flex flex-col gap-8'>
-      <div className='md-w-[80%] space-y-4'>
+      <div className='md-w-[80%] space-y-8'>
         <DisplayFile
           file={educationData?.school_image?.value}
           className={{
@@ -106,7 +106,7 @@ const SectionEducationDetail = () => {
         <div className='grid grid-cols-1 md:grid-cols-3  gap-4'>
           {Object.keys(educationData)
             .filter((key, _) => key !== 'school_image')
-            ?.map((key) => {
+            ?.map((key, i) => {
               const keyField = key as keyof typeof educationData
               let type = TTypeDispalyInformation.TEXT
 
@@ -117,6 +117,7 @@ const SectionEducationDetail = () => {
               }
               return (
                 <DisplayInfo
+                  key={i}
                   label={educationData[keyField].label}
                   value={String(educationData[keyField].value)}
                   type={type}

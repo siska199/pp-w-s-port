@@ -1,31 +1,57 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { eventEmitter } from '@event-emitters'
 
+import useSkillUserAPI from '@features/skill-user/apis/use-skill-user-api'
 import EVENT_SKILL_USER from '@features/skill-user/event-emitters/skill-user-event'
 import skillUserSchema, {
   initialFormSkillUser,
+  TOptionsFormSkillUser,
   TSkillUserSchema
 } from '@features/skill-user/validation/skill-user-schema'
+import InputNumber from '@components/ui/input/input-number'
 import InputSelect from '@components/ui/input/input-select/input-select'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
+import useMasterAPI from '@apis/use-master-api'
 
 import useEventEmitter from '@hooks/use-event-emitter'
-import { deepCopy, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function'
+import {
+  deepCopy,
+  extractValueFromForm,
+  generateOptions,
+  mappingErrorsToForm,
+  mappingValuesToForm
+} from '@lib/helper/function'
 import { TTypeActionModalForm } from '@typescript/index-type'
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types'
 
 const FormSkillUser = () => {
   const [modalForm, setModalForm] = useState({
     isShow: false,
-    action: TTypeActionModalForm.ADD
+    action: TTypeActionModalForm.ADD,
+    moduleName: 'Skill User',
+    customeClass: {
+      mdBody: 'md:min-w-[32rem]'
+    }
   })
   const [form, setForm] = useState(deepCopy({ ...initialFormSkillUser }))
+  type TKeyForm = keyof typeof form
+
+  const [options, setOptions] = useState<TOptionsFormSkillUser>({
+    categories: [],
+    skills: []
+  })
+  const { getListMasterCategorySkill, getListMasterSkill } = useMasterAPI()
+  const { upsertSkillUser } = useSkillUserAPI()
 
   useEffect(() => {
     handleInitData()
   }, [])
 
   useEventEmitter(EVENT_SKILL_USER.SET_MODAL_FORM_SKILL_USER, (data) => {
-    setModalForm({ ...data })
+    setModalForm({
+      ...modalForm,
+      ...data
+    })
   })
 
   useEventEmitter(EVENT_SKILL_USER.SET_SKILL_USER, (data) => {
@@ -34,36 +60,78 @@ const FormSkillUser = () => {
 
   const handleInitData = async () => {
     try {
-      //
+      const categories = generateOptions({
+        options: (await getListMasterCategorySkill())?.data || []
+      })
+      const skills = generateOptions({
+        options: (await getListMasterSkill())?.data || [],
+        listSaveField: ['id_category']
+      })
+
+      form['id_category'].options = categories
+      form['id_skill'].options = skills
+
+      setOptions({
+        categories: [...categories],
+        skills: [...skills]
+      })
+
+      setForm({
+        ...form
+      })
     } catch (error: any) {
       console.log('error: ', error?.message)
     }
   }
 
-  const handleOnChange = useCallback((e: TEventOnChange) => {
-    const name = e.target.name as keyof typeof form
-    const value = e.target.value
+  const handleOnChange = (e: TEventOnChange) => {
+    const name = e.target.name as TKeyForm
+    let value = e.target.value
     const currForm = form
+    currForm[name].value = value
+
+    if (name === 'id_category') {
+      currForm['id_skill'].options = options['skills']?.filter(
+        (data: any) => data?.id_category === value
+      )
+      currForm['id_skill'].disabled = !value
+      currForm['id_skill'].value = ''
+    }
+
+    if (name === 'years_of_experiance') {
+      value = Number(value)
+    }
+
     currForm[name].value = value
 
     setForm({
       ...currForm
     })
-  }, [])
+  }
 
-  const handleOnSubmit = (e: TEventSubmitForm) => {
+  const handleOnSubmit = async (e: TEventSubmitForm) => {
     e?.preventDefault()
     const { isValid, form: updatedForm } = mappingErrorsToForm<TSkillUserSchema, typeof form>({
       form,
       schema: skillUserSchema
     })
 
-    if (isValid) {
-      handleCloseFormSkill()
-    }
     setForm({
       ...updatedForm
     })
+
+    if (isValid) {
+      const extractForm = extractValueFromForm(form)
+      const result = await upsertSkillUser({
+        ...extractForm,
+        id: extractForm?.id || undefined,
+        years_of_experiance: Number(extractForm?.years_of_experiance)
+      })
+      if (result?.status) {
+        handleCloseFormSkill()
+        eventEmitter.emit(EVENT_SKILL_USER.REFRESH_DATA_TABLE_SKILL_USER, true)
+      }
+    }
   }
 
   const handleCloseFormSkill = () => {
@@ -72,21 +140,21 @@ const FormSkillUser = () => {
   }
 
   return (
-    <ContainerModalForm
-      moduleName={'Skill'}
-      action={modalForm.action}
-      isShow={modalForm.isShow}
-      onClose={handleCloseFormSkill}
-      customeClass={{ mdBody: 'md:min-w-[32rem]' }}
-      onSubmit={handleOnSubmit}
-    >
+    <ContainerModalForm {...modalForm} onClose={handleCloseFormSkill} onSubmit={handleOnSubmit}>
       <div className='grid md:grid-cols-2 gap-4'>
         <InputSelect {...form['id_category']} onChange={handleOnChange} />
         <InputSelect {...form['id_skill']} onChange={handleOnChange} />
       </div>
       <div className='grid md:grid-cols-2 gap-4'>
         <InputSelect {...form['level']} onChange={handleOnChange} />
-        <InputSelect {...form['years_of_experiance']} onChange={handleOnChange} />
+        <InputNumber
+          {...form['years_of_experiance']}
+          onChange={handleOnChange}
+          customeElement={{
+            preStart: '±',
+            end: 'years'
+          }}
+        />
       </div>
     </ContainerModalForm>
   )

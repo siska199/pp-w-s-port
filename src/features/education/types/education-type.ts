@@ -1,4 +1,3 @@
-import { TDate } from '@typescript/index-type'
 import {
   TMasterEducationLevel,
   TMasterEducationMajor,
@@ -19,10 +18,11 @@ export interface TEducation<TSchoolImage = string> {
   school_name: string
   level_name: string
   major_name: string
-  
+
   gpa: number
   description: string
-  start_at: TDate
-  end_at: TDate
+  start_at: Date
+  end_at: Date
+  
   school_image: TSchoolImage
 }

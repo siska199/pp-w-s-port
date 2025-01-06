@@ -114,7 +114,7 @@ const FormEducation = () => {
       const isUniversity = !['High School', 'Middle School', 'Bootcamp']?.includes(levelName)
 
       currForm['gpa'].max = isUniversity ? 4.0 : 100.0
-      currForm['gpa'].value = '0.0'
+      currForm['gpa'].value = 0.0
 
       const keys = ['id_major', 'id_school'] as TExtractKeyEducation<'id_major' | 'id_school'>
       keys?.map((key) => {
@@ -165,7 +165,14 @@ const FormEducation = () => {
     })
 
     if (isValid) {
-      const result = await upsertEducation(extractValueFromForm(form))
+      const extractForm = {
+        ...extractValueFromForm(form)
+      }
+      const result = await upsertEducation({
+        ...extractForm,
+        gpa: Number(extractForm?.gpa),
+        id: extractForm?.id || undefined
+      })
 
       if (result?.status) {
         handleCloseFormEducation()
@@ -182,7 +189,7 @@ const FormEducation = () => {
       </div>
       <div className='grid md:grid-cols-2 gap-4'>
         <InputSelect {...form['id_school']} onChange={handleOnChange} />
-        <InputNumber {...form['gpa']} onChange={handleOnChange} />
+        <InputNumber {...form['gpa']} value={String(form['gpa'])} onChange={handleOnChange} />
       </div>
       <div className='grid md:grid-cols-2 gap-4 overflow-visible'>
         <InputDate {...form['start_at']} onChange={handleOnChange} />

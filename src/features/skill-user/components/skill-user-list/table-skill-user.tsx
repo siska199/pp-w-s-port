@@ -38,7 +38,7 @@ const TableSkillUser = () => {
       },
       {
         name: 'Year of Experiance',
-        key: 'years_of_experience',
+        key: 'years_of_experiance',
         isSorted: true,
         className: ' flex items-center  justify-center md:min-w-[10rem]'
       },
@@ -48,7 +48,7 @@ const TableSkillUser = () => {
         isSorted: true,
         className: ' flex items-center  justify-center  md:min-w-[10rem]',
         customeComponent: (data: TSkillUser) => {
-          const level = data.level
+          const level = data?.level
           let variant = 'soft-primary' as keyof typeof variantBadge
           switch (level) {
             case TTypeLevelSkill.BEGINNER:
@@ -71,7 +71,7 @@ const TableSkillUser = () => {
         customeComponent: (data: TSkillUser) => {
           return (
             <div className='flex flex-col gap-2'>
-              {data?.projects.map((project, i) => (
+              {data?.projects?.map((project, i) => (
                 <Badge
                   key={i}
                   variant={'soft-gray'}
@@ -87,10 +87,9 @@ const TableSkillUser = () => {
     onFetchData: handleFetchData
   })
 
-  useEventEmitter(EVENT_SKILL_USER.SEARCH_DATA_TABLE_SKILL, async (formFilter) => {
+  useEventEmitter(EVENT_SKILL_USER.REFRESH_DATA_TABLE_SKILL_USER, async () => {
     configTable.onChange({
-      ...configTable.setting,
-      ...formFilter
+      ...configTable.setting
     })
   })
 
@@ -116,21 +115,22 @@ const TableSkillUser = () => {
   }
 
   const handleEditData = (data: TSkillUser) => {
-    eventEmitter.emit(EVENT_SKILL_USER.SET_MODAL_FORM_SKILL, {
+    eventEmitter.emit(EVENT_SKILL_USER.SET_MODAL_FORM_SKILL_USER, {
       isShow: true,
       action: TTypeActionModalForm.EDIT
     })
 
-    eventEmitter.emit(EVENT_SKILL_USER.SET_SKILL, {
+    eventEmitter.emit(EVENT_SKILL_USER.SET_SKILL_USER, {
+      id: data?.id,
       id_category: data?.id_category,
       id_skill: data?.id_skill,
       level: data?.level,
-      years_of_experiance: String(data?.years_of_experience)
+      years_of_experiance: data?.years_of_experiance
     })
   }
 
   const handleViewData = (data: TSkillUser) => {
-    navigate(routes.skill.child.detail.fullPath(String(data?.id)))
+    navigate(routes.skillUser.child.detail.fullPath(String(data?.id)))
   }
 
   const handleDeleteData = (data: TSkillUser) => {

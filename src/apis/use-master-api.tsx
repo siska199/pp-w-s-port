@@ -2,11 +2,13 @@ import ENDPOINTS from '@apis/endpoints'
 
 import useAPI from '@hooks/use-api'
 import {
+  TMasterCategorySkill,
   TMasterCategorySocialLink,
   TMasterEducationLevel,
   TMasterEducationMajor,
   TMasterEducationSchool,
-  TMasterProfession
+  TMasterProfession,
+  TMasterSkill
 } from '@typescript/master-module-types'
 
 const useMasterAPI = () => {
@@ -102,16 +104,37 @@ const useMasterAPI = () => {
     return result
   }
 
+  const getListMasterCategorySkill = async () => {
+    const result = await apiClient<TMasterCategorySkill[]>({
+      endpoint: ENDPOINTS.MASTER.GET_LIST_MASTER_CATEGORY_SKILL,
+      isLodiang: false
+    })
+    return result
+  }
+
+  const getListMasterSkill = async () => {
+    const result = await apiClient<TMasterSkill[]>({
+      endpoint: ENDPOINTS.MASTER.GET_LIST_MASTER_SKILL,
+      isLodiang: false
+    })
+    return result
+  }
+
   return {
     getListMasterProvince,
     getListMasterCity,
     getListMasterDistrict,
     getListMasterPostalCode,
+
     getListMasterProfession,
     getListMasterCategorySocialLink,
+
     getListMasterEducationLevel,
     getListMasterEducationMajor,
-    getListMasterEducationSchool
+    getListMasterEducationSchool,
+
+    getListMasterCategorySkill,
+    getListMasterSkill
   }
 }
 

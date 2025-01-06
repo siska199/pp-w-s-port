@@ -22,7 +22,7 @@ const useSkillUserAPI = () => {
 
   const upsertSkillUser = async (params: TSkillUserSchema) => {
     const response = await apiClient<TSkillUser>({
-      endpoint: ENDPOINT.EDUCATION.UPSERT_EDUCATION,
+      endpoint: ENDPOINT.SKILL_USER.UPSERT_SKILL_USER,
       payload: {
         ...params
       },

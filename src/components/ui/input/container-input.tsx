@@ -86,7 +86,11 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
               disabled
             })}
           >
-            <CustomeElement elmn1={customeElement?.preStart} elmn2={customeElement?.start} />
+            <CustomeElement
+              type='start'
+              elmn1={customeElement?.preStart}
+              elmn2={customeElement?.start}
+            />
 
             <div className={`${customeClass?.ciV1} text-black flex flex-col w-full relative `}>
               {typeof children === 'function' ? (
@@ -116,7 +120,7 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
               <IconClose className='cursor-pointer' onClick={handleOnClearValue} />
             )}
 
-            <CustomeElement elmn1={customeElement?.preEnd} elmn2={customeElement?.end} />
+            <CustomeElement type='end' elmn1={customeElement?.preEnd} elmn2={customeElement?.end} />
 
             {type === 'password' && (
               <div onClick={handleToggleTypePassword} className='cursor-pointer-custome '>
@@ -135,15 +139,33 @@ const ContainerInput = <TInput,>(props: TPropsInput<TInput>) => {
 interface TPropsCustomeElement {
   elmn1?: React.ReactNode
   elmn2?: React.ReactNode
+  type?: 'end' | 'start'
 }
 const CustomeElement = (props: TPropsCustomeElement) => {
-  const { elmn1, elmn2 } = props
+  const { elmn1, elmn2, type } = props
   return (
     <>
       {elmn1 && (
-        <div className={`hidden ${elmn1 && 'shrink-0 !flex bg-gray-100 p-2'}`}>{elmn1}</div>
+        <div
+          className={cn({
+            ['hidden']: true,
+            ['!flex shrink-0 bg-gray-100 p-2']: elmn1
+          })}
+        >
+          <div className='min-w-[1.5rem] flex justify-center items-center'> {elmn1}</div>
+        </div>
       )}
-      {elmn2 && <div className={`hidden ${elmn2 && 'shrink-0 !flex'}`}>{elmn2}</div>}
+      {elmn2 && (
+        <div
+          className={cn({
+            ['hidden']: true,
+            ['shrink-0 !flex']: elmn2,
+            ['pr-2']: type === 'end'
+          })}
+        >
+          {elmn2}
+        </div>
+      )}
     </>
   )
 }

@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
 
 import Image from '@components/ui/image'
-import PDFThumbnail from '@components/ui/pdf-thumbnail'
-import ModalPreviewPDF from '@components/ui/preview-file/modal-preview-pdf'
 
 import { getGeneralTypeFile } from '@lib/helper/function'
 import { TFileWithPreview } from '@typescript/index-type'
-
 export interface TPropsThumbnail {
   file: TFileWithPreview | null
   className?: {
@@ -14,6 +11,9 @@ export interface TPropsThumbnail {
     containerPDF?: string
   }
 }
+
+const PDFThumbnail = React.lazy(() => import('@components/ui/pdf-thumbnail'))
+const ModalPreviewPDF = React.lazy(() => import('@components/ui/preview-file/modal-preview-pdf'))
 
 const DisplayFile = React.memo((props: TPropsThumbnail) => {
   const { file, className } = props

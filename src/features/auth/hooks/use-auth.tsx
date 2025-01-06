@@ -50,6 +50,7 @@ const useAuth = (props: { componentName: TTypeComponentNameUseAuth }) => {
 
   useEffect(() => {
     if (authStorage && isGlobalLayout) {
+      console.log('masuk kesini', authStorage)
       dispatch(handleSetAuth(authStorage))
     }
   }, [JSON.stringify(authStorage)])
