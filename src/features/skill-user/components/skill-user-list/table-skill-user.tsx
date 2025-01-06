@@ -21,7 +21,7 @@ const TableSkillUser = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { getListSkillUser } = useSkillUserAPI()
+  const { getListSkillUser, deleteSkillUser } = useSkillUserAPI()
 
   const configTable = useTable<TSkillUser, false>({
     initialColumn: [
@@ -119,7 +119,6 @@ const TableSkillUser = () => {
       isShow: true,
       action: TTypeActionModalForm.EDIT
     })
-
     eventEmitter.emit(EVENT_SKILL_USER.SET_SKILL_USER, {
       id: data?.id,
       id_category: data?.id_category,
@@ -134,14 +133,18 @@ const TableSkillUser = () => {
   }
 
   const handleDeleteData = (data: TSkillUser) => {
-    console.log('data: ', data)
     dispatch(
       handleSetModalConfirmation({
         isShow: true,
         children: 'Are you sure want to delete this data?',
         button: {
           confirm: {
-            onClick: () => dispatch(handleSetModalConfirmation({ isShow: false }))
+            onClick: async () => {
+              const id = data?.id
+              await deleteSkillUser(id)
+              dispatch(handleSetModalConfirmation({ isShow: false }))
+              eventEmitter.emit(EVENT_SKILL_USER.REFRESH_DATA_TABLE_SKILL_USER, true)
+            }
           }
         }
       })

@@ -60,6 +60,7 @@ const FormSkillUser = () => {
 
   const handleInitData = async () => {
     try {
+      const updateForm = form
       const categories = generateOptions({
         options: (await getListMasterCategorySkill())?.data || []
       })
@@ -68,8 +69,8 @@ const FormSkillUser = () => {
         listSaveField: ['id_category']
       })
 
-      form['id_category'].options = categories
-      form['id_skill'].options = skills
+      updateForm['id_category'].options = categories
+      updateForm['id_skill'].options = skills
 
       setOptions({
         categories: [...categories],
@@ -77,7 +78,7 @@ const FormSkillUser = () => {
       })
 
       setForm({
-        ...form
+        ...updateForm
       })
     } catch (error: any) {
       console.log('error: ', error?.message)
@@ -135,6 +136,8 @@ const FormSkillUser = () => {
   }
 
   const handleCloseFormSkill = () => {
+    initialFormSkillUser['id_category'].options = options.categories
+    initialFormSkillUser['id_skill'].options = options.skills
     setForm(deepCopy({ ...initialFormSkillUser }))
     setModalForm({ ...modalForm, isShow: false })
   }

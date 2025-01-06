@@ -33,9 +33,21 @@ const useSkillUserAPI = () => {
     return response
   }
 
+  const deleteSkillUser = async (param: string) => {
+    const id = param
+    const response = await apiClient<TSkillUser>({
+      endpoint: ENDPOINT.SKILL_USER.DELETE_SKILL_USER(id),
+      method: 'delete',
+      message: appMessage.deleteModule('Skill User')
+    })
+
+    return response
+  }
+
   return {
     getListSkillUser,
-    upsertSkillUser
+    upsertSkillUser,
+    deleteSkillUser
   }
 }
 
