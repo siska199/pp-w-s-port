@@ -3,22 +3,17 @@ import { messageError } from '@validation/constant'
 
 import Avatar from '@components/ui/avatar'
 import Button from '@components/ui/button'
+import DisplayFile from '@components/ui/display/display-file'
 import Image from '@components/ui/image'
 import ContainerInput from '@components/ui/input/container-input'
-import PDFThumbnail from '@components/ui/pdf-thumbnail'
-import ModalPreviewPDF from '@components/ui/preview-file/modal-preview-pdf'
 
-import {
-  convertBytesToMegabytes,
-  getGeneralTypeFile,
-  handleDownloadFile,
-  isValidTypeFile
-} from '@lib/helper/function'
+import { convertBytesToMegabytes, handleDownloadFile, isValidTypeFile } from '@lib/helper/function'
+import { TFileWithPreview } from '@typescript/index-type'
 import { TBasePropsInput, TCustomeEventOnChange, TTypeFile } from '@typescript/ui-types'
 import { IconCamera } from '@assets/icons'
 
-type TFileWithPreview = File & { preview?: string }
 export type TFileValue = TFileWithPreview | null
+
 export interface TPropsInputFileV1
   extends Omit<TBasePropsInput, 'variant'>,
     Omit<Partial<React.HTMLProps<HTMLInputElement>>, 'value' | 'onChange'> {
@@ -122,7 +117,7 @@ const InputFileV1 = (props: TPropsInputFileV1) => {
         {variant === 'general' && (
           <div className='flex gap-4 '>
             {attrsInput.value ? (
-              <Thumbnail file={attrsInput.value} />
+              <DisplayFile file={attrsInput.value} />
             ) : (
               <Image
                 className={`self-center h-[clamp(7rem,7rem,7rem)]  w-[clamp(7rem,7rem,7rem)] flex-shrink-0 border ${
@@ -174,43 +169,5 @@ const InputFileV1 = (props: TPropsInputFileV1) => {
     </>
   )
 }
-
-interface TPropsThumbnail {
-  file: File
-}
-
-const Thumbnail = React.memo((props: TPropsThumbnail) => {
-  const { file } = props
-  const [showPreview, setShowPreview] = useState(false)
-  const handleTogglePreview = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e?.stopPropagation()
-    e?.preventDefault()
-    setShowPreview(!showPreview)
-  }
-  return (
-    <>
-      {getGeneralTypeFile(file?.type) === 'image' && (
-        <Image
-          className='self-center  flex-shrink-0   h-[clamp(7rem,7rem,7rem)]  w-[clamp(7rem,7rem,7rem)] border '
-          width={500}
-          height={500}
-          src={(file as TFileWithPreview)?.preview || ''}
-          alt='Preview Image'
-        />
-      )}
-      {getGeneralTypeFile(file?.type) === 'pdf' && (
-        <PDFThumbnail
-          customeClass={{
-            container:
-              'flex-shrink-0  h-[clamp(7rem,7rem,7rem)]  w-[clamp(7rem,7rem,7rem)] cursor-zoom-in '
-          }}
-          file={file}
-          onClick={handleTogglePreview}
-        />
-      )}
-      <ModalPreviewPDF file={file} isShow={showPreview} onClose={handleTogglePreview} />
-    </>
-  )
-})
 
 export default React.memo(InputFileV1)

@@ -24,11 +24,11 @@ const FormSkillUser = () => {
     handleInitData()
   }, [])
 
-  useEventEmitter(EVENT_SKILL_USER.SET_MODAL_FORM_SKILL, (data) => {
+  useEventEmitter(EVENT_SKILL_USER.SET_MODAL_FORM_SKILL_USER, (data) => {
     setModalForm({ ...data })
   })
 
-  useEventEmitter(EVENT_SKILL_USER.SET_SKILL, (data) => {
+  useEventEmitter(EVENT_SKILL_USER.SET_SKILL_USER, (data) => {
     setForm({ ...mappingValuesToForm({ values: data, form }) })
   })
 

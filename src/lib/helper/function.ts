@@ -2,7 +2,7 @@ import clsx, { ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import z, { ZodSchema, ZodType } from 'zod'
 
-import { TObject, TResponseAPI } from '@typescript/index-type'
+import { TDate, TObject, TResponseAPI } from '@typescript/index-type'
 import { TOption, TTypeDateFormat, TTypeFile } from '@typescript/ui-types'
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -290,12 +290,12 @@ export const deepCopy = <T extends object>(input: T): T => {
 }
 
 interface TFormatDate {
-  date: Date | string | null
+  date: TDate
   format?: TTypeDateFormat
   timeZone?: string
   formatLanguage?: 'en-GB' | 'en-US'
 }
-export const formatDate = (params: TFormatDate) => {
+export const formatDate = (params: TFormatDate): string => {
   let { date } = params
   const {
     format = TTypeDateFormat['DD/MM/YYYY'],
@@ -303,7 +303,7 @@ export const formatDate = (params: TFormatDate) => {
     formatLanguage = 'en-GB'
   } = params
 
-  if (!date) return null
+  if (!date) return ''
 
   date = new Date(date)
 
@@ -332,9 +332,11 @@ export const formatDate = (params: TFormatDate) => {
   }
 
   const formattedDate = new Intl.DateTimeFormat(formatLanguage, formatOptions[format]!).format(date)
-  return format === TTypeDateFormat['DD-MM-YYYY']
-    ? formattedDate.replace(/\//g, '-')
-    : formattedDate
+  return (
+    (format === TTypeDateFormat['DD-MM-YYYY']
+      ? formattedDate.replace(/\//g, '-')
+      : formattedDate) || ''
+  )
 }
 
 export const generateMaxDateOneYear = (date: string | Date | null): Date | null => {

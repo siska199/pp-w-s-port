@@ -33,3 +33,7 @@ export interface TResponseDataPaginationAPI<TData extends object> {
   total_items: number
   total_pages: number
 }
+
+export type TFileWithPreview = File & { preview?: string }
+
+export type TDate = Date | string | null | undefined

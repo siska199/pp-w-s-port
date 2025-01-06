@@ -18,7 +18,7 @@ export interface TSkillUser {
   id: string
   id_skill: string
   skill_name: string
-  year_of_experiance: string
+  years_of_experiance: string
   level: TTypeLevelSkill
   id_user: string
   created_at: string
