@@ -42,7 +42,6 @@ const Table = <TData, TIncludeChecked extends boolean = false>(
   props: TTableProps<TData, TIncludeChecked>
 ) => {
   const { data, setting, onChange, actionBtn, isLoading } = props
-
   const handleOnChangePage = (pageNumber: number) => {
     onChange({
       ...setting,
@@ -57,7 +56,7 @@ const Table = <TData, TIncludeChecked extends boolean = false>(
 
   return (
     <div className='border border-warning-100 rounded-lg w-full overflow-hidden'>
-      <div className='relative  overflow-y-auto max-h-[30rem] '>
+      <div className='relative  overflow-y-auto min-h-[30rem] max-h-[30rem] '>
         <table className={`table-auto  w-full ${data?.length === 0 && 'flex flex-col'}`}>
           <TableHeader {...props} isShowColumnAction={Boolean(isShowColumnAction)} />
           <TableBody {...props} isShowColumnAction={Boolean(isShowColumnAction)} />
@@ -121,7 +120,7 @@ const TableHeader = <TData, TIncludeChecked extends boolean = false>(
   )
 
   return (
-    <thead className='sticky z-[2] top-0 text-warning-700 bg-warning-50'>
+    <thead className='sticky z-[1] top-0 text-warning-700 bg-warning-50'>
       <tr className='border-b border-warning-100'>
         {withNo && <th className='p-th-td'>No.</th>}
         {columns?.map((column, i) => (

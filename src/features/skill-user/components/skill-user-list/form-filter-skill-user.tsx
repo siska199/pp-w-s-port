@@ -24,7 +24,7 @@ const FormFilterSkillUser = () => {
   }
 
   const handleEmitEventSearchDataTable = debounce(() => {
-    eventEmitter.emit(EVENT_SKILL_USER.SEARCH_DATA_TABLE_SKILL, {
+    eventEmitter.emit(EVENT_SKILL_USER.SEARCH_DATA_TABLE_SKILL_USER, {
       years_of_experiance: form.years_of_experiance.value,
       level: form.level.value,
       id_category: form.id_category.value,

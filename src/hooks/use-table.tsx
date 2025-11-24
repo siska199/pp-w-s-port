@@ -32,7 +32,7 @@ const useTable = <TData extends object, TIncludeChecked extends boolean = false>
 
   const [setting, setSetting] = useState<TSettingTable<TData>>({
     currentPage: 1,
-    totalPage: 0,
+    totalPage: 1,
     itemsPerPage: 10,
     pagination: true,
     ...initialSetting
@@ -49,10 +49,12 @@ const useTable = <TData extends object, TIncludeChecked extends boolean = false>
 
   const onChange = async (params: TSettingTable<TData>) => {
     const data = await handleFetchData(params)
-
     setData(data?.items)
+
     setSetting({
       ...setting,
+      sortBy: params?.sortBy,
+      sortDir: params?.sortDir,
       totalPage: data?.total_pages,
       currentPage: data?.current_page === 0 ? 1 : data?.current_page
     })

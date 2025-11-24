@@ -4,7 +4,8 @@ import z from 'zod'
 export const initialFormResponsibilityProject = {
   id: {
     name: 'id',
-    label: 'ID'
+    label: 'ID',
+    value: ''
   },
   description: {
     name: 'description',

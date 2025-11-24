@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import educationSchema, { TEducationSchema } from '@features/education/validations/education-schema'
 import { contextFormProject } from '@features/project/context/form-project-context'
 import EVENT_PROJECT from '@features/project/event-emitters/project-event'
-import { initialFormMenuProject } from '@features/project/validation/menu-project-schema'
+import { initialFormProjectMenu } from '@features/project/validation/project-menu-schema'
 import InputBase from '@components/ui/input/input-base'
 import InputFileV1 from '@components/ui/input/input-file/input-file-v1'
 import InputFileV2 from '@components/ui/input/input-file/input-file-v2'
@@ -16,11 +16,11 @@ import { deepCopy, mappingErrorsToForm } from '@lib/helper/function'
 import { TTypeActionModalForm } from '@typescript/index-type'
 import { TEventSubmitForm } from '@typescript/ui-types'
 
-const FormMenuProject = () => {
+const FormProjectMenu = () => {
   const {
-    formMenuProject: form,
-    handleOnChangeFormMenuProject: handleOnChange,
-    setFormMenuProject: setForm
+    formProjectMenu: form,
+    handleOnChangeFormProjectMenu: handleOnChange,
+    setFormProjectMenu: setForm
   } = useContext(contextFormProject)
 
   const [modalForm, setModalForm] = useState({
@@ -38,7 +38,7 @@ const FormMenuProject = () => {
   })
 
   const handlleCloseFormEducation = () => {
-    setForm(deepCopy({ ...initialFormMenuProject }))
+    setForm(deepCopy({ ...initialFormProjectMenu }))
     setModalForm({
       ...modalForm,
       isShow: false
@@ -76,4 +76,4 @@ const FormMenuProject = () => {
   )
 }
 
-export default React.memo(FormMenuProject)
+export default React.memo(FormProjectMenu)

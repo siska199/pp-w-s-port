@@ -9,6 +9,8 @@ import CONFIG from '@lib/config/config'
 import appMessage from '@lib/data/app-message'
 import { generateUrlQueryParams } from '@lib/helper/function'
 import { TObject, TResponseAPI } from '@typescript/index-type'
+import { useNavigate } from 'react-router-dom'
+import { routes } from '@routes/constant'
 
 interface TParamsApiClient {
   baseURL?: string
@@ -33,7 +35,7 @@ const useAPI = () => {
   const cancelTokenRef = useRef<CancelTokenSource | null>(null)
   const dispatch = useAppDispatch()
   const jwtToken = useAppSelector((state) => state?.auth?.token)
-
+  const navigate = useNavigate()
   const apiClient = async <TData extends object>(
     params: TParamsApiClient
   ): Promise<Partial<TResponseAPI<TData>>> => {
@@ -124,6 +126,7 @@ const useAPI = () => {
             isRememberMe: false
           })
         )
+        navigate(routes.auth.name, { replace: true })
       }
 
       isShowAlert &&

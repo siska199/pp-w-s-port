@@ -2,8 +2,8 @@ import React, { useMemo } from 'react'
 import { eventEmitter } from '@event-emitters'
 
 import EVENT_PROJECT from '@features/project/event-emitters/project-event'
-import useMenuProject from '@features/project/hooks/use-menu-project'
-import { TMenuProject } from '@features/project/validation/menu-project-schema'
+import useProjectMenu from '@features/project/hooks/use-project-menu'
+import { TProjectMenu } from '@features/project/validation/project-menu-schema'
 import Badge from '@components/ui/badge'
 import Header from '@components/ui/header/header'
 import Image from '@components/ui/image'
@@ -12,8 +12,8 @@ import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge'
 import { TTypeActionModalForm } from '@typescript/index-type'
 import { IconDelete, IconEdit } from '@assets/icons'
 
-const MenuProjects = React.memo(() => {
-  const { listMenuProject } = useMenuProject()
+const ProjectMenus = React.memo(() => {
+  const { listProjectMenu } = useProjectMenu()
 
   const handleOnClickAddData = () => {
     eventEmitter.emit(EVENT_PROJECT.SET_MODAL_FORM_MENU_PROJECT, {
@@ -25,15 +25,15 @@ const MenuProjects = React.memo(() => {
     <div className='space-y-10'>
       <Header title='Menu Project' onClickAddData={handleOnClickAddData} />
       <div className='md:w-[50%] space-y-4'>
-        {listMenuProject?.map((menuProject) => (
-          <CardMenuProject key={menuProject.id} {...menuProject} />
+        {listProjectMenu?.map((projectMenu) => (
+          <CardProjectMenu key={projectMenu.id} {...projectMenu} />
         ))}
       </div>
     </div>
   )
 })
 
-const CardMenuProject = React.memo((props: TMenuProject) => {
+const CardProjectMenu = React.memo((props: TProjectMenu) => {
   const { name, id, description, main_image, features } = props
 
   const handleEditProject = (id: string) => {
@@ -89,4 +89,4 @@ const CardMenuProject = React.memo((props: TMenuProject) => {
     </div>
   )
 })
-export default MenuProjects
+export default ProjectMenus

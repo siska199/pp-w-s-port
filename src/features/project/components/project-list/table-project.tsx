@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { eventEmitter } from '@event-emitters'
 
 import EVENT_PROJECT from '@features/project/event-emitters/project-event'
-import EVENT_SKILL from '@features/skill/event-emitters/skill-event'
+import EVENT_SKILL_USER from '@features/skill-user/event-emitters/skill-user-event'
 import Badge from '@components/ui/badge'
 import Table from '@components/ui/table'
 
@@ -13,17 +13,17 @@ import { handleSetModalConfirmation } from '@store/ui-slice'
 import { projects } from '@lib/data/dummy/dummy'
 import { delay } from '@lib/helper/function'
 import { routes } from '@routes/constant'
-import { TTypeActionModalForm } from '@typescript/index-type'
+import { TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type'
 import { TSettingTable } from '@typescript/ui-types'
+import { TProject } from '@features/project/types/project-type'
 
-type TData = (typeof projects)[0]
 
 const TableProject = () => {
   const isLoading = useAppSelector((state) => state.ui.isLoading)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const configTable = useTable<TData, false>({
+  const configTable = useTable<TProject, false>({
     initialColumn: [
       {
         name: 'Title',
@@ -50,7 +50,7 @@ const TableProject = () => {
         name: 'Tech Stack',
         key: 'tech_stacks',
         className: ' min-w-[15rem]',
-        customeComponent: (data: TData) => {
+        customeComponent: (data: TProject) => {
           return (
             <div className='flex flex-col gap-2'>
               {data?.tech_stacks.map((techStack, i) => (
@@ -73,20 +73,25 @@ const TableProject = () => {
     onFetchData: handleFetchData
   })
 
-  useEventEmitter(EVENT_SKILL.SEARCH_DATA_TABLE_SKILL, async (formFilter) => {
+  useEventEmitter(EVENT_SKILL_USER.SEARCH_DATA_TABLE_SKILL_USER, async (formFilter) => {
     await handleFetchData({
       ...configTable.setting,
       formFilter
     })
   })
 
-  async function handleFetchData(params: TSettingTable<TData>): Promise<TData[]> {
-    console.log('params : ', params)
-    delay(1500)
-    return projects as TData[]
+  async function handleFetchData(params: TSettingTable<TProject>): Promise<TProject[]> {
+    const results = await getListEducation({
+      sort_by: params.sortBy,
+      sort_dir: params?.sortDir,
+      items_perpage: params?.itemsPerPage,
+      page_no: params?.currentPage,
+ 
+    })
+    return results as TResponseDataPaginationAPI<TProject[]>
   }
 
-  const handleEditData = (data: TData) => {
+  const handleEdiTProject = (data: TProject) => {
     eventEmitter.emit(EVENT_PROJECT.SET_FORM_PROJECT, {
       action: TTypeActionModalForm.EDIT,
       id: String(data?.id)
@@ -94,12 +99,11 @@ const TableProject = () => {
     navigate(routes.project.child.detail.fullPath(String(data.id)))
   }
 
-  const handleViewData = (data: TData) => {
+  const handleViewData = (data: TProject) => {
     navigate(routes.project.child.detail.fullPath(String(data?.id)))
   }
 
-  const handleDeleteData = (data: TData) => {
-    console.log('data: ', data)
+  const handleDeleteData = (data: TProject) => {
     dispatch(
       handleSetModalConfirmation({
         isShow: true,
@@ -115,13 +119,13 @@ const TableProject = () => {
 
   return (
     <div>
-      <Table<TData, false>
+      <Table<TProject, false>
         {...configTable}
         withNo
         isLoading={isLoading}
         actionBtn={{
           view: handleViewData,
-          edit: handleEditData,
+          edit: handleEdiTProject,
           delete: handleDeleteData
         }}
       />

@@ -24,7 +24,6 @@ const parseDate = (params) => {
 
 const formatDate = (params) => {
   const { date, format } = params
-  console.log(Date.parse(date), date, new Date(date))
   if (!Date.parse(date)) throw new Error('Invalid Date')
 
   if (format === 'ISO') {

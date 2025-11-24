@@ -55,6 +55,7 @@ export const initialFormInformationProject = {
   }
 }
 const informationProjectSchema = z.object({
+  id: zString({ name: 'ID', mandatory: false }),
   name: zString({ name: 'Name' }),
   category: zEnum({ name: 'Category', enum: ['WEBSITE', 'MOBILE', 'API', 'UI-UX'] as const }),
   type: zEnum({

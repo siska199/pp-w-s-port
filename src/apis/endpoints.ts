@@ -36,10 +36,22 @@ const ENDPOINTS = {
     UPSERT_SKILL_USER: '/skill-user',
     DELETE_SKILL_USER: (id: string) => `/skill-user/${id}`
   },
+  PROJECT: {
+    GET_LIST_PROJECT: '/projects',
+    UPSERT_PROJECT: '/project',
+    GET_DETAIL_PROJECT: (id: string) => `/project/${id}`,
+    DELETE_PROJECT: (id: string) => `/project/${id}`
+  },
+  PROJECT_MENU: {
+    GET_LIST_PROJECT_MENU: '/project-menus',
+    UPSERT_PROJECT_MENU: '/project-menu',
+    GET_DETAIL_PROJECT_MENU: (id: string) => `/project-menu/${id}`,
+    DELETE_PROJECT_MENU: (id: string) => `/project-menu/${id}`
+  },
   EXPERIANCE: {
     GET_LIST_EXPERIANCE: '/experiances',
     UPSERT_EXPERIANCE: '/experiance',
-    GET_DETAIL_EXPERIANCE: (id: string) => `/GET_DETAIL_EXPERIANCE/${id}`
+    GET_DETAIL_EXPERIANCE: (id: string) => `/experiance/${id}`
   }
 }
 

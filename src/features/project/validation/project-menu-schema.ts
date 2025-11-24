@@ -4,7 +4,7 @@ import { z } from 'zod'
 import { defaultTTypeImage } from '@lib/helper/constant'
 import { TTypeFile } from '@typescript/ui-types'
 
-const menuProjectSchema = z.object({
+const projectMenuSchema = z.object({
   name: zString({ name: 'Name' }),
   main_image: zFileLocale({ name: 'Main Image', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL] }),
   description: zString({ name: 'Description', max: 1000 }),
@@ -16,11 +16,11 @@ const menuProjectSchema = z.object({
   tech_tacks: zString({ name: 'Tech Stacks', max: 5000 })
 })
 
-export type TMenuProject = z.input<typeof menuProjectSchema> & {
+export type TProjectMenu = z.input<typeof projectMenuSchema> & {
   id: string
 }
 
-export const initialFormMenuProject = {
+export const initialFormProjectMenu = {
   name: {
     name: 'name',
     label: 'Name',
@@ -55,4 +55,4 @@ export const initialFormMenuProject = {
     totalMaxSize: 30
   }
 }
-export default menuProjectSchema
+export default projectMenuSchema

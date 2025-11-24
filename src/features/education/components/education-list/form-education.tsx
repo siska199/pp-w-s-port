@@ -136,6 +136,10 @@ const FormEducation = () => {
       currForm['end_at'].disabled = !value
     }
 
+    if (name === 'gpa') {
+      currForm[name].value = Number(value)
+    }
+
     setForm({
       ...currForm
     })

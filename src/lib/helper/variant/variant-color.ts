@@ -1,4 +1,4 @@
-const variant = {
+ const variant = {
   'solid-primary': 'bg-primary border-primary text-white',
   'solid-sucess': 'bg-sucess border-sucess text-white',
   'solid-warning': 'bg-warning border-warning text-white',

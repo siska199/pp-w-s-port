@@ -2,40 +2,48 @@ import React, { createContext, SetStateAction, useCallback, useState } from 'rea
 
 import EVENT_PROJECT from '@features/project/event-emitters/project-event'
 import { initialFormInformationProject } from '@features/project/validation/information-project-schema'
-import { initialFormMenuProject } from '@features/project/validation/menu-project-schema'
-import { initialFormResponsibilityProject } from '@features/project/validation/responsiblity-project-schema'
+import { initialFormProjectMenu } from '@features/project/validation/project-menu-schema'
+import {
+  initialFormResponsibilityProject,
+  TResponsibilityProject
+} from '@features/project/validation/responsiblity-project-schema'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import { deepCopy, mappingValuesToForm } from '@lib/helper/function'
 import { TTypeActionData } from '@typescript/index-type'
 import { TEventOnChange } from '@typescript/ui-types'
+import { TProjectMenu } from '@features/project/types/project-type'
 
 export interface TContextFormProject {
   formInformationProject: typeof initialFormInformationProject
-  formMenuProject: typeof initialFormMenuProject
+  formProjectMenu: typeof initialFormProjectMenu
   formResponsibilityProject: typeof initialFormResponsibilityProject
   setFormInformationProject: React.Dispatch<
     SetStateAction<TContextFormProject['formInformationProject']>
   >
-  setFormMenuProject: React.Dispatch<SetStateAction<TContextFormProject['formMenuProject']>>
+  setFormProjectMenu: React.Dispatch<SetStateAction<TContextFormProject['formProjectMenu']>>
   setFormResponsibilityProject: React.Dispatch<
     SetStateAction<TContextFormProject['formResponsibilityProject']>
   >
   handleOnChangeFormInformationProject: (e: TEventOnChange) => void
-  handleOnChangeFormMenuProject: (e: TEventOnChange) => void
+  handleOnChangeFormProjectMenu: (e: TEventOnChange) => void
   handleOnChangeFormResponsibilityProject: (e: TEventOnChange) => void
+  listResponsibility: TResponsibilityProject[]
+  listProjectMenu: TProjectMenu[]
 }
 
 const initialContextFormProject = {
   formInformationProject: initialFormInformationProject,
-  formMenuProject: initialFormMenuProject,
+  formProjectMenu: initialFormProjectMenu,
   formResponsibilityProject: initialFormResponsibilityProject,
   handleOnChangeFormInformationProject: () => null,
-  handleOnChangeFormMenuProject: () => null,
+  handleOnChangeFormProjectMenu: () => null,
   handleOnChangeFormResponsibilityProject: () => null,
   setFormInformationProject: () => null,
-  setFormMenuProject: () => null,
-  setFormResponsibilityProject: () => null
+  setFormProjectMenu: () => null,
+  setFormResponsibilityProject: () => null,
+  listResponsibility: [],
+  listProjectMenu: []
 }
 
 export const contextFormProject = createContext<TContextFormProject>(initialContextFormProject)
@@ -46,26 +54,26 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
     deepCopy({ ...initialFormInformationProject })
   )
 
-  const [formMenuProject, setFormMenuProject] = useState(deepCopy({ ...initialFormMenuProject }))
+  const [formProjectMenu, setFormProjectMenu] = useState(deepCopy({ ...initialFormProjectMenu }))
 
   const [formResponsibilityProject, setFormResponsibilityProject] = useState(
     deepCopy({ ...initialFormResponsibilityProject })
   )
 
-  const [listResponsibility, setListResponsibility] = useState([])
-  const [listMenuProject, setListMenuProject] = useState([])
+  const [listResponsibility, setListResponsibility] = useState<TResponsibilityProject[]>([])
+  const [listProjectMenu, setListProjectMenu] = useState([])
 
   type TKeyFormInformationProject = keyof typeof formInformationProject
-  type TKeyFormMenuProject = keyof typeof formMenuProject
+  type TKeyFormProjectMenu = keyof typeof formProjectMenu
   type TKeyFormResponsibilityProject = keyof typeof formResponsibilityProject
 
   useEventEmitter(EVENT_PROJECT.SET_SELECTED_MENU_PROJECT, ({ data, action }) => {
     if (action === TTypeActionData.EDIT) {
-      setFormMenuProject({ ...mappingValuesToForm({ values: data, form: formMenuProject }) })
+      setFormProjectMenu({ ...mappingValuesToForm({ values: data, form: formProjectMenu }) })
     }
 
     if (action === TTypeActionData.DELETE) {
-      setListMenuProject((prev) => prev?.filter((menuProject) => menuProject !== data?.id))
+      setListProjectMenu((prev) => prev?.filter((projectMenu) => projectMenu !== data?.id))
     }
   })
 
@@ -93,13 +101,13 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
     })
   }, [])
 
-  const handleOnChangeFormMenuProject = useCallback((e: TEventOnChange) => {
-    const currForm = formMenuProject
-    const name = e.target.name as TKeyFormMenuProject
+  const handleOnChangeFormProjectMenu = useCallback((e: TEventOnChange) => {
+    const currForm = formProjectMenu
+    const name = e.target.name as TKeyFormProjectMenu
     const value = e.target.value
     currForm[name].value = value
 
-    setFormMenuProject({
+    setFormProjectMenu({
       ...currForm
     })
   }, [])
@@ -119,16 +127,16 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
     <contextFormProject.Provider
       value={{
         formInformationProject,
-        formMenuProject,
+        formProjectMenu,
         formResponsibilityProject,
         handleOnChangeFormInformationProject,
-        handleOnChangeFormMenuProject,
+        handleOnChangeFormProjectMenu,
         handleOnChangeFormResponsibilityProject,
         setFormInformationProject,
-        setFormMenuProject,
+        setFormProjectMenu,
         setFormResponsibilityProject,
         listResponsibility,
-        listMenuProject
+        listProjectMenu
       }}
     >
       {children}

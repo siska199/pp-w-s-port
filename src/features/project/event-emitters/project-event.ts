@@ -1,4 +1,4 @@
-import { TMenuProject } from '@features/project/validation/menu-project-schema'
+import { TProjectMenu } from '@features/project/validation/project-menu-schema'
 import { TResponsibilityProject } from '@features/project/validation/responsiblity-project-schema'
 
 import { TTypeActionData, TTypeActionModalForm } from '@typescript/index-type'
@@ -30,7 +30,7 @@ export type TEventMapProject = {
   }
 
   [EVENT_PROJECT.SET_SELECTED_MENU_PROJECT]: {
-    data: TMenuProject
+    data: TProjectMenu
     action: TTypeActionData
   }
   [EVENT_PROJECT.SET_MODAL_FORM_MENU_PROJECT]: {
@@ -47,7 +47,7 @@ export type TEventMapProject = {
 
   [EVENT_PROJECT.ONCHANGE_LIST_MENU_PROJECT]: {
     action: TTypeActionData
-    menuProject: TMenuProject
+    projectMenu: TProjectMenu
   }
 }
 

@@ -23,6 +23,9 @@ export interface TProject {
   id_experiance: string
   id_user: string
   experiance: TExperiance
+  title: string
+  company_name: string
+  tech_stacks: string[]
 }
 
 export interface TProjectResponsibility {
