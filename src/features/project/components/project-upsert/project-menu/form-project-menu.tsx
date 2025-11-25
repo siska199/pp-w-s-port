@@ -1,18 +1,22 @@
+import { eventEmitter } from '@event-emitters'
 import React, { useContext, useState } from 'react'
 
-import educationSchema, { TEducationSchema } from '@features/education/validations/education-schema'
-import { contextFormProject } from '@features/project/context/form-project-context'
-import EVENT_PROJECT from '@features/project/event-emitters/project-event'
-import { initialFormProjectMenu } from '@features/project/validation/project-menu-schema'
 import InputBase from '@components/ui/input/input-base'
 import InputFileV1 from '@components/ui/input/input-file/input-file-v1'
 import InputFileV2 from '@components/ui/input/input-file/input-file-v2'
 import InputTextArea from '@components/ui/input/input-text-area'
 import InputTextEditor from '@components/ui/input/input-text-editor'
 import ContainerModalForm from '@components/ui/modal/container-modal-form'
+import { contextFormProject } from '@features/project/context/form-project-context'
+import EVENT_PROJECT from '@features/project/event-emitters/project-event'
+import projectMenuSchema, {
+  initialFormProjectMenu,
+  TProjectMenu
+} from '@features/project/validation/project-menu-schema'
 
+import useProjectMenuApi from '@features/project/apis/use-project-menu-api'
 import useEventEmitter from '@hooks/use-event-emitter'
-import { deepCopy, mappingErrorsToForm } from '@lib/helper/function'
+import { deepCopy, extractValueFromForm, mappingErrorsToForm } from '@lib/helper/function'
 import { TTypeActionModalForm } from '@typescript/index-type'
 import { TEventSubmitForm } from '@typescript/ui-types'
 
@@ -22,9 +26,10 @@ const FormProjectMenu = () => {
     handleOnChangeFormProjectMenu: handleOnChange,
     setFormProjectMenu: setForm
   } = useContext(contextFormProject)
+  const { upsertProjectMenu } = useProjectMenuApi()
 
   const [modalForm, setModalForm] = useState({
-    moduleName: 'Menu Project',
+    moduleName: 'Feature Project',
     isShow: false,
     action: TTypeActionModalForm.ADD,
     customeClass: { mdBody: '  md:min-w-[38rem]  space-y-4' }
@@ -37,7 +42,7 @@ const FormProjectMenu = () => {
     })
   })
 
-  const handlleCloseFormEducation = () => {
+  const handlleCloseFormProjectMenu = () => {
     setForm(deepCopy({ ...initialFormProjectMenu }))
     setModalForm({
       ...modalForm,
@@ -45,26 +50,35 @@ const FormProjectMenu = () => {
     })
   }
 
-  const handleOnSubmit = (e: TEventSubmitForm) => {
+  const handleOnSubmit = async (e: TEventSubmitForm) => {
     e?.preventDefault()
-    const { isValid, form: updatedForm } = mappingErrorsToForm<TEducationSchema, typeof form>({
+    const { isValid, form: updatedForm } = mappingErrorsToForm<TProjectMenu, typeof form>({
       form,
-      schema: educationSchema
+      schema: projectMenuSchema
     })
-
-    if (isValid) {
-      handlleCloseFormEducation()
-    }
 
     setForm({
       ...updatedForm
     })
+    if (!isValid) return
+
+    const extractForm = {
+      ...extractValueFromForm(form)
+    }
+    const result = await upsertProjectMenu({
+      ...extractForm
+    })
+    
+    if(!result?.status) return
+    handlleCloseFormProjectMenu()
+    eventEmitter.emit(EVENT_PROJECT.REFRESH_DATA_LIST_MENU_PROJECT, true)
+
   }
 
   return (
     <ContainerModalForm
       {...modalForm}
-      onClose={handlleCloseFormEducation}
+      onClose={handlleCloseFormProjectMenu}
       onSubmit={handleOnSubmit}
     >
       <InputBase {...form['name']} onChange={handleOnChange} />

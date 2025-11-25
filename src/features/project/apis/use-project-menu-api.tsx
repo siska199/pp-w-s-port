@@ -5,16 +5,16 @@ import { TProjectMenu } from '@features/project/validation/project-menu-schema'
 import useAPI from '@hooks/use-api'
 import appMessage from '@lib/data/app-message'
 import { removeKeyWithUndifienedValue } from '@lib/helper/function'
-import { TPaginationQueryParams, TResponseDataPaginationAPI } from '@typescript/index-type'
+import { TPaginationQueryParams } from '@typescript/index-type'
 
-const useProjectApi = () => {
+export interface TParamsListProjectMenu extends TPaginationQueryParams {
+  id_project?: string
+}
+const useProjectMenuApi = () => {
   const { apiClient } = useAPI()
 
-  interface TParamsListProjectMenu extends TPaginationQueryParams {
-    id_project?: string
-  }
   const getListProjectMenu = async (params: TParamsListProjectMenu) => {
-    const response = await apiClient<TResponseDataPaginationAPI<TProject>>({
+    const response = await apiClient<TProjectMenu[]>({
       endpoint: ENDPOINT.PROJECT_MENU.GET_LIST_PROJECT_MENU,
       queryObject: removeKeyWithUndifienedValue(params)
     })
@@ -39,7 +39,8 @@ const useProjectApi = () => {
         ...params
       },
       method: 'post',
-      message: appMessage.upsertModule(params?.id, 'Project')
+      message: appMessage.upsertModule(params?.id, 'Project'),
+      isForm: true
     })
 
     return response
@@ -64,4 +65,4 @@ const useProjectApi = () => {
   }
 }
 
-export default useProjectApi
+export default useProjectMenuApi

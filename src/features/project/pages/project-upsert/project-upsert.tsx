@@ -3,17 +3,18 @@ import FormResponsiblityProject from '@features/project/components/project-upser
 import ContainerProtectedPage from '@components/ui/container/container-protected-page'
 import HeaderPage from '@components/ui/header/header-page'
 import FormProjectMenu from '@features/project/components/project-upsert/project-menu/form-project-menu'
+import ContextFormProjectProvider from '@features/project/context/form-project-context'
 
 const ProjectUpsertPage = () => {
   return (
-    <>
+    <ContextFormProjectProvider>
       <ContainerProtectedPage className=' mb-0'>
         <HeaderPage title='Form Project' isNested />
         <FormProject />
       </ContainerProtectedPage>
       <FormProjectMenu />
       <FormResponsiblityProject />
-    </>
+    </ContextFormProjectProvider>
   )
 }
 

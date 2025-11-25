@@ -7,6 +7,7 @@ import { TProjectMenu } from '@features/project/validation/project-menu-schema'
 import Badge from '@components/ui/badge'
 import Header from '@components/ui/header/header'
 import Image from '@components/ui/image'
+import useEventEmitter from '@hooks/use-event-emitter'
 
 import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge'
 import { TTypeActionModalForm } from '@typescript/index-type'
@@ -21,9 +22,15 @@ const ProjectMenus = React.memo(() => {
       action: TTypeActionModalForm.ADD
     })
   }
+
+  useEventEmitter(EVENT_PROJECT.REFRESH_DATA_LIST_MENU_PROJECT, async (formFilter) => {
+    
+  })
+
+  
   return (
     <div className='space-y-10'>
-      <Header title='Menu Project' onClickAddData={handleOnClickAddData} />
+      <Header title='Feature Project' onClickAddData={handleOnClickAddData} />
       <div className='md:w-[50%] space-y-4'>
         {listProjectMenu?.map((projectMenu) => (
           <CardProjectMenu key={projectMenu.id} {...projectMenu} />

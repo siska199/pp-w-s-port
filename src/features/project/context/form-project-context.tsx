@@ -106,11 +106,10 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
     const name = e.target.name as TKeyFormProjectMenu
     const value = e.target.value
     currForm[name].value = value
-
     setFormProjectMenu({
       ...currForm
     })
-  }, [])
+  },[])
 
   const handleOnChangeFormResponsibilityProject = useCallback((e: TEventOnChange) => {
     const currForm = formResponsibilityProject

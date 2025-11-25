@@ -6,6 +6,7 @@ import Button from '@components/ui/button'
 import { cn } from '@lib/helper/function'
 import { TBaseModal } from '@typescript/ui-types'
 import { IconClose } from '@assets/icons'
+import { useAppSelector } from '@store/store'
 
 export interface TContainerModalProps extends TBaseModal, VariantProps<typeof modalVariants> {
   customeClass?: {
@@ -33,6 +34,7 @@ const ContainerModal = (props: TContainerModalProps) => {
     variant = 'fadein-scaleup',
     footer
   } = props
+  const isLoading = useAppSelector((state) => state?.ui?.isLoading)
 
   const handleStopPropagation = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation()
@@ -72,6 +74,7 @@ const ContainerModal = (props: TContainerModalProps) => {
             className={`absolute top-3 z-[4] right-2 rounded-full p-1 ${customeClass?.btnClose?.container}`}
             variant={'transparent'}
             onClick={handleOnClose}
+            disabled={isLoading}
           >
             <IconClose
               className={`icon-black w-[1.25rem] h-[1.25rem] ${customeClass?.btnClose?.icon}`}

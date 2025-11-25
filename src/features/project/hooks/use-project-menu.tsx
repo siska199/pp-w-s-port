@@ -5,9 +5,11 @@ import { TProjectMenu } from '@features/project/validation/project-menu-schema'
 
 import useEventEmitter from '@hooks/use-event-emitter'
 import { TTypeActionData } from '@typescript/index-type'
+import useProjectMenuApi, { TParamsListProjectMenu } from '@features/project/apis/use-project-menu-api'
 
 const useProjectMenu = () => {
-  const [listProjectMenu, setListProjectMenu] = useState<TProjectMenu[]>([])
+  const [listProjectMenu, setListProjectMenu] = useState<TProjectMenu[]>([]);
+  const { getListProjectMenu: getListProjectMenuApi } = useProjectMenuApi()
 
   useEventEmitter(EVENT_PROJECT.ONCHANGE_LIST_MENU_PROJECT, (data) => {
     let listMenuProjectUpdated = listProjectMenu
@@ -30,8 +32,15 @@ const useProjectMenu = () => {
     setListProjectMenu([...listMenuProjectUpdated])
   })
 
+  const getListProjectMenu = async (params: TParamsListProjectMenu) => {
+    const result = await getListProjectMenuApi(params);
+    if(!result.data) return
+    setListProjectMenu(result.data)
+  }
+
   return {
-    listProjectMenu
+    listProjectMenu,
+    getListProjectMenu
   }
 }
 

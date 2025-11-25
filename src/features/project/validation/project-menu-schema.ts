@@ -5,6 +5,7 @@ import { defaultTTypeImage } from '@lib/helper/constant'
 import { TTypeFile } from '@typescript/ui-types'
 
 const projectMenuSchema = z.object({
+  id: zString({ name: 'ID', mandatory: false }),
   name: zString({ name: 'Name' }),
   main_image: zFileLocale({ name: 'Main Image', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL] }),
   description: zString({ name: 'Description', max: 1000 }),
@@ -12,8 +13,7 @@ const projectMenuSchema = z.object({
   related_images: z
     .array(zFileLocale({ name: 'Related Images', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL] }))
     .nonempty({ message: 'At least one related image is required' })
-    .max(5, { message: 'A maximum of 5 images are allowed' }),
-  tech_tacks: zString({ name: 'Tech Stacks', max: 5000 })
+    .max(5, { message: 'A maximum of 5 images are allowed' })
 })
 
 export type TProjectMenu = z.input<typeof projectMenuSchema> & {
@@ -21,6 +21,12 @@ export type TProjectMenu = z.input<typeof projectMenuSchema> & {
 }
 
 export const initialFormProjectMenu = {
+  id: {
+    value: '',
+    name: 'id',
+    errorMessage: '',
+    label: 'ID'
+  },
   name: {
     name: 'name',
     label: 'Name',
