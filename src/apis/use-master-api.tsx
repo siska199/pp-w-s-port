@@ -4,6 +4,7 @@ import useAPI from '@hooks/use-api'
 import {
   TMasterCategorySkill,
   TMasterCategorySocialLink,
+  TMasterCompany,
   TMasterEducationLevel,
   TMasterEducationMajor,
   TMasterEducationSchool,
@@ -120,6 +121,15 @@ const useMasterAPI = () => {
     return result
   }
 
+  const getListMasterCompany = async () => {
+    const result = await apiClient<TMasterCompany[]>({
+      endpoint: ENDPOINTS.MASTER.GET_LIST_MASTER_COMPANY,
+      isLodiang: false
+    })
+    return result
+  }
+
+
   return {
     getListMasterProvince,
     getListMasterCity,
@@ -134,7 +144,9 @@ const useMasterAPI = () => {
     getListMasterEducationSchool,
 
     getListMasterCategorySkill,
-    getListMasterSkill
+    getListMasterSkill,
+
+    getListMasterCompany
   }
 }
 

@@ -1,29 +1,30 @@
-import { useNavigate } from 'react-router-dom'
 import { eventEmitter } from '@event-emitters'
+import { useNavigate } from 'react-router-dom'
 
-import EVENT_EXPERIANCE from '@features/experiance/event-emitters/experiance-event'
 import Badge from '@components/ui/badge'
 import Table from '@components/ui/table'
+import EVENT_EXPERIANCE from '@features/experiance/event-emitters/experiance-event'
 
+import useExperianceApi from '@features/experiance/apis/use-experiance-api'
+import { TExperiance } from '@features/experiance/types/experiance-type'
 import useEventEmitter from '@hooks/use-event-emitter'
 import useTable from '@hooks/use-table'
-import { useAppDispatch, useAppSelector } from '@store/store'
-import { handleSetModalConfirmation } from '@store/ui-slice'
-import experiances from '@lib/data/dummy/experiances.json'
-import { delay, formatDate, getRandomKey } from '@lib/helper/function'
+import { formatDate, getRandomKey } from '@lib/helper/function'
 import variantBadge from '@lib/helper/variant/variant-badge'
 import { routes } from '@routes/constant'
-import { TTypeActionModalForm } from '@typescript/index-type'
+import { useAppDispatch, useAppSelector } from '@store/store'
+import { handleSetModalConfirmation } from '@store/ui-slice'
+import { TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type'
 import { TSettingTable } from '@typescript/ui-types'
-
-type TData = (typeof experiances)[0]
+import appMessage from '@lib/data/app-message'
 
 const TableExperiance = () => {
   const isLoading = useAppSelector((state) => state?.ui?.isLoading)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const { getListExperiance, deleteExperiance } = useExperianceApi()
 
-  const configTable = useTable<TData, false>({
+  const configTable = useTable<TExperiance, false>({
     initialColumn: [
       {
         name: 'Company',
@@ -41,7 +42,7 @@ const TableExperiance = () => {
         key: 'start_at',
         isSorted: true,
         className: 'min-w-[8rem]',
-        customeComponent: (data: TData) => {
+        customeComponent: (data: TExperiance) => {
           return <div>{formatDate({ date: data.start_at })}</div>
         }
       },
@@ -50,15 +51,15 @@ const TableExperiance = () => {
         key: 'end_at',
         className: 'min-w-[8rem]',
         isSorted: true,
-        customeComponent: (data: TData) => {
+        customeComponent: (data: TExperiance) => {
           return <div>{formatDate({ date: data.start_at })}</div>
         }
       },
       {
-        name: 'Project',
+        name: 'Related Project',
         key: 'projects',
         className: ' min-w-[15rem]',
-        customeComponent: (data: TData) => {
+        customeComponent: (data: TExperiance) => {
           return (
             <ul className='list-disc ml-5'>
               {data?.projects?.map((project, i) => <li key={i}>{project?.name}</li>)}
@@ -70,7 +71,7 @@ const TableExperiance = () => {
         name: 'Tech Stack',
         key: 'tech_stacks',
         className: 'md:min-w-[20rem]',
-        customeComponent: (data: TData) => {
+        customeComponent: (data: TExperiance) => {
           return (
             <div className='gap-2 flex flex-wrap'>
               {data?.tech_stacks.map((stack, i) => (
@@ -99,20 +100,39 @@ const TableExperiance = () => {
       formFilter
     })
   })
+  useEventEmitter(EVENT_EXPERIANCE.REFRESH_DATA_TABLE_EXPERIANCE, async () => {
+    await configTable.onChange({
+      ...configTable.setting
+    })
+  })
 
-  async function handleFetchData(params: TSettingTable<TData>): Promise<TData[]> {
-    console.log('params : ', params)
-    delay(1500)
-    return experiances as TData[]
+  async function handleFetchData(
+    params: TSettingTable<TExperiance> & {
+      keyword?: string
+      start_at?: string
+      end_at?: string
+    }
+  ): Promise<TResponseDataPaginationAPI<TExperiance>> {
+    const results = await getListExperiance({
+      sort_by: params.sortBy,
+      sort_dir: params?.sortDir,
+      items_perpage: params?.itemsPerPage,
+      page_no: params?.currentPage,
+      keyword: params?.keyword,
+      start_at: params?.start_at,
+      end_at: params?.end_at
+    })
+    return results?.data as TResponseDataPaginationAPI<TExperiance>
   }
 
-  const handleEditData = (data: TData) => {
+  const handleEdiTExperiance = (data: TExperiance) => {
     eventEmitter.emit(EVENT_EXPERIANCE.SET_MODAL_FORM_EXPERIANCE, {
       isShow: true,
       action: TTypeActionModalForm.EDIT
     })
 
     eventEmitter.emit(EVENT_EXPERIANCE.SET_EXPERIANCE, {
+      id: data?.id,
       id_company: data.id_company,
       id_profession: data.id_profession,
       start_at: data.start_at,
@@ -121,19 +141,23 @@ const TableExperiance = () => {
     })
   }
 
-  const handleViewData = (data: TData) => {
+  const handleViewData = (data: TExperiance) => {
     navigate(routes.experiance.child.detail.fullPath(String(data?.id)))
   }
 
-  const handleDeleteData = (data: TData) => {
-    console.log('data: ', data)
+  const handleDeleteData = (data: TExperiance) => {
     dispatch(
       handleSetModalConfirmation({
         isShow: true,
-        children: 'Are you sure want to delete this data?',
+        children: appMessage.warning.deleteData,
         button: {
           confirm: {
-            onClick: () => dispatch(handleSetModalConfirmation({ isShow: false }))
+            onClick: async () => {
+              const id = data?.id
+              await deleteExperiance(id)
+              dispatch(handleSetModalConfirmation({ isShow: false }))
+              eventEmitter.emit(EVENT_EXPERIANCE.REFRESH_DATA_TABLE_EXPERIANCE, true)
+            }
           }
         }
       })
@@ -142,13 +166,13 @@ const TableExperiance = () => {
 
   return (
     <div>
-      <Table<TData, false>
+      <Table<TExperiance, false>
         {...configTable}
         withNo
         isLoading={isLoading}
         actionBtn={{
           view: handleViewData,
-          edit: handleEditData,
+          edit: handleEdiTExperiance,
           delete: handleDeleteData
         }}
       />

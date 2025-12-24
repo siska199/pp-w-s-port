@@ -10,7 +10,8 @@ const ENDPOINTS = {
     GET_LIST_MASTER_EDUCATION_LEVEL: '/education-levels',
     GET_LIST_MASTER_EDUCATION_MAJOR: '/education-majors',
     GET_LIST_MASTER_EDUCATION_SCHOOL: '/education-schools',
-    GET_LIST_MASTER_CATEGORY_SKILL: '/category-skills'
+    GET_LIST_MASTER_CATEGORY_SKILL: '/category-skills',
+    GET_LIST_MASTER_COMPANY: '/companies'
   },
   AUTH: {
     SIGN_UP: '/sign-up',
@@ -51,7 +52,8 @@ const ENDPOINTS = {
   EXPERIANCE: {
     GET_LIST_EXPERIANCE: '/experiances',
     UPSERT_EXPERIANCE: '/experiance',
-    GET_DETAIL_EXPERIANCE: (id: string) => `/experiance/${id}`
+    GET_DETAIL_EXPERIANCE: (id: string) => `/experiance/${id}`,
+    DELETE_EXPERIANCE: (id: string) => `/experiance/${id}`
   }
 }
 

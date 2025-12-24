@@ -65,7 +65,9 @@ const initialFormFilter = {
 }
 
 export type TFilterExperiance = {
-  [K in keyof typeof initialFormFilter]: (typeof initialFormFilter)[K]['value']
+  keyword: string
+  start_at: string
+  end_at: string;
 }
 
 export default FormFilterExperiance

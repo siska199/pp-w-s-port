@@ -63,3 +63,9 @@ export interface TUser {
   image: string
   profession: TMasterProfession
 }
+
+export interface TMasterCompany{
+  id: string;
+  name: string;
+  image: string;
+}

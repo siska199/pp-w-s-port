@@ -2,8 +2,13 @@ import { zBooleanCheckbox, zDate, zString } from '@validation/reusable-schema'
 import z from 'zod'
 
 import appMessage from '@lib/data/app-message'
-
+import { TOption } from '@typescript/ui-types'
+export interface TOptionsFormExperiance {
+  companies: TOption[]
+  professions: TOption[]
+}
 const experianceSchema = z.object({
+  id: zString({ name: 'ID', mandatory: false }),
   id_company: zString({ name: 'Company' }),
   id_profession: zString({ name: 'Profession' }),
   start_at: zDate({ name: 'Start At' }),
@@ -15,18 +20,24 @@ const experianceSchema = z.object({
 export type TExperianceSchema = z.input<typeof experianceSchema>
 
 export const initialFormExperiance = {
+  id: {
+    value: '',
+    name: 'id',
+    errorMessage: '',
+    label: 'ID'
+  },
   id_company: {
     name: 'id_company',
     label: 'Company',
     placeholder: appMessage.selectInputPlaceolder('company'),
-    options: [],
+    options: [] as TOption[],
     value: ''
   },
   id_profession: {
-    name: 'profession',
+    name: 'id_profession',
     label: 'Profession',
     placeholder: appMessage.selectInputPlaceolder('profession'),
-    options: [],
+    options: [] as TOption[],
     value: ''
   },
   start_at: {

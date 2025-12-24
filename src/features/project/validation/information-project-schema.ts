@@ -1,77 +1,85 @@
-import { zEnum, zFileLocale, zString } from '@validation/reusable-schema'
-import { z } from 'zod'
+import { zEnum, zFileLocale, zString } from '@validation/reusable-schema';
+import { z } from 'zod';
 
-import {
-  optionsCategoryProject,
-  optionsTechStack,
-  optionsTypeProject
-} from '@features/project/constants'
+import { optionsCategoryProject, optionsTypeProject } from '@features/project/constants';
 
-import appMessage from '@lib/data/app-message'
-import { TTypeFile } from '@typescript/ui-types'
+import appMessage from '@lib/data/app-message';
+import { TOption, TTypeFile } from '@typescript/ui-types';
+
+export interface TOptionsFormEducation {
+    companies: TOption[];
+    tech_stacks: TOption[];
+}
 
 export const initialFormInformationProject = {
-  name: {
-    name: 'name',
-    label: 'Name',
-    value: '',
-    placeholder: 'e.g GOA (Garda oto Akses)'
-  },
-  category: {
-    name: 'category',
-    value: '',
-    options: optionsCategoryProject,
-    placeholder: appMessage.selectInputPlaceolder('category'),
-    label: 'Category'
-  },
-  tech_stacks: {
-    label: 'Tech Stacks',
-    placeholder: 'e.g React, Node js, Golang',
-    name: 'tech_stacks',
-    options: optionsTechStack,
-    value: []
-  },
-  type: {
-    name: 'type',
-    value: '',
-    options: optionsTypeProject,
-    placeholder: appMessage.selectInputPlaceolder('type'),
-    label: 'Type'
-  },
-  thumbnail: {
-    name: 'thumbnail',
-    label: 'Thumbnail',
-    value: null,
-    listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG]
-  },
-  description: {
-    name: 'description',
-    label: 'Description',
-    placeholder: 'Enter a brief description of your project',
-    value: '',
-    errorMessage: '',
-    rows: 5,
-    maxLength: 500
-  }
-}
+    name: {
+        name: 'name',
+        label: 'Name',
+        value: '',
+        placeholder: 'e.g GOA (Garda oto Akses)',
+    },
+    category: {
+        name: 'category',
+        value: '',
+        options: optionsCategoryProject,
+        placeholder: appMessage.selectInputPlaceolder('category'),
+        label: 'Category',
+    },
+    tech_stacks: {
+        label: 'Tech Stacks',
+        placeholder: 'e.g React, Node js, Golang',
+        name: 'tech_stacks',
+        options: [],
+        value: [],
+    },
+    company: {
+        lable: 'Company',
+        placeholder: 'e.g PT Astra International',
+        name: 'company',
+        options: [],
+        value: [],
+    },
+    type: {
+        name: 'type',
+        value: '',
+        options: optionsTypeProject,
+        placeholder: appMessage.selectInputPlaceolder('type'),
+        label: 'Type',
+    },
+    thumbnail: {
+        name: 'thumbnail',
+        label: 'Thumbnail',
+        value: null,
+        listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG],
+    },
+    description: {
+        name: 'description',
+        label: 'Description',
+        placeholder: 'Enter a brief description of your project',
+        value: '',
+        errorMessage: '',
+        rows: 5,
+        maxLength: 500,
+    },
+};
 const informationProjectSchema = z.object({
-  id: zString({ name: 'ID', mandatory: false }),
-  name: zString({ name: 'Name' }),
-  category: zEnum({ name: 'Category', enum: ['WEBSITE', 'MOBILE', 'API', 'UI-UX'] as const }),
-  type: zEnum({
-    name: 'Type',
-    enum: ['PERSONAL_PROJECT', 'COMPANY_PROJECT', 'FREELANCE'] as const
-  }),
-  thumbnail: zFileLocale({
-    name: 'thumbnail',
-    listAcceptedTypeFile: initialFormInformationProject.thumbnail.listAcceptedTypeFile
-  }),
-  description: zString({
-    name: 'Description',
-    max: initialFormInformationProject.description.maxLength
-  })
-})
+    id: zString({ name: 'ID', mandatory: false }),
+    name: zString({ name: 'Name' }),
+    category: zEnum({ name: 'Category', enum: ['WEBSITE', 'MOBILE', 'API', 'UI-UX'] as const }),
+    type: zEnum({
+        name: 'Type',
+        enum: ['PERSONAL_PROJECT', 'COMPANY_PROJECT', 'FREELANCE'] as const,
+    }),
+    thumbnail: zFileLocale({
+        name: 'thumbnail',
+        listAcceptedTypeFile: initialFormInformationProject.thumbnail.listAcceptedTypeFile,
+    }),
+    description: zString({
+        name: 'Description',
+        max: initialFormInformationProject.description.maxLength,
+    }),
+});
 
-export type TProjectSchema = z.input<typeof informationProjectSchema>
+export type TProjectSchema = z.input<typeof informationProjectSchema>;
 
-export default informationProjectSchema
+export default informationProjectSchema;

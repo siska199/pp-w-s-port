@@ -167,22 +167,19 @@ const FormEducation = () => {
     setForm({
       ...updatedForm
     })
+    if (!isValid) return
 
-    if (isValid) {
-      const extractForm = {
-        ...extractValueFromForm(form)
-      }
-      const result = await upsertEducation({
-        ...extractForm,
-        gpa: Number(extractForm?.gpa),
-        id: extractForm?.id || undefined
-      })
-
-      if (result?.status) {
-        handleCloseFormEducation()
-        eventEmitter.emit(EVENT_EDUCATION.REFRESH_DATA_TABLE_EDUCATION, true)
-      }
+    const extractForm = {
+      ...extractValueFromForm(form)
     }
+    const result = await upsertEducation({
+      ...extractForm,
+      gpa: Number(extractForm?.gpa),
+      id: extractForm?.id || undefined
+    })
+    if (!result?.status) return
+    handleCloseFormEducation()
+    eventEmitter.emit(EVENT_EDUCATION.REFRESH_DATA_TABLE_EDUCATION, true)
   }
 
   return (

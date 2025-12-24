@@ -124,7 +124,7 @@ const TableHeader = <TData, TIncludeChecked extends boolean = false>(
       <tr className='border-b border-warning-100'>
         {withNo && <th className='p-th-td'>No.</th>}
         {columns?.map((column, i) => (
-          <th key={i}>
+          <th key={i} className='bg-warning-50'>
             <div className={`flex p-th-td items-center text-center ${column?.className}`}>
               {column?.name}
               {column?.isSorted && IconSorted(column)}
@@ -132,7 +132,7 @@ const TableHeader = <TData, TIncludeChecked extends boolean = false>(
           </th>
         ))}
         {isShowColumnAction && (
-          <th className='p-th-td'>
+          <th className='p-th-td bg-warning-50'>
             <div className='min-w-[5rem] flex justify-center items-center'>Action</div>
           </th>
         )}
@@ -306,7 +306,7 @@ const PaginationTable = <TData, TIncludeChecked extends boolean>(
         ))}
         <div className='px-2 py-1 !border-r flex items-center justify-center gap-2'>
           <input
-            value={valuePage}
+            value={setting.totalPage === 0 ? 0 : valuePage}
             onChange={handleOnChange}
             aria-label='current-page'
             className='outline-none w-10 text-center focus:border-primary border  p-0 rounded-md'
