@@ -29,7 +29,7 @@ const FormProjectMenu = () => {
   const { upsertProjectMenu } = useProjectMenuApi()
 
   const [modalForm, setModalForm] = useState({
-    moduleName: 'Feature Project',
+    moduleName: 'Menu Project',
     isShow: false,
     action: TTypeActionModalForm.ADD,
     customeClass: { mdBody: '  md:min-w-[38rem]  space-y-4' }

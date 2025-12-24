@@ -1,40 +1,47 @@
-import { TCategorySocialLink, TProfession, TUser } from '@typescript/master-module-types'
+import { TMasterCategorySocialLink, TMasterProfession, TUser } from '@typescript/master-module-types';
+
+export interface TKeyMetric {
+    id: string;
+    key: string;
+    value: string;
+}
 
 export interface TSocialLink {
-  id: string
-  url: string
-  id_category: string
-  id_user: string
-  category: TCategorySocialLink
+    id: string;
+    url: string;
+    id_category: string;
+    id_user: string;
+    category: TMasterCategorySocialLink;
 }
 
 export interface TSelectedSocialLink extends TSocialLink {
-  errorMessage: string
-  default_value: string
-  value: string
-  image: string
-  name: string
-  placeholder: string
+    errorMessage: string;
+    default_value: string;
+    value: string;
+    image: string;
+    name: string;
+    placeholder: string;
 }
 
 export interface TPersonalInformation {
-  id: string
-  professional_image: string
-  first_name: string
-  last_name: string
+    id: string;
+    professional_image: string;
+    resume: string;
+    first_name: string;
+    last_name: string;
 
-  id_province: string
-  id_city: string
-  id_district: string
-  id_postal_code: string
+    id_province: string;
+    id_city: string;
+    id_district: string;
+    id_postal_code: string;
 
-  email: string
-  phone_number: string
-  about_me: string
-  bio: string
+    email: string;
+    phone_number: string;
+    about_me: string;
+    bio: string;
 
-  id_profession: string
-  profession?: TProfession
+    id_profession: string;
+    profession?: TMasterProfession;
 
-  user?: TUser
+    user?: TUser;
 }

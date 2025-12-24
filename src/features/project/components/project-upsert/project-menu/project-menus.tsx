@@ -30,7 +30,7 @@ const ProjectMenus = React.memo(() => {
   
   return (
     <div className='space-y-10'>
-      <Header title='Feature Project' onClickAddData={handleOnClickAddData} />
+      <Header title='Menu Project' onClickAddData={handleOnClickAddData} />
       <div className='md:w-[50%] space-y-4'>
         {listProjectMenu?.map((projectMenu) => (
           <CardProjectMenu key={projectMenu.id} {...projectMenu} />
