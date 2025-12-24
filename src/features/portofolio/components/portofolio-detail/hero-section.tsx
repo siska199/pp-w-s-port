@@ -10,10 +10,18 @@ import useMediaQuery from '@hooks/use-media-query'
 import { socialLinks } from '@lib/data/dummy/dummy'
 import { IconDownload } from '@assets/icons'
 import { opacityAnimation } from '@assets/styles/animation'
+import { handleDownloadFile } from '@lib/helper/function'
+import resumeSiskaAprianaPDF from '@assets/Siska Apriana Rifianti-Resume.pdf';
 
 const HeroSection = () => {
   const { isMaxMd } = useMediaQuery()
 
+  const handleDonwloadResume = () => {
+    handleDownloadFile({
+        url: resumeSiskaAprianaPDF,
+        filename: 'Siska Apriana Rifianti-Resume.pdf',
+    });
+  }
   return (
     <ContainerSection gap='xl' className='mt-10 md:mt-0  h-screen !p-8'>
       <Container gap='base' className='w-auto '>
@@ -23,7 +31,7 @@ const HeroSection = () => {
         />
 
         <AnimatedText
-          text={`Frontend Developer`}
+          text={`SOFTWARE ENGINEER`}
           className='font-bubblegum-sans text-center md:text-start'
         />
 
@@ -42,7 +50,7 @@ const HeroSection = () => {
               text={`Sharp Thinking and Seamless Coding, Powered by Coffee ☕`}
               className='ml-1 text-center md:text-start italic text-body-large font-normal '
             />
-            <Button shape={'circle'} variant={'glass'} className='font-bold '>
+            <Button onClick={()=>handleDonwloadResume()} shape={'circle'} variant={'glass'} className='font-bold '>
               <IconDownload className='icon-white' /> Download Resume
             </Button>
 
