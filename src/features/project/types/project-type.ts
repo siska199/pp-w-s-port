@@ -14,18 +14,19 @@ export enum TTypeTypeProject {
 }
 
 export interface TProject {
-  id: string
-  name: string
-  thumbnail_image: string
-  description: string
-  category: TTypeCategoryProject
-  type: TTypeTypeProject
-  id_experiance: string
-  id_user: string
-  experiance: TExperiance
-  title: string
-  company_name: string
-  tech_stacks: string[]
+    id: string;
+    name: string;
+    thumbnail_image: string;
+    description: string;
+    category: TTypeCategoryProject;
+    type: TTypeTypeProject;
+    id_experiance: string;
+    id_user: string;
+    experiance: TExperiance;
+    title: string;
+    company_name: string;
+    tech_stacks: string[];
+    id_skill_users : string[]
 }
 
 export interface TProjectResponsibility {
@@ -34,19 +35,20 @@ export interface TProjectResponsibility {
   id_project: string
 }
 
-export interface TProjectMenu {
-  id: string
-  name: string
-  description: string
-  main_image: string
-  features: string
-  id_project: string
+export interface TProjectMenuParams {
+    id: string;
+    name: string;
+    description: string;
+    main_image: string|null;
+    features: string;
+    id_project?: string;
+    related_images: TProjectRelatedImageMenu[];
 }
 
 export interface TProjectRelatedImageMenu {
   id: string
   image: string
-  id_project_menu: string
+  id_project_menu?: string
 }
 
 export interface TProjectTechStack {

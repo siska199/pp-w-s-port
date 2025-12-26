@@ -131,7 +131,7 @@ const InputFileV2 = (props: TProps) => {
       customeClass={{
         ciV2: '!border-none !p-0'
       }}
-      errorMessage={errorMessageDynamic}
+      errorMessage={errorMessageDynamic || props?.errorMessage}
     >
       {(attrsInput) => (
         <>

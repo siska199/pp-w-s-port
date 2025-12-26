@@ -1,20 +1,19 @@
 import ENDPOINT from '@apis/endpoints'
-import { TProject } from '@features/project/types/project-type'
+import { TProject, TProjectMenuParams } from '@features/project/types/project-type'
 import { TProjectMenu } from '@features/project/validation/project-menu-schema'
 
 import useAPI from '@hooks/use-api'
 import appMessage from '@lib/data/app-message'
 import { removeKeyWithUndifienedValue } from '@lib/helper/function'
-import { TPaginationQueryParams } from '@typescript/index-type'
 
-export interface TParamsListProjectMenu extends TPaginationQueryParams {
+export interface TParamsListProjectMenu  {
   id_project?: string
 }
 const useProjectMenuApi = () => {
   const { apiClient } = useAPI()
 
   const getListProjectMenu = async (params: TParamsListProjectMenu) => {
-    const response = await apiClient<TProjectMenu[]>({
+    const response = await apiClient<TProjectMenuParams[]>({
       endpoint: ENDPOINT.PROJECT_MENU.GET_LIST_PROJECT_MENU,
       queryObject: removeKeyWithUndifienedValue(params)
     })
@@ -32,16 +31,14 @@ const useProjectMenuApi = () => {
     return response
   }
 
-  const upsertProjectMenu = async (params: TProjectMenu) => {
+  const upsertProjectMenu = async (params: FormData) => {
     const response = await apiClient<TProject>({
-      endpoint: ENDPOINT.PROJECT.UPSERT_PROJECT,
-      payload: {
-        ...params
-      },
-      method: 'post',
-      message: appMessage.upsertModule(params?.id, 'Project'),
-      isForm: true
-    })
+        endpoint: ENDPOINT.PROJECT_MENU.UPSERT_PROJECT_MENU,
+        payload: params,
+        method: 'post',
+        message: appMessage.upsertModule(params?.get('id') as string, 'Project'),
+        isForm: true,
+    });
 
     return response
   }

@@ -33,7 +33,7 @@ const KeyMetrics = (): JSX.Element => {
             ) : (
                 <ul className="space-y-4 list-disc">
                     {listKeyMetric.map((item, i) => (
-                        <CardKeyMetric key={i} id={item?.id} keyData={item?.key} value={item?.value} />
+                        <CardKeyMetric key={i} id={item?.id || ''} keyData={item?.key} value={item?.value} />
                     ))}
                 </ul>
             )}

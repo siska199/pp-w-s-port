@@ -13,8 +13,6 @@ import { TEventOnChange, TOption } from '@typescript/ui-types';
 
 const FormFilterProject = () => {
     const [form, setForm] = useState(deepCopy({ ...initialFormFilter }));
-    type TKeyForm = keyof typeof form;
-
     const { getListMasterSkill } = useMasterAPI();
 
     useEffect(() => {

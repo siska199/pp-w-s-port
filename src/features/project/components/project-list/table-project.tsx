@@ -14,13 +14,13 @@ import { useAppDispatch, useAppSelector } from '@store/store';
 import { handleSetModalConfirmation } from '@store/ui-slice';
 import { TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type';
 import { TSettingTable } from '@typescript/ui-types';
-import useProjectApi from '@features/project/apis/use-project-api';
+import useProjectAPI from '@features/project/apis/use-project-api';
 
 const TableProject = () => {
     const isLoading = useAppSelector((state) => state.ui.isLoading);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const { getListProject, deleteProject } = useProjectApi();
+    const { getListProject, deleteProject } = useProjectAPI();
 
     const configTable = useTable<TProject, false>({
         initialColumn: [

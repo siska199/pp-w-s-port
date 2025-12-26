@@ -12,6 +12,11 @@ export interface TOptionsFormEducation {
 }
 
 export const initialFormInformationProject = {
+    id: {
+        name: 'id',
+        label: 'ID',
+        value: '',
+    },
     name: {
         name: 'name',
         label: 'Name',
@@ -25,19 +30,19 @@ export const initialFormInformationProject = {
         placeholder: appMessage.selectInputPlaceolder('category'),
         label: 'Category',
     },
-    tech_stacks: {
+    id_skill_users: {
         label: 'Tech Stacks',
         placeholder: 'e.g React, Node js, Golang',
-        name: 'tech_stacks',
+        name: 'id_skill_users',
         options: [],
-        value: [],
+        value: [] as string[],
     },
-    company: {
-        lable: 'Company',
+    id_experiance: {
+        label: 'Company',
         placeholder: 'e.g PT Astra International',
-        name: 'company',
+        name: 'id_experiance',
         options: [],
-        value: [],
+        value: '',
     },
     type: {
         name: 'type',
@@ -46,10 +51,10 @@ export const initialFormInformationProject = {
         placeholder: appMessage.selectInputPlaceolder('type'),
         label: 'Type',
     },
-    thumbnail: {
-        name: 'thumbnail',
+    thumbnail_image: {
+        name: 'thumbnail_image',
         label: 'Thumbnail',
-        value: null,
+        value: null as null | File,
         listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG],
     },
     description: {
@@ -70,9 +75,9 @@ const informationProjectSchema = z.object({
         name: 'Type',
         enum: ['PERSONAL_PROJECT', 'COMPANY_PROJECT', 'FREELANCE'] as const,
     }),
-    thumbnail: zFileLocale({
-        name: 'thumbnail',
-        listAcceptedTypeFile: initialFormInformationProject.thumbnail.listAcceptedTypeFile,
+    thumbnail_image: zFileLocale({
+        name: 'thumbnail_image',
+        listAcceptedTypeFile: initialFormInformationProject.thumbnail_image.listAcceptedTypeFile,
     }),
     description: zString({
         name: 'Description',

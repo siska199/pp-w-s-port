@@ -7,7 +7,7 @@ import DisplayFile from '@components/ui/display/display-file';
 import Image from '@components/ui/image';
 import ContainerInput from '@components/ui/input/container-input';
 
-import { IconCamera } from '@assets/icons';
+import { IconCamera, IconClose } from '@assets/icons';
 import { convertBytesToMegabytes, handleDownloadFile, isValidTypeFile } from '@lib/helper/function';
 import { TFileWithPreview } from '@typescript/index-type';
 import { TBasePropsInput, TCustomeEventOnChange, TTypeFile } from '@typescript/ui-types';
@@ -52,6 +52,15 @@ const InputFileV1 = (props: TPropsInputFileV1) => {
             target: {
                 name,
                 value: isValidFile ? file : null,
+            },
+        });
+    };
+
+    const handleDeleteFile = () => {
+        onChange({
+            target: {
+                name,
+                value: null,
             },
         });
     };
@@ -123,9 +132,16 @@ const InputFileV1 = (props: TPropsInputFileV1) => {
                                     Choose File
                                 </Button>
 
-                                <span className={`my-auto text-gray ${attrsInput.value && 'cursor-pointer hover:underline'}`} onClick={handleOnDownloadFile}>
-                                    {attrsInput?.value?.name ?? 'No File Chosen'}
-                                </span>
+                                {attrsInput?.value?.name && (
+                                    <div className="flex gap-2 items-center">
+                                        <span className={` text-gray ${attrsInput.value && 'cursor-pointer hover:underline'}`} onClick={handleOnDownloadFile}>
+                                            {attrsInput?.value?.name ?? 'No File Chosen'}
+                                        </span>
+                                        <Button variant={'transparent'} onClick={handleDeleteFile}>
+                                            <IconClose />
+                                        </Button>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

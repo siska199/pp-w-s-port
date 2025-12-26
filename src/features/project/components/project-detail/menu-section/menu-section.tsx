@@ -80,6 +80,7 @@ const ListRelatedImageMenu = (props: TPropsRelatedImagesMenu) => {
         isShow: true,
         children: <SliderRelatedImageMenu activeIndex={index} />,
         customeClass: {
+          mdBody : 'scrollbar-hidden',
           mdContent: 'bg-white/0  h-[90vh]',
           btnClose: {
             icon: '!w-[2rem] !h-[2rem] icon-white'

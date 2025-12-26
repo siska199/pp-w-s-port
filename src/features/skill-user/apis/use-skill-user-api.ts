@@ -12,7 +12,7 @@ const useSkillUserAPI = () => {
   const { apiClient } = useAPI()
 
   type TParamsListSkillUser = TPaginationQueryParams & Partial<TFilterSkillUser>
-  const getListSkillUser = async (params: TParamsListSkillUser) => {
+  const getListSkillUser = async (params: Partial<TParamsListSkillUser>) => {
     const result = await apiClient<TResponseDataPaginationAPI<TSkillUser>>({
       endpoint: ENDPOINT.SKILL_USER.GET_LIST_SKILL_USER,
       queryObject: removeKeyWithUndifienedValue(params)

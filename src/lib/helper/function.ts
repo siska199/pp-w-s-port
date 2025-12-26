@@ -162,7 +162,7 @@ export const generateDefaultValue = (schema: ZodType<any>): any => {
 
 export const generateOptions = (params: { options: TObject; labelField?: string; valueField?: string; listSaveField?: string[]; isFormatCapitalize?: boolean }) => {
     const { options, isFormatCapitalize = true, labelField = 'name', valueField = 'id', listSaveField } = params;
-
+    
     return options?.map((option: TObject) => {
         const saveFields = listSaveField?.reduce<Record<string, any>>((acc, field) => {
             acc[field] = option[field];
@@ -388,4 +388,29 @@ export const formatPhoneNumber = (phoneNumber: string): string => {
     const formatedPhoneNumber = isHaveFormated ? phoneNumber : `0${phoneNumber?.replace(/-/gi, '')}`;
 
     return formatedPhoneNumber;
+};
+
+
+export const buildFormData = (data: Record<string, any>) => {
+    const formData = new FormData();
+
+    Object.entries(data).forEach(([key, value]) => {
+        if (value === undefined || value === null) return;
+
+        if (Array.isArray(value) && value[0] instanceof File) {
+            value.forEach((file: File) => {
+                formData.append(key, file);
+            });
+            return;
+        }
+
+        if (value instanceof File) {
+            formData.append(key, value);
+            return;
+        }
+
+        formData.append(key, String(value));
+    });
+
+    return formData;
 };

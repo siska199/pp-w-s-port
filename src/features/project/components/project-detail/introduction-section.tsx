@@ -7,7 +7,7 @@ const IntroductionSection = () => {
     <ContainerSection>
       <div className='space-y-4 my-auto '>
         <div className=''>
-          <h3 className='font-bubblegum-sans mb-2'>Garda Oto Akses</h3>
+          <h3 className='font-bubblegum-sans mb-2'>Garda Oto Akses | Frontend Developer</h3>
           <p className='font-bold'>PT Astra Internasional</p>
           <p className='font-thin'>11 April 2022 - 30 April 2023</p>
         </div>
