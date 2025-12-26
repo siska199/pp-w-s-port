@@ -9,9 +9,10 @@ const useFile = () => {
   }): Promise<TFileValue> => {
     let { filename } = params
     const { url } = params
-    const response = await fetch(url)
-
-    if (!response.ok) return null
+    if(!url) return null
+    const response = await fetch(url);
+  
+    if (!response.ok || !response) return null
     const blob = await response.blob()
 
     filename = `${filename}.${extractExtensionFile(blob?.type)}`

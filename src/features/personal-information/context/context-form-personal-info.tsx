@@ -55,7 +55,7 @@ export const contextFormPersonalInfo = createContext<TStateFormPersonalInfo>(int
 const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
     const { children } = props;
     const navigate = useNavigate();
-    const { upsertPersonalInformation, upsertBulkSocialLink, upsertBulkKeyMetric,getDetailPersonalInformation, getListKeyMetric } = usePersonalInformationAPI();
+    const { upsertPersonalInformation, upsertBulkSocialLink, upsertBulkKeyMetric, getDetailPersonalInformation, getListKeyMetric } = usePersonalInformationAPI();
     const { getListMasterProvince, getListMasterCity, getListMasterDistrict, getListMasterProfession, getListMasterPostalCode } = useMasterAPI();
     const dispatch = useAppDispatch();
     const { handleGetFileFromUrl } = useFile();
@@ -220,6 +220,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
                     id: selectedSocliaLink?.id,
                     url: selectedSocliaLink?.value,
                 }));
+                const keyMetrics = listKeyMetric.map(({ id, ...rest }) => (id?.includes('NEW') ? rest : { id, ...rest }));
 
                 const results = await Promise.all([
                     upsertPersonalInformation({
@@ -227,7 +228,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
                         phone_number: formatPhoneNumber(personalInformation.phone_number),
                     }),
                     upsertBulkSocialLink(socialLinks),
-                    upsertBulkKeyMetric(listKeyMetric)
+                    upsertBulkKeyMetric(keyMetrics),
                 ]);
 
                 const errorMessage = mapErrorMessagePromiseAll(

@@ -3,19 +3,19 @@ import { useContext, useState } from 'react';
 
 import ContainerModalForm from '@components/ui/modal/container-modal-form';
 import EVENT_EDUCATION from '@features/education/event-emitters/education-event';
-import educationSchema, { TEducationSchema } from '@features/education/validations/education-schema';
 
 import InputBase from '@components/ui/input/input-base';
 import { contextFormPersonalInfo } from '@features/personal-information/context/context-form-personal-info';
 import EVENT_PERSONAL_INFO from '@features/personal-information/event-emitters/personal-info-event';
-import { initialFormKeyMetric } from '@features/personal-information/validations/key-metric-schema';
+import { TKeyMetric } from '@features/personal-information/types/personal-information-types';
+import keyMetricSchema, { initialFormKeyMetric } from '@features/personal-information/validations/key-metric-schema';
 import useEventEmitter from '@hooks/use-event-emitter';
 import { deepCopy, extractValueFromForm, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function';
 import { TTypeActionModalForm } from '@typescript/index-type';
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types';
 
 const FormKeyMetric = () => {
-    const { listKeyMetric } = useContext(contextFormPersonalInfo);
+    const { setListKeyMetric } = useContext(contextFormPersonalInfo);
 
     const [modalForm, setModalForm] = useState({
         moduleName: 'Key Metric',
@@ -59,27 +59,37 @@ const FormKeyMetric = () => {
     const handleOnSubmit = async (event: TEventSubmitForm): Promise<void> => {
         event?.preventDefault();
 
-        const { isValid, form: validatedForm } = mappingErrorsToForm<TEducationSchema, typeof form>({
+        const { isValid, form: validatedForm } = mappingErrorsToForm<TKeyMetric, typeof form>({
             form: deepCopy(form),
-            schema: educationSchema,
+            schema: keyMetricSchema,
         });
 
         setForm(validatedForm);
-
         if (!isValid) return;
 
         const extractedForm = extractValueFromForm(validatedForm);
 
-        const existingIndex = listKeyMetric.findIndex(({ id }) => id === extractedForm.id);
+        setListKeyMetric((prev) => {
+            const existingIndex = prev.findIndex(({ id }) => id === extractedForm.id);
 
-        if (existingIndex >= 0) {
-            listKeyMetric[existingIndex] = {
-                ...listKeyMetric[existingIndex],
+            if (existingIndex === -1) {
+                return [
+                    ...prev,
+                    {
+                        ...extractedForm,
+                        id: `${Date.now()}-NEW`,
+                    },
+                ];
+            }
+
+            const updated = [...prev];
+            updated[existingIndex] = {
+                ...updated[existingIndex],
                 ...extractedForm,
             };
-        } else {
-            listKeyMetric.push(extractedForm);
-        }
+
+            return updated;
+        });
 
         handleCloseFormKeyMetric();
         eventEmitter.emit(EVENT_EDUCATION.REFRESH_DATA_TABLE_EDUCATION, true);

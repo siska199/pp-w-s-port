@@ -23,7 +23,7 @@ const ENDPOINTS = {
     },
     KEY_METRIC: {
         GET_LIST_KEY_METRIC: '/key-metrics',
-        UPSERT_BULK_KEY_METRICS: '/key-metric',
+        UPSERT_BULK_KEY_METRICS: '/key-metrics',
     },
     PERSONAL_INFORMATION: {
         GET_DETAIL_PERSONAL_INFORMATION: '/personal-information',

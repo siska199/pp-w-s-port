@@ -3,11 +3,11 @@ import { eventEmitter } from '@event-emitters';
 import CardAction from '@components/ui/card/card-action';
 import Header from '@components/ui/header/header';
 
+import EmptyData from '@components/ui/empty-data';
 import { contextFormPersonalInfo } from '@features/personal-information/context/context-form-personal-info';
 import EVENT_PERSONAL_INFO from '@features/personal-information/event-emitters/personal-info-event';
 import { TTypeActionModalForm } from '@typescript/index-type';
 import { useCallback, useContext } from 'react';
-import EmptyData from '@components/ui/empty-data';
 
 const KeyMetrics = (): JSX.Element => {
     const { listKeyMetric } = useContext(contextFormPersonalInfo);
@@ -32,8 +32,8 @@ const KeyMetrics = (): JSX.Element => {
                 />
             ) : (
                 <ul className="space-y-4 list-disc">
-                    {listKeyMetric.map((item) => (
-                        <CardKeyMetric {...item} />
+                    {listKeyMetric.map((item, i) => (
+                        <CardKeyMetric key={i} id={item?.id} keyData={item?.key} value={item?.value} />
                     ))}
                 </ul>
             )}
@@ -43,13 +43,13 @@ const KeyMetrics = (): JSX.Element => {
 
 interface TPropsCardKeyMetric {
     id: string;
-    key: string;
+    keyData: string;
     value: string;
 }
 const CardKeyMetric = (props: TPropsCardKeyMetric) => {
     const { setListKeyMetric } = useContext(contextFormPersonalInfo);
 
-    const { id, key, value } = props;
+    const { id, keyData, value } = props;
 
     const handleEditData = (id: string) => {
         eventEmitter.emit(EVENT_PERSONAL_INFO.SET_MODAL_FORM_KEY_METRIC, {
@@ -59,7 +59,7 @@ const CardKeyMetric = (props: TPropsCardKeyMetric) => {
 
         eventEmitter.emit(EVENT_PERSONAL_INFO.SET_KEY_METRIC, {
             id,
-            key,
+            key: keyData,
             value,
         });
     };
@@ -75,7 +75,7 @@ const CardKeyMetric = (props: TPropsCardKeyMetric) => {
     return (
         <CardAction onEditData={() => handleEditData(id)} onDeleteData={() => handleDeleteData(id)}>
             <li className="ml-4">
-                {key} : {value}
+                {keyData} : {value}
             </li>
         </CardAction>
     );

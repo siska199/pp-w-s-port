@@ -1,8 +1,8 @@
-import { zEmail, zFileLocale, zPhoneNumber, zString } from '@validation/reusable-schema'
-import z from 'zod'
+import { zEmail, zFileLocale, zPhoneNumber, zString } from '@validation/reusable-schema';
+import z from 'zod';
 
-import { TTypeFile } from '@typescript/ui-types'
-import { TOption } from '@typescript/ui-types'
+import { TTypeFile } from '@typescript/ui-types';
+import { TOption } from '@typescript/ui-types';
 
 export const initialFormGeneralPersonalInfo = {
     id: {
@@ -121,38 +121,39 @@ export const initialFormGeneralPersonalInfo = {
         listAcceptedTypeFile: [TTypeFile.PDF],
         totalMaxSize: 10,
         errorMessage: '',
+ 
     },
 };
 
-export type TFormGeneralPersonalInfo = typeof initialFormGeneralPersonalInfo
+export type TFormGeneralPersonalInfo = typeof initialFormGeneralPersonalInfo;
 
 const generalPersonalInfoSchema = z
-  .object({
-    id: zString({ name: 'ID', mandatory: false }),
-    first_name: zString({ name: 'First Name', max: 50 }),
-    last_name: zString({ name: 'Last Name', max: 50 }),
-    id_profession: zString({ name: 'Profession' }),
+    .object({
+        id: zString({ name: 'ID', mandatory: false }),
+        first_name: zString({ name: 'First Name', max: 50 }),
+        last_name: zString({ name: 'Last Name', max: 50 }),
+        id_profession: zString({ name: 'Profession' }),
 
-    id_province: zString({ name: 'Province', max: 255,mandatory: false }),
-    id_city: zString({ name: 'City', max: 255,mandatory: false }),
-    id_district: zString({ name: 'District', max: 255,mandatory: false }),
-    id_postal_code: zString({ name: 'Postal Code', max: 255,mandatory: false }),
+        id_province: zString({ name: 'Province', max: 255, mandatory: false }),
+        id_city: zString({ name: 'City', max: 255, mandatory: false }),
+        id_district: zString({ name: 'District', max: 255, mandatory: false }),
+        id_postal_code: zString({ name: 'Postal Code', max: 255, mandatory: false }),
 
-    phone_number: zPhoneNumber(true),
-    email: zEmail(),
-    bio: zString({ name: 'Bio', max: 100 }),
-    about_me: zString({ name: 'About Me', max: initialFormGeneralPersonalInfo.about_me.maxLength }),
-    professional_image: zFileLocale({
-      name: 'Professional Image',
-      listAcceptedTypeFile: initialFormGeneralPersonalInfo.professional_image.listAcceptedTypeFile
-    }),
-    resume: zFileLocale({
-      name: 'Resume',
-      listAcceptedTypeFile: initialFormGeneralPersonalInfo.resume.listAcceptedTypeFile
+        phone_number: zPhoneNumber(true),
+        email: zEmail(),
+        bio: zString({ name: 'Bio', max: 100 }),
+        about_me: zString({ name: 'About Me', max: initialFormGeneralPersonalInfo.about_me.maxLength }),
+        professional_image: zFileLocale({
+            name: 'Professional Image',
+            listAcceptedTypeFile: initialFormGeneralPersonalInfo.professional_image.listAcceptedTypeFile,
+        }),
+        resume: zFileLocale({
+            name: 'Resume',
+            listAcceptedTypeFile: initialFormGeneralPersonalInfo.resume.listAcceptedTypeFile,
+        }),
     })
-  })
-  ?.strict()
+    ?.strict();
 
-export type TGeneralPersonalInfoSchema = z.input<typeof generalPersonalInfoSchema>
+export type TGeneralPersonalInfoSchema = z.input<typeof generalPersonalInfoSchema>;
 
-export default generalPersonalInfoSchema
+export default generalPersonalInfoSchema;

@@ -26,8 +26,8 @@ export const initialFormKeyMetric = {
 
 const keyMetricSchema = z.object({
     id: zString({ name: 'ID', mandatory: false }),
-    key: zString({ name: 'Level' }),
-    value: zString({ name: 'Major' }),
+    key: zString({ name: 'Key' }),
+    value: zString({ name: 'Value' }),
 });
 
 export type TKeyMetricSchema = z.input<typeof keyMetricSchema>;

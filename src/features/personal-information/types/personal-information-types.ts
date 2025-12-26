@@ -1,7 +1,7 @@
 import { TMasterCategorySocialLink, TMasterProfession, TUser } from '@typescript/master-module-types';
 
 export interface TKeyMetric {
-    id: string;
+    id?: string;
     key: string;
     value: string;
 }

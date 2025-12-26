@@ -15,7 +15,8 @@ const FormPersonalInfo = () => {
             <Divider />
             <SocialLinks />
             <Divider />
-            <KeyMetrics/>
+            <KeyMetrics />
+            <Divider />
             <Button onClick={handleOnSubmit} className="ml-auto" isLoading={isLoading}>
                 Save
             </Button>
