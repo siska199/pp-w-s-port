@@ -1,164 +1,147 @@
-import { useRef, useState } from 'react'
-import axios, { CancelTokenSource } from 'axios'
+import { useRef, useState } from 'react';
+import axios, { CancelTokenSource } from 'axios';
 
-import { handleSetAuth } from '@features/auth/store/auth-slice'
+import { handleSetAuth } from '@features/auth/store/auth-slice';
 
-import { useAppDispatch, useAppSelector } from '@store/store'
-import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice'
-import CONFIG from '@lib/config/config'
-import appMessage from '@lib/data/app-message'
-import { generateUrlQueryParams } from '@lib/helper/function'
-import { TObject, TResponseAPI } from '@typescript/index-type'
-import { useNavigate } from 'react-router-dom'
-import { routes } from '@routes/constant'
+import { useAppDispatch, useAppSelector } from '@store/store';
+import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice';
+import CONFIG from '@lib/config/config';
+import appMessage from '@lib/data/app-message';
+import { generateUrlQueryParams } from '@lib/helper/function';
+import { TObject, TResponseAPI } from '@typescript/index-type';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '@routes/constant';
 
 interface TParamsApiClient {
-  baseURL?: string
-  method?: 'get' | 'post' | 'put' | 'post' | 'delete'
-  bareerToken?: string
-  endpoint: string
-  payload?: TObject
-  isForm?: boolean
-  message?: {
-    sucess?: string
-    error?: string
-  }
-  queryObject?: TObject
-  noChace?: boolean
-  isNoCache?: boolean
-  isShowAlert?: boolean
-  isLodiang?: boolean
+    baseURL?: string;
+    method?: 'get' | 'post' | 'put' | 'post' | 'delete';
+    bareerToken?: string;
+    endpoint: string;
+    payload?: TObject;
+    isForm?: boolean;
+    message?: {
+        sucess?: string;
+        error?: string;
+    };
+    queryObject?: TObject;
+    noChace?: boolean;
+    isNoCache?: boolean;
+    isShowAlert?: boolean;
+    isLoading?: boolean;
 }
 
 const useAPI = () => {
-  const [progress, setProgress] = useState(0)
-  const cancelTokenRef = useRef<CancelTokenSource | null>(null)
-  const dispatch = useAppDispatch()
-  const jwtToken = useAppSelector((state) => state?.auth?.token)
-  const navigate = useNavigate()
-  const apiClient = async <TData extends object>(
-    params: TParamsApiClient
-  ): Promise<Partial<TResponseAPI<TData>>> => {
-    const {
-      method = 'get',
-      bareerToken,
-      endpoint,
-      isForm = false,
-      payload,
-      message,
-      queryObject,
-      isNoCache,
-      isLodiang = true
-    } = params
+    const [progress, setProgress] = useState(0);
+    const cancelTokenRef = useRef<CancelTokenSource | null>(null);
+    const dispatch = useAppDispatch();
+    const jwtToken = useAppSelector((state) => state?.auth?.token);
+    const navigate = useNavigate();
+    const apiClient = async <TData extends object>(params: TParamsApiClient): Promise<Partial<TResponseAPI<TData>>> => {
+        const { method = 'get', bareerToken, endpoint, isForm = false, payload, message, queryObject, isNoCache, isLoading = true } = params;
 
-    let { baseURL, isShowAlert } = params
+        let { baseURL, isShowAlert } = params;
 
-    isLodiang && dispatch(handleSetIsloading(true))
-    try {
-      /*BASE URL */
-      baseURL = baseURL || CONFIG.SERVER_BASE_URL
+        isLoading && dispatch(handleSetIsloading(true));
+        try {
+            /*BASE URL */
+            baseURL = baseURL || CONFIG.SERVER_BASE_URL;
 
-      /*SET URL WITH QUERY PARAM */
-      let url = endpoint
-      if (method === 'get' && queryObject) {
-        url = generateUrlQueryParams({ url, queryObject })
-      }
+            /*SET URL WITH QUERY PARAM */
+            let url = endpoint;
+            if (method === 'get' && queryObject) {
+                url = generateUrlQueryParams({ url, queryObject });
+            }
 
-      /*CACHE CONTROL*/
-      const noCacheConfig = {
-        'Cache-Control': 'no-cache',
-        Pragma: 'no-cache',
-        Expires: '0'
-      }
+            /*CACHE CONTROL*/
+            const noCacheConfig = {
+                'Cache-Control': 'no-cache',
+                Pragma: 'no-cache',
+                Expires: '0',
+            };
 
-      /*HEADER CONFIGURATION*/
-      const headers = {
-        Authorization: `Bearer ${bareerToken || jwtToken}`,
-        'Content-Type': isForm ? 'multipart/form-data' : 'application/json',
-        ...(isNoCache && noCacheConfig)
-      }
+            /*HEADER CONFIGURATION*/
+            const headers = {
+                Authorization: `Bearer ${bareerToken || jwtToken}`,
+                'Content-Type': isForm ? 'multipart/form-data' : 'application/json',
+                ...(isNoCache && noCacheConfig),
+            };
 
-      /*CANCEL TOKEN */
-      cancelTokenRef.current = axios.CancelToken.source()
+            /*CANCEL TOKEN */
+            cancelTokenRef.current = axios.CancelToken.source();
 
-      /*SHOW ALERT */
-      isShowAlert = isShowAlert ?? (method === 'get' ? false : true)
+            /*SHOW ALERT */
+            isShowAlert = isShowAlert ?? (method === 'get' ? false : true);
 
-      const response = await axios({
-        baseURL,
-        url,
-        method,
-        headers,
-        withCredentials: !!bareerToken,
-        cancelToken: cancelTokenRef.current.token,
-        data: payload,
-        onUploadProgress: (event) => {
-          setProgress(Math.round((100 * event.loaded) / (event?.total || 100)))
+            const response = await axios({
+                baseURL,
+                url,
+                method,
+                headers,
+                withCredentials: !!bareerToken,
+                cancelToken: cancelTokenRef.current.token,
+                data: payload,
+                onUploadProgress: (event) => {
+                    setProgress(Math.round((100 * event.loaded) / (event?.total || 100)));
+                },
+            });
+
+            isShowAlert &&
+                dispatch(
+                    handleSetAlertConfig({
+                        show: true,
+                        message: message?.sucess || JSON.stringify(response?.data?.data?.message) || 'Successfully',
+                        type: 'sucess',
+                        withIcon: true,
+                    }),
+                );
+
+            return response.data;
+        } catch (error: any) {
+            const messageError = message?.error || JSON.stringify(error?.response?.data?.message) || error?.message || appMessage.systemErrorMessage;
+
+            const status = error?.response?.status;
+            if ([401, 403]?.includes(status)) {
+                dispatch(
+                    handleSetAuth({
+                        isAuthenticated: false,
+                        user: null,
+                        token: '',
+                        isRememberMe: false,
+                    }),
+                );
+                navigate(routes.auth.name, { replace: true });
+            }
+
+            isShowAlert &&
+                dispatch(
+                    handleSetAlertConfig({
+                        message: messageError,
+                        show: true,
+                        type: 'error',
+                        withIcon: true,
+                    }),
+                );
+            return {
+                status: false,
+                message: 'error',
+            };
+        } finally {
+            isLoading && dispatch(handleSetIsloading(false));
         }
-      })
+    };
 
-      isShowAlert &&
-        dispatch(
-          handleSetAlertConfig({
-            show: true,
-            message:
-              message?.sucess || JSON.stringify(response?.data?.data?.message) || 'Successfully',
-            type: 'sucess',
-            withIcon: true
-          })
-        )
+    const cancelRequest = () => {
+        if (cancelTokenRef.current) {
+            cancelTokenRef.current.cancel('Operation canceled by the user.');
+        }
+    };
 
-      return response.data
-    } catch (error: any) {
-      const messageError =
-        message?.error ||
-        JSON.stringify(error?.response?.data?.message) ||
-        error?.message ||
-        appMessage.systemErrorMessage
+    return {
+        apiClient,
+        progress,
+        cancelRequest,
+        setProgress,
+    };
+};
 
-      const status = error?.response?.status
-      if ([401, 403]?.includes(status)) {
-        dispatch(
-          handleSetAuth({
-            isAuthenticated: false,
-            user: null,
-            token: '',
-            isRememberMe: false
-          })
-        )
-        navigate(routes.auth.name, { replace: true })
-      }
-
-      isShowAlert &&
-        dispatch(
-          handleSetAlertConfig({
-            message: messageError,
-            show: true,
-            type: 'error',
-            withIcon: true
-          })
-        )
-      return {
-        status: false,
-        message: 'error'
-      }
-    } finally {
-      isLodiang && dispatch(handleSetIsloading(false))
-    }
-  }
-
-  const cancelRequest = () => {
-    if (cancelTokenRef.current) {
-      cancelTokenRef.current.cancel('Operation canceled by the user.')
-    }
-  }
-
-  return {
-    apiClient,
-    progress,
-    cancelRequest,
-    setProgress
-  }
-}
-
-export default useAPI
+export default useAPI;

@@ -9,7 +9,7 @@ const usePersonalInformationAPI = () => {
     const getDetailPersonalInformation = async () => {
         const result = await apiClient<TPersonalInformation>({
             endpoint: `${ENDPOINT.PERSONAL_INFORMATION.GET_DETAIL_PERSONAL_INFORMATION}`,
-            isLodiang: false,
+            isLoading: false,
         });
         return result;
     };
@@ -17,7 +17,7 @@ const usePersonalInformationAPI = () => {
     const getListSocialLink = async () => {
         const result = await apiClient<TSocialLink[]>({
             endpoint: `${ENDPOINT.SOCIAL_LINK.GET_LIST_SOCIAL_LINK}`,
-            isLodiang: false,
+            isLoading: false,
         });
         return result;
     };
@@ -29,7 +29,7 @@ const usePersonalInformationAPI = () => {
             method: 'post',
             isForm: true,
             isShowAlert: false,
-            isLodiang: false,
+            isLoading: false,
         });
 
         return result;
@@ -41,7 +41,7 @@ const usePersonalInformationAPI = () => {
             payload: params,
             method: 'post',
             isShowAlert: false,
-            isLodiang: false,
+            isLoading: false,
         });
 
         return result;
@@ -50,7 +50,7 @@ const usePersonalInformationAPI = () => {
     const getListKeyMetric = async () => {
         const result = await apiClient<TKeyMetric[]>({
             endpoint: `${ENDPOINT.KEY_METRIC.GET_LIST_KEY_METRIC}`,
-            isLodiang: false,
+            isLoading: false,
         });
         return result;
     };
@@ -61,7 +61,7 @@ const usePersonalInformationAPI = () => {
             payload: params,
             method: 'post',
             isShowAlert: false,
-            isLodiang: false,
+            isLoading: false,
         });
 
         return result;

@@ -97,7 +97,7 @@ const TableProject = () => {
             action: TTypeActionModalForm.EDIT,
             id: String(data?.id),
         });
-        navigate(routes.project.child.detail.fullPath(String(data.id)));
+        navigate(routes.project.child.upsert.fullPath(String(data.id)));
     };
 
     const handleViewData = (data: TProject) => {

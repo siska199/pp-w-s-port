@@ -1,29 +1,27 @@
 import { eventEmitter } from '@event-emitters';
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 
 import Badge from '@components/ui/badge';
 import Header from '@components/ui/header/header';
 import Image from '@components/ui/image';
 import EVENT_PROJECT from '@features/project/event-emitters/project-event';
-import useProjectMenu from '@features/project/hooks/use-project-menu';
 import useEventEmitter from '@hooks/use-event-emitter';
 
 import { IconDelete, IconEdit } from '@assets/icons';
 import EmptyData from '@components/ui/empty-data';
 import { TFileValue } from '@components/ui/input/input-file/input-file-v1';
+import useProjectMenuApi from '@features/project/apis/use-project-menu-api';
 import { contextFormProject } from '@features/project/context/form-project-context';
 import { TProjectMenuItem } from '@features/project/types/project-type';
 import useFile from '@hooks/use-file';
-import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge';
-import { TTypeActionModalForm } from '@typescript/index-type';
-import { handleSetModalConfirmation } from '@store/ui-slice';
 import appMessage from '@lib/data/app-message';
+import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge';
 import { useAppDispatch } from '@store/store';
-import useProjectMenuApi from '@features/project/apis/use-project-menu-api';
+import { handleSetModalConfirmation } from '@store/ui-slice';
+import { TTypeActionModalForm } from '@typescript/index-type';
 
 const ProjectMenus = React.memo(() => {
-    const { listProjectMenu, getListProjectMenu } = useProjectMenu();
-    const { formInformationProject } = useContext(contextFormProject);
+    const { formInformationProject, listProjectMenu, getListProjectMenu } = useContext(contextFormProject);
 
     const handleOnClickAddData = () => {
         eventEmitter.emit(EVENT_PROJECT.SET_MODAL_FORM_MENU_PROJECT, {
@@ -31,12 +29,6 @@ const ProjectMenus = React.memo(() => {
             action: TTypeActionModalForm.ADD,
         });
     };
-
-    useEffect(() => {
-        getListProjectMenu({
-            id_project: formInformationProject.id.value,
-        });
-    }, []);
 
     useEventEmitter(EVENT_PROJECT.REFRESH_DATA_LIST_MENU_PROJECT, async () => {
         await getListProjectMenu({

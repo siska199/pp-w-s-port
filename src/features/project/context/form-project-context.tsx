@@ -3,10 +3,12 @@ import React, { createContext, SetStateAction, useCallback, useEffect, useState 
 import EVENT_PROJECT from '@features/project/event-emitters/project-event';
 import informationProjectSchema, { initialFormInformationProject, TInformationProjectSchema } from '@features/project/validation/information-project-schema';
 import { initialFormProjectMenu } from '@features/project/validation/project-menu-schema';
-import { initialFormProjectResponsibility } from '@features/project/validation/project-responsibility-schema';
 
 import useExperianceAPI from '@features/experiance/apis/use-experiance-api';
 import useProjectAPI from '@features/project/apis/use-project-api';
+import useProjectMenuApi, { TParamsListProjectMenu } from '@features/project/apis/use-project-menu-api';
+import useProjectResponsibilityApi, { TParamsListProjectResponsibility } from '@features/project/apis/use-project-responsibility-api';
+import { TProjectMenuItem, TProjectResponsibilityItem } from '@features/project/types/project-type';
 import useSkillUserAPI from '@features/skill-user/apis/use-skill-user-api';
 import useEventEmitter from '@hooks/use-event-emitter';
 import useFile from '@hooks/use-file';
@@ -16,6 +18,7 @@ import { handleSetIsloading } from '@store/ui-slice';
 import { TTypeActionData } from '@typescript/index-type';
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { initialFormProjectResponsibility } from '../validation/project-responsibility-schema';
 
 export interface TContextFormProject {
     formInformationProject: typeof initialFormInformationProject;
@@ -30,6 +33,12 @@ export interface TContextFormProject {
     handleOnSubmitInformationProject: (e: TEventSubmitForm) => void;
     isLoading: boolean;
     setIsLoading: React.Dispatch<SetStateAction<boolean>>;
+
+    listProjectMenu: TProjectMenuItem[];
+    getListProjectMenu: (params: TParamsListProjectMenu) => Promise<void>;
+
+    listProjectResponsibility: TProjectResponsibilityItem[];
+    getListProjectResponsibility: (params: TParamsListProjectResponsibility) => Promise<void>;
 }
 
 const initialContextFormProject = {
@@ -46,6 +55,10 @@ const initialContextFormProject = {
     handleOnSubmitInformationProject: (_e: TEventSubmitForm) => null,
     isLoading: false,
     setIsLoading: () => null,
+    listProjectMenu: [],
+    getListProjectMenu: async () => {},
+    listProjectResponsibility: [],
+    getListProjectResponsibility: async () => {},
 };
 
 export const contextFormProject = createContext<TContextFormProject>(initialContextFormProject);
@@ -55,16 +68,21 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
     const dispatch = useAppDispatch();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
+
     const { getListSkillUser } = useSkillUserAPI();
     const { getListExperiance } = useExperianceAPI();
     const { upsertProject, getProjectDetail } = useProjectAPI();
     const { handleGetFileFromUrl } = useFile();
+    const { getListProjectMenu: getListProjectMenuApi } = useProjectMenuApi();
+    const { getListProjectResponsibility: getListProjectResponsibilityApi } = useProjectResponsibilityApi();
 
     const [isLoading, setIsLoading] = useState(false);
 
     const [formInformationProject, setFormInformationProject] = useState(deepCopy({ ...initialFormInformationProject }));
     const [formProjectMenu, setFormProjectMenu] = useState(deepCopy({ ...initialFormProjectMenu }));
     const [formResponsibilityProject, setFormResponsibilityProject] = useState(deepCopy({ ...initialFormProjectResponsibility }));
+    const [listProjectMenu, setListProjectMenu] = useState<TProjectMenuItem[]>([]);
+    const [listProjectResponsibility, setListProjectResponsibility] = useState<TProjectResponsibilityItem[]>([]);
 
     useEffect(() => {
         handleInitData();
@@ -83,7 +101,19 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
                 labelField: 'company_name',
             });
             const id = searchParams.get('id');
-            const resultInformationProject = id ? await getProjectDetail(id) : null;
+            const result = id
+                ? await Promise.all([
+                      getProjectDetail(id),
+                      getListProjectMenu({
+                          id_project: id,
+                      },false),
+                      getListProjectResponsibility({
+                          id_project: id,
+                      },false),
+                  ])
+                : null;
+            const resultInformationProject = result?.[0];
+
             if (resultInformationProject?.data) {
                 updatedFormInformationProject = mappingValuesToForm({
                     form: updatedFormInformationProject,
@@ -102,6 +132,18 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         } finally {
             dispatch(handleSetIsloading(false));
         }
+    };
+
+    const getListProjectMenu = async (params: TParamsListProjectMenu,isLoading: boolean = true) => {
+        const result = await getListProjectMenuApi(params, isLoading);
+        if (!result.data) return;
+        setListProjectMenu(result.data);
+    };
+
+    const getListProjectResponsibility = async (params: TParamsListProjectResponsibility,isLoading: boolean = true) => {
+        const result = await getListProjectResponsibilityApi(params, isLoading);
+        if (!result.data) return;
+        setListProjectResponsibility(result.data);
     };
 
     type TKeyFormInformationProject = keyof typeof formInformationProject;
@@ -204,6 +246,10 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
                 handleOnSubmitInformationProject,
                 isLoading,
                 setIsLoading,
+                listProjectMenu,
+                getListProjectMenu,
+                listProjectResponsibility,
+                getListProjectResponsibility,
             }}
         >
             {children}

@@ -12,10 +12,11 @@ export interface TParamsListProjectResponsibility {
 const useProjectResponsibilityApi = () => {
     const { apiClient } = useAPI();
 
-    const getListProjectResponsibility = async (params: TParamsListProjectResponsibility) => {
+    const getListProjectResponsibility = async (params: TParamsListProjectResponsibility, isLoading: boolean = true) => {
         const response = await apiClient<TProjectResponsibilityItem[]>({
             endpoint: ENDPOINT.PROJECT_RESPONSIBILITY.GET_LIST_PROJECT_RESPONSIBILITY,
             queryObject: removeKeyWithUndifienedValue(params),
+             isLoading
         });
 
         return response;
@@ -37,7 +38,6 @@ const useProjectResponsibilityApi = () => {
             payload: params,
             method: 'post',
             message: appMessage.upsertModule(params?.id, 'Project'),
-            isForm: true,
         });
 
         return response;

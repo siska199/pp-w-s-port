@@ -11,10 +11,11 @@ export interface TParamsListProjectMenu {
 const useProjectMenuApi = () => {
     const { apiClient } = useAPI();
 
-    const getListProjectMenu = async (params: TParamsListProjectMenu) => {
+    const getListProjectMenu = async (params: TParamsListProjectMenu, isLoading: boolean=true) => {
         const response = await apiClient<TProjectMenuItem[]>({
             endpoint: ENDPOINT.PROJECT_MENU.GET_LIST_PROJECT_MENU,
             queryObject: removeKeyWithUndifienedValue(params),
+            isLoading,
         });
 
         return response;

@@ -75,7 +75,7 @@ const route = {
       },
       upsert: {
         name: 'upsert',
-        fullPath: '/project/upsert',
+        fullPath:  (id: string) =>`/project/upsert?id=${id}`,
         isPrivate: true
       }
     }

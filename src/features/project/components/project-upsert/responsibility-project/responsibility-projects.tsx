@@ -5,23 +5,17 @@ import Header from '@components/ui/header/header';
 import EVENT_PROJECT from '@features/project/event-emitters/project-event';
 
 import { contextFormProject } from '@features/project/context/form-project-context';
-import useProjectResponsibility from '@features/project/hooks/use-project-responsibility';
 import { TTypeActionModalForm } from '@typescript/index-type';
 import { useContext, useEffect } from 'react';
 import { useAppDispatch } from '@store/store';
 import useProjectResponsibilityApi from '@features/project/apis/use-project-responsibility-api';
 import { handleSetModalConfirmation } from '@store/ui-slice';
 import appMessage from '@lib/data/app-message';
+import EmptyData from '@components/ui/empty-data';
+import useEventEmitter from '@hooks/use-event-emitter';
 
 const ResponsibilityProjects = () => {
-    const { listProjectResponsibility, getListProjectResponsibility } = useProjectResponsibility();
-    const { formInformationProject } = useContext(contextFormProject);
-
-    useEffect(() => {
-        getListProjectResponsibility({
-            id_project: formInformationProject.id.value,
-        });
-    }, []);
+    const { formInformationProject, listProjectResponsibility, getListProjectResponsibility } = useContext(contextFormProject);
 
     const handleOnClickAddData = () => {
         eventEmitter.emit(EVENT_PROJECT.SET_MODAL_FORM_RESPONSIBILITY_PROJECT, {
@@ -29,9 +23,23 @@ const ResponsibilityProjects = () => {
             action: TTypeActionModalForm.ADD,
         });
     };
+
+        useEventEmitter(EVENT_PROJECT.REFRESH_DATA_LIST_RESPONSIBILITY_PROJECT, async () => {
+            await getListProjectResponsibility({
+                id_project: formInformationProject.id.value,
+            });
+        });
     return (
         <div className="space-y-10">
             <Header title="Responsibility Project" onClickAddData={handleOnClickAddData} />
+            {listProjectResponsibility?.length === 0 && (
+                <EmptyData
+                    customeClass={{
+                        container: 'w-full !border-none',
+                        img: 'h-[5rem]',
+                    }}
+                />
+            )}
             <ul className="space-y-4 list-disc">{listProjectResponsibility?.map((responsibility, i) => <CardResponsibility key={i} {...responsibility} />)}</ul>
         </div>
     );
@@ -40,9 +48,10 @@ const ResponsibilityProjects = () => {
 interface TPropsCardResponsibility {
     id: string;
     description: string;
+    id_project: string;
 }
 const CardResponsibility = (props: TPropsCardResponsibility) => {
-    const { id, description } = props;
+    const { id, description, id_project } = props;
     const dispatch = useAppDispatch();
     const { deleteProjectResponsibility } = useProjectResponsibilityApi();
 
@@ -54,6 +63,7 @@ const CardResponsibility = (props: TPropsCardResponsibility) => {
         eventEmitter.emit(EVENT_PROJECT.SET_RESPONSIBILITY_PROJECT, {
             id,
             description,
+            id_project,
         });
     };
 

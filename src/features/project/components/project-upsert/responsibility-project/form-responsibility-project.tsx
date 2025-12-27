@@ -20,10 +20,10 @@ const FormResponsiblityProject = () => {
         action: TTypeActionModalForm.ADD,
         customeClass: { mdBody: '  md:min-w-[38rem]  space-y-4' },
     });
-    const { formResponsibilityProject: form, handleOnChangeFormResponsibilityProject: handleOnChange, setFormResponsibilityProject: setForm } = useContext(contextFormProject);
+    const { formResponsibilityProject: form, formInformationProject, handleOnChangeFormResponsibilityProject: handleOnChange, setFormResponsibilityProject: setForm } = useContext(contextFormProject);
     const { upsertProjectResponsibility } = useProjectResponsibilityApi();
 
-    useEventEmitter(EVENT_PROJECT.SET_MENU_PROJECT, (data) => {
+    useEventEmitter(EVENT_PROJECT.SET_RESPONSIBILITY_PROJECT, (data) => {
         setForm({ ...mappingValuesToForm({ values: data, form }) });
     });
 
@@ -42,7 +42,7 @@ const FormResponsiblityProject = () => {
         });
     };
 
-    const handleOnSubmit = async(e: TEventSubmitForm) => {
+    const handleOnSubmit = async (e: TEventSubmitForm) => {
         e?.preventDefault();
         const { isValid, form: updatedForm } = mappingErrorsToForm<TProjectResponsibility, typeof form>({
             form,
@@ -58,11 +58,14 @@ const FormResponsiblityProject = () => {
             ...extractValueFromForm(form),
         };
 
-        const result = await upsertProjectResponsibility(extractForm);
+        const result = await upsertProjectResponsibility({
+            ...extractForm,
+            id_project: formInformationProject.id.value,
+        });
 
         if (!result?.status) return;
         handleCloseModalForm();
-        eventEmitter.emit(EVENT_PROJECT.REFRESH_DATA_LIST_MENU_PROJECT, true);
+        eventEmitter.emit(EVENT_PROJECT.REFRESH_DATA_LIST_RESPONSIBILITY_PROJECT, true);
     };
 
     return (
