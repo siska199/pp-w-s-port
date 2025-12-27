@@ -1,11 +1,10 @@
 import { useState } from 'react';
 
-
 import useProjectMenuApi, { TParamsListProjectMenu } from '@features/project/apis/use-project-menu-api';
-import { TProjectMenuParams } from '@features/project/types/project-type';
+import { TProjectMenuItem } from '@features/project/types/project-type';
 
 const useProjectMenu = () => {
-    const [listProjectMenu, setListProjectMenu] = useState<TProjectMenuParams[]>([]);
+    const [listProjectMenu, setListProjectMenu] = useState<TProjectMenuItem[]>([]);
     const { getListProjectMenu: getListProjectMenuApi } = useProjectMenuApi();
 
     const getListProjectMenu = async (params: TParamsListProjectMenu) => {

@@ -1,6 +1,6 @@
 import ENDPOINT from '@apis/endpoints';
 import { TProject, TTypeTypeProject } from '@features/project/types/project-type';
-import { TProjectSchema } from '@features/project/validation/information-project-schema';
+import { TInformationProjectSchema } from '@features/project/validation/information-project-schema';
 
 import useAPI from '@hooks/use-api';
 import appMessage from '@lib/data/app-message';
@@ -36,7 +36,7 @@ const useProjectAPI = () => {
         return response;
     };
 
-    const upsertProject = async (params: TProjectSchema) => {
+    const upsertProject = async (params: TInformationProjectSchema) => {
         const response = await apiClient<TProject>({
             endpoint: ENDPOINT.PROJECT.UPSERT_PROJECT,
             payload: {

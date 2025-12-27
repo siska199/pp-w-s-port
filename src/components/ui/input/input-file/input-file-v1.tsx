@@ -8,7 +8,7 @@ import Image from '@components/ui/image';
 import ContainerInput from '@components/ui/input/container-input';
 
 import { IconCamera, IconClose } from '@assets/icons';
-import { convertBytesToMegabytes, handleDownloadFile, isValidTypeFile } from '@lib/helper/function';
+import { compressImage, convertBytesToMegabytes, handleDownloadFile, isValidTypeFile } from '@lib/helper/function';
 import { TFileWithPreview } from '@typescript/index-type';
 import { TBasePropsInput, TCustomeEventOnChange, TTypeFile } from '@typescript/ui-types';
 
@@ -21,12 +21,15 @@ export interface TPropsInputFileV1 extends Omit<TBasePropsInput, 'variant'>, Omi
     onChange: (e: TCustomeEventOnChange<TFileValue>) => void;
     value: TFileValue | null | undefined;
     variant?: 'change-profile' | 'general';
+    isCompress?: boolean;
 }
 
 const InputFileV1 = (props: TPropsInputFileV1) => {
-    const { listAcceptedTypeFile = [TTypeFile.ALL], totalMaxSize = 5, onChange, name, variant = 'general', errorMessage, ...attrsInput } = props;
+    const { listAcceptedTypeFile = [TTypeFile.ALL], isCompress = false, totalMaxSize = 5, onChange, name, variant = 'general', errorMessage, ...attrsInput } = props;
 
     const inputFileRef = useRef<HTMLInputElement | null>(null);
+
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [acceptedFile, setAcceptedFile] = useState('');
     const [errorMessageDynamic, setErrorMessageDynamic] = useState('');
 
@@ -43,17 +46,39 @@ const InputFileV1 = (props: TPropsInputFileV1) => {
         inputFileRef?.current?.click();
     };
 
-    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target?.files?.[0] as TFileWithPreview;
-        const isValidFile = handleValidationInputFile(file);
-        file.preview = URL.createObjectURL(file);
+    const handleOnChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        setIsLoading(true);
+        try {
+            const rawFile = e.target?.files?.[0];
+            if (!rawFile) return;
 
-        onChange({
-            target: {
-                name,
-                value: isValidFile ? file : null,
-            },
-        });
+            const isValidFile = handleValidationInputFile(rawFile);
+            if (!isValidFile) {
+                onChange({
+                    target: {
+                        name,
+                        value: null,
+                    },
+                });
+                return;
+            }
+
+            const processedFile = isCompress? await compressImage(rawFile) : rawFile;
+
+            const fileWithPreview: TFileWithPreview = Object.assign(processedFile, {
+                preview: URL.createObjectURL(processedFile),
+            });
+
+            onChange({
+                target: {
+                    name,
+                    value: fileWithPreview,
+                },
+            });
+        } catch (error) {
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleDeleteFile = () => {
@@ -128,7 +153,7 @@ const InputFileV1 = (props: TPropsInputFileV1) => {
                             </p>
 
                             <div className="flex gap-2">
-                                <Button variant="outline-primary" onClick={handleOnClickInput}>
+                                <Button variant="outline-primary" isLoading={isLoading} onClick={handleOnClickInput}>
                                     Choose File
                                 </Button>
 

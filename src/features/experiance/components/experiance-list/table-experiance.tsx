@@ -58,18 +58,24 @@ const TableExperiance = () => {
             {
                 name: 'Related Project',
                 key: 'projects',
-                className: ' min-w-[15rem]',
+                className: ' min-w-[15rem] flex items-center  justify-center',
                 customeComponent: (data: TExperiance) => {
-                    return <ul className="list-disc ml-5">{data?.projects?.map((project, i) => <li key={i}>{project?.name}</li>)}</ul>;
+                    return (
+                        <>
+                            {data?.projects?.length == 0 && <div className="flex flex-col gap-2 flex-grow items-center">-</div>}
+                            <ul className="list-disc ml-5">{data?.projects?.map((project, i) => <li key={i}>{project?.name}</li>)}</ul>
+                        </>
+                    );
                 },
             },
             {
                 name: 'Tech Stack',
                 key: 'tech_stacks',
-                className: 'md:min-w-[20rem]',
+                className: 'md:min-w-[20rem] flex items-center  justify-center',
                 customeComponent: (data: TExperiance) => {
                     return (
                         <div className="gap-2 flex flex-wrap">
+                            {(!data?.tech_stacks || data?.tech_stacks?.length == 0) && <div>-</div>}
                             {data?.tech_stacks.map((stack, i) => <Badge key={i} variant={getRandomKey(variantBadge)} label={stack} className=" px-4 min-w-[5rem]" />)}
                         </div>
                     );

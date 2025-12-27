@@ -154,3 +154,9 @@ export const zBooleanCheckbox = (params: { name: string; mandatory?: boolean }) 
     mandatory: mandatory
   })
 }
+
+export const zArray = (params: { name: string; mandatory?: boolean }) => {
+    const { name, mandatory = true } = params;
+    const dateSchema = z.string().array();
+    return mandatory ? dateSchema.nonempty(messageError.required(name)) : dateSchema.optional();
+};

@@ -1,9 +1,11 @@
 import clsx, { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import z, { ZodSchema, ZodType } from 'zod';
+import imageCompression from 'browser-image-compression';
 
 import { TDate, TObject, TResponseAPI } from '@typescript/index-type';
 import { TOption, TTypeDateFormat, TTypeFile } from '@typescript/ui-types';
+import { TFileValue } from '@components/ui/input/input-file/input-file-v1';
 
 export const cn = (...inputs: ClassValue[]) => {
     return twMerge(clsx(inputs));
@@ -162,7 +164,7 @@ export const generateDefaultValue = (schema: ZodType<any>): any => {
 
 export const generateOptions = (params: { options: TObject; labelField?: string; valueField?: string; listSaveField?: string[]; isFormatCapitalize?: boolean }) => {
     const { options, isFormatCapitalize = true, labelField = 'name', valueField = 'id', listSaveField } = params;
-    
+
     return options?.map((option: TObject) => {
         const saveFields = listSaveField?.reduce<Record<string, any>>((acc, field) => {
             acc[field] = option[field];
@@ -390,7 +392,6 @@ export const formatPhoneNumber = (phoneNumber: string): string => {
     return formatedPhoneNumber;
 };
 
-
 export const buildFormData = (data: Record<string, any>) => {
     const formData = new FormData();
 
@@ -413,4 +414,33 @@ export const buildFormData = (data: Record<string, any>) => {
     });
 
     return formData;
+};
+
+export type ImageCompressionOptions = {
+    maxSizeMB?: number;
+    maxWidthOrHeight?: number;
+    useWebWorker?: boolean;
+    initialQuality?: number;
+};
+
+export const compressImage = async (file: File, options?: ImageCompressionOptions): Promise<File> => {
+    if (!file.type.startsWith('image/')) return file;
+
+    const mergedOptions = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+        initialQuality: 0.8,
+        ...options,
+    };
+    const compressed = await imageCompression(file, mergedOptions);
+
+    if (compressed instanceof File) {
+        return compressed;
+    }
+
+    return new File([compressed], file.name, {
+        type: (compressed as TFileValue)?.type || file.type,
+        lastModified: Date.now(),
+    });
 };

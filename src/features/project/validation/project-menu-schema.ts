@@ -33,12 +33,14 @@ export const initialFormProjectMenu = {
         label: 'Name',
         placeholder: 'e.g Login',
         value: '',
+        errorMessage: '',
     },
     main_image: {
         name: 'main_image',
         label: 'Main Image',
         value: null,
         listAcceptedTypeFile: defaultTTypeImage,
+        errorMessage: '',
     },
     description: {
         name: 'description',
@@ -46,6 +48,7 @@ export const initialFormProjectMenu = {
         value: '',
         rows: 5,
         placeholder: 'Write a description about your menu project',
+        errorMessage: '',
     },
 
     features: {
@@ -53,6 +56,7 @@ export const initialFormProjectMenu = {
         label: 'Features',
         value: '',
         placeholder: 'List the features of your menu project',
+        errorMessage: '',
     },
     related_images: {
         name: 'related_images',

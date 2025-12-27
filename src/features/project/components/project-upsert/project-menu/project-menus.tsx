@@ -12,10 +12,14 @@ import { IconDelete, IconEdit } from '@assets/icons';
 import EmptyData from '@components/ui/empty-data';
 import { TFileValue } from '@components/ui/input/input-file/input-file-v1';
 import { contextFormProject } from '@features/project/context/form-project-context';
-import { TProjectMenuParams } from '@features/project/types/project-type';
+import { TProjectMenuItem } from '@features/project/types/project-type';
 import useFile from '@hooks/use-file';
 import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge';
 import { TTypeActionModalForm } from '@typescript/index-type';
+import { handleSetModalConfirmation } from '@store/ui-slice';
+import appMessage from '@lib/data/app-message';
+import { useAppDispatch } from '@store/store';
+import useProjectMenuApi from '@features/project/apis/use-project-menu-api';
 
 const ProjectMenus = React.memo(() => {
     const { listProjectMenu, getListProjectMenu } = useProjectMenu();
@@ -58,9 +62,12 @@ const ProjectMenus = React.memo(() => {
     );
 });
 
-const CardProjectMenu = React.memo((props: TProjectMenuParams) => {
+const CardProjectMenu = React.memo((props: TProjectMenuItem) => {
     const { name, id, description, main_image, features, related_images } = props;
     const { handleGetFileFromUrl } = useFile();
+    const dispatch = useAppDispatch();
+    const { deleteProjectMenu } = useProjectMenuApi();
+
     const handleEditProject = async (id: string) => {
         eventEmitter.emit(EVENT_PROJECT.SET_MODAL_FORM_MENU_PROJECT, {
             isShow: true,
@@ -90,7 +97,21 @@ const CardProjectMenu = React.memo((props: TProjectMenuParams) => {
     };
 
     const handleDeleteProject = (id: string) => {
-        console.log('id:', id);
+        dispatch(
+            handleSetModalConfirmation({
+                isShow: true,
+                children: appMessage.warning.deleteData,
+                button: {
+                    confirm: {
+                        onClick: async () => {
+                            await deleteProjectMenu(id);
+                            dispatch(handleSetModalConfirmation({ isShow: false }));
+                            eventEmitter.emit(EVENT_PROJECT.REFRESH_DATA_LIST_MENU_PROJECT, true);
+                        },
+                    },
+                },
+            }),
+        );
     };
 
     const listBtnAction = useMemo(
@@ -124,6 +145,10 @@ const CardProjectMenu = React.memo((props: TProjectMenuParams) => {
             <div>
                 <h5 className="text-body-base font-medium">Features : </h5>
                 <div className="container-list-disc-style " dangerouslySetInnerHTML={{ __html: features ?? '' }}></div>
+            </div>
+            <div>
+                <h5 className="text-body-base font-medium">Related Images : </h5>
+                <div className="text-gray cursor-pointer hover:underline">{related_images?.length || 0} Item</div>
             </div>
         </div>
     );

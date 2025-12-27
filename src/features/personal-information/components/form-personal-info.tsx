@@ -17,7 +17,7 @@ const FormPersonalInfo = () => {
             <Divider />
             <KeyMetrics />
             <Divider />
-            <Button onClick={handleOnSubmit} className="ml-auto" isLoading={isLoading}>
+            <Button onClick={handleOnSubmit} className="ml-auto md:min-w-[8rem]" isLoading={isLoading}>
                 Save
             </Button>
         </>

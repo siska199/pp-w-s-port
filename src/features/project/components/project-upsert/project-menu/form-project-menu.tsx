@@ -27,7 +27,7 @@ const FormProjectMenu = () => {
         action: TTypeActionModalForm.ADD,
         customeClass: { mdBody: '  md:min-w-[38rem]  space-y-4' },
     });
-    
+
     useEventEmitter(EVENT_PROJECT.SET_MENU_PROJECT, (data) => {
         setForm({ ...mappingValuesToForm({ values: data, form }) });
     });
@@ -39,7 +39,8 @@ const FormProjectMenu = () => {
         });
     });
 
-    const handlleCloseFormProjectMenu = () => {
+    const handleCloseFormProjectMenu = () => {
+        initialFormProjectMenu.main_image.value = null;
         setForm(deepCopy({ ...initialFormProjectMenu }));
         setModalForm({
             ...modalForm,
@@ -73,12 +74,12 @@ const FormProjectMenu = () => {
         const result = await upsertProjectMenu(formData);
 
         if (!result?.status) return;
-        handlleCloseFormProjectMenu();
+        handleCloseFormProjectMenu();
         eventEmitter.emit(EVENT_PROJECT.REFRESH_DATA_LIST_MENU_PROJECT, true);
     };
 
     return (
-        <ContainerModalForm {...modalForm} onClose={handlleCloseFormProjectMenu} onSubmit={handleOnSubmit}>
+        <ContainerModalForm {...modalForm} onClose={handleCloseFormProjectMenu} onSubmit={handleOnSubmit}>
             <InputBase {...form['name']} onChange={handleOnChange} />
             <InputFileV1 {...form['main_image']} onChange={handleOnChange} />
             <InputTextArea {...form['description']} onChange={handleOnChange} />

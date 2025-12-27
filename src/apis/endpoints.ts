@@ -53,6 +53,12 @@ const ENDPOINTS = {
         GET_DETAIL_PROJECT_MENU: (id: string) => `/project-menu/${id}`,
         DELETE_PROJECT_MENU: (id: string) => `/project-menu/${id}`,
     },
+    PROJECT_RESPONSIBILITY: {
+        GET_LIST_PROJECT_RESPONSIBILITY: '/project-responsibilities',
+        UPSERT_PROJECT_RESPONSIBILITY: '/project-responsibility',
+        GET_DETAIL_PROJECT_RESPONSIBILITY: (id: string) => `/project-responsibility/${id}`,
+        DELETE_PROJECT_RESPONSIBILITY: (id: string) => `/project-responsibility/${id}`,
+    },
     EXPERIANCE: {
         GET_LIST_EXPERIANCE: '/experiances',
         UPSERT_EXPERIANCE: '/experiance',

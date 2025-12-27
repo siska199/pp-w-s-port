@@ -111,7 +111,7 @@ export const initialFormGeneralPersonalInfo = {
         name: 'professional_image',
         label: 'Professional Image',
         value: null as null | File,
-        listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG, TTypeFile.PDF],
+        listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG],
         errorMessage: '',
     },
     resume: {

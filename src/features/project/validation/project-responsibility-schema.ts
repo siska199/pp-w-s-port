@@ -1,7 +1,7 @@
 import { zString } from '@validation/reusable-schema'
 import z from 'zod'
 
-export const initialFormResponsibilityProject = {
+export const initialFormProjectResponsibility = {
   id: {
     name: 'id',
     label: 'ID',
@@ -20,11 +20,11 @@ export const initialFormResponsibilityProject = {
   }
 }
 
-const responsibilityProjectSchema = z.object({
+const projectResponsibilitySchema = z.object({
   description: zString({ name: 'Description', max: 2000 }),
   id: zString({ name: 'id', mandatory: false })
 })
 
-export type TResponsibilityProject = z.input<typeof responsibilityProjectSchema>
+export type TProjectResponsibility = z.input<typeof projectResponsibilitySchema>
 
-export default responsibilityProjectSchema
+export default projectResponsibilitySchema

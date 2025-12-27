@@ -1,4 +1,4 @@
-import { zEnum, zFileLocale, zString } from '@validation/reusable-schema';
+import { zArray, zEnum, zFileLocale, zString } from '@validation/reusable-schema';
 import { z } from 'zod';
 
 import { optionsCategoryProject, optionsTypeProject } from '@features/project/constants';
@@ -16,12 +16,14 @@ export const initialFormInformationProject = {
         name: 'id',
         label: 'ID',
         value: '',
+        errorMessage: '',
     },
     name: {
         name: 'name',
         label: 'Name',
         value: '',
         placeholder: 'e.g GOA (Garda oto Akses)',
+        errorMessage: '',
     },
     category: {
         name: 'category',
@@ -29,6 +31,7 @@ export const initialFormInformationProject = {
         options: optionsCategoryProject,
         placeholder: appMessage.selectInputPlaceolder('category'),
         label: 'Category',
+        errorMessage: '',
     },
     id_skill_users: {
         label: 'Tech Stacks',
@@ -36,6 +39,7 @@ export const initialFormInformationProject = {
         name: 'id_skill_users',
         options: [],
         value: [] as string[],
+        errorMessage: '',
     },
     id_experiance: {
         label: 'Company',
@@ -43,6 +47,7 @@ export const initialFormInformationProject = {
         name: 'id_experiance',
         options: [],
         value: '',
+        errorMessage: '',
     },
     type: {
         name: 'type',
@@ -50,12 +55,15 @@ export const initialFormInformationProject = {
         options: optionsTypeProject,
         placeholder: appMessage.selectInputPlaceolder('type'),
         label: 'Type',
+        errorMessage: '',
     },
     thumbnail_image: {
         name: 'thumbnail_image',
         label: 'Thumbnail',
         value: null as null | File,
         listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG],
+        isCompress: true,
+        errorMessage: '',
     },
     description: {
         name: 'description',
@@ -71,6 +79,7 @@ const informationProjectSchema = z.object({
     id: zString({ name: 'ID', mandatory: false }),
     name: zString({ name: 'Name' }),
     category: zEnum({ name: 'Category', enum: ['WEBSITE', 'MOBILE', 'API', 'UI-UX'] as const }),
+    id_experiance: zString({ name: 'Company' }),
     type: zEnum({
         name: 'Type',
         enum: ['PERSONAL_PROJECT', 'COMPANY_PROJECT', 'FREELANCE'] as const,
@@ -83,8 +92,12 @@ const informationProjectSchema = z.object({
         name: 'Description',
         max: initialFormInformationProject.description.maxLength,
     }),
+    id_skill_users: zArray({
+        name: 'Tech Stack',
+        mandatory: true,
+    }),
 });
 
-export type TProjectSchema = z.input<typeof informationProjectSchema>;
+export type TInformationProjectSchema = z.input<typeof informationProjectSchema>;
 
 export default informationProjectSchema;

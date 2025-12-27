@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Badge from '@components/ui/badge';
 import Table from '@components/ui/table';
 import EVENT_PROJECT from '@features/project/event-emitters/project-event';
-import EVENT_SKILL_USER from '@features/skill-user/event-emitters/skill-user-event';
 
+import useProjectAPI from '@features/project/apis/use-project-api';
 import { TProject, TTypeTypeProject } from '@features/project/types/project-type';
 import useEventEmitter from '@hooks/use-event-emitter';
 import useTable from '@hooks/use-table';
@@ -14,7 +14,6 @@ import { useAppDispatch, useAppSelector } from '@store/store';
 import { handleSetModalConfirmation } from '@store/ui-slice';
 import { TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type';
 import { TSettingTable } from '@typescript/ui-types';
-import useProjectAPI from '@features/project/apis/use-project-api';
 
 const TableProject = () => {
     const isLoading = useAppSelector((state) => state.ui.isLoading);
@@ -26,7 +25,7 @@ const TableProject = () => {
         initialColumn: [
             {
                 name: 'Title',
-                key: 'title',
+                key: 'name',
                 className: ' md:min-w-[10rem]',
             },
             {
@@ -51,9 +50,17 @@ const TableProject = () => {
             {
                 name: 'Tech Stack',
                 key: 'tech_stacks',
-                className: ' min-w-[15rem]',
+                className: ' min-w-[15rem] flex justify-center',
                 customeComponent: (data: TProject) => {
-                    return <div className="flex flex-col gap-2">{data?.tech_stacks.map((techStack, i) => <Badge key={i} variant={'soft-gray'} label={techStack} className="text-start px-4" />)}</div>;
+                    return (
+                        <div className="flex  gap-2">
+                            {data?.tech_stacks.map((techStack, i) => (
+                                <div key={i}>
+                                    <Badge key={i} variant={techStack.color} label={techStack.name} className="text-start px-4" />
+                                </div>
+                            ))}
+                        </div>
+                    );
                 },
             },
         ],
