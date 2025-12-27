@@ -66,13 +66,13 @@ const TableSkillUser = () => {
             },
             {
                 name: 'Related Project',
-                key: 'projects',
+                key: 'project_tech_stacks',
                 className: ' flex items-center  justify-center md:min-w-[15rem]',
                 customeComponent: (data: TSkillUser) => {
                     return (
                         <div className="flex flex-col gap-2 flex-grow items-center">
-                            {(!data?.projects || data?.projects?.length == 0) && <div>-</div>}
-                            {data?.projects?.map((project, i) => <Badge key={i} variant={'soft-gray'} label={project.name} className="text-start px-4 " />)}
+                            {(!data?.project_tech_stacks || data?.project_tech_stacks?.length == 0) && <div>-</div>}
+                            <ul className="list-disc ml-5">{data?.project_tech_stacks?.map((project, i) => <li key={i}>{project?.name}</li>)}</ul>
                         </div>
                     );
                 },
