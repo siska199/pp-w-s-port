@@ -71,12 +71,16 @@ const TableExperiance = () => {
             {
                 name: 'Tech Stack',
                 key: 'tech_stacks',
-                className: 'md:min-w-[20rem] flex items-center  justify-center',
+                className: ' min-w-[15rem] flex justify-center',
                 customeComponent: (data: TExperiance) => {
                     return (
-                        <div className="gap-2 flex flex-wrap">
+                        <div className="gap-2 flex flex-wrap justify-center items-center ">
                             {(!data?.tech_stacks || data?.tech_stacks?.length == 0) && <div>-</div>}
-                            {data?.tech_stacks.map((stack, i) => <Badge key={i} variant={getRandomKey(variantBadge)} label={stack} className=" px-4 min-w-[5rem]" />)}
+                            {data?.tech_stacks.map((stack, i) => (
+                                <div key={i}>
+                                    <Badge key={i} variant={stack.color} label={stack.name} className=" px-4 text-start" />
+                                </div>
+                            ))}
                         </div>
                     );
                 },

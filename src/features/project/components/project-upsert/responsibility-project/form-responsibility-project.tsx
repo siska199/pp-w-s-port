@@ -24,6 +24,7 @@ const FormResponsiblityProject = () => {
     const { upsertProjectResponsibility } = useProjectResponsibilityApi();
 
     useEventEmitter(EVENT_PROJECT.SET_RESPONSIBILITY_PROJECT, (data) => {
+        console.log("data", data)
         setForm({ ...mappingValuesToForm({ values: data, form }) });
     });
 

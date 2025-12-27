@@ -4,15 +4,15 @@ import CardAction from '@components/ui/card/card-action';
 import Header from '@components/ui/header/header';
 import EVENT_PROJECT from '@features/project/event-emitters/project-event';
 
-import { contextFormProject } from '@features/project/context/form-project-context';
-import { TTypeActionModalForm } from '@typescript/index-type';
-import { useContext, useEffect } from 'react';
-import { useAppDispatch } from '@store/store';
-import useProjectResponsibilityApi from '@features/project/apis/use-project-responsibility-api';
-import { handleSetModalConfirmation } from '@store/ui-slice';
-import appMessage from '@lib/data/app-message';
 import EmptyData from '@components/ui/empty-data';
+import useProjectResponsibilityApi from '@features/project/apis/use-project-responsibility-api';
+import { contextFormProject } from '@features/project/context/form-project-context';
 import useEventEmitter from '@hooks/use-event-emitter';
+import appMessage from '@lib/data/app-message';
+import { useAppDispatch } from '@store/store';
+import { handleSetModalConfirmation } from '@store/ui-slice';
+import { TTypeActionModalForm } from '@typescript/index-type';
+import { useContext } from 'react';
 
 const ResponsibilityProjects = () => {
     const { formInformationProject, listProjectResponsibility, getListProjectResponsibility } = useContext(contextFormProject);
@@ -24,11 +24,11 @@ const ResponsibilityProjects = () => {
         });
     };
 
-        useEventEmitter(EVENT_PROJECT.REFRESH_DATA_LIST_RESPONSIBILITY_PROJECT, async () => {
-            await getListProjectResponsibility({
-                id_project: formInformationProject.id.value,
-            });
+    useEventEmitter(EVENT_PROJECT.REFRESH_DATA_LIST_RESPONSIBILITY_PROJECT, async () => {
+        await getListProjectResponsibility({
+            id_project: formInformationProject.id.value,
         });
+    });
     return (
         <div className="space-y-10">
             <Header title="Responsibility Project" onClickAddData={handleOnClickAddData} />
@@ -86,7 +86,7 @@ const CardResponsibility = (props: TPropsCardResponsibility) => {
     };
     return (
         <CardAction onEditData={() => handleEditData(id)} onDeleteData={() => handleDeleteData(id)}>
-            <li className="ml-4">{description}</li>
+            <li className="ml-4" dangerouslySetInnerHTML={{ __html: description ?? '' }}></li>
         </CardAction>
     );
 };
