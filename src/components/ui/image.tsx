@@ -28,22 +28,23 @@ export interface TPropsImage extends Omit<Partial<HTMLProps<HTMLImageElement>>, 
     };
 }
 
-const Image = ({
-    src,
-    alt = 'image',
-    className,
-    customeClassName,
-    overlay,
+const Image = (props: TPropsImage) => {
+    const {
+        src,
+        alt = 'image',
+        className,
+        customeClassName,
+        overlay,
 
-    withSkeleton = true,
-    withLoadEffect = true,
-    timeoutLoadImage = 0,
+        withSkeleton = true,
+        withLoadEffect = true,
+        timeoutLoadImage = 0,
 
-    lazy = true,
-    rootMargin = '200px',
+        lazy = true,
+        rootMargin = '200px',
 
-    ...attrs
-}: TPropsImage) => {
+        ...attrs
+    } = props;
     const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({
         rootMargin,
         freezeOnceVisible: true,
@@ -63,10 +64,8 @@ const Image = ({
 
     return (
         <div ref={lazy ? ref : undefined} className={cn('relative group w-full h-full overflow-hidden', className, customeClassName?.container)}>
-            {/* Skeleton */}
             {withSkeleton && isLoading && <div className="absolute inset-0 animate-pulse bg-gray-300 rounded" />}
 
-            {/* Image */}
             {(!lazy || isVisible) && (
                 <img
                     src={resolvedSrc}
@@ -86,7 +85,6 @@ const Image = ({
                 />
             )}
 
-            {/* Overlay */}
             {overlay?.content && (
                 <div
                     className={cn(

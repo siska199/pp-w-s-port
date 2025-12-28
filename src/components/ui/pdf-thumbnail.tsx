@@ -17,9 +17,7 @@ const PDFThumbnail = (props: TProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        import('react-pdf').then((module) => {
-            module.pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.mjs';
-        });
+
         import('react-pdf/dist/esm/Page/AnnotationLayer.css');
         import('react-pdf/dist/esm/Page/TextLayer.css');
     }, []);

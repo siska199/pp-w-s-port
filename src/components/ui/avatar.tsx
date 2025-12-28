@@ -41,7 +41,7 @@ const Avatar = (props: TProps) => {
                     }),
                 )}
             >
-                {type === 'image' && <Image src={src || 'avatar.svg'} alt={name} className=" w-full h-full object-scale-down" />}
+                {type === 'image' && <Image src={src || 'avatar.png'} alt={name} className=" w-full h-full object-scale-down" />}
                 {type === 'initial-name' && <div>{name?.substring(0, 1)}</div>}
                 {['online', 'offline', 'dontdistrub', 'away']?.includes(status || '') && (
                     <span

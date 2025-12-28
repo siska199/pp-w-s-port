@@ -15,11 +15,11 @@ import { IconHumburger, IconLogout, IconUser } from '@assets/icons';
 const Navbar = () => {
     const { currentPath } = useCurrentPath();
 
-    const isUsingPublicNavabr = currentPath?.handle?.component?.publicNavbar;
+    const isUsingPublicNavbar = currentPath?.handle?.component?.publicNavbar;
 
     return (
-        <nav className={`p-3 ${isUsingPublicNavabr ? 'fixed' : 'border-b sticky bg-white'}  top-0 z-[3] flex gap-4 items-center`}>
-            {isUsingPublicNavabr ? <ContentPortofolio /> : <ContentProtectedRoute />}
+        <nav className={`p-3 ${isUsingPublicNavbar ? 'fixed' : 'border-b sticky bg-white'}  top-0 z-[3] flex gap-4 items-center`}>
+            {isUsingPublicNavbar ? <ContentPortofolio /> : <ContentProtectedRoute />}
         </nav>
     );
 };
@@ -69,12 +69,13 @@ const ContentProtectedRoute = () => {
         ],
         [],
     );
+
     return (
         <div className="px-3 flex justify-between  w-full items-center">
             <IconHumburger className="cursor-pointer" onClick={handleOnToggle} />
             <div className="ml-auto">
                 <div className="flex gap-4 ">
-                    <Avatar width={50} height={50} src={'avatar.png'} alt="avatar" className="self-center border-gray-200 rounded-full" />
+                    <Avatar type='initial-name' name={user?.first_name} width={50} height={50} src={user?.image} alt="avatar" className="self-center border-gray-200 rounded-full" />
                     <div className="flex flex-col justify-center space-y-1">
                         <p className="text-black font-semibold">
                             {user?.first_name} {user?.last_name}
