@@ -1,18 +1,18 @@
+import { useContext } from 'react';
 import { eventEmitter } from '@event-emitters';
 
-import CardAction from '@components/ui/card/card-action';
-import Header from '@components/ui/header/header';
-import EVENT_PROJECT from '@features/project/event-emitters/project-event';
-
-import EmptyData from '@components/ui/empty-data';
 import useProjectResponsibilityApi from '@features/project/apis/use-project-responsibility-api';
 import { contextFormProject } from '@features/project/context/form-project-context';
+import EVENT_PROJECT from '@features/project/event-emitters/project-event';
+import CardAction from '@components/ui/card/card-action';
+import EmptyData from '@components/ui/empty-data';
+import Header from '@components/ui/header/header';
+
 import useEventEmitter from '@hooks/use-event-emitter';
-import appMessage from '@lib/data/app-message';
 import { useAppDispatch } from '@store/store';
 import { handleSetModalConfirmation } from '@store/ui-slice';
+import appMessage from '@lib/data/app-message';
 import { TTypeActionModalForm } from '@typescript/index-type';
-import { useContext } from 'react';
 
 const ResponsibilityProjects = () => {
     const { formInformationProject, listProjectResponsibility, getListProjectResponsibility } = useContext(contextFormProject);
@@ -40,7 +40,11 @@ const ResponsibilityProjects = () => {
                     }}
                 />
             )}
-            <ul className="space-y-4 list-disc">{listProjectResponsibility?.map((responsibility, i) => <CardResponsibility key={i} {...responsibility} />)}</ul>
+            <ul className="space-y-4 list-disc">
+                {listProjectResponsibility?.map((responsibility, i) => (
+                    <CardResponsibility key={i} {...responsibility} />
+                ))}
+            </ul>
         </div>
     );
 };

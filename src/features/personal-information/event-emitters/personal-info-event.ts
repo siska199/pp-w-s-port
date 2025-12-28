@@ -1,5 +1,6 @@
-import { TKeyMetricSchema } from "@features/personal-information/validations/key-metric-schema";
-import { TTypeActionModalForm } from "@typescript/index-type";
+import { TKeyMetricSchema } from '@features/personal-information/validations/key-metric-schema';
+
+import { TTypeActionModalForm } from '@typescript/index-type';
 
 export const EVENT_PERSONAL_INFO = {
     ON_VALIDATE_PERSONAL_INFO: 'ON_VALIDATE_PERSONAL_INFO',

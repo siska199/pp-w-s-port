@@ -1,8 +1,8 @@
-import Header, { THeaderProps } from '@components/ui/header/header'
+import Header, { THeaderProps } from '@components/ui/header/header';
 
-type TProps = THeaderProps
+type TProps = THeaderProps;
 const HeaderPage = (props: TProps) => {
-  return <Header {...props} />
-}
+    return <Header {...props} />;
+};
 
-export default HeaderPage
+export default HeaderPage;

@@ -137,7 +137,11 @@ const InputFileV2 = (props: TProps) => {
                             <p className="text-gray text-body-small text-center">Drag and Drop Files Here to Upload</p>
                         </div>
 
-                        <div className="flex flex-col gap-2">{arrValue?.map((value, i) => <CardFileUploaded key={i} i={i} value={value} onRemoveItem={handleRemoveItem} />)}</div>
+                        <div className="flex flex-col gap-2">
+                            {arrValue?.map((value, i) => (
+                                <CardFileUploaded key={i} i={i} value={value} onRemoveItem={handleRemoveItem} />
+                            ))}
+                        </div>
                     </div>
                     <input ref={inputFileRef} {...attrsInput} className="hidden" type="file" accept={acceptedFile} value={''} />
                 </>

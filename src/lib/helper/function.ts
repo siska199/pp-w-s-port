@@ -1,11 +1,12 @@
+import imageCompression from 'browser-image-compression';
 import clsx, { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import z, { ZodSchema, ZodType } from 'zod';
-import imageCompression from 'browser-image-compression';
+
+import { TFileValue } from '@components/ui/input/input-file/input-file-v1';
 
 import { TDate, TObject, TResponseAPI } from '@typescript/index-type';
 import { TOption, TTypeDateFormat, TTypeFile } from '@typescript/ui-types';
-import { TFileValue } from '@components/ui/input/input-file/input-file-v1';
 
 export const cn = (...inputs: ClassValue[]) => {
     return twMerge(clsx(inputs));

@@ -1,9 +1,10 @@
 import { zFileLocale, zString } from '@validation/reusable-schema';
 import { z } from 'zod';
 
+import { TFileValue } from '@components/ui/input/input-file/input-file-v1';
+
 import { defaultTTypeImage } from '@lib/helper/constant';
 import { TTypeFile } from '@typescript/ui-types';
-import { TFileValue } from '@components/ui/input/input-file/input-file-v1';
 
 const projectMenuSchema = z.object({
     id: zString({ name: 'ID', mandatory: false }),

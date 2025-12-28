@@ -121,7 +121,6 @@ export const initialFormGeneralPersonalInfo = {
         listAcceptedTypeFile: [TTypeFile.PDF],
         totalMaxSize: 10,
         errorMessage: '',
- 
     },
 };
 

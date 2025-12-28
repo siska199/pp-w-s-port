@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react';
+import { eventEmitter } from '@event-emitters';
 
-import InputTextEditor from '@components/ui/input/input-text-editor';
-import ContainerModalForm from '@components/ui/modal/container-modal-form';
+import useProjectResponsibilityApi from '@features/project/apis/use-project-responsibility-api';
 import { contextFormProject } from '@features/project/context/form-project-context';
 import EVENT_PROJECT from '@features/project/event-emitters/project-event';
-
-import { eventEmitter } from '@event-emitters';
-import useProjectResponsibilityApi from '@features/project/apis/use-project-responsibility-api';
 import projectResponsibilitySchema, { initialFormProjectResponsibility, TProjectResponsibility } from '@features/project/validation/project-responsibility-schema';
+import InputTextEditor from '@components/ui/input/input-text-editor';
+import ContainerModalForm from '@components/ui/modal/container-modal-form';
+
 import useEventEmitter from '@hooks/use-event-emitter';
 import { deepCopy, extractValueFromForm, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function';
 import { TTypeActionModalForm } from '@typescript/index-type';
@@ -24,7 +24,7 @@ const FormResponsiblityProject = () => {
     const { upsertProjectResponsibility } = useProjectResponsibilityApi();
 
     useEventEmitter(EVENT_PROJECT.SET_RESPONSIBILITY_PROJECT, (data) => {
-        console.log("data", data)
+        console.log('data', data);
         setForm({ ...mappingValuesToForm({ values: data, form }) });
     });
 

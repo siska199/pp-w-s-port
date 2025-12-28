@@ -7,11 +7,10 @@ import variantBadge from '@lib/helper/variant/variant-badge';
 interface TProps extends Omit<Partial<HTMLProps<HTMLDivElement>>, 'size' | 'shape' | 'label'>, VariantProps<typeof badgeVariants> {
     customeElement?: React.ReactNode;
     label: string | React.ReactNode;
-    isShow?: boolean;
 }
 
 const Badge = (props: TProps) => {
-    const { label, className, variant, customeElement, shape, size, isShow, ...attrs } = props;
+    const { label, className, variant, customeElement, shape, size, ...attrs } = props;
     return (
         <div className={`${cn(badgeVariants({ className, variant, shape, size }))}`} {...attrs}>
             {label}

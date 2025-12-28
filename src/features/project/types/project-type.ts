@@ -1,4 +1,5 @@
 import { TExperiance } from '@features/experiance/types/experiance-type';
+
 import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge';
 
 export enum TTypeCategoryProject {
@@ -29,8 +30,6 @@ export interface TProject {
     tech_stacks: TProjectTechStack[];
     id_skill_users: string[];
 }
-
-
 
 export interface TProjectMenuItem {
     id: string;

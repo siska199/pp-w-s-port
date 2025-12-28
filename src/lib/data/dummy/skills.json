@@ -1,12 +1,12 @@
 [
-  { "id": "React", "name": "React", "id_category": "Frontend" },
-  { "id": "Node.js", "name": "Node.js", "id_category": "Backend" },
-  { "id": "Figma", "name": "Figma", "id_category": "UI/UX" },
-  { "id": "PostgreSQL", "name": "PostgreSQL", "id_category": "Database" },
-  { "id": "Docker", "name": "Docker", "id_category": "DevOps" },
-  { "id": "AWS", "name": "AWS", "id_category": "Cloud Technologies" },
-  { "id": "Jest", "name": "Jest", "id_category": "Testing" },
-  { "id": "JavaScript", "name": "JavaScript", "id_category": "Frontend" },
-  { "id": "Django", "name": "Django", "id_category": "Backend" },
-  { "id": "MongoDB", "name": "MongoDB", "id_category": "Database" }
+    { "id": "React", "name": "React", "id_category": "Frontend" },
+    { "id": "Node.js", "name": "Node.js", "id_category": "Backend" },
+    { "id": "Figma", "name": "Figma", "id_category": "UI/UX" },
+    { "id": "PostgreSQL", "name": "PostgreSQL", "id_category": "Database" },
+    { "id": "Docker", "name": "Docker", "id_category": "DevOps" },
+    { "id": "AWS", "name": "AWS", "id_category": "Cloud Technologies" },
+    { "id": "Jest", "name": "Jest", "id_category": "Testing" },
+    { "id": "JavaScript", "name": "JavaScript", "id_category": "Frontend" },
+    { "id": "Django", "name": "Django", "id_category": "Backend" },
+    { "id": "MongoDB", "name": "MongoDB", "id_category": "Database" }
 ]

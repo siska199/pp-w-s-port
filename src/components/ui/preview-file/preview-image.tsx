@@ -1,5 +1,5 @@
 const PreviewImage = () => {
-  return <div>PreviewImage</div>
-}
+    return <div>PreviewImage</div>;
+};
 
-export default PreviewImage
+export default PreviewImage;

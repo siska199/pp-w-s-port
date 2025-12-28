@@ -1,3 +1,3 @@
-import React from 'react'
+import React from 'react';
 
-export const AuthPage = React.lazy(() => import('@features/auth/pages/auth/auth'))
+export const AuthPage = React.lazy(() => import('@features/auth/pages/auth/auth'));

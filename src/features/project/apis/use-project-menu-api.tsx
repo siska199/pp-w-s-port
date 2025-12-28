@@ -1,5 +1,5 @@
-import ENDPOINT from '@apis/endpoints';
 import { TProject, TProjectMenuItem } from '@features/project/types/project-type';
+import ENDPOINT from '@apis/endpoints';
 
 import useAPI from '@hooks/use-api';
 import appMessage from '@lib/data/app-message';
@@ -11,7 +11,7 @@ export interface TParamsListProjectMenu {
 const useProjectMenuApi = () => {
     const { apiClient } = useAPI();
 
-    const getListProjectMenu = async (params: TParamsListProjectMenu, isLoading: boolean=true) => {
+    const getListProjectMenu = async (params: TParamsListProjectMenu, isLoading: boolean = true) => {
         const response = await apiClient<TProjectMenuItem[]>({
             endpoint: ENDPOINT.PROJECT_MENU.GET_LIST_PROJECT_MENU,
             queryObject: removeKeyWithUndifienedValue(params),

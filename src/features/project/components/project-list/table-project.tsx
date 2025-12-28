@@ -1,17 +1,17 @@
-import { eventEmitter } from '@event-emitters';
 import { useNavigate } from 'react-router-dom';
-
-import Badge from '@components/ui/badge';
-import Table from '@components/ui/table';
-import EVENT_PROJECT from '@features/project/event-emitters/project-event';
+import { eventEmitter } from '@event-emitters';
 
 import useProjectAPI from '@features/project/apis/use-project-api';
+import EVENT_PROJECT from '@features/project/event-emitters/project-event';
 import { TProject, TTypeTypeProject } from '@features/project/types/project-type';
+import Badge from '@components/ui/badge';
+import Table from '@components/ui/table';
+
 import useEventEmitter from '@hooks/use-event-emitter';
 import useTable from '@hooks/use-table';
-import { routes } from '@routes/constant';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { handleSetModalConfirmation } from '@store/ui-slice';
+import { routes } from '@routes/constant';
 import { TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type';
 import { TSettingTable } from '@typescript/ui-types';
 

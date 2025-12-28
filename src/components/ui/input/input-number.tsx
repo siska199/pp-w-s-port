@@ -1,69 +1,60 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
-import ContainerInput from '@components/ui/input/container-input'
+import ContainerInput from '@components/ui/input/container-input';
 
-import { TBasePropsInput } from '@typescript/ui-types'
+import { TBasePropsInput } from '@typescript/ui-types';
 
-interface TProps
-  extends TBasePropsInput,
-    Omit<React.HTMLProps<HTMLInputElement>, 'value' | 'type'> {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  name: string
-  value: string
-  type?: 'float' | 'integer'
-  min?: number
-  max?: number
+interface TProps extends TBasePropsInput, Omit<React.HTMLProps<HTMLInputElement>, 'value' | 'type'> {
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    name: string;
+    value: string;
+    type?: 'float' | 'integer';
+    min?: number;
+    max?: number;
 }
 
 const InputNumber = (props: TProps) => {
-  const { onChange: handleOnChange, value, min, max, type = 'float', ...attrs } = props
-  const [formatedValue, setFormatedValue] = useState<string>(value)
+    const { onChange: handleOnChange, value, min, max, type = 'float', ...attrs } = props;
+    const [formatedValue, setFormatedValue] = useState<string>(value);
 
-  useEffect(() => {
-    setFormatedValue(formatValue(value))
-  }, [value])
+    useEffect(() => {
+        setFormatedValue(formatValue(value));
+    }, [value]);
 
-  function formatValue(value: string): string {
-    if (type === 'integer') return parseInt(value)?.toString()
+    function formatValue(value: string): string {
+        if (type === 'integer') return parseInt(value)?.toString();
 
-    let valueFormatted = String(value)
-      .replace(/[^\d.]+/g, '')
-      .replace(/(\..*?)\./g, '$1')
-      .replace(/(\.\d\d)\d+/g, '$1')
-      .replace(/^0+(?=\d)/, '')
+        let valueFormatted = String(value)
+            .replace(/[^\d.]+/g, '')
+            .replace(/(\..*?)\./g, '$1')
+            .replace(/(\.\d\d)\d+/g, '$1')
+            .replace(/^0+(?=\d)/, '');
 
-    const numericValue = parseFloat(valueFormatted)
+        const numericValue = parseFloat(valueFormatted);
 
-    if (min || max) {
-      if (min && numericValue < min) {
-        valueFormatted = String(min)
-      } else if (max && numericValue > max) {
-        valueFormatted = String(formatedValue)
-      }
+        if (min || max) {
+            if (min && numericValue < min) {
+                valueFormatted = String(min);
+            } else if (max && numericValue > max) {
+                valueFormatted = String(formatedValue);
+            }
+        }
+
+        return valueFormatted;
     }
 
-    return valueFormatted
-  }
+    const handleOnChangeFormatedValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const valueFormatted = formatValue(e.target.value);
+        e.target.value = valueFormatted;
+        handleOnChange(e);
+        setFormatedValue(e.target.value);
+    };
 
-  const handleOnChangeFormatedValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const valueFormatted = formatValue(e.target.value)
-    e.target.value = valueFormatted
-    handleOnChange(e)
-    setFormatedValue(e.target.value)
-  }
+    return (
+        <ContainerInput<React.HTMLProps<HTMLInputElement>> {...attrs} onChange={handleOnChange} isClerable={true} value={formatedValue}>
+            {(attrsInput) => <input {...attrsInput} value={formatedValue} onChange={handleOnChangeFormatedValue} />}
+        </ContainerInput>
+    );
+};
 
-  return (
-    <ContainerInput<React.HTMLProps<HTMLInputElement>>
-      {...attrs}
-      onChange={handleOnChange}
-      isClerable={true}
-      value={formatedValue}
-    >
-      {(attrsInput) => (
-        <input {...attrsInput} value={formatedValue} onChange={handleOnChangeFormatedValue} />
-      )}
-    </ContainerInput>
-  )
-}
-
-export default InputNumber
+export default InputNumber;

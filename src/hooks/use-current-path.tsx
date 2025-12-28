@@ -1,17 +1,17 @@
-import { UIMatch, useMatches } from 'react-router-dom'
+import { UIMatch, useMatches } from 'react-router-dom';
 
-import { TRoute } from '@routes/constant'
+import { TRoute } from '@routes/constant';
 
 const useCurrentPath = () => {
-  const matches = useMatches()
+    const matches = useMatches();
 
-  const currentPath = matches?.find((match: UIMatch) => {
-    return match?.pathname?.replace(/\/+$/, '') == location?.pathname && match?.handle
-  }) as Omit<UIMatch, 'handle'> & {
-    handle: TRoute
-  }
+    const currentPath = matches?.find((match: UIMatch) => {
+        return match?.pathname?.replace(/\/+$/, '') == location?.pathname && match?.handle;
+    }) as Omit<UIMatch, 'handle'> & {
+        handle: TRoute;
+    };
 
-  return { currentPath }
-}
+    return { currentPath };
+};
 
-export default useCurrentPath
+export default useCurrentPath;

@@ -1,162 +1,162 @@
 [
-  {
-    "id": "6",
-    "name": "University of Oxford",
-    "image": "https://example.com/oxford.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-06T12:00:00Z",
-    "updated_at": "2023-01-06T12:00:00Z"
-  },
-  {
-    "id": "7",
-    "name": "Cambridge University",
-    "image": "https://example.com/cambridge.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-07T12:00:00Z",
-    "updated_at": "2023-01-07T12:00:00Z"
-  },
-  {
-    "id": "8",
-    "name": "Princeton University",
-    "image": "https://example.com/princeton.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-08T12:00:00Z",
-    "updated_at": "2023-01-08T12:00:00Z"
-  },
-  {
-    "id": "9",
-    "name": "Yale University",
-    "image": "https://example.com/yale.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-09T12:00:00Z",
-    "updated_at": "2023-01-09T12:00:00Z"
-  },
-  {
-    "id": "10",
-    "name": "Columbia University",
-    "image": "https://example.com/columbia.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-10T12:00:00Z",
-    "updated_at": "2023-01-10T12:00:00Z"
-  },
-  {
-    "id": "11",
-    "name": "University of Chicago",
-    "image": "https://example.com/uchicago.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-11T12:00:00Z",
-    "updated_at": "2023-01-11T12:00:00Z"
-  },
-  {
-    "id": "12",
-    "name": "University of Tokyo",
-    "image": "https://example.com/tokyo.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-12T12:00:00Z",
-    "updated_at": "2023-01-12T12:00:00Z"
-  },
-  {
-    "id": "13",
-    "name": "University of Toronto",
-    "image": "https://example.com/toronto.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-13T12:00:00Z",
-    "updated_at": "2023-01-13T12:00:00Z"
-  },
-  {
-    "id": "14",
-    "name": "University of Melbourne",
-    "image": "https://example.com/melbourne.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-14T12:00:00Z",
-    "updated_at": "2023-01-14T12:00:00Z"
-  },
-  {
-    "id": "15",
-    "name": "ETH Zurich",
-    "image": "https://example.com/ethzurich.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-15T12:00:00Z",
-    "updated_at": "2023-01-15T12:00:00Z"
-  },
-  {
-    "id": "16",
-    "name": "University of Hong Kong",
-    "image": "https://example.com/hongkong.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-16T12:00:00Z",
-    "updated_at": "2023-01-16T12:00:00Z"
-  },
-  {
-    "id": "17",
-    "name": "University of British Columbia",
-    "image": "https://example.com/ubc.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-17T12:00:00Z",
-    "updated_at": "2023-01-17T12:00:00Z"
-  },
-  {
-    "id": "18",
-    "name": "Seoul National University",
-    "image": "https://example.com/snu.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-18T12:00:00Z",
-    "updated_at": "2023-01-18T12:00:00Z"
-  },
-  {
-    "id": "19",
-    "name": "University of California, Berkeley",
-    "image": "https://example.com/berkeley.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-19T12:00:00Z",
-    "updated_at": "2023-01-19T12:00:00Z"
-  },
-  {
-    "id": "20",
-    "name": "Peking University",
-    "image": "https://example.com/peking.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-20T12:00:00Z",
-    "updated_at": "2023-01-20T12:00:00Z"
-  },
-  {
-    "id": "21",
-    "name": "Australian National University",
-    "image": "https://example.com/anu.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-21T12:00:00Z",
-    "updated_at": "2023-01-21T12:00:00Z"
-  },
-  {
-    "id": "22",
-    "name": "National University of Singapore",
-    "image": "https://example.com/nus.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-22T12:00:00Z",
-    "updated_at": "2023-01-22T12:00:00Z"
-  },
-  {
-    "id": "23",
-    "name": "University of Edinburgh",
-    "image": "https://example.com/edinburgh.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-23T12:00:00Z",
-    "updated_at": "2023-01-23T12:00:00Z"
-  },
-  {
-    "id": "24",
-    "name": "University of Sydney",
-    "image": "https://example.com/sydney.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-24T12:00:00Z",
-    "updated_at": "2023-01-24T12:00:00Z"
-  },
-  {
-    "id": "25",
-    "name": "University of Pennsylvania",
-    "image": "https://example.com/upenn.jpg",
-    "id_level": "20",
-    "created_at": "2023-01-25T12:00:00Z",
-    "updated_at": "2023-01-25T12:00:00Z"
-  }
+    {
+        "id": "6",
+        "name": "University of Oxford",
+        "image": "https://example.com/oxford.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-06T12:00:00Z",
+        "updated_at": "2023-01-06T12:00:00Z"
+    },
+    {
+        "id": "7",
+        "name": "Cambridge University",
+        "image": "https://example.com/cambridge.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-07T12:00:00Z",
+        "updated_at": "2023-01-07T12:00:00Z"
+    },
+    {
+        "id": "8",
+        "name": "Princeton University",
+        "image": "https://example.com/princeton.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-08T12:00:00Z",
+        "updated_at": "2023-01-08T12:00:00Z"
+    },
+    {
+        "id": "9",
+        "name": "Yale University",
+        "image": "https://example.com/yale.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-09T12:00:00Z",
+        "updated_at": "2023-01-09T12:00:00Z"
+    },
+    {
+        "id": "10",
+        "name": "Columbia University",
+        "image": "https://example.com/columbia.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-10T12:00:00Z",
+        "updated_at": "2023-01-10T12:00:00Z"
+    },
+    {
+        "id": "11",
+        "name": "University of Chicago",
+        "image": "https://example.com/uchicago.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-11T12:00:00Z",
+        "updated_at": "2023-01-11T12:00:00Z"
+    },
+    {
+        "id": "12",
+        "name": "University of Tokyo",
+        "image": "https://example.com/tokyo.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-12T12:00:00Z",
+        "updated_at": "2023-01-12T12:00:00Z"
+    },
+    {
+        "id": "13",
+        "name": "University of Toronto",
+        "image": "https://example.com/toronto.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-13T12:00:00Z",
+        "updated_at": "2023-01-13T12:00:00Z"
+    },
+    {
+        "id": "14",
+        "name": "University of Melbourne",
+        "image": "https://example.com/melbourne.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-14T12:00:00Z",
+        "updated_at": "2023-01-14T12:00:00Z"
+    },
+    {
+        "id": "15",
+        "name": "ETH Zurich",
+        "image": "https://example.com/ethzurich.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-15T12:00:00Z",
+        "updated_at": "2023-01-15T12:00:00Z"
+    },
+    {
+        "id": "16",
+        "name": "University of Hong Kong",
+        "image": "https://example.com/hongkong.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-16T12:00:00Z",
+        "updated_at": "2023-01-16T12:00:00Z"
+    },
+    {
+        "id": "17",
+        "name": "University of British Columbia",
+        "image": "https://example.com/ubc.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-17T12:00:00Z",
+        "updated_at": "2023-01-17T12:00:00Z"
+    },
+    {
+        "id": "18",
+        "name": "Seoul National University",
+        "image": "https://example.com/snu.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-18T12:00:00Z",
+        "updated_at": "2023-01-18T12:00:00Z"
+    },
+    {
+        "id": "19",
+        "name": "University of California, Berkeley",
+        "image": "https://example.com/berkeley.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-19T12:00:00Z",
+        "updated_at": "2023-01-19T12:00:00Z"
+    },
+    {
+        "id": "20",
+        "name": "Peking University",
+        "image": "https://example.com/peking.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-20T12:00:00Z",
+        "updated_at": "2023-01-20T12:00:00Z"
+    },
+    {
+        "id": "21",
+        "name": "Australian National University",
+        "image": "https://example.com/anu.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-21T12:00:00Z",
+        "updated_at": "2023-01-21T12:00:00Z"
+    },
+    {
+        "id": "22",
+        "name": "National University of Singapore",
+        "image": "https://example.com/nus.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-22T12:00:00Z",
+        "updated_at": "2023-01-22T12:00:00Z"
+    },
+    {
+        "id": "23",
+        "name": "University of Edinburgh",
+        "image": "https://example.com/edinburgh.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-23T12:00:00Z",
+        "updated_at": "2023-01-23T12:00:00Z"
+    },
+    {
+        "id": "24",
+        "name": "University of Sydney",
+        "image": "https://example.com/sydney.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-24T12:00:00Z",
+        "updated_at": "2023-01-24T12:00:00Z"
+    },
+    {
+        "id": "25",
+        "name": "University of Pennsylvania",
+        "image": "https://example.com/upenn.jpg",
+        "id_level": "20",
+        "created_at": "2023-01-25T12:00:00Z",
+        "updated_at": "2023-01-25T12:00:00Z"
+    }
 ]

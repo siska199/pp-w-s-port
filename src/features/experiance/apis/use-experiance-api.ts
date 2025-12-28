@@ -1,6 +1,6 @@
-import ENDPOINT from '@apis/endpoints';
 import { TExperiance } from '@features/experiance/types/experiance-type';
 import { TExperianceSchema } from '@features/experiance/validation/experiance-schema';
+import ENDPOINT from '@apis/endpoints';
 
 import useAPI from '@hooks/use-api';
 import appMessage from '@lib/data/app-message';

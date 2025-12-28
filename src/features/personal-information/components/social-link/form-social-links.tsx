@@ -2,11 +2,11 @@ import React, { useCallback, useContext } from 'react';
 
 import { contextFormPersonalInfo } from '@features/personal-information/context/context-form-personal-info';
 import { TSelectedSocialLink } from '@features/personal-information/types/personal-information-types';
+import EmptyData from '@components/ui/empty-data';
 import Image from '@components/ui/image';
 import InputBase from '@components/ui/input/input-base';
 
 import { TEventOnChange } from '@typescript/ui-types';
-import EmptyData from '@components/ui/empty-data';
 
 const FormSocialLinks = (): JSX.Element => {
     const { listSelectedSocialLink } = useContext(contextFormPersonalInfo);

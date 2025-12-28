@@ -1,5 +1,5 @@
 const DetailSkillUser = () => {
-  return <div>DetailSkillUser</div>
-}
+    return <div>DetailSkillUser</div>;
+};
 
-export default DetailSkillUser
+export default DetailSkillUser;

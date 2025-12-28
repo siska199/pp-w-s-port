@@ -1,19 +1,19 @@
-import { eventEmitter } from '@event-emitters';
 import { useNavigate } from 'react-router-dom';
-
-import Badge from '@components/ui/badge';
-import Table from '@components/ui/table';
-import EVENT_EXPERIANCE from '@features/experiance/event-emitters/experiance-event';
+import { eventEmitter } from '@event-emitters';
 
 import useExperianceAPI from '@features/experiance/apis/use-experiance-api';
+import EVENT_EXPERIANCE from '@features/experiance/event-emitters/experiance-event';
 import { TExperiance } from '@features/experiance/types/experiance-type';
+import Badge from '@components/ui/badge';
+import Table from '@components/ui/table';
+
 import useEventEmitter from '@hooks/use-event-emitter';
 import useTable from '@hooks/use-table';
+import { useAppDispatch, useAppSelector } from '@store/store';
+import { handleSetModalConfirmation } from '@store/ui-slice';
 import appMessage from '@lib/data/app-message';
 import { formatDate } from '@lib/helper/function';
 import { routes } from '@routes/constant';
-import { useAppDispatch, useAppSelector } from '@store/store';
-import { handleSetModalConfirmation } from '@store/ui-slice';
 import { TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type';
 import { TSettingTable } from '@typescript/ui-types';
 
@@ -62,7 +62,11 @@ const TableExperiance = () => {
                     return (
                         <>
                             {data?.projects?.length == 0 && <div className="flex flex-col gap-2 flex-grow items-center">-</div>}
-                            <ul className="list-disc ml-5">{data?.projects?.map((project, i) => <li key={i}>{project?.name}</li>)}</ul>
+                            <ul className="list-disc ml-5">
+                                {data?.projects?.map((project, i) => (
+                                    <li key={i}>{project?.name}</li>
+                                ))}
+                            </ul>
                         </>
                     );
                 },

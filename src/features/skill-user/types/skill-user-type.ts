@@ -1,7 +1,7 @@
 export enum TTypeLevelSkill {
-  ADVANCE = 'ADVANCE',
-  INTERMEDIATE = 'INTERMEDIATE',
-  BEGINNER = 'BEGINNER'
+    ADVANCE = 'ADVANCE',
+    INTERMEDIATE = 'INTERMEDIATE',
+    BEGINNER = 'BEGINNER',
 }
 
 export interface TSkillUser {
@@ -26,6 +26,6 @@ export interface TSkillUser {
 }
 
 export interface TCategorySkill {
-  id: string
-  name: string
+    id: string;
+    name: string;
 }

@@ -3,10 +3,10 @@ import { cva, VariantProps } from 'class-variance-authority';
 
 import Button from '@components/ui/button';
 
+import { useAppSelector } from '@store/store';
 import { cn } from '@lib/helper/function';
 import { TBaseModal } from '@typescript/ui-types';
 import { IconClose } from '@assets/icons';
-import { useAppSelector } from '@store/store';
 
 export interface TContainerModalProps extends TBaseModal, VariantProps<typeof modalVariants> {
     customeClass?: {

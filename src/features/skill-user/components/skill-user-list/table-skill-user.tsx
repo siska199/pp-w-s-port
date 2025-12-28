@@ -72,7 +72,11 @@ const TableSkillUser = () => {
                     return (
                         <div className="flex flex-col gap-2 flex-grow items-center">
                             {(!data?.project_tech_stacks || data?.project_tech_stacks?.length == 0) && <div>-</div>}
-                            <ul className="list-disc ml-5">{data?.project_tech_stacks?.map((project, i) => <li key={i}>{project?.name}</li>)}</ul>
+                            <ul className="list-disc ml-5">
+                                {data?.project_tech_stacks?.map((project, i) => (
+                                    <li key={i}>{project?.name}</li>
+                                ))}
+                            </ul>
                         </div>
                     );
                 },

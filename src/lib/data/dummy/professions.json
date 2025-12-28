@@ -1,12 +1,12 @@
 [
-  { "id": "1", "name": "Frontend Developer" },
-  { "id": "2", "name": "Backend Developer" },
-  { "id": "3", "name": "Full Stack Developer" },
-  { "id": "4", "name": "Web Designer" },
-  { "id": "5", "name": "DevOps Engineer" },
-  { "id": "6", "name": "UI/UX Designer" },
-  { "id": "7", "name": "Software Engineer" },
-  { "id": "8", "name": "Quality Assurance Engineer" },
-  { "id": "9", "name": "Database Administrator" },
-  { "id": "10", "name": "System Administrator" }
+    { "id": "1", "name": "Frontend Developer" },
+    { "id": "2", "name": "Backend Developer" },
+    { "id": "3", "name": "Full Stack Developer" },
+    { "id": "4", "name": "Web Designer" },
+    { "id": "5", "name": "DevOps Engineer" },
+    { "id": "6", "name": "UI/UX Designer" },
+    { "id": "7", "name": "Software Engineer" },
+    { "id": "8", "name": "Quality Assurance Engineer" },
+    { "id": "9", "name": "Database Administrator" },
+    { "id": "10", "name": "System Administrator" }
 ]

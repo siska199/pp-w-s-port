@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios, { CancelTokenSource } from 'axios';
 
 import { handleSetAuth } from '@features/auth/store/auth-slice';
@@ -8,9 +9,8 @@ import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice';
 import CONFIG from '@lib/config/config';
 import appMessage from '@lib/data/app-message';
 import { generateUrlQueryParams } from '@lib/helper/function';
-import { TObject, TResponseAPI } from '@typescript/index-type';
-import { useNavigate } from 'react-router-dom';
 import { routes } from '@routes/constant';
+import { TObject, TResponseAPI } from '@typescript/index-type';
 
 interface TParamsApiClient {
     baseURL?: string;

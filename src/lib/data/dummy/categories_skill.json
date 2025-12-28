@@ -1,7 +1,7 @@
 [
-  { "id": "Frontend", "name": "Frontend" },
-  { "id": "Backend", "name": "Backend" },
-  { "id": "UI/UX", "name": "UI/UX" },
-  { "id": "Database", "name": "Database" },
-  { "id": "DevOps", "name": "DevOps" }
+    { "id": "Frontend", "name": "Frontend" },
+    { "id": "Backend", "name": "Backend" },
+    { "id": "UI/UX", "name": "UI/UX" },
+    { "id": "Database", "name": "Database" },
+    { "id": "DevOps", "name": "DevOps" }
 ]

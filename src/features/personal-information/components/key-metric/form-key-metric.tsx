@@ -1,14 +1,14 @@
-import { eventEmitter } from '@event-emitters';
 import { useContext, useState } from 'react';
+import { eventEmitter } from '@event-emitters';
 
-import ContainerModalForm from '@components/ui/modal/container-modal-form';
 import EVENT_EDUCATION from '@features/education/event-emitters/education-event';
-
-import InputBase from '@components/ui/input/input-base';
 import { contextFormPersonalInfo } from '@features/personal-information/context/context-form-personal-info';
 import EVENT_PERSONAL_INFO from '@features/personal-information/event-emitters/personal-info-event';
 import { TKeyMetric } from '@features/personal-information/types/personal-information-types';
 import keyMetricSchema, { initialFormKeyMetric } from '@features/personal-information/validations/key-metric-schema';
+import InputBase from '@components/ui/input/input-base';
+import ContainerModalForm from '@components/ui/modal/container-modal-form';
+
 import useEventEmitter from '@hooks/use-event-emitter';
 import { deepCopy, extractValueFromForm, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function';
 import { TTypeActionModalForm } from '@typescript/index-type';

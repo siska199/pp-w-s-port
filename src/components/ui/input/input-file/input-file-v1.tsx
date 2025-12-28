@@ -1,5 +1,5 @@
-import { messageError } from '@validation/constant';
 import React, { useEffect, useRef, useState } from 'react';
+import { messageError } from '@validation/constant';
 
 import Avatar from '@components/ui/avatar';
 import Button from '@components/ui/button';
@@ -7,10 +7,10 @@ import DisplayFile from '@components/ui/display/display-file';
 import Image from '@components/ui/image';
 import ContainerInput from '@components/ui/input/container-input';
 
-import { IconCamera, IconClose } from '@assets/icons';
 import { compressImage, convertBytesToMegabytes, handleDownloadFile, isValidTypeFile } from '@lib/helper/function';
 import { TFileWithPreview } from '@typescript/index-type';
 import { TBasePropsInput, TCustomeEventOnChange, TTypeFile } from '@typescript/ui-types';
+import { IconCamera, IconClose } from '@assets/icons';
 
 export type TFileValue = TFileWithPreview | null;
 
@@ -63,7 +63,7 @@ const InputFileV1 = (props: TPropsInputFileV1) => {
                 return;
             }
 
-            const processedFile = isCompress? await compressImage(rawFile) : rawFile;
+            const processedFile = isCompress ? await compressImage(rawFile) : rawFile;
 
             const fileWithPreview: TFileWithPreview = Object.assign(processedFile, {
                 preview: URL.createObjectURL(processedFile),
@@ -75,7 +75,8 @@ const InputFileV1 = (props: TPropsInputFileV1) => {
                     value: fileWithPreview,
                 },
             });
-        } catch (error) {
+        } catch (error: any) {
+            console.log('error: ', error?.message);
         } finally {
             setIsLoading(false);
         }

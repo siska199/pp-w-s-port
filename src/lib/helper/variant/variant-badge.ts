@@ -1,9 +1,9 @@
-import variant from '@lib/helper/variant/variant-color'
+import variant from '@lib/helper/variant/variant-color';
 
 const variantBadge = {
-  ...variant
-}
+    ...variant,
+};
 
-export type TKeyVariantBadge = keyof typeof variantBadge
+export type TKeyVariantBadge = keyof typeof variantBadge;
 
-export default variantBadge
+export default variantBadge;

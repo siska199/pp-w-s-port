@@ -1,23 +1,24 @@
 import React, { createContext, SetStateAction, useCallback, useEffect, useState } from 'react';
-
-import EVENT_PROJECT from '@features/project/event-emitters/project-event';
-import informationProjectSchema, { initialFormInformationProject, TInformationProjectSchema } from '@features/project/validation/information-project-schema';
-import { initialFormProjectMenu } from '@features/project/validation/project-menu-schema';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import useExperianceAPI from '@features/experiance/apis/use-experiance-api';
 import useProjectAPI from '@features/project/apis/use-project-api';
 import useProjectMenuApi, { TParamsListProjectMenu } from '@features/project/apis/use-project-menu-api';
 import useProjectResponsibilityApi, { TParamsListProjectResponsibility } from '@features/project/apis/use-project-responsibility-api';
+import EVENT_PROJECT from '@features/project/event-emitters/project-event';
 import { TProjectMenuItem, TProjectResponsibilityItem } from '@features/project/types/project-type';
+import informationProjectSchema, { initialFormInformationProject, TInformationProjectSchema } from '@features/project/validation/information-project-schema';
+import { initialFormProjectMenu } from '@features/project/validation/project-menu-schema';
 import useSkillUserAPI from '@features/skill-user/apis/use-skill-user-api';
+
 import useEventEmitter from '@hooks/use-event-emitter';
 import useFile from '@hooks/use-file';
-import { deepCopy, extractValueFromForm, generateOptions, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function';
 import { useAppDispatch } from '@store/store';
 import { handleSetIsloading } from '@store/ui-slice';
+import { deepCopy, extractValueFromForm, generateOptions, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function';
 import { TTypeActionData } from '@typescript/index-type';
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+
 import { initialFormProjectResponsibility } from '../validation/project-responsibility-schema';
 
 export interface TContextFormProject {
@@ -104,12 +105,18 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
             const result = id
                 ? await Promise.all([
                       getProjectDetail(id),
-                      getListProjectMenu({
-                          id_project: id,
-                      },false),
-                      getListProjectResponsibility({
-                          id_project: id,
-                      },false),
+                      getListProjectMenu(
+                          {
+                              id_project: id,
+                          },
+                          false,
+                      ),
+                      getListProjectResponsibility(
+                          {
+                              id_project: id,
+                          },
+                          false,
+                      ),
                   ])
                 : null;
             const resultInformationProject = result?.[0];
@@ -134,13 +141,13 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         }
     };
 
-    const getListProjectMenu = async (params: TParamsListProjectMenu,isLoading: boolean = true) => {
+    const getListProjectMenu = async (params: TParamsListProjectMenu, isLoading: boolean = true) => {
         const result = await getListProjectMenuApi(params, isLoading);
         if (!result.data) return;
         setListProjectMenu(result.data);
     };
 
-    const getListProjectResponsibility = async (params: TParamsListProjectResponsibility,isLoading: boolean = true) => {
+    const getListProjectResponsibility = async (params: TParamsListProjectResponsibility, isLoading: boolean = true) => {
         const result = await getListProjectResponsibilityApi(params, isLoading);
         if (!result.data) return;
         setListProjectResponsibility(result.data);

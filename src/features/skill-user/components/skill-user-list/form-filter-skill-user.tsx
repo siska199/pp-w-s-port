@@ -5,11 +5,11 @@ import EVENT_SKILL_USER from '@features/skill-user/event-emitters/skill-user-eve
 import { TTypeLevelSkill } from '@features/skill-user/types/skill-user-type';
 import InputBase from '@components/ui/input/input-base';
 import InputSelect from '@components/ui/input/input-select/input-select';
+import useMasterAPI from '@apis/use-master-api';
 
 import { debounce, deepCopy, generateOptions, generateOptionsFromEnum } from '@lib/helper/function';
 import { TCustomeEventOnChange, TOption } from '@typescript/ui-types';
 import { IconSearch } from '@assets/icons';
-import useMasterAPI from '@apis/use-master-api';
 
 export interface TOptionsFormFilterSkillUser {
     categories: TOption[];
@@ -19,9 +19,6 @@ const FormFilterSkillUser = () => {
     const [form, setForm] = useState(deepCopy({ ...initialFormFilter }));
     const { getListMasterCategorySkill } = useMasterAPI();
 
-    const [options, setOptions] = useState<TOptionsFormFilterSkillUser>({
-        categories: [],
-    });
     useEffect(() => {
         handleInitData();
     }, []);
@@ -34,11 +31,6 @@ const FormFilterSkillUser = () => {
             });
 
             updateForm['id_category'].options = categories;
-
-            setOptions({
-                categories: [...categories],
-            });
-
             setForm({
                 ...updateForm,
             });

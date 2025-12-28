@@ -1,19 +1,19 @@
 @font-face {
-  font-family: 'Circle Of Love';
-  src: url('../fonts/circle-of-love.ttf');
-  font-display: swap;
+    font-family: 'Circle Of Love';
+    src: url('../fonts/circle-of-love.ttf');
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Bubblegum Sans';
-  src: url('../fonts/bubblegum-sans.ttf');
-  font-display: swap;
+    font-family: 'Bubblegum Sans';
+    src: url('../fonts/bubblegum-sans.ttf');
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Shaky Hand';
-  src: url('../fonts/shaky-hand.otf');
-  font-display: swap;
+    font-family: 'Shaky Hand';
+    src: url('../fonts/shaky-hand.otf');
+    font-display: swap;
 }
 
 @tailwind base;
@@ -21,244 +21,226 @@
 @tailwind utilities;
 
 @layer base {
-  *,
-  *::before,
-  *::after {
-    @apply box-border p-0 m-0;
-  }
+    *,
+    *::before,
+    *::after {
+        @apply box-border p-0 m-0;
+    }
 
-  html {
-    @apply scroll-smooth;
-  }
+    html {
+        @apply scroll-smooth;
+    }
 
-  body {
-    @apply relative text-body-base  bg-white text-gray-800;
-  }
+    body {
+        @apply relative text-body-base  bg-white text-gray-800;
+    }
 
-  h1 {
-    @apply text-heading-01;
-  }
-  h2 {
-    @apply text-heading-02;
-  }
-  h3 {
-    @apply text-heading-03;
-  }
-  h4 {
-    @apply text-heading-04;
-  }
-  h5 {
-    @apply text-heading-05;
-  }
+    h1 {
+        @apply text-heading-01;
+    }
+    h2 {
+        @apply text-heading-02;
+    }
+    h3 {
+        @apply text-heading-03;
+    }
+    h4 {
+        @apply text-heading-04;
+    }
+    h5 {
+        @apply text-heading-05;
+    }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5 {
-    @apply font-bold;
-  }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        @apply font-bold;
+    }
 
-  p {
-    @apply text-body-base  font-[400] text-justify;
-  }
+    p {
+        @apply text-body-base  font-[400] text-justify;
+    }
 }
 
 @layer components {
-  /*->Custome padding th and td table*/
-  .p-th-td {
-    @apply p-[1rem];
-  }
-  /*->Customize scrollbar */
-  ::-webkit-scrollbar {
-    @apply w-2 h-2;
-  }
-  ::-webkit-scrollbar-track {
-    box-shadow: none;
-    border-radius: 10px;
-    background: white;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply rounded-lg bg-gray-300;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-300;
-  }
+    /*->Custome padding th and td table*/
+    .p-th-td {
+        @apply p-[1rem];
+    }
+    /*->Customize scrollbar */
+    ::-webkit-scrollbar {
+        @apply w-2 h-2;
+    }
+    ::-webkit-scrollbar-track {
+        box-shadow: none;
+        border-radius: 10px;
+        background: white;
+    }
+    ::-webkit-scrollbar-thumb {
+        @apply rounded-lg bg-gray-300;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-gray-300;
+    }
 
-  /*->Hide scrollbar */
-  .scrollbar-hidden::-webkit-scrollbar {
-    display: none;
-  }
-  .scrollbar-hidden {
-    -ms-overflow-style: none;
-    scrollbar-width: none; /* Firefox */
-  }
+    /*->Hide scrollbar */
+    .scrollbar-hidden::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hidden {
+        -ms-overflow-style: none;
+        scrollbar-width: none; /* Firefox */
+    }
 
-  /*->FOR SVG ICON set color dinamically */
-  .icon-white path,
-  .icon-white rect,
-  .icon-white circle {
-    @apply !stroke-white;
-  }
-  .icon-white-fill path {
-    @apply fill-white;
-  }
+    /*->FOR SVG ICON set color dinamically */
+    .icon-white path,
+    .icon-white rect,
+    .icon-white circle {
+        @apply !stroke-white;
+    }
+    .icon-white-fill path {
+        @apply fill-white;
+    }
 
-  .icon-black path,
-  .icon-black rect {
-    @apply stroke-black;
-  }
-  .icon-black-fill path {
-    @apply fill-black;
-  }
+    .icon-black path,
+    .icon-black rect {
+        @apply stroke-black;
+    }
+    .icon-black-fill path {
+        @apply fill-black;
+    }
 
-  .icon-gray path,
-  .icon-gray rect {
-    @apply stroke-gray;
-  }
-  .icon-gray circle {
-    @apply !stroke-gray;
-  }
-  .icon-gray-fill path {
-    @apply fill-gray;
-  }
+    .icon-gray path,
+    .icon-gray rect {
+        @apply stroke-gray;
+    }
+    .icon-gray circle {
+        @apply !stroke-gray;
+    }
+    .icon-gray-fill path {
+        @apply fill-gray;
+    }
 
-  .icon-primary path,
-  .icon-primary rect {
-    @apply stroke-primary;
-  }
-  .icon-primary-fill path {
-    @apply fill-primary;
-  }
+    .icon-primary path,
+    .icon-primary rect {
+        @apply stroke-primary;
+    }
+    .icon-primary-fill path {
+        @apply fill-primary;
+    }
 
-  .icon-blue path,
-  .icon-blue rect,
-  .icon-blue circle {
-    @apply stroke-blue;
-  }
-  .icon-blue-fill path {
-    @apply fill-blue;
-  }
+    .icon-blue path,
+    .icon-blue rect,
+    .icon-blue circle {
+        @apply stroke-blue;
+    }
+    .icon-blue-fill path {
+        @apply fill-blue;
+    }
 
-  .icon-error path,
-  .icon-error rect {
-    @apply stroke-error;
-  }
-  .icon-error-fill path {
-    @apply fill-error;
-  }
+    .icon-error path,
+    .icon-error rect {
+        @apply stroke-error;
+    }
+    .icon-error-fill path {
+        @apply fill-error;
+    }
 
-  .icon-warning path,
-  .icon-warning rect {
-    @apply !stroke-warning;
-  }
-  .icon-warning-fill path {
-    @apply fill-warning;
-  }
+    .icon-warning path,
+    .icon-warning rect {
+        @apply !stroke-warning;
+    }
+    .icon-warning-fill path {
+        @apply fill-warning;
+    }
 
-  .icon-sucess path,
-  .icon-sucess rect {
-    @apply stroke-sucess;
-  }
-  .icon-sucess-fill path {
-    @apply fill-sucess;
-  }
+    .icon-sucess path,
+    .icon-sucess rect {
+        @apply stroke-sucess;
+    }
+    .icon-sucess-fill path {
+        @apply fill-sucess;
+    }
 }
 
 @layer utilities {
-  .container-list-disc-style ul {
-    @apply ml-4 list-disc;
-  }
-  /*->Effect */
-  .zoom-out-effect {
-    @apply hover:scale-125 ease-in duration-150;
-  }
+    .container-list-disc-style ul {
+        @apply ml-4 list-disc;
+    }
+    /*->Effect */
+    .zoom-out-effect {
+        @apply hover:scale-125 ease-in duration-150;
+    }
 
-  /*->Background color text*/
-  .bg-color-text-1 {
-    @apply font-bubblegum-sans bg-clip-text text-transparent bg-gradient-to-r from-primary-300 to-white;
-  }
+    /*->Background color text*/
+    .bg-color-text-1 {
+        @apply font-bubblegum-sans bg-clip-text text-transparent bg-gradient-to-r from-primary-300 to-white;
+    }
 
-  /*->Background Portofolio */
-  .bg-sport {
-    @apply bg-s-port bg-center bg-no-repeat bg-cover;
-  }
+    /*->Background Portofolio */
+    .bg-sport {
+        @apply bg-s-port bg-center bg-no-repeat bg-cover;
+    }
 
-  .bg-sport-plain {
-    @apply bg-s-port-plain bg-center bg-no-repeat bg-cover;
-  }
+    .bg-sport-plain {
+        @apply bg-s-port-plain bg-center bg-no-repeat bg-cover;
+    }
 
-  /*->Background glassmorphism*/
-  .bg-glassmorphism {
-    @apply h-full w-full  bg-gray-900   bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30;
-  }
+    /*->Background glassmorphism*/
+    .bg-glassmorphism {
+        @apply h-full w-full  bg-gray-900   bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30;
+    }
 
-  /*->Background Glass */
-  .bg-glass-animation {
-    background-image: linear-gradient(
-      90deg,
-      rgba(165, 215, 232, 0.42) 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    background-size: 0 100%;
-    background-repeat: no-repeat;
-    transition: 0.4s;
-  }
+    /*->Background Glass */
+    .bg-glass-animation {
+        background-image: linear-gradient(90deg, rgba(165, 215, 232, 0.42) 0%, rgba(255, 255, 255, 0) 100%);
+        background-size: 0 100%;
+        background-repeat: no-repeat;
+        transition: 0.4s;
+    }
 
-  .bg-glass-animation:hover {
-    background-size: 100% 100%;
-  }
+    .bg-glass-animation:hover {
+        background-size: 100% 100%;
+    }
 
-  .bg-glass {
-    background-image: linear-gradient(
-      90deg,
-      rgba(165, 215, 232, 0.42) 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  }
+    .bg-glass {
+        background-image: linear-gradient(90deg, rgba(165, 215, 232, 0.42) 0%, rgba(255, 255, 255, 0) 100%);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
 
-  /*->Background */
-  .bg-card-transparent {
-    @apply bg-gradient-to-br from-white/20 to-white/0;
-  }
+    /*->Background */
+    .bg-card-transparent {
+        @apply bg-gradient-to-br from-white/20 to-white/0;
+    }
 
-  /*->Shadow Custome */
-  .shadow-image-arise {
-    @apply shadow-[rgba(0,0,0,0.25)_0px_14px_28px,rgba(0,0,0,0.22)_0px_10px_10px];
-  }
+    /*->Shadow Custome */
+    .shadow-image-arise {
+        @apply shadow-[rgba(0,0,0,0.25)_0px_14px_28px,rgba(0,0,0,0.22)_0px_10px_10px];
+    }
 
-  /*->Clip mask for image */
-  .clip-path-hero-img {
-    clip-path: polygon(
-      50% 0%,
-      83% 12%,
-      100% 43%,
-      94% 78%,
-      68% 100%,
-      32% 100%,
-      6% 78%,
-      0% 43%,
-      17% 12%
-    );
-  }
+    /*->Clip mask for image */
+    .clip-path-hero-img {
+        clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+    }
 
-  /*->Custome container class*/
-  .container-page {
-    @apply max-w-full overflow-x-auto;
-  }
+    /*->Custome container class*/
+    .container-page {
+        @apply max-w-full overflow-x-auto;
+    }
 
-  /*->Bounce effect */
-  .bounce-effect {
-    @apply transition-all duration-[50] hover:scale-[1.03] active:scale-[0.98] disabled:!scale-[1] disabled:cursor-not-allowed;
-  }
+    /*->Bounce effect */
+    .bounce-effect {
+        @apply transition-all duration-[50] hover:scale-[1.03] active:scale-[0.98] disabled:!scale-[1] disabled:cursor-not-allowed;
+    }
 
-  .bounce-effect-disabled {
-    @apply transition-none hover:scale-100 active:scale-100;
-  }
+    .bounce-effect-disabled {
+        @apply transition-none hover:scale-100 active:scale-100;
+    }
 
-  .cursor-pointer-custome {
-    @apply bounce-effect cursor-pointer;
-  }
+    .cursor-pointer-custome {
+        @apply bounce-effect cursor-pointer;
+    }
 }

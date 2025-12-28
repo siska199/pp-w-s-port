@@ -1,6 +1,6 @@
-import ENDPOINT from '@apis/endpoints';
 import { TProjectResponsibilityItem } from '@features/project/types/project-type';
 import { TProjectResponsibility } from '@features/project/validation/project-responsibility-schema';
+import ENDPOINT from '@apis/endpoints';
 
 import useAPI from '@hooks/use-api';
 import appMessage from '@lib/data/app-message';
@@ -16,7 +16,7 @@ const useProjectResponsibilityApi = () => {
         const response = await apiClient<TProjectResponsibilityItem[]>({
             endpoint: ENDPOINT.PROJECT_RESPONSIBILITY.GET_LIST_PROJECT_RESPONSIBILITY,
             queryObject: removeKeyWithUndifienedValue(params),
-             isLoading
+            isLoading,
         });
 
         return response;

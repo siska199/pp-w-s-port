@@ -36,7 +36,11 @@ const CardAction = (props: TPropsCardAction) => {
     return (
         <div className="border rounded-md p-4 w-full relative space-y-1 flex gap-2 ">
             <div className="flex flex-grow">{children}</div>
-            <div className="flex gap-2 mr-auto">{listBtnAction?.map((btn, i) => <Badge key={i} {...btn} shape={'pilled'} className={'!p-1 !min-h-auto !min-w-auto cursor-pointer-custome'} />)}</div>
+            <div className="flex gap-2 mr-auto">
+                {listBtnAction?.map((btn, i) => (
+                    <Badge key={i} {...btn} shape={'pilled'} className={'!p-1 !min-h-auto !min-w-auto cursor-pointer-custome'} />
+                ))}
+            </div>
         </div>
     );
 };

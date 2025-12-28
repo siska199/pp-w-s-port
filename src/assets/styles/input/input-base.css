@@ -5,35 +5,35 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  transition: background-color 5000s ease-in-out 0s;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 /* Input Number */
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 input[type='number'] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
 /* Input Radio Button */
 input[type='radio'] {
-  @apply accent-primary;
-  -webkit-appearance: none;
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: 50%;
-  outline: none;
-  box-shadow: 0 0 0 1px #e2e8f0;
+    @apply accent-primary;
+    -webkit-appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    outline: none;
+    box-shadow: 0 0 0 1px #e2e8f0;
 }
 
 input[type='radio']:checked {
-  box-shadow: 0 0 0 1px #357aea;
+    box-shadow: 0 0 0 1px #357aea;
 }
 
 input[type='radio']:disabled {
-  accent-color: #e2e8f0 !important;
-  box-shadow: 0 0 0 1px #e2e8f0 !important;
+    accent-color: #e2e8f0 !important;
+    box-shadow: 0 0 0 1px #e2e8f0 !important;
 }

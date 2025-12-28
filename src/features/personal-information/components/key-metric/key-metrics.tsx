@@ -1,13 +1,13 @@
+import { useCallback, useContext } from 'react';
 import { eventEmitter } from '@event-emitters';
 
-import CardAction from '@components/ui/card/card-action';
-import Header from '@components/ui/header/header';
-
-import EmptyData from '@components/ui/empty-data';
 import { contextFormPersonalInfo } from '@features/personal-information/context/context-form-personal-info';
 import EVENT_PERSONAL_INFO from '@features/personal-information/event-emitters/personal-info-event';
+import CardAction from '@components/ui/card/card-action';
+import EmptyData from '@components/ui/empty-data';
+import Header from '@components/ui/header/header';
+
 import { TTypeActionModalForm } from '@typescript/index-type';
-import { useCallback, useContext } from 'react';
 
 const KeyMetrics = (): JSX.Element => {
     const { listKeyMetric } = useContext(contextFormPersonalInfo);

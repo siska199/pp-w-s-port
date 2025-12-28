@@ -1,42 +1,38 @@
-import { TEventMapEducation } from '@features/education/event-emitters/education-event'
-import { TEventMapExperiance } from '@features/experiance/event-emitters/experiance-event'
-import { TEventMapPersonalInfo } from '@features/personal-information/event-emitters/personal-info-event'
-import { TEventMapProject } from '@features/project/event-emitters/project-event'
-import { TEventMapSkillUser } from '@features/skill-user/event-emitters/skill-user-event'
+import { TEventMapEducation } from '@features/education/event-emitters/education-event';
+import { TEventMapExperiance } from '@features/experiance/event-emitters/experiance-event';
+import { TEventMapPersonalInfo } from '@features/personal-information/event-emitters/personal-info-event';
+import { TEventMapProject } from '@features/project/event-emitters/project-event';
+import { TEventMapSkillUser } from '@features/skill-user/event-emitters/skill-user-event';
 
-export type TEventMap = TEventMapSkillUser &
-  TEventMapEducation &
-  TEventMapExperiance &
-  TEventMapProject &
-  TEventMapPersonalInfo
+export type TEventMap = TEventMapSkillUser & TEventMapEducation & TEventMapExperiance & TEventMapProject & TEventMapPersonalInfo;
 
-type TEventCallback<T = any> = (data: T) => void
+type TEventCallback<T = any> = (data: T) => void;
 
 class EventEmitter {
-  private events: Record<string, TEventCallback[]>
+    private events: Record<string, TEventCallback[]>;
 
-  constructor() {
-    this.events = {}
-  }
-
-  on<T extends keyof TEventMap>(event: T, callback: TEventCallback<TEventMap[T]>) {
-    if (!this.events[event]) {
-      this.events[event] = []
+    constructor() {
+        this.events = {};
     }
-    this.events[event].push(callback as TEventCallback)
-  }
 
-  off<T extends keyof TEventMap>(event: T, callback: TEventCallback<TEventMap[T]>) {
-    if (!this.events[event]) return
+    on<T extends keyof TEventMap>(event: T, callback: TEventCallback<TEventMap[T]>) {
+        if (!this.events[event]) {
+            this.events[event] = [];
+        }
+        this.events[event].push(callback as TEventCallback);
+    }
 
-    this.events[event] = this.events[event].filter((cb) => cb !== callback)
-  }
+    off<T extends keyof TEventMap>(event: T, callback: TEventCallback<TEventMap[T]>) {
+        if (!this.events[event]) return;
 
-  emit<T extends keyof TEventMap>(event: T, data: TEventMap[T]) {
-    if (!this.events[event]) return
+        this.events[event] = this.events[event].filter((cb) => cb !== callback);
+    }
 
-    this.events[event].forEach((callback) => callback(data))
-  }
+    emit<T extends keyof TEventMap>(event: T, data: TEventMap[T]) {
+        if (!this.events[event]) return;
+
+        this.events[event].forEach((callback) => callback(data));
+    }
 }
 
-export const eventEmitter = new EventEmitter()
+export const eventEmitter = new EventEmitter();
