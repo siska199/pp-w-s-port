@@ -446,3 +446,13 @@ export const compressImage = async (file: File, options?: ImageCompressionOption
         lastModified: Date.now(),
     });
 };
+
+export function omitKeys<T extends Record<string, any>, K extends readonly (keyof T)[]>(obj: T, keys: K): Omit<T, K[number]> {
+    const result = { ...obj };
+
+    keys.forEach((key) => {
+        delete result[key];
+    });
+
+    return result;
+}

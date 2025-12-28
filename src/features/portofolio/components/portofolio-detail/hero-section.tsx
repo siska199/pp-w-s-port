@@ -6,6 +6,7 @@ import Container from '@components/ui/container/container';
 import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
 
+import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import useMediaQuery from '@hooks/use-media-query';
 import { socialLinks } from '@lib/data/dummy/dummy';
 import { handleDownloadFile } from '@lib/helper/function';
@@ -14,6 +15,11 @@ import resumeSiskaAprianaPDF from '@assets/Siska Apriana Rifianti-Resume.pdf';
 import { opacityAnimation } from '@assets/styles/animation';
 
 const HeroSection = () => {
+    const { ref } = useFetchOnView({
+        fetcher: async () => {
+            console.log('fet endpoint personl information');
+        },
+    });
     const { isMaxMd } = useMediaQuery();
 
     const handleDonwloadResume = () => {
@@ -23,7 +29,7 @@ const HeroSection = () => {
         });
     };
     return (
-        <ContainerSection gap="xl" className="mt-10 md:mt-0  h-screen !p-8">
+        <ContainerSection ref={ref} gap="xl" className="mt-10 md:mt-0  h-screen !p-8">
             <Container gap="base" className="w-auto ">
                 <AnimatedText text={`I'm Siska Apriana Rifianti`} className="!text-heading-05 text-center md:text-start mx-auto md:mx-0 " />
 

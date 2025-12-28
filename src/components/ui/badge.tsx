@@ -1,18 +1,20 @@
 import React, { HTMLProps } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
 
-import { cn } from '@lib/helper/function';
+import { cn, omitKeys } from '@lib/helper/function';
 import variantBadge from '@lib/helper/variant/variant-badge';
 
 interface TProps extends Omit<Partial<HTMLProps<HTMLDivElement>>, 'size' | 'shape' | 'label'>, VariantProps<typeof badgeVariants> {
     customeElement?: React.ReactNode;
     label: string | React.ReactNode;
+    isShow?: boolean;
 }
 
 const Badge = (props: TProps) => {
     const { label, className, variant, customeElement, shape, size, ...attrs } = props;
+
     return (
-        <div className={`${cn(badgeVariants({ className, variant, shape, size }))}`} {...attrs}>
+        <div className={`${cn(badgeVariants({ className, variant, shape, size }))}`} {...omitKeys(attrs, ['isShow'])}>
             {label}
             {customeElement}
         </div>

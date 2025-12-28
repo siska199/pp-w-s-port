@@ -7,15 +7,20 @@ import Container from '@components/ui/container/container';
 import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
 
+import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { skillCategories } from '@lib/data/dummy/dummy';
 import { cn } from '@lib/helper/function';
 import { cardAnimation, slideInAnimation } from '@assets/styles/animation';
 
 const SkillSection = () => {
     const [activeIndex, setActiveIndex] = useState(0);
-
+    const { ref } = useFetchOnView({
+        fetcher: async () => {
+            console.log('fet endpoint skill');
+        },
+    });
     return (
-        <ContainerSection title="Skill">
+        <ContainerSection ref={ref} title="Skill">
             <Container variant={'hsc'} gap="large" className="flex-col md:flex-row flex-grow">
                 <motion.div {...slideInAnimation({ direction: 'left' })}>
                     <Container gap="base" className="flex-row md:flex-col md:pb-0 md:border-none w-auto">

@@ -6,13 +6,19 @@ import Container from '@components/ui/container/container';
 import ContainerSection from '@components/ui/container/container-section';
 
 import { useAnimateScrollCustome } from '@hooks/use-animate-scroll-custome';
+import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { useAppDispatch } from '@store/store';
 import { handleSetModal } from '@store/ui-slice';
 import { experiances } from '@lib/data/dummy/dummy';
 
 const ExperianceSection = () => {
+    const { ref } = useFetchOnView({
+        fetcher: async () => {
+            console.log('fet endpoint experiance');
+        },
+    });
     return (
-        <ContainerSection title="Experiance" className="">
+        <ContainerSection ref={ref} title="Experiance" className="">
             <Container className="h-full w-auto relative gap-8 ">
                 {experiances?.map((experiance, i) => (
                     <CardExperiance key={i} {...experiance} />

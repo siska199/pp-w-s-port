@@ -8,6 +8,7 @@ import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
 import InputBase from '@components/ui/input/input-base';
 
+import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { projects } from '@lib/data/dummy/dummy';
 import { routes } from '@routes/constant';
 import { IconArrowUp, IconSearch } from '@assets/icons';
@@ -15,9 +16,13 @@ import { cardAnimation } from '@assets/styles/animation';
 
 const ProjectSection = () => {
     const [keyword, setKeyword] = useState('');
-
+    const { ref } = useFetchOnView({
+        fetcher: async () => {
+            console.log('fet endpoint project');
+        },
+    });
     return (
-        <ContainerSection title="Projects">
+        <ContainerSection ref={ref} title="Projects">
             <Container className="mt-8" gap={'large'}>
                 <InputBase
                     customeClass={{

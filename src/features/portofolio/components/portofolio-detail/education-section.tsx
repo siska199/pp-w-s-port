@@ -3,12 +3,18 @@ import { motion } from 'framer-motion';
 import ContainerSection from '@components/ui/container/container-section';
 import SliderBase from '@components/ui/slider/slider-base';
 
+import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { educations } from '@lib/data/dummy/dummy';
 import { slideInAnimation } from '@assets/styles/animation';
 
 const EducationSection = () => {
+    const { ref } = useFetchOnView({
+        fetcher: async () => {
+            console.log('fet endpoint education');
+        },
+    });
     return (
-        <ContainerSection title="Education">
+        <ContainerSection ref={ref} title="Education">
             <motion.div {...slideInAnimation({ direction: 'left' })} className=" max-w-full">
                 <SliderBase
                     items={educations?.map((education, i) => (

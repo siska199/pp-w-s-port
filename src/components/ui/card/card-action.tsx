@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 
 import Badge from '@components/ui/badge';
 
+import { omitKeys } from '@lib/helper/function';
 import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge';
 import { IconDelete, IconEdit } from '@assets/icons';
 
@@ -38,7 +39,7 @@ const CardAction = (props: TPropsCardAction) => {
             <div className="flex flex-grow">{children}</div>
             <div className="flex gap-2 mr-auto">
                 {listBtnAction?.map((btn, i) => (
-                    <Badge key={i} {...btn} shape={'pilled'} className={'!p-1 !min-h-auto !min-w-auto cursor-pointer-custome'} />
+                    <Badge key={i} {...omitKeys(btn, ['isShow'])} shape={'pilled'} className={'!p-1 !min-h-auto !min-w-auto cursor-pointer-custome'} />
                 ))}
             </div>
         </div>
