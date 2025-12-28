@@ -7,7 +7,7 @@ import { routes } from '@routes/constant';
 const HeaderProject = () => {
     const navigate = useNavigate();
     const handleAddProject = () => {
-        navigate(routes.project.child.upsert.fullPath);
+        navigate(routes.project.child.upsert.fullPath(''));
     };
     return <HeaderPage title={'Project'} onClickAddData={handleAddProject} />;
 };

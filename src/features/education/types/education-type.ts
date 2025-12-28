@@ -17,8 +17,8 @@ export interface TEducation<TSchoolImage = string> {
 
     gpa: number;
     description: string;
-    start_at: Date;
-    end_at: Date;
+    start_at: Date | null;
+    end_at: Date | null;
 
     school_image: TSchoolImage;
 }

@@ -41,11 +41,11 @@ const SectionEducationDetail = () => {
         },
         start_at: {
             label: 'Start At',
-            value: null as TValueDate,
+            value: null,
         },
         end_at: {
             label: 'End At',
-            value: '',
+            value: null,
         },
         description: {
             label: 'Description',
@@ -72,8 +72,8 @@ const SectionEducationDetail = () => {
             educationData['major_name'].value = education?.level_name;
             educationData['gpa'].value = education?.gpa;
             educationData['description'].value = education?.description;
-            educationData['start_at'].value = formatDate({ date: education?.start_at });
-            educationData['end_at'].value = formatDate({ date: education?.end_at });
+            educationData['start_at'].value = formatDate({ date: education?.start_at }) as unknown as Date;
+            educationData['end_at'].value = formatDate({ date: education?.end_at }) as unknown as Date;
             educationData['school_image'].value = await handleGetFileFromUrl({
                 url: education?.school_image as string,
                 filename: 'professional-image',

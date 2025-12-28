@@ -75,7 +75,10 @@ const route = {
             },
             upsert: {
                 name: 'upsert',
-                fullPath: (id: string) => `/project/upsert?id=${id}`,
+                fullPath: (id?: string) => {
+                    const params = new URLSearchParams(id ? { id } : {});
+                    return `/project/upsert${params.toString() ? `?${params}` : ''}`;
+                },
                 isPrivate: true,
             },
         },

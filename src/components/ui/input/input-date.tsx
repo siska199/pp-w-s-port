@@ -10,7 +10,7 @@ import { cn } from '@lib/helper/function';
 import { TBasePropsInput, TCustomeEventOnChange } from '@typescript/ui-types';
 import { IconCalender, IconChevronLeft, IconChevronRight } from '@assets/icons';
 
-type TValueDate = [Date | null, Date | null] | Date | null;
+export type TValueDate = [Date | null, Date | null] | Date | null;
 
 interface TProps extends TBasePropsInput, Omit<DatePickerProps, 'onChange' | 'value' | 'minDate' | 'maxDate'> {
     name: string;

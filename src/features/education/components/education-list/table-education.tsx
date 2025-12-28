@@ -99,8 +99,8 @@ const TableEducation = () => {
             id_level: data.id_level,
             id_major: data.id_major,
             id_school: data.id_school,
-            start_at: data.start_at,
-            end_at: data.end_at,
+            start_at: data.start_at as Date,
+            end_at: data.end_at as Date,
             gpa: data.gpa,
         });
     };

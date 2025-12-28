@@ -61,14 +61,14 @@ export const initialFormEducation = {
         name: 'start_at',
         label: 'Start At',
         placeholder: 'Select a Start At',
-        value: null,
+        value: null as unknown as Date,
         errorMessage: '',
     },
     end_at: {
         name: 'end_at',
         label: 'End At',
         placeholder: 'Select a End At',
-        value: null,
+        value: null as unknown as Date,
         errorMessage: '',
         disabled: true,
     },
@@ -88,7 +88,7 @@ const educationSchema = z.object({
     id_school: zString({ name: 'School' }),
     gpa: zNumber({ name: 'GPA' }),
     start_at: zDate({ name: 'Start At', mandatory: true }),
-    end_at: zDate({ name: 'End At', mandatory: false }),
+    end_at: zDate({ name: 'End At', mandatory: true }),
     description: zString({ name: 'Description' }),
 });
 
