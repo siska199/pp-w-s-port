@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
 import InputBase from '@components/ui/input/input-base';
-import InputDate from '@components/ui/input/input-date';
+import InputDate, { TValueDate } from '@components/ui/input/input-date';
 
-import { deepCopy, generateMaxDateOneYear } from '@lib/helper/function';
-import { TEventOnChange } from '@typescript/ui-types';
 import { IconSearch } from '@assets/icons';
+import { eventEmitter } from '@event-emitters';
+import EVENT_EXPERIANCE from '@features/experiance/event-emitters/experiance-event';
+import { debounce, deepCopy, generateMaxDateOneYear } from '@lib/helper/function';
+import { TEventOnChange } from '@typescript/ui-types';
 
 const FormFilterExperiance = () => {
     const [form, setForm] = useState(deepCopy({ ...initialFormFilter }));
@@ -20,7 +22,16 @@ const FormFilterExperiance = () => {
             currForm['end_at'].value = null;
         }
         setForm({ ...currForm });
+        handleEmitEventSearchDataTable();
     };
+    
+    const handleEmitEventSearchDataTable = debounce(() => {
+        eventEmitter.emit(EVENT_EXPERIANCE.SEARCH_DATA_TABLE_EXPERIANCE, {
+            keyword: form?.keyword?.value,
+            start_at: form?.start_at?.value,
+            end_at: form?.end_at?.value,
+        });
+    }, 1500);
 
     return (
         <div className="grid md:grid-cols-4 gap-4">
@@ -61,8 +72,8 @@ const initialFormFilter = {
 
 export type TFilterExperiance = {
     keyword: string;
-    start_at: string;
-    end_at: string;
+    start_at: TValueDate;
+    end_at: TValueDate;
 };
 
 export default FormFilterExperiance;

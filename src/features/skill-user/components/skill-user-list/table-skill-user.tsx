@@ -84,7 +84,12 @@ const TableSkillUser = () => {
         ],
         onFetchData: handleFetchData,
     });
-
+    useEventEmitter(EVENT_SKILL_USER.SEARCH_DATA_TABLE_SKILL_USER, async (formFilter) => {
+        await configTable.onChange({
+            ...configTable.setting,
+            ...formFilter,
+        });
+    });
     useEventEmitter(EVENT_SKILL_USER.REFRESH_DATA_TABLE_SKILL_USER, async () => {
         configTable.onChange({
             ...configTable.setting,
