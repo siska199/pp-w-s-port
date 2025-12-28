@@ -80,14 +80,14 @@ const initialFormFilter = {
     },
     categories: {
         name: 'categories',
-        placeholder: 'Categorie',
+        placeholder: 'Categories',
         value: [],
         options: [] as TOption[],
         isMultiple: true,
     },
     types: {
         name: 'types',
-        placeholder: 'Type',
+        placeholder: 'Types',
         value: [],
         options: [] as TOption[],
         isMultiple: true,

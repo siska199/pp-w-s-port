@@ -12,7 +12,7 @@ import { IconSearch } from '@assets/icons';
 
 const FormFilterEducation = () => {
     const [form, setForm] = useState(deepCopy({ ...initialFormFilter }));
-    const { getListMasterEducationSchool } = useMasterAPI();
+    const { getListMasterEducationLevel } = useMasterAPI();
 
     useEffect(() => {
         handleInitData();
@@ -22,7 +22,7 @@ const FormFilterEducation = () => {
         try {
             const currForm = form;
             currForm['id_level'].options = await generateOptions({
-                options: (await getListMasterEducationSchool())?.data || [],
+                options: (await getListMasterEducationLevel())?.data || [],
             });
             setForm({
                 ...currForm,

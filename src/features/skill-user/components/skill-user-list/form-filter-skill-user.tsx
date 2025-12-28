@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { eventEmitter } from '@event-emitters';
 
 import EVENT_SKILL_USER from '@features/skill-user/event-emitters/skill-user-event';
@@ -39,7 +39,7 @@ const FormFilterSkillUser = () => {
         }
     };
 
-    const handleOnChange = (e: TCustomeEventOnChange<any>) => {
+    const handleOnChange = useCallback((e: TCustomeEventOnChange<any>) => {
         const currForm = form;
         const value = e.target.value;
         const name = e.target.name as keyof typeof form;
@@ -47,7 +47,7 @@ const FormFilterSkillUser = () => {
 
         setForm({ ...currForm });
         handleEmitEventSearchDataTable();
-    };
+    },[])
 
     const handleEmitEventSearchDataTable = debounce(() => {
         eventEmitter.emit(EVENT_SKILL_USER.SEARCH_DATA_TABLE_SKILL_USER, {
