@@ -32,7 +32,7 @@ const SkillSection = () => {
     }, [skillCategoryList?.length]);
 
     return (
-        <ContainerSection ref={ref} title={'Skill'} className="h-screen">
+        <ContainerSection ref={ref} title={'Skill'} className="min-h-screen">
             {isLoading['SKILL_CATEGORY'] ? (
                 <div className="my-auto">Loading Section Skill...</div>
             ) : (

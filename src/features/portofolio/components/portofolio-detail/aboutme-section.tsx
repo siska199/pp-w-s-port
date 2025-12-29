@@ -18,12 +18,12 @@ const AboutMeSection = () => {
         },
     });
     return (
-        <ContainerSection ref={ref} title={'About Me'} className="h-screen">
+        <ContainerSection ref={ref} title={'About Me'} className="min-h-screen">
             {isLoading[EPortfolioLoading.KEY_METRIC] ? (
                 <div className="my-auto">Loading About Me...</div>
             ) : (
                 <Container variant={'hsc'} gap="medium" className="flex-col-reverse md:flex-row overflow-x-hidden">
-                    <motion.div {...slideInAnimation({ direction: 'left' })} className="flex md:flex-col flex-grow min-w-[20rem] gap-2">
+                    <motion.div {...slideInAnimation({ direction: 'left' })} className="flex md:flex-col flex-grow min-w-[23rem] gap-2">
                         {keyMetricList?.map?.((info, i) => (
                             <CardKeyMetric key={i} value={info.value} keyMetric={info?.key} />
                         ))}

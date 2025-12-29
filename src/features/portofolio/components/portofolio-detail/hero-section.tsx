@@ -24,7 +24,7 @@ const HeroSection = () => {
     const { isMaxMd } = useMediaQuery();
 
     return (
-        <ContainerSection ref={ref} gap="xl" className="mt-10 md:mt-0  h-screen !p-8">
+        <ContainerSection ref={ref} gap="xl" className="mt-10 md:mt-0  min-h-screen !p-8">
             {isLoading[EPortfolioLoading.PERSONAL_INFORMATION] ? (
                 <div>Loading Hero Section...</div>
             ) : (
