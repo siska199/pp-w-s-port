@@ -4,8 +4,8 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Navbar from '@components/navbar';
 
 import useCurrentPath from '@hooks/use-current-path';
-import { useAppSelector } from '@store/store';
 import { routes } from '@routes/constant';
+import { useAppSelector } from '@store/store';
 
 const PublicLayout = () => {
     const navigate = useNavigate();
@@ -19,7 +19,7 @@ const PublicLayout = () => {
     return (
         <div className={`bg-sport-plain h-screen  relative  w-full`}>
             <div className={`absolute top-0 bg-glassmorphism text-white h-full w-full`}>
-                {['portofolio']?.includes(currentPath?.handle?.name) && <Navbar />}
+                {['portofolio', 'project-detail']?.includes(currentPath?.handle?.name) && <Navbar />}
                 <Outlet />
             </div>
         </div>
