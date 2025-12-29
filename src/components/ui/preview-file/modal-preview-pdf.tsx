@@ -2,7 +2,6 @@ import React from 'react';
 
 import ContainerModal, { TContainerModalProps } from '@components/ui/modal/container-modal';
 
-
 const PreviewPDF = React.lazy(() => import('../preview-file/preview-pdf'));
 
 interface TPropsModalPreviewPDF extends Omit<TContainerModalProps, 'children'> {

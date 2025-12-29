@@ -47,7 +47,7 @@ const FormFilterSkillUser = () => {
 
         setForm({ ...currForm });
         handleEmitEventSearchDataTable();
-    },[])
+    }, []);
 
     const handleEmitEventSearchDataTable = debounce(() => {
         eventEmitter.emit(EVENT_SKILL_USER.SEARCH_DATA_TABLE_SKILL_USER, {

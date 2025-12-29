@@ -1,14 +1,14 @@
+import { useContext } from 'react';
 import { motion } from 'framer-motion';
 
+import { TEducation } from '@features/education/types/education-type';
+import { contextPortfolio, EPortfolioLoading } from '@features/portofolio/context/context-portofolio';
 import ContainerSection from '@components/ui/container/container-section';
 import SliderBase from '@components/ui/slider/slider-base';
 
-import { slideInAnimation } from '@assets/styles/animation';
-import { TEducation } from '@features/education/types/education-type';
-import { contextPortfolio, EPortfolioLoading } from '@features/portofolio/context/context-portofolio';
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { formatDate } from '@lib/helper/function';
-import { useContext } from 'react';
+import { slideInAnimation } from '@assets/styles/animation';
 
 const EducationSection = () => {
     const { isLoading, getEducationList, educationList } = useContext(contextPortfolio);

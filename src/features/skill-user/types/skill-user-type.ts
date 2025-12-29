@@ -1,4 +1,4 @@
-import { TMasterSkill } from "@typescript/master-module-types";
+import { TMasterSkill } from '@typescript/master-module-types';
 
 export enum TTypeLevelSkill {
     ADVANCE = 'ADVANCE',
@@ -26,7 +26,7 @@ export interface TSkillUser {
         name: string;
     }[];
 
-    skill?: TMasterSkill
+    skill?: TMasterSkill;
 }
 
 export interface TCategorySkill {

@@ -151,72 +151,104 @@ const ContextPortfolioProvider = (props: { children: React.ReactNode }) => {
     const [activeIdCat, setActiveIdCat] = useState<string>('');
 
     const getPersonalInformation = useCallback(
-        withLoading(async () => {
-            const result = await getDetailPersonalInformationPortofolio();
-            if (result?.data) setPersonalInformation(result.data);
-        }, setIsLoading, EPortfolioLoading.PERSONAL_INFORMATION),
+        withLoading(
+            async () => {
+                const result = await getDetailPersonalInformationPortofolio();
+                if (result?.data) setPersonalInformation(result.data);
+            },
+            setIsLoading,
+            EPortfolioLoading.PERSONAL_INFORMATION,
+        ),
         [],
     );
 
     const getSkillCategoryList = useCallback(
-        withLoading(async () => {
-            const result = await getListCategorySkillPortofolio();
-            if (result?.data) setSkillCategoryList(result.data);
-        }, setIsLoading, EPortfolioLoading.SKILL_CATEGORY),
+        withLoading(
+            async () => {
+                const result = await getListCategorySkillPortofolio();
+                if (result?.data) setSkillCategoryList(result.data);
+            },
+            setIsLoading,
+            EPortfolioLoading.SKILL_CATEGORY,
+        ),
         [],
     );
 
     const getSkillList = useCallback(
-        withLoading(async (params?: Partial<TParamsListSkillUser>) => {
-            setActiveIdCat(params?.id_category || '');
-            const result = await getListSkillPortofolio(params || {});
-            if (result?.data?.items) setSkillList(result.data.items);
-        }, setIsLoading, EPortfolioLoading.SKILL_LIST),
+        withLoading(
+            async (params?: Partial<TParamsListSkillUser>) => {
+                setActiveIdCat(params?.id_category || '');
+                const result = await getListSkillPortofolio(params || {});
+                if (result?.data?.items) setSkillList(result.data.items);
+            },
+            setIsLoading,
+            EPortfolioLoading.SKILL_LIST,
+        ),
         [],
     );
 
     const getProjectList = useCallback(
-        withLoading(async (params?: Partial<TParamsListProject>) => {
-            const result = await getListProjectPortofolio(params || {});
-            if (result?.data?.items)
-                setProjectConfig({
-                    projectList: result.data.items,
-                    currentPage: result.data.current_page,
-                    totalPage: result.data.total_pages,
-                });
-        }, setIsLoading, EPortfolioLoading.PROJECT_LIST),
+        withLoading(
+            async (params?: Partial<TParamsListProject>) => {
+                const result = await getListProjectPortofolio(params || {});
+                if (result?.data?.items)
+                    setProjectConfig({
+                        projectList: result.data.items,
+                        currentPage: result.data.current_page,
+                        totalPage: result.data.total_pages,
+                    });
+            },
+            setIsLoading,
+            EPortfolioLoading.PROJECT_LIST,
+        ),
         [],
     );
 
     const getExperienceList = useCallback(
-        withLoading(async (params?: Partial<TParamsListExperiance>) => {
-            const result = await getListExperiancePortofolio(params || {});
-            if (result?.data?.items) setExperienceList(result.data.items);
-        }, setIsLoading, EPortfolioLoading.EXPERIENCE_LIST),
+        withLoading(
+            async (params?: Partial<TParamsListExperiance>) => {
+                const result = await getListExperiancePortofolio(params || {});
+                if (result?.data?.items) setExperienceList(result.data.items);
+            },
+            setIsLoading,
+            EPortfolioLoading.EXPERIENCE_LIST,
+        ),
         [],
     );
 
     const getEducationList = useCallback(
-        withLoading(async (params?: Partial<TParamsListEducation>) => {
-            const result = await getListEducationPortofolio(params);
-            if (result?.data?.items) setEducationList(result.data.items);
-        }, setIsLoading, EPortfolioLoading.EDUCATION_LIST),
+        withLoading(
+            async (params?: Partial<TParamsListEducation>) => {
+                const result = await getListEducationPortofolio(params);
+                if (result?.data?.items) setEducationList(result.data.items);
+            },
+            setIsLoading,
+            EPortfolioLoading.EDUCATION_LIST,
+        ),
         [],
     );
 
     const getSocialLinkList = useCallback(
-        withLoading(async () => {
-            const result = await getListSocialLinkPortofolio();
-            if (result?.data) setSocialLinkList(result.data);
-        }, setIsLoading, EPortfolioLoading.SOCIAL_LINK),
+        withLoading(
+            async () => {
+                const result = await getListSocialLinkPortofolio();
+                if (result?.data) setSocialLinkList(result.data);
+            },
+            setIsLoading,
+            EPortfolioLoading.SOCIAL_LINK,
+        ),
         [],
     );
 
     const getKeyMetricList = useCallback(
-        withLoading(async () => {
-            const result = await getListKeyMetricPortofolio();
-            if (result?.data) setKeyMetricList(result.data);
-        }, setIsLoading, EPortfolioLoading.KEY_METRIC),
+        withLoading(
+            async () => {
+                const result = await getListKeyMetricPortofolio();
+                if (result?.data) setKeyMetricList(result.data);
+            },
+            setIsLoading,
+            EPortfolioLoading.KEY_METRIC,
+        ),
         [],
     );
 

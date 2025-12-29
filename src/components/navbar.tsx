@@ -75,7 +75,7 @@ const ContentProtectedRoute = () => {
             <IconHumburger className="cursor-pointer" onClick={handleOnToggle} />
             <div className="ml-auto">
                 <div className="flex gap-4 ">
-                    <Avatar type='initial-name' name={user?.first_name} width={50} height={50} src={user?.image} alt="avatar" className="self-center border-gray-200 rounded-full" />
+                    <Avatar type="initial-name" name={user?.first_name} width={50} height={50} src={user?.image} alt="avatar" className="self-center border-gray-200 rounded-full" />
                     <div className="flex flex-col justify-center space-y-1">
                         <p className="text-black font-semibold">
                             {user?.first_name} {user?.last_name}

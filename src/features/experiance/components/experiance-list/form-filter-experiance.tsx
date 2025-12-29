@@ -24,7 +24,7 @@ const FormFilterExperiance = () => {
         setForm({ ...currForm });
         handleEmitEventSearchDataTable();
     };
-    
+
     const handleEmitEventSearchDataTable = debounce(() => {
         eventEmitter.emit(EVENT_EXPERIANCE.SEARCH_DATA_TABLE_EXPERIANCE, {
             keyword: form?.keyword?.value,
