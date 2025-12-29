@@ -62,7 +62,7 @@ const ProjectSection = () => {
                     placeholder="Search Project by Name, Category Skill, Skill or Company... "
                 />
                 {isLoading['PROJECT_LIST'] ? (
-                    <div className="mx-auto">Loading Project Data...</div>
+                    <h5 className="text-body-large mx-auto">Loading Project Data...</h5>
                 ) : (
                     <>
                         <div className="grid md:grid-cols-3 gap-8 px-4  mx-auto ">
@@ -119,7 +119,7 @@ const CardProject = (props: TPropsCardProject) => {
                         <Badge key={i} variant={'soft-gray'} label={tect.color} />
                     ))}
                 </Container>
-                <Button to={`/${routes.project?.child?.detail?.name}/${id}`} variant={'solid-black'}>
+                <Button to={`/${routes.project?.child?.detail?.name}/${id}`} target='_blank' variant={'solid-black'}>
                     View Project <IconArrowUp className="icon-white rotate-90 mt-1" />
                 </Button>
             </div>

@@ -25,7 +25,7 @@ const ExperianceSection = () => {
     return (
         <ContainerSection ref={ref} title={'Experiance'} className="min-h-screen">
             {isLoading[EPortfolioLoading.EXPERIENCE_LIST] ? (
-                <div className="my-auto">Loading Section Experiance...</div>
+                <h5 className="text-body-large">Loading Section Experiance...</h5>
             ) : (
                 <Container className="h-full w-auto relative gap-8 ">
                     {experienceList?.map((experiance, i) => (

@@ -12,6 +12,7 @@ import Image from '@components/ui/image';
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { cn } from '@lib/helper/function';
 import { cardAnimation, slideInAnimation } from '@assets/styles/animation';
+import Loading from '@components/loading';
 
 const SkillSection = () => {
     const { isLoading, activeIdCat, skillList, skillCategoryList, getSkillList, getSkillCategoryList } = useContext(contextPortfolio);
@@ -34,9 +35,9 @@ const SkillSection = () => {
     return (
         <ContainerSection ref={ref} title={'Skill'} className="min-h-screen">
             {isLoading['SKILL_CATEGORY'] ? (
-                <div className="my-auto">Loading Section Skill...</div>
+                <h5 className="text-body-large">Loading Section Skill...</h5>
             ) : (
-                <Container variant={'hsc'} gap="large" className="flex-col md:flex-row flex-grow">
+                <Container variant={'hsc'} gap="large" className="flex-col md:flex-row overflow-x-hidden">
                     <motion.div {...slideInAnimation({ direction: 'left' })}>
                         <Container gap="base" className="flex-row md:flex-col md:pb-0 md:border-none w-auto">
                             {skillCategoryList?.map((category, i) => (
@@ -56,7 +57,7 @@ const SkillSection = () => {
                     </motion.div>
 
                     <div className="md:p-8 grid grid-cols-2 md:flex flex-wrap md:m-auto justify-center items-center gap-4">
-                        {isLoading['SKILL_LIST'] ? <div>Loading Skill</div> : skillList.map((skill, j) => <CardItemSkill key={j} {...skill} index={j} />)}
+                        {isLoading['SKILL_LIST'] ? <Loading /> : skillList.map((skill, j) => <CardItemSkill key={j} {...skill} index={j} />)}
                     </div>
                 </Container>
             )}

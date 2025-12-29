@@ -26,10 +26,10 @@ const HeroSection = () => {
     return (
         <ContainerSection ref={ref} gap="xl" className="mt-10 md:mt-0  min-h-screen !p-8">
             {isLoading[EPortfolioLoading.PERSONAL_INFORMATION] ? (
-                <div>Loading Hero Section...</div>
+                <h5 className="my-auto text-body-large">Loading Hero Section...</h5>
             ) : (
                 <>
-                    <Container gap="base" className="w-auto ">
+                    <Container gap="base" className="w-auto overflow-x-hidden ">
                         <AnimatedText text={`I'm ${data?.first_name} ${data?.last_name}`} className="!text-heading-05 text-center md:text-start mx-auto md:mx-0 " />
 
                         <AnimatedText text={data?.profession?.name || ''} className="font-bubblegum-sans text-center md:text-start" />

@@ -21,7 +21,7 @@ const EducationSection = () => {
     return (
         <ContainerSection ref={ref} title="Education" className="">
             {isLoading[EPortfolioLoading.EDUCATION_LIST] ? (
-                <div className="my-auto">Loading Section Education...</div>
+                <h5 className="text-body-large">Loading Section Education...</h5>
             ) : (
                 <motion.div {...slideInAnimation({ direction: 'left' })} className=" max-w-full">
                     <SliderBase

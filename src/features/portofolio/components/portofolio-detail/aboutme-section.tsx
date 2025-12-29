@@ -20,15 +20,15 @@ const AboutMeSection = () => {
     return (
         <ContainerSection ref={ref} title={'About Me'} className="min-h-screen">
             {isLoading[EPortfolioLoading.KEY_METRIC] ? (
-                <div className="my-auto">Loading About Me...</div>
+                <h5 className="text-body-large">Loading About Me...</h5>
             ) : (
-                <Container variant={'hsc'} gap="medium" className="flex-col-reverse md:flex-row overflow-x-hidden">
-                    <motion.div {...slideInAnimation({ direction: 'left' })} className="flex md:flex-col flex-grow min-w-[23rem] gap-2">
+                <Container variant={'hsc'} gap="medium" className="overflow-x-hidden flex-col-reverse md:flex-row box-border">
+                    <motion.div {...slideInAnimation({ direction: 'left' })} className="flex md:flex-col flex-wrap flex-grow md:min-w-[23rem] gap-2">
                         {keyMetricList?.map?.((info, i) => (
                             <CardKeyMetric key={i} value={info.value} keyMetric={info?.key} />
                         ))}
                     </motion.div>
-                    <motion.p {...slideInAnimation({ direction: 'right' })} className="indent-16 md:text-body-large h-auto my-auto p-4 rounded-md bg-card-transparent">
+                    <motion.p {...slideInAnimation({ direction: 'right' })} className=" indent-16 w-full  md:text-body-large h-auto my-auto p-4 rounded-md bg-card-transparent">
                         {data?.about_me}
                     </motion.p>
                 </Container>
@@ -45,11 +45,14 @@ interface TPropsKeyMetric {
 const CardKeyMetric = (props: TPropsKeyMetric) => {
     const { value, keyMetric } = props;
     return (
-        <Container variant={'hsc'} className="  bg-glass-animation rounded-lg p-4 gap-8 md:gap-2">
-            <h1 className="md:flex text-heading-05 md:text-heading-01">
-                <AnimatedCountNumber number={Number(value)} className="text-heading-05 md:text-heading-01 w-[5rem] md:w-auto font-bold" /> +
+        <Container variant={'hsc'} className=" flex-nowrap bg-glass-animation rounded-lg p-4 gap-8 md:gap-2">
+            <h1 className="flex flex-grow md:flex-grow-0  text-heading-05 md:text-heading-01">
+                <span>
+                    <AnimatedCountNumber number={Number(value)} className="text-heading-05 md:text-heading-01 w-[5rem] md:w-auto font-bold" />
+                    + 
+                </span>
             </h1>
-            <p className="text-start text-white flex-grow">{keyMetric}</p>
+            <p className=" text-end md:text-start text-white flex-grow break-words ">{keyMetric}</p>
         </Container>
     );
 };
