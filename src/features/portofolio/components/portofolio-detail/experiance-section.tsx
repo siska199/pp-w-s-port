@@ -91,10 +91,8 @@ const CardProjects = (props: TPropsProjects) => {
                 isShow: true,
                 title: `My Responsibilities in ${idProject} Project`,
                 customeClass: {
-                    mdModal: '',
-                    mdContent: 'bg-white/0 shadow-none border-none',
+                    mdContent: 'shadow-none border-none',
                     mdBody: 'overflow-y-auto ',
-                    mdOverlay: 'blur-4xl bg-white',
                 },
                 children: <ListResponsibility />,
             }),

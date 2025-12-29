@@ -19,9 +19,15 @@ const IntroductionSection = () => {
                 </p>
 
                 <div className=" flex-col md:flex-row flex gap-4 ">
-                    <Button variant={'solid-primary'} shape={'circle'} className="font-medium min-w-[10rem] flex gap-2">
+                    {/* <Button variant={'solid-primary'} shape={'circle'} className="font-medium min-w-[10rem] flex gap-2">
                         <span className="-mt-1">📂</span>
                         {''} Code Repository
+                    </Button> */}
+                    <Button variant={'glass'} shape={'circle'} className="min-w-[10rem] font-medium !text-white hover:!bg-transparent ">
+                        <span>🌐</span> View Demo
+                    </Button>
+                    <Button variant={'glass'} shape={'circle'} className="min-w-[10rem] font-medium !text-white hover:!bg-transparent ">
+                        <span>🌐</span> View Demo
                     </Button>
                     <Button variant={'glass'} shape={'circle'} className="min-w-[10rem] font-medium !text-white hover:!bg-transparent ">
                         <span>🌐</span> View Demo
