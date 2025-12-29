@@ -55,11 +55,8 @@ const SkillSection = () => {
                         </Container>
                     </motion.div>
 
-                    <div className="md:p-8 grid grid-cols-2 md:flex flex-wrap m-auto justify-center items-center gap-4">
-                        {isLoading['SKILL_LIST'] && <div>Loading Skill</div>}
-                        {skillList.map((skill, j) => (
-                            <CardItemSkill key={j} {...skill} index={j} />
-                        ))}
+                    <div className="md:p-8 grid grid-cols-2 md:flex flex-wrap md:m-auto justify-center items-center gap-4">
+                        {isLoading['SKILL_LIST'] ? <div>Loading Skill</div> : skillList.map((skill, j) => <CardItemSkill key={j} {...skill} index={j} />)}
                     </div>
                 </Container>
             )}

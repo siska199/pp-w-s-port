@@ -44,7 +44,7 @@ const usePortofolioAPI = () => {
 
     const getListSkillPortofolio = async (params: Partial<TParamsListSkillUser>) => {
         const result = await apiClient<TResponseDataPaginationAPI<TSkillUser>>({
-            endpoint: ENDPOINT.SKILL_USER.GET_LIST_SKILL_USER,
+            endpoint: ENDPOINT.PORTOFOLIO.GET_LIST_SKILL,
             queryObject: removeKeyWithUndifienedValue({
                 ...params,
                 username,
@@ -56,7 +56,7 @@ const usePortofolioAPI = () => {
 
     const getListProjectPortofolio = async (params: Partial<TParamsListProject>) => {
         const response = await apiClient<TResponseDataPaginationAPI<TProject>>({
-            endpoint: ENDPOINT.PROJECT.GET_LIST_PROJECT,
+            endpoint: ENDPOINT.PORTOFOLIO.GET_LIST_PROJECT,
             queryObject: removeKeyWithUndifienedValue({
                 ...params,
                 username,
@@ -69,7 +69,7 @@ const usePortofolioAPI = () => {
 
     const getListExperiancePortofolio = async (params: Partial<TParamsListExperiance>) => {
         const response = await apiClient<TResponseDataPaginationAPI<TExperiance>>({
-            endpoint: ENDPOINT.EXPERIANCE.GET_LIST_EXPERIANCE,
+            endpoint: ENDPOINT.PORTOFOLIO.GET_LIST_EXPERIANCE,
             queryObject: removeKeyWithUndifienedValue({
                 ...params,
                 username,
@@ -81,7 +81,7 @@ const usePortofolioAPI = () => {
 
     const getListEducationPortofolio = async (params?: Partial<TParamsListEducation>) => {
         const response = await apiClient<TResponseDataPaginationAPI<TEducation>>({
-            endpoint: ENDPOINT.EDUCATION.GET_LIST_EDUCATION,
+            endpoint: ENDPOINT.PORTOFOLIO.GET_LIST_EDUCATION,
             queryObject: removeKeyWithUndifienedValue({
                 ...params,
                 username,

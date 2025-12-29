@@ -23,7 +23,7 @@ const ExperianceSection = () => {
         },
     });
     return (
-        <ContainerSection ref={ref} title={'Experiance'} className="h-screen">
+        <ContainerSection ref={ref} title={'Experiance'} className="min-h-screen">
             {isLoading[EPortfolioLoading.EXPERIENCE_LIST] ? (
                 <div className="my-auto">Loading Section Experiance...</div>
             ) : (
@@ -63,7 +63,7 @@ const CardExperiance = (props: TPropsExperiance) => {
                     {formatDate({ date: start_at })} | {formatDate({ date: end_at })}
                 </p>
 
-                <div className="flex gap-6 justify-between">
+                <div className=" flex flex-col md:flex-row gap-2 md:gap-6 justify-between">
                     <p className="font-medium w-auto min-w-[5rem]">Tech Stacks</p>
                     <Container variant={'hsc'} className="!flex-wrap gap-3">
                         {tech_stacks?.map((tect, i) => (

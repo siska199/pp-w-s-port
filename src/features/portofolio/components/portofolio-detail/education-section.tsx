@@ -19,7 +19,7 @@ const EducationSection = () => {
         },
     });
     return (
-        <ContainerSection ref={ref} title="Education">
+        <ContainerSection ref={ref} title="Education" className="">
             {isLoading[EPortfolioLoading.EDUCATION_LIST] ? (
                 <div className="my-auto">Loading Section Education...</div>
             ) : (

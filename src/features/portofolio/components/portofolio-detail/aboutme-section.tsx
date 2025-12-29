@@ -23,7 +23,7 @@ const AboutMeSection = () => {
                 <div className="my-auto">Loading About Me...</div>
             ) : (
                 <Container variant={'hsc'} gap="medium" className="flex-col-reverse md:flex-row overflow-x-hidden">
-                    <motion.div {...slideInAnimation({ direction: 'left' })} className="flex flex-col flex-grow min-w-[20rem] gap-2">
+                    <motion.div {...slideInAnimation({ direction: 'left' })} className="flex md:flex-col flex-grow min-w-[20rem] gap-2">
                         {keyMetricList?.map?.((info, i) => (
                             <CardKeyMetric key={i} value={info.value} keyMetric={info?.key} />
                         ))}

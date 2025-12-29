@@ -47,7 +47,7 @@ const ProjectSection = () => {
         });
     }, []);
     return (
-        <ContainerSection ref={ref} title={'Projects'} className="h-screen">
+        <ContainerSection ref={ref} title={'Projects'} className="min-h-screen flex md:flex-col  flex-grow">
             <Container className="mt-8" gap={'large'}>
                 <InputBase
                     customeClass={{
