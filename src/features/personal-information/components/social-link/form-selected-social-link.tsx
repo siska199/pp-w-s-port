@@ -1,11 +1,11 @@
-import { messageError } from '@validation/constant';
 import { useContext, useEffect, useState } from 'react';
+import { messageError } from '@validation/constant';
 
-import useMasterAPI from '@apis/use-master-api';
-import InputSelect from '@components/ui/input/input-select/input-select';
 import usePersonalInformationAPI from '@features/personal-information/apis/use-personal-information-api';
 import { contextFormPersonalInfo } from '@features/personal-information/context/context-form-personal-info';
 import EVENT_PERSONAL_INFO from '@features/personal-information/event-emitters/personal-info-event';
+import InputSelect from '@components/ui/input/input-select/input-select';
+import useMasterAPI from '@apis/use-master-api';
 
 import useEventEmitter from '@hooks/use-event-emitter';
 import { catchErrors } from '@lib/helper/function';

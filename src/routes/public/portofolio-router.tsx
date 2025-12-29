@@ -10,7 +10,7 @@ const portofolioRouter: RouteObject[] = [
         path: routes.portofolio.name,
         children: [
             {
-                path: ':id',
+                path: ':username',
                 element: (
                     <LazyLoad>
                         <PortofolioDetailPage />

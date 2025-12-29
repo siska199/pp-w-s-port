@@ -14,6 +14,7 @@ export interface TParamsListExperiance extends TPaginationQueryParams {
 
 const useExperianceAPI = () => {
     const { apiClient } = useAPI();
+    
     const getListExperiance = async (params: Partial<TParamsListExperiance>) => {
         const response = await apiClient<TResponseDataPaginationAPI<TExperiance>>({
             endpoint: ENDPOINT.EXPERIANCE.GET_LIST_EXPERIANCE,

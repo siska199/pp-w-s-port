@@ -7,13 +7,13 @@ import appMessage from '@lib/data/app-message';
 import { removeKeyWithUndifienedValue } from '@lib/helper/function';
 import { TPaginationQueryParams, TResponseDataPaginationAPI } from '@typescript/index-type';
 
+export interface TParamsListEducation extends TPaginationQueryParams {
+    keyword?: string;
+    id_level?: string;
+}
 const useEducationApi = () => {
     const { apiClient } = useAPI();
 
-    interface TParamsListEducation extends TPaginationQueryParams {
-        keyword?: string;
-        id_level?: string;
-    }
     const getListEducation = async (params: TParamsListEducation) => {
         const response = await apiClient<TResponseDataPaginationAPI<TEducation>>({
             endpoint: ENDPOINT.EDUCATION.GET_LIST_EDUCATION,

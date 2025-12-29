@@ -65,6 +65,16 @@ const ENDPOINTS = {
         GET_DETAIL_EXPERIANCE: (id: string) => `/experiance/${id}`,
         DELETE_EXPERIANCE: (id: string) => `/experiance/${id}`,
     },
+    PORTOFOLIO: {
+        GET_DETAIL_PERSONAL_INFORMATION: '/portofolio/personal-information',
+        GET_LIST_CATEGORY_SKILL: '/portofolio/category-skills',
+        GET_LIST_SKILL: '/portofolio/skills',
+        GET_LIST_PROJECT: '/portofolio/projects',
+        GET_LIST_EXPERIANCE: '/portofolio/experiances',
+        GET_LIST_EDUCATION: '/portofolio/educations',
+        GET_LIST_SOCIAL_LINK: '/portofolio/social-links',
+        GET_LIST_KEY_METRIC: '/portofolio/key-metrics',
+    },
 };
 
 export default ENDPOINTS;

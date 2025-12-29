@@ -18,7 +18,7 @@ export const initialFormKeyMetric = {
     value: {
         name: 'value',
         label: 'Value',
-        placeholder: 'e.g 4+',
+        placeholder: 'e.g 4',
         value: '',
         errorMessage: '',
     },

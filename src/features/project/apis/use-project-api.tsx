@@ -7,16 +7,16 @@ import appMessage from '@lib/data/app-message';
 import { removeKeyWithUndifienedValue } from '@lib/helper/function';
 import { TPaginationQueryParams, TResponseDataPaginationAPI } from '@typescript/index-type';
 
+export interface TParamsListProject extends TPaginationQueryParams {
+    keyword?: string;
+    id_level?: string;
+    id_category?: string;
+    id_skill?: string;
+    type?: TTypeTypeProject;
+}
 const useProjectAPI = () => {
     const { apiClient } = useAPI();
 
-    interface TParamsListProject extends TPaginationQueryParams {
-        keyword?: string;
-        id_level?: string;
-        id_category?: string;
-        id_skill?: string;
-        type?: TTypeTypeProject;
-    }
     const getListProject = async (params: TParamsListProject) => {
         const response = await apiClient<TResponseDataPaginationAPI<TProject>>({
             endpoint: ENDPOINT.PROJECT.GET_LIST_PROJECT,

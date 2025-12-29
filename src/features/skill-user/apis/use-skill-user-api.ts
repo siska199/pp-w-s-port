@@ -8,10 +8,10 @@ import appMessage from '@lib/data/app-message';
 import { removeKeyWithUndifienedValue } from '@lib/helper/function';
 import { TPaginationQueryParams, TResponseDataPaginationAPI } from '@typescript/index-type';
 
+export type TParamsListSkillUser = TPaginationQueryParams & Partial<TFilterSkillUser>;
 const useSkillUserAPI = () => {
     const { apiClient } = useAPI();
 
-    type TParamsListSkillUser = TPaginationQueryParams & Partial<TFilterSkillUser>;
     const getListSkillUser = async (params: Partial<TParamsListSkillUser>) => {
         const result = await apiClient<TResponseDataPaginationAPI<TSkillUser>>({
             endpoint: ENDPOINT.SKILL_USER.GET_LIST_SKILL_USER,

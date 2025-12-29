@@ -49,6 +49,8 @@ export interface TMasterSkill {
 export interface TMasterCategorySkill {
     id: string;
     name: string;
+    categoryName?: string;
+    categoryId?: string;
 }
 export interface TUser {
     first_name: string;
