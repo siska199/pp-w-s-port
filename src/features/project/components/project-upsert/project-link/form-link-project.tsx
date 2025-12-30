@@ -1,10 +1,8 @@
 import { useContext, useState } from 'react';
 import { eventEmitter } from '@event-emitters';
 
-import useProjectResponsibilityApi from '@features/project/apis/use-project-responsibility-api';
 import { contextFormProject } from '@features/project/context/form-project-context';
 import EVENT_PROJECT from '@features/project/event-emitters/project-event';
-import projectResponsibilitySchema, { initialFormProjectResponsibility, TProjectResponsibility } from '@features/project/validation/project-responsibility-schema';
 import InputTextEditor from '@components/ui/input/input-text-editor';
 import ContainerModalForm from '@components/ui/modal/container-modal-form';
 
@@ -12,22 +10,25 @@ import useEventEmitter from '@hooks/use-event-emitter';
 import { deepCopy, extractValueFromForm, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function';
 import { TTypeActionModalForm } from '@typescript/index-type';
 import { TEventSubmitForm } from '@typescript/ui-types';
+import InputBase from '@components/ui/input/input-base';
+import useProjectLinkApi from '@features/project/apis/use-project-link-api';
+import projectLinkSchema, { initialFormProjectLink, TProjectLink } from '@features/project/validation/project-link-schema';
 
 const FormLinkProject = () => {
     const [modalForm, setModalForm] = useState({
-        moduleName: 'Project Responsibility',
+        moduleName: 'Project Link',
         isShow: false,
         action: TTypeActionModalForm.ADD,
         customeClass: { mdBody: '  md:min-w-[38rem]  space-y-4' },
     });
-    const { formResponsibilityProject: form, formInformationProject, handleOnChangeFormResponsibilityProject: handleOnChange, setFormResponsibilityProject: setForm } = useContext(contextFormProject);
-    const { upsertProjectResponsibility } = useProjectResponsibilityApi();
+    const { formLinkProject: form, formInformationProject, handleOnChangeFormLinkProject: handleOnChange, setFormLinkProject: setForm } = useContext(contextFormProject);
+    const { upsertProjectLink } = useProjectLinkApi();
 
-    useEventEmitter(EVENT_PROJECT.SET_RESPONSIBILITY_PROJECT, (data) => {
+    useEventEmitter(EVENT_PROJECT.SET_LINK_PROJECT, (data) => {
         setForm({ ...mappingValuesToForm({ values: data, form }) });
     });
 
-    useEventEmitter(EVENT_PROJECT.SET_MODAL_FORM_RESPONSIBILITY_PROJECT, (data) => {
+    useEventEmitter(EVENT_PROJECT.SET_MODAL_FORM_LINK_PROJECT, (data) => {
         setModalForm({
             ...modalForm,
             ...data,
@@ -35,7 +36,7 @@ const FormLinkProject = () => {
     });
 
     const handleCloseModalForm = () => {
-        setForm(deepCopy({ ...initialFormProjectResponsibility }));
+        setForm(deepCopy({ ...initialFormProjectLink }));
         setModalForm({
             ...modalForm,
             isShow: false,
@@ -44,9 +45,9 @@ const FormLinkProject = () => {
 
     const handleOnSubmit = async (e: TEventSubmitForm) => {
         e?.preventDefault();
-        const { isValid, form: updatedForm } = mappingErrorsToForm<TProjectResponsibility, typeof form>({
+        const { isValid, form: updatedForm } = mappingErrorsToForm<TProjectLink, typeof form>({
             form,
-            schema: projectResponsibilitySchema,
+            schema: projectLinkSchema,
         });
 
         setForm({
@@ -58,19 +59,22 @@ const FormLinkProject = () => {
             ...extractValueFromForm(form),
         };
 
-        const result = await upsertProjectResponsibility({
+        const result = await upsertProjectLink({
             ...extractForm,
             id_project: formInformationProject.id.value,
         });
 
         if (!result?.status) return;
         handleCloseModalForm();
-        eventEmitter.emit(EVENT_PROJECT.REFRESH_DATA_LIST_RESPONSIBILITY_PROJECT, true);
+        eventEmitter.emit(EVENT_PROJECT.REFRESH_DATA_LIST_LINK_PROJECT, true);
     };
 
     return (
         <ContainerModalForm {...modalForm} onClose={handleCloseModalForm} onSubmit={handleOnSubmit}>
-            <InputTextEditor onChange={handleOnChange} {...form['description']} />
+            <div className="grid md:grid-cols-2 gap-4">
+                <InputBase {...form['label']} onChange={handleOnChange} />
+                <InputBase {...form['url']} onChange={handleOnChange} />
+            </div>
         </ContainerModalForm>
     );
 };

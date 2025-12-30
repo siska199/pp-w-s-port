@@ -1,4 +1,5 @@
 import { TFormFilterProject } from '@features/project/components/project-list/form-filter-project';
+import { TProjectLink } from '@features/project/validation/project-link-schema';
 import { TProjectMenu } from '@features/project/validation/project-menu-schema';
 import { TProjectResponsibility } from '@features/project/validation/project-responsibility-schema';
 
@@ -18,6 +19,11 @@ const EVENT_PROJECT = {
     SET_SELECTED_RESPONSIBILITY_PROJECT: 'SET_SELECTED_RESPONSIBILITY_PROJECT',
     SET_RESPONSIBILITY_PROJECT: 'SET_RESPONSIBILITY_PROJECT',
     REFRESH_DATA_LIST_RESPONSIBILITY_PROJECT: 'REFRESH_DATA_LIST_RESPONSIBILITY_PROJECT',
+
+    SET_MODAL_FORM_LINK_PROJECT: 'SET_MODAL_FORM_LINK_PROJECT',
+    SET_SELECTED_LINK_PROJECT: 'SET_SELECTED_LINK_PROJECT',
+    SET_LINK_PROJECT: 'SET_LINK_PROJECT',
+    REFRESH_DATA_LIST_LINK_PROJECT: 'REFRESH_DATA_LIST_LINK_PROJECT',
 
     ONCHANGE_TECH_STACKS: 'ONCHANGE_TECH_STACKS',
     ONCHANGE_LIST_MENU_PROJECT: 'ONCHANGE_LIST_MENU_PROJECT',
@@ -61,6 +67,17 @@ export type TEventMapProject = {
     };
     [EVENT_PROJECT.REFRESH_DATA_LIST_MENU_PROJECT]: boolean;
     [EVENT_PROJECT.REFRESH_DATA_LIST_RESPONSIBILITY_PROJECT]: boolean;
+
+    [EVENT_PROJECT.SET_LINK_PROJECT]: TProjectLink;
+    [EVENT_PROJECT.SET_MODAL_FORM_LINK_PROJECT]: {
+        isShow: boolean;
+        action: TTypeActionModalForm;
+    };
+    [EVENT_PROJECT.REFRESH_DATA_LIST_LINK_PROJECT]: boolean;
+    [EVENT_PROJECT.SET_SELECTED_LINK_PROJECT]: {
+        action: TTypeActionData;
+        data: TProjectLink;
+    };
 };
 
 export default EVENT_PROJECT;

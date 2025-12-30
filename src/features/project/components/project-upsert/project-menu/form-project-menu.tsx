@@ -55,10 +55,7 @@ const FormProjectMenu = () => {
             schema: projectMenuSchema,
         });
 
-        if (form.related_images.value?.length < 2) {
-            updatedForm.related_images.errorMessage = 'Upload minimal 2 related images';
-            return;
-        }
+
         setForm({
             ...updatedForm,
         });

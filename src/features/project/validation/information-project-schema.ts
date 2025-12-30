@@ -1,4 +1,4 @@
-import { zArray, zEnum, zFileLocale, zString } from '@validation/reusable-schema';
+import { zArray, zDate, zEnum, zFileLocale, zString } from '@validation/reusable-schema';
 import { z } from 'zod';
 
 import { optionsCategoryProject, optionsTypeProject } from '@features/project/constants';
@@ -74,6 +74,28 @@ export const initialFormInformationProject = {
         rows: 5,
         maxLength: 500,
     },
+    start_at: {
+        name: 'start_at',
+        label: 'Start At',
+        placeholder: appMessage.selectInputPlaceolder('start at date'),
+        value: null,
+        errorMessage: '',
+    },
+    end_at: {
+        name: 'end_at',
+        label: 'End At',
+        placeholder: appMessage.selectInputPlaceolder('end at date'),
+        value: null,
+        errorMessage: '',
+    },
+    id_profession: {
+        name: 'id_profession',
+        label: 'Role',
+        placeholder: appMessage.selectInputPlaceolder('role'),
+        options: [] as TOption[],
+        value: '',
+        errorMessage: '',
+    },
 };
 const informationProjectSchema = z.object({
     id: zString({ name: 'ID', mandatory: false }),
@@ -96,6 +118,9 @@ const informationProjectSchema = z.object({
         name: 'Tech Stack',
         mandatory: true,
     }),
+    id_profession: zString({ name: 'Role' }),
+    start_at: zDate({ name: 'Start At' }),
+    end_at: zDate({ name: 'End At' }),
 });
 
 export type TInformationProjectSchema = z.input<typeof informationProjectSchema>;

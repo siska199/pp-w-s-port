@@ -59,6 +59,12 @@ const ENDPOINTS = {
         GET_DETAIL_PROJECT_RESPONSIBILITY: (id: string) => `/project-responsibility/${id}`,
         DELETE_PROJECT_RESPONSIBILITY: (id: string) => `/project-responsibility/${id}`,
     },
+    PROJECT_LINK: {
+        GET_LIST_PROJECT_LINK: '/project-links',
+        UPSERT_PROJECT_LINK: '/project-link',
+        GET_DETAIL_PROJECT_LINK: (id: string) => `/project-link/${id}`,
+        DELETE_PROJECT_LINK: (id: string) => `/project-link/${id}`,
+    },
     EXPERIANCE: {
         GET_LIST_EXPERIANCE: '/experiances',
         UPSERT_EXPERIANCE: '/experiance',

@@ -14,7 +14,7 @@ import { TFileValue } from '@components/ui/input/input-file/input-file-v1';
 import useEventEmitter from '@hooks/use-event-emitter';
 import useFile from '@hooks/use-file';
 import { useAppDispatch } from '@store/store';
-import { handleSetModalConfirmation } from '@store/ui-slice';
+import { handleSetIsloading, handleSetModalConfirmation } from '@store/ui-slice';
 import appMessage from '@lib/data/app-message';
 import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge';
 import { TTypeActionModalForm } from '@typescript/index-type';
@@ -63,10 +63,8 @@ const CardProjectMenu = React.memo((props: TProjectMenuItem) => {
     const { deleteProjectMenu } = useProjectMenuApi();
 
     const handleEditProject = async (id: string) => {
-        eventEmitter.emit(EVENT_PROJECT.SET_MODAL_FORM_MENU_PROJECT, {
-            isShow: true,
-            action: TTypeActionModalForm.EDIT,
-        });
+        dispatch(handleSetIsloading(true));
+
         const dMainImage = await handleGetFileFromUrl({
             url: main_image as unknown as string,
             filename: 'main_image',
@@ -80,6 +78,11 @@ const CardProjectMenu = React.memo((props: TProjectMenuItem) => {
                 return result;
             }),
         );
+        dispatch(handleSetIsloading(false));
+        eventEmitter.emit(EVENT_PROJECT.SET_MODAL_FORM_MENU_PROJECT, {
+            isShow: true,
+            action: TTypeActionModalForm.EDIT,
+        });
         eventEmitter.emit(EVENT_PROJECT.SET_MENU_PROJECT, {
             id,
             name,

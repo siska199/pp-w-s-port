@@ -9,12 +9,11 @@ import { TTypeFile } from '@typescript/ui-types';
 const projectMenuSchema = z.object({
     id: zString({ name: 'ID', mandatory: false }),
     name: zString({ name: 'Name' }),
-    main_image: zFileLocale({ name: 'Main Image', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL] }),
+    main_image: zFileLocale({ name: 'Main Image', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL], mandatory:false}),
     description: zString({ name: 'Description', max: 1000 }),
     features: zString({ name: 'Description', max: 1000 }),
     related_images: z
-        .array(zFileLocale({ name: 'Related Images', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL] }))
-        .nonempty({ message: 'At least one related image is required' })
+        .array(zFileLocale({ name: 'Related Images', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL],mandatory:false }))
         .max(5, { message: 'A maximum of 5 images are allowed' }),
 });
 
@@ -38,7 +37,7 @@ export const initialFormProjectMenu = {
     },
     main_image: {
         name: 'main_image',
-        label: 'Main Image',
+        label: 'Main Image (Opsional)',
         value: null,
         listAcceptedTypeFile: defaultTTypeImage,
         errorMessage: '',
@@ -61,7 +60,7 @@ export const initialFormProjectMenu = {
     },
     related_images: {
         name: 'related_images',
-        label: 'Related Images',
+        label: 'Related Images (Opsional)',
         value: [] as TFileValue[],
         multiple: true,
         totalMaxSize: 30,

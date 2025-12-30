@@ -6,7 +6,7 @@ import useProjectAPI from '@features/project/apis/use-project-api';
 import useProjectMenuApi, { TParamsListProjectMenu } from '@features/project/apis/use-project-menu-api';
 import useProjectResponsibilityApi, { TParamsListProjectResponsibility } from '@features/project/apis/use-project-responsibility-api';
 import EVENT_PROJECT from '@features/project/event-emitters/project-event';
-import { TProjectMenuItem, TProjectResponsibilityItem } from '@features/project/types/project-type';
+import { TProjectLinkItem, TProjectMenuItem, TProjectResponsibilityItem } from '@features/project/types/project-type';
 import informationProjectSchema, { initialFormInformationProject, TInformationProjectSchema } from '@features/project/validation/information-project-schema';
 import { initialFormProjectMenu } from '@features/project/validation/project-menu-schema';
 import useSkillUserAPI from '@features/skill-user/apis/use-skill-user-api';
@@ -20,18 +20,28 @@ import { TTypeActionData } from '@typescript/index-type';
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types';
 
 import { initialFormProjectResponsibility } from '../validation/project-responsibility-schema';
+import useMasterAPI from '@apis/use-master-api';
+import { initialFormProjectLink } from '@features/project/validation/project-link-schema';
+import useProjectLinkApi, { TParamsListProjectLink } from '../apis/use-project-link-api';
 
 export interface TContextFormProject {
     formInformationProject: typeof initialFormInformationProject;
     formProjectMenu: typeof initialFormProjectMenu;
     formResponsibilityProject: typeof initialFormProjectResponsibility;
+    formLinkProject: typeof initialFormProjectLink;
+
     setFormInformationProject: React.Dispatch<SetStateAction<TContextFormProject['formInformationProject']>>;
     setFormProjectMenu: React.Dispatch<SetStateAction<TContextFormProject['formProjectMenu']>>;
     setFormResponsibilityProject: React.Dispatch<SetStateAction<TContextFormProject['formResponsibilityProject']>>;
+    setFormLinkProject: React.Dispatch<SetStateAction<TContextFormProject['formLinkProject']>>;
+
     handleOnChangeFormInformationProject: (e: TEventOnChange) => void;
     handleOnChangeFormProjectMenu: (e: TEventOnChange) => void;
     handleOnChangeFormResponsibilityProject: (e: TEventOnChange) => void;
+    handleOnChangeFormLinkProject: (e: TEventOnChange) => void;
+
     handleOnSubmitInformationProject: (e: TEventSubmitForm) => void;
+
     isLoading: boolean;
     setIsLoading: React.Dispatch<SetStateAction<boolean>>;
 
@@ -40,18 +50,26 @@ export interface TContextFormProject {
 
     listProjectResponsibility: TProjectResponsibilityItem[];
     getListProjectResponsibility: (params: TParamsListProjectResponsibility) => Promise<void>;
+
+    listProjectLink: TProjectLinkItem[];
+    getListProjectLink: (params: TParamsListProjectLink) => Promise<void>;
 }
 
 const initialContextFormProject = {
     formInformationProject: initialFormInformationProject,
     formProjectMenu: initialFormProjectMenu,
     formResponsibilityProject: initialFormProjectResponsibility,
+    formLinkProject: initialFormProjectLink,
+
     handleOnChangeFormInformationProject: () => null,
     handleOnChangeFormProjectMenu: () => null,
     handleOnChangeFormResponsibilityProject: () => null,
+    handleOnChangeFormLinkProject: () => null,
+
     setFormInformationProject: () => null,
     setFormProjectMenu: () => null,
     setFormResponsibilityProject: () => null,
+    setFormLinkProject: () => null,
 
     handleOnSubmitInformationProject: (_e: TEventSubmitForm) => null,
     isLoading: false,
@@ -60,6 +78,9 @@ const initialContextFormProject = {
     getListProjectMenu: async () => {},
     listProjectResponsibility: [],
     getListProjectResponsibility: async () => {},
+
+    listProjectLink: [],
+    getListProjectLink: async () => {},
 };
 
 export const contextFormProject = createContext<TContextFormProject>(initialContextFormProject);
@@ -70,20 +91,24 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
 
+    const { getListMasterProfession } = useMasterAPI();
     const { getListSkillUser } = useSkillUserAPI();
     const { getListExperiance } = useExperianceAPI();
     const { upsertProject, getProjectDetail } = useProjectAPI();
     const { handleGetFileFromUrl } = useFile();
     const { getListProjectMenu: getListProjectMenuApi } = useProjectMenuApi();
     const { getListProjectResponsibility: getListProjectResponsibilityApi } = useProjectResponsibilityApi();
-
+    const { getListProjectLink: getListProjectLinkApi } = useProjectLinkApi();
     const [isLoading, setIsLoading] = useState(false);
 
     const [formInformationProject, setFormInformationProject] = useState(deepCopy({ ...initialFormInformationProject }));
     const [formProjectMenu, setFormProjectMenu] = useState(deepCopy({ ...initialFormProjectMenu }));
     const [formResponsibilityProject, setFormResponsibilityProject] = useState(deepCopy({ ...initialFormProjectResponsibility }));
+    const [formLinkProject, setFormLinkProject] = useState(deepCopy({ ...initialFormProjectLink }));
+
     const [listProjectMenu, setListProjectMenu] = useState<TProjectMenuItem[]>([]);
     const [listProjectResponsibility, setListProjectResponsibility] = useState<TProjectResponsibilityItem[]>([]);
+    const [listProjectLink, setListProjectLink] = useState<TProjectLinkItem[]>([]);
 
     useEffect(() => {
         handleInitData();
@@ -93,6 +118,9 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         dispatch(handleSetIsloading(true));
         try {
             let updatedFormInformationProject = formInformationProject;
+            updatedFormInformationProject['id_profession'].options = generateOptions({
+                options: (await getListMasterProfession())?.data || [],
+            });
             updatedFormInformationProject.id_skill_users.options = await generateOptions({
                 options: (await getListSkillUser({}))?.data?.items || [],
                 labelField: 'skill_name',
@@ -142,7 +170,12 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
     };
 
     const getListProjectMenu = async (params: TParamsListProjectMenu, isLoading: boolean = true) => {
-        const result = await getListProjectMenuApi(params, isLoading);
+        const result = await getListProjectMenuApi(
+            {
+                ...params,
+            },
+            isLoading,
+        );
         if (!result.data) return;
         setListProjectMenu(result.data);
     };
@@ -152,10 +185,16 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         if (!result.data) return;
         setListProjectResponsibility(result.data);
     };
+    const getListProjectLink = async (params: TParamsListProjectLink, isLoading: boolean = true) => {
+        const result = await getListProjectLinkApi(params, isLoading);
+        if (!result.data) return;
+        setListProjectLink(result.data);
+    };
 
     type TKeyFormInformationProject = keyof typeof formInformationProject;
     type TKeyFormProjectMenu = keyof typeof formProjectMenu;
     type TKeyFormResponsibilityProject = keyof typeof formResponsibilityProject;
+    type TKeyFormLinkProject = keyof typeof formLinkProject;
 
     useEventEmitter(EVENT_PROJECT.SET_SELECTED_MENU_PROJECT, ({ data, action }) => {
         if (action === TTypeActionData.EDIT) {
@@ -167,6 +206,14 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         if (action === TTypeActionData.EDIT) {
             setFormResponsibilityProject({
                 ...mappingValuesToForm({ values: data, form: formResponsibilityProject }),
+            });
+        }
+    });
+
+    useEventEmitter(EVENT_PROJECT.SET_SELECTED_LINK_PROJECT, ({ data, action }) => {
+        if (action === TTypeActionData.EDIT) {
+            setFormLinkProject({
+                ...mappingValuesToForm({ values: data, form: formLinkProject }),
             });
         }
     });
@@ -204,11 +251,24 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         });
     }, []);
 
+    const handleOnChangeFormLinkProject = useCallback((e: TEventOnChange) => {
+        const currForm = formLinkProject;
+        const name = e.target.name as TKeyFormLinkProject;
+        const value = e.target.value;
+        currForm[name].value = value;
+
+        setFormLinkProject({
+            ...currForm,
+        });
+    }, []);
+
     const handleOnSubmitInformationProject = async (e: TEventSubmitForm) => {
         dispatch(handleSetIsloading(true));
         setIsLoading(true);
         try {
             e?.preventDefault();
+            const id = searchParams.get('id');
+
             const { isValid, form: updatedFormInformationProject } = mappingErrorsToForm<TInformationProjectSchema, typeof formInformationProject>({
                 form: formInformationProject,
                 schema: informationProjectSchema,
@@ -224,6 +284,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
             };
             const result = await upsertProject({
                 ...informationProject,
+                ...(id && { id }),
             });
             result?.status && navigate(`?id=${result?.data?.id}`, { replace: true });
             updatedFormInformationProject.id.value = result?.data?.id || '';
@@ -244,12 +305,17 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
                 formInformationProject,
                 formProjectMenu,
                 formResponsibilityProject,
+                formLinkProject,
+
                 handleOnChangeFormInformationProject,
                 handleOnChangeFormProjectMenu,
                 handleOnChangeFormResponsibilityProject,
+                handleOnChangeFormLinkProject,
                 setFormInformationProject,
                 setFormProjectMenu,
                 setFormResponsibilityProject,
+                setFormLinkProject,
+
                 handleOnSubmitInformationProject,
                 isLoading,
                 setIsLoading,
@@ -257,6 +323,8 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
                 getListProjectMenu,
                 listProjectResponsibility,
                 getListProjectResponsibility,
+                listProjectLink,
+                getListProjectLink,
             }}
         >
             {children}

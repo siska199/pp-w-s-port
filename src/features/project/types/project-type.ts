@@ -29,6 +29,9 @@ export interface TProject {
     company_name: string;
     tech_stacks: TProjectTechStack[];
     id_skill_users: string[];
+    id_profession: string;
+    start_at: string;
+    end_at: string;
 }
 
 export interface TProjectMenuItem {
@@ -58,5 +61,12 @@ export interface TProjectTechStack {
 export interface TProjectResponsibilityItem {
     id: string;
     description: string;
+    id_project: string;
+}
+
+export interface TProjectLinkItem {
+    id: string;
+    url: string;
+    label: string;
     id_project: string;
 }

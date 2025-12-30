@@ -190,7 +190,12 @@ const ContextPortfolioProvider = (props: { children: React.ReactNode }) => {
     const getProjectList = useCallback(
         withLoading(
             async (params?: Partial<TParamsListProject>) => {
-                const result = await getListProjectPortofolio(params || {});
+                const result = await getListProjectPortofolio(
+                    {
+                        ...params,
+                        items_perpage:12
+                    },
+                );
                 if (result?.data?.items)
                     setProjectConfig({
                         projectList: result.data.items,

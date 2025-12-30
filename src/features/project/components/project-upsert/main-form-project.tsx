@@ -1,4 +1,5 @@
 import FormGeneralProject from '@features/project/components/project-upsert/form-information-project';
+import LinkProjects from '@features/project/components/project-upsert/project-link/link-projects';
 import ProjectMenus from '@features/project/components/project-upsert/project-menu/project-menus';
 import ResponsibilityProjects from '@features/project/components/project-upsert/responsibility-project/responsibility-projects';
 
@@ -8,6 +9,7 @@ const MainFromProject = () => {
             <FormGeneralProject />
             <ProjectMenus />
             <ResponsibilityProjects />
+            <LinkProjects />
         </div>
     );
 };

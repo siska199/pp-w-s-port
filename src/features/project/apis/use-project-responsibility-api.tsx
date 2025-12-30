@@ -37,7 +37,7 @@ const useProjectResponsibilityApi = () => {
             endpoint: ENDPOINT.PROJECT_RESPONSIBILITY.UPSERT_PROJECT_RESPONSIBILITY,
             payload: params,
             method: 'post',
-            message: appMessage.upsertModule(params?.id, 'Project'),
+            message: appMessage.upsertModule(params?.id, 'Project Responsibility'),
         });
 
         return response;
