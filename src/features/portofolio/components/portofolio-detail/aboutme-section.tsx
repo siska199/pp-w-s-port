@@ -48,8 +48,7 @@ const CardKeyMetric = (props: TPropsKeyMetric) => {
         <Container variant={'hsc'} className=" flex-nowrap bg-glass-animation rounded-lg p-4 gap-8 md:gap-2">
             <h1 className="flex flex-grow md:flex-grow-0  text-heading-05 md:text-heading-01">
                 <span>
-                    <AnimatedCountNumber number={Number(value)} className="text-heading-05 md:text-heading-01 w-[5rem] md:w-auto font-bold" />
-                    + 
+                    <AnimatedCountNumber number={Number(value)} className="text-heading-05 md:text-heading-01 w-[5rem] md:w-auto font-bold" />+
                 </span>
             </h1>
             <p className=" text-end md:text-start text-white flex-grow break-words ">{keyMetric}</p>

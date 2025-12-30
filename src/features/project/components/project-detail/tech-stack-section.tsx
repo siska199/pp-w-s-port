@@ -1,6 +1,5 @@
 import ContainerSection from '@components/ui/container/container-section';
 
-
 const TechStackSection = () => {
     return (
         <ContainerSection title="Tech Stack" gap="large" className="">

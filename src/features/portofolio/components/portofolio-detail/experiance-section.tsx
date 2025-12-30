@@ -13,6 +13,7 @@ import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { useAppDispatch } from '@store/store';
 import { handleSetModal } from '@store/ui-slice';
 import { formatDate } from '@lib/helper/function';
+import { TTypeDateFormat } from '@typescript/ui-types';
 
 const ExperianceSection = () => {
     const { isLoading, getExperienceList, experienceList } = useContext(contextPortfolio);
@@ -60,7 +61,7 @@ const CardExperiance = (props: TPropsExperiance) => {
                     {company_name} - {profession.name}
                 </h5>
                 <p className="font-thin">
-                    {formatDate({ date: start_at })} | {formatDate({ date: end_at })}
+                    {formatDate({ date: start_at,format: TTypeDateFormat['DD MONTH YEAR'] })} | {formatDate({ date: end_at,format: TTypeDateFormat['DD MONTH YEAR'] })}
                 </p>
 
                 <div className=" flex flex-col md:flex-row gap-2 md:gap-6 justify-between">

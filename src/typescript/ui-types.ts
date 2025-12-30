@@ -1,5 +1,3 @@
-
-
 import { FormEvent, MouseEvent } from 'react';
 
 import { TObject } from '@typescript/index-type';

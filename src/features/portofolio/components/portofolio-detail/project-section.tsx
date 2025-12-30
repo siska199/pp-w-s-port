@@ -14,7 +14,7 @@ import InputBase from '@components/ui/input/input-base';
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { convertEnumToLabel, debounce, formatDate } from '@lib/helper/function';
 import { routes } from '@routes/constant';
-import { TEventOnChange } from '@typescript/ui-types';
+import { TEventOnChange, TTypeDateFormat } from '@typescript/ui-types';
 import { IconArrowUp, IconSearch } from '@assets/icons';
 import { cardAnimation } from '@assets/styles/animation';
 
@@ -103,9 +103,14 @@ const CardProject = (props: TPropsCardProject) => {
                     content: (
                         <Container variant={'vee'} className="p-4 gap-3">
                             <Badge variant={'solid-primary'} label={convertEnumToLabel(category)} />
-                            <Badge variant={'outline-white'} className="bg-transparent  font-bold text-white !text-end md:!text-center !justify-end md:!justify-center" label={`${convertEnumToLabel(type)} - ${experiance.profession.name}`} />
+                            <Badge
+                                variant={'outline-white'}
+                                className="bg-transparent  font-bold text-white !text-end md:!text-center !justify-end md:!justify-center"
+                                label={`${convertEnumToLabel(type)} - ${experiance.profession.name}`}
+                            />
                             <p className="font-bold ">
-                                {formatDate({ date: experiance.start_at })} - {formatDate({ date: experiance.end_at })}
+                                {formatDate({ date: experiance.start_at, format: TTypeDateFormat['DD MONTH YEAR'] })} -{' '}
+                                {formatDate({ date: experiance.end_at, format: TTypeDateFormat['DD MONTH YEAR'] })}
                             </p>
                         </Container>
                     ),
@@ -119,7 +124,7 @@ const CardProject = (props: TPropsCardProject) => {
                         <Badge key={i} variant={'soft-gray'} label={tech?.name} />
                     ))}
                 </Container>
-                <Button to={`/${routes.project?.child?.detail?.name}/${id}`} target='_blank' variant={'solid-black'}>
+                <Button to={`/${routes.project?.child?.detail?.name}/${id}`} target="_blank" variant={'solid-black'}>
                     View Project <IconArrowUp className="icon-white rotate-90 mt-1" />
                 </Button>
             </div>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 
 import { contextPortfolio } from '@features/portofolio/context/context-portofolio';
 import { TSkillUser } from '@features/skill-user/types/skill-user-type';
+import Loading from '@components/loading';
 import Badge from '@components/ui/badge';
 import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
@@ -12,7 +13,6 @@ import Image from '@components/ui/image';
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { cn } from '@lib/helper/function';
 import { cardAnimation, slideInAnimation } from '@assets/styles/animation';
-import Loading from '@components/loading';
 
 const SkillSection = () => {
     const { isLoading, activeIdCat, skillList, skillCategoryList, getSkillList, getSkillCategoryList } = useContext(contextPortfolio);
