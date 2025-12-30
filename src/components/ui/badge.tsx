@@ -21,7 +21,7 @@ const Badge = (props: TProps) => {
     );
 };
 
-const badgeVariants = cva('w-fit font-medium  h-fit  flex-inline gap-1 text-center font-medium rounded items-center justify-center', {
+const badgeVariants = cva('w-fit font-medium  h-fit  flex-inline gap-1  font-medium rounded text-center items-center justify-center', {
     variants: {
         variant: variantBadge,
         size: {

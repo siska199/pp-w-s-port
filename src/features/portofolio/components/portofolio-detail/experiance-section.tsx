@@ -27,7 +27,7 @@ const ExperianceSection = () => {
             {isLoading[EPortfolioLoading.EXPERIENCE_LIST] ? (
                 <h5 className="text-body-large">Loading Section Experiance...</h5>
             ) : (
-                <Container className="h-full w-auto relative gap-8 ">
+                <Container className="h-full w-auto relative gap-8 pt-8 ">
                     {experienceList?.map((experiance, i) => (
                         <CardExperiance key={i} {...experiance} />
                     ))}

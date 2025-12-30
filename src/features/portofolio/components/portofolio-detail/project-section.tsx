@@ -103,7 +103,7 @@ const CardProject = (props: TPropsCardProject) => {
                     content: (
                         <Container variant={'vee'} className="p-4 gap-3">
                             <Badge variant={'solid-primary'} label={convertEnumToLabel(category)} />
-                            <Badge variant={'outline-white'} className="bg-transparent  font-bold text-white" label={`${convertEnumToLabel(type)} - ${experiance.profession.name}`} />
+                            <Badge variant={'outline-white'} className="bg-transparent  font-bold text-white !text-end md:!text-center !justify-end md:!justify-center" label={`${convertEnumToLabel(type)} - ${experiance.profession.name}`} />
                             <p className="font-bold ">
                                 {formatDate({ date: experiance.start_at })} - {formatDate({ date: experiance.end_at })}
                             </p>
@@ -115,8 +115,8 @@ const CardProject = (props: TPropsCardProject) => {
                 <h5 className="  text-body-large font-bold">{name}</h5>
                 <p className=" line-clamp-3">{description}</p>
                 <Container variant={'hsc'} className="!flex-wrap gap-3">
-                    {props?.tech_stacks?.map((tect, i) => (
-                        <Badge key={i} variant={'soft-gray'} label={tect.color} />
+                    {props?.tech_stacks?.map((tech, i) => (
+                        <Badge key={i} variant={'soft-gray'} label={tech?.name} />
                     ))}
                 </Container>
                 <Button to={`/${routes.project?.child?.detail?.name}/${id}`} target='_blank' variant={'solid-black'}>

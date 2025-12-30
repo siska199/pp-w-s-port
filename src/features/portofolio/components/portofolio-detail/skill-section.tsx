@@ -37,7 +37,7 @@ const SkillSection = () => {
             {isLoading['SKILL_CATEGORY'] ? (
                 <h5 className="text-body-large">Loading Section Skill...</h5>
             ) : (
-                <Container variant={'hsc'} gap="large" className="flex-col md:flex-row overflow-x-hidden">
+                <Container variant={'hsc'} gap="large" className="flex-col md:flex-row ">
                     <motion.div {...slideInAnimation({ direction: 'left' })}>
                         <Container gap="base" className="flex-row md:flex-col md:pb-0 md:border-none w-auto">
                             {skillCategoryList?.map((category, i) => (
@@ -56,7 +56,7 @@ const SkillSection = () => {
                         </Container>
                     </motion.div>
 
-                    <div className="md:p-8 grid grid-cols-2 md:flex flex-wrap md:m-auto justify-center items-center gap-4">
+                    <div className="md:p-8 grid grid-cols-1 md:flex flex-wrap md:m-auto justify-center items-center gap-4">
                         {isLoading['SKILL_LIST'] ? <Loading /> : skillList.map((skill, j) => <CardItemSkill key={j} {...skill} index={j} />)}
                     </div>
                 </Container>

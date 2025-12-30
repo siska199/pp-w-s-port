@@ -38,7 +38,7 @@ const MenuSection = () => {
                 }}
             />
 
-            <div className="-mt-[6rem] space-y-4 w-full">
+            <div className="lg:-mt-[6rem] space-y-4 w-full">
                 <CardIntroMenu
                     title={'Menu Login'}
                     description={`Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero vitae temporibus quasi
