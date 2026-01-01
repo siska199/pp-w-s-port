@@ -45,6 +45,8 @@ const useExperianceAPI = () => {
     const deleteExperiance = async (id: string) => {
         const response = await apiClient({
             endpoint: ENDPOINT.EXPERIANCE.DELETE_EXPERIANCE(id),
+            method: 'delete',
+            message: appMessage.deleteModule('Education'),
         });
 
         return response;
