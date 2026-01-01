@@ -97,7 +97,7 @@ const FormSignIn = () => {
                 <InputBase {...form['password']} onChange={handleOnChange} />
                 <div className="flex justify-between items-center gap-2">
                     <InputCheckbox {...form['is_remember_me']} onChange={handleOnChange} />
-                    <Button variant={'link-black'} className=" text-white  underline !p-0" href={'/auth/forget-password'} name="forgot-password">
+                    <Button variant={'link-black'} name="forgot-password" type="link" className=" text-white  underline !p-0" to={'/auth'} >
                         Forget Password
                     </Button>
                 </div>
