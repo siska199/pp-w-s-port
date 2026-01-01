@@ -9,6 +9,7 @@ import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
 import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
+import Tooltip from '@components/ui/tooltip';
 
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { cn } from '@lib/helper/function';
@@ -57,7 +58,13 @@ const SkillSection = () => {
                     </motion.div>
 
                     <div className="md:p-8 grid grid-cols-1 md:flex flex-wrap md:m-auto justify-center items-center gap-4">
-                        {isLoading['SKILL_LIST'] ? <Loading /> : skillList.map((skill, j) => <CardItemSkill key={j} {...skill} index={j} />)}
+                        {isLoading['SKILL_LIST'] ? (
+                            <div className="ml-4">
+                                <Loading />
+                            </div>
+                        ) : (
+                            skillList.map((skill, j) => <CardItemSkill key={j} {...skill} index={j} />)
+                        )}
                     </div>
                 </Container>
             )}
@@ -75,7 +82,9 @@ const CardItemSkill = (props: TCardItemSkill) => {
         <motion.div key={skill_name} {...cardAnimation({ index })} className=" bg-card-transparent  flex gap-4 items-center md:w-[12rem] md:max-w-[12rem] md:min-w-[12rem] p-4 rounded-md">
             <Image src={skill?.image || ''} className="w-10 md:w-[3.5rem] flex-shrink-0 aspect-square rounded-full shadow-2xl" />
             <div className="flex flex-col gap-2">
-                <p className="md:text-body-medium font-bold line-clamp-1 text-start ">{skill_name}</p>
+                <Tooltip text={skill_name} variant="right" type="glass">
+                    <div className="md:text-body-medium font-bold line-clamp-1 text-start ">{skill_name}</div>
+                </Tooltip>
                 <Badge className="truncate" variant={'solid-blue'} label={`${project_tech_stacks.length}+ Project`} />
             </div>
         </motion.div>

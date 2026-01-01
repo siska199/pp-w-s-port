@@ -55,7 +55,6 @@ const FormProjectMenu = () => {
             schema: projectMenuSchema,
         });
 
-
         setForm({
             ...updatedForm,
         });

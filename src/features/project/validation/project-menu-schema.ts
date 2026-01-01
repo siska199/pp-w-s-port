@@ -9,12 +9,10 @@ import { TTypeFile } from '@typescript/ui-types';
 const projectMenuSchema = z.object({
     id: zString({ name: 'ID', mandatory: false }),
     name: zString({ name: 'Name' }),
-    main_image: zFileLocale({ name: 'Main Image', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL], mandatory:false}),
+    main_image: zFileLocale({ name: 'Main Image', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL], mandatory: false }),
     description: zString({ name: 'Description', max: 1000 }),
     features: zString({ name: 'Description', max: 1000 }),
-    related_images: z
-        .array(zFileLocale({ name: 'Related Images', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL],mandatory:false }))
-        .max(5, { message: 'A maximum of 5 images are allowed' }),
+    related_images: z.array(zFileLocale({ name: 'Related Images', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL], mandatory: false })).max(5, { message: 'A maximum of 5 images are allowed' }),
 });
 
 export type TProjectMenu = z.input<typeof projectMenuSchema> & {

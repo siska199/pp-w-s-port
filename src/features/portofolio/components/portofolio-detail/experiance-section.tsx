@@ -41,7 +41,7 @@ const ExperianceSection = () => {
 type TPropsExperiance = TExperiance;
 
 const CardExperiance = (props: TPropsExperiance) => {
-    const { company_name, profession, start_at, end_at, tech_stacks, projects } = props;
+    const { company_name, profession, start_at, end_at, tech_stacks, projects, description } = props;
     const targetRef = useRef<HTMLDivElement | null>(null);
     const { scrollYProgress } = useAnimateScrollCustome({
         targetRef,
@@ -61,7 +61,7 @@ const CardExperiance = (props: TPropsExperiance) => {
                     {company_name} - {profession.name}
                 </h5>
                 <p className="font-thin">
-                    {formatDate({ date: start_at,format: TTypeDateFormat['DD MONTH YEAR'] })} | {formatDate({ date: end_at,format: TTypeDateFormat['DD MONTH YEAR'] })}
+                    {formatDate({ date: start_at, format: TTypeDateFormat['DD MONTH YEAR'] })} | {formatDate({ date: end_at, format: TTypeDateFormat['DD MONTH YEAR'] })}
                 </p>
 
                 <div className=" flex flex-col md:flex-row gap-2 md:gap-6 justify-between">
@@ -74,6 +74,7 @@ const CardExperiance = (props: TPropsExperiance) => {
                 </div>
 
                 <CardProjects projects={projects} />
+                <ResAndCon description={description} />
             </div>
         </motion.div>
     );
@@ -84,32 +85,46 @@ type TPropsProjects = {
 };
 const CardProjects = (props: TPropsProjects) => {
     const { projects } = props;
-    const dispatch = useAppDispatch();
-
-    const handleClickItemProject = (idProject: string) => {
-        dispatch(
-            handleSetModal({
-                isShow: true,
-                title: `My Responsibilities in ${idProject} Project`,
-                customeClass: {
-                    mdContent: 'shadow-none border-none',
-                    mdBody: 'overflow-y-auto ',
-                },
-                children: <ListResponsibility />,
-            }),
-        );
-    };
 
     return (
         <div className="space-y-2">
             <p className="font-medium">Projects</p>
             <ul className="flex flex-col gap-2">
                 {projects?.map((project, i) => (
-                    <li key={i} onClick={() => handleClickItemProject(project?.id)} className="p-2 bg-glass-animation border-b cursor-pointer-custome rounded-md font-thin">
+                    <li key={i} className="p-2 bg-glass-animation border-b cursor-pointer-custome rounded-md font-thin">
                         {'-'} {project?.name}
                     </li>
                 ))}
             </ul>
+        </div>
+    );
+};
+
+type TPropsResAndCon = {
+    description: string;
+};
+const ResAndCon = (props: TPropsResAndCon) => {
+    const { description } = props;
+    const dispatch = useAppDispatch();
+
+    const handleClickResAndCon = () => {
+        dispatch(
+            handleSetModal({
+                isShow: true,
+                title: `Responsibilities and Contributions`,
+                customeClass: {
+                    mdContent: 'shadow-none border-none',
+                    mdBody: 'overflow-y-auto ',
+                },
+                children: <div className="container-list-disc-style" dangerouslySetInnerHTML={{ __html: description }}></div>,
+            }),
+        );
+    };
+    return (
+        <div className="space-y-2">
+            <p onClick={() => handleClickResAndCon()} className="font-medium cursor-pointer hover:underline">
+                Resonsibility And Contribution 📍
+            </p>
         </div>
     );
 };

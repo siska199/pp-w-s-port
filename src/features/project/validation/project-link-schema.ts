@@ -1,4 +1,4 @@
-import { zLink, zString } from '@validation/reusable-schema';
+import { zString } from '@validation/reusable-schema';
 import z from 'zod';
 
 export const initialFormProjectLink = {
@@ -37,6 +37,6 @@ const projectLinkSchema = z.object({
     id_project: zString({ name: 'ID Project', mandatory: false }),
 });
 
-export type TProjectLink = Required<z.input<typeof projectLinkSchema>>
+export type TProjectLink = Required<z.input<typeof projectLinkSchema>>;
 
 export default projectLinkSchema;

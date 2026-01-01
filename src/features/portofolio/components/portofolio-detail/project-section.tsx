@@ -71,7 +71,7 @@ const ProjectSection = () => {
                             ))}
                         </div>
 
-                        {projectConfig?.currentPage !== projectConfig?.totalPage && (
+                        {(projectConfig?.projectList?.length != 0 || projectConfig?.currentPage !== projectConfig?.totalPage) && (
                             <Button shape={'rounded'} variant={'glass'} size={'large'} className="min-w-[15rem] mx-auto  md:text-body-large  md:font-bold">
                                 Load More +
                             </Button>

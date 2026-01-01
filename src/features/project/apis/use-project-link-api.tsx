@@ -1,6 +1,7 @@
-import ENDPOINTS from '@apis/endpoints';
 import { TProjectLinkItem } from '@features/project/types/project-type';
 import { TProjectLink } from '@features/project/validation/project-link-schema';
+import ENDPOINTS from '@apis/endpoints';
+
 import useAPI from '@hooks/use-api';
 import appMessage from '@lib/data/app-message';
 import { removeKeyWithUndifienedValue } from '@lib/helper/function';

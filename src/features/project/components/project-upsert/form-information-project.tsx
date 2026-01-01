@@ -6,10 +6,10 @@ import { contextFormProject } from '@features/project/context/form-project-conte
 import Button from '@components/ui/button';
 import Divider from '@components/ui/divider';
 import InputBase from '@components/ui/input/input-base';
+import InputDate from '@components/ui/input/input-date';
 import InputUploadFile from '@components/ui/input/input-file/input-file-v1';
 import InputSelect from '@components/ui/input/input-select/input-select';
 import InputTextArea from '@components/ui/input/input-text-area';
-import InputDate from '@components/ui/input/input-date';
 
 const FormInformationProject = () => {
     const { formInformationProject: form, handleOnChangeFormInformationProject: handleOnChange, isLoading, handleOnSubmitInformationProject: handleOnSubmit } = useContext(contextFormProject);
@@ -23,7 +23,8 @@ const FormInformationProject = () => {
                 </div>
                 <div className="grid grid-grid-cols-1 md:grid-cols-2 gap-4">
                     <InputSelect {...form['id_skill_users']} onChange={handleOnChange} isMultiple />
-                    <InputSelect {...form['id_profession']} onChange={handleOnChange}/>                </div>
+                    <InputSelect {...form['id_profession']} onChange={handleOnChange} />{' '}
+                </div>
                 <div className="grid grid-grid-cols-1 md:grid-cols-2 gap-4">
                     <InputSelect {...form['type']} onChange={handleOnChange} />
                     <InputSelect {...form['id_experiance']} onChange={handleOnChange} />

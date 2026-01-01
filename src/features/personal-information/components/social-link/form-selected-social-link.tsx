@@ -47,7 +47,7 @@ const FormSelectedSocialLink = () => {
                 url: socialLinkUser?.url,
                 value: JSON.stringify({
                     ...data,
-                    id_category : data?.id,
+                    id_category: data?.id,
                     id: socialLinkUser?.id,
                     value: socialLinkUser?.url || data?.default_value,
                 }),

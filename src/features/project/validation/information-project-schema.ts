@@ -72,7 +72,7 @@ export const initialFormInformationProject = {
         value: '',
         errorMessage: '',
         rows: 5,
-        maxLength: 500,
+        maxLength: 10000,
     },
     start_at: {
         name: 'start_at',

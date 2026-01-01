@@ -1,18 +1,17 @@
 import { useContext, useState } from 'react';
 import { eventEmitter } from '@event-emitters';
 
+import useProjectLinkApi from '@features/project/apis/use-project-link-api';
 import { contextFormProject } from '@features/project/context/form-project-context';
 import EVENT_PROJECT from '@features/project/event-emitters/project-event';
-import InputTextEditor from '@components/ui/input/input-text-editor';
+import projectLinkSchema, { initialFormProjectLink, TProjectLink } from '@features/project/validation/project-link-schema';
+import InputBase from '@components/ui/input/input-base';
 import ContainerModalForm from '@components/ui/modal/container-modal-form';
 
 import useEventEmitter from '@hooks/use-event-emitter';
 import { deepCopy, extractValueFromForm, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function';
 import { TTypeActionModalForm } from '@typescript/index-type';
 import { TEventSubmitForm } from '@typescript/ui-types';
-import InputBase from '@components/ui/input/input-base';
-import useProjectLinkApi from '@features/project/apis/use-project-link-api';
-import projectLinkSchema, { initialFormProjectLink, TProjectLink } from '@features/project/validation/project-link-schema';
 
 const FormLinkProject = () => {
     const [modalForm, setModalForm] = useState({

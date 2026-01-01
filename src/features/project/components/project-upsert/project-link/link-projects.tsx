@@ -1,18 +1,18 @@
-import { eventEmitter } from '@event-emitters';
 import { useContext } from 'react';
+import { eventEmitter } from '@event-emitters';
 
+import useProjectLinkApi from '@features/project/apis/use-project-link-api';
+import { contextFormProject } from '@features/project/context/form-project-context';
+import EVENT_PROJECT from '@features/project/event-emitters/project-event';
+import { TProjectLinkItem } from '@features/project/types/project-type';
 import CardAction from '@components/ui/card/card-action';
 import EmptyData from '@components/ui/empty-data';
 import Header from '@components/ui/header/header';
-import { contextFormProject } from '@features/project/context/form-project-context';
-import EVENT_PROJECT from '@features/project/event-emitters/project-event';
 
-import useProjectLinkApi from '@features/project/apis/use-project-link-api';
-import { TProjectLinkItem } from '@features/project/types/project-type';
 import useEventEmitter from '@hooks/use-event-emitter';
-import appMessage from '@lib/data/app-message';
 import { useAppDispatch } from '@store/store';
 import { handleSetModalConfirmation } from '@store/ui-slice';
+import appMessage from '@lib/data/app-message';
 import { TTypeActionModalForm } from '@typescript/index-type';
 
 const LinkProjects = () => {

@@ -44,7 +44,7 @@ type TPropsClassNameContainerText = Pick<TPropsTooltip, 'customeClass' | 'varian
 
 const classNameContainerText = ({ customeClass, variant, type }: TPropsClassNameContainerText) =>
     cn({
-        'rectangle ': true,
+        ' ': true,
         [customeClass?.rectangle || '']: true,
         [variant || '']: true,
         '!border-transparent !border-t-transparent !border-b-white/15 !border-l-transparent !border-r-transparent': type === 'glass',

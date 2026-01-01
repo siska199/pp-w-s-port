@@ -8,8 +8,10 @@ import useProjectResponsibilityApi, { TParamsListProjectResponsibility } from '@
 import EVENT_PROJECT from '@features/project/event-emitters/project-event';
 import { TProjectLinkItem, TProjectMenuItem, TProjectResponsibilityItem } from '@features/project/types/project-type';
 import informationProjectSchema, { initialFormInformationProject, TInformationProjectSchema } from '@features/project/validation/information-project-schema';
+import { initialFormProjectLink } from '@features/project/validation/project-link-schema';
 import { initialFormProjectMenu } from '@features/project/validation/project-menu-schema';
 import useSkillUserAPI from '@features/skill-user/apis/use-skill-user-api';
+import useMasterAPI from '@apis/use-master-api';
 
 import useEventEmitter from '@hooks/use-event-emitter';
 import useFile from '@hooks/use-file';
@@ -19,10 +21,8 @@ import { deepCopy, extractValueFromForm, generateOptions, mappingErrorsToForm, m
 import { TTypeActionData } from '@typescript/index-type';
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types';
 
-import { initialFormProjectResponsibility } from '../validation/project-responsibility-schema';
-import useMasterAPI from '@apis/use-master-api';
-import { initialFormProjectLink } from '@features/project/validation/project-link-schema';
 import useProjectLinkApi, { TParamsListProjectLink } from '../apis/use-project-link-api';
+import { initialFormProjectResponsibility } from '../validation/project-responsibility-schema';
 
 export interface TContextFormProject {
     formInformationProject: typeof initialFormInformationProject;

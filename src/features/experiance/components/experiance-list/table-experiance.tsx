@@ -139,7 +139,7 @@ const TableExperiance = () => {
             id_profession: data.id_profession,
             start_at: data.start_at,
             end_at: data.end_at,
-            description: '',
+            description: data?.description,
         });
     };
 
