@@ -24,7 +24,7 @@ const FormEducation = () => {
         moduleName: 'Education',
         isShow: false,
         action: TTypeActionModalForm.ADD,
-        customeClass: { mdBody: '  md:min-w-[38rem]  space-y-4' },
+        customeClass: { mdBody: '!overflow-y-visible md:min-w-[38rem]  space-y-4' },
     });
     const [form, setForm] = useState(deepCopy({ ...initialFormEducation }));
     const [options, setOptions] = useState<TOptionsFormEducation>({

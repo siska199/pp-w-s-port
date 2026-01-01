@@ -20,7 +20,7 @@ const FormSkillUser = () => {
         action: TTypeActionModalForm.ADD,
         moduleName: 'Skill User',
         customeClass: {
-            mdBody: 'md:min-w-[32rem]',
+            mdBody: '!overflow-y-visible md:min-w-[32rem]',
         },
     });
     const [form, setForm] = useState(deepCopy({ ...initialFormSkillUser }));

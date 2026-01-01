@@ -45,7 +45,7 @@ const SkillSection = () => {
                                     key={i}
                                     variant={'no-style'}
                                     className={cn({
-                                        'bg-glass-animation flex flex-grow text-body-medium font-medium md:min-w-[10rem] !justify-start !text-start': true,
+                                        'bg-glass-animation flex flex-grow text-body-medium font-medium md:min-w-[10rem] md:max-w-[10rem] !justify-start !text-start': true,
                                         'bg-glass': category?.categoryId === activeIdCat,
                                     })}
                                     onClick={() => getSkillList({ id_category: category?.categoryId })}

@@ -56,7 +56,7 @@ const ContainerModal = (props: TContainerModalProps) => {
                     <Button className={`absolute top-3 z-[4] right-2 rounded-full p-1 ${customeClass?.btnClose?.container}`} variant={'transparent'} onClick={handleOnClose} disabled={isLoading}>
                         <IconClose className={`icon-black w-[1.25rem] h-[1.25rem] ${customeClass?.btnClose?.icon}`} />
                     </Button>
-                    <div ref={bodyRef} className={`overflow-y-scroll scrollbar-hidden  flex flex-col space-y-4 px-4 ${customeClass?.mdBody}`}>
+                    <div ref={bodyRef} className={`overflow-y-scroll   scrollbar-hidden  flex flex-col space-y-4 px-4 ${customeClass?.mdBody}`}>
                         {children}
                     </div>
                     {footer && <div className={`${customeClass?.mdFooter}`}>{footer}</div>}

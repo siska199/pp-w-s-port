@@ -13,7 +13,7 @@ const experianceSchema = z.object({
     id_profession: zString({ name: 'Profession' }),
     start_at: zDate({ name: 'Start At' }),
     end_at: zDate({ name: 'End At' }),
-    description: zString({ name: 'Description', max: 1000 }),
+    description: zString({ name: 'Description', max: 10000 }),
     is_currently_work_here: zBooleanCheckbox({ name: 'Currently Work Here' }),
 });
 

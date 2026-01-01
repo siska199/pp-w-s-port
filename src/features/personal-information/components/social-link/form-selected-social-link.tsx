@@ -42,12 +42,12 @@ const FormSelectedSocialLink = () => {
 
         const options = catSosialLinks?.map((data) => {
             const socialLinkUser = socialLinksUsers?.filter((socialLink) => socialLink?.category?.name === data?.name)?.[0];
-
             return {
                 label: data.name,
                 url: socialLinkUser?.url,
                 value: JSON.stringify({
                     ...data,
+                    id_category : data?.id,
                     id: socialLinkUser?.id,
                     value: socialLinkUser?.url || data?.default_value,
                 }),
