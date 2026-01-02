@@ -65,7 +65,7 @@ export interface TProjectTechStack {
     name: string;
     color: TKeyVariantBadge;
     skill: TMasterCategorySkill;
-    image:string
+    image: string;
 }
 
 export interface TProjectResponsibilityItem {

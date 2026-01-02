@@ -290,6 +290,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
             };
             const result = await upsertProject({
                 ...informationProject,
+                is_show_project: String(informationProject.is_show_project),
                 ...(id && { id }),
             });
             result?.status && navigate(`?id=${result?.data?.id}`, { replace: true });

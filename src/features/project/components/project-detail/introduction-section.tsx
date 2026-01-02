@@ -1,11 +1,13 @@
+import { useContext } from 'react';
+
+import { contextProject } from '@features/project/context/context-project';
 import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
 import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
-import { contextProject } from '@features/project/context/context-project';
+
 import { formatDate } from '@lib/helper/function';
 import { TTypeDateFormat } from '@typescript/ui-types';
-import { useContext } from 'react';
 
 const IntroductionSection = () => {
     const { project: data } = useContext(contextProject);

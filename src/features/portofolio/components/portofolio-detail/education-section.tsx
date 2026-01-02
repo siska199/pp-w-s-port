@@ -8,8 +8,8 @@ import SliderBase from '@components/ui/slider/slider-base';
 
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { formatDate } from '@lib/helper/function';
-import { slideInAnimation } from '@assets/styles/animation';
 import { TTypeDateFormat } from '@typescript/ui-types';
+import { slideInAnimation } from '@assets/styles/animation';
 
 const EducationSection = () => {
     const { isLoading, getEducationList, educationList } = useContext(contextPortfolio);

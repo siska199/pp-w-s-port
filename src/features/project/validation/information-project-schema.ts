@@ -100,7 +100,7 @@ export const initialFormInformationProject = {
         name: 'is_show_project',
         label: 'Is Show Project',
         placeholder: appMessage.selectInputPlaceolder('Is Show Project'),
-        value: 'false',
+        value: 'true',
         errorMessage: '',
     },
 };

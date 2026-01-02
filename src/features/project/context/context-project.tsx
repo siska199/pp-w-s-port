@@ -36,7 +36,7 @@ const ContextProjectProvider = (props: { children: React.ReactNode }) => {
 
     const getProjectDetail = async () => {
         setIsLoading(true);
-        const result = await getProjectDetailApi(id,false);
+        const result = await getProjectDetailApi(id, false);
         if (!result.data) return;
         setProject(result.data);
         setIsLoading(true);

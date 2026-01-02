@@ -2,18 +2,16 @@ import { useContext, useState } from 'react';
 import { SwiperClass } from 'swiper/react';
 
 import SliderRelatedImageMenu from '@features/project/components/project-detail/menu-section/slider-related-image-menu';
+import { contextProject } from '@features/project/context/context-project';
 import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
 import SliderImage3D from '@components/ui/slider/slider-image-3d';
 
 import { useAppDispatch } from '@store/store';
 import { handleSetModal } from '@store/ui-slice';
-import { contextProject } from '@features/project/context/context-project';
 
 const MenuSection = () => {
-
     const { project: data } = useContext(contextProject);
-
 
     const listImage = [
         'dummy-images/project-goa/1.png',
@@ -32,7 +30,7 @@ const MenuSection = () => {
         setCurrIndexImg(swiper.realIndex);
     };
 
-    if(data?.project_menus?.length === 0) return null;
+    if (data?.project_menus?.length === 0) return null;
 
     return (
         <ContainerSection title="Menu" className=" ">

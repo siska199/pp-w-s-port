@@ -1,10 +1,10 @@
 import FormProject from '@features/project/components/project-upsert/form-information-project';
+import FormLinkProject from '@features/project/components/project-upsert/project-link/form-link-project';
 import FormProjectMenu from '@features/project/components/project-upsert/project-menu/form-project-menu';
 import FormResponsiblityProject from '@features/project/components/project-upsert/responsibility-project/form-responsibility-project';
 import ContextFormProjectProvider from '@features/project/context/form-project-context';
 import ContainerProtectedPage from '@components/ui/container/container-protected-page';
 import HeaderPage from '@components/ui/header/header-page';
-import FormLinkProject from '@features/project/components/project-upsert/project-link/form-link-project';
 
 const ProjectUpsertPage = () => {
     return (

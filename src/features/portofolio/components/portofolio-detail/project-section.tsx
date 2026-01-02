@@ -1,22 +1,22 @@
-import { motion } from 'framer-motion';
 import { useCallback, useContext, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
+import { contextPortfolio } from '@features/portofolio/context/context-portofolio';
+import { TParamsListProject } from '@features/project/apis/use-project-api';
+import { TProject } from '@features/project/types/project-type';
 import Badge from '@components/ui/badge';
 import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
 import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
 import InputBase from '@components/ui/input/input-base';
-import { contextPortfolio } from '@features/portofolio/context/context-portofolio';
-import { TParamsListProject } from '@features/project/apis/use-project-api';
-import { TProject } from '@features/project/types/project-type';
 
-import { IconArrowUp, IconSearch } from '@assets/icons';
-import { cardAnimation } from '@assets/styles/animation';
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { convertEnumToLabel, debounce } from '@lib/helper/function';
 import { routes } from '@routes/constant';
 import { TEventOnChange } from '@typescript/ui-types';
+import { IconArrowUp, IconSearch } from '@assets/icons';
+import { cardAnimation } from '@assets/styles/animation';
 const ProjectSection = () => {
     const { isLoading, getProjectList, projectConfig } = useContext(contextPortfolio);
 
@@ -94,7 +94,7 @@ const CardProject = (props: TPropsCardProject) => {
             <Image
                 src={thumbnail_image}
                 className="h-[13rem] md:h-[15rem] aspect-square border-1 shadow-image-arise border-gray-500 "
-                customeClassName={{ image: '' }}
+                customeClassName={{ image: '!object-contain' }}
                 overlay={{
                     withBackdrop: true,
                     isShowOnHover: true,

@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 
+import LinkProjects from '@features/project/components/project-upsert/project-link/link-projects';
 import ProjectMenus from '@features/project/components/project-upsert/project-menu/project-menus';
 import ResponsibilityProjects from '@features/project/components/project-upsert/responsibility-project/responsibility-projects';
 import { contextFormProject } from '@features/project/context/form-project-context';
 import Button from '@components/ui/button';
 import Divider from '@components/ui/divider';
 import InputBase from '@components/ui/input/input-base';
+import InputCheckbox from '@components/ui/input/input-checkbox';
 import InputDate from '@components/ui/input/input-date';
 import InputUploadFile from '@components/ui/input/input-file/input-file-v1';
 import InputSelect from '@components/ui/input/input-select/input-select';
 import InputTextArea from '@components/ui/input/input-text-area';
-import LinkProjects from '@features/project/components/project-upsert/project-link/link-projects';
-import InputCheckbox from '@components/ui/input/input-checkbox';
 
 const FormInformationProject = () => {
     const { formInformationProject: form, handleOnChangeFormInformationProject: handleOnChange, isLoading, handleOnSubmitInformationProject: handleOnSubmit } = useContext(contextFormProject);
@@ -37,7 +37,7 @@ const FormInformationProject = () => {
                 </div>
                 <InputUploadFile {...form['thumbnail_image']} onChange={handleOnChange} />
                 <InputTextArea {...form['description']} onChange={handleOnChange} />
-                <InputCheckbox {...form['is_show_project']} onChange={handleOnChange}/>
+                <InputCheckbox {...form['is_show_project']} onChange={handleOnChange} />
                 <Button onClick={handleOnSubmit} className="ml-auto mt-4 md:min-w-[8rem]" isLoading={isLoading}>
                     Save
                 </Button>

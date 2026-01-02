@@ -1,6 +1,7 @@
-import ContainerSection from '@components/ui/container/container-section';
-import { contextProject } from '@features/project/context/context-project';
 import { useContext } from 'react';
+
+import { contextProject } from '@features/project/context/context-project';
+import ContainerSection from '@components/ui/container/container-section';
 
 const ResponsibilitySection = () => {
     const { project: data } = useContext(contextProject);
