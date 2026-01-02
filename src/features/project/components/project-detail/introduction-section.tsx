@@ -13,7 +13,7 @@ const IntroductionSection = () => {
     const { project: data } = useContext(contextProject);
 
     return (
-        <ContainerSection className="mt-10 md:mt-0   min-h-screen !p-8">
+        <ContainerSection className="mt-10 md:mt-0   min-h-screen lg:p-8">
             {!data?.id ? (
                 <h5 className="my-auto text-body-large ">Loading Introduction...</h5>
             ) : (
@@ -21,7 +21,7 @@ const IntroductionSection = () => {
                     <>
                         <div className="space-y-4 my-auto ">
                             <div className="">
-                                <h3 className="font-bubblegum-sans mb-2">
+                                <h3 className="font-bubblegum-sans mb-2 text-heading-05 md:text-heading-03">
                                     {data?.name} | {data?.profession?.name}
                                 </h3>
                                 <p className="font-bold">{data?.experiance?.company_name}</p>
@@ -45,10 +45,10 @@ const IntroductionSection = () => {
                         <div className="lg:p-8 flex">
                             <Image
                                 customeClassName={{
-                                    image: 'object-cover zoom-out-effect',
+                                    image: '!object-contain zoom-out-effect',
                                 }}
                                 src={data?.thumbnail_image}
-                                className="my-auto h-auto aspect-video rounded-lg shadow-image-arise overflow-hidden w-[10rem] md:w-[40rem] "
+                                className="my-auto h-auto aspect-video rounded-lg shadow-image-arise overflow-hidden w-full md:w-[40rem] "
                             />
                         </div>
                     </>

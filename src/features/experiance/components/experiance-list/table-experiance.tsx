@@ -12,7 +12,7 @@ import useTable from '@hooks/use-table';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { handleSetModalConfirmation } from '@store/ui-slice';
 import appMessage from '@lib/data/app-message';
-import { formatDate } from '@lib/helper/function';
+import { formatDate, toLocalDateInputValue } from '@lib/helper/function';
 import { routes } from '@routes/constant';
 import { TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type';
 import { TSettingTable } from '@typescript/ui-types';
@@ -42,7 +42,7 @@ const TableExperiance = () => {
                 isSorted: true,
                 className: 'min-w-[8rem]',
                 customeComponent: (data: TExperiance) => {
-                    return <div>{formatDate({ date: data.start_at })}</div>;
+                    return <div>{formatDate({ date: toLocalDateInputValue(data.start_at) })}</div>;
                 },
             },
             {
@@ -51,7 +51,7 @@ const TableExperiance = () => {
                 className: 'min-w-[8rem]',
                 isSorted: true,
                 customeComponent: (data: TExperiance) => {
-                    return <div>{formatDate({ date: data.end_at })}</div>;
+                    return <div>{formatDate({ date: toLocalDateInputValue(data.end_at) })}</div>;
                 },
             },
             {

@@ -464,3 +464,9 @@ export const convertEnumToLabel = (str: string) => {
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
 };
+
+export function toLocalDateInputValue(isoString: string | Date | null) {
+    if(!isoString) return '';
+    const date = new Date(isoString);
+    return date.toLocaleDateString('en-CA'); 
+}

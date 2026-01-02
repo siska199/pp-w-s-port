@@ -115,6 +115,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
                     url: resultPersonalInfo?.data?.resume,
                     filename: 'resume',
                 });
+                
             }
 
             setFormGeneralInfoPersonalInfo({ ...updatedFormGeneralPersonalInfo });
@@ -221,7 +222,6 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
                     url: selectedSocliaLink?.value,
                 }));
                 const keyMetrics = listKeyMetric.map(({ id, ...rest }) => (id?.includes('NEW') ? rest : { id, ...rest }));
-                console.log('testtt: ', socialLinks);
                 const results = await Promise.all([
                     upsertPersonalInformation({
                         ...personalInformation,

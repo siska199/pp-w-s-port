@@ -80,7 +80,7 @@ const CardItemSkill = (props: TCardItemSkill) => {
     const { skill_name, index, skill, project_tech_stacks } = props;
     return (
         <motion.div key={skill_name} {...cardAnimation({ index })} className=" bg-card-transparent  flex gap-4 items-center md:w-[12rem] md:max-w-[12rem] md:min-w-[12rem] p-4 rounded-md">
-            <Image src={skill?.image || ''} className="w-10 md:w-[3.5rem] flex-shrink-0 aspect-square rounded-full shadow-2xl" />
+            <Image src={skill?.image || ''} className="w-10 !object-contain md:w-[3.5rem] flex-shrink-0 aspect-square rounded-full shadow-2xl" />
             <div className="flex flex-col gap-2">
                 <Tooltip text={skill_name} variant="right" type="glass">
                     <div className="md:text-body-medium font-bold line-clamp-1 text-start ">{skill_name}</div>

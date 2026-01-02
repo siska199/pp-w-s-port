@@ -164,6 +164,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
                     url: resultInformationProject.data?.thumbnail_image,
                     filename: 'thumbnail_image',
                 });
+                updatedFormInformationProject['is_show_project'].value = String(resultInformationProject.data?.is_show_project);
             }
             setFormInformationProject({
                 ...updatedFormInformationProject,

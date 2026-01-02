@@ -89,7 +89,7 @@ const educationSchema = z.object({
     gpa: zNumber({ name: 'GPA' }),
     start_at: zDate({ name: 'Start At', mandatory: true }),
     end_at: zDate({ name: 'End At', mandatory: true }),
-    description: zString({ name: 'Description', max: 500 }),
+    description: zString({ name: 'Description', max: 500, mandatory: false }),
 });
 
 export type TEducationSchema = z.input<typeof educationSchema>;

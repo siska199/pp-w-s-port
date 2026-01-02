@@ -12,7 +12,7 @@ import ContainerSection from '@components/ui/container/container-section';
 import { useAnimateScrollCustome } from '@hooks/use-animate-scroll-custome';
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { handleSetModal } from '@store/ui-slice';
-import { formatDate } from '@lib/helper/function';
+import { formatDate, toLocalDateInputValue } from '@lib/helper/function';
 import { TTypeDateFormat } from '@typescript/ui-types';
 
 const ExperianceSection = () => {
@@ -55,7 +55,7 @@ const CardExperiance = (props: TPropsExperiance) => {
                 title: `Responsibilities and Contributions`,
                 customeClass: {
                     mdContent: 'shadow-none border-none',
-                    mdBody: 'overflow-y-auto ',
+                    mdBody: 'overflow-y-auto mb-4',
                 },
                 children: <div className="container-list-disc-style" dangerouslySetInnerHTML={{ __html: description }}></div>,
             }),
@@ -74,7 +74,7 @@ const CardExperiance = (props: TPropsExperiance) => {
                     {company_name} - {profession.name}
                 </h5>
                 <p className="font-thin">
-                    {formatDate({ date: start_at, format: TTypeDateFormat['DD MONTH YEAR'] })} | {formatDate({ date: end_at, format: TTypeDateFormat['DD MONTH YEAR'] })}
+                    {formatDate({ date: toLocalDateInputValue(start_at), format: TTypeDateFormat['DD MONTH YEAR'] })} | {formatDate({ date: toLocalDateInputValue(end_at), format: TTypeDateFormat['DD MONTH YEAR'] })}
                 </p>
 
                 <div className=" flex flex-col md:flex-row gap-2 md:gap-6 justify-between">
