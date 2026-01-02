@@ -11,7 +11,7 @@ const projectMenuSchema = z.object({
     name: zString({ name: 'Name' }),
     main_image: zFileLocale({ name: 'Main Image', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL], mandatory: false }),
     description: zString({ name: 'Description', max: 1000 }),
-    features: zString({ name: 'Description', max: 1000 }),
+    features: zString({ name: 'Description', max: 1000, mandatory:false }),
     related_images: z.array(zFileLocale({ name: 'Related Images', listAcceptedTypeFile: [TTypeFile.IMAGE_ALL], mandatory: false })).max(5, { message: 'A maximum of 5 images are allowed' }),
 });
 
@@ -51,7 +51,7 @@ export const initialFormProjectMenu = {
 
     features: {
         name: 'features',
-        label: 'Features',
+        label: 'Features (Opsional)',
         value: '',
         placeholder: 'List the features of your menu project',
         errorMessage: '',

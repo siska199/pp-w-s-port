@@ -9,6 +9,7 @@ import SliderBase from '@components/ui/slider/slider-base';
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { formatDate } from '@lib/helper/function';
 import { slideInAnimation } from '@assets/styles/animation';
+import { TTypeDateFormat } from '@typescript/ui-types';
 
 const EducationSection = () => {
     const { isLoading, getEducationList, educationList } = useContext(contextPortfolio);
@@ -46,7 +47,7 @@ const CardEducation = (props: TPropsCardEducation) => {
                 {school.name} - {major.name}
             </h5>
             <p className="font-thin">
-                {formatDate({ date: start_at })} | {formatDate({ date: end_at })}
+                {formatDate({ date: start_at, format: TTypeDateFormat['DD MONTH YEAR'] })} | {formatDate({ date: end_at, format: TTypeDateFormat['DD MONTH YEAR'] })}
             </p>
             <div className="container-list-disc-style" dangerouslySetInnerHTML={{ __html: description }}></div>
         </div>

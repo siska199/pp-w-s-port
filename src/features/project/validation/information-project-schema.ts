@@ -59,7 +59,7 @@ export const initialFormInformationProject = {
     },
     thumbnail_image: {
         name: 'thumbnail_image',
-        label: 'Thumbnail',
+        label: 'Thumbnail (Opsional)',
         value: null as null | File,
         listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG],
         isCompress: true,
@@ -96,6 +96,13 @@ export const initialFormInformationProject = {
         value: '',
         errorMessage: '',
     },
+    is_show_project: {
+        name: 'is_show_project',
+        label: 'Is Show Project',
+        placeholder: appMessage.selectInputPlaceolder('Is Show Project'),
+        value: 'false',
+        errorMessage: '',
+    },
 };
 const informationProjectSchema = z.object({
     id: zString({ name: 'ID', mandatory: false }),
@@ -109,6 +116,7 @@ const informationProjectSchema = z.object({
     thumbnail_image: zFileLocale({
         name: 'thumbnail_image',
         listAcceptedTypeFile: initialFormInformationProject.thumbnail_image.listAcceptedTypeFile,
+        mandatory: false,
     }),
     description: zString({
         name: 'Description',
@@ -121,6 +129,10 @@ const informationProjectSchema = z.object({
     id_profession: zString({ name: 'Role' }),
     start_at: zDate({ name: 'Start At' }),
     end_at: zDate({ name: 'End At' }),
+    is_show_project: zString({
+        name: 'Is Show Project',
+        mandatory: false,
+    }),
 });
 
 export type TInformationProjectSchema = z.input<typeof informationProjectSchema>;

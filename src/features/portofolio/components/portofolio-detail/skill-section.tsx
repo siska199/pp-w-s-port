@@ -57,9 +57,9 @@ const SkillSection = () => {
                         </Container>
                     </motion.div>
 
-                    <div className="md:p-8 grid grid-cols-1 md:flex flex-wrap md:m-auto justify-center items-center gap-4">
+                    <div className="md:p-8 grid grid-cols-2 md:flex flex-wrap md:m-auto justify-center items-center gap-4">
                         {isLoading['SKILL_LIST'] ? (
-                            <div className="ml-4">
+                            <div >
                                 <Loading />
                             </div>
                         ) : (

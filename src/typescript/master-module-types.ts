@@ -51,6 +51,7 @@ export interface TMasterCategorySkill {
     name: string;
     categoryName?: string;
     categoryId?: string;
+    image: string;
 }
 export interface TUser {
     first_name: string;

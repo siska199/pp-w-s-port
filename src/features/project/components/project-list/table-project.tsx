@@ -53,7 +53,7 @@ const TableProject = () => {
                 className: ' min-w-[15rem] flex justify-center',
                 customeComponent: (data: TProject) => {
                     return (
-                        <div className="flex  gap-2">
+                        <div className="flex  gap-2 flex-wrap justify-center">
                             {data?.tech_stacks.map((techStack, i) => (
                                 <div key={i}>
                                     <Badge key={i} variant={techStack.color} label={techStack.name} className="text-start px-4" />

@@ -2,6 +2,7 @@ import React, { HTMLProps, useCallback, useState } from 'react';
 
 import { useIntersectionObserver } from '@hooks/use-intersection-observer';
 import { cn, getAssetURL } from '@lib/helper/function';
+import noImageAvailable from '../../assets/images/no-image-available.svg';
 
 export interface TPropsImage extends Omit<Partial<HTMLProps<HTMLImageElement>>, 'src'> {
     src: string;
@@ -52,7 +53,7 @@ const Image = (props: TPropsImage) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const resolvedSrc = src.includes('http') ? src : getAssetURL({ name: src });
+    const resolvedSrc = src?.includes('http') ? src : src ? getAssetURL({ name: src }) : noImageAvailable;
 
     const handleLoad = useCallback(() => {
         if (timeoutLoadImage) {

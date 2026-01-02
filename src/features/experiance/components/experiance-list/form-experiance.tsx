@@ -22,6 +22,7 @@ const FormExperiance = () => {
     const [modalForm, setModalForm] = useState({
         isShow: false,
         action: TTypeActionModalForm.ADD,
+        customeClass: { mdBody: '!overflow-y-visible ' },
     });
 
     const [form, setForm] = useState(deepCopy({ ...initialFormExperiance }));
@@ -58,7 +59,7 @@ const FormExperiance = () => {
         }
     };
     useEventEmitter(EVENT_EXPERIANCE.SET_MODAL_FORM_EXPERIANCE, (data) => {
-        setModalForm({ ...data });
+        setModalForm({ ...modalForm, ...data });
     });
 
     useEventEmitter(EVENT_EXPERIANCE.SET_EXPERIANCE, (data) => {

@@ -145,6 +145,12 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
                           },
                           false,
                       ),
+                      getListProjectLink(
+                          {
+                              id_project: id,
+                          },
+                          false,
+                      ),
                   ])
                 : null;
             const resultInformationProject = result?.[0];

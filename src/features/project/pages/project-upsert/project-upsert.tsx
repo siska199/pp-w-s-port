@@ -4,6 +4,7 @@ import FormResponsiblityProject from '@features/project/components/project-upser
 import ContextFormProjectProvider from '@features/project/context/form-project-context';
 import ContainerProtectedPage from '@components/ui/container/container-protected-page';
 import HeaderPage from '@components/ui/header/header-page';
+import FormLinkProject from '@features/project/components/project-upsert/project-link/form-link-project';
 
 const ProjectUpsertPage = () => {
     return (
@@ -14,6 +15,7 @@ const ProjectUpsertPage = () => {
             </ContainerProtectedPage>
             <FormProjectMenu />
             <FormResponsiblityProject />
+            <FormLinkProject />
         </ContextFormProjectProvider>
     );
 };

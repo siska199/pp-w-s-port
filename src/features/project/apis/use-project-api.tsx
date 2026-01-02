@@ -26,11 +26,12 @@ const useProjectAPI = () => {
         return response;
     };
 
-    const getProjectDetail = async (param: string) => {
+    const getProjectDetail = async (param: string, isLoading = true) => {
         const id = param;
 
         const response = await apiClient<TProject>({
             endpoint: ENDPOINT.PROJECT.GET_DETAIL_PROJECT(id),
+            isLoading,
         });
 
         return response;

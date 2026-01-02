@@ -32,7 +32,7 @@ const LinkProjects = () => {
     });
     return (
         <div className="space-y-10">
-            <Header title="LINK Project" onClickAddData={handleOnClickAddData} />
+            <Header title="Link Project" onClickAddData={handleOnClickAddData} />
             {listProjectLink?.length === 0 && (
                 <EmptyData
                     customeClass={{

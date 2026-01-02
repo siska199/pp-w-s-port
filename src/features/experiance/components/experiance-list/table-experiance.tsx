@@ -51,7 +51,7 @@ const TableExperiance = () => {
                 className: 'min-w-[8rem]',
                 isSorted: true,
                 customeComponent: (data: TExperiance) => {
-                    return <div>{formatDate({ date: data.start_at })}</div>;
+                    return <div>{formatDate({ date: data.end_at })}</div>;
                 },
             },
             {

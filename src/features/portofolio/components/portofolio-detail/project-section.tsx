@@ -1,23 +1,22 @@
-import { useCallback, useContext, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useCallback, useContext, useRef, useState } from 'react';
 
-import { contextPortfolio } from '@features/portofolio/context/context-portofolio';
-import { TParamsListProject } from '@features/project/apis/use-project-api';
-import { TProject } from '@features/project/types/project-type';
 import Badge from '@components/ui/badge';
 import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
 import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
 import InputBase from '@components/ui/input/input-base';
+import { contextPortfolio } from '@features/portofolio/context/context-portofolio';
+import { TParamsListProject } from '@features/project/apis/use-project-api';
+import { TProject } from '@features/project/types/project-type';
 
-import { useFetchOnView } from '@hooks/use-fetch-on-view';
-import { convertEnumToLabel, debounce, formatDate } from '@lib/helper/function';
-import { routes } from '@routes/constant';
-import { TEventOnChange, TTypeDateFormat } from '@typescript/ui-types';
 import { IconArrowUp, IconSearch } from '@assets/icons';
 import { cardAnimation } from '@assets/styles/animation';
-
+import { useFetchOnView } from '@hooks/use-fetch-on-view';
+import { convertEnumToLabel, debounce } from '@lib/helper/function';
+import { routes } from '@routes/constant';
+import { TEventOnChange } from '@typescript/ui-types';
 const ProjectSection = () => {
     const { isLoading, getProjectList, projectConfig } = useContext(contextPortfolio);
 
@@ -71,7 +70,7 @@ const ProjectSection = () => {
                             ))}
                         </div>
 
-                        {(projectConfig?.projectList?.length != 0 || projectConfig?.currentPage !== projectConfig?.totalPage) && (
+                        {projectConfig?.projectList?.length != 0 && projectConfig?.currentPage !== projectConfig?.totalPage && (
                             <Button shape={'rounded'} variant={'glass'} size={'large'} className="min-w-[15rem] mx-auto  md:text-body-large  md:font-bold">
                                 Load More +
                             </Button>
@@ -88,11 +87,10 @@ type TPropsCardProject = TProject & {
 };
 
 const CardProject = (props: TPropsCardProject) => {
-    const { id, thumbnail_image, index, experiance, category, type, name, description } = props;
+    const { id, thumbnail_image, index, company_name, experiance, category, type, name, description } = props;
     const targetRef = useRef<HTMLDivElement | null>(null);
-
     return (
-        <motion.div className="overflow-hidden  bg-card-transparent rounded-md " ref={targetRef} {...cardAnimation({ index })}>
+        <motion.div className="overflow-hidden  bg-card-transparent rounded-md md:max-w-[25rem]" ref={targetRef} {...cardAnimation({ index })}>
             <Image
                 src={thumbnail_image}
                 className="h-[13rem] md:h-[15rem] aspect-square border-1 shadow-image-arise border-gray-500 "
@@ -106,12 +104,9 @@ const CardProject = (props: TPropsCardProject) => {
                             <Badge
                                 variant={'outline-white'}
                                 className="bg-transparent  font-bold text-white !text-end md:!text-center !justify-end md:!justify-center"
-                                label={`${convertEnumToLabel(type)} - ${experiance.profession.name}`}
+                                label={`${company_name} - ${experiance.profession.name}`}
                             />
-                            <p className="font-bold ">
-                                {formatDate({ date: experiance.start_at, format: TTypeDateFormat['DD MONTH YEAR'] })} -{' '}
-                                {formatDate({ date: experiance.end_at, format: TTypeDateFormat['DD MONTH YEAR'] })}
-                            </p>
+                            <p className="font-bold ">{convertEnumToLabel(type)}</p>
                         </Container>
                     ),
                 }}
@@ -125,7 +120,7 @@ const CardProject = (props: TPropsCardProject) => {
                     ))}
                 </Container>
                 <Button to={`/${routes.project?.child?.detail?.name}/${id}`} target="_blank" variant={'solid-black'}>
-                    View Project <IconArrowUp className="icon-white rotate-90 mt-1" />
+                    View Detail Project <IconArrowUp className="icon-white rotate-90 mt-1" />
                 </Button>
             </div>
         </motion.div>

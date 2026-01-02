@@ -13,7 +13,7 @@ import { deepCopy, extractValueFromForm, mappingErrorsToForm, mappingValuesToFor
 import { TTypeActionModalForm } from '@typescript/index-type';
 import { TEventSubmitForm } from '@typescript/ui-types';
 
-const FormLinkProject = () => {
+const FormResponsibilityProject = () => {
     const [modalForm, setModalForm] = useState({
         moduleName: 'Project Responsibility',
         isShow: false,
@@ -75,4 +75,4 @@ const FormLinkProject = () => {
     );
 };
 
-export default FormLinkProject;
+export default FormResponsibilityProject;

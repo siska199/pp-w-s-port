@@ -10,6 +10,8 @@ import InputDate from '@components/ui/input/input-date';
 import InputUploadFile from '@components/ui/input/input-file/input-file-v1';
 import InputSelect from '@components/ui/input/input-select/input-select';
 import InputTextArea from '@components/ui/input/input-text-area';
+import LinkProjects from '@features/project/components/project-upsert/project-link/link-projects';
+import InputCheckbox from '@components/ui/input/input-checkbox';
 
 const FormInformationProject = () => {
     const { formInformationProject: form, handleOnChangeFormInformationProject: handleOnChange, isLoading, handleOnSubmitInformationProject: handleOnSubmit } = useContext(contextFormProject);
@@ -35,6 +37,7 @@ const FormInformationProject = () => {
                 </div>
                 <InputUploadFile {...form['thumbnail_image']} onChange={handleOnChange} />
                 <InputTextArea {...form['description']} onChange={handleOnChange} />
+                <InputCheckbox {...form['is_show_project']} onChange={handleOnChange}/>
                 <Button onClick={handleOnSubmit} className="ml-auto mt-4 md:min-w-[8rem]" isLoading={isLoading}>
                     Save
                 </Button>
@@ -44,6 +47,7 @@ const FormInformationProject = () => {
                     <Divider />
                     <ProjectMenus />
                     <ResponsibilityProjects />
+                    <LinkProjects />
                 </>
             )}
         </>
