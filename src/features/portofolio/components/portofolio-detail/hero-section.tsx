@@ -10,15 +10,20 @@ import Image from '@components/ui/image';
 
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import useMediaQuery from '@hooks/use-media-query';
+import { useAppDispatch } from '@store/store';
+import { handleSetIsloading } from '@store/ui-slice';
 import { IconDownload } from '@assets/icons';
 import { opacityAnimation } from '@assets/styles/animation';
 
 const HeroSection = () => {
     const { isLoading, personalInformation: data, socialLinkList, getPersonalInformation, getSocialLinkList } = useContext(contextPortfolio);
+    const dispatch = useAppDispatch();
+
     const { ref } = useFetchOnView({
         fetcher: async () => {
             await getPersonalInformation();
             await getSocialLinkList();
+            dispatch(handleSetIsloading(false));
         },
     });
     const { isMaxMd } = useMediaQuery();

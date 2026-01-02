@@ -1,4 +1,5 @@
 import { useContext, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 
 import { TExperiance } from '@features/experiance/types/experiance-type';
@@ -10,7 +11,6 @@ import ContainerSection from '@components/ui/container/container-section';
 
 import { useAnimateScrollCustome } from '@hooks/use-animate-scroll-custome';
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
-import { useAppDispatch } from '@store/store';
 import { handleSetModal } from '@store/ui-slice';
 import { formatDate } from '@lib/helper/function';
 import { TTypeDateFormat } from '@typescript/ui-types';
@@ -47,7 +47,20 @@ const CardExperiance = (props: TPropsExperiance) => {
         targetRef,
         offset: ['0 1', '1.33 1'],
     });
-
+    const dispatch = useDispatch();
+    const handleClickResAndCon = () => {
+        dispatch(
+            handleSetModal({
+                isShow: true,
+                title: `Responsibilities and Contributions`,
+                customeClass: {
+                    mdContent: 'shadow-none border-none',
+                    mdBody: 'overflow-y-auto ',
+                },
+                children: <div className="container-list-disc-style" dangerouslySetInnerHTML={{ __html: description }}></div>,
+            }),
+        );
+    };
     return (
         <motion.div className="relative bg-card-transparent flex pb-4 w-full rounded-md" ref={targetRef} style={{ scale: scrollYProgress, opacity: scrollYProgress }}>
             <div className="p-4">
@@ -74,7 +87,11 @@ const CardExperiance = (props: TPropsExperiance) => {
                 </div>
 
                 <CardProjects projects={projects} />
-                <ResAndCon description={description} />
+                <div className="space-y-2">
+                    <p onClick={() => handleClickResAndCon()} className="font-medium cursor-pointer hover:underline">
+                        Resonsibility And Contribution 📍
+                    </p>
+                </div>
             </div>
         </motion.div>
     );
@@ -96,35 +113,6 @@ const CardProjects = (props: TPropsProjects) => {
                     </li>
                 ))}
             </ul>
-        </div>
-    );
-};
-
-type TPropsResAndCon = {
-    description: string;
-};
-const ResAndCon = (props: TPropsResAndCon) => {
-    const { description } = props;
-    const dispatch = useAppDispatch();
-
-    const handleClickResAndCon = () => {
-        dispatch(
-            handleSetModal({
-                isShow: true,
-                title: `Responsibilities and Contributions`,
-                customeClass: {
-                    mdContent: 'shadow-none border-none',
-                    mdBody: 'overflow-y-auto ',
-                },
-                children: <div className="container-list-disc-style" dangerouslySetInnerHTML={{ __html: description }}></div>,
-            }),
-        );
-    };
-    return (
-        <div className="space-y-2">
-            <p onClick={() => handleClickResAndCon()} className="font-medium cursor-pointer hover:underline">
-                Resonsibility And Contribution 📍
-            </p>
         </div>
     );
 };

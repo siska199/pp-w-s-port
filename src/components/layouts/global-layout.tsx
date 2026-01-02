@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect } from 'react';
 
 import useAuth, { TTypeComponentNameUseAuth } from '@features/auth/hooks/use-auth';
@@ -43,13 +42,7 @@ const GlobalLayout = (props: TPropsGlobalLayout) => {
                     },
                 }}
             />
-            <ContainerModal
-                {...modal}
-                isShow={modal?.isShow || false}
-                // @ts-expect-error
-                children={modal?.children?._source ? modal?.children : <></>}
-                onClose={() => dispatch(handleSetModal({ ...initialStateUISlice?.modal }))}
-            />
+            <ContainerModal {...modal} isShow={modal?.isShow || false} children={modal?.children} onClose={() => dispatch(handleSetModal({ ...initialStateUISlice?.modal }))} />
             {isLoading && <Loading type="page" />}
             <Alert {...alertConfig} message={alertConfig?.message} show={alertConfig?.show} />
         </>

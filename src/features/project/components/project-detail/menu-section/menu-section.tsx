@@ -30,7 +30,7 @@ const MenuSection = () => {
         setCurrIndexImg(swiper.realIndex);
     };
 
-    if (data?.project_menus?.length === 0) return null;
+    if (!data || data?.project_menus?.length === 0) return null;
 
     return (
         <ContainerSection title="Menu" className=" ">

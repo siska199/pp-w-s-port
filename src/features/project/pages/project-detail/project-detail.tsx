@@ -1,5 +1,4 @@
 import IntroductionSection from '@features/project/components/project-detail/introduction-section';
-import MenuSection from '@features/project/components/project-detail/menu-section/menu-section';
 import ResponsibilitySection from '@features/project/components/project-detail/responsibility-section';
 import TechStackSection from '@features/project/components/project-detail/tech-stack-section';
 import ContextProjectProvider from '@features/project/context/context-project';
@@ -12,7 +11,7 @@ const ProjectDetailPage = () => {
                 <>
                     <IntroductionSection />
                     <TechStackSection />
-                    <MenuSection />
+                    {/* <MenuSection /> */}
                     <ResponsibilitySection />
                 </>
             </ContainerLandingPage>
