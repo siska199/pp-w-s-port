@@ -1,4 +1,4 @@
-import React, { HTMLProps, useCallback, useState } from 'react';
+import React, { HTMLProps, useCallback, useEffect, useState } from 'react';
 
 import { useIntersectionObserver } from '@hooks/use-intersection-observer';
 import { cn, getAssetURL } from '@lib/helper/function';
@@ -47,6 +47,11 @@ const Image = (props: TPropsImage) => {
 
         ...attrs
     } = props;
+
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+
+    if (!mounted) return null;
     const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({
         rootMargin,
         freezeOnceVisible: true,
@@ -72,7 +77,7 @@ const Image = (props: TPropsImage) => {
                 <img
                     src={resolvedSrc}
                     alt={alt}
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                     onLoad={handleLoad}
                     className={cn(
