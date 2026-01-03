@@ -48,9 +48,6 @@ const Image = (props: TPropsImage) => {
         ...attrs
     } = props;
 
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
-
     const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({
         rootMargin,
         freezeOnceVisible: true,
@@ -67,7 +64,6 @@ const Image = (props: TPropsImage) => {
             setIsLoading(false);
         }
     }, [timeoutLoadImage]);
-    if (!mounted) return null;
 
     return (
         <div ref={lazy ? ref : undefined} className={cn('relative group w-full h-full overflow-hidden', className, customeClassName?.container)}>
