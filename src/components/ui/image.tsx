@@ -1,4 +1,4 @@
-import React, { HTMLProps, useCallback, useEffect, useState } from 'react';
+import React, { HTMLProps, useCallback, useState } from 'react';
 
 import { useIntersectionObserver } from '@hooks/use-intersection-observer';
 import { cn, getAssetURL } from '@lib/helper/function';
