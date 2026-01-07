@@ -247,7 +247,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         });
     };
 
-    const handleOnChangeFormResponsibilityProject = useCallback((e: TEventOnChange) => {
+    const handleOnChangeFormResponsibilityProject = (e: TEventOnChange) => {
         const currForm = formResponsibilityProject;
         const name = e.target.name as TKeyFormResponsibilityProject;
         const value = e.target.value;
@@ -256,9 +256,9 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         setFormResponsibilityProject({
             ...currForm,
         });
-    }, []);
+    };
 
-    const handleOnChangeFormLinkProject = useCallback((e: TEventOnChange) => {
+    const handleOnChangeFormLinkProject = (e: TEventOnChange) => {
         const currForm = formLinkProject;
         const name = e.target.name as TKeyFormLinkProject;
         const value = e.target.value;
@@ -267,7 +267,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         setFormLinkProject({
             ...currForm,
         });
-    }, []);
+    };
 
     const handleOnSubmitInformationProject = async (e: TEventSubmitForm) => {
         dispatch(handleSetIsloading(true));

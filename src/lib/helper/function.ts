@@ -235,6 +235,7 @@ interface TMappingValuesToForm<TForm extends TObject> {
 }
 export const mappingValuesToForm = <TForm extends TObject>(params: TMappingValuesToForm<TForm>) => {
     const { form, values } = params;
+
     Object.keys(form).forEach((key) => {
         form[key].value = values[key] || '';
     });
@@ -465,7 +466,7 @@ export const convertEnumToLabel = (str: string) => {
 };
 
 export function toLocalDateInputValue(isoString: string | Date | null) {
-    if(!isoString) return '';
+    if (!isoString) return '';
     const date = new Date(isoString);
-    return date.toLocaleDateString('en-CA'); 
+    return date.toLocaleDateString('en-CA');
 }
