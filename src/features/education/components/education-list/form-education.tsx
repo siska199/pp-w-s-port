@@ -161,7 +161,7 @@ const FormEducation = () => {
         });
         if (!result?.status) return;
         handleCloseFormEducation();
-        eventEmitter.emit(EVENT_EDUCATION.REFRESH_DATA_TABLE_EDUCATION, true);
+        eventEmitter.emit(EVENT_EDUCATION.SEARCH_DATA_TABLE_EDUCATION_WITH_CURR_FILTER, true);
     };
 
     return (

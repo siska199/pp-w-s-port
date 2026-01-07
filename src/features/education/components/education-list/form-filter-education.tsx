@@ -9,6 +9,7 @@ import useMasterAPI from '@apis/use-master-api';
 import { debounce, deepCopy, generateOptions } from '@lib/helper/function';
 import { TEventOnChange } from '@typescript/ui-types';
 import { IconSearch } from '@assets/icons';
+import useEventEmitter from '@hooks/use-event-emitter';
 
 const FormFilterEducation = () => {
     const [form, setForm] = useState(deepCopy({ ...initialFormFilter }));
@@ -48,6 +49,10 @@ const FormFilterEducation = () => {
         });
     }, 1500);
 
+    useEventEmitter(EVENT_EDUCATION.SEARCH_DATA_TABLE_EDUCATION_WITH_CURR_FILTER, async () => {
+        handleEmitEventSearchDataTable();
+    });
+    
     return (
         <div className="grid md:grid-cols-4 gap-4">
             <InputBase
