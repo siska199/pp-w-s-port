@@ -1,6 +1,5 @@
-
 const SectionSkillUserDetail = () => {
-  return <div>SectionSkillUserDetail</div>;
+    return <div>SectionSkillUserDetail</div>;
 };
 
 export default SectionSkillUserDetail;

@@ -7,10 +7,10 @@ import InputBase from '@components/ui/input/input-base';
 import InputSelect from '@components/ui/input/input-select/input-select';
 import useMasterAPI from '@apis/use-master-api';
 
+import useEventEmitter from '@hooks/use-event-emitter';
 import { debounce, deepCopy, generateOptions, generateOptionsFromEnum } from '@lib/helper/function';
 import { TCustomeEventOnChange, TOption } from '@typescript/ui-types';
 import { IconSearch } from '@assets/icons';
-import useEventEmitter from '@hooks/use-event-emitter';
 
 export interface TOptionsFormFilterSkillUser {
     categories: TOption[];
@@ -62,7 +62,7 @@ const FormFilterSkillUser = () => {
     useEventEmitter(EVENT_SKILL_USER.SEARCH_DATA_TABLE_SKILL_USER_WITH_CURR_FILTER, async () => {
         handleEmitEventSearchDataTable();
     });
-    
+
     return (
         <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

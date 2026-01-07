@@ -175,7 +175,7 @@ const FormEducation = () => {
                 <InputNumber {...form['gpa']} value={String(form['gpa'].value)} onChange={handleOnChange} />
             </div>
             <div className="grid md:grid-cols-2 gap-4 overflow-visible">
-                <InputDate {...form['start_at']} onChange={handleOnChange} />                
+                <InputDate {...form['start_at']} onChange={handleOnChange} />
                 <InputDate {...form['end_at']} minDate={form.start_at.value ?? undefined} onChange={handleOnChange} />
             </div>
 

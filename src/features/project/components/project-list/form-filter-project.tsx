@@ -1,15 +1,15 @@
-import { eventEmitter } from '@event-emitters';
 import { useEffect, useState } from 'react';
+import { eventEmitter } from '@event-emitters';
 
-import useMasterAPI from '@apis/use-master-api';
-import InputBase from '@components/ui/input/input-base';
-import InputSelect from '@components/ui/input/input-select/input-select';
 import EVENT_PROJECT from '@features/project/event-emitters/project-event';
 import { TTypeCategoryProject } from '@features/project/types/project-type';
+import InputBase from '@components/ui/input/input-base';
+import InputSelect from '@components/ui/input/input-select/input-select';
+import useMasterAPI from '@apis/use-master-api';
 
-import { IconSearch } from '@assets/icons';
 import { debounce, deepCopy, generateOptions, generateOptionsFromEnum } from '@lib/helper/function';
 import { TEventOnChange, TOption } from '@typescript/ui-types';
+import { IconSearch } from '@assets/icons';
 
 const FormFilterProject = () => {
     const [form, setForm] = useState(deepCopy({ ...initialFormFilter }));

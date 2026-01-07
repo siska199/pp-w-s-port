@@ -36,7 +36,7 @@ const useExperianceAPI = () => {
             endpoint: ENDPOINT.EXPERIANCE.UPSERT_EXPERIANCE,
             payload: {
                 ...payload,
-                is_currently_work_here: payload?.is_currently_work_here==="true"
+                is_currently_work_here: payload?.is_currently_work_here === 'true',
             },
             method: 'post',
             message: appMessage.upsertModule(payload?.id, 'Experiance'),

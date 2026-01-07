@@ -1,9 +1,9 @@
+import { messageError } from '@validation/constant';
 import { zBooleanCheckbox, zDate, zString } from '@validation/reusable-schema';
 import z from 'zod';
 
 import appMessage from '@lib/data/app-message';
 import { TOption } from '@typescript/ui-types';
-import { messageError } from '@validation/constant';
 export interface TOptionsFormExperiance {
     companies: TOption[];
     professions: TOption[];

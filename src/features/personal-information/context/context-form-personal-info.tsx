@@ -38,7 +38,7 @@ interface TStateFormPersonalInfo {
     handleOnSubmit: (e: TEventSubmitForm) => void;
     isLoading: boolean;
     errorKeyMetric: string;
-    setErrorKeyMetric :  React.Dispatch<React.SetStateAction<string>>;
+    setErrorKeyMetric: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const intialStateFormPersonalInformation = {
@@ -65,7 +65,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
     const { handleGetFileFromUrl } = useFile();
 
     const [listKeyMetric, setListKeyMetric] = useState<TKeyMetric[]>([]);
-    const [errorKeyMetric, setErrorKeyMetric] = useState<string>('')
+    const [errorKeyMetric, setErrorKeyMetric] = useState<string>('');
     const [listSelectedSocialLink, setListSelectedSocialLink] = useState<TSelectedSocialLink[]>([]);
     const [formGeneralPersonalInfo, setFormGeneralInfoPersonalInfo] = useState(intialStateFormPersonalInformation.formGeneralPersonalInfo);
     const [isLoading, setIsLoading] = useState(false);
@@ -120,7 +120,6 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
                     url: resultPersonalInfo?.data?.resume,
                     filename: 'resume',
                 });
-                
             }
 
             setFormGeneralInfoPersonalInfo({ ...updatedFormGeneralPersonalInfo });
@@ -218,7 +217,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
             setFormGeneralInfoPersonalInfo({ ...updatedFormGeneralInfo });
 
             if (!isValidFormListKeyMetric) {
-                setErrorKeyMetric('Key Metrics is Required')
+                setErrorKeyMetric('Key Metrics is Required');
             }
 
             if (isValidFormGeneralInfo && isValidFormListSelectedSocialLink && isValidFormListKeyMetric) {

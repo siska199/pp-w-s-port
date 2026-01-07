@@ -1,4 +1,5 @@
 import { createContext, SetStateAction, useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { TParamsListEducation } from '@features/education/apis/use-education-api';
 import { TEducation } from '@features/education/types/education-type';
@@ -12,7 +13,6 @@ import { TParamsListSkillUser } from '@features/skill-user/apis/use-skill-user-a
 import { TSkillUser } from '@features/skill-user/types/skill-user-type';
 
 import { TMasterCategorySkill } from '@typescript/master-module-types';
-import { useNavigate } from 'react-router-dom';
 
 export enum EPortfolioLoading {
     PERSONAL_INFORMATION = 'PERSONAL_INFORMATION',

@@ -74,7 +74,8 @@ const CardExperiance = (props: TPropsExperiance) => {
                     {company_name} - {profession.name}
                 </h5>
                 <p className="font-thin">
-                    {formatDate({ date: toLocalDateInputValue(start_at), format: TTypeDateFormat['DD MONTH YEAR'] })} | {formatDate({ date: toLocalDateInputValue(end_at), format: TTypeDateFormat['DD MONTH YEAR'] })}
+                    {formatDate({ date: toLocalDateInputValue(start_at), format: TTypeDateFormat['DD MONTH YEAR'] })} |{' '}
+                    {formatDate({ date: toLocalDateInputValue(end_at), format: TTypeDateFormat['DD MONTH YEAR'] })}
                 </p>
 
                 <div className=" flex flex-col md:flex-row gap-2 md:gap-6 justify-between">

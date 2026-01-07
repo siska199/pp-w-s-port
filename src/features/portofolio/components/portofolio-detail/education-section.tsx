@@ -47,7 +47,8 @@ const CardEducation = (props: TPropsCardEducation) => {
                 {school.name} - {major.name}
             </h5>
             <p className="font-thin">
-                {formatDate({ date: toLocalDateInputValue(start_at), format: TTypeDateFormat['DD MONTH YEAR'] })} | {formatDate({ date: toLocalDateInputValue(end_at), format: TTypeDateFormat['DD MONTH YEAR'] })}
+                {formatDate({ date: toLocalDateInputValue(start_at), format: TTypeDateFormat['DD MONTH YEAR'] })} |{' '}
+                {formatDate({ date: toLocalDateInputValue(end_at), format: TTypeDateFormat['DD MONTH YEAR'] })}
             </p>
             <div className="container-list-disc-style" dangerouslySetInnerHTML={{ __html: description }}></div>
         </div>

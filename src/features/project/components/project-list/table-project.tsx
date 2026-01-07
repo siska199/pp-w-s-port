@@ -11,10 +11,10 @@ import useEventEmitter from '@hooks/use-event-emitter';
 import useTable from '@hooks/use-table';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { handleSetModalConfirmation } from '@store/ui-slice';
+import { convertEnumToLabel } from '@lib/helper/function';
 import { routes } from '@routes/constant';
 import { TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type';
 import { TSettingTable } from '@typescript/ui-types';
-import { convertEnumToLabel } from '@lib/helper/function';
 
 const TableProject = () => {
     const isLoading = useAppSelector((state) => state.ui.isLoading);

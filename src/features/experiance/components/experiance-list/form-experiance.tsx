@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { eventEmitter } from '@event-emitters';
 
 import useExperianceAPI from '@features/experiance/apis/use-experiance-api';
 import EVENT_EXPERIANCE from '@features/experiance/event-emitters/experiance-event';
 import experianceSchema, { initialFormExperiance, TExperianceSchema, TOptionsFormExperiance } from '@features/experiance/validation/experiance-schema';
+import InputCheckbox from '@components/ui/input/input-checkbox';
 import InputDate from '@components/ui/input/input-date';
 import InputSelect from '@components/ui/input/input-select/input-select';
 import InputTextEditor from '@components/ui/input/input-text-editor';
@@ -14,7 +15,6 @@ import useEventEmitter from '@hooks/use-event-emitter';
 import { deepCopy, extractValueFromForm, generateOptions, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function';
 import { TTypeActionModalForm } from '@typescript/index-type';
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types';
-import InputCheckbox from '@components/ui/input/input-checkbox';
 
 const FormExperiance = () => {
     const { getListMasterCompany, getListMasterProfession } = useMasterAPI();
