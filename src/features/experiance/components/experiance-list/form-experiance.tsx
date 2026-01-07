@@ -14,6 +14,7 @@ import useEventEmitter from '@hooks/use-event-emitter';
 import { deepCopy, extractValueFromForm, generateOptions, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function';
 import { TTypeActionModalForm } from '@typescript/index-type';
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types';
+import InputCheckbox from '@components/ui/input/input-checkbox';
 
 const FormExperiance = () => {
     const { getListMasterCompany, getListMasterProfession } = useMasterAPI();
@@ -115,6 +116,8 @@ const FormExperiance = () => {
             </div>
             <div className="grid md:grid-cols-2 gap-4">
                 <InputDate {...form['start_at']} onChange={handleOnChange} />
+                <InputCheckbox {...form['is_currently_work_here']} onChange={handleOnChange} />
+
                 <InputDate {...form['end_at']} onChange={handleOnChange} />
             </div>
             <InputTextEditor {...form['description']} onChange={handleOnChange} />

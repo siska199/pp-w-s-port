@@ -7,8 +7,9 @@ import DisplayFile from '@components/ui/display/display-file';
 import DisplayInfo, { TTypeDispalyInformation } from '@components/ui/display/display-info';
 
 import useFile from '@hooks/use-file';
-import { formatDate } from '@lib/helper/function';
+import { formatDate, toLocalDateInputValue } from '@lib/helper/function';
 import { TFileWithPreview } from '@typescript/index-type';
+import { TTypeDateFormat } from '@typescript/ui-types';
 
 type TPickEducation = Pick<TEducation<TFileWithPreview | null>, 'gpa' | 'description' | 'level_name' | 'major_name' | 'school_name' | 'start_at' | 'end_at' | 'school_image'>;
 
@@ -72,8 +73,8 @@ const SectionEducationDetail = () => {
             educationData['major_name'].value = education?.level_name;
             educationData['gpa'].value = education?.gpa;
             educationData['description'].value = education?.description;
-            educationData['start_at'].value = formatDate({ date: education?.start_at }) as unknown as Date;
-            educationData['end_at'].value = formatDate({ date: education?.end_at }) as unknown as Date;
+            educationData['start_at'].value = formatDate({ date: toLocalDateInputValue(education?.start_at), format: TTypeDateFormat['DD MONTH YEAR'] }) as unknown as Date;
+            educationData['end_at'].value = formatDate({ date: toLocalDateInputValue(education?.end_at), format: TTypeDateFormat['DD MONTH YEAR'] }) as unknown as Date;
             educationData['school_image'].value = await handleGetFileFromUrl({
                 url: education?.school_image as string,
                 filename: 'professional-image',
@@ -95,7 +96,7 @@ const SectionEducationDetail = () => {
                 />
                 <div className="grid grid-cols-1 md:grid-cols-3  gap-4">
                     {Object.keys(educationData)
-                        .filter((key, _) => key !== 'school_image')
+                        .filter((key, _) => !['school_image', 'description']?.includes(key))
                         ?.map((key, i) => {
                             const keyField = key as keyof typeof educationData;
                             let type = TTypeDispalyInformation.TEXT;
@@ -108,6 +109,7 @@ const SectionEducationDetail = () => {
                             return <DisplayInfo key={i} label={educationData[keyField].label} value={String(educationData[keyField].value)} type={type} withBorder={true} />;
                         })}
                 </div>
+                <DisplayInfo label={educationData.description.label} value={String(educationData.description.value)} type={TTypeDispalyInformation.HTML} withBorder={true} />
             </div>
         </div>
     );

@@ -96,8 +96,8 @@ export const initialFormInformationProject = {
         value: '',
         errorMessage: '',
     },
-    is_show_project: {
-        name: 'is_show_project',
+    is_show: {
+        name: 'is_show',
         label: 'Is Show Project',
         placeholder: appMessage.selectInputPlaceolder('Is Show Project'),
         value: 'true',
@@ -129,7 +129,7 @@ const informationProjectSchema = z.object({
     id_profession: zString({ name: 'Role' }),
     start_at: zDate({ name: 'Start At' }),
     end_at: zDate({ name: 'End At' }),
-    is_show_project: zString({
+    is_show: zString({
         name: 'Is Show Project',
         mandatory: false,
     }),

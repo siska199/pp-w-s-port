@@ -57,6 +57,13 @@ export const initialFormExperiance = {
         label: 'Description',
         value: '',
     },
+    is_currently_work_here: {
+        name: 'is_currently_work_here',
+        label: 'Is Currently Work Here',
+        placeholder: appMessage.selectInputPlaceolder('Is Currently Work Here'),
+        value: 'false',
+        errorMessage: '',
+    },
 };
 
 export default experianceSchema;

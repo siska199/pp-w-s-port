@@ -141,7 +141,7 @@ const generalPersonalInfoSchema = z
         phone_number: zPhoneNumber('Phone Number', true),
         email: zEmail(),
         bio: zString({ name: 'Bio', max: 100 }),
-        about_me: zString({ name: 'About Me', max: initialFormGeneralPersonalInfo.about_me.maxLength }),
+        about_me: zString({ name: 'About Me', min: 150, max: initialFormGeneralPersonalInfo.about_me.maxLength }),
         professional_image: zFileLocale({
             name: 'Professional Image',
             listAcceptedTypeFile: initialFormGeneralPersonalInfo.professional_image.listAcceptedTypeFile,

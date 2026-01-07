@@ -39,7 +39,7 @@ export interface TProject {
 
     start_at: string;
     end_at: string;
-    is_show_project: boolean;
+    is_show: boolean;
 }
 
 export interface TProjectMenuItem {

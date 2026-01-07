@@ -231,7 +231,7 @@ export const mappingErrorsToForm = <TSchema, TForm extends TObject>(params: TMap
 };
 
 interface TMappingValuesToForm<TForm extends TObject> {
-    values: Record<keyof TForm, any>;
+    values: Partial<Record<keyof TForm, any>>;
     form: TForm;
 }
 export const mappingValuesToForm = <TForm extends TObject>(params: TMappingValuesToForm<TForm>) => {

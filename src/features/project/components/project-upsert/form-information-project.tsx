@@ -37,7 +37,7 @@ const FormInformationProject = () => {
                 </div>
                 <InputUploadFile {...form['thumbnail_image']} onChange={handleOnChange} />
                 <InputTextArea {...form['description']} onChange={handleOnChange} />
-                <InputCheckbox {...form['is_show_project']} onChange={handleOnChange} />
+                <InputCheckbox {...form['is_show']} onChange={handleOnChange} />
                 <Button onClick={handleOnSubmit} className="ml-auto mt-4 md:min-w-[8rem]" isLoading={isLoading}>
                     Save
                 </Button>

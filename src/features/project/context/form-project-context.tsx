@@ -164,7 +164,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
                     url: resultInformationProject.data?.thumbnail_image,
                     filename: 'thumbnail_image',
                 });
-                updatedFormInformationProject['is_show_project'].value = String(resultInformationProject.data?.is_show_project);
+                updatedFormInformationProject['is_show'].value = String(resultInformationProject.data?.is_show);
             }
             setFormInformationProject({
                 ...updatedFormInformationProject,
@@ -291,7 +291,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
             };
             const result = await upsertProject({
                 ...informationProject,
-                is_show_project: String(informationProject.is_show_project),
+                is_show: String(informationProject.is_show),
                 ...(id && { id }),
             });
             result?.status && navigate(`?id=${result?.data?.id}`, { replace: true });
