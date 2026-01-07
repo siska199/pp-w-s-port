@@ -32,7 +32,7 @@ const SliderBase = (props: TPropsSliderBase) => {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             }}
-            className="swiper_container px-[5rem]"
+            className="swiper_container sm:px-[5rem]"
             modules={[Navigation]}
             spaceBetween={40}
             {...swiperProps}
