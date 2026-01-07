@@ -24,7 +24,7 @@ const FormExperiance = () => {
         moduleName: 'Experiance',
         isShow: false,
         action: TTypeActionModalForm.ADD,
-        customeClass: { mdBody: '!overflow-y-visible md:min-w-[38rem] ' },
+        customeClass: { mdBody: 'md:min-w-[38rem] ' },
     });
 
     const [form, setForm] = useState(deepCopy({ ...initialFormExperiance }));
