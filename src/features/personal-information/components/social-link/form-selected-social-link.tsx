@@ -65,14 +65,23 @@ const FormSelectedSocialLink = () => {
     });
 
     const handleOnChange = (e: TEventOnChange) => {
-        const value = e.target.value;
-        setFormSocialLink({
-            ...formSocialLink,
+        const value = e.target.value as string[];
+        setFormSocialLink((prev) => ({
+            ...prev,
             value,
             errorMessage: '',
-        });
+        }));
 
-        setListSelectedSocialLink(value?.map((data: string) => JSON.parse(data)));
+        const parsedValue = value.map((v) => JSON.parse(v));
+
+        setListSelectedSocialLink((prev) => {
+            if (parsedValue.length > prev.length) {
+                const addedItem = parsedValue.at(-1);
+                return [...prev, addedItem];
+            }
+
+            return prev.filter((item) => parsedValue.some((v) => v.name === item.name));
+        });
     };
 
     return (
