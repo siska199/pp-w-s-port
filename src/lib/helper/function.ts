@@ -60,12 +60,28 @@ export const getFieldLabelFromOptions = (params: Pick<TParamsFieldFromObjectList
     return array?.filter((data) => data?.value === value)?.[0]?.label;
 };
 
-export function debounce(func?: (...args: any[]) => void, wait?: number) {
-    let timeout: ReturnType<typeof setTimeout>;
-    return function (...args: any[]) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => (func ? func(...args) : null), wait);
+export type DebouncedFunction<T extends (...args: any[]) => void> = T & {
+    cancel: () => void;
+};
+
+export function debounce<T extends (...args: any[]) => void>(func?: T, wait: number = 0): DebouncedFunction<(...args: Parameters<T>) => void> {
+    let timeout: ReturnType<typeof setTimeout> | undefined;
+
+    const debounced = (...args: Parameters<T>) => {
+        if (timeout) clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            func?.(...args);
+        }, wait);
     };
+
+    debounced.cancel = () => {
+        if (timeout) {
+            clearTimeout(timeout);
+            timeout = undefined;
+        }
+    };
+
+    return debounced as DebouncedFunction<(...args: Parameters<T>) => void>;
 }
 
 interface TParamsGetAssetURl {

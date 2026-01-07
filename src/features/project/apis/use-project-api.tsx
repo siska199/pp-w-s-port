@@ -1,6 +1,6 @@
-import { TProject, TTypeTypeProject } from '@features/project/types/project-type';
-import { TInformationProjectSchema } from '@features/project/validation/information-project-schema';
 import ENDPOINT from '@apis/endpoints';
+import { TProject } from '@features/project/types/project-type';
+import { TInformationProjectSchema } from '@features/project/validation/information-project-schema';
 
 import useAPI from '@hooks/use-api';
 import appMessage from '@lib/data/app-message';
@@ -10,9 +10,9 @@ import { TPaginationQueryParams, TResponseDataPaginationAPI } from '@typescript/
 export interface TParamsListProject extends TPaginationQueryParams {
     keyword?: string;
     id_level?: string;
-    id_category?: string;
-    id_skill?: string;
-    type?: TTypeTypeProject;
+    categories?: string;
+    id_skills?: string;
+    types?: string;
 }
 const useProjectAPI = () => {
     const { apiClient } = useAPI();

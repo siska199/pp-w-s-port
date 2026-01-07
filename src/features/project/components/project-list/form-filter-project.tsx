@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { eventEmitter } from '@event-emitters';
 
 import EVENT_PROJECT from '@features/project/event-emitters/project-event';
-import { TTypeCategoryProject } from '@features/project/types/project-type';
+import { TTypeCategoryProject, TTypeTypeProject } from '@features/project/types/project-type';
 import InputBase from '@components/ui/input/input-base';
 import InputSelect from '@components/ui/input/input-select/input-select';
 import useMasterAPI from '@apis/use-master-api';
@@ -17,6 +17,9 @@ const FormFilterProject = () => {
 
     useEffect(() => {
         handleInitData();
+        return () => {
+            emitSearchRef.current.cancel();
+        };
     }, []);
 
     const handleInitData = async () => {
@@ -37,22 +40,43 @@ const FormFilterProject = () => {
     };
 
     const handleOnChange = (e: TEventOnChange) => {
-        const currForm = form;
-        const value = e.target.value;
-        const name = e.target.name as keyof typeof form;
-        currForm[name].value = value;
-        setForm({ ...currForm });
-        handleEmitEventSearchDataTable();
+        const { name, value } = e.target;
+
+        setForm((prev) => {
+            const next = {
+                ...prev,
+                [name]: {
+                    ...prev[name as keyof typeof prev],
+                    value,
+                },
+            };
+            emitSearchRef.current({
+                id_skills: next.id_skills.value,
+                keyword: next.keyword.value,
+                categories: next.categories.value,
+                types: next.types.value,
+            });
+
+            return next;
+        });
     };
 
-    const handleEmitEventSearchDataTable = debounce(() => {
-        eventEmitter.emit(EVENT_PROJECT.SEARCH_DATA_TABLE_PROJECT, {
-            id_skills: form.id_skills.value,
-            keyword: form?.keyword?.value,
-            categories: form?.categories?.value,
-            types: form?.types?.value,
-        });
-    }, 1500);
+    // const handleEmitEventSearchDataTable = debounce(() => {
+    //     eventEmitter.emit(EVENT_PROJECT.SEARCH_DATA_TABLE_PROJECT, {
+    //         keyword: form?.keyword?.value,
+    //         id_skills: form.id_skills.value,
+    //         categories: form?.categories?.value,
+    //         types: form?.types?.value,
+    //     });
+    // }, 1500);
+
+    const emitSearchRef = useRef(
+        debounce((payload) => {
+            console.log("payloaddd: ", payload)
+            eventEmitter.emit(EVENT_PROJECT.SEARCH_DATA_TABLE_PROJECT, payload);
+        }, 1500),
+    );
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <InputBase
@@ -104,7 +128,7 @@ const initialFormFilter = {
 export type TFormFilterProject = {
     keyword: string;
     categories: string[];
-    types: string[];
+    types: TTypeTypeProject[];
     id_skills: string[];
 };
 

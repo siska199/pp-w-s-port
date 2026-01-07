@@ -84,14 +84,18 @@ const TableProject = () => {
         });
     });
 
-    async function handleFetchData(params: TSettingTable<TProject> & { keyword?: string; type?: TTypeTypeProject }): Promise<TResponseDataPaginationAPI<TProject>> {
+    async function handleFetchData(
+        params: TSettingTable<TProject> & { keyword?: string; types?: TTypeTypeProject[]; id_skills?: string[]; categories?: string[] },
+    ): Promise<TResponseDataPaginationAPI<TProject>> {
         const results = await getListProject({
             sort_by: params.sortBy,
             sort_dir: params?.sortDir,
             items_perpage: params?.itemsPerPage,
             page_no: params?.currentPage,
             keyword: params?.keyword,
-            type: params?.type,
+            types: params?.types?.join(','),
+            id_skills: params?.id_skills?.join(','),
+            categories: params?.categories?.join(','),
         });
         return results.data as TResponseDataPaginationAPI<TProject>;
     }
