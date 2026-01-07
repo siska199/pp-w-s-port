@@ -48,7 +48,9 @@ export const zDate = (params: { name: string; mandatory?: boolean; format?: TTyp
         })
         .refine(
             (date) => {
-                return date && date !== '1970-01-01T00:00:00.000Z';
+                const defaultValueDate = '1970-01-01T00:00:00.000Z';
+                if (!mandatory && date === defaultValueDate) return true;
+                return date && date !== defaultValueDate;
             },
             { message: messageError.required(name) },
         );
@@ -69,7 +71,7 @@ export const zEmail = (mandatory = true) => {
     });
 };
 
-export const zPhoneNumber = (name='',mandatory = true) => {
+export const zPhoneNumber = (name = '', mandatory = true) => {
     const phoneSchema = z
         .string()
         .nonempty({ message: messageError.required(name) })

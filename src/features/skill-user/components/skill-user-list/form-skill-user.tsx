@@ -118,7 +118,7 @@ const FormSkillUser = () => {
             });
             if (result?.status) {
                 handleCloseFormSkill();
-                eventEmitter.emit(EVENT_SKILL_USER.REFRESH_DATA_TABLE_SKILL_USER, true);
+                eventEmitter.emit(EVENT_SKILL_USER.SEARCH_DATA_TABLE_SKILL_USER_WITH_CURR_FILTER, true);
             }
         }
     };

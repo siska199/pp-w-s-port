@@ -34,7 +34,10 @@ const useExperianceAPI = () => {
     const upsertExperiance = async (payload: TExperianceSchema) => {
         const response = await apiClient({
             endpoint: ENDPOINT.EXPERIANCE.UPSERT_EXPERIANCE,
-            payload,
+            payload: {
+                ...payload,
+                is_currently_work_here: payload?.is_currently_work_here==="true"
+            },
             method: 'post',
             message: appMessage.upsertModule(payload?.id, 'Experiance'),
         });

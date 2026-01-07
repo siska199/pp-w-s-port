@@ -21,9 +21,10 @@ const FormExperiance = () => {
     const { upsertExperiance } = useExperianceAPI();
 
     const [modalForm, setModalForm] = useState({
+        moduleName: 'Experiance',
         isShow: false,
         action: TTypeActionModalForm.ADD,
-        customeClass: { mdBody: '!overflow-y-visible ' },
+        customeClass: { mdBody: '!overflow-y-visible md:min-w-[38rem] ' },
     });
 
     const [form, setForm] = useState(deepCopy({ ...initialFormExperiance }));
@@ -67,24 +68,31 @@ const FormExperiance = () => {
         setForm({ ...mappingValuesToForm({ values: data, form }) });
     });
 
-    const handleOnChange = useCallback((e: TEventOnChange) => {
+    const handleOnChange = (e: TEventOnChange) => {
         const name = e.target.name as keyof typeof form;
         const value = e.target.value;
         const currForm = form;
         currForm[name].value = value;
+        currForm[name].errorMessage = '';
+
+        if (name === 'is_currently_work_here') {
+            currForm.end_at.errorMessage = '';
+        }
 
         setForm({
             ...currForm,
         });
-    }, []);
+    };
 
     const handleOnSubmit = async (e: TEventSubmitForm) => {
         e?.preventDefault();
         const { isValid, form: updatedForm } = mappingErrorsToForm<TExperianceSchema, typeof form>({
-            form,
+            form: deepCopy({ ...form }),
             schema: experianceSchema,
         });
-
+        if (updatedForm.is_currently_work_here.value === 'true') {
+            updatedForm.end_at.errorMessage = '';
+        }
         setForm({
             ...updatedForm,
         });
@@ -109,16 +117,17 @@ const FormExperiance = () => {
     };
 
     return (
-        <ContainerModalForm moduleName={'Experiance'} {...modalForm} onClose={handleCloseFormExperiance} customeClass={{ mdBody: 'md:min-w-[38rem]' }} onSubmit={handleOnSubmit}>
+        <ContainerModalForm {...modalForm} onClose={handleCloseFormExperiance} onSubmit={handleOnSubmit}>
             <div className="grid md:grid-cols-2 gap-4">
                 <InputSelect {...form['id_company']} onChange={handleOnChange} />
                 <InputSelect {...form['id_profession']} onChange={handleOnChange} />
             </div>
             <div className="grid md:grid-cols-2 gap-4">
-                <InputDate {...form['start_at']} onChange={handleOnChange} />
-                <InputCheckbox {...form['is_currently_work_here']} onChange={handleOnChange} />
-
-                <InputDate {...form['end_at']} onChange={handleOnChange} />
+                <div className="flex flex-col gap-2">
+                    <InputDate {...form['start_at']} onChange={handleOnChange} />
+                    <InputCheckbox {...form['is_currently_work_here']} onChange={handleOnChange} />
+                </div>
+                <InputDate {...form['end_at']} disabled={!form['start_at'].value || form['is_currently_work_here'].value === 'true'} onChange={handleOnChange} />
             </div>
             <InputTextEditor {...form['description']} onChange={handleOnChange} />
         </ContainerModalForm>

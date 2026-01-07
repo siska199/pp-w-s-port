@@ -3,19 +3,31 @@ import z from 'zod';
 
 import appMessage from '@lib/data/app-message';
 import { TOption } from '@typescript/ui-types';
+import { messageError } from '@validation/constant';
 export interface TOptionsFormExperiance {
     companies: TOption[];
     professions: TOption[];
 }
-const experianceSchema = z.object({
-    id: zString({ name: 'ID', mandatory: false }),
-    id_company: zString({ name: 'Company' }),
-    id_profession: zString({ name: 'Profession' }),
-    start_at: zDate({ name: 'Start At' }),
-    end_at: zDate({ name: 'End At' }),
-    description: zString({ name: 'Description', max: 10000 }),
-    is_currently_work_here: zBooleanCheckbox({ name: 'Currently Work Here' }),
-});
+const experianceSchema = z
+    .object({
+        id: zString({ name: 'ID', mandatory: false }),
+        id_company: zString({ name: 'Company' }),
+        id_profession: zString({ name: 'Profession' }),
+        start_at: zDate({ name: 'Start At' }),
+        end_at: zDate({ name: 'End At', mandatory: false }),
+        description: zString({ name: 'Description', max: 10000 }),
+        is_currently_work_here: zBooleanCheckbox({ name: 'Currently Work Here' }),
+    })
+    .superRefine((data, ctx) => {
+        const defaultValueDate = '1970-01-01T00:00:00.000Z';
+        if (data.is_currently_work_here !== 'true' && String(data.end_at) === defaultValueDate) {
+            ctx.addIssue({
+                path: ['end_at'],
+                code: z.ZodIssueCode.custom,
+                message: messageError.required('End Date'),
+            });
+        }
+    });
 
 export type TExperianceSchema = z.input<typeof experianceSchema>;
 
@@ -32,6 +44,7 @@ export const initialFormExperiance = {
         placeholder: appMessage.selectInputPlaceolder('company'),
         options: [] as TOption[],
         value: '',
+        errorMessage: '',
     },
     id_profession: {
         name: 'id_profession',
@@ -39,23 +52,27 @@ export const initialFormExperiance = {
         placeholder: appMessage.selectInputPlaceolder('profession'),
         options: [] as TOption[],
         value: '',
+        errorMessage: '',
     },
     start_at: {
         name: 'start_at',
         label: 'Start At',
         placeholder: appMessage.selectInputPlaceolder('start at date'),
         value: null,
+        errorMessage: '',
     },
     end_at: {
         name: 'end_at',
         label: 'End At',
         placeholder: appMessage.selectInputPlaceolder('end at date'),
         value: null,
+        errorMessage: '',
     },
     description: {
         name: 'description',
         label: 'Description',
         value: '',
+        errorMessage: '',
     },
     is_currently_work_here: {
         name: 'is_currently_work_here',
