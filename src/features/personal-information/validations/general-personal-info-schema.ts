@@ -138,7 +138,7 @@ const generalPersonalInfoSchema = z
         id_district: zString({ name: 'District', max: 255, mandatory: false }),
         id_postal_code: zString({ name: 'Postal Code', max: 255, mandatory: false }),
 
-        phone_number: zPhoneNumber(true),
+        phone_number: zPhoneNumber('Phone Number', true),
         email: zEmail(),
         bio: zString({ name: 'Bio', max: 100 }),
         about_me: zString({ name: 'About Me', max: initialFormGeneralPersonalInfo.about_me.maxLength }),

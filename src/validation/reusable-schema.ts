@@ -69,9 +69,10 @@ export const zEmail = (mandatory = true) => {
     });
 };
 
-export const zPhoneNumber = (mandatory = true) => {
+export const zPhoneNumber = (name='',mandatory = true) => {
     const phoneSchema = z
         .string()
+        .nonempty({ message: messageError.required(name) })
         .max(15, { message: messageError.phoneNumberExceedLength })
         .transform((phoneNumber) => {
             const isFormated = String(phoneNumber?.charAt(0)) === '0';

@@ -8,9 +8,10 @@ import EmptyData from '@components/ui/empty-data';
 import Header from '@components/ui/header/header';
 
 import { TTypeActionModalForm } from '@typescript/index-type';
+import HelperMessage from '@components/ui/helper-message';
 
 const KeyMetrics = (): JSX.Element => {
-    const { listKeyMetric } = useContext(contextFormPersonalInfo);
+    const { errorKeyMetric, listKeyMetric } = useContext(contextFormPersonalInfo);
 
     const handleAdd = useCallback((): void => {
         eventEmitter.emit(EVENT_PERSONAL_INFO.SET_MODAL_FORM_KEY_METRIC, {
@@ -21,7 +22,7 @@ const KeyMetrics = (): JSX.Element => {
 
     return (
         <div className="space-y-10">
-            <Header title="Key Metrics" onClickAddData={handleAdd} />
+            <Header title="Key Metrics" onClickAddData={handleAdd} subHeader={<HelperMessage variant={'error'} message={errorKeyMetric} />} />
 
             {listKeyMetric.length === 0 ? (
                 <EmptyData

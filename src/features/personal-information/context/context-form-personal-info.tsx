@@ -37,6 +37,8 @@ interface TStateFormPersonalInfo {
     handleOnChangeFormGeneralPersonalInfo: (e: TEventOnChange) => void;
     handleOnSubmit: (e: TEventSubmitForm) => void;
     isLoading: boolean;
+    errorKeyMetric: string;
+    setErrorKeyMetric :  React.Dispatch<React.SetStateAction<string>>;
 }
 
 const intialStateFormPersonalInformation = {
@@ -48,6 +50,8 @@ const intialStateFormPersonalInformation = {
     handleOnChangeFormGeneralPersonalInfo: () => null,
     handleOnSubmit: (_e: TEventSubmitForm) => null,
     isLoading: false,
+    errorKeyMetric: '',
+    setErrorKeyMetric: () => null,
 };
 
 export const contextFormPersonalInfo = createContext<TStateFormPersonalInfo>(intialStateFormPersonalInformation);
@@ -61,6 +65,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
     const { handleGetFileFromUrl } = useFile();
 
     const [listKeyMetric, setListKeyMetric] = useState<TKeyMetric[]>([]);
+    const [errorKeyMetric, setErrorKeyMetric] = useState<string>('')
     const [listSelectedSocialLink, setListSelectedSocialLink] = useState<TSelectedSocialLink[]>([]);
     const [formGeneralPersonalInfo, setFormGeneralInfoPersonalInfo] = useState(intialStateFormPersonalInformation.formGeneralPersonalInfo);
     const [isLoading, setIsLoading] = useState(false);
@@ -212,6 +217,10 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
             setListSelectedSocialLink([...updateListSelectedSocialLink]);
             setFormGeneralInfoPersonalInfo({ ...updatedFormGeneralInfo });
 
+            if (!isValidFormListKeyMetric) {
+                setErrorKeyMetric('Key Metrics is Required')
+            }
+
             if (isValidFormGeneralInfo && isValidFormListSelectedSocialLink && isValidFormListKeyMetric) {
                 const personalInformation = {
                     ...extractValueFromForm({ ...formGeneralPersonalInfo }),
@@ -325,6 +334,8 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
                 isLoading,
                 listKeyMetric,
                 setListKeyMetric,
+                errorKeyMetric,
+                setErrorKeyMetric,
             }}
         >
             {children}

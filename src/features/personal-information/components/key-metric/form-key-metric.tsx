@@ -15,7 +15,7 @@ import { TTypeActionModalForm } from '@typescript/index-type';
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types';
 
 const FormKeyMetric = () => {
-    const { setListKeyMetric } = useContext(contextFormPersonalInfo);
+    const { setListKeyMetric, setErrorKeyMetric } = useContext(contextFormPersonalInfo);
 
     const [modalForm, setModalForm] = useState({
         moduleName: 'Key Metric',
@@ -93,6 +93,7 @@ const FormKeyMetric = () => {
 
         handleCloseFormKeyMetric();
         eventEmitter.emit(EVENT_EDUCATION.REFRESH_DATA_TABLE_EDUCATION, true);
+        setErrorKeyMetric('');
     };
 
     return (
