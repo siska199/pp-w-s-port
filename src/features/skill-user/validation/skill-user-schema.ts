@@ -31,6 +31,7 @@ export const initialFormSkillUser = {
         name: 'id',
         errorMessage: '',
         label: 'ID',
+        
     },
     id_category: {
         name: 'id_category',

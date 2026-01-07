@@ -44,7 +44,7 @@ const FormFilterSkillUser = () => {
         const value = e.target.value;
         const name = e.target.name as keyof typeof form;
         currForm[name].value = value;
-
+        currForm[name].errorMessage = '';
         setForm({ ...currForm });
         handleEmitEventSearchDataTable();
     }, []);
@@ -91,12 +91,14 @@ const initialFormFilter = {
         value: '',
         placeholder: 'Search by category or skill name...',
         customeClass: {},
+        errorMessage: '',
     },
     id_category: {
         name: 'id_category',
         options: [],
         placeholder: 'Category Skill',
         value: '',
+        errorMessage: '',
     },
     years_of_experiance: {
         name: 'years_of_experiance',
@@ -106,12 +108,14 @@ const initialFormFilter = {
         })),
         value: '',
         placeholder: 'Year of experiance',
+        errorMessage: '',
     },
     level: {
         name: 'level',
         value: '',
         options: generateOptionsFromEnum(TTypeLevelSkill),
         placeholder: 'Level',
+        errorMessage: '',
     },
 };
 
