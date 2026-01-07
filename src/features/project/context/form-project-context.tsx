@@ -1,6 +1,7 @@
-import React, { createContext, SetStateAction, useCallback, useEffect, useState } from 'react';
+import React, { createContext, SetStateAction, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
+import useMasterAPI from '@apis/use-master-api';
 import useExperianceAPI from '@features/experiance/apis/use-experiance-api';
 import useProjectAPI from '@features/project/apis/use-project-api';
 import useProjectMenuApi, { TParamsListProjectMenu } from '@features/project/apis/use-project-menu-api';
@@ -11,13 +12,12 @@ import informationProjectSchema, { initialFormInformationProject, TInformationPr
 import { initialFormProjectLink } from '@features/project/validation/project-link-schema';
 import { initialFormProjectMenu } from '@features/project/validation/project-menu-schema';
 import useSkillUserAPI from '@features/skill-user/apis/use-skill-user-api';
-import useMasterAPI from '@apis/use-master-api';
 
 import useEventEmitter from '@hooks/use-event-emitter';
 import useFile from '@hooks/use-file';
+import { deepCopy, extractValueFromForm, generateOptions, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function';
 import { useAppDispatch } from '@store/store';
 import { handleSetIsloading } from '@store/ui-slice';
-import { deepCopy, extractValueFromForm, generateOptions, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function';
 import { TTypeActionData } from '@typescript/index-type';
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types';
 
@@ -225,7 +225,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         }
     });
 
-    const handleOnChangeFormInformationProject = useCallback((e: TEventOnChange) => {
+    const handleOnChangeFormInformationProject = (e: TEventOnChange) => {
         const currForm = formInformationProject;
         const name = e.target.name as TKeyFormInformationProject;
         const value = e.target.value;
@@ -234,7 +234,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         setFormInformationProject({
             ...currForm,
         });
-    }, []);
+    };
 
     const handleOnChangeFormProjectMenu = (e: TEventOnChange) => {
         const currForm = formProjectMenu;

@@ -74,7 +74,7 @@ const TableProject = () => {
     useEventEmitter(EVENT_PROJECT.SEARCH_DATA_TABLE_PROJECT, async (formFilter) => {
         await handleFetchData({
             ...configTable.setting,
-            formFilter,
+            ...formFilter,
         });
     });
 
