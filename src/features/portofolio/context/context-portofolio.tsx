@@ -12,6 +12,7 @@ import { TParamsListSkillUser } from '@features/skill-user/apis/use-skill-user-a
 import { TSkillUser } from '@features/skill-user/types/skill-user-type';
 
 import { TMasterCategorySkill } from '@typescript/master-module-types';
+import { useNavigate } from 'react-router-dom';
 
 export enum EPortfolioLoading {
     PERSONAL_INFORMATION = 'PERSONAL_INFORMATION',
@@ -122,6 +123,7 @@ export const contextPortfolio = createContext<TContextPortfolio>(initialContextP
 
 const ContextPortfolioProvider = (props: { children: React.ReactNode }) => {
     const { children } = props;
+    const navigate = useNavigate();
     const {
         getDetailPersonalInformationPortofolio,
         getListCategorySkillPortofolio,
@@ -154,7 +156,12 @@ const ContextPortfolioProvider = (props: { children: React.ReactNode }) => {
         withLoading(
             async () => {
                 const result = await getDetailPersonalInformationPortofolio();
-                if (result?.data) setPersonalInformation(result.data);
+                if (!result?.data) {
+                    navigate(`/`, { replace: true });
+                    return;
+                }
+
+                setPersonalInformation(result.data);
             },
             setIsLoading,
             EPortfolioLoading.PERSONAL_INFORMATION,

@@ -1,15 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
 import { eventEmitter } from '@event-emitters';
+import { useEffect, useState } from 'react';
 
-import EVENT_PROJECT from '@features/project/event-emitters/project-event';
-import { TTypeCategoryProject } from '@features/project/types/project-type';
+import useMasterAPI from '@apis/use-master-api';
 import InputBase from '@components/ui/input/input-base';
 import InputSelect from '@components/ui/input/input-select/input-select';
-import useMasterAPI from '@apis/use-master-api';
+import EVENT_PROJECT from '@features/project/event-emitters/project-event';
+import { TTypeCategoryProject } from '@features/project/types/project-type';
 
+import { IconSearch } from '@assets/icons';
 import { debounce, deepCopy, generateOptions, generateOptionsFromEnum } from '@lib/helper/function';
 import { TEventOnChange, TOption } from '@typescript/ui-types';
-import { IconSearch } from '@assets/icons';
 
 const FormFilterProject = () => {
     const [form, setForm] = useState(deepCopy({ ...initialFormFilter }));
@@ -36,14 +36,14 @@ const FormFilterProject = () => {
         }
     };
 
-    const handleOnChange = useCallback((e: TEventOnChange) => {
+    const handleOnChange = (e: TEventOnChange) => {
         const currForm = form;
         const value = e.target.value;
         const name = e.target.name as keyof typeof form;
         currForm[name].value = value;
         setForm({ ...currForm });
         handleEmitEventSearchDataTable();
-    }, []);
+    };
 
     const handleEmitEventSearchDataTable = debounce(() => {
         eventEmitter.emit(EVENT_PROJECT.SEARCH_DATA_TABLE_PROJECT, {

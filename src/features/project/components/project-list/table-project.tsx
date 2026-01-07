@@ -14,6 +14,7 @@ import { handleSetModalConfirmation } from '@store/ui-slice';
 import { routes } from '@routes/constant';
 import { TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type';
 import { TSettingTable } from '@typescript/ui-types';
+import { convertEnumToLabel } from '@lib/helper/function';
 
 const TableProject = () => {
     const isLoading = useAppSelector((state) => state.ui.isLoading);
@@ -46,6 +47,9 @@ const TableProject = () => {
                 key: 'type',
                 isSorted: true,
                 className: ' md:min-w-[10rem]',
+                customeComponent: (data: TProject) => {
+                    return <div>{convertEnumToLabel(data?.type)}</div>;
+                },
             },
             {
                 name: 'Tech Stack',

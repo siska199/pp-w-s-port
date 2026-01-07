@@ -42,7 +42,7 @@ export const initialFormInformationProject = {
         errorMessage: '',
     },
     id_experiance: {
-        label: 'Company',
+        label: 'Company (Opsional)',
         placeholder: 'e.g PT Astra International',
         name: 'id_experiance',
         options: [],
@@ -108,7 +108,7 @@ const informationProjectSchema = z.object({
     id: zString({ name: 'ID', mandatory: false }),
     name: zString({ name: 'Name' }),
     category: zEnum({ name: 'Category', enum: ['WEBSITE', 'MOBILE', 'API', 'UI-UX'] as const }),
-    id_experiance: zString({ name: 'Company' }),
+    id_experiance: zString({ name: 'Company', mandatory: false }),
     type: zEnum({
         name: 'Type',
         enum: ['PERSONAL_PROJECT', 'COMPANY_PROJECT', 'FREELANCE'] as const,

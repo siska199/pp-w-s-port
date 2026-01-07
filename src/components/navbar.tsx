@@ -1,16 +1,16 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { handleSetAuth, initialStateAuthStore } from '@features/auth/store/auth-slice';
 import Logo from '@components/logo';
 import Avatar from '@components/ui/avatar';
 import DropdownBase, { TOptionDropdown } from '@components/ui/dropdown';
+import { handleSetAuth, initialStateAuthStore } from '@features/auth/store/auth-slice';
 
+import { IconHumburger, IconLogout } from '@assets/icons';
 import useCurrentPath from '@hooks/use-current-path';
+import { routes } from '@routes/constant';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { handleToggleSidebar } from '@store/ui-slice';
-import { routes } from '@routes/constant';
-import { IconHumburger, IconLogout, IconUser } from '@assets/icons';
 
 const Navbar = () => {
     const { currentPath } = useCurrentPath();
@@ -49,15 +49,6 @@ const ContentProtectedRoute = () => {
 
     const optionDropdown = useMemo(
         () => [
-            {
-                label: (
-                    <>
-                        <IconUser /> Change Profile
-                    </>
-                ),
-                value: 'profile',
-                className: 'border-b',
-            },
             {
                 label: (
                     <>
