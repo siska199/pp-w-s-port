@@ -1,33 +1,26 @@
-import { useContext, useState } from 'react';
+import { useContext, useMemo } from 'react';
 import { SwiperClass } from 'swiper/react';
 
-import SliderRelatedImageMenu from '@features/project/components/project-detail/menu-section/slider-related-image-menu';
-import { contextProject } from '@features/project/context/context-project';
 import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
 import SliderImage3D from '@components/ui/slider/slider-image-3d';
+import SliderRelatedImageMenu from '@features/project/components/project-detail/menu-section/slider-related-image-menu';
+import { contextProject } from '@features/project/context/context-project';
 
 import { useAppDispatch } from '@store/store';
 import { handleSetModal } from '@store/ui-slice';
 
 const MenuSection = () => {
-    const { project: data } = useContext(contextProject);
+    const { project: data, acitiveMenuIndex, setActiveMenuIndex } = useContext(contextProject);
 
-    const listImage = [
-        'dummy-images/project-goa/1.png',
-        'dummy-images/project-goa/2.png',
-        'dummy-images/project-goa/3.png',
-        'dummy-images/project-goa/4.png',
-        'dummy-images/project-goa/1.png',
-        'dummy-images/project-goa/2.png',
-    ];
-
-    const listFeatures = ['Create Form Registration', 'Add Data Bengkel', 'Edit Data bengkerl'];
-
-    const [_currIndexImg, setCurrIndexImg] = useState(0);
+    const currentProject = useMemo(() => {
+        return data?.project_menus?.[acitiveMenuIndex as number];
+    }, [acitiveMenuIndex]);
+    const relatedImages = currentProject?.related_images?.map((image) => image?.image);
 
     const handleOnChangeSlide = (swiper: SwiperClass) => {
-        setCurrIndexImg(swiper.realIndex);
+        console.log('testtt: ', swiper?.realIndex);
+        setActiveMenuIndex(swiper.realIndex);
     };
 
     if (!data || data?.project_menus?.length === 0) return null;
@@ -35,7 +28,7 @@ const MenuSection = () => {
     return (
         <ContainerSection title="Menu" className=" ">
             <SliderImage3D
-                images={listImage}
+                images={data?.project_menus?.map((image) => image?.main_image) as string[]}
                 onClick={handleOnChangeSlide}
                 onSlideChange={handleOnChangeSlide}
                 swiperSlideProps={{
@@ -43,16 +36,10 @@ const MenuSection = () => {
                 }}
             />
 
-            <div className="lg:-mt-[6rem] space-y-4 w-full">
-                <CardIntroMenu
-                    title={'Menu Login'}
-                    description={`Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero vitae temporibus quasi
-            minus natus maxime optio eaque doloremque inventore non, officia dignissimos sed ex ipsa
-            asperiores facilis ea iure, itaque neque magni exercitationem hic ut fugiat eveniet!
-            Assumenda dolores nihil, quo debitis suscipit facere. Facere voluptatum repudiandae.`}
-                />
-                <ListRelatedImageMenu images={listImage} />
-                <ListFeature features={listFeatures} />
+            <div className="lg:-mt-[0rem] space-y-4 w-full">
+                <CardIntroMenu title={currentProject?.name} description={currentProject?.description} />
+                <ListRelatedImageMenu images={relatedImages} />
+                {/* <ListFeature features={listFeatures} /> */}
             </div>
         </ContainerSection>
     );
@@ -83,7 +70,7 @@ const ListRelatedImageMenu = (props: TPropsRelatedImagesMenu) => {
         dispatch(
             handleSetModal({
                 isShow: true,
-                children: <SliderRelatedImageMenu activeIndex={index} />,
+                children: <SliderRelatedImageMenu listImage={images} activeIndex={index} />,
                 customeClass: {
                     mdBody: 'scrollbar-hidden',
                     mdContent: 'bg-white/0  h-[90vh]',
@@ -94,13 +81,14 @@ const ListRelatedImageMenu = (props: TPropsRelatedImagesMenu) => {
             }),
         );
     };
+    console.log('list realted images:', images);
     return (
         <>
             <div className="space-y-2">
                 <p className="text-body-large font-medium">Related Image</p>
-                <div className="flex gap-4 overflow-x-auto py-4 pr-4">
+                <div className="flex gap-4 overflow-x-auto pt-2 overflow-y-visible pb-8 pr-4">
                     {images?.map((image, i) => (
-                        <Image onClick={() => handleOnClickMenu(i)} key={i} src={image} className="min-w-[10rem] zoom-out-effect cursor-pointer rounded-md" />
+                        <Image onClick={() => handleOnClickMenu(i)} key={i} src={image} className=" object-cover max-w-[5rem] max-h-[10rem] !aspect-square zoom-out-effect cursor-pointer rounded-md" />
                     ))}
                 </div>
             </div>

@@ -7,8 +7,9 @@ import { TProject } from '@features/project/types/project-type';
 export interface TContextProject {
     isLoading: boolean;
     setIsLoading: React.Dispatch<SetStateAction<boolean>>;
-
+    acitiveMenuIndex: number | null;
     project: TProject;
+    setActiveMenuIndex: React.Dispatch<SetStateAction<number | null>>;
 }
 
 const initialContextProject = {
@@ -16,6 +17,8 @@ const initialContextProject = {
     setProject: () => null,
     isLoading: false,
     setIsLoading: () => null,
+    acitiveMenuIndex: 0,
+    setActiveMenuIndex: () => null,
 };
 
 export const contextProject = createContext<TContextProject>(initialContextProject);
@@ -29,6 +32,7 @@ const ContextProjectProvider = (props: { children: React.ReactNode }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const [project, setProject] = useState<TProject>({} as TProject);
+    const [acitiveMenuIndex, setActiveMenuIndex] = useState<number | null>(null);
 
     useEffect(() => {
         getProjectDetail();
@@ -39,6 +43,7 @@ const ContextProjectProvider = (props: { children: React.ReactNode }) => {
         const result = await getProjectDetailApi(id, false);
         if (!result.data) return;
         setProject(result.data);
+        setActiveMenuIndex(0)
         setIsLoading(true);
     };
 
@@ -48,6 +53,8 @@ const ContextProjectProvider = (props: { children: React.ReactNode }) => {
                 isLoading,
                 setIsLoading,
                 project,
+                acitiveMenuIndex,
+                setActiveMenuIndex,
             }}
         >
             {children}

@@ -3,6 +3,7 @@ import ResponsibilitySection from '@features/project/components/project-detail/r
 import TechStackSection from '@features/project/components/project-detail/tech-stack-section';
 import ContextProjectProvider from '@features/project/context/context-project';
 import ContainerLandingPage from '@components/ui/container/container-landing-page';
+import MenuSection from '@features/project/components/project-detail/menu-section/menu-section';
 
 const ProjectDetailPage = () => {
     return (
@@ -11,7 +12,7 @@ const ProjectDetailPage = () => {
                 <>
                     <IntroductionSection />
                     <TechStackSection />
-                    {/* <MenuSection /> */}
+                    <MenuSection />
                     <ResponsibilitySection />
                 </>
             </ContainerLandingPage>

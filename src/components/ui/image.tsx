@@ -3,7 +3,7 @@ import React, { HTMLProps, useCallback, useState } from 'react';
 import { useIntersectionObserver } from '@hooks/use-intersection-observer';
 import { cn, getAssetURL } from '@lib/helper/function';
 
-import noImageAvailable from '../../assets/images/no-image-available.svg';
+import noImageAvailable from '../../assets/images/no-image-available.png';
 
 export interface TPropsImage extends Omit<Partial<HTMLProps<HTMLImageElement>>, 'src'> {
     src: string;

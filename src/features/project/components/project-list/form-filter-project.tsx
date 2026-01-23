@@ -72,7 +72,6 @@ const FormFilterProject = () => {
 
     const emitSearchRef = useRef(
         debounce((payload) => {
-            console.log('payloaddd: ', payload);
             eventEmitter.emit(EVENT_PROJECT.SEARCH_DATA_TABLE_PROJECT, payload);
         }, 1500),
     );

@@ -17,13 +17,13 @@ const IntroductionSection = () => {
             {!data?.id ? (
                 <h5 className="my-auto text-body-large ">Loading Introduction...</h5>
             ) : (
-                <Container gap="base" className="w-auto flex-col-reverse flex-wrap md:flex-row overflow-x-hidden">
+                <Container gap="base" className="w-auto flex-col-reverse flex-wrap md:flex-row ">
                     <>
                         <div className="space-y-4 my-auto ">
                             <div className="">
-                                <h3 className="font-bubblegum-sans mb-2 text-heading-05 md:text-heading-03">
-                                    {data?.name} | {data?.profession?.name}
-                                </h3>
+                                <h4 className=" mb-2 text-heading-05 md:text-heading-04">
+                                    {data?.name}
+                                </h4>
                                 <p className="font-bold">{data?.experiance?.company_name}</p>
                                 <p className="font-thin">
                                     {' '}
@@ -35,7 +35,7 @@ const IntroductionSection = () => {
 
                             <div className=" flex-col md:flex-row flex gap-4 ">
                                 {data?.project_links?.map((link) => (
-                                    <Button key={link.id} variant={'solid-primary'} href={link.url} target="_blank" shape={'circle'} className="font-medium min-w-[10rem] flex gap-2">
+                                    <Button key={link.id} variant={'solid-primary'} to={link.url} target="_blank" shape={'circle'} className="font-medium min-w-[10rem] flex gap-2">
                                         {link?.label}
                                     </Button>
                                 ))}
@@ -48,7 +48,7 @@ const IntroductionSection = () => {
                                     image: '!object-contain zoom-out-effect',
                                 }}
                                 src={data?.thumbnail_image}
-                                className="my-auto h-auto aspect-video rounded-lg shadow-image-arise overflow-hidden w-full md:w-[40rem] "
+                                className="my-auto h-auto aspect-video rounded-lg shadow-image-arise overflow-hidden w-full md:w-[30rem] "
                             />
                         </div>
                     </>

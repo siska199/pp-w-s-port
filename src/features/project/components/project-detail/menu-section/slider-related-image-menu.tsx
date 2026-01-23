@@ -7,20 +7,12 @@ import useMediaQuery from '@hooks/use-media-query';
 import { navigationSliderClass } from '@lib/helper/constant';
 interface TPropsSliderRelatedImageMenu {
     activeIndex: number;
+    listImage: string[]
 }
 const SliderRelatedImageMenu = (props: TPropsSliderRelatedImageMenu) => {
-    const { activeIndex } = props;
+    const { activeIndex, listImage} = props;
     const [swiper, setSwiper] = useState<Swiper | null>(null);
     const { isMaxMd } = useMediaQuery();
-
-    const listImage = [
-        'dummy-images/project-goa/1.png',
-        'dummy-images/project-goa/2.png',
-        'dummy-images/project-goa/3.png',
-        'dummy-images/project-goa/4.png',
-        'dummy-images/project-goa/1.png',
-        'dummy-images/project-goa/2.png',
-    ];
 
     useEffect(() => {
         if (swiper) {

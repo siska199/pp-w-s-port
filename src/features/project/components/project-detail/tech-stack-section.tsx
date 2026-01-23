@@ -8,7 +8,7 @@ const TechStackSection = () => {
     const { project: data } = useContext(contextProject);
 
     return (
-        <ContainerSection title="Tech Stack" gap="large" className="min-h-screen">
+        <ContainerSection title="Tech Stack" gap="large" className="md:min-h-screen ">
             <div className="flex flex-wrap h-auto gap-8  w-full max-w-md  items-center justify-center mx-auto">
                 {data.tech_stacks?.map((skill, j) => (
                     <div key={j}>

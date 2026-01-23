@@ -13,9 +13,8 @@ import InputBase from '@components/ui/input/input-base';
 
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { convertEnumToLabel, debounce } from '@lib/helper/function';
-import { routes } from '@routes/constant';
 import { TEventOnChange } from '@typescript/ui-types';
-import { IconArrowUp, IconSearch } from '@assets/icons';
+import { IconSearch } from '@assets/icons';
 import { cardAnimation } from '@assets/styles/animation';
 const ProjectSection = () => {
     const { isLoading, getProjectList, projectConfig } = useContext(contextPortfolio);
@@ -87,10 +86,10 @@ type TPropsCardProject = TProject & {
 };
 
 const CardProject = (props: TPropsCardProject) => {
-    const { id, thumbnail_image, index, company_name, experiance, category, type, name, description } = props;
+    const { project_links, thumbnail_image, index, company_name, experiance, category, type, name, description } = props;
     const targetRef = useRef<HTMLDivElement | null>(null);
     return (
-        <motion.div className="overflow-hidden  bg-card-transparent rounded-md md:max-w-[25rem]" ref={targetRef} {...cardAnimation({ index })}>
+        <motion.div className="overflow-hidden flex flex-col  bg-card-transparent rounded-md md:max-w-[25rem]" ref={targetRef} {...cardAnimation({ index })}>
             <Image
                 src={thumbnail_image}
                 className="h-[13rem] md:h-[15rem] aspect-square border-1 shadow-image-arise border-gray-500 "
@@ -111,7 +110,7 @@ const CardProject = (props: TPropsCardProject) => {
                     ),
                 }}
             />
-            <div className="space-y-4 p-4">
+            <div className="space-y-4 p-4 flex flex-col  flex-grow ">
                 <h5 className="  text-body-large font-bold">{name}</h5>
                 <p className=" line-clamp-3">{description}</p>
                 <Container variant={'hsc'} className="!flex-wrap gap-3">
@@ -119,9 +118,13 @@ const CardProject = (props: TPropsCardProject) => {
                         <Badge key={i} variant={'soft-gray'} label={tech?.name} />
                     ))}
                 </Container>
-                <Button to={`/${routes.project?.child?.detail?.name}/${id}`} target="_blank" variant={'solid-black'}>
-                    View Detail Project <IconArrowUp className="icon-white rotate-90 mt-1" />
-                </Button>
+            </div>
+            <div className="flex mt-auto p-4">
+                {project_links?.map((link) => (
+                    <Button key={link.id} variant={'solid-black'} to={link.url} target="_blank" className=" font-medium w-full flex gap-2">
+                        {link?.label}
+                    </Button>
+                ))}
             </div>
         </motion.div>
     );

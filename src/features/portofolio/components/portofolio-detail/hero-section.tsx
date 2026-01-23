@@ -34,7 +34,7 @@ const HeroSection = () => {
                 <h5 className="my-auto text-body-large">Loading Hero Section...</h5>
             ) : (
                 <>
-                    <Container gap="base" className="w-auto overflow-x-hidden ">
+                    <Container gap="base" className="w-auto overflow-x-visible ">
                         <AnimatedText text={`I'm ${data?.first_name} ${data?.last_name}`} className="!text-heading-05 text-center md:text-start mx-auto md:mx-0 " />
 
                         <AnimatedText text={data?.profession?.name || ''} className="font-bubblegum-sans text-center md:text-start" />

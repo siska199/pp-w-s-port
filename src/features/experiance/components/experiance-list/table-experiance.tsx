@@ -132,7 +132,6 @@ const TableExperiance = () => {
             isShow: true,
             action: TTypeActionModalForm.EDIT,
         });
-
         eventEmitter.emit(EVENT_EXPERIANCE.SET_EXPERIANCE, {
             id: data?.id,
             id_company: data.id_company,
@@ -140,6 +139,7 @@ const TableExperiance = () => {
             start_at: data.start_at,
             end_at: data.end_at,
             description: data?.description,
+            is_currently_work_here: data?.is_currently_work_here ? 'true' : 'false',
         });
     };
 
