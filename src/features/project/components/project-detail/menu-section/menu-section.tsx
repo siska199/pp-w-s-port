@@ -1,11 +1,11 @@
 import { useContext, useMemo } from 'react';
 import { SwiperClass } from 'swiper/react';
 
+import SliderRelatedImageMenu from '@features/project/components/project-detail/menu-section/slider-related-image-menu';
+import { contextProject } from '@features/project/context/context-project';
 import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
 import SliderImage3D from '@components/ui/slider/slider-image-3d';
-import SliderRelatedImageMenu from '@features/project/components/project-detail/menu-section/slider-related-image-menu';
-import { contextProject } from '@features/project/context/context-project';
 
 import { useAppDispatch } from '@store/store';
 import { handleSetModal } from '@store/ui-slice';
@@ -19,7 +19,6 @@ const MenuSection = () => {
     const relatedImages = currentProject?.related_images?.map((image) => image?.image);
 
     const handleOnChangeSlide = (swiper: SwiperClass) => {
-        console.log('testtt: ', swiper?.realIndex);
         setActiveMenuIndex(swiper.realIndex);
     };
 
@@ -39,7 +38,7 @@ const MenuSection = () => {
             <div className="lg:-mt-[0rem] space-y-4 w-full">
                 <CardIntroMenu title={currentProject?.name} description={currentProject?.description} />
                 <ListRelatedImageMenu images={relatedImages} />
-                {/* <ListFeature features={listFeatures} /> */}
+                <ListFeature features={[]} />
             </div>
         </ContainerSection>
     );
@@ -81,7 +80,6 @@ const ListRelatedImageMenu = (props: TPropsRelatedImagesMenu) => {
             }),
         );
     };
-    console.log('list realted images:', images);
     return (
         <>
             <div className="space-y-2">
