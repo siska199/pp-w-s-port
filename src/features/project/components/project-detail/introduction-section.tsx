@@ -40,7 +40,7 @@ const IntroductionSection = () => {
                             </div>
                         </div>
 
-                        <div className="lg:p-8 flex md:min-w-[50%]">
+                        <div className="lg:p-8 flex md:max-w-[50%] md:min-w-[50%]">
                             <Image
                                 customeClassName={{
                                     image: '!object-contain zoom-out-effect',

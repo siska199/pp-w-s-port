@@ -31,7 +31,7 @@ const SliderImage3D = (props: TPropsSlider3D) => {
             }}
             initialSlide={0}
             centeredSlides={true}
-            loop={ false}
+            loop={false}
             {...attrs}
         />
     );
