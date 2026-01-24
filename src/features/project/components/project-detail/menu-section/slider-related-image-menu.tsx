@@ -7,10 +7,10 @@ import useMediaQuery from '@hooks/use-media-query';
 import { navigationSliderClass } from '@lib/helper/constant';
 interface TPropsSliderRelatedImageMenu {
     activeIndex: number;
-    listImage: string[]
+    listImage: string[];
 }
 const SliderRelatedImageMenu = (props: TPropsSliderRelatedImageMenu) => {
-    const { activeIndex, listImage} = props;
+    const { activeIndex, listImage } = props;
     const [swiper, setSwiper] = useState<Swiper | null>(null);
     const { isMaxMd } = useMediaQuery();
 

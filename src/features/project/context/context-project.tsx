@@ -43,7 +43,7 @@ const ContextProjectProvider = (props: { children: React.ReactNode }) => {
         const result = await getProjectDetailApi(id, false);
         if (!result.data) return;
         setProject(result.data);
-        setActiveMenuIndex(0)
+        setActiveMenuIndex(0);
         setIsLoading(true);
     };
 

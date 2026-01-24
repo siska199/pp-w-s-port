@@ -21,9 +21,7 @@ const IntroductionSection = () => {
                     <>
                         <div className="space-y-4 my-auto ">
                             <div className="">
-                                <h4 className=" mb-2 text-heading-05 md:text-heading-04">
-                                    {data?.name}
-                                </h4>
+                                <h4 className=" mb-2 text-heading-05 md:text-heading-04">{data?.name}</h4>
                                 <p className="font-bold">{data?.experiance?.company_name}</p>
                                 <p className="font-thin">
                                     {' '}
