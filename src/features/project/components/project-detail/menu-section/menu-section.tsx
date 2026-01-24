@@ -16,29 +16,32 @@ const MenuSection = () => {
     const currentProject = useMemo(() => {
         return data?.project_menus?.[acitiveMenuIndex as number];
     }, [acitiveMenuIndex]);
-    const relatedImages = currentProject?.related_images?.map((image) => image?.image);
-
+    const listImages = useMemo(() => {
+        return (data?.project_menus?.map((image) => image?.main_image) || []) as string[];
+    }, [acitiveMenuIndex]);
     const handleOnChangeSlide = (swiper: SwiperClass) => {
         setActiveMenuIndex(swiper.realIndex);
     };
 
-    if (!data || data?.project_menus?.length === 0) return null;
+    if (!data || !currentProject) return null;
 
     return (
         <ContainerSection title="Menu" className=" ">
-            <SliderImage3D
-                images={data?.project_menus?.map((image) => image?.main_image) as string[]}
-                onClick={handleOnChangeSlide}
-                onSlideChange={handleOnChangeSlide}
-                swiperSlideProps={{
-                    className: `min-w-auto md:min-h-[20rem] min-w-[20rem] max-w-[25rem] md:min-w-[40rem] md:max-w-[40rem] rounded-lg overflow-hidden`,
-                }}
-            />
+            {listImages?.length > 0 && (
+                <SliderImage3D
+                    images={listImages}
+                    onClick={handleOnChangeSlide}
+                    onSlideChange={handleOnChangeSlide}
+                    swiperSlideProps={{
+                        className: `min-w-auto md:min-h-[20rem] min-w-[20rem] max-w-[25rem] md:min-w-[40rem] md:max-w-[40rem] rounded-lg overflow-hidden`,
+                    }}
+                />
+            )}
 
             <div className="lg:-mt-[0rem] space-y-4 w-full">
                 <CardIntroMenu title={currentProject?.name} description={currentProject?.description} />
-                <ListRelatedImageMenu images={relatedImages} />
-                <ListFeature features={[]} />
+                <ListRelatedImageMenu images={currentProject?.related_images?.map((image) => image?.image)} />
+                <ListFeature features={currentProject?.features} />
             </div>
         </ContainerSection>
     );
@@ -84,7 +87,7 @@ const ListRelatedImageMenu = (props: TPropsRelatedImagesMenu) => {
         <>
             <div className="space-y-2">
                 <p className="text-body-large font-medium">Related Image</p>
-                <div className="flex gap-4 overflow-x-auto pt-2 overflow-y-visible pb-8 pr-4">
+                <div className="flex gap-4 overflow-x-auto pt-2 !overflow-visible pr-4">
                     {images?.map((image, i) => (
                         <Image onClick={() => handleOnClickMenu(i)} key={i} src={image} className=" object-cover max-w-[5rem] max-h-[10rem] !aspect-square zoom-out-effect cursor-pointer rounded-md" />
                     ))}
@@ -95,7 +98,7 @@ const ListRelatedImageMenu = (props: TPropsRelatedImagesMenu) => {
 };
 
 interface TPorpsListFeature {
-    features: string[];
+    features: string;
 }
 const ListFeature = (props: TPorpsListFeature) => {
     const { features } = props;
@@ -103,13 +106,7 @@ const ListFeature = (props: TPorpsListFeature) => {
     return (
         <div className="space-y-2">
             <p className="text-body-large font-medium">Features:</p>
-            <ul className="flex flex-col gap-4">
-                {features?.map((feature, i) => (
-                    <li key={i}>
-                        {'-'} {feature}
-                    </li>
-                ))}
-            </ul>
+            <div className="container-list-disc-style" dangerouslySetInnerHTML={{ __html: features }}></div>
         </div>
     );
 };

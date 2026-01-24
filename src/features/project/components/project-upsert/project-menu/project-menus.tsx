@@ -147,7 +147,7 @@ const CardProjectMenu = React.memo((props: TProjectMenuItem) => {
             </div>
             <div>
                 <h5 className="text-body-base font-medium">Related Images : </h5>
-                <div className="text-gray cursor-pointer hover:underline">{related_images?.length || 0} Item</div>
+                <div className="text-gray ">{related_images?.length || 0} Item</div>
             </div>
         </div>
     );

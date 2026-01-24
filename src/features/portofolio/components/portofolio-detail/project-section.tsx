@@ -16,6 +16,7 @@ import { convertEnumToLabel, debounce } from '@lib/helper/function';
 import { TEventOnChange } from '@typescript/ui-types';
 import { IconSearch } from '@assets/icons';
 import { cardAnimation } from '@assets/styles/animation';
+import { routes } from '@routes/constant';
 const ProjectSection = () => {
     const { isLoading, getProjectList, projectConfig } = useContext(contextPortfolio);
 
@@ -86,7 +87,7 @@ type TPropsCardProject = TProject & {
 };
 
 const CardProject = (props: TPropsCardProject) => {
-    const { project_links, thumbnail_image, index, company_name, experiance, category, type, name, description } = props;
+    const { project_links, id, thumbnail_image, index, company_name, experiance, category, type, name, description } = props;
     const targetRef = useRef<HTMLDivElement | null>(null);
     return (
         <motion.div className="overflow-hidden flex flex-col  bg-card-transparent rounded-md md:max-w-[25rem]" ref={targetRef} {...cardAnimation({ index })}>
@@ -120,11 +121,9 @@ const CardProject = (props: TPropsCardProject) => {
                 </Container>
             </div>
             <div className="flex mt-auto p-4">
-                {project_links?.map((link) => (
-                    <Button key={link.id} variant={'solid-black'} to={link.url} target="_blank" className=" font-medium w-full flex gap-2">
-                        {link?.label}
-                    </Button>
-                ))}
+                <Button key={index} variant={'solid-black'} to={routes.project.child.detail.fullPath(id)} target="_blank" className=" font-medium w-full flex gap-2">
+                    Lihat Detail
+                </Button>
             </div>
         </motion.div>
     );

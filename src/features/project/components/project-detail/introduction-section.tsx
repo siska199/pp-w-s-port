@@ -17,7 +17,7 @@ const IntroductionSection = () => {
             {!data?.id ? (
                 <h5 className="my-auto text-body-large ">Loading Introduction...</h5>
             ) : (
-                <Container gap="base" className="w-auto flex-col-reverse flex-wrap md:flex-row ">
+                <Container gap="base" className="w-auto flex-col-reverse flex-wrap md:flex-row md:px-8">
                     <>
                         <div className="space-y-4 my-auto ">
                             <div className="">
@@ -25,7 +25,7 @@ const IntroductionSection = () => {
                                 <p className="font-bold">{data?.experiance?.company_name}</p>
                                 <p className="font-thin">
                                     {' '}
-                                    {formatDate({ date: data?.start_at, format: TTypeDateFormat['DD MONTH YEAR'] })} | {formatDate({ date: data?.end_at, format: TTypeDateFormat['DD MONTH YEAR'] })}
+                                    {formatDate({ date: data?.start_at, format: TTypeDateFormat['DD MONTH YEAR'] })} - {formatDate({ date: data?.end_at, format: TTypeDateFormat['DD MONTH YEAR'] })}
                                 </p>
                             </div>
 
@@ -40,13 +40,13 @@ const IntroductionSection = () => {
                             </div>
                         </div>
 
-                        <div className="lg:p-8 flex">
+                        <div className="lg:p-8 flex md:min-w-[50%]">
                             <Image
                                 customeClassName={{
                                     image: '!object-contain zoom-out-effect',
                                 }}
                                 src={data?.thumbnail_image}
-                                className="my-auto h-auto aspect-video rounded-lg shadow-image-arise overflow-hidden w-full md:w-[30rem] "
+                                className="my-auto h-auto aspect-video rounded-lg shadow-image-arise overflow-hidden w-full  "
                             />
                         </div>
                     </>
