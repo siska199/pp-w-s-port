@@ -13,10 +13,10 @@ import InputBase from '@components/ui/input/input-base';
 
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { convertEnumToLabel, debounce } from '@lib/helper/function';
+import { routes } from '@routes/constant';
 import { TEventOnChange } from '@typescript/ui-types';
 import { IconSearch } from '@assets/icons';
 import { cardAnimation } from '@assets/styles/animation';
-import { routes } from '@routes/constant';
 const ProjectSection = () => {
     const { isLoading, getProjectList, projectConfig } = useContext(contextPortfolio);
 
@@ -87,7 +87,7 @@ type TPropsCardProject = TProject & {
 };
 
 const CardProject = (props: TPropsCardProject) => {
-    const { project_links, id, thumbnail_image, index, company_name, experiance, category, type, name, description } = props;
+    const { id, thumbnail_image, index, company_name, experiance, category, type, name, description } = props;
     const targetRef = useRef<HTMLDivElement | null>(null);
     return (
         <motion.div className="overflow-hidden flex flex-col  bg-card-transparent rounded-md md:max-w-[25rem]" ref={targetRef} {...cardAnimation({ index })}>
