@@ -29,6 +29,9 @@ const SliderImage3D = (props: TPropsSlider3D) => {
                 next: 'top-[2rem] md:top-[5rem]',
                 prev: 'top-[2rem] md:top-[5rem]',
             }}
+            initialSlide={0}
+            centeredSlides={true}
+            loop={ false}
             {...attrs}
         />
     );

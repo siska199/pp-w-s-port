@@ -29,7 +29,7 @@ const MenuSection = () => {
         <ContainerSection title="Menu" className=" ">
             {listImages?.length > 0 && (
                 <SliderImage3D
-                    images={listImages}
+                    images={[...listImages]}
                     onClick={handleOnChangeSlide}
                     onSlideChange={handleOnChangeSlide}
                     swiperSlideProps={{
