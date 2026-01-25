@@ -6,6 +6,7 @@ import { TExperiance } from '@features/experiance/types/experiance-type';
 import { contextPortfolio, EPortfolioLoading } from '@features/portofolio/context/context-portofolio';
 import { TProject } from '@features/project/types/project-type';
 import Badge from '@components/ui/badge';
+import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
 import ContainerSection from '@components/ui/container/container-section';
 
@@ -13,6 +14,7 @@ import { useAnimateScrollCustome } from '@hooks/use-animate-scroll-custome';
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { handleSetModal } from '@store/ui-slice';
 import { formatDate, toLocalDateInputValue } from '@lib/helper/function';
+import { routes } from '@routes/constant';
 import { TTypeDateFormat } from '@typescript/ui-types';
 
 const ExperianceSection = () => {
@@ -107,13 +109,13 @@ const CardProjects = (props: TPropsProjects) => {
     return (
         <div className="space-y-2">
             <p className="font-medium">Projects</p>
-            <ul className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
                 {projects?.map((project, i) => (
-                    <li key={i} className="p-2 bg-glass-animation border-b  rounded-md font-thin">
-                        {'-'} {project?.name}
-                    </li>
+                    <Button key={i} to={routes.project.child.detail.fullPath(project.id)} target="_blank" className="w-full text-white !p-2 bg-glass-animation !border-b  !rounded-md font-thin">
+                        {project?.name}
+                    </Button>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };

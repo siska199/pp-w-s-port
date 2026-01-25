@@ -6,6 +6,7 @@ import ContainerSection from '@components/ui/container/container-section';
 const ResponsibilitySection = () => {
     const { project: data } = useContext(contextProject);
 
+    if (data?.project_responsibilities?.length == 0) return null;
     return (
         <ContainerSection title="Responsibility">
             <ul className="space-y-4 list-disc">

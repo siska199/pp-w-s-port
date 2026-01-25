@@ -87,7 +87,7 @@ type TPropsCardProject = TProject & {
 };
 
 const CardProject = (props: TPropsCardProject) => {
-    const { id, thumbnail_image, index, company_name, experiance, category, type, name, description } = props;
+    const { profession, id, thumbnail_image, index, company_name, category, type, name, description } = props;
     const targetRef = useRef<HTMLDivElement | null>(null);
     return (
         <motion.div className="overflow-hidden flex flex-col  bg-card-transparent rounded-md md:max-w-[25rem]" ref={targetRef} {...cardAnimation({ index })}>
@@ -104,7 +104,7 @@ const CardProject = (props: TPropsCardProject) => {
                             <Badge
                                 variant={'outline-white'}
                                 className="bg-transparent  font-bold text-white !text-end md:!text-center !justify-end md:!justify-center"
-                                label={`${company_name} - ${experiance.profession.name}`}
+                                label={`${company_name} - ${profession.name}`}
                             />
                             <p className="font-bold ">{convertEnumToLabel(type)}</p>
                         </Container>
