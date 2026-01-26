@@ -7,7 +7,7 @@ import { routes } from '@routes/constant';
 
 const portofolioRouter: RouteObject[] = [
     {
-        path: routes.portofolio.name,
+        path: "",
         children: [
             {
                 path: ':username',
