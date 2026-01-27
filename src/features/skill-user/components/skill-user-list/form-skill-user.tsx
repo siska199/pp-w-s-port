@@ -110,10 +110,9 @@ const FormSkillUser = () => {
         });
 
         if (isValid) {
-            const extractForm = extractValueFromForm(form);
+            const extractForm = extractValueFromForm(form) as unknown as TSkillUserSchema;
             const result = await upsertSkillUser({
                 ...extractForm,
-                id: extractForm?.id || undefined,
                 years_of_experiance: Number(extractForm?.years_of_experiance),
             });
             if (result?.status) {

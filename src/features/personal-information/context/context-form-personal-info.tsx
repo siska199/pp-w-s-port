@@ -1,7 +1,7 @@
-import { eventEmitter } from '@event-emitters';
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { eventEmitter } from '@event-emitters';
 
-import useMasterAPI from '@apis/use-master-api';
 import usePersonalInformationAPI from '@features/personal-information/apis/use-personal-information-api';
 import EVENT_PERSONAL_INFO from '@features/personal-information/event-emitters/personal-info-event';
 import { TKeyMetric, TSelectedSocialLink } from '@features/personal-information/types/personal-information-types';
@@ -12,8 +12,11 @@ import generalPersonalInfoSchema, {
     TOptionalFormGeneralPersonalInfo,
 } from '@features/personal-information/validations/general-personal-info-schema';
 import socialLinkSchema from '@features/personal-information/validations/social-link-schema';
+import useMasterAPI from '@apis/use-master-api';
 
 import useFile from '@hooks/use-file';
+import { useAppDispatch } from '@store/store';
+import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice';
 import {
     extractValueFromForm,
     formatPhoneNumber,
@@ -24,11 +27,8 @@ import {
     mergeArraysOfObjects,
     TParamsMapErrorMessagePromiseAll,
 } from '@lib/helper/function';
-import { useAppDispatch } from '@store/store';
-import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice';
 import { TTypeActionData } from '@typescript/index-type';
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types';
-import { useNavigate } from 'react-router-dom';
 
 interface TStateFormPersonalInfo {
     formGeneralPersonalInfo: TFormGeneralPersonalInfo;

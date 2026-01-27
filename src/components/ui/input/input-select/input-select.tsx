@@ -33,7 +33,7 @@ interface MultipleSelectProps extends TBasePropsInput, Omit<React.HTMLProps<HTML
 }
 
 const InputSelect = (props: TPropsInputSelect) => {
-    const { options, isMultiple, withSelectAll, onLoadMore, isUpdated, ...attrs } = props;
+    const { options, isMultiple, withSelectAll, onLoadMore, isUpdated: _isUpdated, ...attrs } = props;
     const refContainerDropdown = useRef<HTMLDivElement | null>(null);
     const refContainerValue = useRef<HTMLDivElement | null>(null);
     const refIconChevron = useRef<HTMLDivElement | null>(null);

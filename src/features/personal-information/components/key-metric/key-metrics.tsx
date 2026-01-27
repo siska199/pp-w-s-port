@@ -71,7 +71,7 @@ const CardKeyMetric = (props: TPropsCardKeyMetric) => {
             if (index < 0) return prev;
             return prev.filter((_, i) => i !== index);
         });
-        setListDeletedKeyMetric((prev)=>[...prev, idData])
+        setListDeletedKeyMetric((prev) => [...prev, idData]);
     };
 
     return (

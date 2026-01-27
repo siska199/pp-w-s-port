@@ -1,6 +1,6 @@
-import ENDPOINT from '@apis/endpoints';
 import { TProject } from '@features/project/types/project-type';
 import { TOptionalInformationProjectSchema } from '@features/project/validation/information-project-schema';
+import ENDPOINT from '@apis/endpoints';
 
 import useAPI from '@hooks/use-api';
 import appMessage from '@lib/data/app-message';

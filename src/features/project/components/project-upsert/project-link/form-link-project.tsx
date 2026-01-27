@@ -56,7 +56,7 @@ const FormLinkProject = () => {
 
         const extractForm = {
             ...extractValueFromForm(form),
-        };
+        } as TProjectLink;
 
         const result = await upsertProjectLink({
             ...extractForm,

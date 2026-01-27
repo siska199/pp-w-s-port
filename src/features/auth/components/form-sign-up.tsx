@@ -58,7 +58,7 @@ const FormSignUp = () => {
             });
 
             if (isValid) {
-                const payload = extractValueFromForm(deepCopy(updatedForm));
+                const payload = extractValueFromForm(deepCopy(updatedForm)) as TSignUpSchema;
                 const result = await signUp({
                     ...filterKeysObject({
                         object: payload,

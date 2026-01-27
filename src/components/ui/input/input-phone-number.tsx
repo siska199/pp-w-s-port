@@ -13,7 +13,7 @@ interface TProps extends TBasePropsInput, React.HTMLProps<HTMLInputElement> {
 }
 
 const InputPhoneNumber = (props: TProps) => {
-    const { onChange: handleOnChange,isUpdated, ...attrs } = props;
+    const { onChange: handleOnChange, isUpdated: _isUpdated, ...attrs } = props;
     const formatPattern = 'XX-XXX-XXX-XXX';
 
     const updateValue = attrs?.value?.replace(/^0+/, '');

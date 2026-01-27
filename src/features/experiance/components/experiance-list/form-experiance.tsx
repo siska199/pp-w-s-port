@@ -100,7 +100,8 @@ const FormExperiance = () => {
 
         const extractForm = {
             ...extractValueFromForm(form),
-        };
+        } as unknown as TExperianceSchema;
+
         const result = await upsertExperiance({
             ...extractForm,
         });

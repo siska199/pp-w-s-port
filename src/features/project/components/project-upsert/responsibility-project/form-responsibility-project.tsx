@@ -56,7 +56,7 @@ const FormResponsibilityProject = () => {
 
         const extractForm = {
             ...extractValueFromForm(form),
-        };
+        } as TProjectResponsibility;
 
         const result = await upsertProjectResponsibility({
             ...extractForm,

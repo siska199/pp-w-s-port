@@ -1,8 +1,8 @@
 import { TKeyMetric, TPersonalInformation, TSocialLink } from '@features/personal-information/types/personal-information-types';
+import { TOptionalFormGeneralPersonalInfo } from '@features/personal-information/validations/general-personal-info-schema';
 import ENDPOINT from '@apis/endpoints';
 
 import useAPI from '@hooks/use-api';
-import { TOptionalFormGeneralPersonalInfo } from '@features/personal-information/validations/general-personal-info-schema';
 
 const usePersonalInformationAPI = () => {
     const { apiClient } = useAPI();

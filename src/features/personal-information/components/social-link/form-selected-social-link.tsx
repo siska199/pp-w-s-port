@@ -81,7 +81,7 @@ const FormSelectedSocialLink = () => {
                     ...prev,
                     {
                         ...addedItem,
-                        isUpdated:true
+                        isUpdated: true,
                     },
                 ];
             }

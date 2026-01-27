@@ -26,7 +26,7 @@ export interface TPropsInputFileV1 extends Omit<TBasePropsInput, 'variant'>, Omi
 }
 
 const InputFileV1 = (props: TPropsInputFileV1) => {
-    const { isUpdated, listAcceptedTypeFile = [TTypeFile.ALL], isCompress = false, totalMaxSize = 5, onChange, name, variant = 'general', errorMessage, ...attrsInput } = props;
+    const { isUpdated: _isUpdated, listAcceptedTypeFile = [TTypeFile.ALL], isCompress = false, totalMaxSize = 5, onChange, name, variant = 'general', errorMessage, ...attrsInput } = props;
 
     const inputFileRef = useRef<HTMLInputElement | null>(null);
 

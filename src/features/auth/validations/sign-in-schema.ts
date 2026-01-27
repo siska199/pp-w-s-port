@@ -4,10 +4,10 @@ import * as z from 'zod';
 const signInSchema = z.object({
     username: zString({ name: 'username', mandatory: true }),
     password: zPassword(true),
-    isRememberMe: zBooleanCheckbox({ name: 'Is Remember Me' }),
+    isRememberMe: zBooleanCheckbox({ name: 'isRememberMe' }),
 });
 export type TSignInSchema = z.input<typeof signInSchema>;
-
+export type TOptionalSignIn = Partial<TSignInSchema>;
 export const initialFormSignIn = {
     username: {
         name: 'username',

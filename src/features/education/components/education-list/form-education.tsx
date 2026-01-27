@@ -153,11 +153,11 @@ const FormEducation = () => {
 
         const extractForm = {
             ...extractValueFromForm(form),
-        };
+        } as TEducationSchema;
         const result = await upsertEducation({
             ...extractForm,
             gpa: Number(extractForm?.gpa),
-            id: extractForm?.id || undefined,
+            id: extractForm?.id,
         });
         if (!result?.status) return;
         handleCloseFormEducation();

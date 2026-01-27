@@ -221,7 +221,7 @@ export const extractValueFromForm = <TForm extends Record<string, FormField>>(fo
         (acc, key) => {
             const field = form[key as keyof TForm];
 
-            if (action === TTypeActionData['EDIT'] && !field?.isUpdated && field.name!=='id') {
+            if (action === TTypeActionData['EDIT'] && !field?.isUpdated && field.name !== 'id') {
                 return acc;
             }
 
