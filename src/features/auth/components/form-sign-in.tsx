@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import useAuthAPI from '@features/auth/apis/use-auth-api';
+import signInSchema, { initialFormSignIn, TSignInSchema } from '@features/auth/validations/sign-in-schema';
 import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
 import InputBase from '@components/ui/input/input-base';
 import InputCheckbox from '@components/ui/input/input-checkbox';
-import useAuthAPI from '@features/auth/apis/use-auth-api';
-import signInSchema, { initialFormSignIn, TSignInSchema } from '@features/auth/validations/sign-in-schema';
 
 import STORAGE_VARIABLE from '@lib/config/storage-variable';
 import { deepCopy, extractValueFromForm, filterKeysObject, mappingErrorsToForm } from '@lib/helper/function';
@@ -56,7 +56,7 @@ const FormSignIn = () => {
                     password: payload.password,
                 });
                 if (result?.status) {
-                    const isRememberMe = payload?.isRememberMe === 'true'
+                    const isRememberMe = payload?.isRememberMe === 'true';
                     setItemSecureWebstorage(STORAGE_VARIABLE.IS_REMEMBER_ME, isRememberMe);
                     setItemSecureWebstorage(
                         STORAGE_VARIABLE.AUTH,
