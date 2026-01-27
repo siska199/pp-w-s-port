@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { eventEmitter } from '@event-emitters';
 
 import useExperianceAPI from '@features/experiance/apis/use-experiance-api';
@@ -13,14 +12,12 @@ import { useAppDispatch, useAppSelector } from '@store/store';
 import { handleSetModalConfirmation } from '@store/ui-slice';
 import appMessage from '@lib/data/app-message';
 import { formatDate, toLocalDateInputValue } from '@lib/helper/function';
-import { routes } from '@routes/constant';
 import { TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type';
 import { TSettingTable } from '@typescript/ui-types';
 
 const TableExperiance = () => {
     const isLoading = useAppSelector((state) => state?.ui?.isLoading);
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
     const { getListExperiance, deleteExperiance } = useExperianceAPI();
 
     const configTable = useTable<TExperiance, false>({
@@ -143,10 +140,6 @@ const TableExperiance = () => {
         });
     };
 
-    const handleViewData = (data: TExperiance) => {
-        navigate(routes.experiance.child.detail.fullPath(String(data?.id)));
-    };
-
     const handleDeleteData = (data: TExperiance) => {
         dispatch(
             handleSetModalConfirmation({
@@ -173,7 +166,6 @@ const TableExperiance = () => {
                 withNo
                 isLoading={isLoading}
                 actionBtn={{
-                    view: handleViewData,
                     edit: handleEdiTExperiance,
                     delete: handleDeleteData,
                 }}

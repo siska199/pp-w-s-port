@@ -8,10 +8,11 @@ interface TProps extends TBasePropsInput, React.HTMLProps<HTMLTextAreaElement> {
     name: string;
     value: string;
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    isUpdated?: boolean;
 }
 
 const InputTextArea = (props: TProps) => {
-    const { ...attrs } = props;
+    const {isUpdated, ...attrs } = props;
     return (
         <ContainerInput<React.HTMLProps<HTMLTextAreaElement>>
             customeClass={{

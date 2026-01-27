@@ -2,6 +2,7 @@ import { TKeyMetric, TPersonalInformation, TSocialLink } from '@features/persona
 import ENDPOINT from '@apis/endpoints';
 
 import useAPI from '@hooks/use-api';
+import { TOptionalFormGeneralPersonalInfo } from '@features/personal-information/validations/general-personal-info-schema';
 
 const usePersonalInformationAPI = () => {
     const { apiClient } = useAPI();
@@ -22,7 +23,7 @@ const usePersonalInformationAPI = () => {
         return result;
     };
 
-    const upsertPersonalInformation = async (params: TPersonalInformation) => {
+    const upsertPersonalInformation = async (params: TOptionalFormGeneralPersonalInfo) => {
         const result = await apiClient({
             endpoint: ENDPOINT.PERSONAL_INFORMATION.UPSERT_PERSONAL_INFORMATION,
             payload: params,
@@ -40,6 +41,18 @@ const usePersonalInformationAPI = () => {
             endpoint: ENDPOINT.SOCIAL_LINK.UPSERT_BULK_SOCIAL_LINKS,
             payload: params,
             method: 'post',
+            isShowAlert: false,
+            isLoading: false,
+        });
+
+        return result;
+    };
+
+    const deleteBulkSocialLink = async (params: string[]) => {
+        const result = await apiClient({
+            endpoint: ENDPOINT.SOCIAL_LINK.DELETE_BULK_SOCIAL_LINKS,
+            payload: params,
+            method: 'delete',
             isShowAlert: false,
             isLoading: false,
         });
@@ -67,6 +80,18 @@ const usePersonalInformationAPI = () => {
         return result;
     };
 
+    const deleteBulkKeyMetric = async (params: string[]) => {
+        const result = await apiClient({
+            endpoint: ENDPOINT.KEY_METRIC.DELETE_BULK_KEY_METRICS,
+            payload: params,
+            method: 'delete',
+            isShowAlert: false,
+            isLoading: false,
+        });
+
+        return result;
+    };
+
     return {
         getDetailPersonalInformation,
         getListSocialLink,
@@ -74,6 +99,8 @@ const usePersonalInformationAPI = () => {
         upsertBulkSocialLink,
         getListKeyMetric,
         upsertBulkKeyMetric,
+        deleteBulkKeyMetric,
+        deleteBulkSocialLink,
     };
 };
 

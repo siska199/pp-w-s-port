@@ -4,6 +4,7 @@ import { SwiperClass } from 'swiper/react';
 import SliderRelatedImageMenu from '@features/project/components/project-detail/menu-section/slider-related-image-menu';
 import { contextProject } from '@features/project/context/context-project';
 import ContainerSection from '@components/ui/container/container-section';
+import ContainerVisibility from '@components/ui/container/container-visibility';
 import Image from '@components/ui/image';
 import SliderImage3D from '@components/ui/slider/slider-image-3d';
 
@@ -16,34 +17,38 @@ const MenuSection = () => {
     const currentProject = useMemo(() => {
         return data?.project_menus?.[acitiveMenuIndex as number];
     }, [acitiveMenuIndex]);
+
     const listImages = useMemo(() => {
         return (data?.project_menus?.map((image) => image?.main_image) || []) as string[];
     }, [acitiveMenuIndex]);
+
     const handleOnChangeSlide = (swiper: SwiperClass) => {
         setActiveMenuIndex(swiper.realIndex);
     };
 
-    if (!data || !currentProject) return null;
-
     return (
-        <ContainerSection title="Menu" className=" ">
-            {listImages?.length > 0 && (
-                <SliderImage3D
-                    images={[...listImages]}
-                    onClick={handleOnChangeSlide}
-                    onSlideChange={handleOnChangeSlide}
-                    swiperSlideProps={{
-                        className: `min-w-auto md:min-h-[20rem] min-w-[20rem] max-w-[25rem] md:min-w-[40rem] md:max-w-[40rem] rounded-lg overflow-hidden`,
-                    }}
-                />
-            )}
+        <ContainerVisibility isVisible={!!currentProject}>
+            <ContainerSection title="Menu" className=" ">
+                <ContainerVisibility isVisible={listImages?.length > 0}>
+                    <SliderImage3D
+                        images={[...listImages]}
+                        onClick={handleOnChangeSlide}
+                        onSlideChange={handleOnChangeSlide}
+                        swiperSlideProps={{
+                            className: `min-w-auto md:min-h-[20rem] min-w-[20rem] max-w-[25rem] md:min-w-[40rem] md:max-w-[40rem] rounded-lg overflow-hidden`,
+                        }}
+                    />
+                </ContainerVisibility>
 
-            <div className="lg:-mt-[0rem] space-y-4 w-full">
-                <CardIntroMenu title={currentProject?.name} description={currentProject?.description} />
-                <ListRelatedImageMenu images={currentProject?.related_images?.map((image) => image?.image)} />
-                <ListFeature features={currentProject?.features} />
-            </div>
-        </ContainerSection>
+                <div className="lg:-mt-[0rem] space-y-4 w-full">
+                    <CardIntroMenu title={currentProject?.name} description={currentProject?.description} />
+                    <ContainerVisibility isVisible={currentProject?.related_images?.length > 0}>
+                        <ListRelatedImageMenu images={currentProject?.related_images?.map((image) => image?.image)} />
+                    </ContainerVisibility>
+                    <ListFeature features={currentProject?.features} />
+                </div>
+            </ContainerSection>
+        </ContainerVisibility>
     );
 };
 
@@ -83,7 +88,6 @@ const ListRelatedImageMenu = (props: TPropsRelatedImagesMenu) => {
             }),
         );
     };
-    if (images?.length === 0) return null;
     return (
         <>
             <div className="space-y-2">

@@ -4,6 +4,8 @@ export interface TKeyMetric {
     id?: string;
     key: string;
     value: string;
+
+    isUpdated?: boolean
 }
 
 export interface TSocialLink {
@@ -21,6 +23,7 @@ export interface TSelectedSocialLink extends TSocialLink {
     image: string;
     name: string;
     placeholder: string;
+    isUpdated:boolean
 }
 
 export interface TPersonalInformation {

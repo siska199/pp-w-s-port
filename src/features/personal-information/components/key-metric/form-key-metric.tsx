@@ -43,6 +43,7 @@ const FormKeyMetric = () => {
         const value = e.target.value;
         const currForm = form;
         currForm[name].value = value;
+
         setForm({
             ...currForm,
         });
@@ -67,7 +68,7 @@ const FormKeyMetric = () => {
         setForm(validatedForm);
         if (!isValid) return;
 
-        const extractedForm = extractValueFromForm(validatedForm);
+        const extractedForm = extractValueFromForm(validatedForm) as TKeyMetric;
 
         setListKeyMetric((prev) => {
             const existingIndex = prev.findIndex(({ id }) => id === extractedForm.id);
@@ -78,6 +79,7 @@ const FormKeyMetric = () => {
                     {
                         ...extractedForm,
                         id: `${Date.now()}-NEW`,
+                        isUpdated: true,
                     },
                 ];
             }
@@ -86,6 +88,7 @@ const FormKeyMetric = () => {
             updated[existingIndex] = {
                 ...updated[existingIndex],
                 ...extractedForm,
+                isUpdated: true,
             };
 
             return updated;

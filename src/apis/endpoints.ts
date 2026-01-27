@@ -20,10 +20,12 @@ const ENDPOINTS = {
     SOCIAL_LINK: {
         GET_LIST_SOCIAL_LINK: '/social-links',
         UPSERT_BULK_SOCIAL_LINKS: '/social-links',
+        DELETE_BULK_SOCIAL_LINKS: '/social-links',
     },
     KEY_METRIC: {
         GET_LIST_KEY_METRIC: '/key-metrics',
         UPSERT_BULK_KEY_METRICS: '/key-metrics',
+        DELETE_BULK_KEY_METRICS: '/key-metrics',
     },
     PERSONAL_INFORMATION: {
         GET_DETAIL_PERSONAL_INFORMATION: '/personal-information',

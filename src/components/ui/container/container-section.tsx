@@ -6,13 +6,15 @@ import HeaderSection from '@components/ui/header/header-section';
 interface TProps extends TPropsContainer {
     children: React.ReactNode;
     title?: string;
+    isLoading?: boolean;
+    loadingWording?: string;
 }
 
-const ContainerSection = forwardRef<HTMLDivElement, TProps>(({ children, className, title, ...attrs }, ref) => {
+const ContainerSection = forwardRef<HTMLDivElement, TProps>(({ children, className, title, isLoading, loadingWording, ...attrs }, ref) => {
     return (
         <Container ref={ref} gap="base" variant={title ? 'vcc' : 'hcc'} className={`p-4 ${className ?? ''}`} {...attrs}>
             <HeaderSection title={title} />
-            {children}
+            {isLoading ? <h5 className="text-body-large">{loadingWording ?? `Loading Section ${title}...`}</h5> : children}
         </Container>
     );
 });

@@ -1,7 +1,7 @@
-import { createContext, useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { eventEmitter } from '@event-emitters';
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 
+import useMasterAPI from '@apis/use-master-api';
 import usePersonalInformationAPI from '@features/personal-information/apis/use-personal-information-api';
 import EVENT_PERSONAL_INFO from '@features/personal-information/event-emitters/personal-info-event';
 import { TKeyMetric, TSelectedSocialLink } from '@features/personal-information/types/personal-information-types';
@@ -9,13 +9,11 @@ import generalPersonalInfoSchema, {
     initialFormGeneralPersonalInfo,
     TFormGeneralPersonalInfo,
     TGeneralPersonalInfoSchema,
+    TOptionalFormGeneralPersonalInfo,
 } from '@features/personal-information/validations/general-personal-info-schema';
 import socialLinkSchema from '@features/personal-information/validations/social-link-schema';
-import useMasterAPI from '@apis/use-master-api';
 
 import useFile from '@hooks/use-file';
-import { useAppDispatch } from '@store/store';
-import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice';
 import {
     extractValueFromForm,
     formatPhoneNumber,
@@ -26,7 +24,11 @@ import {
     mergeArraysOfObjects,
     TParamsMapErrorMessagePromiseAll,
 } from '@lib/helper/function';
+import { useAppDispatch } from '@store/store';
+import { handleSetAlertConfig, handleSetIsloading } from '@store/ui-slice';
+import { TTypeActionData } from '@typescript/index-type';
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types';
+import { useNavigate } from 'react-router-dom';
 
 interface TStateFormPersonalInfo {
     formGeneralPersonalInfo: TFormGeneralPersonalInfo;
@@ -39,6 +41,9 @@ interface TStateFormPersonalInfo {
     isLoading: boolean;
     errorKeyMetric: string;
     setErrorKeyMetric: React.Dispatch<React.SetStateAction<string>>;
+
+    setListDeletedKeyMetric: React.Dispatch<React.SetStateAction<string[]>>;
+    setListDeletedSocialLink: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const intialStateFormPersonalInformation = {
@@ -52,20 +57,27 @@ const intialStateFormPersonalInformation = {
     isLoading: false,
     errorKeyMetric: '',
     setErrorKeyMetric: () => null,
+    setListDeletedKeyMetric: () => null,
+    setListDeletedSocialLink: () => null,
 };
 
 export const contextFormPersonalInfo = createContext<TStateFormPersonalInfo>(intialStateFormPersonalInformation);
 
 const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
     const { children } = props;
-    const navigate = useNavigate();
-    const { upsertPersonalInformation, upsertBulkSocialLink, upsertBulkKeyMetric, getDetailPersonalInformation, getListKeyMetric } = usePersonalInformationAPI();
+    const { upsertPersonalInformation, upsertBulkSocialLink, deleteBulkKeyMetric, upsertBulkKeyMetric, getDetailPersonalInformation, getListKeyMetric, deleteBulkSocialLink } =
+        usePersonalInformationAPI();
     const { getListMasterProvince, getListMasterCity, getListMasterDistrict, getListMasterProfession, getListMasterPostalCode } = useMasterAPI();
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const { handleGetFileFromUrl } = useFile();
 
     const [listKeyMetric, setListKeyMetric] = useState<TKeyMetric[]>([]);
     const [errorKeyMetric, setErrorKeyMetric] = useState<string>('');
+
+    const [listDeletedKeyMetric, setListDeletedKeyMetric] = useState<string[]>([]);
+    const [listDeletedSocialLink, setListDeletedSocialLink] = useState<string[]>([]);
+
     const [listSelectedSocialLink, setListSelectedSocialLink] = useState<TSelectedSocialLink[]>([]);
     const [formGeneralPersonalInfo, setFormGeneralInfoPersonalInfo] = useState(intialStateFormPersonalInformation.formGeneralPersonalInfo);
     const [isLoading, setIsLoading] = useState(false);
@@ -141,6 +153,7 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
         const value = e.target.value;
         currForm[name].value = value;
         currForm[name].errorMessage = '';
+        currForm[name].isUpdated = true;
 
         if (name == 'id_province') {
             const keys = ['id_city', 'id_district', 'id_postal_code'] as TExtractKeyPersonalInfo<'id_city' | 'id_district' | 'id_postal_code'>;
@@ -177,92 +190,139 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
         });
     }, []);
 
+    const isEditAction = useMemo(() => {
+        return formGeneralPersonalInfo?.id.value ? TTypeActionData['EDIT'] : TTypeActionData['ADD'];
+    }, [formGeneralPersonalInfo?.id.value]);
+
+    const validateFormPersonalInfo = () => {
+        const { isValid, form } = mappingErrorsToForm<TGeneralPersonalInfoSchema, typeof formGeneralPersonalInfo>({
+            form: formGeneralPersonalInfo,
+            schema: generalPersonalInfoSchema,
+        });
+        setFormGeneralInfoPersonalInfo({ ...form });
+        if (!isValid) return false;
+        return form;
+    };
+
+    const validateSocialLinks = () => {
+        let isValidFormListSelectedSocialLink = !(listSelectedSocialLink?.length == 0);
+        eventEmitter.emit(EVENT_PERSONAL_INFO.ON_VALIDATE_PERSONAL_INFO, isValidFormListSelectedSocialLink);
+
+        const updateListSelectedSocialLink = listSelectedSocialLink?.map((selectedSocialLink) => {
+            const form = {
+                url: {
+                    name: 'url',
+                    value: selectedSocialLink.value,
+                    errorMessage: '',
+                },
+            };
+
+            const { isValid, form: updatedForm } = mappingErrorsToForm({
+                form,
+                schema: socialLinkSchema(selectedSocialLink?.name),
+            });
+
+            if (!isValid) isValidFormListSelectedSocialLink = false;
+            return {
+                ...selectedSocialLink,
+                errorMessage: updatedForm?.url?.errorMessage,
+            };
+        });
+
+        setListSelectedSocialLink([...updateListSelectedSocialLink]);
+        if (!isValidFormListSelectedSocialLink) return false;
+        return updateListSelectedSocialLink;
+    };
+
+    const validateKeyMetrics = () => {
+        const isValidFormListKeyMetric = !(listKeyMetric?.length == 0);
+        if (!isValidFormListKeyMetric) {
+            setErrorKeyMetric('Key Metrics is Required');
+            return false;
+        }
+        return listKeyMetric;
+    };
+
+    const handleProsesSubmitFormGeneralInfo = async (data: typeof formGeneralPersonalInfo) => {
+        const phoneNumberValue = data?.phone_number.value;
+        const payloadPersonalInfo = {
+            ...extractValueFromForm({ ...data }, isEditAction),
+            ...(phoneNumberValue && {
+                phone_number: formatPhoneNumber(phoneNumberValue),
+            }),
+        } as TOptionalFormGeneralPersonalInfo;
+        const responseSubmitGeneralInfo = await upsertPersonalInformation(payloadPersonalInfo);
+        return responseSubmitGeneralInfo;
+    };
+
+    const handleProsesSubmitSocialLinks = async (data: typeof listSelectedSocialLink) => {
+        const payloadSocialLinks = data
+            ?.filter((socialLink) => socialLink?.isUpdated)
+            ?.map((selectedSocliaLink) => ({
+                id_category: selectedSocliaLink.id_category,
+                id: selectedSocliaLink?.id,
+                url: selectedSocliaLink?.value,
+            }));
+        const responseSocialLinks = await upsertBulkSocialLink(payloadSocialLinks);
+
+        const listDeletedIdSocialLink = listDeletedSocialLink?.filter((id) => !!id);
+        if (listDeletedIdSocialLink?.length > 0) {
+            await deleteBulkSocialLink(listDeletedIdSocialLink);
+        }
+        return responseSocialLinks;
+    };
+
+    const handleProsesSubmitKeyMetrics = async (data: typeof listKeyMetric) => {
+        const keyMetrics = data?.filter((keyMetric) => keyMetric?.isUpdated).map(({ id, ...rest }) => (id?.includes('NEW') ? rest : { id, ...rest }));
+        const responseKeyMetrics = await upsertBulkKeyMetric(keyMetrics);
+
+        const listDeletedIdKeyMetric = listDeletedKeyMetric?.filter((id) => !id.includes('-NEW'));
+
+        if (listDeletedIdKeyMetric?.length > 0) {
+            await deleteBulkKeyMetric(listDeletedIdKeyMetric);
+        }
+        return responseKeyMetrics;
+    };
+
     const handleOnSubmit = async (e: TEventSubmitForm) => {
+        e?.preventDefault();
         dispatch(handleSetIsloading(true));
         setIsLoading(true);
         try {
-            e?.preventDefault();
-            const { isValid: isValidFormGeneralInfo, form: updatedFormGeneralInfo } = mappingErrorsToForm<TGeneralPersonalInfoSchema, typeof formGeneralPersonalInfo>({
-                form: formGeneralPersonalInfo,
-                schema: generalPersonalInfoSchema,
-            });
+            const validateFormPersonalInfoValid = validateFormPersonalInfo();
+            const validateSocialLinksValid = validateSocialLinks();
+            const validateKeyMetricsValid = validateKeyMetrics();
 
-            eventEmitter.emit(EVENT_PERSONAL_INFO.ON_VALIDATE_PERSONAL_INFO, listSelectedSocialLink?.length > 0);
+            const isFormInvalid = !validateFormPersonalInfo || !validateSocialLinksValid || !validateKeyMetricsValid;
+            if (isFormInvalid) return;
 
-            let isValidFormListSelectedSocialLink = !(listSelectedSocialLink?.length == 0);
-            const updateListSelectedSocialLink = listSelectedSocialLink?.map((selectedSocialLink) => {
-                const form = {
-                    url: {
-                        name: 'url',
-                        value: selectedSocialLink.value,
-                        errorMessage: '',
+            const results = await Promise.all([
+                handleProsesSubmitFormGeneralInfo(validateFormPersonalInfoValid as typeof formGeneralPersonalInfo),
+                handleProsesSubmitSocialLinks(validateSocialLinksValid),
+                handleProsesSubmitKeyMetrics(validateKeyMetricsValid),
+            ]);
+            const errorMessage = mapErrorMessagePromiseAll(
+                mergeArraysOfObjects(results, [
+                    { moduleName: 'General Personal Information' },
+                    {
+                        moduleName: 'Social Link',
                     },
-                };
+                ]) as TParamsMapErrorMessagePromiseAll,
+            );
 
-                const { isValid, form: updatedForm } = mappingErrorsToForm({
-                    form,
-                    schema: socialLinkSchema(selectedSocialLink?.name),
-                });
-
-                if (!isValid) isValidFormListSelectedSocialLink = false;
-                return {
-                    ...selectedSocialLink,
-                    errorMessage: updatedForm?.url?.errorMessage,
-                };
-            });
-
-            const isValidFormListKeyMetric = !(listKeyMetric?.length == 0);
-
-            setListSelectedSocialLink([...updateListSelectedSocialLink]);
-            setFormGeneralInfoPersonalInfo({ ...updatedFormGeneralInfo });
-
-            if (!isValidFormListKeyMetric) {
-                setErrorKeyMetric('Key Metrics is Required');
-            }
-
-            if (isValidFormGeneralInfo && isValidFormListSelectedSocialLink && isValidFormListKeyMetric) {
-                const personalInformation = {
-                    ...extractValueFromForm({ ...formGeneralPersonalInfo }),
-                };
-                const socialLinks = listSelectedSocialLink?.map((selectedSocliaLink) => ({
-                    id_category: selectedSocliaLink.id_category,
-                    id: selectedSocliaLink?.id,
-                    url: selectedSocliaLink?.value,
-                }));
-                const keyMetrics = listKeyMetric.map(({ id, ...rest }) => (id?.includes('NEW') ? rest : { id, ...rest }));
-                const results = await Promise.all([
-                    upsertPersonalInformation({
-                        ...personalInformation,
-                        phone_number: formatPhoneNumber(personalInformation.phone_number),
-                    }),
-                    upsertBulkSocialLink(socialLinks),
-                    upsertBulkKeyMetric(keyMetrics),
-                ]);
-
-                const errorMessage = mapErrorMessagePromiseAll(
-                    mergeArraysOfObjects(results, [
-                        { moduleName: 'General Personal Information' },
-                        {
-                            moduleName: 'Social Link',
-                        },
-                    ]) as TParamsMapErrorMessagePromiseAll,
-                );
-
-                const isSuccess = results?.every((result) => result?.status);
-                dispatch(
-                    handleSetAlertConfig({
-                        show: true,
-                        message: errorMessage,
-                        type: isSuccess ? 'sucess' : 'error',
-                        withIcon: true,
-                    }),
-                );
-
-                isSuccess &&
-                    setTimeout(() => {
-                        navigate(0);
-                    }, 3000);
-            }
+            const isSuccess = results?.every((result) => result?.status);
+            dispatch(
+                handleSetAlertConfig({
+                    show: true,
+                    message: errorMessage,
+                    type: isSuccess ? 'sucess' : 'error',
+                    withIcon: true,
+                }),
+            );
+            if (isSuccess)
+                setTimeout(() => {
+                    navigate(0);
+                }, 3000);
         } catch (error: any) {
             console.log('error: ', error?.message);
         } finally {
@@ -335,6 +395,8 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
                 setListKeyMetric,
                 errorKeyMetric,
                 setErrorKeyMetric,
+                setListDeletedKeyMetric,
+                setListDeletedSocialLink,
             }}
         >
             {children}

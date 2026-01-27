@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { eventEmitter } from '@event-emitters';
 
 import useEducationApi from '@features/education/apis/use-education-api';
@@ -12,15 +11,12 @@ import { useAppDispatch, useAppSelector } from '@store/store';
 import { handleSetModalConfirmation } from '@store/ui-slice';
 import appMessage from '@lib/data/app-message';
 import { formatDate, toLocalDateInputValue } from '@lib/helper/function';
-import { routes } from '@routes/constant';
-import { TTypeActionModalForm } from '@typescript/index-type';
-import { TResponseDataPaginationAPI } from '@typescript/index-type';
+import { TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type';
 import { TSettingTable } from '@typescript/ui-types';
 
 const TableEducation = () => {
     const isLoading = useAppSelector((state) => state.ui.isLoading);
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
     const { getListEducation, deleteEducation } = useEducationApi();
     const configTable = useTable<TEducation, false>({
         initialColumn: [
@@ -105,11 +101,6 @@ const TableEducation = () => {
         });
     };
 
-    const handleViewData = (data: TEducation) => {
-        const id = data.id;
-        navigate(routes.education.child.detail.fullPath(id));
-    };
-
     const handleDeleteData = (data: TEducation) => {
         dispatch(
             handleSetModalConfirmation({
@@ -136,7 +127,6 @@ const TableEducation = () => {
                 withNo
                 isLoading={isLoading}
                 actionBtn={{
-                    view: handleViewData,
                     edit: handleEditData,
                     delete: handleDeleteData,
                 }}

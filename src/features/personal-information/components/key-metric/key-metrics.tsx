@@ -48,7 +48,7 @@ interface TPropsCardKeyMetric {
     value: string;
 }
 const CardKeyMetric = (props: TPropsCardKeyMetric) => {
-    const { setListKeyMetric } = useContext(contextFormPersonalInfo);
+    const { setListKeyMetric, setListDeletedKeyMetric } = useContext(contextFormPersonalInfo);
 
     const { id, keyData, value } = props;
 
@@ -71,6 +71,7 @@ const CardKeyMetric = (props: TPropsCardKeyMetric) => {
             if (index < 0) return prev;
             return prev.filter((_, i) => i !== index);
         });
+        setListDeletedKeyMetric((prev)=>[...prev, idData])
     };
 
     return (

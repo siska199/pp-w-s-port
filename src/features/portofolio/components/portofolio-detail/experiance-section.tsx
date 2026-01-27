@@ -13,9 +13,8 @@ import ContainerSection from '@components/ui/container/container-section';
 import { useAnimateScrollCustome } from '@hooks/use-animate-scroll-custome';
 import { useFetchOnView } from '@hooks/use-fetch-on-view';
 import { handleSetModal } from '@store/ui-slice';
-import { formatDate, toLocalDateInputValue } from '@lib/helper/function';
+import { formatDateForPresent } from '@lib/helper/function';
 import { routes } from '@routes/constant';
-import { TTypeDateFormat } from '@typescript/ui-types';
 
 const ExperianceSection = () => {
     const { isLoading, getExperienceList, experienceList } = useContext(contextPortfolio);
@@ -26,16 +25,12 @@ const ExperianceSection = () => {
         },
     });
     return (
-        <ContainerSection ref={ref} title={'Experiance'} className="min-h-screen">
-            {isLoading[EPortfolioLoading.EXPERIENCE_LIST] ? (
-                <h5 className="text-body-large">Loading Section Experiance...</h5>
-            ) : (
-                <Container className="h-full w-auto relative gap-8 pt-8 ">
-                    {experienceList?.map((experiance, i) => (
-                        <CardExperiance key={i} {...experiance} />
-                    ))}
-                </Container>
-            )}
+        <ContainerSection isLoading={isLoading[EPortfolioLoading.EXPERIENCE_LIST]} ref={ref} title={'Experiance'} className="min-h-screen">
+            <Container className="h-full w-auto relative gap-8 pt-8 ">
+                {experienceList?.map((experiance, i) => (
+                    <CardExperiance key={i} {...experiance} />
+                ))}
+            </Container>
         </ContainerSection>
     );
 };
@@ -43,7 +38,7 @@ const ExperianceSection = () => {
 type TPropsExperiance = TExperiance;
 
 const CardExperiance = (props: TPropsExperiance) => {
-    const { company_name, profession, start_at, end_at, tech_stacks, projects, description } = props;
+    const { company_name, profession, start_at, end_at, tech_stacks, projects, description, is_currently_work_here } = props;
     const targetRef = useRef<HTMLDivElement | null>(null);
     const { scrollYProgress } = useAnimateScrollCustome({
         targetRef,
@@ -76,10 +71,8 @@ const CardExperiance = (props: TPropsExperiance) => {
                     {company_name} - {profession.name}
                 </h5>
                 <p className="font-thin">
-                    {formatDate({ date: toLocalDateInputValue(start_at), format: TTypeDateFormat['DD MONTH YEAR'] })} |{' '}
-                    {formatDate({ date: toLocalDateInputValue(end_at), format: TTypeDateFormat['DD MONTH YEAR'] })}
+                    {formatDateForPresent(start_at)} | {is_currently_work_here ? 'Present' : formatDateForPresent(end_at)}
                 </p>
-
                 <div className=" flex flex-col md:flex-row gap-2 md:gap-6 justify-between">
                     <p className="font-medium w-auto min-w-[5rem]">Tech Stacks</p>
                     <Container variant={'hsc'} className="!flex-wrap gap-3">

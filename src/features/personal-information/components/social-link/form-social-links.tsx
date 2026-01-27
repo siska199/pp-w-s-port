@@ -42,6 +42,10 @@ const FormSocialLink = React.memo((props: TSelectedSocialLink) => {
         setListSelectedSocialLink((prev) =>
             prev?.map((socialLink) => {
                 const isChangedData = socialLink?.name === name;
+
+                if (isChangedData) {
+                  socialLink.isUpdated = isChangedData;
+                }
                 return {
                     ...socialLink,
                     value: isChangedData ? value : socialLink?.value,

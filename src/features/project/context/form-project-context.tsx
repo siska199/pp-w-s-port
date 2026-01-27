@@ -7,7 +7,7 @@ import useProjectMenuApi, { TParamsListProjectMenu } from '@features/project/api
 import useProjectResponsibilityApi, { TParamsListProjectResponsibility } from '@features/project/apis/use-project-responsibility-api';
 import EVENT_PROJECT from '@features/project/event-emitters/project-event';
 import { TProjectLinkItem, TProjectMenuItem, TProjectResponsibilityItem } from '@features/project/types/project-type';
-import informationProjectSchema, { initialFormInformationProject, TInformationProjectSchema } from '@features/project/validation/information-project-schema';
+import informationProjectSchema, { initialFormInformationProject, TInformationProjectSchema, TOptionalInformationProjectSchema } from '@features/project/validation/information-project-schema';
 import { initialFormProjectLink } from '@features/project/validation/project-link-schema';
 import { initialFormProjectMenu } from '@features/project/validation/project-menu-schema';
 import useSkillUserAPI from '@features/skill-user/apis/use-skill-user-api';
@@ -287,13 +287,13 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
             if (!isValid) return;
 
             const informationProject = {
-                ...extractValueFromForm({ ...formInformationProject }),
+                ...extractValueFromForm({ ...formInformationProject }, TTypeActionData['DELETE']),
             };
             const result = await upsertProject({
                 ...informationProject,
                 is_show: String(informationProject.is_show),
                 ...(id && { id }),
-            });
+            } as TOptionalInformationProjectSchema);
             result?.status && navigate(`?id=${result?.data?.id}`, { replace: true });
             updatedFormInformationProject.id.value = result?.data?.id || '';
             setFormInformationProject({

@@ -23,7 +23,7 @@ const FormSelectedSocialLink = () => {
 
     const { getListSocialLink } = usePersonalInformationAPI();
     const { getListMasterCategorySocialLink } = useMasterAPI();
-    const { setListSelectedSocialLink } = useContext(contextFormPersonalInfo);
+    const { setListSelectedSocialLink, setListDeletedSocialLink } = useContext(contextFormPersonalInfo);
 
     useEffect(() => {
         handleInitData();
@@ -77,7 +77,19 @@ const FormSelectedSocialLink = () => {
         setListSelectedSocialLink((prev) => {
             if (parsedValue.length > prev.length) {
                 const addedItem = parsedValue.at(-1);
-                return [...prev, addedItem];
+                return [
+                    ...prev,
+                    {
+                        ...addedItem,
+                        isUpdated:true
+                    },
+                ];
+            }
+
+            const deletedItems = prev.filter((item) => !parsedValue.some((v) => v.name === item.name));
+
+            if (deletedItems.length > 0) {
+                setListDeletedSocialLink((prevDeleted) => [...prevDeleted, ...deletedItems.map((item) => item.id)]);
             }
 
             return prev.filter((item) => parsedValue.some((v) => v.name === item.name));

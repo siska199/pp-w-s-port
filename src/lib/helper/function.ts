@@ -5,7 +5,7 @@ import z, { ZodSchema, ZodType } from 'zod';
 
 import { TFileValue } from '@components/ui/input/input-file/input-file-v1';
 
-import { TDate, TObject, TResponseAPI } from '@typescript/index-type';
+import { TDate, TObject, TResponseAPI, TTypeActionData } from '@typescript/index-type';
 import { TOption, TTypeDateFormat, TTypeFile } from '@typescript/ui-types';
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -210,11 +210,26 @@ export const generateFileFromUrl = async (url: string) => {
     return file;
 };
 
-export const extractValueFromForm = <TForm extends TObject>(form: TForm): { [key in keyof TForm]: any } => {
-    Object.keys(form).map((key: keyof TForm) => {
-        form[key] = form[key]?.value;
-    });
-    return form;
+type FormField = {
+    value: any;
+    name: string;
+    isUpdated?: boolean;
+};
+
+export const extractValueFromForm = <TForm extends Record<string, FormField>>(form: TForm, action?: TTypeActionData): Partial<{ [K in keyof TForm]: TForm[K]['value'] }> => {
+    return Object.keys(form).reduce(
+        (acc, key) => {
+            const field = form[key as keyof TForm];
+
+            if (action === TTypeActionData['EDIT'] && !field?.isUpdated && field.name!=='id') {
+                return acc;
+            }
+
+            acc[key as keyof TForm] = field?.value;
+            return acc;
+        },
+        {} as Partial<{ [K in keyof TForm]: TForm[K]['value'] }>,
+    );
 };
 
 interface TMappingErrorsToForm<TSchema, TForm extends TObject> {
@@ -327,6 +342,10 @@ export const formatDate = (params: TFormatDate): string => {
 
     const formattedDate = new Intl.DateTimeFormat(formatLanguage, formatOptions[format]!).format(date);
     return (format === TTypeDateFormat['DD-MM-YYYY'] ? formattedDate.replace(/\//g, '-') : formattedDate) || '';
+};
+
+export const formatDateForPresent = (date: Date) => {
+    return formatDate({ date: toLocalDateInputValue(date), format: TTypeDateFormat['DD MONTH YEAR'] });
 };
 
 export const generateMaxDateOneYear = (date: string | Date | null): Date | null => {

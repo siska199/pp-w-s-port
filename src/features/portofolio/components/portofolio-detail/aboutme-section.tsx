@@ -18,21 +18,17 @@ const AboutMeSection = () => {
         },
     });
     return (
-        <ContainerSection ref={ref} title={'About Me'} className="min-h-screen">
-            {isLoading[EPortfolioLoading.KEY_METRIC] ? (
-                <h5 className="text-body-large">Loading About Me...</h5>
-            ) : (
-                <Container variant={'hsc'} gap="medium" className="overflow-x-hidden flex-col-reverse md:flex-row box-border">
-                    <motion.div {...slideInAnimation({ direction: 'left' })} className="flex md:flex-col flex-wrap flex-grow md:min-w-[23rem] gap-2">
-                        {keyMetricList?.map?.((info, i) => (
-                            <CardKeyMetric key={i} value={info.value} keyMetric={info?.key} />
-                        ))}
-                    </motion.div>
-                    <motion.p {...slideInAnimation({ direction: 'right' })} className=" indent-16 w-full  md:text-body-large h-auto my-auto p-4 rounded-md bg-card-transparent">
-                        {data?.about_me}
-                    </motion.p>
-                </Container>
-            )}
+        <ContainerSection isLoading={isLoading[EPortfolioLoading.KEY_METRIC]} ref={ref} title={'About Me'} className="min-h-screen">
+            <Container variant={'hsc'} gap="medium" className="overflow-x-hidden flex-col-reverse md:flex-row box-border">
+                <motion.div {...slideInAnimation({ direction: 'left' })} className="flex md:flex-col flex-wrap flex-grow md:min-w-[23rem] gap-2">
+                    {keyMetricList?.map?.((info, i) => (
+                        <CardKeyMetric key={i} value={info.value} keyMetric={info?.key} />
+                    ))}
+                </motion.div>
+                <motion.p {...slideInAnimation({ direction: 'right' })} className=" indent-16 w-full  md:text-body-large h-auto my-auto p-4 rounded-md bg-card-transparent">
+                    {data?.about_me}
+                </motion.p>
+            </Container>
         </ContainerSection>
     );
 };

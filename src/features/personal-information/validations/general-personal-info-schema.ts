@@ -10,6 +10,7 @@ export const initialFormGeneralPersonalInfo = {
         name: 'id',
         errorMessage: '',
         label: 'ID',
+        isUpdated: false,
     },
     first_name: {
         name: 'first_name',
@@ -17,6 +18,7 @@ export const initialFormGeneralPersonalInfo = {
         placeholder: 'e.g Siska Apriana',
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     last_name: {
         name: 'last_name',
@@ -24,6 +26,7 @@ export const initialFormGeneralPersonalInfo = {
         placeholder: 'e.g Rifianti',
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     email: {
         name: 'email',
@@ -31,6 +34,7 @@ export const initialFormGeneralPersonalInfo = {
         placeholder: 'e.g XXXXX@gmail.com',
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     phone_number: {
         name: 'phone_number',
@@ -38,6 +42,7 @@ export const initialFormGeneralPersonalInfo = {
         label: 'Phone Number',
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     id_profession: {
         name: 'id_profession',
@@ -46,6 +51,7 @@ export const initialFormGeneralPersonalInfo = {
         placeholder: 'e.g Frontend Developer',
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
 
     id_province: {
@@ -57,6 +63,7 @@ export const initialFormGeneralPersonalInfo = {
         autoComplete: 'new-password',
         errorMessage: '',
         disabled: false,
+        isUpdated: false,
     },
     id_city: {
         name: 'id_city',
@@ -67,6 +74,7 @@ export const initialFormGeneralPersonalInfo = {
         value: '',
         autoComplete: 'new-password',
         errorMessage: '',
+        isUpdated: false,
     },
     id_district: {
         name: 'id_district',
@@ -77,6 +85,7 @@ export const initialFormGeneralPersonalInfo = {
         value: '',
         autoComplete: 'new-password',
         errorMessage: '',
+        isUpdated: false,
     },
 
     id_postal_code: {
@@ -88,6 +97,7 @@ export const initialFormGeneralPersonalInfo = {
         value: '',
         errorMessage: '',
         autoComplete: 'new-password',
+        isUpdated: false,
     },
 
     bio: {
@@ -97,6 +107,7 @@ export const initialFormGeneralPersonalInfo = {
         placeholder: `e.g I'm Frontend Developer based on Jakarta, Indonesia`,
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     about_me: {
         name: 'about_me',
@@ -106,6 +117,7 @@ export const initialFormGeneralPersonalInfo = {
         maxLength: 1500,
         rows: 4,
         errorMessage: '',
+        isUpdated: false,
     },
     professional_image: {
         name: 'professional_image',
@@ -113,6 +125,7 @@ export const initialFormGeneralPersonalInfo = {
         value: null as null | File,
         listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG],
         errorMessage: '',
+        isUpdated: false,
     },
     resume: {
         name: 'resume',
@@ -121,10 +134,12 @@ export const initialFormGeneralPersonalInfo = {
         listAcceptedTypeFile: [TTypeFile.PDF],
         totalMaxSize: 10,
         errorMessage: '',
+        isUpdated: false,
     },
 };
 
 export type TFormGeneralPersonalInfo = typeof initialFormGeneralPersonalInfo;
+export type TOptionalFormGeneralPersonalInfo = Partial<TFormGeneralPersonalInfo>;
 
 const generalPersonalInfoSchema = z
     .object({

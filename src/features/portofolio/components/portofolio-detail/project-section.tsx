@@ -7,6 +7,7 @@ import { TProject } from '@features/project/types/project-type';
 import Badge from '@components/ui/badge';
 import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
+import ContainerLoading from '@components/ui/container/container-loading';
 import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
 import InputBase from '@components/ui/input/input-base';
@@ -60,23 +61,18 @@ const ProjectSection = () => {
                     onChange={handleOnChange}
                     placeholder="Search Project by Name, Category Skill, Skill or Company... "
                 />
-                {isLoading['PROJECT_LIST'] ? (
-                    <h5 className="text-body-large mx-auto">Loading Project Data...</h5>
-                ) : (
-                    <>
-                        <div className="grid md:grid-cols-3 gap-8 px-4  mx-auto ">
-                            {projectConfig?.projectList?.map((project, i) => (
-                                <CardProject key={i} index={i} {...project} />
-                            ))}
-                        </div>
-
-                        {projectConfig?.projectList?.length != 0 && projectConfig?.currentPage !== projectConfig?.totalPage && (
-                            <Button shape={'rounded'} variant={'glass'} size={'large'} className="min-w-[15rem] mx-auto  md:text-body-large  md:font-bold">
-                                Load More +
-                            </Button>
-                        )}
-                    </>
-                )}
+                <ContainerLoading isLoading={isLoading['PROJECT_LIST']} loading="Loading Project Data..." customeClass="font-bold text-body-large mx-auto">
+                    <div className="grid md:grid-cols-3 gap-8 px-4  mx-auto ">
+                        {projectConfig?.projectList?.map((project, i) => (
+                            <CardProject key={i} index={i} {...project} />
+                        ))}
+                    </div>
+                    {projectConfig?.projectList?.length != 0 && projectConfig?.currentPage !== projectConfig?.totalPage && (
+                        <Button shape={'rounded'} variant={'glass'} size={'large'} className="min-w-[15rem] mx-auto  md:text-body-large  md:font-bold">
+                            Load More +
+                        </Button>
+                    )}
+                </ContainerLoading>
             </Container>
         </ContainerSection>
     );

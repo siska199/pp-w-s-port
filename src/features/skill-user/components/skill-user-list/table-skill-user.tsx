@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { eventEmitter } from '@event-emitters';
 
 import useSkillUserAPI from '@features/skill-user/apis/use-skill-user-api';
@@ -12,14 +11,12 @@ import useTable from '@hooks/use-table';
 import { useAppDispatch, useAppSelector } from '@store/store';
 import { handleSetModalConfirmation } from '@store/ui-slice';
 import variantBadge from '@lib/helper/variant/variant-badge';
-import { routes } from '@routes/constant';
 import { TResponseDataPaginationAPI, TTypeActionModalForm } from '@typescript/index-type';
 import { TSettingTable } from '@typescript/ui-types';
 
 const TableSkillUser = () => {
     const isLoading = useAppSelector((state) => state.ui.isLoading);
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
 
     const { getListSkillUser, deleteSkillUser } = useSkillUserAPI();
 
@@ -131,10 +128,6 @@ const TableSkillUser = () => {
         });
     };
 
-    const handleViewData = (data: TSkillUser) => {
-        navigate(routes.skillUser.child.detail.fullPath(String(data?.id)));
-    };
-
     const handleDeleteData = (data: TSkillUser) => {
         dispatch(
             handleSetModalConfirmation({
@@ -161,7 +154,6 @@ const TableSkillUser = () => {
                 withNo
                 isLoading={isLoading}
                 actionBtn={{
-                    view: handleViewData,
                     edit: handleEditData,
                     delete: handleDeleteData,
                 }}

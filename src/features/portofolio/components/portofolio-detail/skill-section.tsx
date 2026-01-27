@@ -7,6 +7,7 @@ import Loading from '@components/loading';
 import Badge from '@components/ui/badge';
 import Button from '@components/ui/button';
 import Container from '@components/ui/container/container';
+import ContainerLoading from '@components/ui/container/container-loading';
 import ContainerSection from '@components/ui/container/container-section';
 import Image from '@components/ui/image';
 import Tooltip from '@components/ui/tooltip';
@@ -34,40 +35,34 @@ const SkillSection = () => {
     }, [skillCategoryList?.length]);
 
     return (
-        <ContainerSection ref={ref} title={'Skill'} className="min-h-screen">
-            {isLoading['SKILL_CATEGORY'] ? (
-                <h5 className="text-body-large">Loading Section Skill...</h5>
-            ) : (
-                <Container variant={'hsc'} gap="large" className="flex-col md:flex-row ">
-                    <motion.div {...slideInAnimation({ direction: 'left' })}>
-                        <Container gap="base" className="flex-row md:flex-col md:pb-0 md:border-none w-auto">
-                            {skillCategoryList?.map((category, i) => (
-                                <Button
-                                    key={i}
-                                    variant={'no-style'}
-                                    className={cn({
-                                        'bg-glass-animation flex flex-grow text-body-medium font-medium md:min-w-[10rem] md:max-w-[10rem] !justify-start !text-start': true,
-                                        'bg-glass': category?.categoryId === activeIdCat,
-                                    })}
-                                    onClick={() => getSkillList({ id_category: category?.categoryId })}
-                                >
-                                    {category?.categoryName}
-                                </Button>
-                            ))}
-                        </Container>
-                    </motion.div>
+        <ContainerSection ref={ref} title={'Skill'} isLoading={isLoading['SKILL_CATEGORY']} className="min-h-screen">
+            <Container variant={'hsc'} gap="large" className="flex-col md:flex-row ">
+                <motion.div {...slideInAnimation({ direction: 'left' })}>
+                    <Container gap="base" className="flex-row md:flex-col md:pb-0 md:border-none w-auto">
+                        {skillCategoryList?.map((category, i) => (
+                            <Button
+                                key={i}
+                                variant={'no-style'}
+                                className={cn({
+                                    'bg-glass-animation flex flex-grow text-body-medium font-medium md:min-w-[10rem] md:max-w-[10rem] !justify-start !text-start': true,
+                                    'bg-glass': category?.categoryId === activeIdCat,
+                                })}
+                                onClick={() => getSkillList({ id_category: category?.categoryId })}
+                            >
+                                {category?.categoryName}
+                            </Button>
+                        ))}
+                    </Container>
+                </motion.div>
 
-                    <div className="md:p-8 grid grid-cols-2 md:flex flex-wrap md:m-auto justify-center items-center gap-4">
-                        {isLoading['SKILL_LIST'] ? (
-                            <div>
-                                <Loading />
-                            </div>
-                        ) : (
-                            skillList.map((skill, j) => <CardItemSkill key={j} {...skill} index={j} />)
-                        )}
-                    </div>
-                </Container>
-            )}
+                <div className="md:p-8 grid grid-cols-2 md:flex flex-wrap md:m-auto justify-center items-center gap-4">
+                    <ContainerLoading isLoading={isLoading['SKILL_LIST']} loading={<Loading />}>
+                        {skillList.map((skill, j) => (
+                            <CardItemSkill key={j} {...skill} index={j} />
+                        ))}
+                    </ContainerLoading>
+                </div>
+            </Container>
         </ContainerSection>
     );
 };

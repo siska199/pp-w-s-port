@@ -1,6 +1,6 @@
-import { TProject } from '@features/project/types/project-type';
-import { TInformationProjectSchema } from '@features/project/validation/information-project-schema';
 import ENDPOINT from '@apis/endpoints';
+import { TProject } from '@features/project/types/project-type';
+import { TOptionalInformationProjectSchema } from '@features/project/validation/information-project-schema';
 
 import useAPI from '@hooks/use-api';
 import appMessage from '@lib/data/app-message';
@@ -37,7 +37,7 @@ const useProjectAPI = () => {
         return response;
     };
 
-    const upsertProject = async (params: TInformationProjectSchema) => {
+    const upsertProject = async (params: TOptionalInformationProjectSchema) => {
         const response = await apiClient<TProject>({
             endpoint: ENDPOINT.PROJECT.UPSERT_PROJECT,
             payload: {
@@ -45,7 +45,7 @@ const useProjectAPI = () => {
             },
             method: 'post',
             isForm: true,
-            message: appMessage.upsertModule(params?.id, 'Project'),
+            message: appMessage.upsertModule(params?.id || '', 'Project'),
         });
 
         return response;

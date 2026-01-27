@@ -20,18 +20,14 @@ const EducationSection = () => {
         },
     });
     return (
-        <ContainerSection ref={ref} title="Education" className="">
-            {isLoading[EPortfolioLoading.EDUCATION_LIST] ? (
-                <h5 className="text-body-large">Loading Section Education...</h5>
-            ) : (
-                <motion.div {...slideInAnimation({ direction: 'left' })} className=" max-w-full">
-                    <SliderBase
-                        items={educationList?.map((education, i) => (
-                            <CardEducation key={i} {...education} />
-                        ))}
-                    />
-                </motion.div>
-            )}
+        <ContainerSection isLoading={isLoading[EPortfolioLoading.EDUCATION_LIST]} ref={ref} title="Education" className="">
+            <motion.div {...slideInAnimation({ direction: 'left' })} className=" max-w-full">
+                <SliderBase
+                    items={educationList?.map((education, i) => (
+                        <CardEducation key={i} {...education} />
+                    ))}
+                />
+            </motion.div>
         </ContainerSection>
     );
 };

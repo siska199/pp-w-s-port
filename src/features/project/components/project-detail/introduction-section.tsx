@@ -23,10 +23,13 @@ const IntroductionSection = () => {
                             <div className="">
                                 <h4 className=" mb-2 text-heading-05 md:text-heading-04">{data?.name}</h4>
                                 <p className="font-bold">{data?.experiance?.company_name}</p>
-                                <p className="font-thin">
-                                    {' '}
-                                    {formatDate({ date: data?.start_at, format: TTypeDateFormat['DD MONTH YEAR'] })} - {formatDate({ date: data?.end_at, format: TTypeDateFormat['DD MONTH YEAR'] })}
-                                </p>
+                                {data?.start_at && (
+                                    <p className="font-thin">
+                                        {' '}
+                                        {formatDate({ date: data?.start_at, format: TTypeDateFormat['DD MONTH YEAR'] })} -{' '}
+                                        {formatDate({ date: data?.end_at, format: TTypeDateFormat['DD MONTH YEAR'] })}
+                                    </p>
+                                )}
                             </div>
 
                             <p className="text-justify  ">{data?.description}</p>

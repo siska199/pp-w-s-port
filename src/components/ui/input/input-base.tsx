@@ -8,10 +8,11 @@ export interface TPropsInputBase extends TBasePropsInput, React.HTMLProps<HTMLIn
     name: string;
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    isUpdated? : boolean
 }
 
 const InputBase = (props: TPropsInputBase) => {
-    const { ...attrs } = props;
+    const {  isUpdated,...attrs } = props;
     return (
         <ContainerInput<React.HTMLProps<HTMLInputElement>> {...attrs} isClerable>
             {(attrsInput) => <input {...attrsInput} id={attrsInput?.name} value={props?.value || ''} />}

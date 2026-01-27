@@ -17,6 +17,7 @@ export type TPropsInputSelect = {
     onChange: (e: TCustomeEventOnChange<string | string[]>) => void;
     options: TOption[];
     onLoadMore?: (args?: any[]) => void;
+    isUpdated?: boolean;
 } & (SingleSelectProps | MultipleSelectProps);
 
 interface SingleSelectProps extends TBasePropsInput, Omit<React.HTMLProps<HTMLInputElement>, 'onChange'> {
@@ -32,7 +33,7 @@ interface MultipleSelectProps extends TBasePropsInput, Omit<React.HTMLProps<HTML
 }
 
 const InputSelect = (props: TPropsInputSelect) => {
-    const { options, isMultiple, withSelectAll, onLoadMore, ...attrs } = props;
+    const { options, isMultiple, withSelectAll, onLoadMore, isUpdated, ...attrs } = props;
     const refContainerDropdown = useRef<HTMLDivElement | null>(null);
     const refContainerValue = useRef<HTMLDivElement | null>(null);
     const refIconChevron = useRef<HTMLDivElement | null>(null);

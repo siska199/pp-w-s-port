@@ -17,6 +17,7 @@ export const initialFormInformationProject = {
         label: 'ID',
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     name: {
         name: 'name',
@@ -76,14 +77,14 @@ export const initialFormInformationProject = {
     },
     start_at: {
         name: 'start_at',
-        label: 'Start At',
+        label: 'Start At (Opsional)',
         placeholder: appMessage.selectInputPlaceolder('start at date'),
         value: null,
         errorMessage: '',
     },
     end_at: {
         name: 'end_at',
-        label: 'End At',
+        label: 'End At (Opsional)',
         placeholder: appMessage.selectInputPlaceolder('end at date'),
         value: null,
         errorMessage: '',
@@ -127,8 +128,8 @@ const informationProjectSchema = z.object({
         mandatory: true,
     }),
     id_profession: zString({ name: 'Role' }),
-    start_at: zDate({ name: 'Start At' }),
-    end_at: zDate({ name: 'End At' }),
+    start_at: zDate({ name: 'Start At', mandatory: false }),
+    end_at: zDate({ name: 'End At', mandatory: false }),
     is_show: zString({
         name: 'Is Show Project',
         mandatory: false,
@@ -136,5 +137,5 @@ const informationProjectSchema = z.object({
 });
 
 export type TInformationProjectSchema = z.input<typeof informationProjectSchema>;
-
+export type TOptionalInformationProjectSchema = Partial<TInformationProjectSchema>;
 export default informationProjectSchema;
