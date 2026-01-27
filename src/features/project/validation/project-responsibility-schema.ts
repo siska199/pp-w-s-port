@@ -7,6 +7,7 @@ export const initialFormProjectResponsibility = {
         label: 'ID',
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     description: {
         name: 'description',
@@ -19,12 +20,14 @@ export const initialFormProjectResponsibility = {
         },
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     id_project: {
         name: 'id_project',
         label: 'Id project',
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
 };
 

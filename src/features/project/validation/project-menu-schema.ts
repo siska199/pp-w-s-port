@@ -25,6 +25,7 @@ export const initialFormProjectMenu = {
         name: 'id',
         errorMessage: '',
         label: 'ID',
+        isUpdated: false,
     },
     name: {
         name: 'name',
@@ -32,6 +33,7 @@ export const initialFormProjectMenu = {
         placeholder: 'e.g Login',
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     main_image: {
         name: 'main_image',
@@ -39,6 +41,7 @@ export const initialFormProjectMenu = {
         value: null,
         listAcceptedTypeFile: defaultTTypeImage,
         errorMessage: '',
+        isUpdated: false,
     },
     description: {
         name: 'description',
@@ -47,6 +50,7 @@ export const initialFormProjectMenu = {
         rows: 5,
         placeholder: 'Write a description about your menu project',
         errorMessage: '',
+        isUpdated: false,
     },
 
     features: {
@@ -55,6 +59,7 @@ export const initialFormProjectMenu = {
         value: '',
         placeholder: 'List the features of your menu project',
         errorMessage: '',
+        isUpdated: false,
     },
     related_images: {
         name: 'related_images',
@@ -63,6 +68,7 @@ export const initialFormProjectMenu = {
         multiple: true,
         totalMaxSize: 30,
         errorMessage: '',
+        isUpdated: false,
     },
 };
 export default projectMenuSchema;

@@ -20,7 +20,7 @@ const experianceSchema = z
     })
     .superRefine((data, ctx) => {
         const defaultValueDate = '1970-01-01T00:00:00.000Z';
-        if (data.is_currently_work_here !== 'true' && String(data.end_at) === defaultValueDate) {
+        if (data.is_currently_work_here !== 'true' && [defaultValueDate, '', null, undefined]?.includes(data.end_at as any)) {
             ctx.addIssue({
                 path: ['end_at'],
                 code: z.ZodIssueCode.custom,

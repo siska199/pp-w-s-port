@@ -1,6 +1,7 @@
-import React, { createContext, SetStateAction, useEffect, useState } from 'react';
+import React, { createContext, SetStateAction, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
+import useMasterAPI from '@apis/use-master-api';
 import useExperianceAPI from '@features/experiance/apis/use-experiance-api';
 import useProjectAPI from '@features/project/apis/use-project-api';
 import useProjectMenuApi, { TParamsListProjectMenu } from '@features/project/apis/use-project-menu-api';
@@ -11,13 +12,12 @@ import informationProjectSchema, { initialFormInformationProject, TInformationPr
 import { initialFormProjectLink } from '@features/project/validation/project-link-schema';
 import { initialFormProjectMenu } from '@features/project/validation/project-menu-schema';
 import useSkillUserAPI from '@features/skill-user/apis/use-skill-user-api';
-import useMasterAPI from '@apis/use-master-api';
 
 import useEventEmitter from '@hooks/use-event-emitter';
 import useFile from '@hooks/use-file';
+import { deepCopy, extractValueFromForm, generateOptions, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function';
 import { useAppDispatch } from '@store/store';
 import { handleSetIsloading } from '@store/ui-slice';
-import { deepCopy, extractValueFromForm, generateOptions, mappingErrorsToForm, mappingValuesToForm } from '@lib/helper/function';
 import { TTypeActionData } from '@typescript/index-type';
 import { TEventOnChange, TEventSubmitForm } from '@typescript/ui-types';
 
@@ -53,6 +53,8 @@ export interface TContextFormProject {
 
     listProjectLink: TProjectLinkItem[];
     getListProjectLink: (params: TParamsListProjectLink) => Promise<void>;
+
+    isEditAction: TTypeActionData;
 }
 
 const initialContextFormProject = {
@@ -81,6 +83,8 @@ const initialContextFormProject = {
 
     listProjectLink: [],
     getListProjectLink: async () => {},
+
+    isEditAction: TTypeActionData.ADD,
 };
 
 export const contextFormProject = createContext<TContextFormProject>(initialContextFormProject);
@@ -90,6 +94,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
     const dispatch = useAppDispatch();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
+    const id = searchParams.get('id');
 
     const { getListMasterProfession } = useMasterAPI();
     const { getListSkillUser } = useSkillUserAPI();
@@ -113,6 +118,10 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
     useEffect(() => {
         handleInitData();
     }, []);
+
+    const isEditAction = useMemo(() => {
+        return id ? TTypeActionData['EDIT'] : TTypeActionData['ADD'];
+    }, [id]);
 
     const handleInitData = async () => {
         dispatch(handleSetIsloading(true));
@@ -192,6 +201,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         if (!result.data) return;
         setListProjectResponsibility(result.data);
     };
+
     const getListProjectLink = async (params: TParamsListProjectLink, isLoading: boolean = true) => {
         const result = await getListProjectLinkApi(params, isLoading);
         if (!result.data) return;
@@ -231,6 +241,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         const value = e.target.value;
         currForm[name].value = value;
         currForm[name].errorMessage = '';
+        currForm[name].isUpdated = true;
         setFormInformationProject({
             ...currForm,
         });
@@ -242,6 +253,8 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         const value = e.target.value;
         currForm[name].value = value;
         currForm[name].errorMessage = '';
+        currForm[name].isUpdated = true;
+
         setFormProjectMenu({
             ...currForm,
         });
@@ -252,6 +265,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         const name = e.target.name as TKeyFormResponsibilityProject;
         const value = e.target.value;
         currForm[name].value = value;
+        currForm[name].isUpdated = true;
 
         setFormResponsibilityProject({
             ...currForm,
@@ -263,6 +277,7 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         const name = e.target.name as TKeyFormLinkProject;
         const value = e.target.value;
         currForm[name].value = value;
+        currForm[name].isUpdated = true;
 
         setFormLinkProject({
             ...currForm,
@@ -274,12 +289,13 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
         setIsLoading(true);
         try {
             e?.preventDefault();
-            const id = searchParams.get('id');
 
             const { isValid, form: updatedFormInformationProject } = mappingErrorsToForm<TInformationProjectSchema, typeof formInformationProject>({
                 form: formInformationProject,
                 schema: informationProjectSchema,
             });
+
+            console.log('testtt: ', updatedFormInformationProject.end_at);
 
             setFormInformationProject({
                 ...updatedFormInformationProject,
@@ -287,14 +303,15 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
             if (!isValid) return;
 
             const informationProject = {
-                ...extractValueFromForm({ ...formInformationProject }, TTypeActionData['DELETE']),
+                ...extractValueFromForm({ ...formInformationProject }, isEditAction),
             };
+            console.log('information project: ', informationProject);
             const result = await upsertProject({
                 ...informationProject,
-                is_show: String(informationProject.is_show),
+                ...(informationProject?.is_show && { is_show: String(informationProject.is_show) }),
                 ...(id && { id }),
             } as TOptionalInformationProjectSchema);
-            result?.status && navigate(`?id=${result?.data?.id}`, { replace: true });
+            if (result?.status) navigate(`?id=${result?.data?.id}`, { replace: true });
             updatedFormInformationProject.id.value = result?.data?.id || '';
             setFormInformationProject({
                 ...updatedFormInformationProject,
@@ -333,6 +350,8 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
                 getListProjectResponsibility,
                 listProjectLink,
                 getListProjectLink,
+
+                isEditAction,
             }}
         >
             {children}

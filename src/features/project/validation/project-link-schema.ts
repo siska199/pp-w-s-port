@@ -7,6 +7,7 @@ export const initialFormProjectLink = {
         label: 'ID',
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     url: {
         name: 'url',
@@ -14,6 +15,7 @@ export const initialFormProjectLink = {
         placeholder: 'e.g https://github.com/siska199',
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     label: {
         name: 'label',
@@ -21,12 +23,14 @@ export const initialFormProjectLink = {
         placeholder: 'e.g 📂 Repository',
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     id_project: {
         name: 'id_project',
         label: 'Id project',
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
 };
 

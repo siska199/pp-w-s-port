@@ -40,17 +40,26 @@ export const zString = (params: { name: string; min?: number; max?: number; mand
 export const zDate = (params: { name: string; mandatory?: boolean; format?: TTypeDateFormat }): ZodDate => {
     const { name = 'Date', mandatory = true, format = TTypeDateFormat.ISO } = params;
 
-    const dateSchema = z.coerce
-        .date()
+    const dateSchema = z
+        .preprocess((value: any) => {
+            if (['', null, undefined]?.includes(value)) {
+                return null;
+            }
+
+            if (typeof value === 'string' || value instanceof Date) {
+                const d = new Date(value);
+                return isNaN(d.getTime()) ? null : d;
+            }
+
+            return value;
+        }, z.date().nullable())
         .transform((date) => {
-            const newFormat = formatDate({ date, format });
-            return date ? newFormat : null;
+            return date ? formatDate({ date, format }) : null;
         })
         .refine(
             (date) => {
-                const defaultValueDate = '1970-01-01T00:00:00.000Z';
-                if (!mandatory && date === defaultValueDate) return true;
-                return date && date !== defaultValueDate;
+                if (!mandatory) return true;
+                return date !== null;
             },
             { message: messageError.required(name) },
         );

@@ -14,11 +14,12 @@ import { TFileValue } from '@components/ui/input/input-file/input-file-v1';
 import useEventEmitter from '@hooks/use-event-emitter';
 import useFile from '@hooks/use-file';
 import { useAppDispatch } from '@store/store';
-import { handleSetIsloading, handleSetModalConfirmation } from '@store/ui-slice';
+import { handleSetIsloading, handleSetModal, handleSetModalConfirmation } from '@store/ui-slice';
 import appMessage from '@lib/data/app-message';
 import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge';
 import { TTypeActionModalForm } from '@typescript/index-type';
 import { IconDelete, IconEdit } from '@assets/icons';
+import SliderRelatedImageMenu from '@features/project/components/project-detail/menu-section/slider-related-image-menu';
 
 const ProjectMenus = React.memo(() => {
     const { formInformationProject, listProjectMenu, getListProjectMenu } = useContext(contextFormProject);
@@ -131,6 +132,22 @@ const CardProjectMenu = React.memo((props: TProjectMenuItem) => {
         [id, handleDeleteProject, handleEditProject],
     );
 
+    const handleShowRelatedImages = () => {
+        dispatch(
+            handleSetModal({
+                isShow: true,
+                children: <SliderRelatedImageMenu listImage={related_images?.map((image) => image?.image)} activeIndex={1} />,
+                customeClass: {
+                    mdBody: 'scrollbar-hidden',
+                    mdContent: 'bg-white/0  h-[90vh]',
+                    btnClose: {
+                        icon: '!w-[2rem] !h-[2rem] icon-white',
+                    },
+                },
+            }),
+        );
+    };
+
     return (
         <div className="border rounded-md p-4 w-full relative space-y-1 ">
             <div className="absolute right-4 flex gap-1">
@@ -147,7 +164,9 @@ const CardProjectMenu = React.memo((props: TProjectMenuItem) => {
             </div>
             <div>
                 <h5 className="text-body-base font-medium">Related Images : </h5>
-                <div className="text-gray ">{related_images?.length || 0} Item</div>
+                <div onClick={handleShowRelatedImages} className="text-gray cursor-pointer ">
+                    {related_images?.length || 0} Item
+                </div>
             </div>
         </div>
     );

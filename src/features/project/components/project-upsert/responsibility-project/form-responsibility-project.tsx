@@ -20,7 +20,13 @@ const FormResponsibilityProject = () => {
         action: TTypeActionModalForm.ADD,
         customeClass: { mdBody: '  md:min-w-[38rem]  space-y-4' },
     });
-    const { formResponsibilityProject: form, formInformationProject, handleOnChangeFormResponsibilityProject: handleOnChange, setFormResponsibilityProject: setForm } = useContext(contextFormProject);
+    const {
+        isEditAction,
+        formResponsibilityProject: form,
+        formInformationProject,
+        handleOnChangeFormResponsibilityProject: handleOnChange,
+        setFormResponsibilityProject: setForm,
+    } = useContext(contextFormProject);
     const { upsertProjectResponsibility } = useProjectResponsibilityApi();
 
     useEventEmitter(EVENT_PROJECT.SET_RESPONSIBILITY_PROJECT, (data) => {
@@ -55,7 +61,7 @@ const FormResponsibilityProject = () => {
         if (!isValid) return;
 
         const extractForm = {
-            ...extractValueFromForm(form),
+            ...extractValueFromForm(form, isEditAction),
         } as TProjectResponsibility;
 
         const result = await upsertProjectResponsibility({

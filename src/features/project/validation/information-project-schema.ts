@@ -5,6 +5,7 @@ import { optionsCategoryProject, optionsTypeProject } from '@features/project/co
 
 import appMessage from '@lib/data/app-message';
 import { TOption, TTypeFile } from '@typescript/ui-types';
+import { TValueDate } from '@components/ui/input/input-date';
 
 export interface TOptionsFormEducation {
     companies: TOption[];
@@ -25,6 +26,7 @@ export const initialFormInformationProject = {
         value: '',
         placeholder: 'e.g GOA (Garda oto Akses)',
         errorMessage: '',
+        isUpdated: false,
     },
     category: {
         name: 'category',
@@ -33,6 +35,7 @@ export const initialFormInformationProject = {
         placeholder: appMessage.selectInputPlaceolder('category'),
         label: 'Category',
         errorMessage: '',
+        isUpdated: false,
     },
     id_skill_users: {
         label: 'Tech Stacks',
@@ -41,6 +44,7 @@ export const initialFormInformationProject = {
         options: [],
         value: [] as string[],
         errorMessage: '',
+        isUpdated: false,
     },
     id_experiance: {
         label: 'Company (Opsional)',
@@ -49,6 +53,7 @@ export const initialFormInformationProject = {
         options: [],
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     type: {
         name: 'type',
@@ -57,6 +62,7 @@ export const initialFormInformationProject = {
         placeholder: appMessage.selectInputPlaceolder('type'),
         label: 'Type',
         errorMessage: '',
+        isUpdated: false,
     },
     thumbnail_image: {
         name: 'thumbnail_image',
@@ -65,6 +71,7 @@ export const initialFormInformationProject = {
         listAcceptedTypeFile: [TTypeFile.JPEG, TTypeFile.JPG, TTypeFile.PNG],
         isCompress: true,
         errorMessage: '',
+        isUpdated: false,
     },
     description: {
         name: 'description',
@@ -74,6 +81,7 @@ export const initialFormInformationProject = {
         errorMessage: '',
         rows: 5,
         maxLength: 10000,
+        isUpdated: false,
     },
     start_at: {
         name: 'start_at',
@@ -81,13 +89,15 @@ export const initialFormInformationProject = {
         placeholder: appMessage.selectInputPlaceolder('start at date'),
         value: null,
         errorMessage: '',
+        isUpdated: false,
     },
     end_at: {
         name: 'end_at',
         label: 'End At (Opsional)',
         placeholder: appMessage.selectInputPlaceolder('end at date'),
-        value: null,
+        value: null as TValueDate,
         errorMessage: '',
+        isUpdated: false,
     },
     id_profession: {
         name: 'id_profession',
@@ -96,6 +106,7 @@ export const initialFormInformationProject = {
         options: [] as TOption[],
         value: '',
         errorMessage: '',
+        isUpdated: false,
     },
     is_show: {
         name: 'is_show',
@@ -103,6 +114,7 @@ export const initialFormInformationProject = {
         placeholder: appMessage.selectInputPlaceolder('Is Show Project'),
         value: 'true',
         errorMessage: '',
+        isUpdated: false,
     },
 };
 const informationProjectSchema = z.object({

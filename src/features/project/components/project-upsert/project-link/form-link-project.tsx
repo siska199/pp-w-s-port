@@ -20,7 +20,7 @@ const FormLinkProject = () => {
         action: TTypeActionModalForm.ADD,
         customeClass: { mdBody: '  md:min-w-[38rem]  space-y-4' },
     });
-    const { formLinkProject: form, formInformationProject, handleOnChangeFormLinkProject: handleOnChange, setFormLinkProject: setForm } = useContext(contextFormProject);
+    const { isEditAction, formLinkProject: form, formInformationProject, handleOnChangeFormLinkProject: handleOnChange, setFormLinkProject: setForm } = useContext(contextFormProject);
     const { upsertProjectLink } = useProjectLinkApi();
 
     useEventEmitter(EVENT_PROJECT.SET_LINK_PROJECT, (data) => {
@@ -56,6 +56,7 @@ const FormLinkProject = () => {
 
         const extractForm = {
             ...extractValueFromForm(form),
+            isEditAction,
         } as TProjectLink;
 
         const result = await upsertProjectLink({

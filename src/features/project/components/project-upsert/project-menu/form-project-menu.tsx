@@ -18,7 +18,7 @@ import { TTypeActionModalForm } from '@typescript/index-type';
 import { TEventSubmitForm } from '@typescript/ui-types';
 
 const FormProjectMenu = () => {
-    const { formProjectMenu: form, formInformationProject, handleOnChangeFormProjectMenu: handleOnChange, setFormProjectMenu: setForm } = useContext(contextFormProject);
+    const { isEditAction, formProjectMenu: form, formInformationProject, handleOnChangeFormProjectMenu: handleOnChange, setFormProjectMenu: setForm } = useContext(contextFormProject);
     const { upsertProjectMenu } = useProjectMenuApi();
 
     const [modalForm, setModalForm] = useState({
@@ -61,7 +61,7 @@ const FormProjectMenu = () => {
         if (!isValid) return;
 
         const extractForm = {
-            ...extractValueFromForm(form),
+            ...extractValueFromForm(form, isEditAction),
         };
 
         const formData = buildFormData(extractForm);
