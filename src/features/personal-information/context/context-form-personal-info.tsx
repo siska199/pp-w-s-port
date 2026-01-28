@@ -244,11 +244,12 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
     };
 
     const handleProsesSubmitFormGeneralInfo = async (data: typeof formGeneralPersonalInfo) => {
-        const phoneNumberValue = data?.phone_number.value;
+        const phoneNumber = data?.phone_number;
+        const isPhoneNumberUpdated = phoneNumber.isUpdated
         const payloadPersonalInfo = {
             ...extractValueFromForm({ ...data }, isEditAction),
-            ...(phoneNumberValue && {
-                phone_number: formatPhoneNumber(phoneNumberValue),
+            ...(isPhoneNumberUpdated && {
+                phone_number: formatPhoneNumber(phoneNumber.value),
             }),
         } as TOptionalFormGeneralPersonalInfo;
         const responseSubmitGeneralInfo = await upsertPersonalInformation(payloadPersonalInfo);
@@ -263,9 +264,15 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
                 id: selectedSocliaLink?.id,
                 url: selectedSocliaLink?.value,
             }));
-        const responseSocialLinks = await upsertBulkSocialLink(payloadSocialLinks);
+        const responseSocialLinks =
+            payloadSocialLinks?.length > 0
+                ? await upsertBulkSocialLink(payloadSocialLinks)
+                : {
+                      status: true,
+                  };
 
         const listDeletedIdSocialLink = listDeletedSocialLink?.filter((id) => !!id);
+
         if (listDeletedIdSocialLink?.length > 0) {
             await deleteBulkSocialLink(listDeletedIdSocialLink);
         }
@@ -274,10 +281,14 @@ const ContextFormPersonalInfo = (props: { children: React.ReactNode }) => {
 
     const handleProsesSubmitKeyMetrics = async (data: typeof listKeyMetric) => {
         const keyMetrics = data?.filter((keyMetric) => keyMetric?.isUpdated).map(({ id, ...rest }) => (id?.includes('NEW') ? rest : { id, ...rest }));
-        const responseKeyMetrics = await upsertBulkKeyMetric(keyMetrics);
+        const responseKeyMetrics =
+            keyMetrics.length > 0
+                ? await upsertBulkKeyMetric(keyMetrics)
+                : {
+                      status: true,
+                  };
 
         const listDeletedIdKeyMetric = listDeletedKeyMetric?.filter((id) => !id.includes('-NEW'));
-
         if (listDeletedIdKeyMetric?.length > 0) {
             await deleteBulkKeyMetric(listDeletedIdKeyMetric);
         }

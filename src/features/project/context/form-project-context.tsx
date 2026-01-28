@@ -295,8 +295,6 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
                 schema: informationProjectSchema,
             });
 
-            console.log('testtt: ', updatedFormInformationProject.end_at);
-
             setFormInformationProject({
                 ...updatedFormInformationProject,
             });
@@ -305,7 +303,6 @@ const ContextFormProjectProvider = (props: { children: React.ReactNode }) => {
             const informationProject = {
                 ...extractValueFromForm({ ...formInformationProject }, isEditAction),
             };
-            console.log('information project: ', informationProject);
             const result = await upsertProject({
                 ...informationProject,
                 ...(informationProject?.is_show && { is_show: String(informationProject.is_show) }),

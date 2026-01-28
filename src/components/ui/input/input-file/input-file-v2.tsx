@@ -17,10 +17,11 @@ type TProps = TBasePropsInput &
         onChange: (e: TEventOnChange) => void;
         value: TFileValue[] | TFileValue | null;
         totalMaxSize?: number;
+        isUpdated?: boolean;
     };
 
 const InputFileV2 = (props: TProps) => {
-    const { listAcceptedTypeFile = [TTypeFile.ALL], onChange, totalMaxSize = 5, ...attrs } = props;
+    const { listAcceptedTypeFile = [TTypeFile.ALL], onChange, totalMaxSize = 5,isUpdated: _isUpdated, ...attrs } = props;
     const inputFileRef = useRef<HTMLInputElement | null>(null);
 
     const [dragActive, setDragActive] = useState(false);

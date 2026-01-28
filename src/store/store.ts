@@ -36,7 +36,6 @@ const middlewareLogout: Middleware = (_storeAPI) => (next) => (action: any) => {
 
 /*--------------------------------------------- */
 const isRememberMe = getItemSecureWebstorage(STORAGE_VARIABLE.IS_REMEMBER_ME);
-
 const storagePersist = isRememberMe ? localStorageRedux : sessionStorageRedux;
 
 const rootReducers = () => {

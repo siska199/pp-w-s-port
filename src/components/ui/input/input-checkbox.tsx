@@ -16,10 +16,11 @@ interface TProps extends TBasePropsInput, Omit<React.HTMLProps<HTMLInputElement>
     customeClassnameCheckbox?: {
         container?: string;
     };
+    isUpdated?: boolean;
 }
 
 const InputCheckbox = (props: TProps) => {
-    const { name, onChange, value, customeClassnameCheckbox, label = '', checked, errorMessage, ...attrsInput } = props;
+    const { name, onChange, value, customeClassnameCheckbox, label = '', checked, errorMessage, isUpdated: _isUpdated,...attrsInput } = props;
 
     const updatedChecked = useMemo(() => {
         return ['true', 'false']?.includes(String(value)) ? String(value) === 'true' : checked || false;
