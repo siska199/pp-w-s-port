@@ -29,7 +29,7 @@ const FormFilterProject = () => {
                 options: (await getListMasterSkill())?.data || [],
             });
             currForm['categories'].options = generateOptionsFromEnum(TTypeCategoryProject);
-            currForm['types'].options = generateOptionsFromEnum(TTypeCategoryProject);
+            currForm['types'].options = generateOptionsFromEnum(TTypeTypeProject);
 
             setForm({
                 ...currForm,
