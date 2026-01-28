@@ -33,7 +33,7 @@ const HeroSection = () => {
             <Container gap="base" className="w-auto overflow-x-visible ">
                 <AnimatedText text={`I'm ${data?.first_name} ${data?.last_name}`} className="!text-heading-05 text-center md:text-start mx-auto md:mx-0 " />
 
-                <AnimatedText text={data?.profession?.name || ''} className="!text-heading-05 md:!text-heading-01 font-bubblegum-sans text-center md:text-start" />
+                <AnimatedText text={data?.profession?.name || ''} className="!text-heading-05 md:!text-heading-01 font-bubblegum-sans text-center mx-auto md:text-start" />
 
                 {isMaxMd && (
                     <motion.div {...opacityAnimation()} className="m-auto">
