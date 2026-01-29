@@ -28,7 +28,7 @@ const MenuSection = () => {
 
     return (
         <ContainerVisibility isVisible={!!currentProject}>
-            <ContainerSection title="Menu" className=" ">
+            <ContainerSection title="What I Developed" className=" ">
                 <ContainerVisibility isVisible={listImages?.length > 0}>
                     <SliderImage3D
                         images={[...listImages]}
