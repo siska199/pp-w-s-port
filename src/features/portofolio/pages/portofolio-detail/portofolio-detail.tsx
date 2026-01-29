@@ -11,7 +11,7 @@ import ContainerLandingPage from '@components/ui/container/container-landing-pag
 const PortofolioDetailPage = () => {
     return (
         <ContextPortfolioProvider>
-            <ContainerLandingPage id="container-page-portofolio" className="scrollbar-hidden">
+            <ContainerLandingPage id="container-page-portofolio" className="">
                 <HeroSection />
                 <AboutMeSection />
                 <SkillSection />

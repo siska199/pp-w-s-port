@@ -18,6 +18,8 @@ import { routes } from '@routes/constant';
 import { TEventOnChange } from '@typescript/ui-types';
 import { IconSearch } from '@assets/icons';
 import { cardAnimation } from '@assets/styles/animation';
+import ContainerVisibility from '@components/ui/container/container-visibility';
+import EmptyData from '@components/ui/empty-data';
 const ProjectSection = () => {
     const { isLoading, getProjectList, projectConfig } = useContext(contextPortfolio);
 
@@ -62,11 +64,23 @@ const ProjectSection = () => {
                     placeholder="Search Project by Name, Category Skill, Skill or Company... "
                 />
                 <ContainerLoading isLoading={isLoading['PROJECT_LIST']} loading="Loading Project Data..." customeClass="font-bold text-body-large mx-auto">
-                    <div className="grid md:grid-cols-3 gap-8 px-4  mx-auto ">
-                        {projectConfig?.projectList?.map((project, i) => (
-                            <CardProject key={i} index={i} {...project} />
-                        ))}
-                    </div>
+                    <ContainerVisibility
+                        isVisible={projectConfig?.projectList?.length > 0}
+                        emptyElmn={
+                            <EmptyData
+                                customeClass={{
+                                    container: 'w-full !border-none',
+                                    img: 'h-[5rem]',
+                                }}
+                            />
+                        }
+                    >
+                        <div className="grid md:grid-cols-3 gap-8 px-4  mx-auto ">
+                            {projectConfig?.projectList?.map((project, i) => (
+                                <CardProject key={i} index={i} {...project} />
+                            ))}
+                        </div>
+                    </ContainerVisibility>
                     {projectConfig?.projectList?.length != 0 && projectConfig?.currentPage !== projectConfig?.totalPage && (
                         <Button shape={'rounded'} variant={'glass'} size={'large'} className="min-w-[15rem] mx-auto  md:text-body-large  md:font-bold">
                             Load More +
