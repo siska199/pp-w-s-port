@@ -20,6 +20,7 @@ import { TKeyVariantBadge } from '@lib/helper/variant/variant-badge';
 import { TTypeActionModalForm } from '@typescript/index-type';
 import { IconDelete, IconEdit } from '@assets/icons';
 import SliderRelatedImageMenu from '@features/project/components/project-detail/menu-section/slider-related-image-menu';
+import ContainerVisibility from '@components/ui/container/container-visibility';
 
 const ProjectMenus = React.memo(() => {
     const { formInformationProject, listProjectMenu, getListProjectMenu } = useContext(contextFormProject);
@@ -160,7 +161,9 @@ const CardProjectMenu = React.memo((props: TProjectMenuItem) => {
             <p className="line-clamp-2 ">{description}</p>
             <div>
                 <h5 className="text-body-base font-medium">Features : </h5>
-                <div className="container-list-disc-style " dangerouslySetInnerHTML={{ __html: features ?? '' }}></div>
+                <ContainerVisibility isVisible={!!features} emptyElmn={<>-</>}>
+                    <div className="container-list-disc-style " dangerouslySetInnerHTML={{ __html: features }}></div>
+                </ContainerVisibility>
             </div>
             <div>
                 <h5 className="text-body-base font-medium">Related Images : </h5>

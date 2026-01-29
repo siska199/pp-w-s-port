@@ -45,7 +45,9 @@ const MenuSection = () => {
                     <ContainerVisibility isVisible={currentProject?.related_images?.length > 0}>
                         <ListRelatedImageMenu images={currentProject?.related_images?.map((image) => image?.image)} />
                     </ContainerVisibility>
-                    <ListFeature features={currentProject?.features} />
+                    <ContainerVisibility isVisible={currentProject?.features.length > 0}>
+                        <ListFeature features={currentProject?.features} />
+                    </ContainerVisibility>
                 </div>
             </ContainerSection>
         </ContainerVisibility>
